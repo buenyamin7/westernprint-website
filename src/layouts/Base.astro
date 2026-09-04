@@ -1,0 +1,130 @@
+---
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  noindex?: boolean;
+}
+const { title, description, ogImage = site.ogImage, jsonLd, noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname.replace(/\/$/, '') || '/', site.url).href;
+const fullTitle = title.includes('westernprint') ? title : `${title} | westernprint`;
+
+const orgLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': `${site.url}/#organization`,
+  name: site.legalName,
+  alternateName: 'westernprint',
+  url: site.url,
+  logo: `${site.url}/icon-512.png`,
+  image: `${site.url}${site.ogImage}`,
+  telephone: site.phone,
+  email: site.email,
+  description: 'Print-on-Demand Druckerei in Oberhausen: DTF- und DTG-Druck ab 1 Stück, Großauflagen, Shopify-Fulfillment mit neutralem Versand.',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    postalCode: site.address.zip,
+    addressLocality: site.address.city,
+    addressCountry: 'DE',
+  },
+  areaServed: ['DE', 'AT', 'CH', 'EU'],
+  sameAs: [site.instagram, site.tiktok],
+};
+const ldBlocks = [orgLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [])];
+---
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#0b0d0c" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="westernprint" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(ogImage, site.url).href} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline>
+      // Theme before paint: saved choice wins, otherwise dark (brand default).
+      try { var q = new URLSearchParams(location.search).get('theme'); var t = q || localStorage.getItem('wp-theme'); if (t === 'light') document.documentElement.setAttribute('data-theme', 'light'); } catch (e) {}
+    </script>
+    {ldBlocks.map((ld) => <script type="application/ld+json" set:html={JSON.stringify(ld)} />)}
+  </head>
+  <body>
+    <a class="skip" href="#main">Zum Inhalt springen</a>
+    <Nav />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <div class="mobile-cta" aria-label="Schnellkontakt">
+      <a href={site.whatsapp} target="_blank" rel="noopener" class="btn btn-ghost" aria-label="WhatsApp schreiben"><Icon name="whatsapp-logo" size={20} /> WhatsApp</a>
+      <a href="/kontakt" class="btn btn-primary">Angebot anfragen</a>
+    </div>
+
+    <script>
+      // Scroll reveal. Motivation: content arrives in reading order instead of popping in at once.
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const items = document.querySelectorAll('.reveal');
+      if (reduce || !('IntersectionObserver' in window)) {
+        items.forEach((el) => el.classList.add('is-in'));
+      } else {
+        const io = new IntersectionObserver((entries) => {
+          for (const e of entries) if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+        items.forEach((el) => io.observe(el));
+        // Safety net: if the observer never fires (prerender, hidden tab), show everything.
+        setTimeout(() => items.forEach((el) => el.classList.add('is-in')), 2500);
+      }
+
+      // Mobile menu
+      const toggle = document.querySelector('[data-menu-toggle]') as HTMLButtonElement | null;
+      const menu = document.getElementById('mobile-menu');
+      toggle?.addEventListener('click', () => {
+        const open = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!open));
+        toggle.setAttribute('aria-label', open ? 'Menü öffnen' : 'Menü schließen');
+        if (menu) menu.hidden = open;
+      });
+
+      // Theme toggle
+      document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
+        const root = document.documentElement;
+        const light = root.getAttribute('data-theme') === 'light';
+        if (light) root.removeAttribute('data-theme'); else root.setAttribute('data-theme', 'light');
+        try { localStorage.setItem('wp-theme', light ? 'dark' : 'light'); } catch (e) {}
+      });
+    </script>
+
+    <style>
+      .skip { position: absolute; left: -999px; top: 8px; z-index: 100; padding: 10px 14px; background: var(--accent); color: var(--accent-ink); border-radius: 999px; font-weight: 600; }
+      .skip:focus { left: 12px; }
+      main { padding-top: var(--nav-h); }
+      .mobile-cta {
+        position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: grid; grid-template-columns: auto 1fr; gap: 10px;
+        padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: color-mix(in srgb, var(--bg) 85%, transparent);
+        backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-top: 1px solid var(--line);
+      }
+      @media (min-width: 900px) { .mobile-cta { display: none; } }
+    </style>
+  </body>
+</html>

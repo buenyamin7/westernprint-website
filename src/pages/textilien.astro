@@ -1,0 +1,80 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { products, site } from '../data/site';
+---
+<Base title="Textilien zum Bedrucken: Stanley/Stella und Stedman" description="Unser Sortiment zum Bedrucken: Bio-T-Shirts, Hoodies, Sweatshirts, Polos und Jogger von Stanley/Stella und Stedman. Ab 1 Stück, ohne Mindestmenge, alle Größen und Farben.">
+  <PageHero
+    eyebrow="Textilien"
+    title="Textilien, die den Druck <span class='hl'>verdienen</span>"
+    lede="Wir drucken auf Bio-Basics von Stanley/Stella und auf preisstarke Stedman-Textilien. Für Print-on-Demand feste Artikel mit sicherer Verfügbarkeit, für Auflagen die ganze Palette."
+    cta={{ label: 'Angebot anfragen', href: '/kontakt' }}
+    cta2={{ label: 'Preise ansehen', href: '/preise' }}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Stanley/Stella: unser POD-Standard</h2>
+        <p>Bio-Baumwolle, GOTS-zertifiziert, über 40 Farben, Größen XS bis 5XL. Diese Artikel führen wir dauerhaft und drucken sie ab 1 Stück.</p>
+      </div>
+      <div class="prod-grid">
+        {products.map((p, i) => (
+          <figure class={`prod reveal reveal-d${i % 4}`}>
+            <img src={p.img} alt={`Stanley/Stella ${p.name}, ${p.type}`} width="720" height="900" loading="lazy" />
+            <figcaption><strong>{p.name}</strong><span>{p.type}</span></figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight brands-section">
+    <div class="container">
+      <div class="brands">
+        {[
+          { t: 'Stanley/Stella', d: 'Premium-Basics aus Bio-Baumwolle. Standard für Print-on-Demand und hochwertige Firmenkleidung.', tags: ['Bio', 'GOTS', 'Fair Wear'] },
+          { t: 'Stedman', d: 'Preisstarke Klassiker für Vereine, Events und große Auflagen. Classic-T, Hoodies, Polos, Fleece.', tags: ['Preisstark', 'Große Auflagen', 'Viele Farben'] },
+          { t: 'Eigene Textilien', d: 'Du hast schon Ware? Schick sie uns, wir prüfen die Eignung und drucken darauf.', tags: ['Auf Anfrage', 'DTF'] },
+        ].map((b, i) => (
+          <div class={`brand reveal reveal-d${i}`}>
+            <h3>{b.t}</h3>
+            <p>{b.d}</p>
+            <div class="tags">{b.tags.map((t) => <span class="tag">{t}</span>)}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container shop-band reveal">
+      <div>
+        <h2>Einzelstück gesucht?</h2>
+        <p class="muted">Shirts, Hoodies und Tassen mit eigenem Motiv bestellst du direkt in unserem Shop. Ohne Anfrage, ohne Wartezeit.</p>
+      </div>
+      <a href={site.shopUrl} target="_blank" rel="noopener" class="btn btn-primary btn-lg">Zum Shop <Icon name="arrow-up-right" size={18} /></a>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .prod-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .prod { margin: 0; border-radius: var(--radius-card); overflow: hidden; border: 1px solid var(--line); background: var(--surface); }
+  .prod img { aspect-ratio: 4 / 5; object-fit: cover; width: 100%; transition: transform 0.5s var(--ease); }
+  .prod:hover img { transform: scale(1.03); }
+  .prod figcaption { display: flex; flex-direction: column; padding: 14px 16px; font-size: 14.5px; }
+  .prod figcaption span { color: var(--text-2); }
+  .brands-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .brands { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 20px; }
+  .brand { padding: 28px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); display: grid; gap: 10px; align-content: start; }
+  .brand p { color: var(--text-2); font-size: 15px; }
+  .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+  .shop-band { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; padding: 32px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); }
+  .shop-band .muted { margin-top: 8px; max-width: 52ch; }
+  @media (max-width: 900px) { .prod-grid { grid-template-columns: repeat(2, 1fr); } .brands { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,13 @@
+---
+// Phosphor icon inlined at build time. Names: https://phosphoricons.com
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+interface Props { name: string; size?: number; weight?: 'regular' | 'bold' | 'fill' | 'duotone'; class?: string }
+const { name, size = 20, weight = 'regular', class: cls = '' } = Astro.props;
+const pkgDir = path.join(process.cwd(), 'node_modules', '@phosphor-icons', 'core');
+const svg = readFileSync(path.join(pkgDir, 'assets', weight, weight === 'regular' ? `${name}.svg` : `${name}-${weight}.svg`), 'utf8').replace(
+  '<svg ',
+  `<svg width="${size}" height="${size}" aria-hidden="true" focusable="false" class="icon ${cls}" `
+);
+---
+<Fragment set:html={svg} />

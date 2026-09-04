@@ -1,0 +1,133 @@
+---
+import { site } from '../data/site';
+import Icon from './Icon.astro';
+interface Props { topic?: string; compact?: boolean }
+const { topic = '', compact = false } = Astro.props;
+const topics = ['Print-on-Demand Fulfillment', 'Großauflage ab 50 Stück', 'B2B-Partnerschaft (50+ Orders/Tag)', 'Einzelstück / Kleinserie', 'Druckverfahren-Beratung', 'Sonstiges'];
+---
+<form class="cform" data-contact-form data-endpoint={site.formEndpoint} data-wa={site.whatsapp} novalidate>
+  <div class="row">
+    <div class="field">
+      <label for="cf-name">Name</label>
+      <input class="input" id="cf-name" name="name" type="text" autocomplete="name" required />
+      <span class="error">Bitte gib deinen Namen an.</span>
+    </div>
+    <div class="field">
+      <label for="cf-email">E-Mail</label>
+      <input class="input" id="cf-email" name="email" type="email" autocomplete="email" required />
+      <span class="error">Bitte gib eine gültige E-Mail-Adresse an.</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="field">
+      <label for="cf-phone">Telefon <span class="optional">(optional, für WhatsApp)</span></label>
+      <input class="input" id="cf-phone" name="phone" type="tel" autocomplete="tel" />
+    </div>
+    <div class="field">
+      <label for="cf-topic">Thema</label>
+      <select class="select" id="cf-topic" name="topic" required>
+        <option value="" disabled selected={!topic}>Bitte wählen</option>
+        {topics.map((t) => <option value={t} selected={t === topic}>{t}</option>)}
+      </select>
+      <span class="error">Bitte wähle ein Thema.</span>
+    </div>
+  </div>
+  {!compact && (
+    <div class="row">
+      <div class="field">
+        <label for="cf-qty">Stückzahl <span class="optional">(ungefähr)</span></label>
+        <input class="input" id="cf-qty" name="qty" type="text" inputmode="numeric" placeholder="z. B. 1, 50 oder 500" />
+      </div>
+      <div class="field">
+        <label for="cf-shop">Shop-URL <span class="optional">(falls vorhanden)</span></label>
+        <input class="input" id="cf-shop" name="shop" type="url" placeholder="https://" />
+      </div>
+    </div>
+  )}
+  <div class="field">
+    <label for="cf-msg">Nachricht</label>
+    <textarea class="textarea" id="cf-msg" name="message" required placeholder="Produkt, Motiv, Termin, Besonderheiten. Dateien schickst du uns anschließend per WhatsApp oder E-Mail."></textarea>
+    <span class="error">Bitte beschreib kurz dein Projekt.</span>
+  </div>
+  <div class="field">
+    <label class="checkbox">
+      <input type="checkbox" name="privacy" required />
+      <span>Ich habe die <a href="/datenschutz" class="accent">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Daten zur Bearbeitung der Anfrage einverstanden.</span>
+    </label>
+    <span class="error">Bitte bestätige den Datenschutzhinweis.</span>
+  </div>
+  <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="sr-only" aria-hidden="true" />
+  <div class="actions">
+    <button type="submit" class="btn btn-primary btn-lg" data-submit>Anfrage senden <Icon name="arrow-right" size={18} /></button>
+    <span class="muted small">Antwort meist innerhalb weniger Stunden, werktags.</span>
+  </div>
+  <p class="form-note" data-note role="status" aria-live="polite"></p>
+</form>
+
+<style>
+  .cform { display: grid; gap: 18px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 4px; }
+  .small { font-size: 13.5px; }
+  @media (max-width: 600px) { .row { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+  const forms = document.querySelectorAll<HTMLFormElement>('[data-contact-form]');
+  forms.forEach((form) => {
+    const note = form.querySelector<HTMLElement>('[data-note]')!;
+    const submit = form.querySelector<HTMLButtonElement>('[data-submit]')!;
+    const setNote = (kind: 'ok' | 'err' | '', text: string) => { note.className = 'form-note ' + kind; note.textContent = text; };
+
+    const validate = () => {
+      let ok = true;
+      form.querySelectorAll<HTMLElement>('.field').forEach((f) => {
+        const input = f.querySelector<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('input, select, textarea');
+        if (!input || !input.hasAttribute('required')) return;
+        const valid = input instanceof HTMLInputElement && input.type === 'checkbox' ? input.checked : input.checkValidity() && input.value.trim() !== '';
+        f.classList.toggle('has-error', !valid);
+        if (!valid) ok = false;
+      });
+      return ok;
+    };
+    form.addEventListener('input', (e) => (e.target as HTMLElement).closest('.field')?.classList.remove('has-error'));
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      setNote('', '');
+      if (!validate()) { setNote('err', 'Bitte prüfe die markierten Felder.'); return; }
+      const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+      if (data._gotcha) return;
+      const endpoint = form.dataset.endpoint;
+      const lines = [
+        `Anfrage über westernprint.de`,
+        `Name: ${data.name}`,
+        `E-Mail: ${data.email}`,
+        data.phone ? `Telefon: ${data.phone}` : '',
+        `Thema: ${data.topic}`,
+        data.qty ? `Stückzahl: ${data.qty}` : '',
+        data.shop ? `Shop: ${data.shop}` : '',
+        ``,
+        data.message,
+      ].filter((l) => l !== '');
+
+      if (!endpoint) {
+        // Kein Endpoint konfiguriert: Anfrage als vorausgefüllte WhatsApp-Nachricht öffnen.
+        window.open(`${form.dataset.wa}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank', 'noopener');
+        setNote('ok', 'WhatsApp öffnet sich mit deiner Anfrage. Einfach absenden, wir melden uns.');
+        return;
+      }
+      submit.disabled = true; submit.textContent = 'Wird gesendet...';
+      try {
+        const res = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) });
+        if (!res.ok) throw new Error(String(res.status));
+        form.reset();
+        setNote('ok', 'Danke! Deine Anfrage ist angekommen. Wir melden uns werktags meist innerhalb weniger Stunden.');
+      } catch {
+        setNote('err', 'Senden hat nicht geklappt. Schreib uns direkt per WhatsApp oder an info@westernprint.de.');
+      } finally {
+        submit.disabled = false; submit.textContent = 'Anfrage senden';
+      }
+    });
+  });
+</script>

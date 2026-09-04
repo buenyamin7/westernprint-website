@@ -1,0 +1,108 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+<Base title="DTF, DTG oder Sublimation? Druckverfahren im Vergleich" description="Welches Druckverfahren für welches Textil: DTF, DTG und Sublimation im Vergleich. Haltbarkeit, Farben, Stückzahlen. Alles auf Epson-Maschinen in Oberhausen.">
+  <PageHero
+    eyebrow="Druckverfahren"
+    title="DTF, DTG oder Sublimation? <span class='hl'>Wir wählen das passende Verfahren.</span>"
+    lede="Höchste Qualität trifft auf moderne Technik. Bei uns läuft alles über Epson-Maschinen mit Fokus auf DTF und DTG, für Tassen und Accessoires auf Sublimation."
+    image="/img/print-1.jpg"
+    imageAlt="Detailaufnahme eines DTF-Drucks, jede Linie gestochen scharf"
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="methods">
+        {[
+          { icon: 'printer', t: 'DTF (Direct to Film)', best: 'Standard für Print-on-Demand und Auflagen', d: 'Das Motiv wird auf Folie gedruckt und mit Kleberpulver aufs Textil gepresst. Deckend auf hellen und dunklen Stoffen, dehnbar, waschfest. Für komplexe Motive, Farbverläufe und alle Materialien von Baumwolle bis Polyester.', tags: ['Ab 1 Stück', 'Alle Textilien', 'Farbverläufe', 'Sehr haltbar'] },
+          { icon: 't-shirt', t: 'DTG (Direct to Garment)', best: 'Fotorealistische Einzelstücke', d: 'Der Drucker druckt direkt ins Gewebe. Weicher Griff, feinste Details, ideal für fotorealistische Motive mit vielen Farben auf Baumwolle. Wir nutzen Epson-DTG mit Vorbehandlung für satte Farben.', tags: ['Ab 1 Stück', 'Baumwolle', 'Fotorealistisch', 'Weicher Griff'] },
+          { icon: 'coffee', t: 'Sublimation', best: 'Tassen, Taschen und Accessoires', d: 'Die Farbe wird per Hitze in die Beschichtung eingedampft. Satte Farben, spülmaschinenfest, praktisch unzerstörbar. Für Tassen, Polyester-Textilien und Accessoires.', tags: ['Tassen', 'Polyester', 'Spülmaschinenfest'] },
+        ].map((m, i) => (
+          <article class={`method reveal reveal-d${i}`}>
+            <div class="method-head">
+              <div class="icon-box"><Icon name={m.icon} size={22} /></div>
+              <div><h2>{m.t}</h2><span class="muted">{m.best}</span></div>
+            </div>
+            <p>{m.d}</p>
+            <div class="tags">{m.tags.map((t) => <span class="tag">{t}</span>)}</div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight table-section">
+    <div class="container">
+      <div class="section-head reveal"><h2>Welches Verfahren wofür?</h2></div>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th>Anforderung</th><th>DTF</th><th>DTG</th><th>Sublimation</th></tr></thead>
+          <tbody>
+            <tr><td>Dunkle Textilien</td><td class="yes">Sehr gut</td><td>Gut, mit Vorbehandlung</td><td class="no">Nicht möglich</td></tr>
+            <tr><td>Fotorealistische Motive</td><td>Gut</td><td class="yes">Sehr gut</td><td class="yes">Sehr gut</td></tr>
+            <tr><td>Polyester und Mischgewebe</td><td class="yes">Sehr gut</td><td class="no">Ungeeignet</td><td class="yes">Sehr gut (hell)</td></tr>
+            <tr><td>Waschbeständigkeit</td><td class="yes">Sehr hoch</td><td>Hoch</td><td class="yes">Sehr hoch</td></tr>
+            <tr><td>Griff auf dem Stoff</td><td>Leicht spürbar</td><td class="yes">Kaum spürbar</td><td class="yes">Nicht spürbar</td></tr>
+            <tr><td>Stückzahl</td><td class="yes">1 bis 1.000+</td><td>1 bis 100</td><td>1 bis 500</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container brand-grid">
+      <div class="reveal">
+        <span class="eyebrow">Textilpartner</span>
+        <h2>Warum wir auf Stanley/Stella setzen</h2>
+        <p class="muted">Stanley/Stella ist europäischer Marktführer für Premium-Basics aus Bio-Baumwolle. Die Lieferkette ist vom Saatgut bis zum fertigen Shirt rückverfolgbar. Für uns der beste Untergrund für DTF und DTG: brillante Farben, bis zu 15 Prozent weniger Tinte.</p>
+        <ul class="certs">
+          <li><Icon name="seal-check" size={18} /> GOTS (Global Organic Textile Standard)</li>
+          <li><Icon name="seal-check" size={18} /> GRS (Global Recycled Standard)</li>
+          <li><Icon name="seal-check" size={18} /> OEKO-TEX Standard 100</li>
+          <li><Icon name="seal-check" size={18} /> PETA-Approved Vegan</li>
+          <li><Icon name="seal-check" size={18} /> Fair Wear Foundation, Leader-Status</li>
+        </ul>
+        <a href="/textilien" class="btn btn-secondary">Textilien ansehen</a>
+      </div>
+      <div class="brand-imgs reveal reveal-d1">
+        <img src="/img/prod-crafter.jpg" alt="Stanley/Stella Crafter T-Shirt" width="720" height="900" loading="lazy" />
+        <img src="/img/prod-chaser.jpg" alt="Stanley/Stella Chaser Oversized Hoodie" width="720" height="900" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Unsicher, welches Verfahren passt?" text="Schick uns dein Motiv und das Wunschtextil. Wir sagen dir, was am besten hält und am besten aussieht." />
+</Base>
+
+<style>
+  .methods { display: grid; gap: 20px; }
+  .method { display: grid; grid-template-columns: 1fr 1.4fr; gap: 28px; padding: 32px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); align-items: start; }
+  .method-head { display: flex; gap: 16px; align-items: flex-start; }
+  .method-head h2 { font-size: 1.4rem; }
+  .method-head .muted { font-size: 14px; display: block; margin-top: 4px; }
+  .method p { color: var(--text-2); }
+  .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  .table-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 620px; }
+  th, td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--line); }
+  th { font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-3); font-weight: 600; }
+  tbody tr:last-child td { border-bottom: 0; }
+  td:first-child { font-weight: 500; }
+  td { color: var(--text-2); }
+  td.yes { color: var(--accent); font-weight: 500; }
+  td.no { color: var(--text-3); }
+  .brand-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 48px; align-items: center; }
+  .brand-grid .muted { margin-top: 14px; max-width: 58ch; }
+  .certs { display: grid; gap: 10px; margin: 24px 0 28px; font-size: 15px; }
+  .certs li { display: flex; gap: 10px; align-items: center; }
+  .certs .icon { color: var(--accent); flex: none; }
+  .brand-imgs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .brand-imgs img { border-radius: var(--radius-card); border: 1px solid var(--line); }
+  .brand-imgs img:last-child { margin-top: 40px; }
+  @media (max-width: 900px) { .method, .brand-grid { grid-template-columns: 1fr; } }
+</style>

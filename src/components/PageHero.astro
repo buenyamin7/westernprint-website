@@ -1,0 +1,32 @@
+---
+// Kompakter Seitenkopf für Unterseiten. Optional mit Bild rechts.
+import Icon from './Icon.astro';
+interface Props { eyebrow?: string; title: string; lede: string; image?: string; imageAlt?: string; cta?: { label: string; href: string }; cta2?: { label: string; href: string } }
+const { eyebrow, title, lede, image, imageAlt = '', cta, cta2 } = Astro.props;
+---
+<section class={`phero ${image ? 'has-image' : ''}`}>
+  <div class="container phero-grid">
+    <div class="phero-text">
+      {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+      <h1 set:html={title} />
+      <p class="lede">{lede}</p>
+      {(cta || cta2) && (
+        <div class="phero-cta">
+          {cta && <a href={cta.href} class="btn btn-primary btn-lg">{cta.label} <Icon name="arrow-right" size={18} /></a>}
+          {cta2 && <a href={cta2.href} class="btn btn-secondary btn-lg">{cta2.label}</a>}
+        </div>
+      )}
+    </div>
+    {image && <div class="phero-img"><img src={image} alt={imageAlt} width="1400" height="1050" loading="eager" fetchpriority="high" /></div>}
+  </div>
+</section>
+
+<style>
+  .phero { padding: clamp(56px, 7vw, 96px) 0 clamp(40px, 5vw, 64px); border-bottom: 1px solid var(--line); background: radial-gradient(900px 400px at 15% 0%, var(--accent-soft), transparent 70%); }
+  .phero-grid { display: grid; gap: 40px; align-items: center; }
+  .has-image .phero-grid { grid-template-columns: 1.15fr 1fr; }
+  .phero-text .lede { margin-top: 18px; }
+  .phero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+  .phero-img img { border-radius: var(--radius-card); border: 1px solid var(--line); aspect-ratio: 4 / 3; object-fit: cover; }
+  @media (max-width: 900px) { .has-image .phero-grid { grid-template-columns: 1fr; } }
+</style>

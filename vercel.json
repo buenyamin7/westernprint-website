@@ -1,0 +1,96 @@
+{
+  "redirects": [
+    {
+      "source": "/pages/pod-druckverfahren-fulfillment",
+      "destination": "/print-on-demand",
+      "permanent": true
+    },
+    {
+      "source": "/pages/b2b-pod-anfragen",
+      "destination": "/b2b-partner",
+      "permanent": true
+    },
+    {
+      "source": "/pages/grossbestellung",
+      "destination": "/grossauflagen",
+      "permanent": true
+    },
+    {
+      "source": "/pages/druckverfahren-und-textilanbieter",
+      "destination": "/druckverfahren",
+      "permanent": true
+    },
+    {
+      "source": "/pages/pod-preise",
+      "destination": "/preise",
+      "permanent": true
+    },
+    {
+      "source": "/pages/bestellen",
+      "destination": "/textilien",
+      "permanent": true
+    },
+    {
+      "source": "/pages/uber-uns",
+      "destination": "/ueber-uns",
+      "permanent": true
+    },
+    {
+      "source": "/pages/contact",
+      "destination": "/kontakt",
+      "permanent": true
+    },
+    {
+      "source": "/pages/impressum",
+      "destination": "/impressum",
+      "permanent": true
+    },
+    {
+      "source": "/pages/agb",
+      "destination": "/agb",
+      "permanent": true
+    },
+    {
+      "source": "/pages/datenschutzerklarung",
+      "destination": "/datenschutz",
+      "permanent": true
+    },
+    {
+      "source": "/policies/privacy-policy",
+      "destination": "/datenschutz",
+      "permanent": true
+    },
+    {
+      "source": "/pages/widerrufsbelehrung-fur-verbraucher",
+      "destination": "/widerruf",
+      "permanent": true
+    },
+    {
+      "source": "/pages/versand-und-zahlungsbedingungen",
+      "destination": "/versand",
+      "permanent": true
+    },
+    {
+      "source": "/collections/:path*",
+      "destination": "https://shop.westernprint.de/collections/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/products/:path*",
+      "destination": "https://shop.westernprint.de/products/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/cart",
+      "destination": "https://shop.westernprint.de/cart",
+      "permanent": true
+    },
+    {
+      "source": "/account/:path*",
+      "destination": "https://shop.westernprint.de/account/:path*",
+      "permanent": true
+    }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
+}

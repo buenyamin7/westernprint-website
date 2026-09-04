@@ -1,0 +1,75 @@
+---
+import { site, nav } from '../data/site';
+import Icon from './Icon.astro';
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+<header class="nav" id="top">
+  <div class="container nav-inner">
+    <a href="/" class="brand" aria-label="westernprint Startseite">
+      <img src="/img/logo.png" alt="westernprint" width="150" height="57" />
+    </a>
+    <nav class="nav-links" aria-label="Hauptnavigation">
+      {nav.map((n) => (
+        <a href={n.href} aria-current={path === n.href ? 'page' : undefined}>{n.label}</a>
+      ))}
+      <a href={site.shopUrl} target="_blank" rel="noopener">Shop <Icon name="arrow-up-right" size={14} /></a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-toggle" type="button" aria-label="Farbschema wechseln" data-theme-toggle>
+        <span class="only-dark"><Icon name="sun" size={18} /></span>
+        <span class="only-light"><Icon name="moon" size={18} /></span>
+      </button>
+      <a href="/kontakt" class="btn btn-primary btn-sm nav-cta">Angebot anfragen</a>
+      <button class="menu-btn" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+        <span class="when-closed"><Icon name="list" size={22} /></span>
+        <span class="when-open"><Icon name="x" size={22} /></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <div class="container">
+      {nav.map((n) => <a href={n.href}>{n.label}</a>)}
+      <a href="/textilien">Textilien</a>
+      <a href="/b2b-partner">B2B-Partner</a>
+      <a href={site.shopUrl} target="_blank" rel="noopener">Shop <Icon name="arrow-up-right" size={14} /></a>
+      <a href="/kontakt" class="btn btn-primary" style="margin-top:12px">Angebot anfragen</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    background: color-mix(in srgb, var(--bg) 78%, transparent);
+    backdrop-filter: blur(14px) saturate(140%); -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner { height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .brand img { height: 40px; width: auto; filter: brightness(0) invert(1); opacity: 0.94; }
+  :global([data-theme="light"]) .brand img { filter: none; opacity: 1; }
+  .nav-links { display: flex; align-items: center; gap: 4px; }
+  .nav-links a {
+    padding: 8px 12px; border-radius: 999px; font-size: 14.5px; font-weight: 500; color: var(--text-2);
+    display: inline-flex; align-items: center; gap: 4px; transition: color 0.2s, background 0.2s;
+  }
+  .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--text); background: var(--surface-2); }
+  .nav-actions { display: flex; align-items: center; gap: 10px; }
+  .theme-toggle, .menu-btn {
+    width: 38px; height: 38px; border-radius: 999px; border: 1px solid var(--line); background: transparent;
+    display: grid; place-items: center; cursor: pointer; color: var(--text-2);
+  }
+  .theme-toggle:hover, .menu-btn:hover { color: var(--text); border-color: var(--line-strong); }
+  .only-light, :global([data-theme="light"]) .only-dark { display: none; }
+  :global([data-theme="light"]) .only-light { display: block; }
+  .menu-btn { display: none; }
+  .when-open { display: none; }
+  .menu-btn[aria-expanded="true"] .when-open { display: block; }
+  .menu-btn[aria-expanded="true"] .when-closed { display: none; }
+  .mobile-menu { border-top: 1px solid var(--line); background: var(--bg); }
+  .mobile-menu .container { display: flex; flex-direction: column; padding-top: 12px; padding-bottom: 20px; }
+  .mobile-menu a:not(.btn) { padding: 13px 4px; border-bottom: 1px solid var(--line); font-weight: 500; display: flex; align-items: center; gap: 6px; }
+  @media (max-width: 1023px) {
+    .nav-links, .nav-cta { display: none; }
+    .menu-btn { display: grid; }
+  }
+</style>

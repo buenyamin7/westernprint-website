@@ -1,0 +1,42 @@
+---
+import { testimonials } from '../data/site';
+import Icon from './Icon.astro';
+const [first, ...rest] = testimonials;
+---
+<section class="section-tight" id="stimmen">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Was Shop-Betreiber über uns sagen</h2>
+      <p>Die meisten unserer Partner kommen von großen Anbietern zu uns. Und bleiben.</p>
+    </div>
+    <div class="tgrid">
+      <figure class="card card-pad t-main reveal">
+        <div class="stars" aria-label="5 von 5 Sternen">{Array.from({ length: 5 }).map(() => <Icon name="star" weight="fill" size={16} />)}</div>
+        <blockquote>„{first.quote}“</blockquote>
+        <figcaption><strong>{first.name}</strong><span>{first.role}</span></figcaption>
+      </figure>
+      <div class="t-side">
+        {rest.map((t, i) => (
+          <figure class={`card card-pad reveal reveal-d${i + 1}`}>
+            <div class="stars" aria-label="5 von 5 Sternen">{Array.from({ length: 5 }).map(() => <Icon name="star" weight="fill" size={14} />)}</div>
+            <blockquote class="small">„{t.quote}“</blockquote>
+            <figcaption><strong>{t.name}</strong><span>{t.role}</span></figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tgrid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; }
+  .t-side { display: grid; gap: 20px; }
+  figure { margin: 0; display: flex; flex-direction: column; gap: 16px; }
+  .t-main { justify-content: center; }
+  .stars { display: flex; gap: 2px; color: var(--accent); }
+  blockquote { margin: 0; font-size: 1.35rem; line-height: 1.4; letter-spacing: -0.01em; font-weight: 500; text-wrap: pretty; }
+  blockquote.small { font-size: 1rem; font-weight: 400; color: var(--text-2); }
+  figcaption { display: flex; flex-direction: column; font-size: 14px; }
+  figcaption span { color: var(--text-3); }
+  @media (max-width: 900px) { .tgrid { grid-template-columns: 1fr; } blockquote { font-size: 1.15rem; } }
+</style>

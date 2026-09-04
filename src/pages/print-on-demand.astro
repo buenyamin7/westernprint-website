@@ -1,0 +1,131 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import { site } from '../data/site';
+
+const faqs = [
+  { q: 'Wie funktioniert euer Print-on-Demand-Service genau?', a: 'Du verbindest deinen Shop mit unserem System. Sobald eine Bestellung eingeht, übernehmen wir Druck, Verpackung und Versand, komplett automatisiert und in deinem Namen.' },
+  { q: 'Gibt es Mindestbestellmengen?', a: 'Nein. Wir produzieren ab 1 Stück, perfekt für Einzelbestellungen oder personalisierte Produkte.' },
+  { q: 'Wie schnell sind die Lieferzeiten?', a: 'Innerhalb Deutschlands in der Regel 1 bis 3 Werktage, auch im Q4. Europaweit meist 3 bis 5 Tage.' },
+  { q: 'Wie läuft die Anbindung meines Shops?', a: 'Du bekommst Zugang zu deinem Kundenportal. Dort verbindest du deinen Shopify-Store per App oder Bestellimport. Auf Wunsch richten wir alles gemeinsam ein.' },
+  { q: 'Wie läuft die Abrechnung?', a: 'Wöchentliche Abrechnung über alle produzierten Artikel zu festen Preisen pro Produkt. Transparent und planbar, ohne Einrichtungsgebühr.' },
+  { q: 'Kann ich eigene Verpackung oder Beilagen nutzen?', a: 'Ja. Neutraler Versand ist Standard, eigene Flyer, Hangtags oder Innenlabel setzen wir auf Anfrage um.' },
+];
+const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
+---
+<Base title="Print-on-Demand Fulfillment für Shopify" description="Shop verbinden, verkaufen, wir drucken und versenden neutral in deinem Namen. Print-on-Demand ab 1 Stück aus Oberhausen, 1-3 Werktage Lieferzeit, feste Preise." jsonLd={faqLd}>
+  <PageHero
+    eyebrow="Print-on-Demand"
+    title="Dein Fulfillment-Partner für Shopify. <span class='hl'>Ab 1 Stück.</span>"
+    lede="Du verkaufst, wir drucken, verpacken und versenden direkt an deine Kunden. Produktion in Deutschland, direkter Support, konstante Qualität."
+    image="/img/druck-dtg.jpg"
+    imageAlt="DTG-Drucker druckt ein Bull-Skull-Motiv auf ein weißes T-Shirt"
+    cta={{ label: 'Angebot anfragen', href: '/kontakt' }}
+    cta2={{ label: 'Preise ansehen', href: '/preise' }}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Shop läuft, aber der Druck nervt?</h2>
+        <p>Zu lange Lieferzeiten, Drucke die nicht halten, kein Ansprechpartner. Genau die Probleme, wegen denen wir westernprint gegründet haben.</p>
+      </div>
+      <div class="grid grid-3">
+        {[
+          { icon: 'factory', t: 'Produktion in Deutschland', d: 'Alle Drucke entstehen auf unseren Epson-Maschinen in Oberhausen. Planbar, schnell, kontrollierbar.' },
+          { icon: 'package', t: 'Neutraler Versand', d: 'Kein westernprint-Logo, keine Rechnung von uns im Paket. Dein Kunde sieht nur dich.' },
+          { icon: 'clock', t: '1 bis 3 Werktage', d: 'Auch in der Black Week und im Weihnachtsgeschäft, wenn andere bis zu 14 Tage brauchen.' },
+          { icon: 'plugs-connected', t: 'Shopify-Anbindung', d: 'Bestellungen laufen automatisch zu uns. Tracking geht automatisch zurück in deinen Shop.' },
+          { icon: 'shield-check', t: 'Qualitätskontrolle', d: 'Jedes Teil wird vor dem Verpacken geprüft. Reklamationen kosten dich sonst Zeit und Werbebudget.' },
+          { icon: 'chat-circle-dots', t: 'Persönlicher Support', d: 'WhatsApp, Telefon, E-Mail. Ein fester Ansprechpartner, kein Ticketsystem.' },
+        ].map((b, i) => (
+          <div class={`feat reveal reveal-d${i % 3}`}>
+            <div class="icon-box"><Icon name={b.icon} size={22} /></div>
+            <h3>{b.t}</h3>
+            <p>{b.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight compare-section">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>westernprint im Vergleich zu großen POD-Anbietern</h2>
+      </div>
+      <div class="compare reveal">
+        <div class="col them">
+          <h3>Große POD-Anbieter</h3>
+          <ul>
+            <li>Support über Tickets, langsame Eskalation</li>
+            <li>Qualität schwankt je nach Auslastung</li>
+            <li>Oft nur DTG, blass und nach wenigen Wäschen rissig</li>
+            <li>Lieferzeiten eskalieren im Q4</li>
+            <li>Nur Editor-Funktionen, keine Sonderwünsche</li>
+          </ul>
+        </div>
+        <div class="col us">
+          <h3>westernprint</h3>
+          <ul>
+            <li><Icon name="check" weight="bold" size={16} /> Direkter Ansprechpartner, schnelle Entscheidungen</li>
+            <li><Icon name="check" weight="bold" size={16} /> Qualitätskontrolle vor jedem Versand</li>
+            <li><Icon name="check" weight="bold" size={16} /> DTF und DTG, deckend und waschbeständig</li>
+            <li><Icon name="check" weight="bold" size={16} /> 1 bis 3 Werktage, auch im Weihnachtsgeschäft</li>
+            <li><Icon name="check" weight="bold" size={16} /> Individuelle Umsetzung: Labels, Beilagen, Sonderformate</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="case-grid">
+        <div class="reveal">
+          <span class="eyebrow">Fallbeispiel</span>
+          <h2>Miriam: von 8 Tagen Lieferzeit zu ruhigem Schlaf</h2>
+          <p class="muted">Miriam betreibt seit über zwei Jahren einen Shopify-Store für personalisierte Geschenke. Beim alten Anbieter löste sich der Druck nach wenigen Wäschen, der Versand dauerte bis zu 8 Werktage, der Support war nicht erreichbar. Sie verlor Stammkunden und bekam schlechte Bewertungen.</p>
+          <p class="muted">Seit Oktober 2023 produziert sie mit uns. Auch in der Black Week und zu Weihnachten liefern wir in 1 bis 3 Tagen.</p>
+          <blockquote>„Ich schlafe wieder ruhig, weil ich weiß, dass jede Bestellung sitzt. Egal ob im Januar oder mitten im Weihnachtsstress.“<footer>Miriam, Kundin seit Oktober 2023</footer></blockquote>
+        </div>
+        <ul class="results reveal reveal-d1">
+          <li><strong>über 70 %</strong><span>weniger Reklamationen</span></li>
+          <li><strong>+4 %</strong><span>wiederkehrende Kunden</span></li>
+          <li><strong>+1.900 €</strong><span>Monatsumsatz durch zufriedenere Kunden</span></li>
+          <li><strong>Bestpreis</strong><span>günstiger als der alte Anbieter, bei besserer Qualität</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faqs} title="Fragen zum POD-Fulfillment" />
+  <CtaBand title="Bereit für ein echtes Upgrade?" text="Wechsel zu einer Druckerei mit Verstand. Wir schauen uns deinen Shop an und sagen dir ehrlich, was wir besser machen können." />
+</Base>
+
+<style>
+  .feat { display: grid; gap: 12px; padding: 26px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); }
+  .feat p { color: var(--text-2); font-size: 15px; }
+  .compare-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .col { padding: 28px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); }
+  .col h3 { margin-bottom: 16px; }
+  .col ul { display: grid; gap: 12px; color: var(--text-2); font-size: 15px; }
+  .col li { display: flex; gap: 10px; align-items: flex-start; }
+  .them li::before { content: '×'; color: var(--text-3); font-weight: 700; width: 16px; flex: none; text-align: center; }
+  .us { border-color: var(--accent-line); background: linear-gradient(160deg, var(--accent-soft), transparent 55%), var(--surface); }
+  .us .icon { color: var(--accent); flex: none; margin-top: 4px; }
+  .us li { color: var(--text); }
+  .case-grid { display: grid; grid-template-columns: 1.3fr 0.9fr; gap: 48px; align-items: center; }
+  .case-grid p { margin-top: 14px; max-width: 60ch; }
+  .case-grid blockquote { margin: 22px 0 0; padding-left: 18px; border-left: 3px solid var(--accent); font-size: 1.15rem; font-weight: 500; line-height: 1.45; }
+  .case-grid blockquote footer { margin-top: 8px; font-size: 14px; font-weight: 400; color: var(--text-3); }
+  .results { display: grid; gap: 14px; }
+  .results li { display: grid; gap: 4px; padding: 20px 22px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); }
+  .results strong { font-size: 1.7rem; letter-spacing: -0.03em; color: var(--accent); line-height: 1; }
+  .results span { color: var(--text-2); font-size: 14px; }
+  @media (max-width: 900px) { .compare, .case-grid { grid-template-columns: 1fr; } }
+</style>

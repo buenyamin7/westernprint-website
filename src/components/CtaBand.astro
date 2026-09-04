@@ -1,0 +1,27 @@
+---
+import { site } from '../data/site';
+import Icon from './Icon.astro';
+interface Props { title?: string; text?: string }
+const { title = 'Bereit für eine Druckerei, die liefert?', text = 'Schreib uns, was du vorhast. Du bekommst eine ehrliche Einschätzung und ein Angebot, meist noch am selben Werktag.' } = Astro.props;
+---
+<section class="section-tight">
+  <div class="container">
+    <div class="band reveal">
+      <div>
+        <h2>{title}</h2>
+        <p class="muted">{text}</p>
+      </div>
+      <div class="band-actions">
+        <a href="/kontakt" class="btn btn-primary btn-lg">Angebot anfragen <Icon name="arrow-right" size={18} /></a>
+        <a href={site.whatsapp} target="_blank" rel="noopener" class="btn btn-secondary btn-lg"><Icon name="whatsapp-logo" size={18} /> WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .band { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: center; padding: clamp(32px, 5vw, 56px); border-radius: var(--radius-card); border: 1px solid var(--accent-line); background: linear-gradient(135deg, var(--accent-soft), transparent 60%), var(--surface); }
+  .band p { margin-top: 12px; max-width: 48ch; }
+  .band-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
+  @media (max-width: 800px) { .band { grid-template-columns: 1fr; } .band-actions { justify-content: flex-start; } }
+</style>

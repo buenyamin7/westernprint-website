@@ -1,0 +1,81 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import ContactForm from '../components/ContactForm.astro';
+---
+<Base title="Textildruck Großauflagen ab 50 Stück | Angebot in 24 h" description="Vereinsshirts, Firmenkleidung, Messe-Merch und Abschluss-Shirts: DTF-Druck ab 50 Stück mit Staffelpreisen. Produktion in Oberhausen, Angebot innerhalb von 24 Stunden.">
+  <PageHero
+    eyebrow="Großauflagen"
+    title="Textildruck für Vereine, Firmen und Events. <span class='hl'>Ab 50 Stück.</span>"
+    lede="Ein Ansprechpartner, ein Angebot, ein Liefertermin. Wir drucken Shirts, Hoodies und Polos in Auflage und liefern gesammelt oder direkt an deine Leute."
+    image="/img/print-4.jpg"
+    imageAlt="Weißes T-Shirt mit mehreren bunten DTF-Drucken auf dem Drucktisch"
+    cta={{ label: 'Angebot anfragen', href: '#anfrage' }}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Für wen wir in Auflage drucken</h2>
+      </div>
+      <div class="grid grid-4">
+        {[
+          { icon: 'users', t: 'Vereine und Teams', d: 'Trikots, Trainingsshirts, Fanartikel mit Namen und Nummern.' },
+          { icon: 'buildings', t: 'Firmen und Corporate', d: 'Workwear, Polos und Hoodies mit Logo. Auf Wunsch mit Nachbestell-Shop.' },
+          { icon: 'sparkle', t: 'Messen und Events', d: 'Crew-Shirts und Give-aways termingerecht zum Event.' },
+          { icon: 'stack', t: 'Schulen und Abschluss', d: 'Abi-Shirts und Kita-Abschluss mit allen Namen auf dem Rücken.' },
+        ].map((b, i) => (
+          <div class={`feat reveal reveal-d${i}`}>
+            <div class="icon-box"><Icon name={b.icon} size={22} /></div>
+            <h3>{b.t}</h3>
+            <p>{b.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight info-section">
+    <div class="container info-grid">
+      <div class="reveal">
+        <h2>Was du wissen solltest</h2>
+        <ul class="facts">
+          <li><strong>Staffelpreise ab 50 Stück.</strong> Je mehr Teile, desto günstiger der Stückpreis. Mischgrößen sind kein Problem.</li>
+          <li><strong>Angebot innerhalb von 24 Stunden.</strong> Schick uns Motiv, Textil und Stückzahl, du bekommst einen festen Preis.</li>
+          <li><strong>Produktion in 5 bis 10 Werktagen.</strong> Express auf Anfrage, wenn der Termin drängt.</li>
+          <li><strong>Textilien nach Wahl.</strong> Stanley/Stella, Stedman oder deine eigenen Textilien, die du uns zuschickst.</li>
+          <li><strong>Druck, der bleibt.</strong> DTF ist waschfest, dehnbar und deckend, auch auf dunklen Stoffen.</li>
+        </ul>
+      </div>
+      <div class="reveal reveal-d1">
+        <img src="/img/print-5.jpg" alt="Mehrfarbiger DTF-Druck auf dunkelgrünem Shirt" width="1400" height="1050" loading="lazy" class="info-img" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="anfrage">
+    <div class="container form-grid">
+      <div class="reveal">
+        <h2>Anfrage für deine Großbestellung</h2>
+        <p class="muted">Produkt, Größenverteilung, Wunschtermin und Motiv reichen. Dateien schickst du uns danach per WhatsApp, E-Mail oder als Link.</p>
+      </div>
+      <div class="card card-pad reveal reveal-d1">
+        <ContactForm topic="Großauflage ab 50 Stück" />
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .feat { display: grid; gap: 12px; padding: 26px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); }
+  .feat p { color: var(--text-2); font-size: 15px; }
+  .info-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .info-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
+  .facts { display: grid; gap: 16px; margin-top: 24px; color: var(--text-2); font-size: 15.5px; }
+  .facts strong { color: var(--text); }
+  .info-img { border-radius: var(--radius-card); border: 1px solid var(--line); aspect-ratio: 4 / 3; object-fit: cover; }
+  .form-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 48px; align-items: start; }
+  .form-grid .muted { margin-top: 14px; max-width: 44ch; }
+  @media (max-width: 900px) { .info-grid, .form-grid { grid-template-columns: 1fr; } }
+</style>

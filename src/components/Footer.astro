@@ -1,0 +1,76 @@
+---
+import { site } from '../data/site';
+import Icon from './Icon.astro';
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="/img/logo.png" alt="westernprint" width="150" height="57" />
+        <p>Print-on-Demand Druckerei aus Oberhausen. DTF- und DTG-Druck ab 1 Stück, Großauflagen, neutraler Versand in deinem Namen.</p>
+        <div class="socials">
+          <a href={site.instagram} target="_blank" rel="noopener" aria-label="Instagram"><Icon name="instagram-logo" size={20} /></a>
+          <a href={site.tiktok} target="_blank" rel="noopener" aria-label="TikTok"><Icon name="tiktok-logo" size={20} /></a>
+          <a href={site.whatsapp} target="_blank" rel="noopener" aria-label="WhatsApp"><Icon name="whatsapp-logo" size={20} /></a>
+        </div>
+      </div>
+      <div>
+        <h2>Leistungen</h2>
+        <a href="/print-on-demand">Print-on-Demand Fulfillment</a>
+        <a href="/b2b-partner">B2B-Partner ab 50 Orders/Tag</a>
+        <a href="/grossauflagen">Großauflagen ab 50 Stück</a>
+        <a href="/druckverfahren">DTF, DTG und Sublimation</a>
+        <a href="/textilien">Textilien und Marken</a>
+        <a href="/preise">Preise</a>
+      </div>
+      <div>
+        <h2>westernprint</h2>
+        <a href="/ueber-uns">Über uns</a>
+        <a href="/kontakt">Kontakt</a>
+        <a href={site.shopUrl} target="_blank" rel="noopener">Shop für Einzelstücke</a>
+        <a href={site.portalUrl} target="_blank" rel="noopener">Kundenportal Login</a>
+      </div>
+      <div>
+        <h2>Kontakt</h2>
+        <address>
+          {site.legalName}<br />
+          {site.address.street}<br />
+          {site.address.zip} {site.address.city}
+        </address>
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+        <a href={site.phoneHref}>{site.phone}</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© {year} {site.legalName}. Oberhausen. HRB 38060, Amtsgericht Duisburg.</span>
+      <nav aria-label="Rechtliches">
+        <a href="/impressum">Impressum</a>
+        <a href="/datenschutz">Datenschutz</a>
+        <a href="/agb">AGB</a>
+        <a href="/widerruf">Widerruf</a>
+        <a href="/versand">Versand</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer { border-top: 1px solid var(--line); background: var(--bg-2); padding: 64px 0 110px; }
+  @media (min-width: 900px) { .footer { padding-bottom: 40px; } }
+  .footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; }
+  .footer-brand img { height: 36px; width: auto; margin-bottom: 16px; filter: brightness(0) invert(1); opacity: 0.94; }
+  :global([data-theme="light"]) .footer-brand img { filter: none; opacity: 1; }
+  .footer-brand p { color: var(--text-2); font-size: 14.5px; max-width: 38ch; }
+  .socials { display: flex; gap: 8px; margin-top: 18px; }
+  .socials a { width: 38px; height: 38px; border-radius: 999px; border: 1px solid var(--line); display: grid; place-items: center; color: var(--text-2); }
+  .socials a:hover { color: var(--text); border-color: var(--line-strong); }
+  .footer h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-3); margin-bottom: 14px; font-weight: 600; }
+  .footer-grid a, .footer address { display: block; color: var(--text-2); font-size: 14.5px; padding: 5px 0; font-style: normal; line-height: 1.55; }
+  .footer-grid div > a:hover { color: var(--text); }
+  .footer-bottom { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--text-3); }
+  .footer-bottom nav { display: flex; gap: 18px; flex-wrap: wrap; }
+  .footer-bottom nav a:hover { color: var(--text); }
+  @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; gap: 28px; } }
+</style>

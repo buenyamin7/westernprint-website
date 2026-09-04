@@ -1,0 +1,80 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import Testimonials from '../components/Testimonials.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { stats } from '../data/site';
+---
+<Base title="Druckerei aus Oberhausen: 5 Jahre POD, 80.000 Kunden" description="Warum es westernprint gibt: 2021 selbst frustrierter POD-Kunde, heute eigene DTF- und DTG-Druckerei in Oberhausen mit über 80.000 belieferten Endkunden. Wer wir sind und wie wir arbeiten.">
+  <PageHero
+    eyebrow="Über uns"
+    title="Aus Frust geboren. <span class='hl'>Aus Erfahrung gewachsen.</span>"
+    lede="westernprint ist die Antwort auf alles, was uns in der Print-on-Demand-Welt gefehlt hat: schneller Versand, echte Kommunikation und Drucke, die halten."
+    image="/img/hero-drucker.jpg"
+    imageAlt="DTG-Drucker in der westernprint Produktion in Oberhausen"
+  />
+
+  <section class="section">
+    <div class="container story">
+      <div class="story-text reveal">
+        <h2>Die Geschichte</h2>
+        <p>2021 waren wir selbst Kunde bei diversen POD-Druckereien. Wir hatten Visionen, starke Designs und motivierte Kunden. Und immer wieder dieselben Enttäuschungen: lange Lieferzeiten, keine Reaktion auf Mails, chaotische Abläufe. Rückmeldungen, wenn überhaupt, nach Tagen.</p>
+        <p>Du gibst alles für deinen Shop, und deine Druckerei zieht dich runter. Genau da haben wir uns geschworen: Wir bauen unsere eigene Lösung. Eine Druckerei aus Sicht eines echten POD-Kunden, weil wir all diese Schmerzen selbst erlebt haben.</p>
+        <p>Heute sind wir genau das: eine zuverlässige, automatisierte Fulfillment-Lösung für Shopify und Co., mit eigenen Epson-Maschinen in Oberhausen und einem Team, das ans Telefon geht.</p>
+      </div>
+      <div class="story-stats reveal reveal-d1">
+        {stats.map((s) => (
+          <div><strong>{s.value}</strong><span>{s.label}</span></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight values-section">
+    <div class="container">
+      <div class="section-head reveal"><h2>Wofür wir stehen</h2></div>
+      <div class="grid grid-4">
+        {[
+          { icon: 'truck', t: 'Schneller Versand', d: 'Unsere Prozesse laufen effizient. Du wartest nicht, du lieferst.' },
+          { icon: 'chat-circle-dots', t: 'Erreichbarer Support', d: 'Schnell, kompetent und persönlich. Kein Ticketsystem-Wahnsinn.' },
+          { icon: 'printer', t: 'Top-Qualität', d: 'Moderne Epson DTF- und DTG-Technik, jedes Teil manuell geprüft.' },
+          { icon: 'seal-check', t: 'Erfolgsbeweise', d: 'Die meisten Kunden kommen von großen Druckereien zu uns. Und bleiben.' },
+        ].map((v, i) => (
+          <div class={`value reveal reveal-d${i}`}>
+            <div class="icon-box"><Icon name={v.icon} size={22} /></div>
+            <h3>{v.t}</h3>
+            <p>{v.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container gallery-grid">
+      <img src="/img/print-2.jpg" alt="DTF-Druck mit Geldschein-Motiv auf weißem Shirt" width="1400" height="1050" loading="lazy" class="reveal" />
+      <img src="/img/druck-dtg.jpg" alt="DTG-Drucker druckt ein Motiv auf ein weißes Shirt" width="893" height="1600" loading="lazy" class="tall reveal reveal-d1" />
+      <img src="/img/print-5.jpg" alt="Mehrfarbiger Druck auf dunkelgrünem Shirt" width="1400" height="1050" loading="lazy" class="reveal reveal-d2" />
+    </div>
+  </section>
+
+  <Testimonials />
+  <CtaBand title="Lass dein Business durchstarten. Ohne Druckerei-Stress." text="Keine leeren Versprechen, sondern Ergebnisse. Alles, was wir damals vermisst haben, haben wir heute für dich umgesetzt." />
+</Base>
+
+<style>
+  .story { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 56px; align-items: start; }
+  .story-text p { color: var(--text-2); margin-top: 16px; max-width: 62ch; font-size: 1.05rem; }
+  .story-stats { display: grid; gap: 14px; position: sticky; top: calc(var(--nav-h) + 24px); }
+  .story-stats div { padding: 20px 22px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); display: grid; gap: 4px; }
+  .story-stats strong { font-size: 1.8rem; letter-spacing: -0.03em; line-height: 1; color: var(--accent); }
+  .story-stats span { color: var(--text-2); font-size: 14px; }
+  .values-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .value { display: grid; gap: 12px; padding: 26px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); align-content: start; }
+  .value p { color: var(--text-2); font-size: 15px; }
+  .gallery-grid { display: grid; grid-template-columns: 1fr 0.7fr 1fr; gap: 16px; align-items: stretch; }
+  .gallery-grid img { border-radius: var(--radius-card); border: 1px solid var(--line); object-fit: cover; height: 100%; aspect-ratio: 4 / 3; }
+  .gallery-grid img.tall { aspect-ratio: auto; }
+  @media (max-width: 900px) { .story { grid-template-columns: 1fr; } .story-stats { position: static; grid-template-columns: 1fr 1fr; } .gallery-grid { grid-template-columns: 1fr 1fr; } .gallery-grid img.tall { display: none; } }
+</style>

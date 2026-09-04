@@ -1,0 +1,29 @@
+---
+import Icon from './Icon.astro';
+interface Props { items: { q: string; a: string }[]; title?: string; intro?: string }
+const { items, title = 'Häufige Fragen', intro } = Astro.props;
+---
+<section class="section" id="faq">
+  <div class="container faq-wrap">
+    <div class="faq-head reveal">
+      <h2>{title}</h2>
+      {intro && <p class="muted">{intro}</p>}
+      <a href="/kontakt" class="btn btn-secondary" style="margin-top:22px">Frage stellen</a>
+    </div>
+    <div class="faq reveal reveal-d1">
+      {items.map((f) => (
+        <details>
+          <summary>{f.q} <Icon name="caret-down" size={18} /></summary>
+          <div class="answer">{f.a}</div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-wrap { display: grid; grid-template-columns: 1fr 1.6fr; gap: 56px; align-items: start; }
+  .faq-head p { margin-top: 12px; max-width: 34ch; }
+  .faq-head { position: sticky; top: calc(var(--nav-h) + 24px); }
+  @media (max-width: 900px) { .faq-wrap { grid-template-columns: 1fr; gap: 28px; } .faq-head { position: static; } }
+</style>

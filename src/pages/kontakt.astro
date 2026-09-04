@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { site } from '../data/site';
+---
+<Base title="Kontakt und Angebot anfragen" description="Angebot für Print-on-Demand, Großauflagen oder Einzelstücke anfragen. WhatsApp, Telefon oder Formular. westernprint GmbH, Schenkendorfstraße 45, Oberhausen.">
+  <section class="section">
+    <div class="container contact-grid">
+      <div class="reveal">
+        <span class="eyebrow">Kontakt</span>
+        <h1>Lass uns dein Projekt starten</h1>
+        <p class="lede">Kostenlose Beratung, Angebot meist noch am selben Werktag. Für schnelle Fragen sind wir auf WhatsApp.</p>
+        <ul class="channels">
+          <li><a href={site.whatsapp} target="_blank" rel="noopener"><div class="icon-box"><Icon name="whatsapp-logo" size={20} /></div><div><strong>WhatsApp</strong><span>{site.phone}</span></div></a></li>
+          <li><a href={`mailto:${site.email}`}><div class="icon-box"><Icon name="envelope" size={20} /></div><div><strong>E-Mail</strong><span>{site.email}</span></div></a></li>
+          <li><a href={site.phoneHref}><div class="icon-box"><Icon name="phone" size={20} /></div><div><strong>Telefon</strong><span>{site.phone}</span></div></a></li>
+          <li><div class="icon-box"><Icon name="map-pin" size={20} /></div><div><strong>Druckerei</strong><span>{site.address.street}, {site.address.zip} {site.address.city}</span></div></li>
+        </ul>
+        <div class="hours">
+          <strong>Erreichbar</strong>
+          <span>Montag bis Freitag, 9 bis 18 Uhr. WhatsApp auch außerhalb, Antwort am nächsten Werktag.</span>
+        </div>
+      </div>
+      <div class="card card-pad reveal reveal-d1">
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(32px, 5vw, 64px); align-items: start; }
+  .lede { margin-top: 16px; }
+  .channels { display: grid; gap: 14px; margin-top: 32px; }
+  .channels li, .channels li a { display: flex; gap: 14px; align-items: center; }
+  .channels li div:last-child { display: flex; flex-direction: column; font-size: 14.5px; }
+  .channels span { color: var(--text-2); }
+  .channels a:hover strong { color: var(--accent); }
+  .hours { margin-top: 32px; padding: 18px 20px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); display: grid; gap: 4px; font-size: 14.5px; }
+  .hours span { color: var(--text-2); }
+  @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
+</style>

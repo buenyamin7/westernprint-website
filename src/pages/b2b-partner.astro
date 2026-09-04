@@ -1,0 +1,82 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import ContactForm from '../components/ContactForm.astro';
+---
+<Base title="B2B POD-Partner für Shops ab 50 Orders am Tag" description="White-Label-Fulfillment für wachsende Shops, Agenturen und Marken: fester Ansprechpartner, Qualitätskontrolle vor Versand, stabile Abläufe bei Launches und im Q4.">
+  <PageHero
+    eyebrow="B2B-Partnerschaft"
+    title="Warum große POD-Druckereien beim Skalieren <span class='hl'>scheitern</span>"
+    lede="Viele Anbieter funktionieren am Anfang. Sobald du skalierst, kommen Support-Chaos, Qualitätsschwankungen und Verzögerungen. Bei uns läuft es sauber, auch bei 50 und mehr Bestellungen am Tag."
+    cta={{ label: 'Erstgespräch buchen', href: '#anfrage' }}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal"><h2>Was du bei uns bekommst</h2></div>
+      <div class="grid grid-3">
+        {[
+          { icon: 'factory', t: 'Produktion in Deutschland', d: 'Planbar, schnell, kontrollierbar.' },
+          { icon: 'phone', t: 'Fester Ansprechpartner', d: 'Kein Ticket-Pingpong, echte Lösungen.' },
+          { icon: 'lightning', t: 'Skalierbar ab 50 Orders am Tag', d: 'Launches und Peaks ohne Bruch.' },
+          { icon: 'shield-check', t: 'Qualitätskontrolle', d: 'Jedes Teil wird vor dem Versand geprüft.' },
+          { icon: 'plugs-connected', t: 'Shopify-Workflows', d: 'Automationen für sauberes Fulfillment.' },
+          { icon: 'clock', t: 'Schnelle Reaktionszeit', d: 'Wenn es brennt, sind wir da.' },
+        ].map((b, i) => (
+          <div class={`feat reveal reveal-d${i % 3}`}>
+            <div class="icon-box"><Icon name={b.icon} size={22} /></div>
+            <h3>{b.t}</h3>
+            <p>{b.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight steps-section">
+    <div class="container">
+      <div class="section-head reveal"><h2>So läuft die Zusammenarbeit</h2></div>
+      <ol class="steps">
+        {[
+          { t: 'Call buchen', d: '30 Minuten. Wir schauen uns deinen Ist-Stand an: Volumen, Produkte, Schmerzpunkte.' },
+          { t: 'Setup planen', d: 'Produkte, Abläufe, Branding-Wünsche, Schnittstellen. Alles, bevor die erste Bestellung kommt.' },
+          { t: 'Testbestellungen', d: 'Wir testen Qualität, Zeiten und Prozess-Stabilität an echten Orders.' },
+          { t: 'Live und skalieren', d: 'Du verkaufst, wir liefern zuverlässig. Auch wenn es plötzlich das Dreifache wird.' },
+        ].map((s, i) => (
+          <li class={`reveal reveal-d${i}`}>
+            <span class="num">{i + 1}</span>
+            <h3>{s.t}</h3>
+            <p>{s.d}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="anfrage">
+    <div class="container form-grid">
+      <div class="reveal">
+        <h2>Kostenloses Erstgespräch</h2>
+        <p class="muted">Wenn du schon 50 oder mehr Bestellungen am Tag hast oder kurz davor bist, ist das der schnellste Weg zur Zusammenarbeit. Schreib uns kurz, was du verkaufst und welches Volumen du hast.</p>
+      </div>
+      <div class="card card-pad reveal reveal-d1">
+        <ContactForm topic="B2B-Partnerschaft (50+ Orders/Tag)" />
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .feat { display: grid; gap: 12px; padding: 26px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); }
+  .feat p { color: var(--text-2); font-size: 15px; }
+  .steps-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .steps li { display: grid; gap: 10px; align-content: start; }
+  .num { width: 40px; height: 40px; border-radius: 999px; display: grid; place-items: center; background: var(--accent); color: var(--accent-ink); font-weight: 700; }
+  .steps p { color: var(--text-2); font-size: 15px; }
+  .form-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 48px; align-items: start; }
+  .form-grid .muted { margin-top: 14px; max-width: 44ch; }
+  @media (max-width: 900px) { .steps { grid-template-columns: 1fr 1fr; } .form-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .steps { grid-template-columns: 1fr; } }
+</style>
