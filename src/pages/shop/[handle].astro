@@ -110,7 +110,7 @@ const ld = { '@context': 'https://schema.org', '@type': 'Product', name: product
 </Base>
 
 <script>
-  import { addLines, euro } from '../../scripts/cart';
+  import { addItem, euro } from '../../scripts/cart';
   const data = JSON.parse(document.getElementById('pdata')!.textContent!);
   const { product, sizes: SIZES, cloud } = data;
   const form = document.querySelector<HTMLFormElement>('[data-config]')!;
@@ -200,17 +200,15 @@ const ld = { '@context': 'https://schema.org', '@type': 'Product', name: product
     if (!v) { $('[data-size-error]').hidden = false; $<HTMLElement>('[data-sizes]').scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
     $('[data-size-error]').hidden = true;
     const a = sidesActive(); const n = qty(); const btn = $<HTMLButtonElement>('[data-add]');
-    const uploadState = (k: 'front' | 'back') => uploads[k] ? (uploads[k]!.url.startsWith('blob:') ? `${uploads[k]!.name} (wird nach der Bestellung per E-Mail angefordert)` : uploads[k]!.url) : 'Kein Motiv hochgeladen, bitte nachreichen';
-    const attrs: { key: string; value: string }[] = [{ key: 'Druckseite', value: val('side') }];
-    if (a.front) attrs.push({ key: 'Druckgröße Vorderseite', value: val('size_front') }, { key: 'Upload Vorderseite', value: uploadState('front') }, { key: '_Position Vorderseite', value: `${pos.front.x.toFixed(0)}% / ${pos.front.y.toFixed(0)}%` });
-    if (a.back) attrs.push({ key: 'Druckgröße Rückseite', value: val('size_back') }, { key: 'Upload Rückseite', value: uploadState('back') }, { key: '_Position Rückseite', value: `${pos.back.x.toFixed(0)}% / ${pos.back.y.toFixed(0)}%` });
-    const ref = `${product.title} ${val('color')} ${val('size')}`;
-    const lines = [{ merchandiseId: v.id, quantity: n, attributes: attrs }];
-    if (a.front) lines.push({ merchandiseId: sizeInfo(val('size_front')).variantId, quantity: n, attributes: [{ key: 'Für', value: `${ref}, Vorderseite` }] });
-    if (a.back) lines.push({ merchandiseId: sizeInfo(val('size_back')).variantId, quantity: n, attributes: [{ key: 'Für', value: `${ref}, Rückseite` }] });
-    btn.disabled = true; btn.textContent = 'Wird hinzugefügt...';
-    try {
-      await addLines(lines);
+    const up = (k: 'front' | 'back') => (uploads[k] && !uploads[k]!.url.startsWith('blob:') ? uploads[k]!.url : uploads[k] ? `${uploads[k]!.name} (wird nachgereicht)` : '');
+    const sur = (a.front ? sizeInfo(val('size_front')).surcharge : 0) + (a.back ? sizeInfo(val('size_back')).surcharge : 0);
+    const item = { variantId: v.id, handle: product.handle, title: product.title, color: val('color'), size: val('size'), image: v.image || product.images[0]?.url || null,
+      quantity: n, base: v.price, side: val('side') as any, surcharge: sur,
+      sizeFront: a.front ? val('size_front') : undefined, sizeBack: a.back ? val('size_back') : undefined,
+      uploadFront: a.front ? up('front') : undefined, uploadBack: a.back ? up('back') : undefined,
+      posFront: a.front ? `${pos.front.x.toFixed(0)}% / ${pos.front.y.toFixed(0)}%` : undefined, posBack: a.back ? `${pos.back.x.toFixed(0)}% / ${pos.back.y.toFixed(0)}%` : undefined };
+        try {
+      addItem(item);
       note.className = 'form-note ok'; note.hidden = false; note.innerHTML = `Im Warenkorb. <a href="/warenkorb" class="accent">Zum Warenkorb und zur Kasse</a>`;
     } catch (err) { note.className = 'form-note err'; note.hidden = false; note.textContent = 'Konnte nicht hinzugefügt werden: ' + (err as Error).message; }
     finally { btn.disabled = false; btn.innerHTML = 'In den Warenkorb'; }

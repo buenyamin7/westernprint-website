@@ -1,0 +1,4152 @@
+[
+ {
+  "id": "15696852320601",
+  "handle": "crafter",
+  "title": "Crafter",
+  "productType": "T-Shirts",
+  "description": "Klassisches Premium-T-Shirt – bequem, vielseitig & langlebig",
+  "images": [
+   {
+    "url": "/img/products/crafter-780b2a2e.jpg",
+    "alt": "Crafter"
+   },
+   {
+    "url": "/img/products/crafter-86657668.jpg",
+    "alt": "crafter - black"
+   },
+   {
+    "url": "/img/products/crafter-892bf503.jpg",
+    "alt": "crafter - black - Rückseite"
+   },
+   {
+    "url": "/img/products/crafter-47e3f0c1.jpg",
+    "alt": "crafter - white"
+   },
+   {
+    "url": "/img/products/crafter-8fd67e3b.jpg",
+    "alt": "crafter - white  Rückseite"
+   },
+   {
+    "url": "/img/products/crafter-97d6860d.jpg",
+    "alt": "crafter - french navy"
+   },
+   {
+    "url": "/img/products/crafter-a41ff8df.jpg",
+    "alt": "crafter french navy Rückseite"
+   },
+   {
+    "url": "/img/products/crafter-cc8aec7f.jpg",
+    "alt": "crafter heather grey "
+   },
+   {
+    "url": "/img/products/crafter-5bc681e6.jpg",
+    "alt": "crafter heather grey Rückseite"
+   },
+   {
+    "url": "/img/products/crafter-db74bc56.jpg",
+    "alt": " crafter - natural raw Rückseite"
+   },
+   {
+    "url": "/img/products/crafter-277b5200.jpg",
+    "alt": "crafter - natural raw"
+   },
+   {
+    "url": "/img/products/crafter-1c68cd3a.jpg",
+    "alt": "crafter cotton pink Rückseite"
+   },
+   {
+    "url": "/img/products/crafter-3528c7b9.jpg",
+    "alt": "crafter cotton pink"
+   },
+   {
+    "url": "/img/products/crafter-eac8d702.jpg",
+    "alt": "crafter khaki"
+   },
+   {
+    "url": "/img/products/crafter-4471c31e.jpg",
+    "alt": "crafter khaki Rückseite"
+   }
+  ],
+  "options": [
+   {
+    "name": "Farbe",
+    "values": [
+     "Black",
+     "White",
+     "French Navy",
+     "Heather Grey",
+     "Natural Raw",
+     "Cotton Pink",
+     "Khaki"
+    ]
+   },
+   {
+    "name": "Größe",
+    "values": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "XXL",
+     "3XL"
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "id": "55901977608537",
+    "title": "Black / S",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "S"
+    },
+    "image": "/img/products/crafter-86657668.jpg"
+   },
+   {
+    "id": "55901977641305",
+    "title": "Black / M",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "M"
+    },
+    "image": "/img/products/crafter-86657668.jpg"
+   },
+   {
+    "id": "55901977674073",
+    "title": "Black / L",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "L"
+    },
+    "image": "/img/products/crafter-86657668.jpg"
+   },
+   {
+    "id": "55901977706841",
+    "title": "Black / XL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XL"
+    },
+    "image": "/img/products/crafter-86657668.jpg"
+   },
+   {
+    "id": "55901977739609",
+    "title": "Black / XXL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/crafter-86657668.jpg"
+   },
+   {
+    "id": "55901977772377",
+    "title": "Black / 3XL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/crafter-86657668.jpg"
+   },
+   {
+    "id": "55909999771993",
+    "title": "White / S",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "S"
+    },
+    "image": "/img/products/crafter-47e3f0c1.jpg"
+   },
+   {
+    "id": "55909999804761",
+    "title": "White / M",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "M"
+    },
+    "image": "/img/products/crafter-47e3f0c1.jpg"
+   },
+   {
+    "id": "55909999837529",
+    "title": "White / L",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "L"
+    },
+    "image": "/img/products/crafter-47e3f0c1.jpg"
+   },
+   {
+    "id": "55909999870297",
+    "title": "White / XL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "XL"
+    },
+    "image": "/img/products/crafter-47e3f0c1.jpg"
+   },
+   {
+    "id": "55909999903065",
+    "title": "White / XXL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/crafter-47e3f0c1.jpg"
+   },
+   {
+    "id": "55909999935833",
+    "title": "White / 3XL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/crafter-47e3f0c1.jpg"
+   },
+   {
+    "id": "55910000001369",
+    "title": "French Navy / S",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "S"
+    },
+    "image": "/img/products/crafter-97d6860d.jpg"
+   },
+   {
+    "id": "55910000034137",
+    "title": "French Navy / M",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "M"
+    },
+    "image": "/img/products/crafter-97d6860d.jpg"
+   },
+   {
+    "id": "55910000066905",
+    "title": "French Navy / L",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "L"
+    },
+    "image": "/img/products/crafter-97d6860d.jpg"
+   },
+   {
+    "id": "55910000099673",
+    "title": "French Navy / XL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "XL"
+    },
+    "image": "/img/products/crafter-97d6860d.jpg"
+   },
+   {
+    "id": "55910000132441",
+    "title": "French Navy / XXL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/crafter-97d6860d.jpg"
+   },
+   {
+    "id": "55910000165209",
+    "title": "French Navy / 3XL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/crafter-97d6860d.jpg"
+   },
+   {
+    "id": "55910000230745",
+    "title": "Heather Grey / S",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "S"
+    },
+    "image": "/img/products/crafter-cc8aec7f.jpg"
+   },
+   {
+    "id": "55910000263513",
+    "title": "Heather Grey / M",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "M"
+    },
+    "image": "/img/products/crafter-cc8aec7f.jpg"
+   },
+   {
+    "id": "55910000296281",
+    "title": "Heather Grey / L",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "L"
+    },
+    "image": "/img/products/crafter-cc8aec7f.jpg"
+   },
+   {
+    "id": "55910000329049",
+    "title": "Heather Grey / XL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "XL"
+    },
+    "image": "/img/products/crafter-cc8aec7f.jpg"
+   },
+   {
+    "id": "55910000361817",
+    "title": "Heather Grey / XXL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/crafter-cc8aec7f.jpg"
+   },
+   {
+    "id": "55910000394585",
+    "title": "Heather Grey / 3XL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/crafter-cc8aec7f.jpg"
+   },
+   {
+    "id": "55910000460121",
+    "title": "Natural Raw / S",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Natural Raw",
+     "Größe": "S"
+    },
+    "image": "/img/products/crafter-277b5200.jpg"
+   },
+   {
+    "id": "55910000492889",
+    "title": "Natural Raw / M",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Natural Raw",
+     "Größe": "M"
+    },
+    "image": "/img/products/crafter-277b5200.jpg"
+   },
+   {
+    "id": "55910000525657",
+    "title": "Natural Raw / L",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Natural Raw",
+     "Größe": "L"
+    },
+    "image": "/img/products/crafter-277b5200.jpg"
+   },
+   {
+    "id": "55910000558425",
+    "title": "Natural Raw / XL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Natural Raw",
+     "Größe": "XL"
+    },
+    "image": "/img/products/crafter-277b5200.jpg"
+   },
+   {
+    "id": "55910000591193",
+    "title": "Natural Raw / XXL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Natural Raw",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/crafter-277b5200.jpg"
+   },
+   {
+    "id": "55910000623961",
+    "title": "Natural Raw / 3XL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Natural Raw",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/crafter-277b5200.jpg"
+   },
+   {
+    "id": "55910063472985",
+    "title": "Cotton Pink / S",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Cotton Pink",
+     "Größe": "S"
+    },
+    "image": "/img/products/crafter-3528c7b9.jpg"
+   },
+   {
+    "id": "55910063505753",
+    "title": "Cotton Pink / M",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Cotton Pink",
+     "Größe": "M"
+    },
+    "image": "/img/products/crafter-3528c7b9.jpg"
+   },
+   {
+    "id": "55910063538521",
+    "title": "Cotton Pink / L",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Cotton Pink",
+     "Größe": "L"
+    },
+    "image": "/img/products/crafter-3528c7b9.jpg"
+   },
+   {
+    "id": "55910063571289",
+    "title": "Cotton Pink / XL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Cotton Pink",
+     "Größe": "XL"
+    },
+    "image": "/img/products/crafter-3528c7b9.jpg"
+   },
+   {
+    "id": "55910063604057",
+    "title": "Cotton Pink / XXL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Cotton Pink",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/crafter-3528c7b9.jpg"
+   },
+   {
+    "id": "55910063636825",
+    "title": "Cotton Pink / 3XL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Cotton Pink",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/crafter-3528c7b9.jpg"
+   },
+   {
+    "id": "55910001148249",
+    "title": "Khaki / S",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Khaki",
+     "Größe": "S"
+    },
+    "image": "/img/products/crafter-eac8d702.jpg"
+   },
+   {
+    "id": "55910001181017",
+    "title": "Khaki / M",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Khaki",
+     "Größe": "M"
+    },
+    "image": "/img/products/crafter-eac8d702.jpg"
+   },
+   {
+    "id": "55910001213785",
+    "title": "Khaki / L",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Khaki",
+     "Größe": "L"
+    },
+    "image": "/img/products/crafter-eac8d702.jpg"
+   },
+   {
+    "id": "55910001246553",
+    "title": "Khaki / XL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Khaki",
+     "Größe": "XL"
+    },
+    "image": "/img/products/crafter-eac8d702.jpg"
+   },
+   {
+    "id": "55910001279321",
+    "title": "Khaki / XXL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Khaki",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/crafter-eac8d702.jpg"
+   },
+   {
+    "id": "55910001312089",
+    "title": "Khaki / 3XL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Khaki",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/crafter-eac8d702.jpg"
+   }
+  ],
+  "minPrice": 8.5
+ },
+ {
+  "id": "15702915023193",
+  "handle": "stella-muser",
+  "title": "Stella Muser",
+  "productType": "T-Shirts",
+  "description": "Premium-T-Shirt – zeitlos, bequem & langlebig",
+  "images": [
+   {
+    "url": "/img/products/stella-muser-2ef706b2.jpg",
+    "alt": "Stella Muser – Black"
+   },
+   {
+    "url": "/img/products/stella-muser-bce9ae86.jpg",
+    "alt": "Stella Muser – Black"
+   },
+   {
+    "url": "/img/products/stella-muser-6433f8b6.jpg",
+    "alt": "Stella Muser – Black Rückseite"
+   },
+   {
+    "url": "/img/products/stella-muser-fef45e5c.jpg",
+    "alt": "Stella Muser – White"
+   },
+   {
+    "url": "/img/products/stella-muser-e3d705d3.jpg",
+    "alt": "Stella Muser – White Rückseite"
+   },
+   {
+    "url": "/img/products/stella-muser-24555ddf.jpg",
+    "alt": "Stella Muser – Heather Grey"
+   },
+   {
+    "url": "/img/products/stella-muser-0234d926.jpg",
+    "alt": "Stella Muser – Heather Grey Rückseite"
+   },
+   {
+    "url": "/img/products/stella-muser-e76f8d5d.jpg",
+    "alt": "Stella Muser – French Navy"
+   },
+   {
+    "url": "/img/products/stella-muser-a44fdef0.jpg",
+    "alt": "Stella Muser – French Navy Rückseite"
+   }
+  ],
+  "options": [
+   {
+    "name": "Farbe",
+    "values": [
+     "Black",
+     "White",
+     "Heather Grey",
+     "French Navy"
+    ]
+   },
+   {
+    "name": "Größe",
+    "values": [
+     "XS",
+     "S",
+     "M",
+     "L",
+     "XL",
+     "XXL"
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "id": "55918402896217",
+    "title": "Black / XS",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XS"
+    },
+    "image": "/img/products/stella-muser-bce9ae86.jpg"
+   },
+   {
+    "id": "55918402928985",
+    "title": "Black / S",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "S"
+    },
+    "image": "/img/products/stella-muser-bce9ae86.jpg"
+   },
+   {
+    "id": "55918402961753",
+    "title": "Black / M",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "M"
+    },
+    "image": "/img/products/stella-muser-bce9ae86.jpg"
+   },
+   {
+    "id": "55918402994521",
+    "title": "Black / L",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "L"
+    },
+    "image": "/img/products/stella-muser-bce9ae86.jpg"
+   },
+   {
+    "id": "55918403027289",
+    "title": "Black / XL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XL"
+    },
+    "image": "/img/products/stella-muser-bce9ae86.jpg"
+   },
+   {
+    "id": "55918403060057",
+    "title": "Black / XXL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/stella-muser-bce9ae86.jpg"
+   },
+   {
+    "id": "55918403125593",
+    "title": "White / XS",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "XS"
+    },
+    "image": "/img/products/stella-muser-fef45e5c.jpg"
+   },
+   {
+    "id": "55918403158361",
+    "title": "White / S",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "S"
+    },
+    "image": "/img/products/stella-muser-fef45e5c.jpg"
+   },
+   {
+    "id": "55918403191129",
+    "title": "White / M",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "M"
+    },
+    "image": "/img/products/stella-muser-fef45e5c.jpg"
+   },
+   {
+    "id": "55918403223897",
+    "title": "White / L",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "L"
+    },
+    "image": "/img/products/stella-muser-fef45e5c.jpg"
+   },
+   {
+    "id": "55918403256665",
+    "title": "White / XL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "XL"
+    },
+    "image": "/img/products/stella-muser-fef45e5c.jpg"
+   },
+   {
+    "id": "55918403289433",
+    "title": "White / XXL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/stella-muser-fef45e5c.jpg"
+   },
+   {
+    "id": "55918403354969",
+    "title": "Heather Grey / XS",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "XS"
+    },
+    "image": "/img/products/stella-muser-24555ddf.jpg"
+   },
+   {
+    "id": "55918403387737",
+    "title": "Heather Grey / S",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "S"
+    },
+    "image": "/img/products/stella-muser-24555ddf.jpg"
+   },
+   {
+    "id": "55918403420505",
+    "title": "Heather Grey / M",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "M"
+    },
+    "image": "/img/products/stella-muser-24555ddf.jpg"
+   },
+   {
+    "id": "55918403453273",
+    "title": "Heather Grey / L",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "L"
+    },
+    "image": "/img/products/stella-muser-24555ddf.jpg"
+   },
+   {
+    "id": "55918403486041",
+    "title": "Heather Grey / XL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "XL"
+    },
+    "image": "/img/products/stella-muser-24555ddf.jpg"
+   },
+   {
+    "id": "55918403518809",
+    "title": "Heather Grey / XXL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/stella-muser-24555ddf.jpg"
+   },
+   {
+    "id": "55918403551577",
+    "title": "French Navy / XS",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "XS"
+    },
+    "image": "/img/products/stella-muser-e76f8d5d.jpg"
+   },
+   {
+    "id": "55918403584345",
+    "title": "French Navy / S",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "S"
+    },
+    "image": "/img/products/stella-muser-e76f8d5d.jpg"
+   },
+   {
+    "id": "55918403617113",
+    "title": "French Navy / M",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "M"
+    },
+    "image": "/img/products/stella-muser-e76f8d5d.jpg"
+   },
+   {
+    "id": "55918403649881",
+    "title": "French Navy / L",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "L"
+    },
+    "image": "/img/products/stella-muser-e76f8d5d.jpg"
+   },
+   {
+    "id": "55918403682649",
+    "title": "French Navy / XL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "XL"
+    },
+    "image": "/img/products/stella-muser-e76f8d5d.jpg"
+   },
+   {
+    "id": "55918403715417",
+    "title": "French Navy / XXL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/stella-muser-e76f8d5d.jpg"
+   }
+  ],
+  "minPrice": 9.5
+ },
+ {
+  "id": "15702914793817",
+  "handle": "stanley-coaster",
+  "title": "Stanley Coaster",
+  "productType": "Polohemden",
+  "description": "Klassisches Premium-Poloshirt – stilvoll, bequem & strapazierfähig",
+  "images": [
+   {
+    "url": "/img/products/stanley-coaster-2fda95a2.jpg",
+    "alt": "Stanley Coaster – Black"
+   },
+   {
+    "url": "/img/products/stanley-coaster-09e237a6.jpg",
+    "alt": "Stanley Coaster – Black"
+   },
+   {
+    "url": "/img/products/stanley-coaster-0a2bb68b.jpg",
+    "alt": "Stanley Coaster – Black Rückseite"
+   },
+   {
+    "url": "/img/products/stanley-coaster-bde000cc.jpg",
+    "alt": "Stanley Coaster – White"
+   },
+   {
+    "url": "/img/products/stanley-coaster-10d50d28.jpg",
+    "alt": "Stanley Coaster – White Rückseite"
+   },
+   {
+    "url": "/img/products/stanley-coaster-1e70a3a1.jpg",
+    "alt": "Stanley Coaster – Heather Grey"
+   },
+   {
+    "url": "/img/products/stanley-coaster-aaff15fe.jpg",
+    "alt": "Stanley Coaster – Heather Grey Rückseite"
+   },
+   {
+    "url": "/img/products/stanley-coaster-026f6759.jpg",
+    "alt": "Stanley Coaster – French Navy"
+   },
+   {
+    "url": "/img/products/stanley-coaster-51eab9d4.jpg",
+    "alt": "Stanley Coaster – French Navy Rückseite"
+   }
+  ],
+  "options": [
+   {
+    "name": "Farbe",
+    "values": [
+     "Black",
+     "White",
+     "Heather Grey",
+     "French Navy"
+    ]
+   },
+   {
+    "name": "Größe",
+    "values": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "XXL",
+     "3XL"
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "id": "55918400078169",
+    "title": "Black / S",
+    "price": 11.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "S"
+    },
+    "image": "/img/products/stanley-coaster-09e237a6.jpg"
+   },
+   {
+    "id": "55918400110937",
+    "title": "Black / M",
+    "price": 11.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "M"
+    },
+    "image": "/img/products/stanley-coaster-09e237a6.jpg"
+   },
+   {
+    "id": "55918400143705",
+    "title": "Black / L",
+    "price": 11.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "L"
+    },
+    "image": "/img/products/stanley-coaster-09e237a6.jpg"
+   },
+   {
+    "id": "55918400176473",
+    "title": "Black / XL",
+    "price": 11.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XL"
+    },
+    "image": "/img/products/stanley-coaster-09e237a6.jpg"
+   },
+   {
+    "id": "55918400209241",
+    "title": "Black / XXL",
+    "price": 11.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/stanley-coaster-09e237a6.jpg"
+   },
+   {
+    "id": "55918400242009",
+    "title": "Black / 3XL",
+    "price": 11.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/stanley-coaster-09e237a6.jpg"
+   },
+   {
+    "id": "55918400274777",
+    "title": "White / S",
+    "price": 11.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "S"
+    },
+    "image": "/img/products/stanley-coaster-bde000cc.jpg"
+   },
+   {
+    "id": "55918400307545",
+    "title": "White / M",
+    "price": 11.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "M"
+    },
+    "image": "/img/products/stanley-coaster-bde000cc.jpg"
+   },
+   {
+    "id": "55918400340313",
+    "title": "White / L",
+    "price": 11.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "L"
+    },
+    "image": "/img/products/stanley-coaster-bde000cc.jpg"
+   },
+   {
+    "id": "55918400373081",
+    "title": "White / XL",
+    "price": 11.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "XL"
+    },
+    "image": "/img/products/stanley-coaster-bde000cc.jpg"
+   },
+   {
+    "id": "55918400405849",
+    "title": "White / XXL",
+    "price": 11.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/stanley-coaster-bde000cc.jpg"
+   },
+   {
+    "id": "55918400438617",
+    "title": "White / 3XL",
+    "price": 11.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/stanley-coaster-bde000cc.jpg"
+   },
+   {
+    "id": "55918400471385",
+    "title": "Heather Grey / S",
+    "price": 11.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "S"
+    },
+    "image": "/img/products/stanley-coaster-1e70a3a1.jpg"
+   },
+   {
+    "id": "55918400504153",
+    "title": "Heather Grey / M",
+    "price": 11.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "M"
+    },
+    "image": "/img/products/stanley-coaster-1e70a3a1.jpg"
+   },
+   {
+    "id": "55918400536921",
+    "title": "Heather Grey / L",
+    "price": 11.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "L"
+    },
+    "image": "/img/products/stanley-coaster-1e70a3a1.jpg"
+   },
+   {
+    "id": "55918400569689",
+    "title": "Heather Grey / XL",
+    "price": 11.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "XL"
+    },
+    "image": "/img/products/stanley-coaster-1e70a3a1.jpg"
+   },
+   {
+    "id": "55918400602457",
+    "title": "Heather Grey / XXL",
+    "price": 11.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/stanley-coaster-1e70a3a1.jpg"
+   },
+   {
+    "id": "55918400635225",
+    "title": "Heather Grey / 3XL",
+    "price": 11.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/stanley-coaster-1e70a3a1.jpg"
+   },
+   {
+    "id": "55918400667993",
+    "title": "French Navy / S",
+    "price": 11.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "S"
+    },
+    "image": "/img/products/stanley-coaster-026f6759.jpg"
+   },
+   {
+    "id": "55918400700761",
+    "title": "French Navy / M",
+    "price": 11.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "M"
+    },
+    "image": "/img/products/stanley-coaster-026f6759.jpg"
+   },
+   {
+    "id": "55918400733529",
+    "title": "French Navy / L",
+    "price": 11.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "L"
+    },
+    "image": "/img/products/stanley-coaster-026f6759.jpg"
+   },
+   {
+    "id": "55918400766297",
+    "title": "French Navy / XL",
+    "price": 11.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "XL"
+    },
+    "image": "/img/products/stanley-coaster-026f6759.jpg"
+   },
+   {
+    "id": "55918400799065",
+    "title": "French Navy / XXL",
+    "price": 11.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/stanley-coaster-026f6759.jpg"
+   },
+   {
+    "id": "55918400831833",
+    "title": "French Navy / 3XL",
+    "price": 11.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/stanley-coaster-026f6759.jpg"
+   }
+  ],
+  "minPrice": 11.5
+ },
+ {
+  "id": "15702914597209",
+  "handle": "breezer",
+  "title": "Breezer",
+  "productType": "T-Shirts",
+  "description": "Premium-Sweatshirt – zeitlos, bequem & langlebig",
+  "images": [
+   {
+    "url": "/img/products/breezer-fcbe59e0.jpg",
+    "alt": "Breezer – Lemon Sorbet"
+   },
+   {
+    "url": "/img/products/breezer-2cc49fa8.jpg",
+    "alt": "Breezer – Lemon Sorbet"
+   },
+   {
+    "url": "/img/products/breezer-c3660d55.jpg",
+    "alt": "Breezer – Lemon Sorbet Rückseite"
+   },
+   {
+    "url": "/img/products/breezer-4e917115.jpg",
+    "alt": "Breezer – Stone"
+   },
+   {
+    "url": "/img/products/breezer-ffacb5e4.jpg",
+    "alt": "Breezer – Stone Rückseite"
+   },
+   {
+    "url": "/img/products/breezer-d0c04587.jpg",
+    "alt": "Breezer – Black"
+   },
+   {
+    "url": "/img/products/breezer-ac4bc85e.jpg",
+    "alt": "Breezer – Black Rückseite"
+   },
+   {
+    "url": "/img/products/breezer-6b77e69f.jpg",
+    "alt": "Breezer – White"
+   },
+   {
+    "url": "/img/products/breezer-a632baf9.jpg",
+    "alt": "Breezer – White Rückseite"
+   },
+   {
+    "url": "/img/products/breezer-e44ce965.jpg",
+    "alt": "Breezer – Heather Grey"
+   },
+   {
+    "url": "/img/products/breezer-aa7d9906.jpg",
+    "alt": "Breezer – Heather Grey Rückseite"
+   },
+   {
+    "url": "/img/products/breezer-628404c2.jpg",
+    "alt": "Breezer – Blue Ice"
+   },
+   {
+    "url": "/img/products/breezer-acabd04c.jpg",
+    "alt": "Breezer – Blue Ice Rückseite"
+   },
+   {
+    "url": "/img/products/breezer-69e374ef.jpg",
+    "alt": "Breezer – French Navy"
+   },
+   {
+    "url": "/img/products/breezer-c5fcd7d7.jpg",
+    "alt": "Breezer – French Navy Rückseite"
+   }
+  ],
+  "options": [
+   {
+    "name": "Farbe",
+    "values": [
+     "Lemon Sorbet",
+     "Stone",
+     "Black",
+     "White",
+     "Heather Grey",
+     "Blue Ice",
+     "French Navy"
+    ]
+   },
+   {
+    "name": "Größe",
+    "values": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "XXL",
+     "3XL"
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "id": "55918397227353",
+    "title": "Lemon Sorbet / S",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Lemon Sorbet",
+     "Größe": "S"
+    },
+    "image": "/img/products/breezer-2cc49fa8.jpg"
+   },
+   {
+    "id": "55918397260121",
+    "title": "Lemon Sorbet / M",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Lemon Sorbet",
+     "Größe": "M"
+    },
+    "image": "/img/products/breezer-2cc49fa8.jpg"
+   },
+   {
+    "id": "55918397292889",
+    "title": "Lemon Sorbet / L",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Lemon Sorbet",
+     "Größe": "L"
+    },
+    "image": "/img/products/breezer-2cc49fa8.jpg"
+   },
+   {
+    "id": "55918397325657",
+    "title": "Lemon Sorbet / XL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Lemon Sorbet",
+     "Größe": "XL"
+    },
+    "image": "/img/products/breezer-2cc49fa8.jpg"
+   },
+   {
+    "id": "55918397358425",
+    "title": "Lemon Sorbet / XXL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Lemon Sorbet",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/breezer-2cc49fa8.jpg"
+   },
+   {
+    "id": "55918397391193",
+    "title": "Lemon Sorbet / 3XL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Lemon Sorbet",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/breezer-2cc49fa8.jpg"
+   },
+   {
+    "id": "55918397489497",
+    "title": "Stone / S",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Stone",
+     "Größe": "S"
+    },
+    "image": "/img/products/breezer-4e917115.jpg"
+   },
+   {
+    "id": "55918397522265",
+    "title": "Stone / M",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Stone",
+     "Größe": "M"
+    },
+    "image": "/img/products/breezer-4e917115.jpg"
+   },
+   {
+    "id": "55918397555033",
+    "title": "Stone / L",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Stone",
+     "Größe": "L"
+    },
+    "image": "/img/products/breezer-4e917115.jpg"
+   },
+   {
+    "id": "55918397587801",
+    "title": "Stone / XL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Stone",
+     "Größe": "XL"
+    },
+    "image": "/img/products/breezer-4e917115.jpg"
+   },
+   {
+    "id": "55918397620569",
+    "title": "Stone / XXL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Stone",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/breezer-4e917115.jpg"
+   },
+   {
+    "id": "55918397653337",
+    "title": "Stone / 3XL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Stone",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/breezer-4e917115.jpg"
+   },
+   {
+    "id": "55918397751641",
+    "title": "Black / S",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "S"
+    },
+    "image": "/img/products/breezer-d0c04587.jpg"
+   },
+   {
+    "id": "55918397784409",
+    "title": "Black / M",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "M"
+    },
+    "image": "/img/products/breezer-d0c04587.jpg"
+   },
+   {
+    "id": "55918397817177",
+    "title": "Black / L",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "L"
+    },
+    "image": "/img/products/breezer-d0c04587.jpg"
+   },
+   {
+    "id": "55918397849945",
+    "title": "Black / XL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XL"
+    },
+    "image": "/img/products/breezer-d0c04587.jpg"
+   },
+   {
+    "id": "55918397882713",
+    "title": "Black / XXL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/breezer-d0c04587.jpg"
+   },
+   {
+    "id": "55918397915481",
+    "title": "Black / 3XL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/breezer-d0c04587.jpg"
+   },
+   {
+    "id": "55918398013785",
+    "title": "White / S",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "S"
+    },
+    "image": "/img/products/breezer-6b77e69f.jpg"
+   },
+   {
+    "id": "55918398046553",
+    "title": "White / M",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "M"
+    },
+    "image": "/img/products/breezer-6b77e69f.jpg"
+   },
+   {
+    "id": "55918398079321",
+    "title": "White / L",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "L"
+    },
+    "image": "/img/products/breezer-6b77e69f.jpg"
+   },
+   {
+    "id": "55918398112089",
+    "title": "White / XL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "XL"
+    },
+    "image": "/img/products/breezer-6b77e69f.jpg"
+   },
+   {
+    "id": "55918398144857",
+    "title": "White / XXL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/breezer-6b77e69f.jpg"
+   },
+   {
+    "id": "55918398177625",
+    "title": "White / 3XL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/breezer-6b77e69f.jpg"
+   },
+   {
+    "id": "55918398275929",
+    "title": "Heather Grey / S",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "S"
+    },
+    "image": "/img/products/breezer-e44ce965.jpg"
+   },
+   {
+    "id": "55918398308697",
+    "title": "Heather Grey / M",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "M"
+    },
+    "image": "/img/products/breezer-e44ce965.jpg"
+   },
+   {
+    "id": "55918398341465",
+    "title": "Heather Grey / L",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "L"
+    },
+    "image": "/img/products/breezer-e44ce965.jpg"
+   },
+   {
+    "id": "55918398374233",
+    "title": "Heather Grey / XL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "XL"
+    },
+    "image": "/img/products/breezer-e44ce965.jpg"
+   },
+   {
+    "id": "55918398407001",
+    "title": "Heather Grey / XXL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/breezer-e44ce965.jpg"
+   },
+   {
+    "id": "55918398439769",
+    "title": "Heather Grey / 3XL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/breezer-e44ce965.jpg"
+   },
+   {
+    "id": "55918398538073",
+    "title": "Blue Ice / S",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Blue Ice",
+     "Größe": "S"
+    },
+    "image": "/img/products/breezer-628404c2.jpg"
+   },
+   {
+    "id": "55918398570841",
+    "title": "Blue Ice / M",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Blue Ice",
+     "Größe": "M"
+    },
+    "image": "/img/products/breezer-628404c2.jpg"
+   },
+   {
+    "id": "55918398603609",
+    "title": "Blue Ice / L",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Blue Ice",
+     "Größe": "L"
+    },
+    "image": "/img/products/breezer-628404c2.jpg"
+   },
+   {
+    "id": "55918398636377",
+    "title": "Blue Ice / XL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Blue Ice",
+     "Größe": "XL"
+    },
+    "image": "/img/products/breezer-628404c2.jpg"
+   },
+   {
+    "id": "55918398669145",
+    "title": "Blue Ice / XXL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Blue Ice",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/breezer-628404c2.jpg"
+   },
+   {
+    "id": "55918398701913",
+    "title": "Blue Ice / 3XL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "Blue Ice",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/breezer-628404c2.jpg"
+   },
+   {
+    "id": "55918398800217",
+    "title": "French Navy / S",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "S"
+    },
+    "image": "/img/products/breezer-69e374ef.jpg"
+   },
+   {
+    "id": "55918398832985",
+    "title": "French Navy / M",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "M"
+    },
+    "image": "/img/products/breezer-69e374ef.jpg"
+   },
+   {
+    "id": "55918398865753",
+    "title": "French Navy / L",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "L"
+    },
+    "image": "/img/products/breezer-69e374ef.jpg"
+   },
+   {
+    "id": "55918398898521",
+    "title": "French Navy / XL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "XL"
+    },
+    "image": "/img/products/breezer-69e374ef.jpg"
+   },
+   {
+    "id": "55918398931289",
+    "title": "French Navy / XXL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/breezer-69e374ef.jpg"
+   },
+   {
+    "id": "55918398964057",
+    "title": "French Navy / 3XL",
+    "price": 9.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/breezer-69e374ef.jpg"
+   }
+  ],
+  "minPrice": 9.5
+ },
+ {
+  "id": "15702915383641",
+  "handle": "drummer-2-0",
+  "title": "Drummer 2.0",
+  "productType": "Hoodie-Sweatshirts",
+  "description": "Premium-Hoodie – bequem, stylisch & langlebig",
+  "images": [
+   {
+    "url": "/img/products/drummer-2-0-03066f70.jpg",
+    "alt": "Drummer 2.0 – Black"
+   },
+   {
+    "url": "/img/products/drummer-2-0-6e0e1ba2.jpg",
+    "alt": "Drummer 2.0 – Black Rückseite"
+   },
+   {
+    "url": "/img/products/drummer-2-0-7a61b42f.jpg",
+    "alt": "Drummer 2.0 – White Rückseite"
+   },
+   {
+    "url": "/img/products/drummer-2-0-dd4dee05.jpg",
+    "alt": "Drummer 2.0 – Heather Grey"
+   },
+   {
+    "url": "/img/products/drummer-2-0-ddf4c6aa.jpg",
+    "alt": "Drummer 2.0 – French Navy Rückseite"
+   },
+   {
+    "url": "/img/products/drummer-2-0-33d4f15a.jpg",
+    "alt": "Drummer 2.0 – Black"
+   },
+   {
+    "url": "/img/products/drummer-2-0-0add4c35.jpg",
+    "alt": "Drummer 2.0 – White"
+   },
+   {
+    "url": "/img/products/drummer-2-0-1495bf15.jpg",
+    "alt": "Drummer 2.0 – Heather Grey Rückseite"
+   },
+   {
+    "url": "/img/products/drummer-2-0-b4514006.jpg",
+    "alt": "Drummer 2.0 – French Navy"
+   }
+  ],
+  "options": [
+   {
+    "name": "Farbe",
+    "values": [
+     "Black",
+     "White",
+     "Heather Grey",
+     "French Navy"
+    ]
+   },
+   {
+    "name": "Größe",
+    "values": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "XXL",
+     "3XL"
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "id": "55918406369625",
+    "title": "Black / S",
+    "price": 19.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "S"
+    },
+    "image": "/img/products/drummer-2-0-33d4f15a.jpg"
+   },
+   {
+    "id": "55918406402393",
+    "title": "Black / M",
+    "price": 19.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "M"
+    },
+    "image": "/img/products/drummer-2-0-33d4f15a.jpg"
+   },
+   {
+    "id": "55918406435161",
+    "title": "Black / L",
+    "price": 19.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "L"
+    },
+    "image": "/img/products/drummer-2-0-33d4f15a.jpg"
+   },
+   {
+    "id": "55918406467929",
+    "title": "Black / XL",
+    "price": 19.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XL"
+    },
+    "image": "/img/products/drummer-2-0-33d4f15a.jpg"
+   },
+   {
+    "id": "55918406500697",
+    "title": "Black / XXL",
+    "price": 19.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/drummer-2-0-33d4f15a.jpg"
+   },
+   {
+    "id": "55918406533465",
+    "title": "Black / 3XL",
+    "price": 19.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/drummer-2-0-33d4f15a.jpg"
+   },
+   {
+    "id": "55918406631769",
+    "title": "White / S",
+    "price": 19.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "S"
+    },
+    "image": "/img/products/drummer-2-0-0add4c35.jpg"
+   },
+   {
+    "id": "55918406664537",
+    "title": "White / M",
+    "price": 19.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "M"
+    },
+    "image": "/img/products/drummer-2-0-0add4c35.jpg"
+   },
+   {
+    "id": "55918406697305",
+    "title": "White / L",
+    "price": 19.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "L"
+    },
+    "image": "/img/products/drummer-2-0-0add4c35.jpg"
+   },
+   {
+    "id": "55918406730073",
+    "title": "White / XL",
+    "price": 19.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "XL"
+    },
+    "image": "/img/products/drummer-2-0-0add4c35.jpg"
+   },
+   {
+    "id": "55918406762841",
+    "title": "White / XXL",
+    "price": 19.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/drummer-2-0-0add4c35.jpg"
+   },
+   {
+    "id": "55918406795609",
+    "title": "White / 3XL",
+    "price": 19.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/drummer-2-0-0add4c35.jpg"
+   },
+   {
+    "id": "55918406893913",
+    "title": "Heather Grey / S",
+    "price": 19.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "S"
+    },
+    "image": "/img/products/drummer-2-0-dd4dee05.jpg"
+   },
+   {
+    "id": "55918406926681",
+    "title": "Heather Grey / M",
+    "price": 19.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "M"
+    },
+    "image": "/img/products/drummer-2-0-dd4dee05.jpg"
+   },
+   {
+    "id": "55918406959449",
+    "title": "Heather Grey / L",
+    "price": 19.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "L"
+    },
+    "image": "/img/products/drummer-2-0-dd4dee05.jpg"
+   },
+   {
+    "id": "55918406992217",
+    "title": "Heather Grey / XL",
+    "price": 19.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "XL"
+    },
+    "image": "/img/products/drummer-2-0-dd4dee05.jpg"
+   },
+   {
+    "id": "55918407024985",
+    "title": "Heather Grey / XXL",
+    "price": 19.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/drummer-2-0-dd4dee05.jpg"
+   },
+   {
+    "id": "55918407057753",
+    "title": "Heather Grey / 3XL",
+    "price": 19.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/drummer-2-0-dd4dee05.jpg"
+   },
+   {
+    "id": "55918407156057",
+    "title": "French Navy / S",
+    "price": 19.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "S"
+    },
+    "image": "/img/products/drummer-2-0-b4514006.jpg"
+   },
+   {
+    "id": "55918407188825",
+    "title": "French Navy / M",
+    "price": 19.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "M"
+    },
+    "image": "/img/products/drummer-2-0-b4514006.jpg"
+   },
+   {
+    "id": "55918407221593",
+    "title": "French Navy / L",
+    "price": 19.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "L"
+    },
+    "image": "/img/products/drummer-2-0-b4514006.jpg"
+   },
+   {
+    "id": "55918407254361",
+    "title": "French Navy / XL",
+    "price": 19.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "XL"
+    },
+    "image": "/img/products/drummer-2-0-b4514006.jpg"
+   },
+   {
+    "id": "55918407287129",
+    "title": "French Navy / XXL",
+    "price": 19.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/drummer-2-0-b4514006.jpg"
+   },
+   {
+    "id": "55918407319897",
+    "title": "French Navy / 3XL",
+    "price": 19.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/drummer-2-0-b4514006.jpg"
+   }
+  ],
+  "minPrice": 19.5
+ },
+ {
+  "id": "15702914695513",
+  "handle": "chaser",
+  "title": "Chaser",
+  "productType": "Hoodie-Sweatshirts",
+  "description": "Premium-Kapuzenpullover – bequem, stylisch & langlebig",
+  "images": [
+   {
+    "url": "/img/products/chaser-688adf39.jpg",
+    "alt": "Chaser – Cream"
+   },
+   {
+    "url": "/img/products/chaser-29bc5001.jpg",
+    "alt": "Chaser – Cream"
+   },
+   {
+    "url": "/img/products/chaser-babb6edd.jpg",
+    "alt": "Chaser – Cream Rückseite"
+   },
+   {
+    "url": "/img/products/chaser-1bbc4d6c.jpg",
+    "alt": "Chaser – Stone"
+   },
+   {
+    "url": "/img/products/chaser-0de5beed.jpg",
+    "alt": "Chaser – Stone Rückseite"
+   },
+   {
+    "url": "/img/products/chaser-0f4d6e70.jpg",
+    "alt": "Chaser – Black"
+   },
+   {
+    "url": "/img/products/chaser-7a63dc11.jpg",
+    "alt": "Chaser – Black Rückseite"
+   },
+   {
+    "url": "/img/products/chaser-078232ad.jpg",
+    "alt": "Chaser – Heather Grey"
+   },
+   {
+    "url": "/img/products/chaser-6efcccf0.jpg",
+    "alt": "Chaser – Heather Grey Rückseite"
+   }
+  ],
+  "options": [
+   {
+    "name": "Farbe",
+    "values": [
+     "Cream",
+     "Stone",
+     "Black",
+     "Heather Grey"
+    ]
+   },
+   {
+    "name": "Größe",
+    "values": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "XXL",
+     "3XL"
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "id": "55918399062361",
+    "title": "Cream / S",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Cream",
+     "Größe": "S"
+    },
+    "image": "/img/products/chaser-29bc5001.jpg"
+   },
+   {
+    "id": "55918399095129",
+    "title": "Cream / M",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Cream",
+     "Größe": "M"
+    },
+    "image": "/img/products/chaser-29bc5001.jpg"
+   },
+   {
+    "id": "55918399127897",
+    "title": "Cream / L",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Cream",
+     "Größe": "L"
+    },
+    "image": "/img/products/chaser-29bc5001.jpg"
+   },
+   {
+    "id": "55918399160665",
+    "title": "Cream / XL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Cream",
+     "Größe": "XL"
+    },
+    "image": "/img/products/chaser-29bc5001.jpg"
+   },
+   {
+    "id": "55918399193433",
+    "title": "Cream / XXL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Cream",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/chaser-29bc5001.jpg"
+   },
+   {
+    "id": "55918399226201",
+    "title": "Cream / 3XL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Cream",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/chaser-29bc5001.jpg"
+   },
+   {
+    "id": "55918399324505",
+    "title": "Stone / S",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Stone",
+     "Größe": "S"
+    },
+    "image": "/img/products/chaser-1bbc4d6c.jpg"
+   },
+   {
+    "id": "55918399357273",
+    "title": "Stone / M",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Stone",
+     "Größe": "M"
+    },
+    "image": "/img/products/chaser-1bbc4d6c.jpg"
+   },
+   {
+    "id": "55918399390041",
+    "title": "Stone / L",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Stone",
+     "Größe": "L"
+    },
+    "image": "/img/products/chaser-1bbc4d6c.jpg"
+   },
+   {
+    "id": "55918399422809",
+    "title": "Stone / XL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Stone",
+     "Größe": "XL"
+    },
+    "image": "/img/products/chaser-1bbc4d6c.jpg"
+   },
+   {
+    "id": "55918399455577",
+    "title": "Stone / XXL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Stone",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/chaser-1bbc4d6c.jpg"
+   },
+   {
+    "id": "55918399488345",
+    "title": "Stone / 3XL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Stone",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/chaser-1bbc4d6c.jpg"
+   },
+   {
+    "id": "55918399586649",
+    "title": "Black / S",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "S"
+    },
+    "image": "/img/products/chaser-0f4d6e70.jpg"
+   },
+   {
+    "id": "55918399619417",
+    "title": "Black / M",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "M"
+    },
+    "image": "/img/products/chaser-0f4d6e70.jpg"
+   },
+   {
+    "id": "55918399652185",
+    "title": "Black / L",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "L"
+    },
+    "image": "/img/products/chaser-0f4d6e70.jpg"
+   },
+   {
+    "id": "55918399684953",
+    "title": "Black / XL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XL"
+    },
+    "image": "/img/products/chaser-0f4d6e70.jpg"
+   },
+   {
+    "id": "55918399717721",
+    "title": "Black / XXL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/chaser-0f4d6e70.jpg"
+   },
+   {
+    "id": "55918399750489",
+    "title": "Black / 3XL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/chaser-0f4d6e70.jpg"
+   },
+   {
+    "id": "55918399848793",
+    "title": "Heather Grey / S",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "S"
+    },
+    "image": "/img/products/chaser-078232ad.jpg"
+   },
+   {
+    "id": "55918399881561",
+    "title": "Heather Grey / M",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "M"
+    },
+    "image": "/img/products/chaser-078232ad.jpg"
+   },
+   {
+    "id": "55918399914329",
+    "title": "Heather Grey / L",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "L"
+    },
+    "image": "/img/products/chaser-078232ad.jpg"
+   },
+   {
+    "id": "55918399947097",
+    "title": "Heather Grey / XL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "XL"
+    },
+    "image": "/img/products/chaser-078232ad.jpg"
+   },
+   {
+    "id": "55918399979865",
+    "title": "Heather Grey / XXL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/chaser-078232ad.jpg"
+   },
+   {
+    "id": "55918400012633",
+    "title": "Heather Grey / 3XL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/chaser-078232ad.jpg"
+   }
+  ],
+  "minPrice": 21.5
+ },
+ {
+  "id": "15702915285337",
+  "handle": "radder-2-0",
+  "title": "Radder 2.0",
+  "productType": "Sweatshirts mit Rundhalsausschnitt",
+  "description": "Premium-Sweatshirt – klassisch, bequem & langlebig",
+  "images": [
+   {
+    "url": "/img/products/radder-2-0-2bd4d3b0.jpg",
+    "alt": "Radder 2.0 – Black"
+   },
+   {
+    "url": "/img/products/radder-2-0-5b625732.jpg",
+    "alt": "Radder 2.0 – Black"
+   },
+   {
+    "url": "/img/products/radder-2-0-3392e08e.jpg",
+    "alt": "Radder 2.0 – Black Rückseite"
+   },
+   {
+    "url": "/img/products/radder-2-0-c18825ae.jpg",
+    "alt": "Radder 2.0 – White"
+   },
+   {
+    "url": "/img/products/radder-2-0-564da7c7.jpg",
+    "alt": "Radder 2.0 – White Rückseite"
+   },
+   {
+    "url": "/img/products/radder-2-0-5552e3d1.jpg",
+    "alt": "Radder 2.0 – Heather Grey"
+   },
+   {
+    "url": "/img/products/radder-2-0-5a842434.jpg",
+    "alt": "Radder 2.0 – Heather Grey Rückseite"
+   },
+   {
+    "url": "/img/products/radder-2-0-df7d0ea0.jpg",
+    "alt": "Radder 2.0 – French Navy"
+   },
+   {
+    "url": "/img/products/radder-2-0-cfbcb5ac.jpg",
+    "alt": "Radder 2.0 – French Navy Rückseite"
+   }
+  ],
+  "options": [
+   {
+    "name": "Farbe",
+    "values": [
+     "Black",
+     "White",
+     "Heather Grey",
+     "French Navy"
+    ]
+   },
+   {
+    "name": "Größe",
+    "values": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "XXL",
+     "3XL"
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "id": "55918405288281",
+    "title": "Black / S",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "S"
+    },
+    "image": "/img/products/radder-2-0-5b625732.jpg"
+   },
+   {
+    "id": "55918405321049",
+    "title": "Black / M",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "M"
+    },
+    "image": "/img/products/radder-2-0-5b625732.jpg"
+   },
+   {
+    "id": "55918405353817",
+    "title": "Black / L",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "L"
+    },
+    "image": "/img/products/radder-2-0-5b625732.jpg"
+   },
+   {
+    "id": "55918405386585",
+    "title": "Black / XL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XL"
+    },
+    "image": "/img/products/radder-2-0-5b625732.jpg"
+   },
+   {
+    "id": "55918405419353",
+    "title": "Black / XXL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/radder-2-0-5b625732.jpg"
+   },
+   {
+    "id": "55918405452121",
+    "title": "Black / 3XL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/radder-2-0-5b625732.jpg"
+   },
+   {
+    "id": "55918405550425",
+    "title": "White / S",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "S"
+    },
+    "image": "/img/products/radder-2-0-c18825ae.jpg"
+   },
+   {
+    "id": "55918405583193",
+    "title": "White / M",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "M"
+    },
+    "image": "/img/products/radder-2-0-c18825ae.jpg"
+   },
+   {
+    "id": "55918405615961",
+    "title": "White / L",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "L"
+    },
+    "image": "/img/products/radder-2-0-c18825ae.jpg"
+   },
+   {
+    "id": "55918405648729",
+    "title": "White / XL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "XL"
+    },
+    "image": "/img/products/radder-2-0-c18825ae.jpg"
+   },
+   {
+    "id": "55918405681497",
+    "title": "White / XXL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/radder-2-0-c18825ae.jpg"
+   },
+   {
+    "id": "55918405714265",
+    "title": "White / 3XL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/radder-2-0-c18825ae.jpg"
+   },
+   {
+    "id": "55918405812569",
+    "title": "Heather Grey / S",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "S"
+    },
+    "image": "/img/products/radder-2-0-5552e3d1.jpg"
+   },
+   {
+    "id": "55918405845337",
+    "title": "Heather Grey / M",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "M"
+    },
+    "image": "/img/products/radder-2-0-5552e3d1.jpg"
+   },
+   {
+    "id": "55918405878105",
+    "title": "Heather Grey / L",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "L"
+    },
+    "image": "/img/products/radder-2-0-5552e3d1.jpg"
+   },
+   {
+    "id": "55918405910873",
+    "title": "Heather Grey / XL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "XL"
+    },
+    "image": "/img/products/radder-2-0-5552e3d1.jpg"
+   },
+   {
+    "id": "55918405943641",
+    "title": "Heather Grey / XXL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/radder-2-0-5552e3d1.jpg"
+   },
+   {
+    "id": "55918405976409",
+    "title": "Heather Grey / 3XL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/radder-2-0-5552e3d1.jpg"
+   },
+   {
+    "id": "55918406074713",
+    "title": "French Navy / S",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "S"
+    },
+    "image": "/img/products/radder-2-0-df7d0ea0.jpg"
+   },
+   {
+    "id": "55918406107481",
+    "title": "French Navy / M",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "M"
+    },
+    "image": "/img/products/radder-2-0-df7d0ea0.jpg"
+   },
+   {
+    "id": "55918406140249",
+    "title": "French Navy / L",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "L"
+    },
+    "image": "/img/products/radder-2-0-df7d0ea0.jpg"
+   },
+   {
+    "id": "55918406173017",
+    "title": "French Navy / XL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "XL"
+    },
+    "image": "/img/products/radder-2-0-df7d0ea0.jpg"
+   },
+   {
+    "id": "55918406205785",
+    "title": "French Navy / XXL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/radder-2-0-df7d0ea0.jpg"
+   },
+   {
+    "id": "55918406238553",
+    "title": "French Navy / 3XL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/radder-2-0-df7d0ea0.jpg"
+   }
+  ],
+  "minPrice": 21.5
+ },
+ {
+  "id": "15702915744089",
+  "handle": "brooker",
+  "title": "Brooker",
+  "productType": "Nicht gepolsterte Jacke",
+  "description": "Nachhaltige Softshell-Fleecejacke – warm, funktional & personalisierbar",
+  "images": [
+   {
+    "url": "/img/products/brooker-69ccf082.jpg",
+    "alt": "Brooker – Black"
+   },
+   {
+    "url": "/img/products/brooker-76ed619c.jpg",
+    "alt": "Brooker – Black"
+   },
+   {
+    "url": "/img/products/brooker-8195727d.jpg",
+    "alt": "Brooker – Desert Dust Rückseite"
+   },
+   {
+    "url": "/img/products/brooker-b3c0ce71.jpg",
+    "alt": "Brooker – Khaki"
+   },
+   {
+    "url": "/img/products/brooker-26f370ab.jpg",
+    "alt": "Brooker – Black Rückseite"
+   },
+   {
+    "url": "/img/products/brooker-5340ecb7.jpg",
+    "alt": "Brooker – Desert Dust"
+   },
+   {
+    "url": "/img/products/brooker-c613d516.jpg",
+    "alt": "Brooker – Khaki Rückseite"
+   }
+  ],
+  "options": [
+   {
+    "name": "Farbe",
+    "values": [
+     "Black",
+     "Desert Dust",
+     "Khaki"
+    ]
+   },
+   {
+    "name": "Größe",
+    "values": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "XXL",
+     "3XL"
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "id": "55918408270169",
+    "title": "Black / S",
+    "price": 49.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "S"
+    },
+    "image": "/img/products/brooker-76ed619c.jpg"
+   },
+   {
+    "id": "55918408302937",
+    "title": "Black / M",
+    "price": 49.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "M"
+    },
+    "image": "/img/products/brooker-76ed619c.jpg"
+   },
+   {
+    "id": "55918408335705",
+    "title": "Black / L",
+    "price": 49.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "L"
+    },
+    "image": "/img/products/brooker-76ed619c.jpg"
+   },
+   {
+    "id": "55918408368473",
+    "title": "Black / XL",
+    "price": 49.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XL"
+    },
+    "image": "/img/products/brooker-76ed619c.jpg"
+   },
+   {
+    "id": "55918408401241",
+    "title": "Black / XXL",
+    "price": 49.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/brooker-76ed619c.jpg"
+   },
+   {
+    "id": "55918408434009",
+    "title": "Black / 3XL",
+    "price": 49.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/brooker-76ed619c.jpg"
+   },
+   {
+    "id": "55918408532313",
+    "title": "Desert Dust / S",
+    "price": 49.5,
+    "available": true,
+    "options": {
+     "Farbe": "Desert Dust",
+     "Größe": "S"
+    },
+    "image": "/img/products/brooker-5340ecb7.jpg"
+   },
+   {
+    "id": "55918408565081",
+    "title": "Desert Dust / M",
+    "price": 49.5,
+    "available": true,
+    "options": {
+     "Farbe": "Desert Dust",
+     "Größe": "M"
+    },
+    "image": "/img/products/brooker-5340ecb7.jpg"
+   },
+   {
+    "id": "55918408597849",
+    "title": "Desert Dust / L",
+    "price": 49.5,
+    "available": true,
+    "options": {
+     "Farbe": "Desert Dust",
+     "Größe": "L"
+    },
+    "image": "/img/products/brooker-5340ecb7.jpg"
+   },
+   {
+    "id": "55918408630617",
+    "title": "Desert Dust / XL",
+    "price": 49.5,
+    "available": true,
+    "options": {
+     "Farbe": "Desert Dust",
+     "Größe": "XL"
+    },
+    "image": "/img/products/brooker-5340ecb7.jpg"
+   },
+   {
+    "id": "55918408663385",
+    "title": "Desert Dust / XXL",
+    "price": 49.5,
+    "available": true,
+    "options": {
+     "Farbe": "Desert Dust",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/brooker-5340ecb7.jpg"
+   },
+   {
+    "id": "55918408696153",
+    "title": "Desert Dust / 3XL",
+    "price": 49.5,
+    "available": true,
+    "options": {
+     "Farbe": "Desert Dust",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/brooker-5340ecb7.jpg"
+   },
+   {
+    "id": "55918408794457",
+    "title": "Khaki / S",
+    "price": 49.5,
+    "available": true,
+    "options": {
+     "Farbe": "Khaki",
+     "Größe": "S"
+    },
+    "image": "/img/products/brooker-b3c0ce71.jpg"
+   },
+   {
+    "id": "55918408827225",
+    "title": "Khaki / M",
+    "price": 49.5,
+    "available": true,
+    "options": {
+     "Farbe": "Khaki",
+     "Größe": "M"
+    },
+    "image": "/img/products/brooker-b3c0ce71.jpg"
+   },
+   {
+    "id": "55918408859993",
+    "title": "Khaki / L",
+    "price": 49.5,
+    "available": true,
+    "options": {
+     "Farbe": "Khaki",
+     "Größe": "L"
+    },
+    "image": "/img/products/brooker-b3c0ce71.jpg"
+   },
+   {
+    "id": "55918408892761",
+    "title": "Khaki / XL",
+    "price": 49.5,
+    "available": true,
+    "options": {
+     "Farbe": "Khaki",
+     "Größe": "XL"
+    },
+    "image": "/img/products/brooker-b3c0ce71.jpg"
+   },
+   {
+    "id": "55918408925529",
+    "title": "Khaki / XXL",
+    "price": 49.5,
+    "available": true,
+    "options": {
+     "Farbe": "Khaki",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/brooker-b3c0ce71.jpg"
+   },
+   {
+    "id": "55918408958297",
+    "title": "Khaki / 3XL",
+    "price": 49.5,
+    "available": true,
+    "options": {
+     "Farbe": "Khaki",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/brooker-b3c0ce71.jpg"
+   }
+  ],
+  "minPrice": 49.5
+ },
+ {
+  "id": "15702915678553",
+  "handle": "stanley-quester",
+  "title": "Stanley Quester",
+  "productType": "Nicht gepolsterte Jacke",
+  "description": "Ärmellose Softshell-Weste – leicht, funktional & vielseitig",
+  "images": [
+   {
+    "url": "/img/products/stanley-quester-f4797475.jpg",
+    "alt": "Stanley Quester – Black"
+   },
+   {
+    "url": "/img/products/stanley-quester-30fa6234.jpg",
+    "alt": "Stanley Quester – Black"
+   },
+   {
+    "url": "/img/products/stanley-quester-9b37a8d7.jpg",
+    "alt": "Stanley Quester – Black Rückseite"
+   }
+  ],
+  "options": [
+   {
+    "name": "Farbe",
+    "values": [
+     "Black"
+    ]
+   },
+   {
+    "name": "Größe",
+    "values": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "XXL",
+     "3XL"
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "id": "55918407975257",
+    "title": "Black / S",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "S"
+    },
+    "image": "/img/products/stanley-quester-30fa6234.jpg"
+   },
+   {
+    "id": "55918408008025",
+    "title": "Black / M",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "M"
+    },
+    "image": "/img/products/stanley-quester-30fa6234.jpg"
+   },
+   {
+    "id": "55918408040793",
+    "title": "Black / L",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "L"
+    },
+    "image": "/img/products/stanley-quester-30fa6234.jpg"
+   },
+   {
+    "id": "55918408073561",
+    "title": "Black / XL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XL"
+    },
+    "image": "/img/products/stanley-quester-30fa6234.jpg"
+   },
+   {
+    "id": "55918408106329",
+    "title": "Black / XXL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/stanley-quester-30fa6234.jpg"
+   },
+   {
+    "id": "55918408139097",
+    "title": "Black / 3XL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/stanley-quester-30fa6234.jpg"
+   }
+  ],
+  "minPrice": 21.5
+ },
+ {
+  "id": "15702915547481",
+  "handle": "stella-guider",
+  "title": "Stella Guider",
+  "productType": "Leicht gepolsterte Jacke",
+  "description": "Softshelljacke – sportlich, bequem & langlebig",
+  "images": [
+   {
+    "url": "/img/products/stella-guider-0c9c4b12.jpg",
+    "alt": "Stella Guider – Black"
+   },
+   {
+    "url": "/img/products/stella-guider-6fea5dd4.jpg",
+    "alt": "Stella Guider – Black Rückseite"
+   },
+   {
+    "url": "/img/products/stella-guider-29841693.jpg",
+    "alt": "Stella Guider – Black"
+   }
+  ],
+  "options": [
+   {
+    "name": "Farbe",
+    "values": [
+     "Black"
+    ]
+   },
+   {
+    "name": "Größe",
+    "values": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "XXL"
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "id": "55918407614809",
+    "title": "Black / S",
+    "price": 25.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "S"
+    },
+    "image": "/img/products/stella-guider-29841693.jpg"
+   },
+   {
+    "id": "55918407647577",
+    "title": "Black / M",
+    "price": 25.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "M"
+    },
+    "image": "/img/products/stella-guider-29841693.jpg"
+   },
+   {
+    "id": "55918407680345",
+    "title": "Black / L",
+    "price": 25.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "L"
+    },
+    "image": "/img/products/stella-guider-29841693.jpg"
+   },
+   {
+    "id": "55918407713113",
+    "title": "Black / XL",
+    "price": 25.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XL"
+    },
+    "image": "/img/products/stella-guider-29841693.jpg"
+   },
+   {
+    "id": "55918407745881",
+    "title": "Black / XXL",
+    "price": 25.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/stella-guider-29841693.jpg"
+   }
+  ],
+  "minPrice": 25.5
+ },
+ {
+  "id": "15702915219801",
+  "handle": "stanley-stancer",
+  "title": "Stanley Stancer",
+  "productType": "Tanktops",
+  "description": "Ärmelloses Premium-Top – leicht, bequem & vielseitig",
+  "images": [
+   {
+    "url": "/img/products/stanley-stancer-4e658e1d.jpg",
+    "alt": "Stanley Stancer – Black"
+   },
+   {
+    "url": "/img/products/stanley-stancer-03c1c302.jpg",
+    "alt": "Stanley Stancer – Black Rückseite"
+   },
+   {
+    "url": "/img/products/stanley-stancer-1e70aeaf.jpg",
+    "alt": "Stanley Stancer – White Rückseite"
+   },
+   {
+    "url": "/img/products/stanley-stancer-0715dd12.jpg",
+    "alt": "Stanley Stancer – Heather Grey Rückseite"
+   },
+   {
+    "url": "/img/products/stanley-stancer-66c4c64e.jpg",
+    "alt": "Stanley Stancer – French Navy"
+   },
+   {
+    "url": "/img/products/stanley-stancer-d08605e3.jpg",
+    "alt": "Stanley Stancer – Black"
+   },
+   {
+    "url": "/img/products/stanley-stancer-4da606d8.jpg",
+    "alt": "Stanley Stancer – White"
+   },
+   {
+    "url": "/img/products/stanley-stancer-83c7a475.jpg",
+    "alt": "Stanley Stancer – Heather Grey"
+   },
+   {
+    "url": "/img/products/stanley-stancer-7976823d.jpg",
+    "alt": "Stanley Stancer – French Navy Rückseite"
+   }
+  ],
+  "options": [
+   {
+    "name": "Farbe",
+    "values": [
+     "Black",
+     "White",
+     "Heather Grey",
+     "French Navy"
+    ]
+   },
+   {
+    "name": "Größe",
+    "values": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "XXL",
+     "3XL"
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "id": "55918404436313",
+    "title": "Black / S",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "S"
+    },
+    "image": "/img/products/stanley-stancer-d08605e3.jpg"
+   },
+   {
+    "id": "55918404469081",
+    "title": "Black / M",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "M"
+    },
+    "image": "/img/products/stanley-stancer-d08605e3.jpg"
+   },
+   {
+    "id": "55918404501849",
+    "title": "Black / L",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "L"
+    },
+    "image": "/img/products/stanley-stancer-d08605e3.jpg"
+   },
+   {
+    "id": "55918404534617",
+    "title": "Black / XL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XL"
+    },
+    "image": "/img/products/stanley-stancer-d08605e3.jpg"
+   },
+   {
+    "id": "55918404567385",
+    "title": "Black / XXL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/stanley-stancer-d08605e3.jpg"
+   },
+   {
+    "id": "55918404600153",
+    "title": "Black / 3XL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/stanley-stancer-d08605e3.jpg"
+   },
+   {
+    "id": "55918404632921",
+    "title": "White / S",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "S"
+    },
+    "image": "/img/products/stanley-stancer-4da606d8.jpg"
+   },
+   {
+    "id": "55918404665689",
+    "title": "White / M",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "M"
+    },
+    "image": "/img/products/stanley-stancer-4da606d8.jpg"
+   },
+   {
+    "id": "55918404698457",
+    "title": "White / L",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "L"
+    },
+    "image": "/img/products/stanley-stancer-4da606d8.jpg"
+   },
+   {
+    "id": "55918404731225",
+    "title": "White / XL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "XL"
+    },
+    "image": "/img/products/stanley-stancer-4da606d8.jpg"
+   },
+   {
+    "id": "55918404763993",
+    "title": "White / XXL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/stanley-stancer-4da606d8.jpg"
+   },
+   {
+    "id": "55918404796761",
+    "title": "White / 3XL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/stanley-stancer-4da606d8.jpg"
+   },
+   {
+    "id": "55918404829529",
+    "title": "Heather Grey / S",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "S"
+    },
+    "image": "/img/products/stanley-stancer-83c7a475.jpg"
+   },
+   {
+    "id": "55918404862297",
+    "title": "Heather Grey / M",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "M"
+    },
+    "image": "/img/products/stanley-stancer-83c7a475.jpg"
+   },
+   {
+    "id": "55918404895065",
+    "title": "Heather Grey / L",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "L"
+    },
+    "image": "/img/products/stanley-stancer-83c7a475.jpg"
+   },
+   {
+    "id": "55918404927833",
+    "title": "Heather Grey / XL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "XL"
+    },
+    "image": "/img/products/stanley-stancer-83c7a475.jpg"
+   },
+   {
+    "id": "55918404960601",
+    "title": "Heather Grey / XXL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/stanley-stancer-83c7a475.jpg"
+   },
+   {
+    "id": "55918404993369",
+    "title": "Heather Grey / 3XL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/stanley-stancer-83c7a475.jpg"
+   },
+   {
+    "id": "55918405026137",
+    "title": "French Navy / S",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "S"
+    },
+    "image": "/img/products/stanley-stancer-66c4c64e.jpg"
+   },
+   {
+    "id": "55918405058905",
+    "title": "French Navy / M",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "M"
+    },
+    "image": "/img/products/stanley-stancer-66c4c64e.jpg"
+   },
+   {
+    "id": "55918405091673",
+    "title": "French Navy / L",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "L"
+    },
+    "image": "/img/products/stanley-stancer-66c4c64e.jpg"
+   },
+   {
+    "id": "55918405124441",
+    "title": "French Navy / XL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "XL"
+    },
+    "image": "/img/products/stanley-stancer-66c4c64e.jpg"
+   },
+   {
+    "id": "55918405157209",
+    "title": "French Navy / XXL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/stanley-stancer-66c4c64e.jpg"
+   },
+   {
+    "id": "55918405189977",
+    "title": "French Navy / 3XL",
+    "price": 8.5,
+    "available": true,
+    "options": {
+     "Farbe": "French Navy",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/stanley-stancer-66c4c64e.jpg"
+   }
+  ],
+  "minPrice": 8.5
+ },
+ {
+  "id": "15702915154265",
+  "handle": "mover-2-0",
+  "title": "Mover 2.0",
+  "productType": "Hosen",
+  "description": "Premium-Jogginghose – bequem, stylisch & funktional",
+  "images": [
+   {
+    "url": "/img/products/mover-2-0-564c0398.jpg",
+    "alt": "Mover 2.0 – Black"
+   },
+   {
+    "url": "/img/products/mover-2-0-fe595ef4.jpg",
+    "alt": "Mover 2.0 – Black"
+   },
+   {
+    "url": "/img/products/mover-2-0-2fce3f30.jpg",
+    "alt": "Mover 2.0 – Black Rückseite"
+   },
+   {
+    "url": "/img/products/mover-2-0-4cd85619.jpg",
+    "alt": "Mover 2.0 – Heather Grey"
+   },
+   {
+    "url": "/img/products/mover-2-0-70c1a18a.jpg",
+    "alt": "Mover 2.0 – Heather Grey Rückseite"
+   }
+  ],
+  "options": [
+   {
+    "name": "Farbe",
+    "values": [
+     "Black",
+     "Heather Grey"
+    ]
+   },
+   {
+    "name": "Größe",
+    "values": [
+     "S",
+     "M",
+     "L",
+     "XL",
+     "XXL",
+     "3XL"
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "id": "55918403944793",
+    "title": "Black / S",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "S"
+    },
+    "image": "/img/products/mover-2-0-fe595ef4.jpg"
+   },
+   {
+    "id": "55918403977561",
+    "title": "Black / M",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "M"
+    },
+    "image": "/img/products/mover-2-0-fe595ef4.jpg"
+   },
+   {
+    "id": "55918404010329",
+    "title": "Black / L",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "L"
+    },
+    "image": "/img/products/mover-2-0-fe595ef4.jpg"
+   },
+   {
+    "id": "55918404043097",
+    "title": "Black / XL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XL"
+    },
+    "image": "/img/products/mover-2-0-fe595ef4.jpg"
+   },
+   {
+    "id": "55918404075865",
+    "title": "Black / XXL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/mover-2-0-fe595ef4.jpg"
+   },
+   {
+    "id": "55918404108633",
+    "title": "Black / 3XL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/mover-2-0-fe595ef4.jpg"
+   },
+   {
+    "id": "55918404206937",
+    "title": "Heather Grey / S",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "S"
+    },
+    "image": "/img/products/mover-2-0-4cd85619.jpg"
+   },
+   {
+    "id": "55918404239705",
+    "title": "Heather Grey / M",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "M"
+    },
+    "image": "/img/products/mover-2-0-4cd85619.jpg"
+   },
+   {
+    "id": "55918404272473",
+    "title": "Heather Grey / L",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "L"
+    },
+    "image": "/img/products/mover-2-0-4cd85619.jpg"
+   },
+   {
+    "id": "55918404305241",
+    "title": "Heather Grey / XL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "XL"
+    },
+    "image": "/img/products/mover-2-0-4cd85619.jpg"
+   },
+   {
+    "id": "55918404338009",
+    "title": "Heather Grey / XXL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/mover-2-0-4cd85619.jpg"
+   },
+   {
+    "id": "55918404370777",
+    "title": "Heather Grey / 3XL",
+    "price": 21.5,
+    "available": true,
+    "options": {
+     "Farbe": "Heather Grey",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/mover-2-0-4cd85619.jpg"
+   }
+  ],
+  "minPrice": 21.5
+ },
+ {
+  "id": "15914253517145",
+  "handle": "puffer",
+  "title": "Puffer",
+  "productType": "Nicht gepolsterte Jacke",
+  "description": "Premium Oversized-Steppjacke aus 100 % recyceltem Polyester – stylisch, warm und nachhaltig. Mit gefütterter Kapuze, verstellbaren Kordeln, Nylon-Frontzip mit Kinnschutz, seitlichen Zipper-Taschen und elastischem Bund. Innen: Tragegurte für freihändiges Tragen + Reißverschluss-Öffnungen für einfache Veredelung. Ideal für hochwertige Prints & Branding – perfekte Balance aus Funktion, Komfort und Streetstyle.",
+  "images": [
+   {
+    "url": "/img/products/puffer-32cfc58c.jpg",
+    "alt": "Puffer"
+   },
+   {
+    "url": "/img/products/puffer-c990d713.jpg",
+    "alt": "Puffer– Black"
+   },
+   {
+    "url": "/img/products/puffer-610ca218.jpg",
+    "alt": "Puffer– Black Rückseite"
+   },
+   {
+    "url": "/img/products/puffer-b8801bee.jpg",
+    "alt": "Puffer– White"
+   },
+   {
+    "url": "/img/products/puffer-941cc925.jpg",
+    "alt": "Puffer– White Rückseite"
+   },
+   {
+    "url": "/img/products/puffer-d1325243.jpg",
+    "alt": "Puffer– Navy"
+   },
+   {
+    "url": "/img/products/puffer-dd61d596.jpg",
+    "alt": "Puffer– Navy Rückseite"
+   },
+   {
+    "url": "/img/products/puffer-64ccc5d9.jpg",
+    "alt": "Puffer– Khaki"
+   },
+   {
+    "url": "/img/products/puffer-3f5ace73.jpg",
+    "alt": "Puffer– Khaki Rückseite"
+   }
+  ],
+  "options": [
+   {
+    "name": "Farbe",
+    "values": [
+     "Black",
+     "White",
+     "Navy",
+     "Khaki"
+    ]
+   },
+   {
+    "name": "Größe",
+    "values": [
+     "xs",
+     "S",
+     "M",
+     "L",
+     "XL",
+     "XXL",
+     "3XL"
+    ]
+   }
+  ],
+  "variants": [
+   {
+    "id": "56549867815257",
+    "title": "Black / xs",
+    "price": 64.5,
+    "available": false,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "xs"
+    },
+    "image": "/img/products/puffer-c990d713.jpg"
+   },
+   {
+    "id": "56549853004121",
+    "title": "Black / S",
+    "price": 64.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "S"
+    },
+    "image": "/img/products/puffer-c990d713.jpg"
+   },
+   {
+    "id": "56549853036889",
+    "title": "Black / M",
+    "price": 64.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "M"
+    },
+    "image": "/img/products/puffer-c990d713.jpg"
+   },
+   {
+    "id": "56549853069657",
+    "title": "Black / L",
+    "price": 64.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "L"
+    },
+    "image": "/img/products/puffer-c990d713.jpg"
+   },
+   {
+    "id": "56549853102425",
+    "title": "Black / XL",
+    "price": 64.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XL"
+    },
+    "image": "/img/products/puffer-c990d713.jpg"
+   },
+   {
+    "id": "56549853135193",
+    "title": "Black / XXL",
+    "price": 64.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/puffer-c990d713.jpg"
+   },
+   {
+    "id": "56549853167961",
+    "title": "Black / 3XL",
+    "price": 64.5,
+    "available": true,
+    "options": {
+     "Farbe": "Black",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/puffer-c990d713.jpg"
+   },
+   {
+    "id": "56549867848025",
+    "title": "White / xs",
+    "price": 64.5,
+    "available": false,
+    "options": {
+     "Farbe": "White",
+     "Größe": "xs"
+    },
+    "image": "/img/products/puffer-b8801bee.jpg"
+   },
+   {
+    "id": "56549853200729",
+    "title": "White / S",
+    "price": 64.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "S"
+    },
+    "image": "/img/products/puffer-b8801bee.jpg"
+   },
+   {
+    "id": "56549853233497",
+    "title": "White / M",
+    "price": 64.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "M"
+    },
+    "image": "/img/products/puffer-b8801bee.jpg"
+   },
+   {
+    "id": "56549853266265",
+    "title": "White / L",
+    "price": 64.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "L"
+    },
+    "image": "/img/products/puffer-b8801bee.jpg"
+   },
+   {
+    "id": "56549853299033",
+    "title": "White / XL",
+    "price": 64.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "XL"
+    },
+    "image": "/img/products/puffer-b8801bee.jpg"
+   },
+   {
+    "id": "56549853331801",
+    "title": "White / XXL",
+    "price": 64.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/puffer-b8801bee.jpg"
+   },
+   {
+    "id": "56549853364569",
+    "title": "White / 3XL",
+    "price": 64.5,
+    "available": true,
+    "options": {
+     "Farbe": "White",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/puffer-b8801bee.jpg"
+   },
+   {
+    "id": "56549867880793",
+    "title": "Navy / xs",
+    "price": 64.5,
+    "available": false,
+    "options": {
+     "Farbe": "Navy",
+     "Größe": "xs"
+    },
+    "image": "/img/products/puffer-d1325243.jpg"
+   },
+   {
+    "id": "56549853397337",
+    "title": "Navy / S",
+    "price": 64.5,
+    "available": true,
+    "options": {
+     "Farbe": "Navy",
+     "Größe": "S"
+    },
+    "image": "/img/products/puffer-d1325243.jpg"
+   },
+   {
+    "id": "56549853430105",
+    "title": "Navy / M",
+    "price": 64.5,
+    "available": true,
+    "options": {
+     "Farbe": "Navy",
+     "Größe": "M"
+    },
+    "image": "/img/products/puffer-d1325243.jpg"
+   },
+   {
+    "id": "56549853462873",
+    "title": "Navy / L",
+    "price": 64.5,
+    "available": true,
+    "options": {
+     "Farbe": "Navy",
+     "Größe": "L"
+    },
+    "image": "/img/products/puffer-d1325243.jpg"
+   },
+   {
+    "id": "56549853495641",
+    "title": "Navy / XL",
+    "price": 64.5,
+    "available": true,
+    "options": {
+     "Farbe": "Navy",
+     "Größe": "XL"
+    },
+    "image": "/img/products/puffer-d1325243.jpg"
+   },
+   {
+    "id": "56549853528409",
+    "title": "Navy / XXL",
+    "price": 64.5,
+    "available": true,
+    "options": {
+     "Farbe": "Navy",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/puffer-d1325243.jpg"
+   },
+   {
+    "id": "56549853561177",
+    "title": "Navy / 3XL",
+    "price": 64.5,
+    "available": true,
+    "options": {
+     "Farbe": "Navy",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/puffer-d1325243.jpg"
+   },
+   {
+    "id": "56549867913561",
+    "title": "Khaki / xs",
+    "price": 64.5,
+    "available": true,
+    "options": {
+     "Farbe": "Khaki",
+     "Größe": "xs"
+    },
+    "image": "/img/products/puffer-64ccc5d9.jpg"
+   },
+   {
+    "id": "56549867946329",
+    "title": "Khaki / S",
+    "price": 64.5,
+    "available": true,
+    "options": {
+     "Farbe": "Khaki",
+     "Größe": "S"
+    },
+    "image": "/img/products/puffer-64ccc5d9.jpg"
+   },
+   {
+    "id": "56549867979097",
+    "title": "Khaki / M",
+    "price": 64.5,
+    "available": true,
+    "options": {
+     "Farbe": "Khaki",
+     "Größe": "M"
+    },
+    "image": "/img/products/puffer-64ccc5d9.jpg"
+   },
+   {
+    "id": "56549868011865",
+    "title": "Khaki / L",
+    "price": 64.5,
+    "available": true,
+    "options": {
+     "Farbe": "Khaki",
+     "Größe": "L"
+    },
+    "image": "/img/products/puffer-64ccc5d9.jpg"
+   },
+   {
+    "id": "56549868044633",
+    "title": "Khaki / XL",
+    "price": 64.5,
+    "available": true,
+    "options": {
+     "Farbe": "Khaki",
+     "Größe": "XL"
+    },
+    "image": "/img/products/puffer-64ccc5d9.jpg"
+   },
+   {
+    "id": "56549868077401",
+    "title": "Khaki / XXL",
+    "price": 64.5,
+    "available": true,
+    "options": {
+     "Farbe": "Khaki",
+     "Größe": "XXL"
+    },
+    "image": "/img/products/puffer-64ccc5d9.jpg"
+   },
+   {
+    "id": "56549868110169",
+    "title": "Khaki / 3XL",
+    "price": 64.5,
+    "available": true,
+    "options": {
+     "Farbe": "Khaki",
+     "Größe": "3XL"
+    },
+    "image": "/img/products/puffer-64ccc5d9.jpg"
+   }
+  ],
+  "minPrice": 64.5
+ }
+]

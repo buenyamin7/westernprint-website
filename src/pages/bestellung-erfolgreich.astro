@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+---
+<Base title="Danke für deine Bestellung" description="Bestellung eingegangen." noindex={true}>
+  <section class="section">
+    <div class="container done" data-endpoint={site.checkoutApi}>
+      <div class="icon-box big"><Icon name="check" weight="bold" size={28} /></div>
+      <h1>Danke, deine Bestellung ist da.</h1>
+      <p class="lede" data-msg>Wir prüfen deine Daten und starten die Produktion. Die Bestätigung mit Rechnung kommt per E-Mail.</p>
+      <div class="card card-pad summary" data-summary hidden>
+        <p><strong>Bestellnummer:</strong> <span data-no></span></p>
+        <ul data-items></ul>
+        <p class="muted small">Bestätigung geht an <span data-email></span>.</p>
+      </div>
+      <div class="card card-pad upload-hint" data-upload-hint hidden>
+        <h2>Motiv nachreichen</h2>
+        <p class="muted">Für mindestens eine Position fehlt noch das Druckmotiv. Schick es uns als PNG mit deiner Bestellnummer:</p>
+        <div class="actions">
+          <a data-wa class="btn btn-primary" target="_blank" rel="noopener"><Icon name="whatsapp-logo" size={18} /> Per WhatsApp</a>
+          <a data-mail class="btn btn-secondary"><Icon name="envelope" size={18} /> Per E-Mail</a>
+        </div>
+      </div>
+      <a href="/shop" class="btn btn-secondary">Zurück zum Shop</a>
+    </div>
+  </section>
+</Base>
+
+<script>
+  import { clearCart } from '../scripts/cart';
+  const root = document.querySelector<HTMLElement>('.done')!;
+  const id = new URLSearchParams(location.search).get('session_id');
+  clearCart();
+  if (id) {
+    fetch(`${root.dataset.endpoint}/order?session_id=${encodeURIComponent(id)}`).then((r) => r.json()).then((o) => {
+      if (!o.orderNo) return;
+      root.querySelector('[data-no]')!.textContent = o.orderNo;
+      root.querySelector('[data-email]')!.textContent = o.email;
+      root.querySelector('[data-items]')!.innerHTML = o.items.map((it: any) => `<li>${it.q} x ${it.p} ${it.c} / ${it.s}, ${it.side}${it.f ? `, vorne ${it.f.sz}` : ''}${it.b ? `, hinten ${it.b.sz}` : ''}</li>`).join('');
+      (root.querySelector('[data-summary]') as HTMLElement).hidden = false;
+      if (o.items.some((it: any) => it.needsUpload)) {
+        const hint = root.querySelector<HTMLElement>('[data-upload-hint]')!; hint.hidden = false;
+        const text = encodeURIComponent(`Hallo, hier mein Motiv zur Bestellung ${o.orderNo}.`);
+        (hint.querySelector('[data-wa]') as HTMLAnchorElement).href = `https://wa.me/4917655412198?text=${text}`;
+        (hint.querySelector('[data-mail]') as HTMLAnchorElement).href = `mailto:info@westernprint.de?subject=${encodeURIComponent('Motiv zur Bestellung ' + o.orderNo)}&body=${text}`;
+      }
+    }).catch(() => {});
+  }
+</script>
+
+<style>
+  .done { max-width: 640px; display: grid; gap: 22px; justify-items: start; }
+  .big { width: 60px; height: 60px; border-radius: 16px; }
+  .summary, .upload-hint { width: 100%; display: grid; gap: 10px; }
+  .summary ul { display: grid; gap: 4px; color: var(--text-2); font-size: 14.5px; }
+  .small { font-size: 13px; }
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+</style>
