@@ -183,7 +183,7 @@ const prints = [
             </li>
           ))}
         </ul>
-        <a href="/ueber-uns" class="btn btn-secondary reveal">Mehr über uns</a>
+        <div class="about-links reveal"><a href="/ueber-uns" class="btn btn-secondary">Mehr über uns</a> <a href="/textildruck-oberhausen" class="btn btn-secondary">Textildruck in Oberhausen</a></div>
       </div>
     </div>
   </section>
@@ -308,6 +308,7 @@ const prints = [
   .about-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
   .about-img img { border-radius: var(--radius-card); border: 1px solid var(--line); aspect-ratio: 3 / 4; object-fit: cover; }
   .about-text .muted { margin-top: 16px; max-width: 58ch; }
+  .about-links { display: flex; gap: 10px; flex-wrap: wrap; }
   .usps { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 24px; margin: 32px 0; }
   .usps li { display: flex; gap: 14px; align-items: flex-start; }
   .usps li div:last-child { display: flex; flex-direction: column; gap: 2px; font-size: 14.5px; }

@@ -6,5 +6,5 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'never',
   build: { format: 'file' },
-  integrations: [sitemap({ filter: (page) => !page.endsWith('/404') })],
+  integrations: [sitemap({ filter: (page) => !page.endsWith('/404') && !page.endsWith('/warenkorb'), changefreq: 'weekly', priority: 0.7 })],
 });

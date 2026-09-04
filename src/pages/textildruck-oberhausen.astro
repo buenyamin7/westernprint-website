@@ -1,0 +1,100 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Faq from '../components/Faq.astro';
+import { site } from '../data/site';
+
+const faqs = [
+  { q: 'Kann ich meine Textilien in Oberhausen abholen?', a: 'Ja. Abholung in der Schenkendorfstraße 45 in Oberhausen nach Absprache, Montag bis Freitag zwischen 9 und 18 Uhr. So sparst du dir die Versandkosten.' },
+  { q: 'Druckt ihr auch für Vereine und Firmen aus Essen, Duisburg oder Bottrop?', a: 'Ja. Wir beliefern das ganze Ruhrgebiet und darüber hinaus. Angebot innerhalb von 24 Stunden, Produktion in 5 bis 10 Werktagen, auf Wunsch Lieferung direkt zu dir.' },
+  { q: 'Kann ich eigene Textilien zum Bedrucken vorbeibringen?', a: 'Ja. Bring sie vorbei oder schick sie uns. Wir prüfen vorher, ob das Material für DTF-Druck geeignet ist.' },
+  { q: 'Wie schnell geht ein Einzelstück?', a: 'Einzelstücke sind in der Regel in 1 bis 3 Werktagen fertig. Wenn es eilig ist, sag uns den Termin, Express ist oft möglich.' },
+];
+const ld = [
+  { '@context': 'https://schema.org', '@type': 'Service', name: 'Textildruck Oberhausen', serviceType: 'Textildruck, DTF-Druck, DTG-Druck', provider: { '@id': `${site.url}/#organization` }, areaServed: ['Oberhausen', 'Essen', 'Duisburg', 'Mülheim an der Ruhr', 'Bottrop', 'Gelsenkirchen', 'Ruhrgebiet'], url: `${site.url}/textildruck-oberhausen` },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+<Base title="Textildruck Oberhausen: T-Shirts und Hoodies bedrucken lassen" description="Textildruck in Oberhausen für Vereine, Firmen, Schulen und Privatkunden. DTF- und DTG-Druck ab 1 Stück, Abholung in Oberhausen oder Lieferung im ganzen Ruhrgebiet. Angebot in 24 Stunden." jsonLd={ld}>
+  <PageHero
+    eyebrow="Oberhausen und Ruhrgebiet"
+    title="Textildruck in Oberhausen. <span class='hl'>Eigene Druckerei, keine Zwischenhändler.</span>"
+    lede="T-Shirts, Hoodies, Polos und Trikots mit deinem Motiv, gedruckt in der Schenkendorfstraße in Oberhausen. Ab 1 Stück, Abholung möglich, Lieferung nach Essen, Duisburg, Mülheim, Bottrop und ins ganze Ruhrgebiet."
+    image="/img/print-3.jpg"
+    imageAlt="Fertig bedrucktes Shirt aus der westernprint Druckerei in Oberhausen"
+    cta={{ label: 'Angebot in 24h', href: '#anfrage' }}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Wofür Oberhausen und Umgebung bei uns druckt</h2>
+      </div>
+      <div class="grid grid-4">
+        {[
+          { icon: 'users', t: 'Vereine und Teams', d: 'Trikots mit Nummern und Namen, Trainingsshirts, Fanartikel. Vom Fußballverein bis zur Karnevalsgesellschaft.' },
+          { icon: 'buildings', t: 'Firmen und Handwerk', d: 'Polos, Hoodies und Workwear mit Logo für Betriebe aus Oberhausen, Essen und Duisburg.' },
+          { icon: 'stack', t: 'Schulen und Abschluss', d: 'Abi-Shirts und Kita-Abschluss mit allen Namen. Sammelbestellung, ein Liefertermin.' },
+          { icon: 't-shirt', t: 'Einzelstücke', d: 'Geschenk, Junggesellenabschied, eigenes Label. Ein Shirt reicht, Motiv hochladen, fertig.' },
+        ].map((b, i) => (
+          <div class={`feat reveal reveal-d${i}`}>
+            <div class="icon-box"><Icon name={b.icon} size={22} /></div>
+            <h3>{b.t}</h3>
+            <p>{b.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight local">
+    <div class="container local-grid">
+      <div class="reveal">
+        <h2>So findest du uns</h2>
+        <address>
+          <strong>{site.legalName}</strong><br />
+          {site.address.street}<br />
+          {site.address.zip} {site.address.city}, Marienviertel
+        </address>
+        <p class="muted">Montag bis Freitag, 9 bis 18 Uhr. Abholung und Beratung vor Ort nach kurzer Absprache per WhatsApp oder Telefon. Von der A42, Ausfahrt Oberhausen-Zentrum, in fünf Minuten erreichbar.</p>
+        <div class="local-cta">
+          <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${site.legalName}, ${site.address.street}, ${site.address.zip} ${site.address.city}`)}`} target="_blank" rel="noopener" class="btn btn-secondary"><Icon name="map-pin" size={18} /> Route planen</a>
+          <a href={site.whatsapp} target="_blank" rel="noopener" class="btn btn-secondary"><Icon name="whatsapp-logo" size={18} /> WhatsApp</a>
+        </div>
+      </div>
+      <ul class="cities reveal reveal-d1">
+        {['Oberhausen', 'Essen', 'Duisburg', 'Mülheim an der Ruhr', 'Bottrop', 'Gelsenkirchen', 'Dinslaken', 'Moers', 'Düsseldorf', 'Bochum', 'Dortmund', 'Recklinghausen'].map((c) => <li>{c}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <Faq items={faqs} title="Fragen aus der Region" />
+
+  <section class="section" id="anfrage">
+    <div class="container form-grid">
+      <div class="reveal">
+        <h2>Anfrage aus Oberhausen und Umgebung</h2>
+        <p class="muted">Schreib uns, was du brauchst. Textil, Stückzahl, Motiv, Wunschtermin. Du bekommst ein Angebot innerhalb von 24 Stunden, meist schneller.</p>
+      </div>
+      <div class="card card-pad reveal reveal-d1">
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .feat { display: grid; gap: 12px; padding: 26px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); align-content: start; }
+  .feat p { color: var(--text-2); font-size: 15px; }
+  .local { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .local-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
+  address { font-style: normal; margin: 18px 0 12px; line-height: 1.6; }
+  .local-cta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+  .cities { display: flex; flex-wrap: wrap; gap: 8px; }
+  .cities li { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); font-size: 14px; }
+  .form-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 48px; align-items: start; }
+  .form-grid .muted { margin-top: 14px; max-width: 44ch; }
+  @media (max-width: 900px) { .local-grid, .form-grid { grid-template-columns: 1fr; } }
+</style>

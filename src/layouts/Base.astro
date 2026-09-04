@@ -19,27 +19,48 @@ const fullTitle = title.includes('westernprint') ? title : `${title} | westernpr
 
 const orgLd = {
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
+  '@type': ['LocalBusiness', 'Organization'],
   '@id': `${site.url}/#organization`,
   name: site.legalName,
-  alternateName: 'westernprint',
+  alternateName: ['westernprint', 'westernprint Druckerei Oberhausen'],
   url: site.url,
   logo: `${site.url}/icon-512.png`,
   image: `${site.url}${site.ogImage}`,
   telephone: site.phone,
   email: site.email,
-  description: 'Print-on-Demand Druckerei in Oberhausen: DTF- und DTG-Druck ab 1 Stück, Großauflagen, Shopify-Fulfillment mit neutralem Versand.',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: site.address.street,
-    postalCode: site.address.zip,
-    addressLocality: site.address.city,
-    addressCountry: 'DE',
-  },
-  areaServed: ['DE', 'AT', 'CH', 'EU'],
+  description: 'Print-on-Demand Druckerei in Oberhausen (Ruhrgebiet): DTF- und DTG-Textildruck ab 1 Stück, Großauflagen ab 50 Stück, Shopify-Fulfillment mit neutralem Versand in 1 bis 3 Werktagen.',
+  slogan: 'Textildruck, der hält.',
+  foundingDate: '2021',
+  founder: { '@type': 'Person', name: 'Bünyamin Dursun' },
+  address: { '@type': 'PostalAddress', streetAddress: site.address.street, postalCode: site.address.zip, addressLocality: site.address.city, addressRegion: 'Nordrhein-Westfalen', addressCountry: 'DE' },
+  geo: { '@type': 'GeoCoordinates', latitude: 51.4795853, longitude: 6.8677457 },
+  hasMap: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(`${site.legalName}, ${site.address.street}, ${site.address.zip} ${site.address.city}`),
+  openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '09:00', closes: '18:00' }],
+  priceRange: '€€',
+  currenciesAccepted: 'EUR',
+  paymentAccepted: 'PayPal, Klarna, Kreditkarte, Apple Pay, Google Pay, Rechnung (B2B)',
+  areaServed: [
+    { '@type': 'Country', name: 'Deutschland' }, { '@type': 'Country', name: 'Österreich' }, { '@type': 'Country', name: 'Schweiz' },
+    { '@type': 'City', name: 'Oberhausen' }, { '@type': 'City', name: 'Essen' }, { '@type': 'City', name: 'Duisburg' }, { '@type': 'City', name: 'Mülheim an der Ruhr' }, { '@type': 'City', name: 'Bottrop' }, { '@type': 'City', name: 'Gelsenkirchen' }, { '@type': 'City', name: 'Düsseldorf' },
+  ],
+  contactPoint: [{ '@type': 'ContactPoint', contactType: 'sales', telephone: site.phone, email: site.email, availableLanguage: ['de', 'en'], areaServed: 'DE' }],
   sameAs: [site.instagram, site.tiktok],
+  knowsAbout: ['Print-on-Demand', 'DTF-Druck', 'DTG-Druck', 'Textildruck', 'Sublimationsdruck', 'Shopify Fulfillment', 'Dropshipping', 'Stanley/Stella', 'Merchandise'],
+  makesOffer: [
+    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Print-on-Demand Fulfillment für Shopify-Shops', url: `${site.url}/print-on-demand` } },
+    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Textildruck Großauflagen ab 50 Stück', url: `${site.url}/grossauflagen` } },
+    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'DTF-, DTG- und Sublimationsdruck', url: `${site.url}/druckverfahren` } },
+    { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'T-Shirts und Hoodies mit eigenem Motiv bedrucken', url: `${site.url}/shop` } },
+  ],
 };
-const ldBlocks = [orgLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [])];
+const webLd = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': `${site.url}/#website`, url: site.url, name: 'westernprint', inLanguage: 'de-DE', publisher: { '@id': `${site.url}/#organization` } };
+const pathParts = (Astro.url.pathname.replace(/\/$/, '') || '/').split('/').filter(Boolean);
+const crumbNames: Record<string, string> = { 'print-on-demand': 'Print-on-Demand', 'b2b-partner': 'B2B-Partner', grossauflagen: 'Großauflagen', druckverfahren: 'Druckverfahren', textilien: 'Textilien', 'ueber-uns': 'Über uns', kontakt: 'Kontakt', shop: 'Shop', warenkorb: 'Warenkorb', 'textildruck-oberhausen': 'Textildruck Oberhausen', impressum: 'Impressum', datenschutz: 'Datenschutz', agb: 'AGB', widerruf: 'Widerruf', versand: 'Versand' };
+const crumbLd = pathParts.length ? { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+  { '@type': 'ListItem', position: 1, name: 'Startseite', item: site.url },
+  ...pathParts.map((part, i) => ({ '@type': 'ListItem', position: i + 2, name: crumbNames[part] ?? title.split('|')[0].trim(), item: `${site.url}/${pathParts.slice(0, i + 1).join('/')}` })),
+] } : null;
+const ldBlocks = [orgLd, webLd, ...(crumbLd ? [crumbLd] : []), ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [])];
 ---
 <!doctype html>
 <html lang="de">
@@ -54,6 +75,11 @@ const ldBlocks = [orgLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] 
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="theme-color" content="#0b0d0c" />
+    <meta name="geo.region" content="DE-NW" />
+    <meta name="geo.placename" content="Oberhausen" />
+    <meta name="geo.position" content="51.4795853;6.8677457" />
+    <meta name="ICBM" content="51.4795853, 6.8677457" />
+    <meta name="author" content="westernprint GmbH" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="westernprint" />
     <meta property="og:locale" content="de_DE" />
@@ -61,6 +87,7 @@ const ldBlocks = [orgLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] 
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL(ogImage, site.url).href} />
+    <meta property="og:image:alt" content={fullTitle} />
     <meta name="twitter:card" content="summary_large_image" />
     <script is:inline>
       // Theme before paint: saved choice wins, otherwise dark (brand default).

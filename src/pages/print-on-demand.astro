@@ -14,9 +14,10 @@ const faqs = [
   { q: 'Wie läuft die Abrechnung?', a: 'Wöchentliche Abrechnung über alle produzierten Artikel zu festen Preisen pro Produkt. Transparent und planbar, ohne Einrichtungsgebühr.' },
   { q: 'Kann ich eigene Verpackung oder Beilagen nutzen?', a: 'Ja. Neutraler Versand ist Standard, eigene Flyer, Hangtags oder Innenlabel setzen wir auf Anfrage um.' },
 ];
+const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'Print-on-Demand Fulfillment für Shopify', serviceType: 'Print-on-Demand Fulfillment', provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: ['DE', 'AT', 'CH', 'EU'], url: 'https://westernprint.de/print-on-demand', offers: { '@type': 'Offer', description: 'Feste Preise pro Produkt inklusive Druck, keine Einrichtungsgebühr, keine Mindestmenge' } };
 const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 ---
-<Base title="Print-on-Demand Fulfillment für Shopify" description="Shop verbinden, verkaufen, wir drucken und versenden neutral in deinem Namen. Print-on-Demand ab 1 Stück aus Oberhausen, 1-3 Werktage Lieferzeit, feste Preise." jsonLd={faqLd}>
+<Base title="Print-on-Demand Fulfillment für Shopify" description="Shop verbinden, verkaufen, wir drucken und versenden neutral in deinem Namen. Print-on-Demand ab 1 Stück aus Oberhausen, 1-3 Werktage Lieferzeit, feste Preise." jsonLd={[svcLd, faqLd]}>
   <PageHero
     eyebrow="Print-on-Demand"
     title="Dein Fulfillment-Partner für Shopify. <span class='hl'>Ab 1 Stück.</span>"
