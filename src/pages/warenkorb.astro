@@ -34,6 +34,7 @@ import { site } from '../data/site';
   import { getCart, updateQty, removeItem, lineTotal, subtotal, euro, type CartItem } from '../scripts/cart';
   const $ = (s: string) => document.querySelector<HTMLElement>(s)!;
   const esc = (s: string) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
+  const SUR: Record<string, number> = { A6: 5, A5: 6, A4: 7, 'A3+': 9 };
   const link = (u?: string) => !u ? 'Kein Motiv, wird nachgereicht' : /^https?:/.test(u) ? `<a href="${esc(u)}" target="_blank" rel="noopener" class="accent">Datei ansehen</a>` : esc(u);
 
   function render(items: CartItem[]) {
@@ -46,11 +47,11 @@ import { site } from '../data/site';
         ${i.image ? `<img src="${esc(i.image)}" alt="" width="90" height="112">` : '<div class="thumb-empty"></div>'}
         <div class="line-body">
           <strong>${esc(i.title)}</strong>
-          <span class="muted">${esc(i.color)} / ${esc(i.size)}</span>
+          <span class="muted">${esc(i.color)} / ${esc(i.size)} · ${euro(i.base)} + Druck ${euro(i.surcharge)} je Stück</span>
           <ul class="attrs">
             <li><span>Druckseite:</span> ${esc(i.side)}</li>
-            ${i.sizeFront ? `<li><span>Vorne ${esc(i.sizeFront)} (+${euro(0).slice(0, 0)}${i.sizeFront === 'A6' ? '5' : i.sizeFront === 'A5' ? '6' : i.sizeFront === 'A4' ? '7' : '9'} €):</span> ${link(i.uploadFront)}</li>` : ''}
-            ${i.sizeBack ? `<li><span>Hinten ${esc(i.sizeBack)}:</span> ${link(i.uploadBack)}</li>` : ''}
+            ${i.sizeFront ? `<li><span>Vorne ${esc(i.sizeFront)} (+${SUR[i.sizeFront] ?? '?'} €):</span> ${link(i.uploadFront)}</li>` : ''}
+            ${i.sizeBack ? `<li><span>Hinten ${esc(i.sizeBack)} (+${SUR[i.sizeBack] ?? '?'} €):</span> ${link(i.uploadBack)}</li>` : ''}
           </ul>
         </div>
         <div class="line-side">

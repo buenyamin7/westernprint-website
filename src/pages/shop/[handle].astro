@@ -8,101 +8,122 @@ export async function getStaticPaths() {
   const products = await getProducts();
   return products.map((p) => ({ params: { handle: p.handle }, props: { product: p } }));
 }
-const { product } = Astro.props;
-const colors = product.options.find((o) => o.name === 'Farbe')?.values ?? [];
-const sizes = product.options.find((o) => o.name === 'Größe')?.values ?? [];
-const colorImage = (c: string) => product.variants.find((v) => v.options['Farbe'] === c && v.image)?.image ?? product.images[0]?.url;
-const clientData = { product: { id: product.id, title: product.title, handle: product.handle, variants: product.variants, images: product.images }, sizes: PRINT_SIZES, cloud: site.cloudinary };
-const ld = { '@context': 'https://schema.org', '@type': 'Product', name: product.title, image: product.images.map((i) => i.url), description: product.description, brand: { '@type': 'Brand', name: 'Stanley/Stella' }, offers: { '@type': 'AggregateOffer', priceCurrency: 'EUR', lowPrice: product.minPrice, offerCount: product.variants.length, availability: 'https://schema.org/InStock' } };
+const { product: p } = Astro.props;
+const gallery = [p.image, p.modelImage, ...p.extraImages].filter((x, i, a) => x && a.indexOf(x) === i) as string[];
+const clientData = { product: { id: p.id, handle: p.handle, title: p.title, price: p.price, image: p.image, colors: p.colors, sizes: p.sizes, variants: p.variants }, sizes: PRINT_SIZES, cloud: site.cloudinary };
+const ld = { '@context': 'https://schema.org', '@type': 'Product', name: `${p.title} bedrucken`, image: gallery.map((g) => `${site.url}${g}`), description: `${p.title} von ${p.brand} mit eigenem Motiv bedrucken. ${p.colors.length} Farben, Größen ${p.sizes[0]} bis ${p.sizes[p.sizes.length - 1]}.`, brand: { '@type': 'Brand', name: p.brand }, offers: { '@type': 'Offer', priceCurrency: 'EUR', price: (p.price + 5).toFixed(2), availability: 'https://schema.org/InStock', url: `${site.url}/shop/${p.handle}` } };
+const details = [
+  p.grammage && ['Grammatur', p.grammage], p.fit && ['Passform', p.fit], p.composition && ['Material', p.composition],
+  ['Marke', p.brand], ['Für', p.gender], ['Farben', `${p.colors.length}`], ['Größen', `${p.sizes[0]} bis ${p.sizes[p.sizes.length - 1]}`],
+].filter(Boolean) as [string, string][];
 ---
-<Base title={`${product.title} bedrucken lassen`} description={`${product.title} von Stanley/Stella mit eigenem Motiv bedrucken. ${colors.length} Farben, Größen ${sizes[0]} bis ${sizes[sizes.length - 1]}, DTF-Druck ab 1 Stück, Versand in 1-3 Werktagen.`} ogImage={product.images[0]?.url} jsonLd={ld}>
-  <section class="section-tight">
+<Base title={`${p.title} bedrucken lassen`} description={`${p.title} von ${p.brand} mit eigenem Motiv per DTF bedrucken. ${p.colors.length} Farben, Größen ${p.sizes[0]} bis ${p.sizes[p.sizes.length - 1]}, ab 1 Stück, Versand in 1-3 Werktagen.`} ogImage={p.image ?? undefined} jsonLd={ld}>
+  <section class="pp">
     <div class="container">
-      <nav class="crumbs muted" aria-label="Pfad"><a href="/shop">Shop</a> <span>/</span> <span>{product.title}</span></nav>
+      <nav class="crumbs muted" aria-label="Pfad"><a href="/shop">Shop</a> <span>/</span> <a href={`/shop?kategorie=${encodeURIComponent(p.category)}`}>{p.category}</a> <span>/</span> <span>{p.title}</span></nav>
       <div class="pgrid">
+        <!-- Vorschau -->
         <div class="pvisual">
           <div class="stage" data-stage>
-            <img src={product.images[0]?.url} alt={product.images[0]?.alt} width="1000" height="1250" data-stage-img />
-            <img class="motif" data-motif hidden alt="" />
-            <span class="stage-hint" data-stage-hint hidden>Motiv mit der Maus verschieben</span>
+            <img src={p.image} alt={`${p.title} ${p.colors[0]?.name ?? ''}`} width="900" height="1125" data-stage-img />
+            <img class="motif" data-motif hidden alt="" draggable="false" />
+            <div class="stage-tabs" data-side-tabs>
+              <button type="button" class="is-on" data-view="front">Vorne</button>
+              <button type="button" data-view="back">Hinten</button>
+            </div>
+            <span class="stage-hint" data-stage-hint hidden><Icon name="arrows-out-cardinal" size={14} /> Motiv verschieben</span>
           </div>
-          <div class="thumbs" data-thumbs>
-            {product.images.slice(0, 6).map((img) => <button type="button" data-thumb={img.url}><img src={img.url} alt="" width="120" height="150" loading="lazy" /></button>)}
+          <div class="thumbs">
+            {gallery.map((g, i) => <button type="button" class={i === 0 ? 'is-on' : ''} data-thumb={g}><img src={g} alt="" width="120" height="150" loading="lazy" /></button>)}
           </div>
         </div>
 
+        <!-- Konfigurator -->
         <form class="config" data-config novalidate>
           <div class="ptitle">
-            <span class="eyebrow">Stanley/Stella</span>
-            <h1>{product.title}</h1>
-            <p class="muted">{product.description.slice(0, 200)}{product.description.length > 200 ? '.' : ''}</p>
+            <span class="pbrand">{p.brand} <span>{p.gender}</span> {p.brand === 'Stanley/Stella' && <em class="bio">Bio-Baumwolle</em>}</span>
+            <h1>{p.title}</h1>
+            <p class="pprice"><strong data-total>{euro(p.price + 5)}</strong> <span class="muted">inkl. Druck und MwSt., zzgl. Versand</span></p>
           </div>
 
-          <fieldset class="opt">
-            <legend>Farbe: <span data-color-label>{colors[0]}</span></legend>
+          <div class="step">
+            <div class="step-h"><span class="num">1</span><h2>Farbe <span data-color-label class="muted">{p.colors[0]?.name}</span></h2></div>
             <div class="swatches">
-              {colors.map((c, i) => (
-                <label class="swatch" title={c}>
-                  <input type="radio" name="color" value={c} checked={i === 0} />
-                  <img src={colorImage(c)} alt={c} width="60" height="75" loading="lazy" />
+              {p.colors.map((c, i) => (
+                <label class={`swatch ${c.image ? 'has-img' : ''}`} title={c.name}>
+                  <input type="radio" name="color" value={c.id} checked={i === 0} data-image={c.image} data-back={c.back} data-name={c.name} />
+                  {c.image ? <img src={c.image} alt={c.name} width="64" height="80" loading="lazy" /> : <i style={`background:${c.hex || '#ccc'}`}></i>}
                 </label>
               ))}
             </div>
-          </fieldset>
+          </div>
 
-          <fieldset class="opt">
-            <legend>Größe</legend>
+          <div class="step">
+            <div class="step-h"><span class="num">2</span><h2>Größe</h2><a href="#groessen" class="muted small">Größentabelle</a></div>
             <div class="chips" data-sizes>
-              {sizes.map((s) => <label class="chip"><input type="radio" name="size" value={s} /> <span>{s}</span></label>)}
+              {p.sizes.map((s) => <label class="chip"><input type="radio" name="size" value={s} /> <span>{s}</span></label>)}
             </div>
             <span class="error" data-size-error hidden>Bitte eine Größe wählen.</span>
-          </fieldset>
+          </div>
 
-          <fieldset class="opt">
-            <legend>Druckseite</legend>
-            <div class="chips">
-              {['Vorderseite', 'Rückseite', 'Beide Seiten'].map((s, i) => <label class="chip"><input type="radio" name="side" value={s} checked={i === 0} /> <span>{s}</span></label>)}
+          <div class="step">
+            <div class="step-h"><span class="num">3</span><h2>Druck</h2></div>
+            <div class="sides">
+              {[['Vorderseite', 'Nur vorne'], ['Rückseite', 'Nur hinten'], ['Beide Seiten', 'Vorne und hinten']].map(([v, l], i) => (
+                <label class="side-opt"><input type="radio" name="side" value={v} checked={i === 0} /><span>{l}</span></label>
+              ))}
             </div>
-          </fieldset>
-
-          {['front', 'back'].map((sideKey) => (
-            <fieldset class="opt side" data-side={sideKey}>
-              <legend>{sideKey === 'front' ? 'Vorderseite' : 'Rückseite'}: Druckgröße und Motiv</legend>
-              <div class="chips">
-                {PRINT_SIZES.map((s, i) => <label class="chip chip--size"><input type="radio" name={`size_${sideKey}`} value={s.key} checked={i === 2} /> <span>{s.label} <small>+{s.surcharge} €</small></span></label>)}
-              </div>
-              <p class="muted tiny" data-size-hint></p>
-              <label class="upload" data-upload>
-                <input type="file" name={`file_${sideKey}`} accept=".png,image/png" />
-                <span class="upload-box">
-                  <Icon name="upload-simple" size={20} />
-                  <span data-upload-label>Motiv als PNG hochladen <small>(transparenter Hintergrund, max. 10 MB)</small></span>
-                </span>
-              </label>
-              <span class="error" data-upload-error hidden></span>
-            </fieldset>
-          ))}
+            {['front', 'back'].map((k) => (
+              <fieldset class="print-side" data-side={k}>
+                <legend>{k === 'front' ? 'Vorderseite' : 'Rückseite'}</legend>
+                <div class="chips chips-size">
+                  {PRINT_SIZES.map((s, i) => <label class="chip"><input type="radio" name={`size_${k}`} value={s.key} checked={i === 2} /> <span>{s.label} <small>{s.hint}, +{s.surcharge} €</small></span></label>)}
+                </div>
+                <label class="upload" data-upload>
+                  <input type="file" name={`file_${k}`} accept=".png,image/png" />
+                  <span class="upload-box">
+                    <span class="upload-thumb" data-upload-thumb><Icon name="upload-simple" size={22} /></span>
+                    <span class="upload-text"><strong data-upload-label>Motiv hochladen</strong><small data-upload-sub>PNG mit transparentem Hintergrund, max. 10 MB. Du kannst es auch nach der Bestellung schicken.</small></span>
+                  </span>
+                </label>
+                <span class="error" data-upload-error hidden></span>
+              </fieldset>
+            ))}
+          </div>
 
           <div class="buy">
             <div class="qty-row">
-              <label for="qty">Menge</label>
+              <span>Menge</span>
               <div class="qty"><button type="button" data-qty="-1" aria-label="Weniger">−</button><input id="qty" name="qty" type="number" min="1" max="99" value="1" /><button type="button" data-qty="1" aria-label="Mehr">+</button></div>
             </div>
-            <div class="total">
-              <span class="muted">Gesamt</span>
-              <strong data-total>{euro(product.variants[0].price)}</strong>
-              <span class="muted tiny">inkl. MwSt., zzgl. Versand</span>
-            </div>
+            <ul class="calc" data-calc></ul>
             <button type="submit" class="btn btn-primary btn-lg" data-add>In den Warenkorb <Icon name="shopping-cart" size={18} /></button>
             <p class="form-note" data-note hidden></p>
+            <ul class="trust">
+              <li><Icon name="printer" size={16} /> DTF-Druck in Oberhausen, waschfest</li>
+              <li><Icon name="truck" size={16} /> Versand 4,90 €, 1 bis 3 Werktage</li>
+              <li><Icon name="shield-check" size={16} /> PayPal, Klarna, Karte, Apple Pay</li>
+            </ul>
           </div>
-
-          <ul class="trust">
-            <li><Icon name="printer" size={18} /> DTF-Druck in Oberhausen, waschfest</li>
-            <li><Icon name="truck" size={18} /> Versand in 1 bis 3 Werktagen, 4,90 € in Deutschland</li>
-            <li><Icon name="shield-check" size={18} /> Sichere Bezahlung über Mollie</li>
-          </ul>
         </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight pdetails" id="groessen">
+    <div class="container details-grid">
+      <div class="card card-pad">
+        <h2>Produktdetails</h2>
+        <dl class="specs">{details.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+        {p.description.length > 0 && <ul class="feat-list">{p.description.slice(0, 8).map((d) => <li>{d}</li>)}</ul>}
+      </div>
+      <div class="card card-pad">
+        <h2>So wird gedruckt</h2>
+        <p class="muted">Wir drucken per DTF (Direct to Film): deckend auf hellen und dunklen Stoffen, dehnbar, waschfest bei 30 bis 40 Grad. Das Motiv sollte als PNG mit transparentem Hintergrund und mindestens 300 dpi vorliegen. Wir prüfen jede Datei vor dem Druck und melden uns, wenn etwas nicht passt.</p>
+        <h3>Druckgrößen</h3>
+        <ul class="sizes-list">{PRINT_SIZES.map((s) => <li><strong>{s.label}</strong> {s.hint}, +{s.surcharge} € je Seite</li>)}</ul>
+        <h3>Größen</h3>
+        <p class="muted">{p.sizes.join(', ')}. Die Maßtabelle des Herstellers schicken wir dir auf Anfrage per WhatsApp, oder du orientierst dich an deiner üblichen Größe: {p.fit ? `${p.fit}.` : 'Die Basics fallen normal aus.'}</p>
       </div>
     </div>
   </section>
@@ -115,155 +136,209 @@ const ld = { '@context': 'https://schema.org', '@type': 'Product', name: product
   const { product, sizes: SIZES, cloud } = data;
   const form = document.querySelector<HTMLFormElement>('[data-config]')!;
   const $ = <T extends HTMLElement>(s: string, root: ParentNode = form) => root.querySelector<T>(s)!;
-  const stage = document.querySelector<HTMLElement>('[data-stage]')!;
+  const stage = $<HTMLElement>('[data-stage]', document);
   const stageImg = $<HTMLImageElement>('[data-stage-img]', document);
   const motif = $<HTMLImageElement>('[data-motif]', document);
-  const uploads: Record<string, { url: string; name: string } | null> = { front: null, back: null };
-  const pos: Record<string, { x: number; y: number }> = { front: { x: 50, y: 42 }, back: { x: 50, y: 42 } };
-  let activePreview: 'front' | 'back' = 'front';
+  const hint = $<HTMLElement>('[data-stage-hint]', document);
+  const tabs = $<HTMLElement>('[data-side-tabs]', document);
+  type Side = 'front' | 'back';
+  const uploads: Record<Side, { url: string; name: string } | null> = { front: null, back: null };
+  const pos: Record<Side, { x: number; y: number }> = { front: { x: 50, y: 40 }, back: { x: 50, y: 38 } };
+  let view: Side = 'front';
 
-  const val = (name: string) => (form.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`)?.value ?? '');
-  const sidesActive = () => { const s = val('side'); return { front: s !== 'Rückseite', back: s !== 'Vorderseite' }; };
-  const variant = () => product.variants.find((v: any) => v.options['Farbe'] === val('color') && v.options['Größe'] === val('size'));
+  const val = (name: string) => form.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`)?.value ?? '';
+  const active = () => { const s = val('side'); return { front: s !== 'Rückseite', back: s !== 'Vorderseite' }; };
+  const colorEl = () => form.querySelector<HTMLInputElement>('input[name="color"]:checked')!;
+  const variant = () => product.variants.find((v: any) => v.color === val('color') && v.size === val('size'));
   const qty = () => Math.max(1, Math.min(99, Number($<HTMLInputElement>('#qty').value) || 1));
   const sizeInfo = (key: string) => SIZES.find((s: any) => s.key === key);
 
   function updateAvailability() {
-    const color = val('color');
     form.querySelectorAll<HTMLInputElement>('input[name="size"]').forEach((inp) => {
-      const v = product.variants.find((x: any) => x.options['Farbe'] === color && x.options['Größe'] === inp.value);
+      const v = product.variants.find((x: any) => x.color === val('color') && x.size === inp.value);
       const ok = !!v && v.available; inp.disabled = !ok; inp.closest('label')!.classList.toggle('is-off', !ok);
       if (!ok && inp.checked) inp.checked = false;
     });
   }
   function updateSides() {
-    const a = sidesActive();
-    (['front', 'back'] as const).forEach((k) => { const fs = $<HTMLFieldSetElement>(`[data-side="${k}"]`); fs.hidden = !a[k]; fs.disabled = !a[k]; });
-    activePreview = a.front ? 'front' : 'back';
-    updatePreview();
+    const a = active();
+    (['front', 'back'] as Side[]).forEach((k) => { const fs = $<HTMLFieldSetElement>(`[data-side="${k}"]`); fs.hidden = !a[k]; fs.disabled = !a[k]; });
+    if (!a[view]) view = a.front ? 'front' : 'back';
+    renderStage();
   }
   function total() {
-    const v = variant(); const base = v ? v.price : product.variants[0].price; const a = sidesActive();
-    let sur = 0; if (a.front) sur += sizeInfo(val('size_front')).surcharge; if (a.back) sur += sizeInfo(val('size_back')).surcharge;
-    return (base + sur) * qty();
+    const a = active(); const v = variant(); const base = v ? v.price : product.price;
+    const sf = a.front ? sizeInfo(val('size_front')).surcharge : 0, sb = a.back ? sizeInfo(val('size_back')).surcharge : 0;
+    return { base, sf, sb, unit: base + sf + sb, sum: (base + sf + sb) * qty() };
   }
-  function updateUI() {
-    $('[data-color-label]').textContent = val('color');
-    const v = product.variants.find((x: any) => x.options['Farbe'] === val('color') && x.image);
-    if (v?.image && stageImg.src !== v.image) stageImg.src = v.image;
-    (['front', 'back'] as const).forEach((k) => { const s = sizeInfo(val(`size_${k}`)); $(`[data-side="${k}"] [data-size-hint]`).textContent = `${s.label}: ${s.hint}, Aufpreis ${s.surcharge} €`; });
-    $('[data-total]').textContent = euro(total());
-    updatePreview();
+  function renderCalc() {
+    const t = total(); const a = active(); const n = qty();
+    $('[data-total]').textContent = euro(t.sum);
+    $('[data-calc]').innerHTML = [
+      `<li><span>${product.title} ${colorEl().dataset.name} ${val('size') ? '/ ' + val('size') : ''}</span><b>${euro(t.base)}</b></li>`,
+      a.front ? `<li><span>Druck vorne ${val('size_front')}</span><b>+ ${euro(t.sf)}</b></li>` : '',
+      a.back ? `<li><span>Druck hinten ${val('size_back')}</span><b>+ ${euro(t.sb)}</b></li>` : '',
+      n > 1 ? `<li><span>x ${n} Stück</span><b>${euro(t.sum)}</b></li>` : '',
+    ].join('');
   }
-  function updatePreview() {
-    const up = uploads[activePreview]; const hint = $<HTMLElement>('[data-stage-hint]', document);
+  function renderStage() {
+    const c = colorEl(); const a = active();
+    const backAvailable = !!c.dataset.back && c.dataset.back !== 'null';
+    tabs.hidden = !(a.front && a.back) && !(view === 'back');
+    tabs.querySelectorAll<HTMLButtonElement>('button').forEach((b) => { b.classList.toggle('is-on', b.dataset.view === view); b.hidden = (b.dataset.view === 'front' && !a.front) || (b.dataset.view === 'back' && !a.back); });
+    const src = view === 'back' && backAvailable ? c.dataset.back! : (c.dataset.image && c.dataset.image !== 'null' ? c.dataset.image : product.image);
+    if (stageImg.src !== location.origin + src) stageImg.src = src;
+    document.querySelectorAll<HTMLButtonElement>('[data-thumb]').forEach((b) => b.classList.toggle('is-on', b.dataset.thumb === src));
+    const up = uploads[view];
     if (!up) { motif.hidden = true; hint.hidden = true; return; }
-    const pct = sizeInfo(val(`size_${activePreview}`)).pct; const p = pos[activePreview];
+    const pct = sizeInfo(val(`size_${view}`)).pct; const pp = pos[view];
     motif.src = up.url; motif.hidden = false; hint.hidden = false;
-    motif.style.width = pct + '%'; motif.style.left = p.x + '%'; motif.style.top = p.y + '%';
+    motif.style.width = pct + '%'; motif.style.left = pp.x + '%'; motif.style.top = pp.y + '%';
   }
+  function updateUI() { $('[data-color-label]').textContent = colorEl().dataset.name || ''; renderCalc(); renderStage(); }
 
-  // Drag motif on stage
+  // Motiv auf der Vorschau verschieben
   let dragging = false;
   motif.addEventListener('pointerdown', (e) => { dragging = true; motif.setPointerCapture(e.pointerId); e.preventDefault(); });
-  motif.addEventListener('pointermove', (e) => { if (!dragging) return; const r = stage.getBoundingClientRect(); pos[activePreview] = { x: Math.min(95, Math.max(5, ((e.clientX - r.left) / r.width) * 100)), y: Math.min(95, Math.max(5, ((e.clientY - r.top) / r.height) * 100)) }; updatePreview(); });
+  motif.addEventListener('pointermove', (e) => { if (!dragging) return; const r = stage.getBoundingClientRect(); pos[view] = { x: Math.min(92, Math.max(8, ((e.clientX - r.left) / r.width) * 100)), y: Math.min(92, Math.max(8, ((e.clientY - r.top) / r.height) * 100)) }; renderStage(); });
   motif.addEventListener('pointerup', () => (dragging = false));
+  motif.addEventListener('pointercancel', () => (dragging = false));
+  tabs.addEventListener('click', (e) => { const b = (e.target as HTMLElement).closest<HTMLButtonElement>('button'); if (!b) return; view = b.dataset.view as Side; renderStage(); });
+  document.querySelectorAll<HTMLButtonElement>('[data-thumb]').forEach((b) => b.addEventListener('click', () => { stageImg.src = b.dataset.thumb!; motif.hidden = true; hint.hidden = true; document.querySelectorAll<HTMLButtonElement>('[data-thumb]').forEach((x) => x.classList.toggle('is-on', x === b)); }));
 
-  // Uploads
+  // Upload je Seite
   async function uploadFile(file: File): Promise<string> {
-    if (!cloud?.cloudName || !cloud?.uploadPreset) return URL.createObjectURL(file); // nur Vorschau, Datei wird nachgereicht
+    if (!cloud?.cloudName || !cloud?.uploadPreset) return URL.createObjectURL(file);
     const fd = new FormData(); fd.append('file', file); fd.append('upload_preset', cloud.uploadPreset); fd.append('folder', 'westernprint-shop');
     const res = await fetch(`https://api.cloudinary.com/v1_1/${cloud.cloudName}/image/upload`, { method: 'POST', body: fd });
-    if (!res.ok) throw new Error('Upload fehlgeschlagen'); const j = await res.json(); return j.secure_url;
+    if (!res.ok) throw new Error('Upload fehlgeschlagen, bitte nochmal versuchen');
+    return (await res.json()).secure_url;
   }
   form.querySelectorAll<HTMLInputElement>('input[type="file"]').forEach((inp) => {
     inp.addEventListener('change', async () => {
-      const k = inp.name.replace('file_', '') as 'front' | 'back'; const box = inp.closest('fieldset')!; const err = $<HTMLElement>('[data-upload-error]', box); const label = $<HTMLElement>('[data-upload-label]', box);
+      const k = inp.name.replace('file_', '') as Side; const box = inp.closest('fieldset')!;
+      const err = $<HTMLElement>('[data-upload-error]', box), label = $<HTMLElement>('[data-upload-label]', box), sub = $<HTMLElement>('[data-upload-sub]', box), thumb = $<HTMLElement>('[data-upload-thumb]', box);
       err.hidden = true; const file = inp.files?.[0]; if (!file) return;
       if (file.type !== 'image/png') { err.textContent = 'Bitte eine PNG-Datei hochladen.'; err.hidden = false; inp.value = ''; return; }
       if (file.size > 10 * 1024 * 1024) { err.textContent = 'Datei ist größer als 10 MB.'; err.hidden = false; inp.value = ''; return; }
-      label.textContent = 'Wird hochgeladen...';
-      try { const url = await uploadFile(file); uploads[k] = { url, name: file.name }; label.textContent = `✓ ${file.name}`; activePreview = k; updatePreview(); }
-      catch (e) { err.textContent = (e as Error).message; err.hidden = false; label.textContent = 'Motiv als PNG hochladen'; }
+      label.textContent = 'Wird hochgeladen...'; sub.textContent = file.name;
+      try {
+        const url = await uploadFile(file); uploads[k] = { url, name: file.name };
+        label.textContent = 'Motiv hochgeladen'; sub.textContent = `${file.name}. Zum Ändern erneut klicken.`;
+        thumb.innerHTML = `<img src="${url}" alt="">`; box.classList.add('has-file');
+        view = k; renderStage();
+      } catch (e) { err.textContent = (e as Error).message; err.hidden = false; label.textContent = 'Motiv hochladen'; }
     });
   });
 
-  form.addEventListener('change', (e) => { const t = e.target as HTMLInputElement; if (t.name === 'color') updateAvailability(); if (t.name === 'side') updateSides(); if (t.name.startsWith('size_')) activePreview = t.name.replace('size_', '') as any; updateUI(); });
-  form.addEventListener('input', updateUI);
-  form.querySelectorAll<HTMLButtonElement>('[data-qty]').forEach((b) => b.addEventListener('click', () => { const i = $<HTMLInputElement>('#qty'); i.value = String(Math.max(1, qty() + Number(b.dataset.qty))); updateUI(); }));
-  document.querySelectorAll<HTMLButtonElement>('[data-thumb]').forEach((b) => b.addEventListener('click', () => { stageImg.src = b.dataset.thumb!; }));
+  form.addEventListener('change', (e) => {
+    const t = e.target as HTMLInputElement;
+    if (t.name === 'color') updateAvailability();
+    if (t.name === 'side') updateSides();
+    if (t.name === 'size_front') view = 'front'; if (t.name === 'size_back') view = 'back';
+    updateUI();
+  });
+  form.addEventListener('input', renderCalc);
+  form.querySelectorAll<HTMLButtonElement>('[data-qty]').forEach((b) => b.addEventListener('click', () => { const i = $<HTMLInputElement>('#qty'); i.value = String(Math.max(1, Math.min(99, qty() + Number(b.dataset.qty)))); renderCalc(); }));
 
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
     const note = $<HTMLElement>('[data-note]'); note.hidden = true; note.className = 'form-note';
     const v = variant();
     if (!v) { $('[data-size-error]').hidden = false; $<HTMLElement>('[data-sizes]').scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
     $('[data-size-error]').hidden = true;
-    const a = sidesActive(); const n = qty(); const btn = $<HTMLButtonElement>('[data-add]');
-    const up = (k: 'front' | 'back') => (uploads[k] && !uploads[k]!.url.startsWith('blob:') ? uploads[k]!.url : uploads[k] ? `${uploads[k]!.name} (wird nachgereicht)` : '');
-    const sur = (a.front ? sizeInfo(val('size_front')).surcharge : 0) + (a.back ? sizeInfo(val('size_back')).surcharge : 0);
-    const item = { variantId: v.id, handle: product.handle, title: product.title, color: val('color'), size: val('size'), image: v.image || product.images[0]?.url || null,
-      quantity: n, base: v.price, side: val('side') as any, surcharge: sur,
+    const a = active(); const t = total(); const c = colorEl();
+    const up = (k: Side) => (uploads[k] ? (uploads[k]!.url.startsWith('blob:') ? `${uploads[k]!.name} (wird nachgereicht)` : uploads[k]!.url) : '');
+    addItem({ variantId: v.id, handle: product.handle, title: product.title, color: c.dataset.name || '', size: val('size'), image: (c.dataset.image && c.dataset.image !== 'null' ? c.dataset.image : product.image),
+      quantity: qty(), base: t.base, side: val('side') as any, surcharge: t.sf + t.sb,
       sizeFront: a.front ? val('size_front') : undefined, sizeBack: a.back ? val('size_back') : undefined,
       uploadFront: a.front ? up('front') : undefined, uploadBack: a.back ? up('back') : undefined,
-      posFront: a.front ? `${pos.front.x.toFixed(0)}% / ${pos.front.y.toFixed(0)}%` : undefined, posBack: a.back ? `${pos.back.x.toFixed(0)}% / ${pos.back.y.toFixed(0)}%` : undefined };
-        try {
-      addItem(item);
-      note.className = 'form-note ok'; note.hidden = false; note.innerHTML = `Im Warenkorb. <a href="/warenkorb" class="accent">Zum Warenkorb und zur Kasse</a>`;
-    } catch (err) { note.className = 'form-note err'; note.hidden = false; note.textContent = 'Konnte nicht hinzugefügt werden: ' + (err as Error).message; }
-    finally { btn.disabled = false; btn.innerHTML = 'In den Warenkorb'; }
+      posFront: a.front ? `${pos.front.x.toFixed(0)}% / ${pos.front.y.toFixed(0)}%` : undefined, posBack: a.back ? `${pos.back.x.toFixed(0)}% / ${pos.back.y.toFixed(0)}%` : undefined });
+    note.className = 'form-note ok'; note.hidden = false;
+    note.innerHTML = `Im Warenkorb. <a href="/warenkorb" class="accent"><b>Zum Warenkorb</b></a> oder weiter stöbern.`;
+    if (!(a.front ? uploads.front : true) || !(a.back ? uploads.back : true)) note.innerHTML += ' <span class="muted">Ohne Motiv? Kein Problem, wir fragen es nach der Bestellung an.</span>';
   });
 
   updateAvailability(); updateSides(); updateUI();
 </script>
 
 <style>
-  .crumbs { font-size: 14px; margin-bottom: 20px; display: flex; gap: 8px; }
-  .crumbs a:hover { color: var(--text); }
-  .pgrid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 56px); align-items: start; }
-  .pvisual { position: sticky; top: calc(var(--nav-h) + 24px); }
-  .stage { position: relative; border-radius: var(--radius-card); overflow: hidden; background: #fff; border: 1px solid var(--line); }
-  .stage img[data-stage-img] { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
-  .motif { position: absolute; transform: translate(-50%, -50%); cursor: grab; touch-action: none; filter: drop-shadow(0 1px 1px rgba(0,0,0,0.25)); }
+  .pp { padding: 24px 0 clamp(40px, 5vw, 64px); }
+  .crumbs { font-size: 14px; margin-bottom: 18px; display: flex; gap: 8px; flex-wrap: wrap; } .crumbs a:hover { color: var(--text); }
+  .pgrid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
+  .pvisual { position: sticky; top: calc(var(--nav-h) + 16px); }
+  .stage { position: relative; border-radius: var(--radius-card); overflow: hidden; background: #f4f4f4; border: 1px solid var(--line); }
+  .stage img[data-stage-img] { width: 100%; aspect-ratio: 4 / 5; object-fit: contain; padding: 4%; box-sizing: border-box; }
+  .motif { position: absolute; transform: translate(-50%, -50%); cursor: grab; touch-action: none; filter: drop-shadow(0 1px 1px rgba(0,0,0,.25)); max-width: none; }
   .motif:active { cursor: grabbing; }
-  .stage-hint { position: absolute; left: 12px; bottom: 12px; font-size: 12px; padding: 4px 10px; border-radius: 999px; background: rgba(0,0,0,0.6); color: #fff; }
+  .stage-tabs { position: absolute; top: 12px; right: 12px; display: flex; background: rgba(255,255,255,.92); border-radius: 999px; padding: 3px; box-shadow: 0 2px 10px rgba(0,0,0,.12); }
+  .stage-tabs button { border: 0; background: transparent; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; color: #333; cursor: pointer; }
+  .stage-tabs button.is-on { background: #111; color: #fff; }
+  .stage-hint { position: absolute; left: 12px; bottom: 12px; font-size: 12px; padding: 5px 10px; border-radius: 999px; background: rgba(0,0,0,.65); color: #fff; display: inline-flex; gap: 6px; align-items: center; }
   .thumbs { display: flex; gap: 8px; margin-top: 10px; overflow-x: auto; }
-  .thumbs button { flex: none; width: 64px; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); background: #fff; padding: 0; cursor: pointer; }
-  .thumbs button:hover { border-color: var(--accent); }
+  .thumbs button { flex: none; width: 64px; border-radius: 8px; overflow: hidden; border: 2px solid var(--line); background: #f4f4f4; padding: 0; cursor: pointer; }
+  .thumbs button.is-on { border-color: var(--accent); }
+  .thumbs img { aspect-ratio: 4 / 5; object-fit: contain; }
+
   .config { display: grid; gap: 22px; }
-  .ptitle .muted { margin-top: 10px; font-size: 15px; }
-  .opt { border: 0; padding: 0; margin: 0; display: grid; gap: 10px; }
-  .opt legend { font-weight: 600; font-size: 14.5px; padding: 0; margin-bottom: 10px; }
-  .opt[hidden] { display: none; }
+  .pbrand { font-size: 13px; color: var(--text-2); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .pbrand span::before { content: '·'; margin-right: 8px; color: var(--text-3); }
+  .bio { font-style: normal; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 12px; font-weight: 600; }
+  .ptitle h1 { margin-top: 6px; font-size: clamp(1.8rem, 3vw, 2.4rem); }
+  .pprice { margin-top: 10px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .pprice strong { font-size: 1.6rem; letter-spacing: -0.02em; }
+  .pprice .muted { font-size: 13px; }
+
+  .step { display: grid; gap: 12px; padding-top: 18px; border-top: 1px solid var(--line); }
+  .step-h { display: flex; align-items: center; gap: 10px; }
+  .step-h h2 { font-size: 1.05rem; display: flex; gap: 8px; align-items: baseline; } .step-h h2 .muted { font-size: 14px; font-weight: 400; }
+  .step-h .small { margin-left: auto; font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
+  .num { width: 24px; height: 24px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-size: 12px; font-weight: 700; display: grid; place-items: center; flex: none; }
   .swatches { display: flex; flex-wrap: wrap; gap: 8px; }
-  .swatch { position: relative; width: 52px; border-radius: 8px; overflow: hidden; border: 2px solid var(--line); cursor: pointer; background: #fff; }
+  .swatch { position: relative; width: 48px; height: 48px; border-radius: 10px; overflow: hidden; border: 2px solid var(--line); cursor: pointer; background: #f4f4f4; display: grid; place-items: center; }
   .swatch input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+  .swatch img { width: 100%; height: 100%; object-fit: contain; padding: 4px; }
+  .swatch i { width: 26px; height: 26px; border-radius: 50%; border: 1px solid rgba(0,0,0,.15); }
   .swatch:has(input:checked) { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .chip { position: relative; padding: 9px 14px; border-radius: 999px; border: 1px solid var(--line-strong); font-size: 14px; cursor: pointer; user-select: none; }
+  .chip { position: relative; padding: 9px 14px; border-radius: 999px; border: 1px solid var(--line-strong); font-size: 14px; cursor: pointer; user-select: none; min-width: 46px; text-align: center; }
   .chip input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
-  .chip:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); color: var(--text); }
+  .chip:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
   .chip.is-off { opacity: 0.35; text-decoration: line-through; cursor: not-allowed; }
-  .chip small { color: var(--text-3); }
-  .side { padding: 18px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); }
-  .tiny { font-size: 13px; }
-  .upload input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .chips-size .chip { text-align: left; } .chips-size small { display: block; color: var(--text-3); font-size: 11.5px; }
+  .sides { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .side-opt { position: relative; padding: 12px; border-radius: 12px; border: 1px solid var(--line-strong); text-align: center; font-size: 14px; font-weight: 500; cursor: pointer; }
+  .side-opt input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+  .side-opt:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+  .print-side { border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin: 0; display: grid; gap: 12px; background: var(--surface); }
+  .print-side[hidden] { display: none; }
+  .print-side legend { padding: 0 6px; font-size: 13px; font-weight: 600; color: var(--text-2); }
   .upload { position: relative; display: block; cursor: pointer; }
-  .upload-box { display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 10px; border: 1px dashed var(--line-strong); font-size: 14px; color: var(--text-2); }
-  .upload-box small { display: block; color: var(--text-3); font-size: 12.5px; }
-  .upload:hover .upload-box, .upload:focus-within .upload-box { border-color: var(--accent); color: var(--text); }
+  .upload input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .upload-box { display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: 10px; border: 1px dashed var(--line-strong); }
+  .upload-thumb { width: 52px; height: 52px; border-radius: 8px; background: var(--surface-2); display: grid; place-items: center; color: var(--accent); flex: none; overflow: hidden; }
+  .upload-thumb img { width: 100%; height: 100%; object-fit: contain; background: #fff; }
+  .upload-text { display: flex; flex-direction: column; gap: 2px; font-size: 14px; } .upload-text small { color: var(--text-3); font-size: 12.5px; }
+  .upload:hover .upload-box, .upload:focus-within .upload-box { border-color: var(--accent); }
+  .has-file .upload-box { border-style: solid; border-color: var(--accent-line); }
   .error { color: var(--danger); font-size: 13px; }
-  .buy { display: grid; gap: 14px; padding: 20px; border-radius: var(--radius-card); border: 1px solid var(--accent-line); background: linear-gradient(135deg, var(--accent-soft), transparent 60%), var(--surface); }
+
+  .buy { display: grid; gap: 12px; padding: 18px; border-radius: var(--radius-card); border: 1px solid var(--accent-line); background: linear-gradient(135deg, var(--accent-soft), transparent 60%), var(--surface); }
   .qty-row { display: flex; align-items: center; justify-content: space-between; font-size: 14.5px; font-weight: 500; }
   .qty { display: inline-flex; align-items: center; border: 1px solid var(--line-strong); border-radius: 999px; }
   .qty button { width: 34px; height: 34px; border: 0; background: transparent; cursor: pointer; font-size: 18px; color: var(--text); }
   .qty input { width: 44px; text-align: center; border: 0; background: transparent; color: var(--text); font: inherit; font-weight: 600; -moz-appearance: textfield; }
   .qty input::-webkit-inner-spin-button { display: none; }
-  .total { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
-  .total strong { font-size: 28px; letter-spacing: -0.02em; }
+  .calc { display: grid; gap: 4px; font-size: 13.5px; color: var(--text-2); }
+  .calc :global(li) { display: flex; justify-content: space-between; gap: 12px; } .calc :global(b) { color: var(--text); font-weight: 500; font-variant-numeric: tabular-nums; }
   .buy .btn { width: 100%; }
-  .trust { display: grid; gap: 8px; font-size: 14px; color: var(--text-2); }
-  .trust li { display: flex; gap: 10px; align-items: center; }
-  .trust .icon { color: var(--accent); flex: none; }
-  @media (max-width: 900px) { .pgrid { grid-template-columns: 1fr; } .pvisual { position: static; } }
+  .trust { display: grid; gap: 6px; font-size: 13px; color: var(--text-2); } .trust li { display: flex; gap: 8px; align-items: center; } .trust .icon { color: var(--accent); flex: none; }
+
+  .pdetails { border-top: 1px solid var(--line); background: var(--bg-2); }
+  .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .details-grid h2 { font-size: 1.15rem; margin-bottom: 14px; } .details-grid h3 { font-size: 0.95rem; margin: 18px 0 8px; }
+  .specs { margin: 0; display: grid; gap: 6px; } .specs div { display: grid; grid-template-columns: 110px 1fr; gap: 12px; font-size: 14px; } .specs dt { color: var(--text-3); } .specs dd { margin: 0; }
+  .feat-list { margin-top: 14px; display: grid; gap: 4px; font-size: 14px; color: var(--text-2); padding-left: 18px; list-style: disc; }
+  .sizes-list { display: grid; gap: 4px; font-size: 14px; color: var(--text-2); }
+  @media (max-width: 900px) { .pgrid { grid-template-columns: 1fr; } .pvisual { position: static; } .details-grid { grid-template-columns: 1fr; } .sides { grid-template-columns: 1fr; } }
 </style>
