@@ -8,7 +8,7 @@ import { site } from '../data/site';
     <div class="container done" data-endpoint={site.checkoutApi}>
       <div class="icon-box big"><Icon name="check" weight="bold" size={28} /></div>
       <h1>Danke, deine Bestellung ist da.</h1>
-      <p class="lede" data-msg>Wir prüfen deine Daten und starten die Produktion. Die Bestätigung mit Rechnung kommt per E-Mail.</p>
+      <p class="lede" data-msg>Wir prüfen deine Daten und starten die Produktion. Die Bestätigung kommt per E-Mail.</p>
       <div class="card card-pad summary" data-summary hidden>
         <p><strong>Bestellnummer:</strong> <span data-no></span></p>
         <ul data-items></ul>
@@ -30,16 +30,18 @@ import { site } from '../data/site';
 <script>
   import { clearCart } from '../scripts/cart';
   const root = document.querySelector<HTMLElement>('.done')!;
-  const id = new URLSearchParams(location.search).get('session_id');
-  clearCart();
+  const id = new URLSearchParams(location.search).get('order');
   if (id) {
-    fetch(`${root.dataset.endpoint}/order?session_id=${encodeURIComponent(id)}`).then((r) => r.json()).then((o) => {
+    clearCart();
+    fetch(`${root.dataset.endpoint}/order?order=${encodeURIComponent(id)}`).then((r) => r.json()).then((o) => {
       if (!o.orderNo) return;
       root.querySelector('[data-no]')!.textContent = o.orderNo;
       root.querySelector('[data-email]')!.textContent = o.email;
-      root.querySelector('[data-items]')!.innerHTML = o.items.map((it: any) => `<li>${it.q} x ${it.p} ${it.c} / ${it.s}, ${it.side}${it.f ? `, vorne ${it.f.sz}` : ''}${it.b ? `, hinten ${it.b.sz}` : ''}</li>`).join('');
+      root.querySelector('[data-items]')!.innerHTML = o.items.map((l: string) => `<li>${l.split(' | ')[0]}</li>`).join('');
       (root.querySelector('[data-summary]') as HTMLElement).hidden = false;
-      if (o.items.some((it: any) => it.needsUpload)) {
+      if (o.status === 'Zahlung offen') root.querySelector('[data-msg]')!.textContent = 'Deine Zahlung wird noch bestätigt. Sobald sie da ist, bekommst du die Bestätigung per E-Mail.';
+      if (o.status === 'Abgebrochen') root.querySelector('[data-msg]')!.textContent = 'Die Zahlung ist nicht abgeschlossen worden. Du kannst es im Warenkorb erneut versuchen.';
+      if (o.needsUpload) {
         const hint = root.querySelector<HTMLElement>('[data-upload-hint]')!; hint.hidden = false;
         const text = encodeURIComponent(`Hallo, hier mein Motiv zur Bestellung ${o.orderNo}.`);
         (hint.querySelector('[data-wa]') as HTMLAnchorElement).href = `https://wa.me/4917655412198?text=${text}`;

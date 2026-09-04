@@ -19,9 +19,9 @@ import { site } from '../data/site';
               <div><dt>Zwischensumme</dt><dd data-cart-subtotal></dd></div>
             </dl>
             <p class="muted small">inkl. MwSt. Versand wird an der Kasse gewählt: Deutschland 4,90 €, Österreich, Schweiz und EU 9,90 €.</p>
-            <button type="button" class="btn btn-primary btn-lg" data-cart-checkout>Zur Kasse <Icon name="arrow-right" size={18} /></button>
+            <a href="/kasse" class="btn btn-primary btn-lg" data-cart-checkout>Zur Kasse <Icon name="arrow-right" size={18} /></a>
             <a href="/shop" class="btn btn-secondary">Weiter einkaufen</a>
-            <p class="muted small">Sichere Bezahlung über Stripe: PayPal, Klarna, Kreditkarte, Apple Pay, Google Pay, SEPA.</p>
+            <p class="muted small">Sichere Bezahlung über Mollie: PayPal, Klarna, Kreditkarte, Apple Pay, SEPA.</p>
           </aside>
         </div>
         <p class="form-note err" data-cart-error hidden></p>
@@ -31,7 +31,7 @@ import { site } from '../data/site';
 </Base>
 
 <script>
-  import { getCart, updateQty, removeItem, lineTotal, subtotal, startCheckout, euro, type CartItem } from '../scripts/cart';
+  import { getCart, updateQty, removeItem, lineTotal, subtotal, euro, type CartItem } from '../scripts/cart';
   const $ = (s: string) => document.querySelector<HTMLElement>(s)!;
   const esc = (s: string) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
   const link = (u?: string) => !u ? 'Kein Motiv, wird nachgereicht' : /^https?:/.test(u) ? `<a href="${esc(u)}" target="_blank" rel="noopener" class="accent">Datei ansehen</a>` : esc(u);
@@ -67,11 +67,6 @@ import { site } from '../data/site';
     const id = li.dataset.line!;
     if (t.matches('[data-remove]')) render(removeItem(id));
     else if (t.matches('[data-qty]')) { const cur = Number(li.querySelector('.qty span')!.textContent); render(updateQty(id, cur + Number(t.getAttribute('data-qty')))); }
-  });
-  $('[data-cart-checkout]').addEventListener('click', async () => {
-    const btn = $('[data-cart-checkout]') as HTMLButtonElement; btn.disabled = true; btn.textContent = 'Kasse wird geöffnet...';
-    try { location.href = await startCheckout($('[data-cart-root]').dataset.endpoint!); }
-    catch (err) { fail('Kasse konnte nicht geöffnet werden: ' + (err as Error).message + '. Schreib uns per WhatsApp, wir helfen sofort.'); btn.disabled = false; btn.textContent = 'Zur Kasse'; }
   });
   render(getCart());
 </script>

@@ -1,0 +1,106 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+const countries = [['DE', 'Deutschland'], ['AT', 'Österreich'], ['CH', 'Schweiz'], ['NL', 'Niederlande'], ['BE', 'Belgien'], ['LU', 'Luxemburg'], ['FR', 'Frankreich'], ['IT', 'Italien'], ['ES', 'Spanien'], ['PL', 'Polen'], ['DK', 'Dänemark'], ['CZ', 'Tschechien']];
+---
+<Base title="Kasse" description="Lieferadresse und Bezahlung." noindex={true}>
+  <section class="section">
+    <div class="container kasse" data-endpoint={site.checkoutApi}>
+      <h1>Kasse</h1>
+      <p class="form-note err" data-cancelled hidden>Die Zahlung wurde abgebrochen. Dein Warenkorb ist noch da, du kannst es erneut versuchen.</p>
+      <div class="kgrid">
+        <form class="kform card card-pad" data-kform novalidate>
+          <h2>Lieferadresse</h2>
+          <div class="row">
+            <div class="field"><label for="k-name">Vor- und Nachname</label><input class="input" id="k-name" name="name" autocomplete="name" required /><span class="error">Bitte Namen angeben.</span></div>
+            <div class="field"><label for="k-email">E-Mail</label><input class="input" id="k-email" name="email" type="email" autocomplete="email" required /><span class="error">Bitte gültige E-Mail angeben.</span></div>
+          </div>
+          <div class="field"><label for="k-street">Straße und Hausnummer</label><input class="input" id="k-street" name="street" autocomplete="street-address" required /><span class="error">Bitte Straße angeben.</span></div>
+          <div class="row row-3">
+            <div class="field"><label for="k-zip">PLZ</label><input class="input" id="k-zip" name="zip" autocomplete="postal-code" required /><span class="error">PLZ fehlt.</span></div>
+            <div class="field"><label for="k-city">Ort</label><input class="input" id="k-city" name="city" autocomplete="address-level2" required /><span class="error">Ort fehlt.</span></div>
+            <div class="field"><label for="k-country">Land</label><select class="select" id="k-country" name="country" autocomplete="country">{countries.map(([c, n]) => <option value={c}>{n}</option>)}</select></div>
+          </div>
+          <div class="field"><label for="k-phone">Telefon <span class="optional">(optional, für Rückfragen zum Motiv)</span></label><input class="input" id="k-phone" name="phone" type="tel" autocomplete="tel" /></div>
+          <div class="field"><label for="k-note">Anmerkung <span class="optional">(optional)</span></label><textarea class="textarea" id="k-note" name="note" rows="2" style="min-height:70px"></textarea></div>
+          <label class="checkbox"><input type="checkbox" name="agb" required /><span>Ich akzeptiere die <a href="/agb" class="accent" target="_blank">AGB</a> und habe die <a href="/widerruf" class="accent" target="_blank">Widerrufsbelehrung</a> sowie die <a href="/datenschutz" class="accent" target="_blank">Datenschutzerklärung</a> gelesen. Individuell bedruckte Ware ist vom Widerruf ausgeschlossen.</span></label>
+          <span class="error" data-agb-error hidden>Bitte AGB bestätigen.</span>
+          <button type="submit" class="btn btn-primary btn-lg" data-pay>Weiter zur Bezahlung <Icon name="arrow-right" size={18} /></button>
+          <p class="muted small">Du wirst zu Mollie weitergeleitet: PayPal, Klarna, Apple Pay, Kreditkarte, SEPA. Der Betrag wird erst dort bezahlt.</p>
+          <p class="form-note err" data-error hidden></p>
+        </form>
+        <aside class="card card-pad summary">
+          <h2>Bestellung</h2>
+          <ul class="items" data-items></ul>
+          <dl>
+            <div><dt>Zwischensumme</dt><dd data-sub></dd></div>
+            <div><dt>Versand <span class="muted" data-ship-label></span></dt><dd data-ship></dd></div>
+            <div class="total"><dt>Gesamt</dt><dd data-total></dd></div>
+          </dl>
+          <p class="muted small">inkl. 19 % MwSt.</p>
+          <a href="/warenkorb" class="muted small">Warenkorb bearbeiten</a>
+        </aside>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  import { getCart, subtotal, lineTotal, euro } from '../scripts/cart';
+  const root = document.querySelector<HTMLElement>('.kasse')!;
+  const $ = <T extends HTMLElement>(s: string) => root.querySelector<T>(s)!;
+  const esc = (s: string) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
+  const SHIP: Record<string, { amount: number; label: string }> = { DE: { amount: 4.9, label: '(1-3 Werktage)' }, EU: { amount: 9.9, label: '(3-5 Werktage)' } };
+  const items = getCart();
+  if (new URLSearchParams(location.search).get('abgebrochen')) $('[data-cancelled]').hidden = false;
+  if (!items.length) { location.replace('/warenkorb'); }
+
+  function render() {
+    const country = $<HTMLSelectElement>('#k-country').value; const ship = SHIP[country === 'DE' ? 'DE' : 'EU'];
+    $('[data-items]').innerHTML = items.map((i) => `<li><span>${i.quantity} x ${esc(i.title)} ${esc(i.color)} / ${esc(i.size)}<small>${esc(i.side)}${i.sizeFront ? `, vorne ${esc(i.sizeFront)}` : ''}${i.sizeBack ? `, hinten ${esc(i.sizeBack)}` : ''}</small></span><strong>${euro(lineTotal(i))}</strong></li>`).join('');
+    $('[data-sub]').textContent = euro(subtotal(items)); $('[data-ship]').textContent = euro(ship.amount); $('[data-ship-label]').textContent = ship.label;
+    $('[data-total]').textContent = euro(subtotal(items) + ship.amount);
+  }
+  $('#k-country').addEventListener('change', render); render();
+
+  const form = $<HTMLFormElement>('[data-kform]');
+  form.addEventListener('input', (e) => (e.target as HTMLElement).closest('.field')?.classList.remove('has-error'));
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    let ok = true;
+    form.querySelectorAll<HTMLElement>('.field').forEach((f) => { const i = f.querySelector<HTMLInputElement>('input,select,textarea'); if (i?.required && !(i.checkValidity() && i.value.trim())) { f.classList.add('has-error'); ok = false; } });
+    const agb = form.querySelector<HTMLInputElement>('input[name=agb]')!; $('[data-agb-error]').hidden = agb.checked; if (!agb.checked) ok = false;
+    if (!ok) return;
+    const btn = $<HTMLButtonElement>('[data-pay]'); const err = $('[data-error]'); err.hidden = true;
+    btn.disabled = true; btn.textContent = 'Bezahlung wird vorbereitet...';
+    const data = Object.fromEntries(new FormData(form).entries());
+    const lines = items.map((i) => ({ variantId: i.variantId, quantity: i.quantity, side: i.side, sizeFront: i.sizeFront, sizeBack: i.sizeBack, uploadFront: i.uploadFront, uploadBack: i.uploadBack, posFront: i.posFront, posBack: i.posBack }));
+    try {
+      const res = await fetch(`${root.dataset.endpoint}/checkout`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ lines, customer: data }) });
+      const j = await res.json(); if (!res.ok || !j.url) throw new Error(j.error || 'Kasse nicht erreichbar');
+      location.href = j.url;
+    } catch (ex) { err.hidden = false; err.textContent = 'Das hat nicht geklappt: ' + (ex as Error).message + '. Versuch es nochmal oder schreib uns per WhatsApp.'; btn.disabled = false; btn.innerHTML = 'Weiter zur Bezahlung'; }
+  });
+</script>
+
+<style>
+  .kasse h1 { margin-bottom: 24px; }
+  .kgrid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px; align-items: start; }
+  .kform { display: grid; gap: 16px; }
+  .kform h2, .summary h2 { font-size: 1.2rem; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .row-3 { grid-template-columns: 0.6fr 1.2fr 1fr; }
+  .small { font-size: 13px; }
+  .error[data-agb-error] { color: var(--danger); font-size: 13px; }
+  .summary { display: grid; gap: 14px; position: sticky; top: calc(var(--nav-h) + 24px); }
+  .items { display: grid; gap: 10px; font-size: 14px; }
+  .items :global(li) { display: flex; justify-content: space-between; gap: 12px; }
+  .items :global(small) { display: block; color: var(--text-3); font-size: 12.5px; }
+  .summary dl { margin: 0; display: grid; gap: 6px; border-top: 1px solid var(--line); padding-top: 12px; }
+  .summary dl div { display: flex; justify-content: space-between; font-size: 14.5px; }
+  .summary dd { margin: 0; font-variant-numeric: tabular-nums; }
+  .summary .total { font-weight: 700; font-size: 17px; padding-top: 6px; }
+  .summary .total dd { color: var(--accent); }
+  @media (max-width: 800px) { .kgrid { grid-template-columns: 1fr; } .summary { position: static; order: -1; } .row, .row-3 { grid-template-columns: 1fr; } }
+</style>
