@@ -22,7 +22,7 @@
     },
     {
       "source": "/pages/pod-preise",
-      "destination": "/preise",
+      "destination": "/kontakt",
       "permanent": true
     },
     {

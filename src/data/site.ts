@@ -23,7 +23,6 @@ export const nav = [
   { label: 'Print-on-Demand', href: '/print-on-demand' },
   { label: 'Großauflagen', href: '/grossauflagen' },
   { label: 'Druckverfahren', href: '/druckverfahren' },
-  { label: 'Preise', href: '/preise' },
   { label: 'Über uns', href: '/ueber-uns' },
 ];
 
