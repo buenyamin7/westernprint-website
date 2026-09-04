@@ -1,0 +1,8 @@
+---
+import Redirect from '../../components/Redirect.astro';
+export function getStaticPaths() {
+  return ['all', 'produkte', 'tees', 'hoodies', 'frontpage'].map((slug) => ({ params: { slug }, props: { to: '/shop' } }));
+}
+const { to } = Astro.props;
+---
+<Redirect to={to} />

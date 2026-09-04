@@ -1,0 +1,20 @@
+---
+// Statische Weiterleitung für alte Shopify-URLs (GitHub Pages kennt keine Server-Redirects).
+interface Props { to: string }
+const { to } = Astro.props;
+const target = to.startsWith('http') ? to : `https://westernprint.de${to}`;
+---
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <title>Weiterleitung</title>
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={target} />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <script is:inline set:html={`location.replace(${JSON.stringify(target)})`} />
+  </head>
+  <body style="font-family:system-ui;padding:40px;background:#0b0d0c;color:#f1f4f2">
+    <p>Diese Seite ist umgezogen: <a style="color:#4fcf78" href={target}>{target}</a></p>
+  </body>
+</html>

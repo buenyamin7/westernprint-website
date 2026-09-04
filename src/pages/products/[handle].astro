@@ -1,0 +1,10 @@
+---
+import Redirect from '../../components/Redirect.astro';
+import { getProducts } from '../../lib/shopify';
+export async function getStaticPaths() {
+  const products = await getProducts();
+  return products.map((p) => ({ params: { handle: p.handle }, props: { to: `/shop/${p.handle}` } }));
+}
+const { to } = Astro.props;
+---
+<Redirect to={to} />

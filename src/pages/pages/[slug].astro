@@ -1,0 +1,15 @@
+---
+import Redirect from '../../components/Redirect.astro';
+export function getStaticPaths() {
+  const map: Record<string, string> = {
+    'pod-druckverfahren-fulfillment': '/print-on-demand', 'pod-fulfillment': '/print-on-demand', 'pod-2': '/print-on-demand',
+    'b2b-pod-anfragen': '/b2b-partner', 'grossbestellung': '/grossauflagen', 'grossbestellungen': '/grossauflagen',
+    'druckverfahren-und-textilanbieter': '/druckverfahren', 'druckverfahren-st-st': '/druckverfahren', 'pod-preise': '/kontakt',
+    'bestellen': '/textilien', 'produkte': '/shop', 'uber-uns': '/ueber-uns', 'ueber-uns': '/ueber-uns', 'contact': '/kontakt',
+    'impressum': '/impressum', 'agb': '/agb', 'datenschutzerklarung': '/datenschutz', 'widerrufsbelehrung-fur-verbraucher': '/widerruf', 'versand-und-zahlungsbedingungen': '/versand',
+  };
+  return Object.entries(map).map(([slug, to]) => ({ params: { slug }, props: { to } }));
+}
+const { to } = Astro.props;
+---
+<Redirect to={to} />
