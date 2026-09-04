@@ -53,3 +53,16 @@ Build: `npm run build` (Ausgabe in `dist/`).
 ## SEO
 
 Jede Seite hat Titel, Meta-Description, Canonical, Open Graph, JSON-LD (LocalBusiness, FAQ auf Startseite und POD-Seite). Sitemap und robots.txt werden automatisch erzeugt.
+
+## Shop-Katalog aktualisieren
+
+Der Shop zeigt das freigeschaltete Sortiment der POD-App. Aktualisieren in zwei Schritten:
+
+```bash
+# 1. Export aus der POD-App-Datenbank (nur lesen)
+cd ~/dev/westernprint-pod && set -a && source .env && set +a && npx tsx scripts/export-public-catalog.ts ~/Desktop/Claude/Projects/westernprint-website/src/data/pod-catalog.json
+# 2. Katalog + Bilder bauen, dann Worker-Kopie und Deploy
+cd ~/Desktop/Claude/Projects/westernprint-website && python3 scripts/build-catalog.py && cp src/data/products.json ../westernprint-checkout/src/products.json
+```
+
+Preise neuer Produkte werden aus dem EK abgeleitet (EK x 1,25 + 3 € netto, brutto auf 0,50 € aufgerundet). Bestehende Shop-Preise bleiben erhalten (Liste in `scripts/build-catalog.py`, `STYLE_OF_HANDLE`). Preise direkt in `src/data/products.json` ändern, dann Worker neu deployen.
