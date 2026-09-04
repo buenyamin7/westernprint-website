@@ -18,7 +18,7 @@ export const site = {
   // Formular-Endpoint (z. B. Formspree "https://formspree.io/f/xxxx"). Leer = Anfrage geht per WhatsApp raus.
   formEndpoint: '',
   // Motiv-Uploads im Shop: Cloudinary (kostenlos). Leer = Datei wird nach der Bestellung angefordert.
-  cloudinary: { cloudName: '', uploadPreset: '' },
+  cloudinary: { cloudName: 'c5unvw6r', uploadPreset: 'westernprint' },
   ogImage: '/og-default.jpg',
 };
 
