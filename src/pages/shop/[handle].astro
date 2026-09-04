@@ -1,0 +1,271 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import { getProducts, euro, PRINT_SIZES } from '../../lib/shopify';
+import { site } from '../../data/site';
+
+export async function getStaticPaths() {
+  const products = await getProducts();
+  return products.map((p) => ({ params: { handle: p.handle }, props: { product: p } }));
+}
+const { product } = Astro.props;
+const colors = product.options.find((o) => o.name === 'Farbe')?.values ?? [];
+const sizes = product.options.find((o) => o.name === 'Größe')?.values ?? [];
+const colorImage = (c: string) => product.variants.find((v) => v.options['Farbe'] === c && v.image)?.image ?? product.images[0]?.url;
+const clientData = { product: { id: product.id, title: product.title, handle: product.handle, variants: product.variants, images: product.images }, sizes: PRINT_SIZES, cloud: site.cloudinary };
+const ld = { '@context': 'https://schema.org', '@type': 'Product', name: product.title, image: product.images.map((i) => i.url), description: product.description, brand: { '@type': 'Brand', name: 'Stanley/Stella' }, offers: { '@type': 'AggregateOffer', priceCurrency: 'EUR', lowPrice: product.minPrice, offerCount: product.variants.length, availability: 'https://schema.org/InStock' } };
+---
+<Base title={`${product.title} bedrucken lassen`} description={`${product.title} von Stanley/Stella mit eigenem Motiv bedrucken. ${colors.length} Farben, Größen ${sizes[0]} bis ${sizes[sizes.length - 1]}, DTF-Druck ab 1 Stück, Versand in 1-3 Werktagen.`} ogImage={product.images[0]?.url} jsonLd={ld}>
+  <section class="section-tight">
+    <div class="container">
+      <nav class="crumbs muted" aria-label="Pfad"><a href="/shop">Shop</a> <span>/</span> <span>{product.title}</span></nav>
+      <div class="pgrid">
+        <div class="pvisual">
+          <div class="stage" data-stage>
+            <img src={product.images[0]?.url} alt={product.images[0]?.alt} width="1000" height="1250" data-stage-img />
+            <img class="motif" data-motif hidden alt="" />
+            <span class="stage-hint" data-stage-hint hidden>Motiv mit der Maus verschieben</span>
+          </div>
+          <div class="thumbs" data-thumbs>
+            {product.images.slice(0, 6).map((img) => <button type="button" data-thumb={img.url}><img src={img.url} alt="" width="120" height="150" loading="lazy" /></button>)}
+          </div>
+        </div>
+
+        <form class="config" data-config novalidate>
+          <div class="ptitle">
+            <span class="eyebrow">Stanley/Stella</span>
+            <h1>{product.title}</h1>
+            <p class="muted">{product.description.slice(0, 200)}{product.description.length > 200 ? '.' : ''}</p>
+          </div>
+
+          <fieldset class="opt">
+            <legend>Farbe: <span data-color-label>{colors[0]}</span></legend>
+            <div class="swatches">
+              {colors.map((c, i) => (
+                <label class="swatch" title={c}>
+                  <input type="radio" name="color" value={c} checked={i === 0} />
+                  <img src={colorImage(c)} alt={c} width="60" height="75" loading="lazy" />
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <fieldset class="opt">
+            <legend>Größe</legend>
+            <div class="chips" data-sizes>
+              {sizes.map((s) => <label class="chip"><input type="radio" name="size" value={s} /> <span>{s}</span></label>)}
+            </div>
+            <span class="error" data-size-error hidden>Bitte eine Größe wählen.</span>
+          </fieldset>
+
+          <fieldset class="opt">
+            <legend>Druckseite</legend>
+            <div class="chips">
+              {['Vorderseite', 'Rückseite', 'Beide Seiten'].map((s, i) => <label class="chip"><input type="radio" name="side" value={s} checked={i === 0} /> <span>{s}</span></label>)}
+            </div>
+          </fieldset>
+
+          {['front', 'back'].map((sideKey) => (
+            <fieldset class="opt side" data-side={sideKey}>
+              <legend>{sideKey === 'front' ? 'Vorderseite' : 'Rückseite'}: Druckgröße und Motiv</legend>
+              <div class="chips">
+                {PRINT_SIZES.map((s, i) => <label class="chip chip--size"><input type="radio" name={`size_${sideKey}`} value={s.key} checked={i === 2} /> <span>{s.label} <small>+{s.surcharge} €</small></span></label>)}
+              </div>
+              <p class="muted tiny" data-size-hint></p>
+              <label class="upload" data-upload>
+                <input type="file" name={`file_${sideKey}`} accept=".png,image/png" />
+                <span class="upload-box">
+                  <Icon name="upload-simple" size={20} />
+                  <span data-upload-label>Motiv als PNG hochladen <small>(transparenter Hintergrund, max. 10 MB)</small></span>
+                </span>
+              </label>
+              <span class="error" data-upload-error hidden></span>
+            </fieldset>
+          ))}
+
+          <div class="buy">
+            <div class="qty-row">
+              <label for="qty">Menge</label>
+              <div class="qty"><button type="button" data-qty="-1" aria-label="Weniger">−</button><input id="qty" name="qty" type="number" min="1" max="99" value="1" /><button type="button" data-qty="1" aria-label="Mehr">+</button></div>
+            </div>
+            <div class="total">
+              <span class="muted">Gesamt</span>
+              <strong data-total>{euro(product.variants[0].price)}</strong>
+              <span class="muted tiny">inkl. MwSt., zzgl. Versand</span>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg" data-add>In den Warenkorb <Icon name="shopping-cart" size={18} /></button>
+            <p class="form-note" data-note hidden></p>
+          </div>
+
+          <ul class="trust">
+            <li><Icon name="printer" size={18} /> DTF-Druck in Oberhausen, waschfest</li>
+            <li><Icon name="truck" size={18} /> Versand in 1 bis 3 Werktagen, 4,90 € in Deutschland</li>
+            <li><Icon name="shield-check" size={18} /> Sichere Bezahlung über Shopify</li>
+          </ul>
+        </form>
+      </div>
+    </div>
+  </section>
+  <script type="application/json" id="pdata" set:html={JSON.stringify(clientData)} />
+</Base>
+
+<script>
+  import { addLines, euro } from '../../scripts/cart';
+  const data = JSON.parse(document.getElementById('pdata')!.textContent!);
+  const { product, sizes: SIZES, cloud } = data;
+  const form = document.querySelector<HTMLFormElement>('[data-config]')!;
+  const $ = <T extends HTMLElement>(s: string, root: ParentNode = form) => root.querySelector<T>(s)!;
+  const stage = document.querySelector<HTMLElement>('[data-stage]')!;
+  const stageImg = $<HTMLImageElement>('[data-stage-img]', document);
+  const motif = $<HTMLImageElement>('[data-motif]', document);
+  const uploads: Record<string, { url: string; name: string } | null> = { front: null, back: null };
+  const pos: Record<string, { x: number; y: number }> = { front: { x: 50, y: 42 }, back: { x: 50, y: 42 } };
+  let activePreview: 'front' | 'back' = 'front';
+
+  const val = (name: string) => (form.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`)?.value ?? '');
+  const sidesActive = () => { const s = val('side'); return { front: s !== 'Rückseite', back: s !== 'Vorderseite' }; };
+  const variant = () => product.variants.find((v: any) => v.options['Farbe'] === val('color') && v.options['Größe'] === val('size'));
+  const qty = () => Math.max(1, Math.min(99, Number($<HTMLInputElement>('#qty').value) || 1));
+  const sizeInfo = (key: string) => SIZES.find((s: any) => s.key === key);
+
+  function updateAvailability() {
+    const color = val('color');
+    form.querySelectorAll<HTMLInputElement>('input[name="size"]').forEach((inp) => {
+      const v = product.variants.find((x: any) => x.options['Farbe'] === color && x.options['Größe'] === inp.value);
+      const ok = !!v && v.available; inp.disabled = !ok; inp.closest('label')!.classList.toggle('is-off', !ok);
+      if (!ok && inp.checked) inp.checked = false;
+    });
+  }
+  function updateSides() {
+    const a = sidesActive();
+    (['front', 'back'] as const).forEach((k) => { const fs = $<HTMLFieldSetElement>(`[data-side="${k}"]`); fs.hidden = !a[k]; fs.disabled = !a[k]; });
+    activePreview = a.front ? 'front' : 'back';
+    updatePreview();
+  }
+  function total() {
+    const v = variant(); const base = v ? v.price : product.variants[0].price; const a = sidesActive();
+    let sur = 0; if (a.front) sur += sizeInfo(val('size_front')).surcharge; if (a.back) sur += sizeInfo(val('size_back')).surcharge;
+    return (base + sur) * qty();
+  }
+  function updateUI() {
+    $('[data-color-label]').textContent = val('color');
+    const v = product.variants.find((x: any) => x.options['Farbe'] === val('color') && x.image);
+    if (v?.image && stageImg.src !== v.image) stageImg.src = v.image;
+    (['front', 'back'] as const).forEach((k) => { const s = sizeInfo(val(`size_${k}`)); $(`[data-side="${k}"] [data-size-hint]`).textContent = `${s.label}: ${s.hint}, Aufpreis ${s.surcharge} €`; });
+    $('[data-total]').textContent = euro(total());
+    updatePreview();
+  }
+  function updatePreview() {
+    const up = uploads[activePreview]; const hint = $<HTMLElement>('[data-stage-hint]', document);
+    if (!up) { motif.hidden = true; hint.hidden = true; return; }
+    const pct = sizeInfo(val(`size_${activePreview}`)).pct; const p = pos[activePreview];
+    motif.src = up.url; motif.hidden = false; hint.hidden = false;
+    motif.style.width = pct + '%'; motif.style.left = p.x + '%'; motif.style.top = p.y + '%';
+  }
+
+  // Drag motif on stage
+  let dragging = false;
+  motif.addEventListener('pointerdown', (e) => { dragging = true; motif.setPointerCapture(e.pointerId); e.preventDefault(); });
+  motif.addEventListener('pointermove', (e) => { if (!dragging) return; const r = stage.getBoundingClientRect(); pos[activePreview] = { x: Math.min(95, Math.max(5, ((e.clientX - r.left) / r.width) * 100)), y: Math.min(95, Math.max(5, ((e.clientY - r.top) / r.height) * 100)) }; updatePreview(); });
+  motif.addEventListener('pointerup', () => (dragging = false));
+
+  // Uploads
+  async function uploadFile(file: File): Promise<string> {
+    if (!cloud?.cloudName || !cloud?.uploadPreset) return URL.createObjectURL(file); // nur Vorschau, Datei wird nachgereicht
+    const fd = new FormData(); fd.append('file', file); fd.append('upload_preset', cloud.uploadPreset); fd.append('folder', 'westernprint-shop');
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${cloud.cloudName}/image/upload`, { method: 'POST', body: fd });
+    if (!res.ok) throw new Error('Upload fehlgeschlagen'); const j = await res.json(); return j.secure_url;
+  }
+  form.querySelectorAll<HTMLInputElement>('input[type="file"]').forEach((inp) => {
+    inp.addEventListener('change', async () => {
+      const k = inp.name.replace('file_', '') as 'front' | 'back'; const box = inp.closest('fieldset')!; const err = $<HTMLElement>('[data-upload-error]', box); const label = $<HTMLElement>('[data-upload-label]', box);
+      err.hidden = true; const file = inp.files?.[0]; if (!file) return;
+      if (file.type !== 'image/png') { err.textContent = 'Bitte eine PNG-Datei hochladen.'; err.hidden = false; inp.value = ''; return; }
+      if (file.size > 10 * 1024 * 1024) { err.textContent = 'Datei ist größer als 10 MB.'; err.hidden = false; inp.value = ''; return; }
+      label.textContent = 'Wird hochgeladen...';
+      try { const url = await uploadFile(file); uploads[k] = { url, name: file.name }; label.textContent = `✓ ${file.name}`; activePreview = k; updatePreview(); }
+      catch (e) { err.textContent = (e as Error).message; err.hidden = false; label.textContent = 'Motiv als PNG hochladen'; }
+    });
+  });
+
+  form.addEventListener('change', (e) => { const t = e.target as HTMLInputElement; if (t.name === 'color') updateAvailability(); if (t.name === 'side') updateSides(); if (t.name.startsWith('size_')) activePreview = t.name.replace('size_', '') as any; updateUI(); });
+  form.addEventListener('input', updateUI);
+  form.querySelectorAll<HTMLButtonElement>('[data-qty]').forEach((b) => b.addEventListener('click', () => { const i = $<HTMLInputElement>('#qty'); i.value = String(Math.max(1, qty() + Number(b.dataset.qty))); updateUI(); }));
+  document.querySelectorAll<HTMLButtonElement>('[data-thumb]').forEach((b) => b.addEventListener('click', () => { stageImg.src = b.dataset.thumb!; }));
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const note = $<HTMLElement>('[data-note]'); note.hidden = true; note.className = 'form-note';
+    const v = variant();
+    if (!v) { $('[data-size-error]').hidden = false; $<HTMLElement>('[data-sizes]').scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+    $('[data-size-error]').hidden = true;
+    const a = sidesActive(); const n = qty(); const btn = $<HTMLButtonElement>('[data-add]');
+    const uploadState = (k: 'front' | 'back') => uploads[k] ? (uploads[k]!.url.startsWith('blob:') ? `${uploads[k]!.name} (wird nach der Bestellung per E-Mail angefordert)` : uploads[k]!.url) : 'Kein Motiv hochgeladen, bitte nachreichen';
+    const attrs: { key: string; value: string }[] = [{ key: 'Druckseite', value: val('side') }];
+    if (a.front) attrs.push({ key: 'Druckgröße Vorderseite', value: val('size_front') }, { key: 'Upload Vorderseite', value: uploadState('front') }, { key: '_Position Vorderseite', value: `${pos.front.x.toFixed(0)}% / ${pos.front.y.toFixed(0)}%` });
+    if (a.back) attrs.push({ key: 'Druckgröße Rückseite', value: val('size_back') }, { key: 'Upload Rückseite', value: uploadState('back') }, { key: '_Position Rückseite', value: `${pos.back.x.toFixed(0)}% / ${pos.back.y.toFixed(0)}%` });
+    const ref = `${product.title} ${val('color')} ${val('size')}`;
+    const lines = [{ merchandiseId: v.id, quantity: n, attributes: attrs }];
+    if (a.front) lines.push({ merchandiseId: sizeInfo(val('size_front')).variantId, quantity: n, attributes: [{ key: 'Für', value: `${ref}, Vorderseite` }] });
+    if (a.back) lines.push({ merchandiseId: sizeInfo(val('size_back')).variantId, quantity: n, attributes: [{ key: 'Für', value: `${ref}, Rückseite` }] });
+    btn.disabled = true; btn.textContent = 'Wird hinzugefügt...';
+    try {
+      await addLines(lines);
+      note.className = 'form-note ok'; note.hidden = false; note.innerHTML = `Im Warenkorb. <a href="/warenkorb" class="accent">Zum Warenkorb und zur Kasse</a>`;
+    } catch (err) { note.className = 'form-note err'; note.hidden = false; note.textContent = 'Konnte nicht hinzugefügt werden: ' + (err as Error).message; }
+    finally { btn.disabled = false; btn.innerHTML = 'In den Warenkorb'; }
+  });
+
+  updateAvailability(); updateSides(); updateUI();
+</script>
+
+<style>
+  .crumbs { font-size: 14px; margin-bottom: 20px; display: flex; gap: 8px; }
+  .crumbs a:hover { color: var(--text); }
+  .pgrid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 56px); align-items: start; }
+  .pvisual { position: sticky; top: calc(var(--nav-h) + 24px); }
+  .stage { position: relative; border-radius: var(--radius-card); overflow: hidden; background: #fff; border: 1px solid var(--line); }
+  .stage img[data-stage-img] { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+  .motif { position: absolute; transform: translate(-50%, -50%); cursor: grab; touch-action: none; filter: drop-shadow(0 1px 1px rgba(0,0,0,0.25)); }
+  .motif:active { cursor: grabbing; }
+  .stage-hint { position: absolute; left: 12px; bottom: 12px; font-size: 12px; padding: 4px 10px; border-radius: 999px; background: rgba(0,0,0,0.6); color: #fff; }
+  .thumbs { display: flex; gap: 8px; margin-top: 10px; overflow-x: auto; }
+  .thumbs button { flex: none; width: 64px; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); background: #fff; padding: 0; cursor: pointer; }
+  .thumbs button:hover { border-color: var(--accent); }
+  .config { display: grid; gap: 22px; }
+  .ptitle .muted { margin-top: 10px; font-size: 15px; }
+  .opt { border: 0; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .opt legend { font-weight: 600; font-size: 14.5px; padding: 0; margin-bottom: 10px; }
+  .opt[hidden] { display: none; }
+  .swatches { display: flex; flex-wrap: wrap; gap: 8px; }
+  .swatch { position: relative; width: 52px; border-radius: 8px; overflow: hidden; border: 2px solid var(--line); cursor: pointer; background: #fff; }
+  .swatch input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+  .swatch:has(input:checked) { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { position: relative; padding: 9px 14px; border-radius: 999px; border: 1px solid var(--line-strong); font-size: 14px; cursor: pointer; user-select: none; }
+  .chip input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+  .chip:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); color: var(--text); }
+  .chip.is-off { opacity: 0.35; text-decoration: line-through; cursor: not-allowed; }
+  .chip small { color: var(--text-3); }
+  .side { padding: 18px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); }
+  .tiny { font-size: 13px; }
+  .upload input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .upload { position: relative; display: block; cursor: pointer; }
+  .upload-box { display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 10px; border: 1px dashed var(--line-strong); font-size: 14px; color: var(--text-2); }
+  .upload-box small { display: block; color: var(--text-3); font-size: 12.5px; }
+  .upload:hover .upload-box, .upload:focus-within .upload-box { border-color: var(--accent); color: var(--text); }
+  .error { color: var(--danger); font-size: 13px; }
+  .buy { display: grid; gap: 14px; padding: 20px; border-radius: var(--radius-card); border: 1px solid var(--accent-line); background: linear-gradient(135deg, var(--accent-soft), transparent 60%), var(--surface); }
+  .qty-row { display: flex; align-items: center; justify-content: space-between; font-size: 14.5px; font-weight: 500; }
+  .qty { display: inline-flex; align-items: center; border: 1px solid var(--line-strong); border-radius: 999px; }
+  .qty button { width: 34px; height: 34px; border: 0; background: transparent; cursor: pointer; font-size: 18px; color: var(--text); }
+  .qty input { width: 44px; text-align: center; border: 0; background: transparent; color: var(--text); font: inherit; font-weight: 600; -moz-appearance: textfield; }
+  .qty input::-webkit-inner-spin-button { display: none; }
+  .total { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .total strong { font-size: 28px; letter-spacing: -0.02em; }
+  .buy .btn { width: 100%; }
+  .trust { display: grid; gap: 8px; font-size: 14px; color: var(--text-2); }
+  .trust li { display: flex; gap: 10px; align-items: center; }
+  .trust .icon { color: var(--accent); flex: none; }
+  @media (max-width: 900px) { .pgrid { grid-template-columns: 1fr; } .pvisual { position: static; } }
+</style>

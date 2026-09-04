@@ -12,13 +12,14 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
       {nav.map((n) => (
         <a href={n.href} aria-current={path === n.href ? 'page' : undefined}>{n.label}</a>
       ))}
-      <a href={site.shopUrl} target="_blank" rel="noopener">Shop <Icon name="arrow-up-right" size={14} /></a>
+      <a href="/shop" aria-current={path.startsWith('/shop') ? 'page' : undefined}>Shop</a>
     </nav>
     <div class="nav-actions">
       <button class="theme-toggle" type="button" aria-label="Farbschema wechseln" data-theme-toggle>
         <span class="only-dark"><Icon name="sun" size={18} /></span>
         <span class="only-light"><Icon name="moon" size={18} /></span>
       </button>
+      <a href="/warenkorb" class="cart-btn" aria-label="Warenkorb"><Icon name="shopping-cart" size={18} /><span class="cart-count" data-cart-count hidden>0</span></a>
       <a href="/kontakt" class="btn btn-primary btn-sm nav-cta">Angebot in 24h</a>
       <button class="menu-btn" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
         <span class="when-closed"><Icon name="list" size={22} /></span>
@@ -31,7 +32,8 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
       {nav.map((n) => <a href={n.href}>{n.label}</a>)}
       <a href="/textilien">Textilien</a>
       <a href="/b2b-partner">B2B-Partner</a>
-      <a href={site.shopUrl} target="_blank" rel="noopener">Shop <Icon name="arrow-up-right" size={14} /></a>
+      <a href="/shop">Shop</a>
+      <a href="/warenkorb">Warenkorb</a>
       <a href="/kontakt" class="btn btn-primary" style="margin-top:12px">Angebot in 24h</a>
     </div>
   </div>
@@ -54,6 +56,10 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
   }
   .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--text); background: var(--surface-2); }
   .nav-actions { display: flex; align-items: center; gap: 10px; }
+  .cart-btn { position: relative; width: 38px; height: 38px; border-radius: 999px; border: 1px solid var(--line); display: grid; place-items: center; color: var(--text-2); }
+  .cart-btn:hover { color: var(--text); border-color: var(--line-strong); }
+  .cart-count { position: absolute; top: -5px; right: -5px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-size: 11px; font-weight: 700; display: grid; place-items: center; }
+  .cart-count[hidden] { display: none; }
   .theme-toggle, .menu-btn {
     width: 38px; height: 38px; border-radius: 999px; border: 1px solid var(--line); background: transparent;
     display: grid; place-items: center; cursor: pointer; color: var(--text-2);

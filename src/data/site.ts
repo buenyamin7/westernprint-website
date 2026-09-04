@@ -12,10 +12,12 @@ export const site = {
   instagram: 'https://www.instagram.com/westernprint.de',
   tiktok: 'https://www.tiktok.com/@westernprint.de',
   // Shop bleibt bei Shopify. Nach dem Domain-Umzug hier auf https://shop.westernprint.de umstellen.
-  shopUrl: 'https://westernprint.de/collections/produkte',
+  shopUrl: '/shop',
   portalUrl: 'https://westernprint.de/account/login',
   // Formular-Endpoint (z. B. Formspree "https://formspree.io/f/xxxx"). Leer = Anfrage geht per WhatsApp raus.
   formEndpoint: '',
+  // Motiv-Uploads im Shop: Cloudinary (kostenlos). Leer = Datei wird nach der Bestellung angefordert.
+  cloudinary: { cloudName: '', uploadPreset: '' },
   ogImage: '/og-default.jpg',
 };
 

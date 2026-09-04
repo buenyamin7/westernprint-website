@@ -82,6 +82,10 @@ const ldBlocks = [orgLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] 
     </div>
 
     <script>
+      import { refreshCount } from '../scripts/cart';
+      refreshCount();
+    </script>
+    <script>
       // Scroll reveal. Motivation: content arrives in reading order instead of popping in at once.
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const items = document.querySelectorAll('.reveal');

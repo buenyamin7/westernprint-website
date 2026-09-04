@@ -1,0 +1,108 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+---
+<Base title="Warenkorb" description="Dein Warenkorb bei westernprint." noindex={true}>
+  <section class="section">
+    <div class="container cart-wrap">
+      <h1>Warenkorb</h1>
+      <div data-cart-root>
+        <p class="muted" data-cart-loading>Warenkorb wird geladen...</p>
+        <div class="empty" data-cart-empty hidden>
+          <p class="lede">Dein Warenkorb ist leer.</p>
+          <a href="/shop" class="btn btn-primary">Zum Shop</a>
+        </div>
+        <div class="cart-grid" data-cart-full hidden>
+          <ul class="lines" data-cart-lines></ul>
+          <aside class="card card-pad summary">
+            <dl>
+              <div><dt>Zwischensumme</dt><dd data-cart-subtotal></dd></div>
+            </dl>
+            <p class="muted small">inkl. MwSt. Versand wird an der Kasse berechnet (Deutschland 4,90 €).</p>
+            <a href="#" class="btn btn-primary btn-lg" data-cart-checkout>Zur Kasse <Icon name="arrow-right" size={18} /></a>
+            <a href="/shop" class="btn btn-secondary">Weiter einkaufen</a>
+            <p class="muted small">Bezahlung sicher über Shopify: PayPal, Klarna, Kreditkarte, Apple Pay, Google Pay.</p>
+          </aside>
+        </div>
+        <p class="form-note err" data-cart-error hidden></p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  import { getCart, updateLine, removeLines, euro, type Cart } from '../scripts/cart';
+  const $ = (s: string) => document.querySelector<HTMLElement>(s)!;
+  const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
+
+  function render(cart: Cart | null) {
+    $('[data-cart-loading]').hidden = true;
+    const empty = !cart || cart.totalQuantity === 0;
+    $('[data-cart-empty]').hidden = !empty;
+    $('[data-cart-full]').hidden = empty;
+    if (empty || !cart) return;
+    ($('[data-cart-checkout]') as HTMLAnchorElement).href = cart.checkoutUrl;
+    $('[data-cart-subtotal]').textContent = euro(cart.cost.subtotalAmount.amount);
+    const isSur = (l: typeof cart.lines.nodes[number]) => /^aufpreis|^druck-aufschlag/i.test(l.merchandise.product.handle) || /^A[3-6]\+?$/.test(l.merchandise.product.title);
+    const sorted = [...cart.lines.nodes].sort((a, b) => Number(isSur(a)) - Number(isSur(b)));
+    $('[data-cart-lines]').innerHTML = sorted.map((l) => {
+      const isSurcharge = isSur(l);
+      const attrs = l.attributes.filter((a) => !a.key.startsWith('_') && !/^Position/.test(a.key));
+      return `<li class="line ${isSurcharge ? 'line--sub' : ''}" data-line="${l.id}">
+        ${l.merchandise.image && !isSurcharge ? `<img src="${l.merchandise.image.url}" alt="" width="90" height="112">` : '<div class="thumb-empty"><span>Druck</span></div>'}
+        <div class="line-body">
+          <strong>${isSurcharge ? `Druckaufpreis ${esc(l.merchandise.title)}` : esc(l.merchandise.product.title)}</strong>
+          ${l.merchandise.title !== 'Default Title' && !isSurcharge ? `<span class="muted">${esc(l.merchandise.title)}</span>` : ''}
+          ${attrs.length ? `<ul class="attrs">${attrs.map((a) => `<li><span>${esc(a.key)}:</span> ${/^https?:/.test(a.value) ? `<a href="${esc(a.value)}" target="_blank" rel="noopener" class="accent">Datei ansehen</a>` : esc(a.value)}</li>`).join('')}</ul>` : ''}
+        </div>
+        <div class="line-side">
+          <div class="qty"><button type="button" data-qty="-1" aria-label="Weniger">−</button><span>${l.quantity}</span><button type="button" data-qty="1" aria-label="Mehr">+</button></div>
+          <strong>${euro(l.cost.totalAmount.amount)}</strong>
+          <button type="button" class="remove" data-remove>Entfernen</button>
+        </div>
+      </li>`;
+    }).join('');
+  }
+
+  async function load() { try { render(await getCart()); } catch (e) { fail(e); } }
+  function fail(e: unknown) { const el = $('[data-cart-error]'); el.hidden = false; el.textContent = 'Warenkorb konnte nicht geladen werden. ' + (e as Error).message; }
+
+  $('[data-cart-lines]').addEventListener('click', async (e) => {
+    const t = e.target as HTMLElement; const li = t.closest<HTMLElement>('[data-line]'); if (!li) return;
+    const id = li.dataset.line!;
+    try {
+      if (t.matches('[data-remove]')) render(await removeLines([id]));
+      else if (t.matches('[data-qty]')) {
+        const cur = Number(li.querySelector('.qty span')!.textContent);
+        const next = cur + Number(t.getAttribute('data-qty'));
+        render(next <= 0 ? await removeLines([id]) : await updateLine(id, next));
+      }
+    } catch (err) { fail(err); }
+  });
+  load();
+</script>
+
+<style>
+  .cart-wrap h1 { margin-bottom: 28px; }
+  .cart-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 32px; align-items: start; }
+  .lines { display: grid; gap: 12px; }
+  .lines :global(.line) { display: grid; grid-template-columns: 90px 1fr auto; gap: 16px; padding: 16px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); align-items: start; }
+  .lines :global(.line--sub) { grid-template-columns: 90px 1fr auto; opacity: 0.85; }
+  .lines :global(.line img) { border-radius: 8px; background: #fff; }
+  .lines :global(.thumb-empty) { width: 90px; height: 112px; border-radius: 8px; background: var(--surface-2); display: grid; place-items: center; font-size: 12px; color: var(--text-3); }
+  .lines :global(.line--sub) { background: transparent; }
+  .lines :global(.line-body) { display: flex; flex-direction: column; gap: 4px; font-size: 14.5px; }
+  .lines :global(.attrs) { display: grid; gap: 2px; font-size: 13px; color: var(--text-2); margin-top: 6px; }
+  .lines :global(.attrs span) { color: var(--text-3); }
+  .lines :global(.line-side) { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+  .lines :global(.qty) { display: inline-flex; align-items: center; border: 1px solid var(--line-strong); border-radius: 999px; }
+  .lines :global(.qty button) { width: 30px; height: 30px; border: 0; background: transparent; cursor: pointer; font-size: 16px; }
+  .lines :global(.qty span) { min-width: 24px; text-align: center; font-size: 14px; }
+  .lines :global(.remove) { border: 0; background: transparent; color: var(--text-3); font-size: 13px; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+  .summary { display: grid; gap: 14px; position: sticky; top: calc(var(--nav-h) + 24px); }
+  .summary dl { margin: 0; } .summary dl div { display: flex; justify-content: space-between; font-size: 16px; font-weight: 600; }
+  .summary dd { margin: 0; }
+  .small { font-size: 13px; }
+  .empty { display: grid; gap: 20px; justify-items: start; }
+  @media (max-width: 800px) { .cart-grid { grid-template-columns: 1fr; } .summary { position: static; } .lines :global(.line) { grid-template-columns: 70px 1fr; } .lines :global(.line-side) { grid-column: 1 / 3; flex-direction: row; justify-content: space-between; align-items: center; } }
+</style>
