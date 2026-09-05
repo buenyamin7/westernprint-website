@@ -4,7 +4,7 @@ const KEY = 'wp-cart-v2';
 export interface CartItem {
   id: string; variantId: string; handle: string; title: string; color: string; size: string; image: string | null;
   quantity: number; base: number; side: 'Vorderseite' | 'Rückseite' | 'Beide Seiten';
-  sizeFront?: string; sizeBack?: string; uploadFront?: string; uploadBack?: string; posFront?: string; posBack?: string;
+  sizeFront?: string; sizeBack?: string; uploadFront?: string; uploadBack?: string; posFront?: string; posBack?: string; mockupFront?: string; mockupBack?: string;
   surcharge: number; // je Stück
 }
 
@@ -33,11 +33,11 @@ function announce(items: CartItem[]) {
 export function refreshCount() { announce(getCart()); }
 export const euro = (n: number | string) => Number(n).toFixed(2).replace('.', ',') + ' €';
 
-/** Kasse: Warenkorb an den Worker schicken, Stripe-URL zurück. */
+/** Kasse: Warenkorb an den Worker schicken, Mollie-URL zurück. */
 export async function startCheckout(endpoint: string): Promise<string> {
   const items = getCart();
   if (!items.length) throw new Error('Warenkorb ist leer');
-  const lines = items.map((i) => ({ variantId: i.variantId, quantity: i.quantity, side: i.side, sizeFront: i.sizeFront, sizeBack: i.sizeBack, uploadFront: i.uploadFront, uploadBack: i.uploadBack, posFront: i.posFront, posBack: i.posBack }));
+  const lines = items.map((i) => ({ variantId: i.variantId, quantity: i.quantity, side: i.side, sizeFront: i.sizeFront, sizeBack: i.sizeBack, uploadFront: i.uploadFront, uploadBack: i.uploadBack, posFront: i.posFront, posBack: i.posBack, mockupFront: i.mockupFront, mockupBack: i.mockupBack }));
   const res = await fetch(`${endpoint}/checkout`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ lines }) });
   const data = await res.json();
   if (!res.ok || !data.url) throw new Error(data.error || 'Kasse nicht erreichbar');

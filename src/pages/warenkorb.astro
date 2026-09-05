@@ -35,7 +35,7 @@ import { site } from '../data/site';
   const $ = (s: string) => document.querySelector<HTMLElement>(s)!;
   const esc = (s: string) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
   const SUR: Record<string, number> = { A6: 5, A5: 6, A4: 7, 'A3+': 9 };
-  const link = (u?: string) => !u ? 'Kein Motiv, wird nachgereicht' : /^https?:/.test(u) ? `<a href="${esc(u)}" target="_blank" rel="noopener" class="accent">Datei ansehen</a>` : esc(u);
+  const link = (u?: string, m?: string) => (!u ? 'Kein Motiv, wird nachgereicht' : /^https?:/.test(u) ? `<a href="${esc(u)}" target="_blank" rel="noopener" class="accent">Motiv</a>` : esc(u)) + (m ? ` · <a href="${esc(m)}" target="_blank" rel="noopener" class="accent">Vorschau mit Position</a>` : '');
 
   function render(items: CartItem[]) {
     const empty = items.length === 0;
@@ -44,14 +44,14 @@ import { site } from '../data/site';
     if (empty) return;
     $('[data-cart-subtotal]').textContent = euro(subtotal(items));
     $('[data-cart-lines]').innerHTML = items.map((i) => `<li class="line" data-line="${i.id}">
-        ${i.image ? `<img src="${esc(i.image)}" alt="" width="90" height="112">` : '<div class="thumb-empty"></div>'}
+        ${(i.mockupFront || i.mockupBack || i.image) ? `<img src="${esc(i.mockupFront || i.mockupBack || i.image!)}" alt="" width="90" height="112">` : '<div class="thumb-empty"></div>'}
         <div class="line-body">
           <strong>${esc(i.title)}</strong>
           <span class="muted">${esc(i.color)} / ${esc(i.size)} · ${euro(i.base)} + Druck ${euro(i.surcharge)} je Stück</span>
           <ul class="attrs">
             <li><span>Druckseite:</span> ${esc(i.side)}</li>
-            ${i.sizeFront ? `<li><span>Vorne ${esc(i.sizeFront)} (+${SUR[i.sizeFront] ?? '?'} €):</span> ${link(i.uploadFront)}</li>` : ''}
-            ${i.sizeBack ? `<li><span>Hinten ${esc(i.sizeBack)} (+${SUR[i.sizeBack] ?? '?'} €):</span> ${link(i.uploadBack)}</li>` : ''}
+            ${i.sizeFront ? `<li><span>Vorne ${esc(i.sizeFront)} (+${SUR[i.sizeFront] ?? '?'} €):</span> ${link(i.uploadFront, i.mockupFront)}</li>` : ''}
+            ${i.sizeBack ? `<li><span>Hinten ${esc(i.sizeBack)} (+${SUR[i.sizeBack] ?? '?'} €):</span> ${link(i.uploadBack, i.mockupBack)}</li>` : ''}
           </ul>
         </div>
         <div class="line-side">

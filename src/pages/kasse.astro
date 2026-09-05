@@ -75,7 +75,7 @@ const countries = [['DE', 'Deutschland'], ['AT', 'Österreich'], ['CH', 'Schweiz
     const btn = $<HTMLButtonElement>('[data-pay]'); const err = $('[data-error]'); err.hidden = true;
     btn.disabled = true; btn.textContent = 'Bezahlung wird vorbereitet...';
     const data = Object.fromEntries(new FormData(form).entries());
-    const lines = items.map((i) => ({ variantId: i.variantId, quantity: i.quantity, side: i.side, sizeFront: i.sizeFront, sizeBack: i.sizeBack, uploadFront: i.uploadFront, uploadBack: i.uploadBack, posFront: i.posFront, posBack: i.posBack }));
+    const lines = items.map((i) => ({ variantId: i.variantId, quantity: i.quantity, side: i.side, sizeFront: i.sizeFront, sizeBack: i.sizeBack, uploadFront: i.uploadFront, uploadBack: i.uploadBack, posFront: i.posFront, posBack: i.posBack, mockupFront: i.mockupFront, mockupBack: i.mockupBack }));
     try {
       const res = await fetch(`${root.dataset.endpoint}/checkout`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ lines, customer: data }) });
       const j = await res.json(); if (!res.ok || !j.url) throw new Error(j.error || 'Kasse nicht erreichbar');

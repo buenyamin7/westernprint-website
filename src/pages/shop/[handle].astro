@@ -214,6 +214,33 @@ const details = [
     if (!res.ok) throw new Error('Upload fehlgeschlagen, bitte nochmal versuchen');
     return (await res.json()).secure_url;
   }
+  // Mockup (Packshot + Motiv an der gewählten Position) als Bild für die Produktion speichern
+  const loadImg = (src: string) => new Promise<HTMLImageElement>((ok, no) => { const im = new Image(); im.crossOrigin = 'anonymous'; im.onload = () => ok(im); im.onerror = () => no(new Error('Bild konnte nicht geladen werden')); im.src = src; });
+  async function renderMockup(k: Side): Promise<string | null> {
+    const up = uploads[k]; if (!up || up.url.startsWith('blob:') || !cloud?.cloudName) return null;
+    const c = colorEl(); const backAvailable = !!c.dataset.back && c.dataset.back !== 'null';
+    const shirtSrc = k === 'back' && backAvailable ? c.dataset.back! : (c.dataset.image && c.dataset.image !== 'null' ? c.dataset.image : product.image);
+    const [shirt, art] = await Promise.all([loadImg(shirtSrc), loadImg(up.url)]);
+    const W = 900, H = 1125, pad = W * 0.04; // gleiche Geometrie wie die Vorschau (4:5, object-fit: contain, 4 % Rand)
+    const cv = document.createElement('canvas'); cv.width = W; cv.height = H; const ctx = cv.getContext('2d')!;
+    ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, W, H);
+    const sc = Math.min((W - 2 * pad) / shirt.naturalWidth, (H - 2 * pad) / shirt.naturalHeight);
+    const sw = shirt.naturalWidth * sc, sh = shirt.naturalHeight * sc;
+    ctx.drawImage(shirt, (W - sw) / 2, (H - sh) / 2, sw, sh);
+    const pct = sizeInfo(val(`size_${k}`)).pct; const pp = pos[k];
+    const mw = (pct / 100) * W, mh = mw * (art.naturalHeight / art.naturalWidth);
+    ctx.drawImage(art, (pp.x / 100) * W - mw / 2, (pp.y / 100) * H - mh / 2, mw, mh);
+    // Positionsmarker klein in die Ecke: Seite, Druckgröße, Position
+    ctx.fillStyle = 'rgba(0,0,0,.65)'; ctx.fillRect(0, H - 34, W, 34);
+    ctx.fillStyle = '#fff'; ctx.font = '600 18px Inter, Arial, sans-serif';
+    ctx.fillText(`${product.title} ${c.dataset.name} · ${k === 'front' ? 'Vorne' : 'Hinten'} ${val(`size_${k}`)} · Mitte bei ${pp.x.toFixed(0)} % / ${pp.y.toFixed(0)} % · Breite ${pct} %`, 14, H - 11);
+    const blob = await new Promise<Blob | null>((r) => cv.toBlob(r, 'image/jpeg', 0.86)); if (!blob) return null;
+    const fd = new FormData(); fd.append('file', new File([blob], `mockup-${k}.jpg`, { type: 'image/jpeg' })); fd.append('upload_preset', cloud.uploadPreset); fd.append('folder', 'westernprint-shop/mockups');
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${cloud.cloudName}/image/upload`, { method: 'POST', body: fd });
+    if (!res.ok) return null;
+    return (await res.json()).secure_url as string;
+  }
+
   form.querySelectorAll<HTMLInputElement>('input[type="file"]').forEach((inp) => {
     inp.addEventListener('change', async () => {
       const k = inp.name.replace('file_', '') as Side; const box = inp.closest('fieldset')!;
@@ -241,7 +268,7 @@ const details = [
   form.addEventListener('input', renderCalc);
   form.querySelectorAll<HTMLButtonElement>('[data-qty]').forEach((b) => b.addEventListener('click', () => { const i = $<HTMLInputElement>('#qty'); i.value = String(Math.max(1, Math.min(99, qty() + Number(b.dataset.qty)))); renderCalc(); }));
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const note = $<HTMLElement>('[data-note]'); note.hidden = true; note.className = 'form-note';
     const v = variant();
@@ -249,11 +276,17 @@ const details = [
     $('[data-size-error]').hidden = true;
     const a = active(); const t = total(); const c = colorEl();
     const up = (k: Side) => (uploads[k] ? (uploads[k]!.url.startsWith('blob:') ? `${uploads[k]!.name} (wird nachgereicht)` : uploads[k]!.url) : '');
+    const btn = $<HTMLButtonElement>('[data-add]'); const btnHtml = btn.innerHTML;
+    btn.disabled = true; btn.textContent = 'Vorschau wird gespeichert...';
+    const mock: Record<Side, string | null> = { front: null, back: null };
+    try { [mock.front, mock.back] = await Promise.all([a.front ? renderMockup('front').catch(() => null) : null, a.back ? renderMockup('back').catch(() => null) : null]); } catch {}
+    btn.disabled = false; btn.innerHTML = btnHtml;
     addItem({ variantId: v.id, handle: product.handle, title: product.title, color: c.dataset.name || '', size: val('size'), image: (c.dataset.image && c.dataset.image !== 'null' ? c.dataset.image : product.image),
       quantity: qty(), base: t.base, side: val('side') as any, surcharge: t.sf + t.sb,
       sizeFront: a.front ? val('size_front') : undefined, sizeBack: a.back ? val('size_back') : undefined,
       uploadFront: a.front ? up('front') : undefined, uploadBack: a.back ? up('back') : undefined,
-      posFront: a.front ? `${pos.front.x.toFixed(0)}% / ${pos.front.y.toFixed(0)}%` : undefined, posBack: a.back ? `${pos.back.x.toFixed(0)}% / ${pos.back.y.toFixed(0)}%` : undefined });
+      posFront: a.front ? `${pos.front.x.toFixed(0)}% / ${pos.front.y.toFixed(0)}%` : undefined, posBack: a.back ? `${pos.back.x.toFixed(0)}% / ${pos.back.y.toFixed(0)}%` : undefined,
+      mockupFront: mock.front || undefined, mockupBack: mock.back || undefined });
     note.className = 'form-note ok'; note.hidden = false;
     note.innerHTML = `Im Warenkorb. <a href="/warenkorb" class="accent"><b>Zum Warenkorb</b></a> oder weiter stöbern.`;
     if (!(a.front ? uploads.front : true) || !(a.back ? uploads.back : true)) note.innerHTML += ' <span class="muted">Ohne Motiv? Kein Problem, wir fragen es nach der Bestellung an.</span>';

@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../data/site';
 ---
-<Base title="Danke für deine Bestellung" description="Bestellung eingegangen." noindex={true}>
+<Base title="Deine Bestellung" description="Bestellstatus und Bestätigung." noindex={true}>
   <section class="section">
     <div class="container done" data-endpoint={site.checkoutApi}>
       <div class="icon-box big"><Icon name="check" weight="bold" size={28} /></div>
@@ -13,6 +13,23 @@ import { site } from '../data/site';
         <p><strong>Bestellnummer:</strong> <span data-no></span></p>
         <ul data-items></ul>
         <p class="muted small">Bestätigung geht an <span data-email></span>.</p>
+      </div>
+      <div class="card card-pad bank" data-bank hidden>
+        <h2>Bitte jetzt überweisen</h2>
+        <p class="muted">Wir starten den Druck, sobald das Geld da ist. Die Daten hast du auch per E-Mail von Mollie bekommen.</p>
+        <dl class="bankdata">
+          <div><dt>Betrag</dt><dd data-bank-amount></dd></div>
+          <div><dt>IBAN</dt><dd data-bank-iban></dd></div>
+          <div><dt>BIC</dt><dd data-bank-bic></dd></div>
+          <div><dt>Empfänger</dt><dd data-bank-holder></dd></div>
+          <div><dt>Verwendungszweck</dt><dd data-bank-ref></dd></div>
+        </dl>
+        <p class="muted small">Bitte den Verwendungszweck genau so angeben, sonst kann die Zahlung nicht zugeordnet werden. Zahlbar bis <span data-bank-until></span>.</p>
+      </div>
+      <div class="card card-pad track" data-track hidden>
+        <h2>Deine Sendung</h2>
+        <p>Sendungsnummer: <strong data-track-no></strong> <span class="muted" data-track-carrier></span></p>
+        <a data-track-link class="btn btn-primary" target="_blank" rel="noopener"><Icon name="truck" size={18} /> Sendung verfolgen</a>
       </div>
       <div class="card card-pad upload-hint" data-upload-hint hidden>
         <h2>Motiv nachreichen</h2>
@@ -39,8 +56,24 @@ import { site } from '../data/site';
       root.querySelector('[data-email]')!.textContent = o.email;
       root.querySelector('[data-items]')!.innerHTML = o.items.map((l: string) => `<li>${l.split(' | ')[0]}</li>`).join('');
       (root.querySelector('[data-summary]') as HTMLElement).hidden = false;
-      if (o.status === 'Zahlung offen') root.querySelector('[data-msg]')!.textContent = 'Deine Zahlung wird noch bestätigt. Sobald sie da ist, bekommst du die Bestätigung per E-Mail.';
-      if (o.status === 'Abgebrochen') root.querySelector('[data-msg]')!.textContent = 'Die Zahlung ist nicht abgeschlossen worden. Du kannst es im Warenkorb erneut versuchen.';
+      const msg = root.querySelector('[data-msg]')!; const h1 = root.querySelector('h1')!;
+      if (o.status === 'Zahlung offen') msg.textContent = 'Deine Zahlung wird noch bestätigt. Sobald sie da ist, bekommst du die Bestätigung per E-Mail.';
+      if (o.status === 'Wartet auf Überweisung') msg.textContent = 'Deine Bestellung ist gespeichert. Sobald deine Überweisung bei uns eingeht, bekommst du die Bestätigung per E-Mail und wir starten den Druck.';
+      if (o.status === 'In Produktion') { h1.textContent = 'Deine Bestellung wird gerade gedruckt.'; msg.textContent = 'Sobald das Paket unterwegs ist, bekommst du die Sendungsnummer per E-Mail.'; }
+      if (o.status === 'Versendet') { h1.textContent = 'Deine Bestellung ist unterwegs.'; msg.textContent = 'Das Paket wurde übergeben. Mit der Sendungsnummer kannst du es verfolgen.'; }
+      if (o.status === 'Storniert') { h1.textContent = 'Diese Bestellung wurde storniert.'; msg.textContent = 'Falls schon bezahlt wurde, erstatten wir den Betrag über den genutzten Zahlungsweg.'; }
+      if (o.bank) {
+        const b = root.querySelector<HTMLElement>('[data-bank]')!; b.hidden = false;
+        const set = (k: string, v: string) => (b.querySelector(`[data-bank-${k}]`)!.textContent = v);
+        set('amount', String(o.bank.amount).replace('.', ',') + ' €'); set('iban', (o.bank.iban || '').replace(/(.{4})/g, '$1 ').trim()); set('bic', o.bank.bic || ''); set('holder', o.bank.holder || ''); set('ref', o.bank.reference || '');
+        set('until', o.bank.until ? new Date(o.bank.until).toLocaleDateString('de-DE') : '');
+      }
+      if (o.tracking) {
+        const t = root.querySelector<HTMLElement>('[data-track]')!; t.hidden = false;
+        t.querySelector('[data-track-no]')!.textContent = o.tracking; t.querySelector('[data-track-carrier]')!.textContent = o.carrier ? `(${o.carrier})` : '';
+        const a = t.querySelector<HTMLAnchorElement>('[data-track-link]')!; if (o.trackingUrl) a.href = o.trackingUrl; else a.hidden = true;
+      }
+      if (o.status === 'Abgebrochen') msg.textContent = 'Die Zahlung ist nicht abgeschlossen worden. Du kannst es im Warenkorb erneut versuchen.';
       if (o.needsUpload) {
         const hint = root.querySelector<HTMLElement>('[data-upload-hint]')!; hint.hidden = false;
         const text = encodeURIComponent(`Hallo, hier mein Motiv zur Bestellung ${o.orderNo}.`);
@@ -54,7 +87,10 @@ import { site } from '../data/site';
 <style>
   .done { max-width: 640px; display: grid; gap: 22px; justify-items: start; }
   .big { width: 60px; height: 60px; border-radius: 16px; }
-  .summary, .upload-hint { width: 100%; display: grid; gap: 10px; }
+  .summary, .upload-hint, .bank, .track { width: 100%; display: grid; gap: 10px; justify-items: start; }
+  .bankdata { display: grid; gap: 6px; margin: 0; width: 100%; }
+  .bankdata div { display: grid; grid-template-columns: 150px 1fr; gap: 12px; font-size: 15px; }
+  .bankdata dt { color: var(--text-3); } .bankdata dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
   .summary ul { display: grid; gap: 4px; color: var(--text-2); font-size: 14.5px; }
   .small { font-size: 13px; }
   .actions { display: flex; gap: 10px; flex-wrap: wrap; }
