@@ -1,0 +1,138 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
+const platforms = ['Shopify', 'WooCommerce', 'Etsy', 'Shopware', 'Noch kein Shop', 'Sonstiges'];
+const volumes = ['0 bis 10', '10 bis 50', '50 bis 200', '200 bis 1000', 'über 1000'];
+---
+<Base title="Kostenloses Sample für deinen POD-Shop" description="Bedrucktes Stanley/Stella Shirt aus unserer Produktion, kostenlos für Shop-Betreiber. Du zahlst nur 7 € Versand." noindex={true} ogImage="/img/sample-bewerbung.jpg">
+  <section class="sample-hero">
+    <div class="container sgrid">
+      <div class="scopy">
+        <span class="eyebrow">Für Print-on-Demand-Shops</span>
+        <h1>Dieses Shirt ist unsere Bewerbung.</h1>
+        <p class="lede">Du betreibst einen POD-Shop und bist mit deinem Anbieter nicht zufrieden? Wir schicken dir ein bedrucktes Stanley/Stella Shirt aus unserer Produktion. Kostenlos. Du zahlst nur <strong>7 € Versand</strong>.</p>
+        <ul class="points">
+          <li><Icon name="check" weight="bold" size={16} /> Stanley/Stella Bio-Baumwolle, DTF-Druck aus Oberhausen</li>
+          <li><Icon name="check" weight="bold" size={16} /> Fühl die Druckqualität, wasch es, zieh es an</li>
+          <li><Icon name="check" weight="bold" size={16} /> Versand in 1 bis 2 Werktagen, kein Abo, keine Verpflichtung</li>
+        </ul>
+        <a href="#form" class="btn btn-primary btn-lg">Sample bestellen <Icon name="arrow-down" size={18} /></a>
+        <p class="muted small">Solange der Vorrat reicht. Ein Sample pro Shop.</p>
+      </div>
+      <div class="svisual">
+        <img src="/img/sample-bewerbung.jpg" alt="Bedruckte Shirts mit dem Aufdruck Dieses Shirt ist unsere Bewerbung auf dem Packtisch bei westernprint" width="1140" height="1536" loading="eager" fetchpriority="high" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container steps">
+      {[['1', 'Eintragen', 'Store-Name, Größe, Adresse. Dauert eine Minute.'], ['2', '7 € Versand zahlen', 'PayPal, Karte, Klarna oder Überweisung über Mollie.'], ['3', 'Shirt testen', 'Kommt in 1 bis 2 Werktagen. Wenn es passt, binden wir deinen Shop an.']].map(([n, h, t]) => (
+        <div class="card card-pad step"><span class="num">{n}</span><h3>{h}</h3><p class="muted">{t}</p></div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section" id="form">
+    <div class="container fgrid">
+      <div class="finfo">
+        <h2>Sample anfordern</h2>
+        <p class="muted">Wir fragen nach deinem Shop, weil das Angebot für Shop-Betreiber gedacht ist. Deine Daten nutzen wir nur, um das Sample zu verschicken und dir danach ein Angebot für die Anbindung zu machen.</p>
+        <ul class="trust">
+          <li><Icon name="truck" size={16} /> Versand aus Oberhausen mit DHL</li>
+          <li><Icon name="shield-check" size={16} /> Zahlung über Mollie, keine Speicherung von Zahlungsdaten bei uns</li>
+          <li><Icon name="whatsapp-logo" size={16} /> Fragen? <a href={site.whatsapp} class="accent" target="_blank" rel="noopener">WhatsApp</a></li>
+        </ul>
+      </div>
+      <form class="sform card card-pad" data-sample-form data-endpoint={site.checkoutApi} novalidate>
+        <p class="form-note err" data-cancelled hidden>Die Zahlung wurde abgebrochen. Du kannst es hier erneut versuchen.</p>
+        <h3>Dein Shop</h3>
+        <div class="row">
+          <div class="field"><label for="s-store">Store-Name</label><input class="input" id="s-store" name="store" required placeholder="z. B. badeyez" /><span class="error">Store-Name fehlt.</span></div>
+          <div class="field"><label for="s-shop">Shop-URL <span class="optional">(optional)</span></label><input class="input" id="s-shop" name="shop" type="url" placeholder="https://" /></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="s-platform">Plattform</label><select class="select" id="s-platform" name="platform" required><option value="" disabled selected>Bitte wählen</option>{platforms.map((p) => <option value={p}>{p}</option>)}</select><span class="error">Bitte wählen.</span></div>
+          <div class="field"><label for="s-volume">Bestellungen pro Monat</label><select class="select" id="s-volume" name="volume" required><option value="" disabled selected>Bitte wählen</option>{volumes.map((v) => <option value={v}>{v}</option>)}</select><span class="error">Bitte wählen.</span></div>
+        </div>
+        <div class="field"><label for="s-provider">Aktueller Anbieter <span class="optional">(optional)</span></label><input class="input" id="s-provider" name="provider" placeholder="z. B. Printful, Shirtee, Gelato" /></div>
+
+        <h3>Sample und Lieferadresse</h3>
+        <div class="field">
+          <label>Größe</label>
+          <div class="chips">{sizes.map((s, i) => <label class="chip"><input type="radio" name="size" value={s} checked={i === 1} /> <span>{s}</span></label>)}</div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="s-name">Vor- und Nachname</label><input class="input" id="s-name" name="name" autocomplete="name" required /><span class="error">Name fehlt.</span></div>
+          <div class="field"><label for="s-email">E-Mail</label><input class="input" id="s-email" name="email" type="email" autocomplete="email" required /><span class="error">Gültige E-Mail angeben.</span></div>
+        </div>
+        <div class="field"><label for="s-street">Straße und Hausnummer</label><input class="input" id="s-street" name="street" autocomplete="street-address" required /><span class="error">Straße fehlt.</span></div>
+        <div class="row row-3">
+          <div class="field"><label for="s-zip">PLZ</label><input class="input" id="s-zip" name="zip" autocomplete="postal-code" required /><span class="error">PLZ fehlt.</span></div>
+          <div class="field"><label for="s-city">Ort</label><input class="input" id="s-city" name="city" autocomplete="address-level2" required /><span class="error">Ort fehlt.</span></div>
+          <div class="field"><label for="s-country">Land</label><select class="select" id="s-country" name="country"><option value="DE">Deutschland</option><option value="AT">Österreich (+3 €)</option></select></div>
+        </div>
+        <div class="field"><label for="s-phone">Telefon <span class="optional">(optional)</span></label><input class="input" id="s-phone" name="phone" type="tel" autocomplete="tel" /></div>
+        <div class="field"><label for="s-note">Was druckst du? <span class="optional">(optional)</span></label><textarea class="textarea" id="s-note" name="note" rows="2" style="min-height:70px" placeholder="Shirts, Hoodies, Motive, was dich beim jetzigen Anbieter nervt"></textarea></div>
+        <label class="checkbox"><input type="checkbox" name="privacy" required /><span>Ich habe die <a href="/datenschutz" class="accent" target="_blank">Datenschutzerklärung</a> gelesen und bin einverstanden, dass westernprint mich zum Sample und zur Shop-Anbindung kontaktiert.</span></label>
+        <span class="error" data-privacy-error hidden>Bitte bestätigen.</span>
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="sr-only" aria-hidden="true" />
+        <button type="submit" class="btn btn-primary btn-lg" data-pay>Sample für <span data-fee>7,00 €</span> Versand bestellen <Icon name="arrow-right" size={18} /></button>
+        <p class="muted small">Du wirst zu Mollie weitergeleitet. Das Shirt selbst ist kostenlos, berechnet wird nur der Versand inkl. MwSt.</p>
+        <p class="form-note err" data-error hidden></p>
+      </form>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-sample-form]')!;
+  const $ = <T extends HTMLElement>(s: string) => form.querySelector<T>(s)!;
+  const params = new URLSearchParams(location.search);
+  if (params.get('abgebrochen')) $('[data-cancelled]').hidden = false;
+  const source = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'ref'].map((k) => params.get(k) ? `${k}=${params.get(k)}` : '').filter(Boolean).join('&');
+  $<HTMLSelectElement>('#s-country').addEventListener('change', (e) => { $('[data-fee]').textContent = (e.target as HTMLSelectElement).value === 'AT' ? '10,00 €' : '7,00 €'; });
+  form.addEventListener('input', (e) => (e.target as HTMLElement).closest('.field')?.classList.remove('has-error'));
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    let ok = true;
+    form.querySelectorAll<HTMLElement>('.field').forEach((f) => { const i = f.querySelector<HTMLInputElement>('input,select,textarea'); if (i?.required && !(i.checkValidity() && i.value.trim())) { f.classList.add('has-error'); ok = false; } });
+    const priv = form.querySelector<HTMLInputElement>('input[name=privacy]')!; $('[data-privacy-error]').hidden = priv.checked; if (!priv.checked) ok = false;
+    if (!ok) return;
+    const btn = $<HTMLButtonElement>('[data-pay]'); const err = $('[data-error]'); err.hidden = true;
+    const html = btn.innerHTML; btn.disabled = true; btn.textContent = 'Bezahlung wird vorbereitet...';
+    const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>; data.source = source;
+    try {
+      const res = await fetch(`${form.dataset.endpoint}/sample`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+      const j = await res.json(); if (!res.ok || !j.url) throw new Error(j.error || 'Kasse nicht erreichbar');
+      location.href = j.url;
+    } catch (ex) { err.hidden = false; err.textContent = (ex as Error).message + '. Bitte prüfen oder per WhatsApp melden.'; btn.disabled = false; btn.innerHTML = html; }
+  });
+</script>
+
+<style>
+  .sample-hero { padding: calc(var(--nav-h) + 48px) 0 56px; }
+  .sgrid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+  .scopy { display: grid; gap: 18px; justify-items: start; }
+  .scopy h1 { font-size: clamp(38px, 5vw, 64px); line-height: 1.02; letter-spacing: -0.02em; }
+  .points { display: grid; gap: 8px; margin: 4px 0; } .points li { display: flex; gap: 10px; align-items: center; color: var(--text-2); }
+  .points :global(svg) { color: var(--accent); flex: none; }
+  .svisual img { border-radius: var(--radius-card); border: 1px solid var(--line); aspect-ratio: 4 / 5; object-fit: cover; width: 100%; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .step { display: grid; gap: 8px; } .step h3 { font-size: 18px; }
+  .num { width: 32px; height: 32px; border-radius: 999px; background: var(--accent); color: #0b1410; font-weight: 700; display: grid; place-items: center; font-size: 14px; }
+  .fgrid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(28px, 4vw, 56px); align-items: start; }
+  .finfo { display: grid; gap: 14px; position: sticky; top: calc(var(--nav-h) + 24px); }
+  .trust { display: grid; gap: 8px; font-size: 14px; color: var(--text-2); } .trust li { display: flex; gap: 8px; align-items: center; }
+  .sform { display: grid; gap: 16px; } .sform h3 { font-size: 16px; margin-top: 6px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; } .row-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chip { position: relative; } .chip input { position: absolute; opacity: 0; }
+  .chip span { display: inline-block; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line-strong); font-weight: 600; cursor: pointer; }
+  .chip input:checked + span { background: var(--accent); color: #0b1410; border-color: var(--accent); }
+  .small { font-size: 13px; }
+  @media (max-width: 900px) { .sgrid, .fgrid { grid-template-columns: 1fr; } .finfo { position: static; } .steps { grid-template-columns: 1fr; } .svisual { order: -1; } .svisual img { aspect-ratio: 4 / 3; } }
+  @media (max-width: 600px) { .row, .row-3 { grid-template-columns: 1fr; } }
+</style>

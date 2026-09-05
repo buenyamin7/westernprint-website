@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+---
+<Base title="Sample ist unterwegs" description="Bestätigung für dein kostenloses Sample." noindex={true}>
+  <section class="section">
+    <div class="container done" data-endpoint={site.checkoutApi}>
+      <div class="icon-box big"><Icon name="check" weight="bold" size={28} /></div>
+      <h1 data-h1>Danke, dein Sample ist reserviert.</h1>
+      <p class="lede" data-msg>Wir packen es in den nächsten 1 bis 2 Werktagen und schicken dir die Sendungsnummer.</p>
+      <div class="card card-pad summary" data-summary hidden>
+        <p><strong>Referenz:</strong> <span data-no></span></p>
+        <p><strong>Shop:</strong> <span data-store></span> · Größe <span data-size></span></p>
+        <p class="muted small">Bestätigung geht an <span data-email></span>.</p>
+      </div>
+      <p class="muted">Wenn dir das Shirt gefällt: Antworte einfach auf die Mail oder schreib uns per <a href={site.whatsapp} class="accent" target="_blank" rel="noopener">WhatsApp</a>, dann besprechen wir die Anbindung deines Shops.</p>
+      <a href="/print-on-demand" class="btn btn-secondary">So läuft Fulfillment mit westernprint</a>
+    </div>
+  </section>
+</Base>
+<script>
+  const root = document.querySelector<HTMLElement>('.done')!;
+  const no = new URLSearchParams(location.search).get('s');
+  if (no) fetch(`${root.dataset.endpoint}/sample-status?s=${encodeURIComponent(no)}`).then((r) => r.json()).then((o) => {
+    if (!o.no) return;
+    root.querySelector('[data-no]')!.textContent = o.no; root.querySelector('[data-store]')!.textContent = o.store; root.querySelector('[data-size]')!.textContent = o.size; root.querySelector('[data-email]')!.textContent = o.email;
+    (root.querySelector('[data-summary]') as HTMLElement).hidden = false;
+    const msg = root.querySelector('[data-msg]')!, h1 = root.querySelector('[data-h1]')!;
+    if (o.status === 'Zahlung offen') msg.textContent = 'Deine Zahlung wird noch bestätigt. Sobald sie da ist, geht das Sample raus.';
+    if (o.status === 'Abgebrochen') { h1.textContent = 'Die Zahlung wurde nicht abgeschlossen.'; msg.innerHTML = 'Du kannst es <a href="/sample" class="accent">hier erneut versuchen</a>.'; }
+    if (o.status === 'Versendet') { h1.textContent = 'Dein Sample ist unterwegs.'; msg.innerHTML = o.trackingUrl ? `Sendungsnummer ${o.tracking}. <a href="${o.trackingUrl}" class="accent" target="_blank" rel="noopener">Sendung verfolgen</a>` : `Sendungsnummer ${o.tracking}.`; }
+  }).catch(() => {});
+</script>
+<style>
+  .done { max-width: 640px; display: grid; gap: 22px; justify-items: start; }
+  .big { width: 60px; height: 60px; border-radius: 16px; }
+  .summary { width: 100%; display: grid; gap: 8px; } .small { font-size: 13px; }
+</style>
