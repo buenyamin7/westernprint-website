@@ -12,11 +12,10 @@ const faqLd = {
   mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
 };
 const prints = [
-  { src: '/img/print-2.jpg', alt: 'DTF-Druck mit Geldschein-Motiv auf weißem T-Shirt, Nahaufnahme' },
-  { src: '/img/print-5.jpg', alt: 'Mehrfarbiger DTF-Druck auf dunkelgrünem T-Shirt' },
-  { src: '/img/print-4.jpg', alt: 'Weißes T-Shirt mit mehreren bunten Drucken auf dem Drucktisch' },
-  { src: '/img/print-1.jpg', alt: 'Detailaufnahme eines DTF-Drucks mit Münzmotiv, jede Linie scharf' },
-  { src: '/img/print-3.jpg', alt: 'Fertig gedrucktes Shirt mit Schriftzug und Cartoon-Figur' },
+  { src: '/img/druck-makro.jpg', alt: 'Nahaufnahme eines DTF-Drucks auf grau meliertem Shirt, jede Masche und die matte Druckoberfläche sichtbar' },
+  { src: '/img/lager-rohware.jpg', alt: 'Regal mit gefalteten Rohware-Shirts und Hoodies nach Farben sortiert, davor eine Heißpresse' },
+  { src: '/img/werkstatt-heisspresse.jpg', alt: 'Werkstatt von westernprint: Mitarbeiter an der Heißpresse, Ziegelwand, Regale mit Textilien' },
+  { src: '/img/packtisch.jpg', alt: 'Frisch bedruckte Shirts auf dem Packtisch mit Klebeband, Schere und Versandkarton' },
 ];
 ---
 <Base
@@ -37,7 +36,7 @@ const prints = [
         </div>
       </div>
       <div class="hero-visual reveal reveal-d2">
-        <img src="/img/hero-drucker.jpg" alt="DTG-Drucker bei westernprint in Oberhausen druckt ein blaues Herzmotiv auf ein weißes Shirt" width="716" height="1284" loading="eager" fetchpriority="high" />
+        <img src="/img/werkstatt-dtf-drucker.jpg" alt="DTF-Drucker bei westernprint in Oberhausen druckt ein Motiv auf Transferfolie" width="1086" height="1448" loading="eager" fetchpriority="high" />
         <figure class="review card">
           <div class="stars" aria-label="5 von 5 Sternen">{Array.from({ length: 5 }).map(() => <Icon name="star" weight="fill" size={14} />)}</div>
           <blockquote>„Seit dem Wechsel hat sich mein Retourenanteil halbiert. Kunden loben endlich wieder die Qualität.“</blockquote>
@@ -67,7 +66,7 @@ const prints = [
         <p>Ob ein personalisiertes Geschenk, der Merch für deinen Shop oder 500 Vereinsshirts: Wir drucken alles selbst, auf eigenen Maschinen.</p>
       </div>
       <div class="bento">
-        <a href="/print-on-demand" class="cell cell-big reveal" style="background-image:url('/img/druck-dtg.jpg')">
+        <a href="/print-on-demand" class="cell cell-big reveal" style="background-image:url('/img/packtisch.jpg')">
           <div class="cell-body">
             <span class="tag">Für Shop-Betreiber</span>
             <h3>Print-on-Demand Fulfillment</h3>
@@ -165,7 +164,7 @@ const prints = [
   <section class="section about">
     <div class="container about-grid">
       <div class="about-img reveal">
-        <img src="/img/drucker-detail.jpg" alt="Blick in den DTG-Drucker während des Drucks" width="716" height="1284" loading="lazy" />
+        <img src="/img/werkstatt-heisspresse.jpg" alt="Die westernprint Werkstatt in Oberhausen: Heißpressen, Regale mit Rohware, Packtisch" width="1024" height="1536" loading="lazy" />
       </div>
       <div class="about-text">
         <h2 class="reveal">Aus Frust gegründet. Aus Erfahrung gewachsen.</h2>
