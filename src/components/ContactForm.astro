@@ -20,7 +20,7 @@ const topics = ['Print-on-Demand Fulfillment', 'Großauflage ab 50 Stück', 'B2B
   </div>
   <div class="row">
     <div class="field">
-      <label for="cf-phone">Telefon <span class="optional">(optional, für WhatsApp)</span></label>
+      <label for="cf-phone">Telefon <span class="optional">(optional)</span></label>
       <input class="input" id="cf-phone" name="phone" type="tel" autocomplete="tel" />
     </div>
     <div class="field">
@@ -59,6 +59,7 @@ const topics = ['Print-on-Demand Fulfillment', 'Großauflage ab 50 Stück', 'B2B
   <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="sr-only" aria-hidden="true" />
   <div class="actions">
     <button type="submit" class="btn btn-primary btn-lg" data-submit>Anfrage senden <Icon name="arrow-right" size={18} /></button>
+    <a class="btn btn-secondary btn-lg" data-wa-btn href={site.whatsapp} target="_blank" rel="noopener"><Icon name="whatsapp-logo" size={18} /> Lieber per WhatsApp</a>
     <span class="muted small">Antwort meist innerhalb weniger Stunden, werktags.</span>
   </div>
   <p class="form-note" data-note role="status" aria-live="polite"></p>
@@ -91,6 +92,12 @@ const topics = ['Print-on-Demand Fulfillment', 'Großauflage ab 50 Stück', 'B2B
       return ok;
     };
     form.addEventListener('input', (e) => (e.target as HTMLElement).closest('.field')?.classList.remove('has-error'));
+    const waBtn = form.querySelector<HTMLAnchorElement>('[data-wa-btn]')!;
+    waBtn.addEventListener('click', () => {
+      const d = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+      const txt = [d.name ? `Hallo, ich bin ${d.name}.` : 'Hallo westernprint,', d.topic ? `Thema: ${d.topic}` : '', d.qty ? `Stückzahl: ${d.qty}` : '', d.message || ''].filter(Boolean).join('\n');
+      waBtn.href = `${form.dataset.wa}?text=${encodeURIComponent(txt)}`;
+    });
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -99,6 +106,7 @@ const topics = ['Print-on-Demand Fulfillment', 'Großauflage ab 50 Stück', 'B2B
       const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
       if (data._gotcha) return;
       const endpoint = form.dataset.endpoint;
+      data.page = location.pathname;
       const lines = [
         `Anfrage über westernprint.de`,
         `Name: ${data.name}`,
@@ -120,11 +128,13 @@ const topics = ['Print-on-Demand Fulfillment', 'Großauflage ab 50 Stück', 'B2B
       submit.disabled = true; submit.textContent = 'Wird gesendet...';
       try {
         const res = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) });
-        if (!res.ok) throw new Error(String(res.status));
+        const j = await res.json().catch(() => ({}));
+        if (!res.ok || !j.ok) throw new Error(j.error || String(res.status));
         form.reset();
-        setNote('ok', 'Danke! Deine Anfrage ist angekommen. Wir melden uns werktags meist innerhalb weniger Stunden.');
+        setNote('ok', 'Danke! Deine Anfrage ist angekommen. Wir melden uns werktags meist innerhalb weniger Stunden per E-Mail.');
       } catch {
         setNote('err', 'Senden hat nicht geklappt. Schreib uns direkt per WhatsApp oder an info@westernprint.de.');
+        (form.querySelector('[data-wa-btn]') as HTMLAnchorElement).href = `${form.dataset.wa}?text=${encodeURIComponent(lines.join('\n'))}`;
       } finally {
         submit.disabled = false; submit.textContent = 'Anfrage senden';
       }

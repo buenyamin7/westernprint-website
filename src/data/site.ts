@@ -16,7 +16,7 @@ export const site = {
   // Kassen-Worker (Cloudflare). Nach dem Deploy hier die Worker-URL eintragen.
   checkoutApi: 'https://westernprint-checkout.westernprint-checkout.workers.dev',
   // Formular-Endpoint (z. B. Formspree "https://formspree.io/f/xxxx"). Leer = Anfrage geht per WhatsApp raus.
-  formEndpoint: '',
+  formEndpoint: 'https://westernprint-checkout.westernprint-checkout.workers.dev/kontakt',
   // Motiv-Uploads im Shop: Cloudinary (kostenlos). Leer = Datei wird nach der Bestellung angefordert.
   cloudinary: { cloudName: 'c5unvw6r', uploadPreset: 'westernprint' },
   ogImage: '/og-default.jpg',
