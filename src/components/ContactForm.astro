@@ -132,8 +132,9 @@ const topics = ['Print-on-Demand Fulfillment', 'Großauflage ab 50 Stück', 'B2B
         if (!res.ok || !j.ok) throw new Error(j.error || String(res.status));
         form.reset();
         setNote('ok', 'Danke! Deine Anfrage ist angekommen. Wir melden uns werktags meist innerhalb weniger Stunden per E-Mail.');
-      } catch {
-        setNote('err', 'Senden hat nicht geklappt. Schreib uns direkt per WhatsApp oder an info@westernprint.de.');
+      } catch (ex) {
+        const why = (ex as Error).message; const known = /fehlt|ungültig/.test(why);
+        setNote('err', known ? `${why}. Bitte prüfen und nochmal senden.` : 'Senden hat nicht geklappt. Schreib uns direkt per WhatsApp oder an info@westernprint.de.');
         (form.querySelector('[data-wa-btn]') as HTMLAnchorElement).href = `${form.dataset.wa}?text=${encodeURIComponent(lines.join('\n'))}`;
       } finally {
         submit.disabled = false; submit.textContent = 'Anfrage senden';
