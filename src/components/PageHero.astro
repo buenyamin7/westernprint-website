@@ -24,9 +24,19 @@ const { eyebrow, title, lede, image, imageAlt = '', cta, cta2 } = Astro.props;
 <style>
   .phero { padding: clamp(56px, 7vw, 96px) 0 clamp(40px, 5vw, 64px); border-bottom: 1px solid var(--line); background: radial-gradient(900px 400px at 15% 0%, var(--accent-soft), transparent 70%); }
   .phero-grid { display: grid; gap: 40px; align-items: center; }
-  .has-image .phero-grid { grid-template-columns: 1.15fr 1fr; }
   .phero-text .lede { margin-top: 18px; }
   .phero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
-  .phero-img img { border-radius: var(--radius-card); border: 1px solid var(--line); aspect-ratio: 4 / 3; object-fit: cover; }
-  @media (max-width: 900px) { .has-image .phero-grid { grid-template-columns: 1fr; } }
+  /* Mit Bild: Bild läuft randlos bis zur rechten Kante, Text bleibt auf der Container-Linie. */
+  .has-image { padding: 0; border-bottom: 0; background: none; }
+  .has-image .phero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0; max-width: none; padding: 0; align-items: stretch; }
+  .has-image .phero-text { align-self: center; padding: clamp(64px, 9vw, 140px) clamp(32px, 5vw, 80px) clamp(64px, 9vw, 140px) max(24px, calc((100vw - var(--container)) / 2 + 24px)); }
+  .has-image .phero-img { position: relative; min-height: clamp(440px, 60vh, 720px); }
+  .has-image .phero-img::before { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(90deg, var(--bg) 0%, transparent 22%); }
+  .has-image .phero-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; border-radius: 0; border: 0; aspect-ratio: auto; }
+  @media (max-width: 900px) {
+    .has-image .phero-grid { grid-template-columns: 1fr; }
+    .has-image .phero-text { padding: clamp(40px, 8vw, 64px) 24px 40px; }
+    .has-image .phero-img { min-height: 0; aspect-ratio: 4 / 3; }
+    .has-image .phero-img::before { background: linear-gradient(180deg, var(--bg) 0%, transparent 18%); }
+  }
 </style>

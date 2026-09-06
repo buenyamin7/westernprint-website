@@ -112,7 +112,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
 </Base>
 
 <style>
-  :global(.phero-img img) { aspect-ratio: 4 / 5 !important; object-position: center top; }
+  :global(.phero-img img) { object-position: center 20% !important; }
   .brands { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .brand { padding: 28px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); display: grid; gap: 10px; align-content: start; }
   .brand .tag { justify-self: start; }
@@ -120,10 +120,12 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
   .brand p { color: var(--text-2); font-size: 15px; }
   .brand .for { display: flex; gap: 8px; align-items: center; color: var(--text); font-size: 14px; margin-top: 4px; }
   .brand .for :global(svg) { color: var(--accent); flex: none; }
-  .brand-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .brand-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
-  .brand-img img { border-radius: var(--radius-card); border: 1px solid var(--line); aspect-ratio: 4 / 5; object-fit: cover; width: 100%; }
-  .brand-text { display: grid; gap: 18px; }
+  .brand-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 0; }
+  .brand-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 0; align-items: stretch; max-width: none; padding: 0; }
+  .brand-img { position: relative; min-height: 560px; }
+  .brand-img::before { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(270deg, var(--bg-2) 0%, transparent 22%); }
+  .brand-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 25%; border: 0; border-radius: 0; }
+  .brand-text { display: grid; gap: 18px; align-self: center; padding: clamp(56px, 8vw, 120px) max(24px, calc((100vw - var(--container)) / 2 + 24px)) clamp(56px, 8vw, 120px) clamp(32px, 5vw, 80px); }
   .steps-list { display: grid; gap: 12px; counter-reset: s; }
   .steps-list li { display: grid; grid-template-columns: 32px 1fr; gap: 12px; align-items: start; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); }
   .steps-list li::before { counter-increment: s; content: counter(s); width: 32px; height: 32px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-weight: 700; display: grid; place-items: center; font-size: 14px; }
@@ -137,6 +139,6 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
   .usp h3 { font-size: 16px; } .usp p { color: var(--text-2); font-size: 14.5px; }
   .shop-band { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; padding: 32px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); }
   .shop-band .muted { margin-top: 8px; max-width: 52ch; }
-  @media (max-width: 900px) { .brands, .brand-grid { grid-template-columns: 1fr; } .usp-grid { grid-template-columns: 1fr 1fr; } .brand-img img { aspect-ratio: 4 / 3; } }
+  @media (max-width: 900px) { .brands, .brand-grid { grid-template-columns: 1fr; } .usp-grid { grid-template-columns: 1fr 1fr; } .brand-img { min-height: 0; aspect-ratio: 4 / 3; } .brand-img::before { background: linear-gradient(0deg, var(--bg-2) 0%, transparent 20%); } .brand-text { padding: 40px 24px 56px; } }
   @media (max-width: 600px) { .usp-grid { grid-template-columns: 1fr; } }
 </style>
