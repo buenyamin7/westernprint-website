@@ -308,7 +308,8 @@ const details = [
   .stage-tabs button { border: 0; background: transparent; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; color: #333; cursor: pointer; }
   .stage-tabs button.is-on { background: #111; color: #fff; }
   .stage-hint { position: absolute; left: 12px; bottom: 12px; font-size: 12px; padding: 5px 10px; border-radius: 999px; background: rgba(0,0,0,.65); color: #fff; display: inline-flex; gap: 6px; align-items: center; }
-  .thumbs { display: flex; gap: 8px; margin-top: 10px; overflow-x: auto; }
+  .thumbs { display: flex; gap: 8px; margin-top: 10px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .thumbs::-webkit-scrollbar { display: none; }
   .thumbs button { flex: none; width: 64px; border-radius: 8px; overflow: hidden; border: 2px solid var(--line); background: #f4f4f4; padding: 0; cursor: pointer; }
   .thumbs button.is-on { border-color: var(--accent); }
   .thumbs img { aspect-ratio: 4 / 5; object-fit: contain; }
@@ -373,5 +374,6 @@ const details = [
   .specs { margin: 0; display: grid; gap: 6px; } .specs div { display: grid; grid-template-columns: 110px 1fr; gap: 12px; font-size: 14px; } .specs dt { color: var(--text-3); } .specs dd { margin: 0; }
   .feat-list { margin-top: 14px; display: grid; gap: 4px; font-size: 14px; color: var(--text-2); padding-left: 18px; list-style: disc; }
   .sizes-list { display: grid; gap: 4px; font-size: 14px; color: var(--text-2); }
-  @media (max-width: 900px) { .pgrid { grid-template-columns: 1fr; } .pvisual { position: static; } .details-grid { grid-template-columns: 1fr; } .sides { grid-template-columns: 1fr; } }
+  .pvisual, .config { min-width: 0; }
+  @media (max-width: 900px) { .pgrid { grid-template-columns: minmax(0, 1fr); } .pvisual { position: static; } .details-grid { grid-template-columns: 1fr; } .sides { grid-template-columns: 1fr; } }
 </style>
