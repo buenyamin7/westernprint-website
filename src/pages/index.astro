@@ -23,8 +23,9 @@ const prints = [
   description="Print-on-Demand aus Oberhausen: Shopify-Anbindung, DTF- und DTG-Druck auf Stanley/Stella ab 1 Stück, neutraler Versand in 1-3 Werktagen. Auch Großauflagen."
   jsonLd={faqLd}
 >
-  <!-- Hero: split, text left, real printer photo right -->
+  <!-- Hero: vollflächiges Bild, Text links, Bewertung rechts, Kennzahlen unten (stoff3-Stil) -->
   <section class="hero">
+    <img class="hero-bg" src="/img/hero-rack.jpg" alt="" width="1672" height="941" loading="eager" fetchpriority="high" aria-hidden="true" />
     <div class="container hero-grid">
       <div class="hero-text">
         <span class="badge reveal">Inhouse-Produktion in Oberhausen. Ab 1 Stück.</span>
@@ -36,7 +37,6 @@ const prints = [
         </div>
       </div>
       <div class="hero-visual reveal reveal-d2">
-        <img src="/img/werkstatt-dtf-drucker.jpg" alt="DTF-Drucker bei westernprint in Oberhausen druckt ein Motiv auf Transferfolie" width="1086" height="1448" loading="eager" fetchpriority="high" />
         <figure class="review card">
           <div class="stars" aria-label="5 von 5 Sternen">{Array.from({ length: 5 }).map(() => <Icon name="star" weight="fill" size={14} />)}</div>
           <blockquote>„Seit dem Wechsel hat sich mein Retourenanteil halbiert. Kunden loben endlich wieder die Qualität.“</blockquote>
@@ -44,17 +44,16 @@ const prints = [
         </figure>
       </div>
     </div>
-  </section>
 
-  <!-- Stats strip -->
-  <section class="stats">
-    <div class="container stats-grid">
-      {stats.map((s, i) => (
-        <div class={`stat reveal reveal-d${i}`}>
-          <strong>{s.value}</strong>
-          <span>{s.label}</span>
-        </div>
-      ))}
+    <div class="container hero-stats">
+      <div class="stats-grid">
+        {stats.map((s, i) => (
+          <div class={`stat reveal reveal-d${i}`}>
+            <strong>{s.value}</strong>
+            <span>{s.label}</span>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -234,28 +233,31 @@ const prints = [
 
 <style>
   /* Hero */
-  .hero { padding: clamp(40px, 6vw, 80px) 0 clamp(40px, 6vw, 72px); position: relative; overflow: hidden; }
-  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(800px 500px at 80% 10%, var(--accent-soft), transparent 65%); pointer-events: none; }
-  .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(32px, 5vw, 72px); align-items: center; position: relative; }
-  .hero-text .badge { margin-bottom: 22px; }
-  .hero-text .lede { margin-top: 22px; }
+  .hero { position: relative; overflow: hidden; min-height: min(94vh, 920px); display: grid; grid-template-rows: 1fr auto; padding-top: calc(var(--nav-h) + clamp(40px, 7vh, 80px)); color: #fff; background: #0b0d0c; }
+  .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; z-index: 0; }
+  .hero::before { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(90deg, rgba(8,10,9,.94) 0%, rgba(8,10,9,.82) 38%, rgba(8,10,9,.45) 70%, rgba(8,10,9,.25) 100%), linear-gradient(180deg, rgba(8,10,9,.35) 0%, rgba(8,10,9,0) 30%, rgba(8,10,9,.55) 75%, rgba(8,10,9,.92) 100%); }
+  .hero-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: clamp(32px, 5vw, 72px); align-items: center; position: relative; z-index: 2; padding-bottom: clamp(32px, 5vh, 56px); }
+  .hero-text h1 { color: #fff; font-size: clamp(2.3rem, 4.9vw, 3.9rem); }
+  .hero-text .badge { margin-bottom: 22px; background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.16); color: #fff; }
+  .hero-text .lede { margin-top: 22px; color: rgba(255,255,255,.78); max-width: 560px; }
   .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
-  .hero-visual { position: relative; }
-  .hero-visual img { border-radius: var(--radius-card); border: 1px solid var(--line); aspect-ratio: 4 / 5; object-fit: cover; width: 100%; max-height: 640px; }
-  .review { position: absolute; left: -48px; bottom: 36px; max-width: 320px; padding: 20px 22px; margin: 0; display: grid; gap: 10px; backdrop-filter: blur(10px); }
+  .hero-cta .btn-secondary { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2); color: #fff; }
+  .hero-visual { display: flex; justify-content: flex-end; }
+  .review { max-width: 360px; padding: 22px 24px; margin: 0; display: grid; gap: 10px; background: rgba(20,24,22,.55); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
   .review .stars { display: flex; gap: 2px; color: var(--accent); }
-  .review blockquote { margin: 0; font-size: 14.5px; line-height: 1.5; font-style: italic; color: var(--text); }
-  .review figcaption { font-size: 13px; color: var(--text-3); }
-  @media (max-width: 1000px) { .hero-grid { grid-template-columns: 1fr; } .hero-visual img { aspect-ratio: 4 / 3; max-height: 460px; } .review { left: 16px; right: 16px; bottom: 16px; max-width: none; } }
+  .review blockquote { margin: 0; font-size: 14.5px; line-height: 1.5; font-style: italic; color: #fff; }
+  .review figcaption { font-size: 13px; color: rgba(255,255,255,.6); }
+  .hero-stats { position: relative; z-index: 2; border-top: 1px solid rgba(255,255,255,.14); padding: 6px 0 clamp(28px, 4vh, 44px); }
+  @media (max-width: 1000px) { .hero { min-height: 0; } .hero-grid { grid-template-columns: 1fr; } .hero-visual { justify-content: flex-start; } .review { max-width: none; } .hero-bg { object-position: 60% 50%; } }
 
   /* Stats */
-  .stats { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg-2); }
   .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
-  .stat { padding: 28px 24px 28px 0; display: grid; gap: 4px; }
-  .stat + .stat { border-left: 1px solid var(--line); padding-left: 24px; }
-  .stat strong { font-size: clamp(1.7rem, 2.6vw, 2.2rem); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; line-height: 1; }
-  .stat span { color: var(--text-2); font-size: 14px; }
-  @media (max-width: 800px) { .stats-grid { grid-template-columns: 1fr 1fr; } .stat:nth-child(3) { border-left: 0; padding-left: 0; } .stat:nth-child(n+3) { border-top: 1px solid var(--line); } }
+  .stat { padding: 26px 24px 0 0; display: grid; gap: 4px; }
+  .stat + .stat { border-left: 1px solid rgba(255,255,255,.14); padding-left: 24px; }
+  .stat strong { font-size: clamp(1.7rem, 2.6vw, 2.2rem); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; line-height: 1; color: #fff; }
+  .stat span { color: rgba(255,255,255,.65); font-size: 14px; }
+  @media (max-width: 800px) { .stats-grid { grid-template-columns: 1fr 1fr; } .stat:nth-child(3) { border-left: 0; padding-left: 0; } .stat:nth-child(n+3) { border-top: 1px solid rgba(255,255,255,.14); padding-top: 18px; margin-top: 18px; } }
 
   /* Bento */
   .bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
