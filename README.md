@@ -66,3 +66,6 @@ cd ~/Desktop/Claude/Projects/westernprint-website && python3 scripts/build-catal
 ```
 
 Preise neuer Produkte werden aus dem EK abgeleitet (EK x 1,25 + 3 € netto, brutto auf 0,50 € aufgerundet). Bestehende Shop-Preise bleiben erhalten (Liste in `scripts/build-catalog.py`, `STYLE_OF_HANDLE`). Preise direkt in `src/data/products.json` ändern, dann Worker neu deployen.
+
+
+Bilder Stanley/Stella: PFM0 = Flat-Lay vorne (Mockup, Farbfelder), PBM0 = Flat-Lay hinten, SFM0/SFM1 = Studiofotos am Model (`colors[].model`, `modelBack`).

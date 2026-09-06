@@ -52,11 +52,16 @@ for b in POD:
         cid, cname = c['id'], c['name']; cs = slug(cname) or cid.lower()
         front = f"{handle}-{cs}.jpg"; back = f"{handle}-{cs}-back.jpg"
         if b['supplier'] == 'STANLEY_STELLA':
-            jobs.append((f"https://res.cloudinary.com/www-stanleystella-com/t_pim/TechnicalNames/SFM0_{b['style']}_{cid}.jpg", f"{IMG_DIR}/{front}"))
-            jobs.append((f"https://res.cloudinary.com/www-stanleystella-com/t_pim/TechnicalNames/SFM1_{b['style']}_{cid}.jpg", f"{IMG_DIR}/{back}"))
+            # PFM0/PBM0 = Flat-Lay-Packshots (Vorder-/Rückseite) für Mockup und Farbfelder, SFM0/SFM1 = Studiofotos am Model
+            flat = f"{handle}-{cs}-flat.jpg"; flatb = f"{handle}-{cs}-flat-back.jpg"
+            base = "https://res.cloudinary.com/www-stanleystella-com/t_pim/TechnicalNames"
+            jobs += [(f"{base}/PFM0_{b['style']}_{cid}.jpg", f"{IMG_DIR}/{flat}"), (f"{base}/PBM0_{b['style']}_{cid}.jpg", f"{IMG_DIR}/{flatb}"),
+                     (f"{base}/SFM0_{b['style']}_{cid}.jpg", f"{IMG_DIR}/{front}"), (f"{base}/SFM1_{b['style']}_{cid}.jpg", f"{IMG_DIR}/{back}")]
+            colors.append({'id': cid, 'name': cname, 'hex': (c.get('hex') or '').strip() or None, 'image': f"/img/products/{flat}", 'back': f"/img/products/{flatb}", 'model': f"/img/products/{front}", 'modelBack': f"/img/products/{back}", 'fallback': f"/img/products/{front}", 'fallbackBack': f"/img/products/{back}"})
+            continue
         elif c.get('image'):
             jobs.append((c['image'], f"{IMG_DIR}/{front}"))
-        colors.append({'id': cid, 'name': cname, 'hex': (c.get('hex') or '').strip() or None, 'image': f"/img/products/{front}", 'back': f"/img/products/{back}" if b['supplier']=='STANLEY_STELLA' else None})
+        colors.append({'id': cid, 'name': cname, 'hex': (c.get('hex') or '').strip() or None, 'image': f"/img/products/{front}", 'back': None})
     model = f"{handle}-model.jpg"
     if b['modelImage']: jobs.append((b['modelImage'], f"{IMG_DIR}/{model}"))
     desc_lines = [l.strip(' -•') for l in (b['description'] or '').splitlines() if l.strip()]
@@ -75,8 +80,12 @@ with concurrent.futures.ThreadPoolExecutor(12) as ex:
 ok = sum(1 for r in results if r); print('Bilder geladen:', ok, 'fehlgeschlagen:', len(results) - ok, flush=True)
 for p in products:
     for c in p['colors']:
-        if not os.path.exists(f"{ROOT}/public{c['image']}"): c['image'] = None
-        if c.get('back') and not os.path.exists(f"{ROOT}/public{c['back']}"): c['back'] = None
+        ex = lambda u: bool(u) and os.path.exists(f"{ROOT}/public{u}")
+        if not ex(c['image']): c['image'] = c.get('fallback') if ex(c.get('fallback')) else None
+        if not ex(c.get('back')): c['back'] = c.get('fallbackBack') if ex(c.get('fallbackBack')) else None
+        if not ex(c.get('model')): c.pop('model', None)
+        if not ex(c.get('modelBack')): c.pop('modelBack', None)
+        c.pop('fallback', None); c.pop('fallbackBack', None)
     if p['modelImage'] and not os.path.exists(f"{ROOT}/public{p['modelImage']}"): p['modelImage'] = None
     with_img = [c for c in p['colors'] if c['image']]
     if with_img: p['colors'] = with_img
