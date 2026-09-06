@@ -3,56 +3,106 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { products, site } from '../data/site';
+import Faq from '../components/Faq.astro';
+import { site } from '../data/site';
+
+const brands = [
+  { t: 'Stanley/Stella', tag: 'Bio-Baumwolle, GOTS, Fair Wear', d: 'Der Standard für Marken, die Qualität zeigen wollen. Creator, Crafter, Cruiser, Drummer und über 40 Farben, alle ab Lager. Weicher Griff, saubere Passformen, in fünf Jahren von uns über 80.000 Mal bedruckt.', for: 'Premium-Merch, Firmenkleidung, Bio-Ansprüche' },
+  { t: 'Stedman', tag: 'Preisstark, robust, viele Größen', d: 'Classic-T, Comfort-T, Classic Hoodie und Polo bis 5XL. Wenn 200 Vereinsshirts oder Eventkleidung kalkulierbar bleiben müssen, ohne dass der Druck leidet.', for: 'Vereine, Events, Großauflagen, Workwear' },
+  { t: 'Build Your Brand', tag: 'Heavy Oversize, Boxy, Acid Wash', d: 'Die Blanks, mit denen Streetwear-Marken heute starten: 240er Heavy Oversize Tees, Boxy Hoodies, Ultra Heavy Sweats. Schwerer Stoff, tiefe Schulter, Brand-Look ohne eigene Produktion.', for: 'Streetwear-Brands, Drops, Merch mit Statement' },
+  { t: 'Urban Classics', tag: 'Streetwear-Basics, große Farbpalette', d: 'Oversized Tees, Hoodies, Longsleeves und Caps zu fairen Preisen. Die Schwestermarke von Build Your Brand für Kollektionen, die breit aufgestellt sein sollen.', for: 'Erste Kollektion, Caps und Accessoires, Nachbestellung' },
+];
+const faqs = [
+  { q: 'Welche Blanks eignen sich für eine Streetwear-Brand?', a: 'Heavy Oversize T-Shirts ab 240 g/m², Boxy Hoodies und Ultra Heavy Sweats von Build Your Brand oder Urban Classics. Schwerer Stoff, tiefe Schultern, kräftige Farben. Genau der Look, den Marken wie Peso, LFDY oder Pegador tragen. Wir haben sie ab Lager oder besorgen sie in wenigen Tagen.' },
+  { q: 'Wie viele Stück brauche ich, um eine eigene Brand zu starten?', a: 'Ein Sample reicht. Wir drucken ab 1 Stück, damit du dein Design in der Hand hältst, bevor du Geld in Ware steckst. Ab 50 Stück gibt es Staffelpreise, ab 100 wird es richtig günstig. Nachbestellen kannst du jederzeit in kleinen Mengen.' },
+  { q: 'Kann ich das Etikett im Nacken durch meinen Brand-Namen ersetzen?', a: 'Ja. Viele Blanks von Build Your Brand und Urban Classics sind tearaway oder ohne Etikett. Wir drucken deinen Nackenprint per DTF, das sieht aus wie ein eigenes Label und ist waschfest.' },
+  { q: 'Was kostet ein bedrucktes Heavy Oversize Shirt?', a: 'Das hängt von Blank, Stückzahl und Druckgröße ab. Du bekommst innerhalb von 24 Stunden ein Angebot mit festem Stückpreis, getrennt nach Textil und Druck. Ein Sample bestellst du direkt im Shop.' },
+  { q: 'Übernehmt ihr auch den Versand an meine Kunden?', a: 'Ja, mit Print-on-Demand: Du verkaufst über deinen Shop, wir drucken und verschicken jede Bestellung neutral in deinem Namen. So startest du ohne Lager und ohne Vorkasse für Ware.' },
+  { q: 'Kann ich eigene Textilien anliefern?', a: 'Ja. Schick uns deine Ware, wir prüfen die Eignung für DTF oder DTG und drucken darauf. Du zahlst nur den Druck.' },
+];
+const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 ---
-<Base title="Textilien: Stanley/Stella und Stedman" description="Unser Sortiment zum Bedrucken: Bio-T-Shirts, Hoodies, Sweatshirts, Polos und Jogger von Stanley/Stella und Stedman. Ab 1 Stück, alle Größen und Farben.">
+<Base title="Textilien für deine Brand: Stanley/Stella, Stedman, Build Your Brand, Urban Classics" description="Blanks zum Bedrucken ab Lager: Bio-Basics von Stanley/Stella, Stedman für Auflagen, Heavy Oversize von Build Your Brand und Urban Classics für Streetwear-Brands. Eigene Modemarke gründen ab 1 Stück, Angebot in 24 Stunden." jsonLd={faqLd}>
   <PageHero
-    eyebrow="Textilien"
-    title="Textilien, die den Druck <span class='hl'>verdienen</span>"
-    lede="Wir drucken auf Bio-Basics von Stanley/Stella und auf preisstarke Stedman-Textilien. Für Print-on-Demand feste Artikel mit sicherer Verfügbarkeit, für Auflagen die ganze Palette."
+    eyebrow="Textilien und Partner"
+    title="Blanks, die deine Brand <span class='hl'>verdient</span>"
+    lede="Wir drucken auf Textilien von vier Partnern, die wir seit Jahren verarbeiten: Stanley/Stella, Stedman, Build Your Brand und Urban Classics. Ab Lager, in allen Größen, ab 1 Stück."
     cta={{ label: 'Angebot in 24h', href: '/kontakt' }}
+    image="/img/lager-rohware.jpg"
+    imageAlt="Regal mit Rohware-Shirts und Hoodies bei westernprint in Oberhausen"
   />
 
   <section class="section">
     <div class="container">
       <div class="section-head reveal">
-        <h2>Stanley/Stella: unser POD-Standard</h2>
-        <p>Bio-Baumwolle, GOTS-zertifiziert, über 40 Farben, Größen XS bis 5XL. Diese Artikel führen wir dauerhaft und drucken sie ab 1 Stück.</p>
+        <h2>Vier Partner, ein Anspruch: Der Druck muss halten</h2>
+        <p>Wir haben jedes dieser Textilien selbst gewaschen, gepresst und reklamiert, bevor es ins Sortiment kam. Was hier steht, empfehlen wir auch, wenn du fragst.</p>
       </div>
-      <div class="prod-grid">
-        {products.map((p, i) => (
-          <figure class={`prod reveal reveal-d${i % 4}`}>
-            <img src={p.img} alt={`Stanley/Stella ${p.name}, ${p.type}`} width="720" height="900" loading="lazy" />
-            <figcaption><strong>{p.name}</strong><span>{p.type}</span></figcaption>
-          </figure>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="section-tight brands-section">
-    <div class="container">
       <div class="brands">
-        {[
-          { t: 'Stanley/Stella', d: 'Premium-Basics aus Bio-Baumwolle. Standard für Print-on-Demand und hochwertige Firmenkleidung.', tags: ['Bio', 'GOTS', 'Fair Wear'] },
-          { t: 'Stedman', d: 'Preisstarke Klassiker für Vereine, Events und große Auflagen. Classic-T, Hoodies, Polos, Fleece.', tags: ['Preisstark', 'Große Auflagen', 'Viele Farben'] },
-          { t: 'Eigene Textilien', d: 'Du hast schon Ware? Schick sie uns, wir prüfen die Eignung und drucken darauf.', tags: ['Auf Anfrage', 'DTF'] },
-        ].map((b, i) => (
-          <div class={`brand reveal reveal-d${i}`}>
+        {brands.map((b, i) => (
+          <div class={`brand reveal reveal-d${i % 2}`}>
+            <span class="tag">{b.tag}</span>
             <h3>{b.t}</h3>
             <p>{b.d}</p>
-            <div class="tags">{b.tags.map((t) => <span class="tag">{t}</span>)}</div>
+            <p class="for"><Icon name="check" weight="bold" size={14} /> {b.for}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
+  <section class="section brand-section" id="brand-gruenden">
+    <div class="container brand-grid">
+      <div class="brand-img reveal">
+        <img src="/img/streetwear-blanks.jpg" alt="Heavy Oversize Blanks in gedeckten Farben auf einer Kleiderstange, bereit für den Druck einer Streetwear-Brand" width="1672" height="941" loading="lazy" />
+      </div>
+      <div class="brand-text">
+        <h2 class="reveal">Eigene Streetwear-Brand gründen, ohne eigene Produktion</h2>
+        <p class="muted reveal reveal-d1">Peso, LFDY, Pegador: Die meisten Marken, die du heute auf der Straße siehst, haben mit fertigen Blanks angefangen. Schwere Oversize-Shirts, Boxy Hoodies, ein starkes Motiv, ein Nackenprint statt Etikett. Genau das bauen wir mit dir. Du bringst Design und Community, wir liefern Textil, Druck und Versand.</p>
+        <ul class="steps-list">
+          {[
+            { t: 'Blank wählen', d: 'Heavy Oversize Tee, Boxy Hoodie oder Ultra Heavy Sweat von Build Your Brand und Urban Classics. Wir beraten zu Grammatur, Schnitt und Farbe.' },
+            { t: 'Sample drucken', d: 'Ein Stück, dein Motiv, dein Nackenprint. In 1 bis 3 Werktagen in der Hand. Erst dann entscheidest du über die Auflage.' },
+            { t: 'Drop produzieren', d: 'Ab 50 Stück Staffelpreise, Mischgrößen ohne Aufpreis, fester Liefertermin für deinen Release.' },
+            { t: 'Skalieren', d: 'Wenn der Shop läuft: Print-on-Demand. Wir drucken und versenden jede Bestellung neutral in deinem Namen, ohne Lager.' },
+          ].map((s, i) => (
+            <li class={`reveal reveal-d${i + 1}`}><strong>{s.t}</strong><span>{s.d}</span></li>
+          ))}
+        </ul>
+        <div class="brand-links reveal"><a href="/kontakt" class="btn btn-primary">Brand-Projekt anfragen <Icon name="arrow-right" size={18} /></a> <a href="/print-on-demand" class="btn btn-secondary">Print-on-Demand für Shops</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Was du bei uns bekommst</h2>
+      </div>
+      <div class="usp-grid">
+        {[
+          { icon: 'package', t: 'Ab Lager', d: 'Die gängigen Farben und Größen von Stanley/Stella und Stedman liegen bei uns. Build Your Brand und Urban Classics in 2 bis 4 Werktagen.' },
+          { icon: 'ruler', t: 'Alle Größen', d: 'XS bis 5XL, Kinder- und Babygrößen, Mischgrößen innerhalb einer Auflage ohne Aufpreis.' },
+          { icon: 'palette', t: 'Über 500 Farben', d: 'Von Off-White bis Acid Washed Black. Im Shop siehst du jede Farbe als Packshot.' },
+          { icon: 'hand-heart', t: 'Eigene Ware', d: 'Du hast schon Textilien? Wir prüfen die Eignung und drucken darauf, du zahlst nur den Druck.' },
+        ].map((u, i) => (
+          <div class={`usp reveal reveal-d${i}`}>
+            <div class="icon-box"><Icon name={u.icon} size={20} /></div>
+            <h3>{u.t}</h3>
+            <p>{u.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faqs} title="Fragen zu Textilien und Brand-Aufbau" intro="Was uns Gründer und Vereine am häufigsten fragen." />
+
   <section class="section-tight">
     <div class="container shop-band reveal">
       <div>
-        <h2>Einzelstück gesucht?</h2>
-        <p class="muted">Shirts, Hoodies und Tassen mit eigenem Motiv bestellst du direkt in unserem Shop. Ohne Anfrage, ohne Wartezeit.</p>
+        <h2>Sample gesucht?</h2>
+        <p class="muted">Jedes Textil aus dem Sortiment kannst du im Shop mit deinem Motiv bestellen. Ab 1 Stück, in 1 bis 3 Werktagen bei dir.</p>
       </div>
       <a href="/shop" class="btn btn-primary btn-lg">Zum Shop <Icon name="arrow-right" size={18} /></a>
     </div>
@@ -62,18 +112,28 @@ import { products, site } from '../data/site';
 </Base>
 
 <style>
-  .prod-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-  .prod { margin: 0; border-radius: var(--radius-card); overflow: hidden; border: 1px solid var(--line); background: var(--surface); }
-  .prod img { aspect-ratio: 4 / 5; object-fit: cover; width: 100%; transition: transform 0.5s var(--ease); }
-  .prod:hover img { transform: scale(1.03); }
-  .prod figcaption { display: flex; flex-direction: column; padding: 14px 16px; font-size: 14.5px; }
-  .prod figcaption span { color: var(--text-2); }
-  .brands-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .brands { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 20px; }
+  .brands { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .brand { padding: 28px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); display: grid; gap: 10px; align-content: start; }
+  .brand .tag { justify-self: start; }
+  .brand h3 { font-size: 20px; }
   .brand p { color: var(--text-2); font-size: 15px; }
-  .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+  .brand .for { display: flex; gap: 8px; align-items: center; color: var(--text); font-size: 14px; margin-top: 4px; }
+  .brand .for :global(svg) { color: var(--accent); flex: none; }
+  .brand-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .brand-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
+  .brand-img img { border-radius: var(--radius-card); border: 1px solid var(--line); aspect-ratio: 4 / 5; object-fit: cover; width: 100%; }
+  .brand-text { display: grid; gap: 18px; }
+  .steps-list { display: grid; gap: 12px; counter-reset: s; }
+  .steps-list li { display: grid; grid-template-columns: 32px 1fr; gap: 12px; align-items: start; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); }
+  .steps-list li::before { counter-increment: s; content: counter(s); width: 32px; height: 32px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-weight: 700; display: grid; place-items: center; font-size: 14px; }
+  .steps-list strong { display: block; }
+  .steps-list span { color: var(--text-2); font-size: 14.5px; }
+  .brand-links { display: flex; gap: 12px; flex-wrap: wrap; }
+  .usp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .usp { padding: 24px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); display: grid; gap: 10px; align-content: start; }
+  .usp h3 { font-size: 16px; } .usp p { color: var(--text-2); font-size: 14.5px; }
   .shop-band { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; padding: 32px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); }
   .shop-band .muted { margin-top: 8px; max-width: 52ch; }
-  @media (max-width: 900px) { .prod-grid { grid-template-columns: repeat(2, 1fr); } .brands { grid-template-columns: 1fr; } }
+  @media (max-width: 900px) { .brands, .brand-grid { grid-template-columns: 1fr; } .usp-grid { grid-template-columns: 1fr 1fr; } .brand-img img { aspect-ratio: 4 / 3; } }
+  @media (max-width: 600px) { .usp-grid { grid-template-columns: 1fr; } }
 </style>
