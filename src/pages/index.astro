@@ -60,49 +60,32 @@ const prints = [
     </div>
   </section>
 
-  <!-- Leistungen: bento with 5 cells -->
-  <section class="section" id="leistungen">
+  <!-- Leistungen: randloses Bildraster, volle Breite -->
+  <section class="section leistungen" id="leistungen">
     <div class="container">
       <div class="section-head reveal">
         <h2>Druck, der nach 50 Wäschen noch sitzt</h2>
         <p>Ob ein einzelnes Geschenk, 30 Shirts für den Verein oder 500 Teile für die Firma: Wir drucken alles selbst in Oberhausen, auf eigenen Epson-Maschinen.</p>
       </div>
-      <div class="bento">
-        <a href="/druckverfahren" class="cell cell-big reveal" style="background-image:url('/img/druck-outside.jpg')">
-          <div class="cell-body">
-            <span class="tag">Unser Standard</span>
-            <h3>DTF-Transferdruck</h3>
-            <p>Brillante Farben, feine Linien, Farbverläufe. Hält auf Baumwolle, Mischgewebe und Polyester, waschbeständig bis 60 °C. Ab 1 Stück.</p>
-            <span class="more">So funktioniert DTF <Icon name="arrow-right" size={16} /></span>
+    </div>
+    <div class="mosaic">
+      {[
+        { href: '/druckverfahren', img: '/img/druck-outside.jpg', pos: 'center 40%', tag: 'Unser Standard', t: 'DTF-Transferdruck', d: 'Brillante Farben, feine Linien, waschbeständig bis 60 °C. Auf Baumwolle, Mischgewebe und Polyester. Ab 1 Stück.', big: true },
+        { href: '/druckverfahren', img: '/img/druck-makro.jpg', pos: 'center', tag: 'Fotorealistisch', t: 'DTG-Direktdruck', d: 'Direkt ins Gewebe gedruckt, weicher Griff. Für Einzelstücke und Bio-Baumwolle.' },
+        { href: '/grossauflagen', img: '/img/lager-regal-werkstatt.jpg', pos: 'center 60%', tag: 'Ab 50 Stück', t: 'Großauflagen', d: 'Vereine, Firmen, Schulen, Events. Staffelpreise, Korrekturabzug, fester Liefertermin.' },
+        { href: '/textilien', img: '/img/streetwear-group.jpg', pos: 'center 30%', tag: 'Über 500 Farben', t: 'Textilien ab Lager', d: 'Stanley/Stella, Stedman, Build Your Brand, Urban Classics. Oder du lieferst eigene Ware an.' },
+        { href: '/shop', img: '/img/streetwear-trio.jpg', pos: 'center 25%', tag: 'Ab 1 Stück', t: 'Einzelstück im Shop', d: 'Motiv hochladen, Position wählen, bestellen. In 1 bis 3 Werktagen bei dir.' },
+      ].map((c, i) => (
+        <a href={c.href} class={`tile ${c.big ? 'tile-big' : ''} reveal reveal-d${i % 3}`}>
+          <img src={c.img} alt="" width="1400" height="1050" loading="lazy" style={`object-position:${c.pos}`} />
+          <div class="tile-body">
+            <span class="tile-tag">{c.tag}</span>
+            <h3>{c.t}</h3>
+            <p>{c.d}</p>
+            <span class="more">Mehr erfahren <Icon name="arrow-right" size={16} /></span>
           </div>
         </a>
-        <a href="/druckverfahren" class="cell reveal reveal-d1">
-          <div class="icon-box"><Icon name="printer" size={22} /></div>
-          <h3>DTG-Direktdruck</h3>
-          <p>Fotorealistische Motive direkt ins Gewebe gedruckt. Weicher Griff, ideal für Einzelstücke und Bio-Baumwolle.</p>
-          <span class="more">Verfahren vergleichen <Icon name="arrow-right" size={16} /></span>
-        </a>
-        <a href="/grossauflagen" class="cell reveal reveal-d2">
-          <div class="icon-box"><Icon name="buildings" size={22} /></div>
-          <h3>Großauflagen ab 50 Stück</h3>
-          <p>Vereine, Firmen, Schulen, Events. Staffelpreise, Korrekturabzug vor dem Druck, fester Liefertermin.</p>
-          <span class="more">Angebot in 24h <Icon name="arrow-right" size={16} /></span>
-        </a>
-        <a href="/textilien" class="cell reveal reveal-d3">
-          <div class="icon-box"><Icon name="t-shirt" size={22} /></div>
-          <h3>Textilien ab Lager</h3>
-          <p>Stanley/Stella Bio-Baumwolle und Stedman Basics in über 500 Farben, oder du lieferst eigene Ware an.</p>
-          <span class="more">Sortiment ansehen <Icon name="arrow-right" size={16} /></span>
-        </a>
-        <a href="/shop" class="cell cell-img reveal reveal-d4">
-          <img src="/img/streetwear-trio.jpg" alt="Drei Models in unbedruckten Oversize-Shirts, bereit für dein Motiv" width="1122" height="1402" loading="lazy" />
-          <div class="cell-body">
-            <h3>Einzelstück im Shop</h3>
-            <p>Motiv hochladen, Position wählen, bestellen. In 1 bis 3 Werktagen bei dir.</p>
-            <span class="more">Zum Shop <Icon name="arrow-right" size={16} /></span>
-          </div>
-        </a>
-      </div>
+      ))}
     </div>
   </section>
 
@@ -280,23 +263,24 @@ const prints = [
   @media (max-width: 800px) { .stats-grid { grid-template-columns: 1fr 1fr; } .stat:nth-child(3) { border-left: 0; padding-left: 0; } .stat:nth-child(n+3) { border-top: 1px solid rgba(255,255,255,.14); padding-top: 18px; margin-top: 18px; } }
 
   /* Bento */
-  .bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .cell { position: relative; display: flex; flex-direction: column; gap: 12px; padding: 28px; border-radius: var(--radius-card); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); transition: transform 0.35s var(--ease), border-color 0.35s var(--ease); overflow: hidden; }
-  .cell:hover { transform: translateY(-3px); border-color: var(--accent-line); }
-  .cell p { color: var(--text-2); font-size: 15px; }
-  .cell .more { margin-top: auto; padding-top: 8px; display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 14px; color: var(--accent); }
-  .cell-big { grid-column: 1 / 3; grid-row: 1; min-height: 360px; padding: 0; background-size: cover; background-position: center 30%; justify-content: flex-end; }
-  .cell-big .cell-body { padding: 28px; background: linear-gradient(to top, rgba(8,10,9,0.95) 30%, rgba(8,10,9,0.55) 70%, transparent); display: flex; flex-direction: column; gap: 10px; color: #f1f4f2; }
-  .cell-big .cell-body p { color: #c9d0cc; max-width: 46ch; }
-  .cell-big .tag { align-self: flex-start; background: rgba(255,255,255,0.1); color: #f1f4f2; border-color: rgba(255,255,255,0.15); }
-  .cell-big .more { color: #6fe39a; }
-  .cell-img { grid-column: 3; grid-row: 1; padding: 0; min-height: 360px; }
-  .cell-img img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
-  .cell-img .cell-body { position: relative; margin-top: auto; padding: 28px; background: linear-gradient(to top, rgba(8,10,9,0.95) 30%, transparent); color: #f1f4f2; display: flex; flex-direction: column; gap: 8px; }
-  .cell-img .cell-body p { color: #c9d0cc; }
-  .cell-img .more { color: #6fe39a; }
-  @media (max-width: 900px) { .bento { grid-template-columns: 1fr 1fr; } .cell-big { grid-column: 1 / 3; grid-row: auto; } .cell-img { grid-column: auto; grid-row: auto; min-height: 320px; } }
-  @media (max-width: 600px) { .bento { grid-template-columns: 1fr; } .cell-big { grid-column: auto; } }
+  /* Leistungen als randloses Bildraster, volle Breite, keine Rahmen */
+  .leistungen { padding-bottom: 0; }
+  .mosaic { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: clamp(280px, 30vw, 420px); gap: 4px; margin-top: clamp(24px, 3vw, 40px); }
+  .tile { position: relative; display: block; overflow: hidden; background: var(--surface); color: #fff; }
+  .tile-big { grid-column: 1 / 3; grid-row: 1 / 3; }
+  .tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--ease); }
+  .tile:hover img { transform: scale(1.04); }
+  .tile::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(6,8,7,0.92) 0%, rgba(6,8,7,0.55) 40%, rgba(6,8,7,0.05) 75%); transition: opacity 0.4s var(--ease); }
+  .tile-body { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; padding: clamp(18px, 2.5vw, 32px); display: grid; gap: 6px; }
+  .tile-tag { font-size: 12.5px; font-weight: 600; color: var(--accent); letter-spacing: 0.02em; }
+  .tile h3 { font-size: clamp(18px, 1.6vw, 24px); color: #fff; }
+  .tile-big h3 { font-size: clamp(22px, 2.4vw, 34px); }
+  .tile p { color: rgba(255,255,255,0.78); font-size: 14.5px; max-width: 46ch; }
+  .tile-big p { font-size: 16px; }
+  .tile .more { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 14px; color: #6fe39a; margin-top: 4px; transform: translateX(-4px); opacity: 0.85; transition: transform 0.4s var(--ease), opacity 0.4s var(--ease); }
+  .tile:hover .more { transform: none; opacity: 1; }
+  @media (max-width: 900px) { .mosaic { grid-template-columns: 1fr 1fr; grid-auto-rows: 260px; } .tile-big { grid-column: 1 / 3; grid-row: auto; } }
+  @media (max-width: 600px) { .mosaic { grid-template-columns: 1fr; grid-auto-rows: 240px; } .tile-big { grid-column: auto; grid-row: auto; min-height: 320px; } }
 
   /* Process */
   .process-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
