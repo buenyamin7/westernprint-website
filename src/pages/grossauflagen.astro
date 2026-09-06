@@ -69,7 +69,7 @@ const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'Tex
   .info-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
   .facts { display: grid; gap: 16px; margin-top: 24px; color: var(--text-2); font-size: 15.5px; }
   .facts strong { color: var(--text); }
-  .info-img { border-radius: var(--radius-card); border: 1px solid var(--line); aspect-ratio: 4 / 3; object-fit: cover; }
+  .info-img { border-radius: 20px; border: 1px solid var(--line); aspect-ratio: 4 / 3; object-fit: cover; box-shadow: 0 40px 80px -40px rgba(0,0,0,0.8), 0 0 60px -30px color-mix(in srgb, var(--accent) 50%, transparent); }
   .form-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 48px; align-items: start; }
   .form-grid .muted { margin-top: 14px; max-width: 44ch; }
   @media (max-width: 900px) { .info-grid, .form-grid { grid-template-columns: 1fr; } }

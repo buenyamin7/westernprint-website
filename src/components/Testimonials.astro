@@ -2,6 +2,7 @@
 import { testimonials } from '../data/site';
 import Icon from './Icon.astro';
 const [first, ...rest] = testimonials;
+const initials = (n: string) => n.split(' ').map((p) => p[0]).join('').slice(0, 2);
 ---
 <section class="section-tight" id="stimmen">
   <div class="container">
@@ -12,15 +13,15 @@ const [first, ...rest] = testimonials;
     <div class="tgrid">
       <figure class="card card-pad t-main reveal">
         <div class="stars" aria-label="5 von 5 Sternen">{Array.from({ length: 5 }).map(() => <Icon name="star" weight="fill" size={16} />)}</div>
-        <blockquote>„{first.quote}“</blockquote>
-        <figcaption><strong>{first.name}</strong><span>{first.role}</span></figcaption>
+        <blockquote>{first.quote}</blockquote>
+        <figcaption><span class="avatar">{initials(first.name)}</span><span class="who"><strong>{first.name}</strong><span>{first.role}</span></span></figcaption>
       </figure>
       <div class="t-side">
         {rest.map((t, i) => (
           <figure class={`card card-pad reveal reveal-d${i + 1}`}>
             <div class="stars" aria-label="5 von 5 Sternen">{Array.from({ length: 5 }).map(() => <Icon name="star" weight="fill" size={14} />)}</div>
-            <blockquote class="small">„{t.quote}“</blockquote>
-            <figcaption><strong>{t.name}</strong><span>{t.role}</span></figcaption>
+            <blockquote class="small">{t.quote}</blockquote>
+            <figcaption><span class="avatar">{initials(t.name)}</span><span class="who"><strong>{t.name}</strong><span>{t.role}</span></span></figcaption>
           </figure>
         ))}
       </div>
@@ -31,12 +32,14 @@ const [first, ...rest] = testimonials;
 <style>
   .tgrid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; }
   .t-side { display: grid; gap: 20px; }
-  figure { margin: 0; display: flex; flex-direction: column; gap: 16px; }
-  .t-main { justify-content: center; }
-  .stars { display: flex; gap: 2px; color: var(--accent); }
-  blockquote { margin: 0; font-size: 1.35rem; line-height: 1.4; letter-spacing: -0.01em; font-weight: 500; text-wrap: pretty; }
-  blockquote.small { font-size: 1rem; font-weight: 400; color: var(--text-2); }
-  figcaption { display: flex; flex-direction: column; font-size: 14px; }
-  figcaption span { color: var(--text-3); }
+  figure { margin: 0; display: flex; flex-direction: column; gap: 16px; position: relative; overflow: hidden; }
+  figure::before { content: '\201E'; position: absolute; right: 22px; top: -22px; font-family: 'Bricolage Grotesque Variable', serif; font-size: 140px; line-height: 1; font-weight: 750; color: var(--accent); opacity: 0.14; pointer-events: none; }
+  .t-main { justify-content: center; padding: clamp(28px, 4vw, 44px); background: linear-gradient(160deg, color-mix(in srgb, var(--accent) 14%, var(--surface)), var(--surface) 55%); border-color: var(--accent-line); box-shadow: 0 0 60px -24px color-mix(in srgb, var(--accent) 60%, transparent); }
+  .stars { display: flex; gap: 3px; color: var(--accent); filter: drop-shadow(0 0 6px color-mix(in srgb, var(--accent) 60%, transparent)); }
+  blockquote { margin: 0; font-size: clamp(1.25rem, 2vw, 1.6rem); line-height: 1.35; letter-spacing: -0.015em; font-weight: 600; text-wrap: pretty; font-family: 'Bricolage Grotesque Variable', 'Inter Variable', sans-serif; }
+  blockquote.small { font-size: 1.02rem; font-weight: 400; color: var(--text-2); font-family: inherit; }
+  figcaption { display: flex; align-items: center; gap: 12px; font-size: 14px; }
+  .avatar { width: 40px; height: 40px; border-radius: 999px; display: grid; place-items: center; font-weight: 700; font-size: 13px; color: var(--accent-ink); background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 85%, white), var(--accent)); flex: none; }
+  .who { display: flex; flex-direction: column; } .who span { color: var(--text-3); }
   @media (max-width: 900px) { .tgrid { grid-template-columns: 1fr; } blockquote { font-size: 1.15rem; } }
 </style>

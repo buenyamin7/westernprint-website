@@ -129,4 +129,12 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
   .results strong { font-size: 1.7rem; letter-spacing: -0.03em; color: var(--accent); line-height: 1; }
   .results span { color: var(--text-2); font-size: 14px; }
   @media (max-width: 900px) { .compare, .case-grid { grid-template-columns: 1fr; } }
+  .compare .col { padding: clamp(24px, 3vw, 36px); border-radius: 20px; }
+  .compare .col.them { background: var(--surface); border: 1px solid var(--line); color: var(--text-2); }
+  .compare .col.us { background: linear-gradient(160deg, color-mix(in srgb, var(--accent) 16%, var(--surface)), var(--surface) 60%); border: 1px solid var(--accent-line); box-shadow: 0 0 70px -28px color-mix(in srgb, var(--accent) 70%, transparent); }
+  .compare .col h3 { font-size: 1.3rem; margin-bottom: 14px; }
+  .compare .col.us h3 { color: var(--accent); }
+  .compare .col ul { display: grid; gap: 10px; } .compare .col li { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; }
+  .compare .col.us li :global(svg) { color: var(--accent); flex: none; margin-top: 3px; }
+  .compare .col.them li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--text-3); flex: none; margin-top: 9px; }
 </style>

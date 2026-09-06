@@ -32,12 +32,15 @@ import { site } from '../data/site';
 <style>
   .contact-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(32px, 5vw, 64px); align-items: start; }
   .lede { margin-top: 16px; }
-  .channels { display: grid; gap: 14px; margin-top: 32px; }
+  .channels { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 32px; }
+  .channels li { border-radius: 16px; background: linear-gradient(180deg, var(--surface-2), var(--surface)); border: 1px solid var(--line); padding: 16px; transition: border-color 0.3s var(--ease), transform 0.3s var(--ease); }
+  .channels li:has(a):hover { border-color: var(--accent-line); transform: translateY(-2px); }
   .channels li, .channels li a { display: flex; gap: 14px; align-items: center; }
   .channels li div:last-child { display: flex; flex-direction: column; font-size: 14.5px; }
   .channels span { color: var(--text-2); }
   .channels a:hover strong { color: var(--accent); }
-  .hours { margin-top: 32px; padding: 18px 20px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); display: grid; gap: 4px; font-size: 14.5px; }
+  .hours { margin-top: 20px; padding: 18px 20px; border-radius: 16px; border: 1px solid var(--accent-line); background: linear-gradient(160deg, color-mix(in srgb, var(--accent) 12%, var(--surface)), var(--surface) 70%); display: grid; gap: 4px; font-size: 14.5px; }
+  @media (max-width: 560px) { .channels { grid-template-columns: 1fr; } }
   .hours span { color: var(--text-2); }
   @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
 </style>

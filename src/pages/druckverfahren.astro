@@ -32,12 +32,12 @@ const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'DTF
         <table>
           <thead><tr><th>Anforderung</th><th>DTF</th><th>DTG</th><th>Sublimation</th></tr></thead>
           <tbody>
-            <tr><td>Dunkle Textilien</td><td class="yes">Sehr gut</td><td>Gut, mit Vorbehandlung</td><td class="no">Nicht möglich</td></tr>
-            <tr><td>Fotorealistische Motive</td><td>Gut</td><td class="yes">Sehr gut</td><td class="yes">Sehr gut</td></tr>
-            <tr><td>Polyester und Mischgewebe</td><td class="yes">Sehr gut</td><td class="no">Ungeeignet</td><td class="yes">Sehr gut (hell)</td></tr>
-            <tr><td>Waschbeständigkeit</td><td class="yes">Sehr hoch</td><td>Hoch</td><td class="yes">Sehr hoch</td></tr>
-            <tr><td>Griff auf dem Stoff</td><td>Leicht spürbar</td><td class="yes">Kaum spürbar</td><td class="yes">Nicht spürbar</td></tr>
-            <tr><td>Stückzahl</td><td class="yes">1 bis 1.000+</td><td>1 bis 100</td><td>1 bis 500</td></tr>
+            <tr><td>Dunkle Textilien</td><td><span class="chip chip-good">Sehr gut</span></td><td><span class="chip chip-ok">Gut, mit Vorbehandlung</span></td><td><span class="chip chip-bad">Nicht möglich</span></td></tr>
+            <tr><td>Fotorealistische Motive</td><td><span class="chip chip-ok">Gut</span></td><td><span class="chip chip-good">Sehr gut</span></td><td><span class="chip chip-good">Sehr gut</span></td></tr>
+            <tr><td>Polyester und Mischgewebe</td><td><span class="chip chip-good">Sehr gut</span></td><td><span class="chip chip-bad">Ungeeignet</span></td><td><span class="chip chip-good">Sehr gut (hell)</span></td></tr>
+            <tr><td>Waschbeständigkeit</td><td><span class="chip chip-good">Sehr hoch</span></td><td><span class="chip chip-ok">Hoch</span></td><td><span class="chip chip-good">Sehr hoch</span></td></tr>
+            <tr><td>Griff auf dem Stoff</td><td><span class="chip chip-ok">Leicht spürbar</span></td><td><span class="chip chip-good">Kaum spürbar</span></td><td><span class="chip chip-good">Nicht spürbar</span></td></tr>
+            <tr><td>Stückzahl</td><td><span class="chip chip-good">1 bis 1.000+</span></td><td><span class="chip chip-ok">1 bis 100</span></td><td><span class="chip chip-ok">1 bis 500</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -78,22 +78,26 @@ const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'DTF
   .method p { color: var(--text-2); }
   .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
   .table-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); }
-  table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 620px; }
-  th, td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--line); }
-  th { font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-3); font-weight: 600; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 20px; background: linear-gradient(180deg, var(--surface-2), var(--surface)); box-shadow: 0 0 60px -30px color-mix(in srgb, var(--accent) 50%, transparent); }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 640px; }
+  th, td { text-align: left; padding: 16px 20px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  th { font-family: 'Bricolage Grotesque Variable', sans-serif; font-size: 16px; color: var(--accent); font-weight: 700; background: color-mix(in srgb, var(--accent) 6%, transparent); }
+  th:first-child { color: var(--text-3); font-family: inherit; font-weight: 500; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; }
+  tbody tr { transition: background 0.25s var(--ease); } tbody tr:hover { background: color-mix(in srgb, var(--accent) 4%, transparent); }
   tbody tr:last-child td { border-bottom: 0; }
-  td:first-child { font-weight: 500; }
+  td:first-child { font-weight: 600; color: var(--text); }
   td { color: var(--text-2); }
-  td.yes { color: var(--accent); font-weight: 500; }
-  td.no { color: var(--text-3); }
-  .brand-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 48px; align-items: center; }
-  .brand-grid .muted { margin-top: 14px; max-width: 58ch; }
-  .certs { display: grid; gap: 10px; margin: 24px 0 28px; font-size: 15px; }
-  .certs li { display: flex; gap: 10px; align-items: center; }
+  .brand-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+  .brand-grid .muted { margin-top: 14px; max-width: 58ch; font-size: 1.05rem; }
+  .certs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 26px 0 30px; font-size: 14.5px; }
+  .certs li { display: flex; gap: 10px; align-items: center; padding: 10px 14px; border-radius: 12px; background: linear-gradient(180deg, var(--surface-2), var(--surface)); border: 1px solid var(--line); }
   .certs .icon { color: var(--accent); flex: none; }
-  .brand-imgs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .brand-imgs img { border-radius: var(--radius-card); border: 1px solid var(--line); }
-  .brand-imgs img:last-child { margin-top: 40px; }
+  .brand-imgs { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 24px 0 40px; }
+  .brand-imgs::before { content: ''; position: absolute; inset: 10% 0; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%); filter: blur(30px); pointer-events: none; }
+  .brand-imgs img { position: relative; border-radius: 20px; border: 1px solid var(--line); transition: transform 0.6s var(--ease); box-shadow: 0 30px 60px -30px rgba(0,0,0,0.8); }
+  .brand-imgs img:first-child { transform: rotate(-4deg) translateY(10px); }
+  .brand-imgs img:last-child { transform: rotate(3deg) translateY(50px); }
+  .brand-imgs:hover img { transform: rotate(0) translateY(20px); }
+  @media (max-width: 600px) { .certs { grid-template-columns: 1fr; } }
   @media (max-width: 900px) { .method, .brand-grid { grid-template-columns: 1fr; } }
 </style>

@@ -67,8 +67,8 @@ import { stats } from '../data/site';
   .story { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 56px; align-items: start; }
   .story-text p { color: var(--text-2); margin-top: 16px; max-width: 62ch; font-size: 1.05rem; }
   .story-stats { display: grid; gap: 14px; position: sticky; top: calc(var(--nav-h) + 24px); }
-  .story-stats div { padding: 20px 22px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); display: grid; gap: 4px; }
-  .story-stats strong { font-size: 1.8rem; letter-spacing: -0.03em; line-height: 1; color: var(--accent); }
+  .story-stats div { padding: 24px 26px; border-radius: 18px; border: 1px solid var(--accent-line); background: linear-gradient(160deg, color-mix(in srgb, var(--accent) 12%, var(--surface)), var(--surface) 60%); display: grid; gap: 6px; box-shadow: 0 0 40px -22px color-mix(in srgb, var(--accent) 60%, transparent); }
+  .story-stats strong { font-family: 'Bricolage Grotesque Variable', sans-serif; font-weight: 750; font-size: 2.4rem; letter-spacing: -0.03em; line-height: 1; color: var(--accent); }
   .story-stats span { color: var(--text-2); font-size: 14px; }
   .values-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .value { display: grid; gap: 12px; padding: 26px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); align-content: start; }

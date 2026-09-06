@@ -20,7 +20,12 @@ const { title = 'Bereit für eine Druckerei, die liefert?', text = 'Schreib uns,
 </section>
 
 <style>
-  .band { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: center; padding: clamp(32px, 5vw, 56px); border-radius: var(--radius-card); border: 1px solid var(--accent-line); background: linear-gradient(135deg, var(--accent-soft), transparent 60%), var(--surface); }
+  .band { position: relative; overflow: hidden; display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: center; padding: clamp(36px, 6vw, 72px); border-radius: 24px; border: 1px solid var(--accent-line);
+    background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 22%, var(--surface)) 0%, color-mix(in srgb, var(--accent) 8%, var(--surface)) 45%, var(--surface) 100%); box-shadow: 0 0 80px -30px color-mix(in srgb, var(--accent) 70%, transparent); }
+  .band::before { content: ''; position: absolute; right: -120px; top: -160px; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--accent) 35%, transparent), transparent 65%); pointer-events: none; }
+  .band::after { content: ''; position: absolute; left: -80px; bottom: -180px; width: 320px; height: 320px; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--accent) 18%, transparent), transparent 65%); pointer-events: none; }
+  .band > * { position: relative; }
+  .band h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); }
   .band p { margin-top: 12px; max-width: 48ch; }
   .band-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
   @media (max-width: 800px) { .band { grid-template-columns: 1fr; } .band-actions { justify-content: flex-start; } }
