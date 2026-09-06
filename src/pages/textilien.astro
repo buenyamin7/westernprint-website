@@ -126,7 +126,9 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
   .steps-list { display: grid; gap: 12px; counter-reset: s; }
   .steps-list li { display: grid; grid-template-columns: 32px 1fr; gap: 12px; align-items: start; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); }
   .steps-list li::before { counter-increment: s; content: counter(s); width: 32px; height: 32px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-weight: 700; display: grid; place-items: center; font-size: 14px; }
+  .steps-list strong, .steps-list span { grid-column: 2; }
   .steps-list strong { display: block; }
+  .steps-list li::before { grid-row: 1 / span 2; }
   .steps-list span { color: var(--text-2); font-size: 14.5px; }
   .brand-links { display: flex; gap: 12px; flex-wrap: wrap; }
   .usp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
