@@ -9,14 +9,14 @@
   --line-strong: rgba(255, 255, 255, 0.14);
   --text: #f1f4f2;
   --text-2: #a7aeaa;
-  --text-3: #737b77;
+  --text-3: #7f8783;
   --accent: #4fcf78;
   --accent-strong: #2e9a52;
   --accent-ink: #06210f;
   --accent-soft: rgba(79, 207, 120, 0.12);
   --accent-line: rgba(79, 207, 120, 0.35);
   --danger: #f08a8a;
-  --shadow: 0 1px 0 rgba(255,255,255,0.04) inset, 0 24px 60px -30px rgba(0,0,0,0.8);
+  --shadow: 0 1px 0 rgba(255,255,255,0.04) inset;
   --radius-card: 16px;
   --radius-input: 10px;
   --nav-h: 68px;
@@ -33,13 +33,13 @@
   --line-strong: rgba(10, 20, 14, 0.16);
   --text: #0f1512;
   --text-2: #4c5551;
-  --text-3: #7a837e;
-  --accent: #1f8f42;
-  --accent-strong: #1b7a39;
+  --text-3: #657069;
+  --accent: #166f34;
+  --accent-strong: #125c2b;
   --accent-ink: #ffffff;
-  --accent-soft: rgba(31, 143, 66, 0.1);
-  --accent-line: rgba(31, 143, 66, 0.35);
-  --shadow: 0 1px 2px rgba(15,21,18,0.04), 0 20px 50px -30px rgba(15,21,18,0.25);
+  --accent-soft: rgba(22, 111, 52, 0.1);
+  --accent-line: rgba(22, 111, 52, 0.35);
+  --shadow: 0 1px 2px rgba(15,21,18,0.05);
   color-scheme: light;
 }
 
@@ -179,13 +179,16 @@ button { font: inherit; color: inherit; }
 .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 .prose strong { color: var(--text); }
 
-/* Reveal on scroll (IntersectionObserver adds .is-in). Reason: sequences content as the user arrives. */
-.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
-.reveal.is-in { opacity: 1; transform: none; }
-.reveal-d1 { transition-delay: 0.08s; } .reveal-d2 { transition-delay: 0.16s; } .reveal-d3 { transition-delay: 0.24s; } .reveal-d4 { transition-delay: 0.32s; }
+
+/* Scroll-Reveal ohne Verstecken: Inhalt ist immer sichtbar, Browser mit Scroll-Timelines animieren beim Einscrollen. */
+@keyframes reveal-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@supports (animation-timeline: view()) {
+  .reveal { animation: reveal-in 0.8s var(--ease) both; animation-timeline: view(); animation-range: entry 0% entry 28%; }
+  .reveal-d1 { animation-range: entry 6% entry 34%; } .reveal-d2 { animation-range: entry 12% entry 40%; } .reveal-d3 { animation-range: entry 18% entry 46%; } .reveal-d4 { animation-range: entry 24% entry 52%; }
+}
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .reveal { animation: none; }
   *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
 }
 

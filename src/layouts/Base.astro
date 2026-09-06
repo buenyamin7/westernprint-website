@@ -113,20 +113,6 @@ const ldBlocks = [orgLd, webLd, ...(crumbLd ? [crumbLd] : []), ...(Array.isArray
       refreshCount();
     </script>
     <script>
-      // Scroll reveal. Motivation: content arrives in reading order instead of popping in at once.
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const items = document.querySelectorAll('.reveal');
-      if (reduce || !('IntersectionObserver' in window)) {
-        items.forEach((el) => el.classList.add('is-in'));
-      } else {
-        const io = new IntersectionObserver((entries) => {
-          for (const e of entries) if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
-        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
-        items.forEach((el) => io.observe(el));
-        // Safety net: if the observer never fires (prerender, hidden tab), show everything.
-        setTimeout(() => items.forEach((el) => el.classList.add('is-in')), 2500);
-      }
-
       // Mobile menu
       const toggle = document.querySelector('[data-menu-toggle]') as HTMLButtonElement | null;
       const menu = document.getElementById('mobile-menu');
