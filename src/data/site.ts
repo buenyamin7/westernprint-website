@@ -23,6 +23,7 @@ export const site = {
 };
 
 export const nav = [
+  { label: 'Für wen', href: '/fuer' },
   { label: 'Druckverfahren', href: '/druckverfahren' },
   { label: 'Großauflagen', href: '/grossauflagen' },
   { label: 'Textilien', href: '/textilien' },

@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+import Tiles from '../../components/Tiles.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { zielgruppen, groups } from '../../data/zielgruppen';
+import { site } from '../../data/site';
+const ld = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Für wen wir drucken', url: `${site.url}/fuer`, hasPart: zielgruppen.map((z) => ({ '@type': 'WebPage', name: z.title, url: `${site.url}/fuer/${z.slug}` })) };
+---
+<Base title="Textildruck für Vereine, Firmen, Schulen, Gastro und Events" description="Für wen wir drucken: Abschlussklassen, Sportvereine, Kirchen und Moscheen, Handwerk, Gastronomie, Events, Bands und Streetwear-Brands. Textildruck aus Oberhausen ab 1 Stück, Angebot in 24 Stunden." jsonLd={ld}>
+  <section class="section-tight head">
+    <div class="container">
+      <span class="eyebrow">Für wen wir drucken</span>
+      <h1>Jede Gruppe hat ihr <span class="hl">eigenes Shirt</span></h1>
+      <p class="lede">Abschlussklasse, Verein, Moschee, Handwerksbetrieb, Restaurant, Festival, Band: Hier findest du, was wir für deine Gruppe drucken, mit typischen Produkten, Ablauf und Antworten auf die häufigsten Fragen.</p>
+    </div>
+  </section>
+  {groups.map((g) => (
+    <section class="section-tight group">
+      <div class="container"><h2>{g}</h2></div>
+      <Tiles items={zielgruppen.filter((z) => z.group === g).map((z) => ({ href: `/fuer/${z.slug}`, img: z.image, pos: z.imagePos, t: z.name, d: z.lede.split('. ')[0] + '.', cta: 'Zur Seite' }))} rows="clamp(220px, 20vw, 300px)" />
+    </section>
+  ))}
+  <CtaBand />
+</Base>
+<style>
+  .head { padding-top: clamp(56px, 8vw, 100px); } .head .lede { margin-top: 18px; }
+  .group { padding-bottom: 0; } .group h2 { margin-bottom: 18px; }
+</style>

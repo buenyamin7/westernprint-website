@@ -1,0 +1,98 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Icon from '../../components/Icon.astro';
+import Faq from '../../components/Faq.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import Tiles from '../../components/Tiles.astro';
+import { site } from '../../data/site';
+import { zielgruppen } from '../../data/zielgruppen';
+
+export function getStaticPaths() { return zielgruppen.map((z) => ({ params: { slug: z.slug }, props: { z } })); }
+const { z } = Astro.props;
+const related = zielgruppen.filter((o) => o.slug !== z.slug && o.group === z.group).slice(0, 3);
+const more = zielgruppen.filter((o) => o.slug !== z.slug && o.group !== z.group).slice(0, 3 - related.length);
+const rel = [...related, ...more];
+const ld = [
+  { '@context': 'https://schema.org', '@type': 'Service', name: z.title, serviceType: 'Textildruck', description: z.description, provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: [{ '@type': 'City', name: 'Oberhausen' }, { '@type': 'AdministrativeArea', name: 'Ruhrgebiet' }, { '@type': 'AdministrativeArea', name: 'Nordrhein-Westfalen' }, { '@type': 'Country', name: 'Deutschland' }], audience: { '@type': 'Audience', audienceType: z.name }, url: `${site.url}/fuer/${z.slug}`, offers: { '@type': 'Offer', description: 'Angebot innerhalb von 24 Stunden, ab 1 Stück, Staffelpreise ab 10 bis 50 Stück' } },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: z.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Start', item: site.url }, { '@type': 'ListItem', position: 2, name: 'Für wen wir drucken', item: `${site.url}/fuer` }, { '@type': 'ListItem', position: 3, name: z.name, item: `${site.url}/fuer/${z.slug}` }] },
+];
+---
+<Base title={`${z.title} | westernprint Oberhausen`} description={z.description} jsonLd={ld} ogImage={z.image}>
+  <PageHero eyebrow={z.name} title={z.h1} lede={z.lede} cta={{ label: 'Angebot in 24h', href: '#anfrage' }} cta2={{ label: 'Per WhatsApp', href: site.whatsapp }} image={z.image} imageAlt={z.imageAlt} />
+
+  <section class="section-tight">
+    <div class="container zg-intro">
+      <p class="lede answer">{z.intro}</p>
+      <ul class="facts">
+        <li><Icon name="clock" size={18} /> Angebot in 24 Stunden</li>
+        <li><Icon name="printer" size={18} /> Produktion in Oberhausen</li>
+        <li><Icon name="truck" size={18} /> Versand mit DHL oder Abholung</li>
+        <li><Icon name="seal-check" size={18} /> Korrekturabzug vor dem Druck</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container zg-grid">
+      <div>
+        <h2>Was wir für {z.name} drucken</h2>
+        <ul class="products">{z.products.map((p) => <li><Icon name="check" weight="bold" size={14} /> {p}</li>)}</ul>
+      </div>
+      <div class="benefits">
+        {z.benefits.map((b) => <div class="benefit"><h3>{b.t}</h3><p>{b.d}</p></div>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight steps-section">
+    <div class="container">
+      <h2>So läuft es ab</h2>
+      <ol class="steps">
+        <li><strong>Anfrage</strong><span>Motiv, Textil, Stückzahl, Wunschtermin. Per Formular, WhatsApp oder Mail.</span></li>
+        <li><strong>Angebot in 24 Stunden</strong><span>Fester Stückpreis, Korrekturabzug mit eurem Motiv, Liefertermin.</span></li>
+        <li><strong>Druck und Lieferung</strong><span>Produktion in Oberhausen, Versand mit DHL oder Abholung.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <Faq items={z.faqs} title={`Fragen von ${z.name}`} />
+
+  <section class="section" id="anfrage">
+    <div class="container zg-form">
+      <div>
+        <h2>Angebot anfragen</h2>
+        <p class="muted">Schreib uns, was du brauchst. Antwort werktags innerhalb von 24 Stunden, meist schneller. Für schnelle Fragen: <a href={site.whatsapp} class="accent" target="_blank" rel="noopener">WhatsApp</a>.</p>
+        <p class="muted small">Druckerei in Oberhausen. Lieferung ins Ruhrgebiet, nach NRW und deutschlandweit.</p>
+      </div>
+      <div class="card card-pad"><ContactForm topic={z.topic} /></div>
+    </div>
+  </section>
+
+  <section class="section-tight related">
+    <div class="container"><h2>Auch für</h2></div>
+    <Tiles items={rel.map((o) => ({ href: `/fuer/${o.slug}`, img: o.image, pos: o.imagePos, t: o.name, d: o.lede.split('. ')[0] + '.', cta: 'Zur Seite' }))} rows="clamp(220px, 20vw, 300px)" />
+  </section>
+</Base>
+
+<style>
+  .zg-intro { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: center; }
+  .answer { max-width: 68ch; font-size: 1.12rem; color: var(--text); }
+  .facts { display: grid; gap: 10px; } .facts li { display: flex; gap: 10px; align-items: center; color: var(--text-2); font-size: 15px; }
+  .facts :global(svg) { color: var(--accent); flex: none; }
+  .zg-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(24px, 4vw, 56px); align-items: start; }
+  .products { display: grid; gap: 10px; margin-top: 16px; } .products li { display: flex; gap: 10px; align-items: center; font-size: 15.5px; }
+  .products :global(svg) { color: var(--accent); flex: none; }
+  .benefits { display: grid; gap: 14px; } .benefit { padding: 20px 22px; border-radius: 12px; background: var(--surface); }
+  .benefit h3 { font-size: 16px; margin-bottom: 4px; } .benefit p { color: var(--text-2); font-size: 14.5px; }
+  .steps-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; counter-reset: s; }
+  .steps li { display: grid; gap: 6px; padding-top: 14px; border-top: 2px solid var(--accent); }
+  .steps li::before { counter-increment: s; content: '0' counter(s); font-family: 'Bricolage Grotesque Variable', sans-serif; font-weight: 750; font-size: 28px; color: var(--accent); }
+  .steps span { color: var(--text-2); font-size: 14.5px; }
+  .zg-form { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(24px, 4vw, 56px); align-items: start; }
+  .zg-form .muted { margin-top: 10px; } .small { font-size: 13px; }
+  .related { padding-bottom: 0; } .related h2 { margin-bottom: 20px; }
+  @media (max-width: 900px) { .zg-intro, .zg-grid, .zg-form { grid-template-columns: 1fr; } .steps { grid-template-columns: 1fr; } }
+</style>
