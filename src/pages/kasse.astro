@@ -4,7 +4,7 @@ import Icon from '../components/Icon.astro';
 import { site } from '../data/site';
 const countries = [['DE', 'Deutschland'], ['AT', 'Österreich'], ['CH', 'Schweiz'], ['NL', 'Niederlande'], ['BE', 'Belgien'], ['LU', 'Luxemburg'], ['FR', 'Frankreich'], ['IT', 'Italien'], ['ES', 'Spanien'], ['PL', 'Polen'], ['DK', 'Dänemark'], ['CZ', 'Tschechien']];
 ---
-<Base title="Kasse" description="Lieferadresse und Bezahlung." noindex={true}>
+<Base title="Kasse" description="Lieferadresse und Bezahlung." noindex={true} hideCta={true}>
   <section class="section">
     <div class="container kasse" data-endpoint={site.checkoutApi}>
       <h1>Kasse</h1>

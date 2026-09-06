@@ -1,5 +1,6 @@
 ---
 import '@fontsource-variable/inter';
+import '@fontsource-variable/bricolage-grotesque/opsz.css';
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -10,10 +11,11 @@ interface Props {
   title: string;
   description: string;
   ogImage?: string;
+  hideCta?: boolean;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   noindex?: boolean;
 }
-const { title, description, ogImage = site.ogImage, jsonLd, noindex = false } = Astro.props;
+const { title, description, ogImage = site.ogImage, jsonLd, noindex = false , hideCta = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname.replace(/\/$/, '') || '/', site.url).href;
 const fullTitle = title.includes('westernprint') ? title : `${title} | westernprint`;
 
@@ -103,10 +105,10 @@ const ldBlocks = [orgLd, webLd, ...(crumbLd ? [crumbLd] : []), ...(Array.isArray
     </main>
     <Footer />
 
-    <div class="mobile-cta" aria-label="Schnellkontakt">
+    {!hideCta && <div class="mobile-cta" aria-label="Schnellkontakt">
       <a href={site.whatsapp} target="_blank" rel="noopener" class="btn btn-ghost" aria-label="WhatsApp schreiben"><Icon name="whatsapp-logo" size={20} /> WhatsApp</a>
       <a href="/kontakt" class="btn btn-primary">Angebot in 24h</a>
-    </div>
+    </div>}
 
     <script>
       import { refreshCount } from '../scripts/cart';

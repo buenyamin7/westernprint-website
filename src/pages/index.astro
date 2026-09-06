@@ -12,6 +12,8 @@ const faqLd = {
   mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
 };
 const prints = [
+  { src: '/img/referenz-live2luv.jpg', alt: 'Zwei bedruckte Shirts von live2luv auf dem Werkstattboden: hellblau mit Blumenmotiv, weiß mit pinkem Herz' },
+  { src: '/img/druck-outside.jpg', alt: 'Nahaufnahme eines mehrfarbigen DTF-Drucks mit Bergmotiv auf grau meliertem Sweatshirt' },
   { src: '/img/druck-makro.jpg', alt: 'Nahaufnahme eines DTF-Drucks auf grau meliertem Shirt, jede Masche und die matte Druckoberfläche sichtbar' },
   { src: '/img/lager-rohware.jpg', alt: 'Regal mit gefalteten Rohware-Shirts und Hoodies nach Farben sortiert, davor eine Heißpresse' },
   { src: '/img/werkstatt-heisspresse.jpg', alt: 'Werkstatt von westernprint: Mitarbeiter an der Heißpresse, Ziegelwand, Regale mit Textilien' },
@@ -28,15 +30,15 @@ const prints = [
     <img class="hero-bg" src="/img/hero-rack.jpg" alt="" width="1672" height="941" loading="eager" fetchpriority="high" aria-hidden="true" />
     <div class="container hero-grid">
       <div class="hero-text">
-        <span class="badge reveal">Inhouse-Produktion in Oberhausen. Ab 1 Stück.</span>
-        <h1 class="reveal reveal-d1">Textildruck, der hält. <span class="hl">Print-on-Demand</span> vom Einzelstück bis zur Großauflage.</h1>
-        <p class="lede reveal reveal-d2">DTF und DTG auf Stanley/Stella, neutral verpackt und in 1 bis 3 Werktagen an deine Kunden geliefert. Aus unserer eigenen Druckerei.</p>
-        <div class="hero-cta reveal reveal-d3">
+        <span class="badge">Inhouse-Produktion in Oberhausen. Ab 1 Stück.</span>
+        <h1 class="reveal-d1">Textildruck, der hält. <span class="hl">Print-on-Demand</span> vom Einzelstück bis zur Großauflage.</h1>
+        <p class="lede">DTF und DTG auf Stanley/Stella, neutral verpackt und in 1 bis 3 Werktagen an deine Kunden geliefert. Aus unserer eigenen Druckerei.</p>
+        <div class="hero-cta">
           <a href="/kontakt" class="btn btn-primary btn-lg">Angebot in 24h <Icon name="arrow-right" size={18} /></a>
           <a href="#leistungen" class="btn btn-secondary btn-lg">Leistungen ansehen</a>
         </div>
       </div>
-      <div class="hero-visual reveal reveal-d2">
+      <div class="hero-visual">
         <figure class="review card">
           <div class="stars" aria-label="5 von 5 Sternen">{Array.from({ length: 5 }).map(() => <Icon name="star" weight="fill" size={14} />)}</div>
           <blockquote>„Seit dem Wechsel hat sich mein Retourenanteil halbiert. Kunden loben endlich wieder die Qualität.“</blockquote>
@@ -48,7 +50,7 @@ const prints = [
     <div class="container hero-stats">
       <div class="stats-grid">
         {stats.map((s, i) => (
-          <div class={`stat reveal reveal-d${i}`}>
+          <div class="stat">
             <strong>{s.value}</strong>
             <span>{s.label}</span>
           </div>
@@ -230,7 +232,13 @@ const prints = [
 <style>
   /* Hero */
   .hero { position: relative; overflow: hidden; min-height: min(94vh, 920px); display: grid; grid-template-rows: 1fr auto; padding-top: calc(var(--nav-h) + clamp(40px, 7vh, 80px)); color: #fff; background: #0b0d0c; }
-  .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; z-index: 0; }
+  .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; z-index: 0; animation: hero-bg 1.6s var(--ease) both; }
+  @keyframes hero-bg { from { transform: scale(1.06); opacity: 0.6; } to { transform: none; opacity: 1; } }
+  @keyframes hero-up { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+  .hero .badge, .hero h1, .hero .lede, .hero-cta, .hero .review, .hero-stats .stat { animation: hero-up 0.9s var(--ease) both; }
+  .hero .badge { animation-delay: 0.05s; } .hero h1 { animation-delay: 0.15s; } .hero .lede { animation-delay: 0.3s; } .hero-cta { animation-delay: 0.4s; } .hero .review { animation-delay: 0.55s; }
+  .hero-stats .stat:nth-child(1) { animation-delay: 0.6s; } .hero-stats .stat:nth-child(2) { animation-delay: 0.68s; } .hero-stats .stat:nth-child(3) { animation-delay: 0.76s; } .hero-stats .stat:nth-child(4) { animation-delay: 0.84s; }
+  @media (prefers-reduced-motion: reduce) { .hero-bg, .hero .badge, .hero h1, .hero .lede, .hero-cta, .hero .review, .hero-stats .stat { animation: none; } }
   .hero::before { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
     background: linear-gradient(90deg, rgba(8,10,9,.94) 0%, rgba(8,10,9,.82) 38%, rgba(8,10,9,.45) 70%, rgba(8,10,9,.25) 100%), linear-gradient(180deg, rgba(8,10,9,.35) 0%, rgba(8,10,9,0) 30%, rgba(8,10,9,.55) 75%, rgba(8,10,9,.92) 100%); }
   .hero-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: clamp(32px, 5vw, 72px); align-items: center; position: relative; z-index: 2; padding-bottom: clamp(32px, 5vh, 56px); }

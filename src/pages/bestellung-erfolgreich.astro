@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../data/site';
 ---
-<Base title="Deine Bestellung" description="Bestellstatus und Bestätigung." noindex={true}>
+<Base title="Deine Bestellung" description="Bestellstatus und Bestätigung." noindex={true} hideCta={true}>
   <section class="section">
     <div class="container done" data-endpoint={site.checkoutApi}>
       <div class="icon-box big"><Icon name="check" weight="bold" size={28} /></div>

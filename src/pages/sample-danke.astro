@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../data/site';
 ---
-<Base title="Sample ist unterwegs" description="Bestätigung für dein kostenloses Sample." noindex={true}>
+<Base title="Sample ist unterwegs" description="Bestätigung für dein kostenloses Sample." noindex={true} hideCta={true}>
   <section class="section">
     <div class="container done" data-endpoint={site.checkoutApi}>
       <div class="icon-box big"><Icon name="check" weight="bold" size={28} /></div>
