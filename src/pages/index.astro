@@ -150,12 +150,18 @@ const prints = [
         <h2>Echte Drucke, keine Mockups</h2>
       </div>
     </div>
-    <div class="gallery reveal" tabindex="0" aria-label="Galerie mit Druckbeispielen, horizontal scrollbar">
-      {prints.map((p) => (
-        <figure>
-          <img src={p.src} alt={p.alt} width="1400" height="1050" loading="lazy" />
-        </figure>
-      ))}
+    <div class="marquee reveal" aria-label="Galerie mit Druckbeispielen, läuft endlos durch">
+      <div class="marquee-track">
+        {[0, 1].map((copy) => (
+          <div class="marquee-group" aria-hidden={copy === 1}>
+            {prints.map((p) => (
+              <figure>
+                <img src={p.src} alt={copy === 0 ? p.alt : ''} width="1400" height="1050" loading="lazy" draggable="false" />
+              </figure>
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -304,10 +310,16 @@ const prints = [
 
   /* Gallery */
   .gallery-section { overflow: hidden; }
-  .gallery { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px max(24px, calc((100vw - var(--container)) / 2 + 24px)) 12px; scrollbar-width: none; }
-  .gallery::-webkit-scrollbar { display: none; }
-  .gallery figure { margin: 0; flex: 0 0 min(72vw, 520px); scroll-snap-align: start; }
-  .gallery img { border-radius: var(--radius-card); border: 1px solid var(--line); aspect-ratio: 4 / 3; object-fit: cover; }
+  /* Endlos-Karussell: zwei identische Gruppen, die Spur wandert um eine Gruppenbreite und springt nahtlos zurück. */
+  .marquee { overflow: hidden; padding: 4px 0 12px; mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+  .marquee-track { display: flex; width: max-content; animation: marquee 48s linear infinite; }
+  .marquee:hover .marquee-track, .marquee:focus-within .marquee-track { animation-play-state: paused; }
+  .marquee-group { display: flex; gap: 16px; padding-right: 16px; flex: none; }
+  .marquee figure { margin: 0; flex: 0 0 min(72vw, 460px); }
+  .marquee img { border-radius: var(--radius-card); border: 1px solid var(--line); aspect-ratio: 4 / 3; object-fit: cover; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (max-width: 700px) { .marquee-track { animation-duration: 36s; } }
+  @media (prefers-reduced-motion: reduce) { .marquee { mask-image: none; -webkit-mask-image: none; overflow-x: auto; } .marquee-track { animation: none; } }
 
   /* About */
   .about-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
