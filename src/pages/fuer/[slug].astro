@@ -13,6 +13,7 @@ const { z } = Astro.props;
 const related = zielgruppen.filter((o) => o.slug !== z.slug && o.group === z.group).slice(0, 3);
 const more = zielgruppen.filter((o) => o.slug !== z.slug && o.group !== z.group).slice(0, 3 - related.length);
 const rel = [...related, ...more];
+const iconFor = (t: string) => /hoodie|sweat|pullover/i.test(t) ? 'hoodie' : /cap|beanie|mütze/i.test(t) ? 'baseball-cap' : /beutel|tote|tasche|bag/i.test(t) ? 'tote' : /jacke|softshell|weste/i.test(t) ? 'coat-hanger' : /print-on-demand|versand|shop/i.test(t) ? 'package' : /short|hose|jogger/i.test(t) ? 'pants' : 't-shirt';
 const ld = [
   { '@context': 'https://schema.org', '@type': 'Service', name: z.title, serviceType: 'Textildruck', description: z.description, provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: [{ '@type': 'City', name: 'Oberhausen' }, { '@type': 'AdministrativeArea', name: 'Ruhrgebiet' }, { '@type': 'AdministrativeArea', name: 'Nordrhein-Westfalen' }, { '@type': 'Country', name: 'Deutschland' }], audience: { '@type': 'Audience', audienceType: z.name }, url: `${site.url}/fuer/${z.slug}`, offers: { '@type': 'Offer', description: 'Angebot innerhalb von 24 Stunden, ab 1 Stück, Staffelpreise ab 10 bis 50 Stück' } },
   { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: z.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
@@ -34,26 +35,51 @@ const ld = [
     </div>
   </section>
 
-  <section class="section-tight">
-    <div class="container zg-grid">
-      <div>
+  <section class="section-tight offer">
+    <div class="container">
+      <div class="offer-head">
         <h2>Was wir für {z.name} drucken</h2>
-        <ul class="products">{z.products.map((p) => <li><Icon name="check" weight="bold" size={14} /> {p}</li>)}</ul>
+        <p class="muted">Typische Teile, die wir für diese Gruppe bedrucken. Alles ab Lager, in allen Größen, mit eurem Motiv.</p>
       </div>
-      <div class="benefits">
-        {z.benefits.map((b) => <div class="benefit"><h3>{b.t}</h3><p>{b.d}</p></div>)}
-      </div>
+      <ul class="products">
+        {z.products.map((p, i) => (
+          <li class={`product reveal reveal-d${i % 4}`}>
+            <span class="product-icon"><Icon name={iconFor(p)} size={34} /></span>
+            <span class="product-name">{p}</span>
+          </li>
+        ))}
+      </ul>
+      <ul class="benefits">
+        {z.benefits.map((b, i) => (
+          <li class={`benefit reveal reveal-d${i}`}>
+            <span class="benefit-icon"><Icon name="check-circle" weight="fill" size={22} /></span>
+            <div><h3>{b.t}</h3><p>{b.d}</p></div>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
-  <section class="section-tight steps-section">
+  <section class="section steps-section">
     <div class="container">
-      <h2>So läuft es ab</h2>
+      <div class="steps-head">
+        <h2>In drei Schritten zu euren Textilien</h2>
+        <p class="muted">Kein Ticketsystem, kein Warten. Ihr schreibt, wir antworten innerhalb von 24 Stunden mit einem festen Preis.</p>
+      </div>
       <ol class="steps">
-        <li><strong>Anfrage</strong><span>Motiv, Textil, Stückzahl, Wunschtermin. Per Formular, WhatsApp oder Mail.</span></li>
-        <li><strong>Angebot in 24 Stunden</strong><span>Fester Stückpreis, Korrekturabzug mit eurem Motiv, Liefertermin.</span></li>
-        <li><strong>Druck und Lieferung</strong><span>Produktion in Oberhausen, Versand mit DHL oder Abholung.</span></li>
+        {[
+          { icon: 'chat-circle-dots', t: 'Anfrage senden', d: 'Motiv, Textil, Stückzahl und Wunschtermin. Per Formular, WhatsApp oder Mail, auch als Skizze oder Foto.' },
+          { icon: 'file-text', t: 'Angebot in 24 Stunden', d: 'Fester Stückpreis, Korrekturabzug mit eurem Motiv auf dem Textil, verbindlicher Liefertermin. Ihr gebt frei.' },
+          { icon: 'package', t: 'Druck und Lieferung', d: 'Produktion in Oberhausen, jedes Teil geprüft. Versand mit DHL, sortiert nach Größe, oder Abholung.' },
+        ].map((st, i) => (
+          <li class={`reveal reveal-d${i}`}>
+            <div class="step-badge"><span class="step-no">0{i + 1}</span><Icon name={st.icon} size={26} /></div>
+            <h3>{st.t}</h3>
+            <p>{st.d}</p>
+          </li>
+        ))}
       </ol>
+      <div class="steps-cta reveal"><a href="#anfrage" class="btn btn-primary btn-lg">Jetzt anfragen <Icon name="arrow-right" size={18} /></a><span class="muted">Kostenlos und unverbindlich.</span></div>
     </div>
   </section>
 
@@ -81,18 +107,41 @@ const ld = [
   .answer { max-width: 68ch; font-size: 1.12rem; color: var(--text); }
   .facts { display: grid; gap: 10px; } .facts li { display: flex; gap: 10px; align-items: center; color: var(--text-2); font-size: 15px; }
   .facts :global(svg) { color: var(--accent); flex: none; }
-  .zg-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(24px, 4vw, 56px); align-items: start; }
-  .products { display: grid; gap: 10px; margin-top: 16px; } .products li { display: flex; gap: 10px; align-items: center; font-size: 15.5px; }
-  .products :global(svg) { color: var(--accent); flex: none; }
-  .benefits { display: grid; gap: 14px; } .benefit { padding: 20px 22px; border-radius: 12px; background: var(--surface); }
-  .benefit h3 { font-size: 16px; margin-bottom: 4px; } .benefit p { color: var(--text-2); font-size: 14.5px; }
-  .steps-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; counter-reset: s; }
-  .steps li { display: grid; gap: 6px; padding-top: 14px; border-top: 2px solid var(--accent); }
-  .steps li::before { counter-increment: s; content: '0' counter(s); font-family: 'Bricolage Grotesque Variable', sans-serif; font-weight: 750; font-size: 28px; color: var(--accent); }
-  .steps span { color: var(--text-2); font-size: 14.5px; }
+  .offer-head { max-width: 62ch; margin-bottom: clamp(24px, 3vw, 40px); } .offer-head p { margin-top: 10px; }
+  .products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .product { position: relative; display: grid; gap: 18px; padding: 26px 24px 22px; border-radius: 18px; background: linear-gradient(180deg, var(--surface-2), var(--surface)); overflow: hidden; transition: transform 0.5s var(--ease); }
+  .product::after { content: ''; position: absolute; inset: auto -40px -60px auto; width: 160px; height: 160px; border-radius: 50%; background: radial-gradient(circle, var(--accent-soft), transparent 70%); pointer-events: none; }
+  .product:hover { transform: translateY(-4px); }
+  .product-icon { width: 64px; height: 64px; border-radius: 18px; display: grid; place-items: center; color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line); }
+  .product-name { font-weight: 600; font-size: 15.5px; line-height: 1.35; text-wrap: balance; }
+  .benefits { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vw, 40px); margin-top: clamp(36px, 5vw, 56px); padding-top: clamp(28px, 4vw, 40px); border-top: 1px solid var(--line); }
+  .benefit { display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: start; }
+  .benefit-icon { color: var(--accent); display: grid; place-items: center; height: 28px; }
+  .benefit h3 { font-size: 17px; margin-bottom: 6px; } .benefit p { color: var(--text-2); font-size: 15px; }
+  @media (max-width: 900px) { .products { grid-template-columns: 1fr 1fr; } .benefits { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) { .products { grid-template-columns: 1fr; } }
+  .steps-section { position: relative; overflow: hidden; background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .steps-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(700px 320px at 50% 0%, var(--accent-soft), transparent 70%); pointer-events: none; }
+  .steps-head { text-align: center; max-width: 62ch; margin: 0 auto clamp(36px, 5vw, 64px); position: relative; }
+  .steps-head p { margin-top: 12px; font-size: 1.05rem; }
+  .steps { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vw, 40px); text-align: center; }
+  .steps::before { content: ''; position: absolute; top: 44px; left: calc(100% / 6); right: calc(100% / 6); height: 1px; background: linear-gradient(90deg, transparent, var(--accent-line) 20%, var(--accent-line) 80%, transparent); }
+  .steps li { position: relative; display: grid; justify-items: center; gap: 10px; padding: 0 clamp(8px, 2vw, 24px); }
+  .step-badge { position: relative; width: 88px; height: 88px; border-radius: 22px; display: grid; place-items: center; color: var(--accent); background: linear-gradient(180deg, var(--surface-2), var(--surface)); border: 1px solid var(--accent-line); box-shadow: 0 0 0 6px var(--bg-2), 0 0 40px -8px rgba(79, 207, 120, 0.45); margin-bottom: 10px; transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease); }
+  .steps li:hover .step-badge { transform: translateY(-4px); box-shadow: 0 0 0 6px var(--bg-2), 0 0 56px -6px rgba(79, 207, 120, 0.6); }
+  .step-no { position: absolute; top: -12px; right: -12px; min-width: 32px; height: 32px; padding: 0 8px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-family: 'Bricolage Grotesque Variable', sans-serif; font-weight: 750; font-size: 14px; display: grid; place-items: center; }
+  .steps h3 { font-size: 19px; }
+  .steps p { color: var(--text-2); font-size: 15px; max-width: 32ch; }
+  .steps-cta { display: flex; justify-content: center; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: clamp(36px, 5vw, 56px); position: relative; }
+  @media (max-width: 800px) {
+    .steps { grid-template-columns: 1fr; gap: 28px; text-align: left; }
+    .steps::before { top: 0; bottom: 0; left: 43px; right: auto; width: 1px; height: auto; background: linear-gradient(180deg, transparent, var(--accent-line) 10%, var(--accent-line) 90%, transparent); }
+    .steps li { grid-template-columns: 88px 1fr; justify-items: start; column-gap: 18px; padding: 0; }
+    .steps li h3 { grid-column: 2; align-self: end; } .steps li p { grid-column: 2; }
+    .step-badge { grid-row: 1 / span 2; margin: 0; }
+  }
   .zg-form { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(24px, 4vw, 56px); align-items: start; }
   .zg-form .muted { margin-top: 10px; } .small { font-size: 13px; }
   .related { padding-bottom: 0; } .related h2 { margin-bottom: 20px; }
-  @media (max-width: 900px) { .zg-intro, .zg-grid, .zg-form { grid-template-columns: 1fr; } .steps { grid-template-columns: 1fr; } }
+  @media (max-width: 900px) { .zg-intro, .zg-form { grid-template-columns: 1fr; } }
 </style>
