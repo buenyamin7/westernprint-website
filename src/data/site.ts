@@ -3,7 +3,7 @@ export const site = {
   name: 'westernprint',
   legalName: 'westernprint GmbH',
   url: 'https://westernprint.de',
-  tagline: 'Print-on-Demand Druckerei aus Oberhausen',
+  tagline: 'Textildruck aus Oberhausen',
   phone: '+49 176 55412198',
   phoneHref: 'tel:+4917655412198',
   whatsapp: 'https://wa.me/4917655412198',
@@ -23,17 +23,18 @@ export const site = {
 };
 
 export const nav = [
-  { label: 'Print-on-Demand', href: '/print-on-demand' },
-  { label: 'Großauflagen', href: '/grossauflagen' },
   { label: 'Druckverfahren', href: '/druckverfahren' },
+  { label: 'Großauflagen', href: '/grossauflagen' },
+  { label: 'Textilien', href: '/textilien' },
+  { label: 'Print-on-Demand', href: '/print-on-demand' },
   { label: 'Über uns', href: '/ueber-uns' },
 ];
 
 export const stats = [
-  { value: '80.000+', label: 'belieferte Endkunden' },
-  { value: '1 Mio. €', label: 'Umsatz unserer Partner-Shops' },
-  { value: '5 Jahre', label: 'Print-on-Demand Erfahrung' },
-  { value: '1-3 Tage', label: 'Versand innerhalb Deutschlands' },
+  { value: '80.000+', label: 'bedruckte Textilien' },
+  { value: 'Ab 1 Stück', label: 'ohne Mindestmenge' },
+  { value: '24 h', label: 'bis zum Angebot' },
+  { value: '1-3 Tage', label: 'Produktion und Versand' },
 ];
 
 export const testimonials = [
@@ -60,8 +61,12 @@ export const faqs = [
     a: 'Nein. Wir produzieren ab 1 Stück. Für Großauflagen ab 50 Stück gibt es Staffelpreise und ein individuelles Angebot.',
   },
   {
-    q: 'Wie funktioniert Print-on-Demand mit westernprint?',
-    a: 'Du verbindest deinen Shopify-Shop mit unserer App oder unserem Kundenportal. Geht eine Bestellung ein, drucken, verpacken und versenden wir neutral in deinem Namen an deinen Kunden.',
+    q: 'Wie schnell bekomme ich ein Angebot?',
+    a: 'Innerhalb von 24 Stunden an Werktagen, meist schneller. Du bekommst einen festen Preis, einen Korrekturabzug mit deinem Motiv auf dem Textil und einen Liefertermin.',
+  },
+  {
+    q: 'Kann ich eigene Textilien anliefern?',
+    a: 'Ja. Wir bedrucken auch angelieferte Ware, dann zahlst du nur den Druck. Wir empfehlen 2 bis 3 Prozent Reserve, für Materialfehler an beigestellter Ware haften wir nicht.',
   },
   {
     q: 'Wie schnell wird geliefert?',
@@ -80,8 +85,12 @@ export const faqs = [
     a: 'Am besten PNG mit transparentem Hintergrund in 300 dpi oder eine vektorisierte PDF. Wir prüfen jede Datei vor dem Druck und melden uns, wenn etwas nicht passt.',
   },
   {
-    q: 'Wie läuft die Abrechnung bei Print-on-Demand?',
-    a: 'Feste Preise pro Produkt inklusive Druck. Du bekommst wöchentlich eine Abrechnung über alle produzierten Artikel. Keine Einrichtungsgebühr, kein Mindestumsatz.',
+    q: 'Wie bezahle ich?',
+    a: 'Einzelstücke im Shop per PayPal, Klarna, Kreditkarte oder Überweisung. Aufträge auf Angebot per Vorkasse oder Rechnung, Firmen und Vereine auf Rechnung nach Absprache.',
+  },
+  {
+    q: 'Macht ihr auch Print-on-Demand für Shops?',
+    a: 'Ja, als eigenes Angebot für Shop-Betreiber: Wir drucken und versenden deine Bestellungen neutral in deinem Namen. Alle Infos auf der Seite Print-on-Demand.',
   },
 ];
 
