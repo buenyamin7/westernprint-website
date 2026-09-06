@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Tiles from '../components/Tiles.astro';
 import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import CtaBand from '../components/CtaBand.astro';
@@ -14,25 +15,14 @@ const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'DTF
     imageAlt="Detailaufnahme eines DTF-Drucks, jede Linie gestochen scharf"
   />
 
-  <section class="section">
+  <section class="section methods-section">
     <div class="container">
-      <div class="methods">
-        {[
-          { icon: 'printer', t: 'DTF (Direct to Film)', best: 'Standard für Print-on-Demand und Auflagen', d: 'Das Motiv wird auf Folie gedruckt und mit Kleberpulver aufs Textil gepresst. Deckend auf hellen und dunklen Stoffen, dehnbar, waschfest. Für komplexe Motive, Farbverläufe und alle Materialien von Baumwolle bis Polyester.', tags: ['Ab 1 Stück', 'Alle Textilien', 'Farbverläufe', 'Sehr haltbar'] },
-          { icon: 't-shirt', t: 'DTG (Direct to Garment)', best: 'Fotorealistische Einzelstücke', d: 'Der Drucker druckt direkt ins Gewebe. Weicher Griff, feinste Details, ideal für fotorealistische Motive mit vielen Farben auf Baumwolle. Wir nutzen Epson-DTG mit Vorbehandlung für satte Farben.', tags: ['Ab 1 Stück', 'Baumwolle', 'Fotorealistisch', 'Weicher Griff'] },
-          { icon: 'coffee', t: 'Sublimation', best: 'Tassen, Taschen und Accessoires', d: 'Die Farbe wird per Hitze in die Beschichtung eingedampft. Satte Farben, spülmaschinenfest, praktisch unzerstörbar. Für Tassen, Polyester-Textilien und Accessoires.', tags: ['Tassen', 'Polyester', 'Spülmaschinenfest'] },
-        ].map((m, i) => (
-          <article class={`method reveal reveal-d${i}`}>
-            <div class="method-head">
-              <div class="icon-box"><Icon name={m.icon} size={22} /></div>
-              <div><h2>{m.t}</h2><span class="muted">{m.best}</span></div>
-            </div>
-            <p>{m.d}</p>
-            <div class="tags">{m.tags.map((t) => <span class="tag">{t}</span>)}</div>
-          </article>
-        ))}
-      </div>
     </div>
+    <Tiles items={[
+      { img: '/img/druck-outside.jpg', pos: 'center 40%', tag: 'Standard für Auflagen und Einzelstücke', t: 'DTF (Direct to Film)', d: 'Motiv auf Folie gedruckt, mit Kleberpulver aufs Textil gepresst. Deckend auf hellen und dunklen Stoffen, dehnbar, waschfest bis 60 °C. Für komplexe Motive, Farbverläufe und alle Materialien von Baumwolle bis Polyester.', big: true },
+      { img: '/img/druck-makro.jpg', tag: 'Fotorealistische Einzelstücke', t: 'DTG (Direct to Garment)', d: 'Direkt ins Gewebe gedruckt. Weicher Griff, feinste Details, ideal für Fotos und viele Farben auf Baumwolle.' },
+      { img: '/img/packtisch.jpg', tag: 'Tassen, Taschen, Accessoires', t: 'Sublimation', d: 'Farbe wird per Hitze in die Beschichtung eingedampft. Satte Farben, spülmaschinenfest, praktisch unzerstörbar.' },
+    ]} rows="clamp(260px, 26vw, 380px)" />
   </section>
 
   <section class="section-tight table-section">

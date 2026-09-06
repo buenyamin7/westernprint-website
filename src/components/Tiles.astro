@@ -1,0 +1,43 @@
+---
+// Randloses Bildraster: Fotos mit Text darüber, keine Rahmen. Wird für Leistungen, Zielgruppen und Partner benutzt.
+import Icon from './Icon.astro';
+interface Tile { href?: string; img: string; pos?: string; tag?: string; t: string; d: string; big?: boolean; cta?: string; alt?: string }
+interface Props { items: Tile[]; cols?: 2 | 3; rows?: string; class?: string }
+const { items, cols = 3, rows = 'clamp(260px, 26vw, 380px)', class: cls = '' } = Astro.props;
+---
+<div class={`tiles cols-${cols} ${cls}`} style={`--rows:${rows}`}>
+  {items.map((c, i) => {
+    const Tag = c.href ? 'a' : 'div';
+    return (
+      <Tag href={c.href} class={`tile ${c.big ? 'tile-big' : ''} reveal reveal-d${i % 3}`}>
+        <img src={c.img} alt={c.alt ?? ''} width="1400" height="1050" loading="lazy" style={c.pos ? `object-position:${c.pos}` : undefined} />
+        <div class="tile-body">
+          {c.tag && <span class="tile-tag">{c.tag}</span>}
+          <h3>{c.t}</h3>
+          <p>{c.d}</p>
+          {c.href && <span class="more">{c.cta ?? 'Mehr erfahren'} <Icon name="arrow-right" size={16} /></span>}
+        </div>
+      </Tag>
+    );
+  })}
+</div>
+
+<style>
+  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: var(--rows); gap: 4px; }
+  .tiles.cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .tile { position: relative; display: block; overflow: hidden; background: var(--surface); color: #fff; }
+  .tile-big { grid-column: 1 / 3; grid-row: span 2; }
+  .tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--ease); }
+  .tile:hover img { transform: scale(1.04); }
+  .tile::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(6,8,7,0.92) 0%, rgba(6,8,7,0.55) 40%, rgba(6,8,7,0.05) 75%); }
+  .tile-body { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; padding: clamp(18px, 2.5vw, 32px); display: grid; gap: 6px; }
+  .tile-tag { font-size: 12.5px; font-weight: 600; color: var(--accent); letter-spacing: 0.02em; }
+  .tile h3 { font-size: clamp(18px, 1.6vw, 24px); color: #fff; }
+  .tile-big h3 { font-size: clamp(22px, 2.4vw, 34px); }
+  .tile p { color: rgba(255,255,255,0.78); font-size: 14.5px; max-width: 46ch; }
+  .tile-big p { font-size: 16px; }
+  .tile .more { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 14px; color: #6fe39a; margin-top: 4px; transform: translateX(-4px); opacity: 0.85; transition: transform 0.4s var(--ease), opacity 0.4s var(--ease); }
+  .tile:hover .more { transform: none; opacity: 1; }
+  @media (max-width: 900px) { .tiles, .tiles.cols-2 { grid-template-columns: 1fr 1fr; grid-auto-rows: 260px; } .tile-big { grid-column: 1 / 3; grid-row: auto; } }
+  @media (max-width: 600px) { .tiles, .tiles.cols-2 { grid-template-columns: 1fr; grid-auto-rows: 240px; } .tile-big { grid-column: auto; min-height: 320px; } }
+</style>

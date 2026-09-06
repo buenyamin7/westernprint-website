@@ -4,13 +4,14 @@ import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Faq from '../components/Faq.astro';
+import Tiles from '../components/Tiles.astro';
 import { site } from '../data/site';
 
 const brands = [
-  { t: 'Stanley/Stella', tag: 'Bio-Baumwolle, GOTS, Fair Wear', d: 'Der Standard für Marken, die Qualität zeigen wollen. Creator, Crafter, Cruiser, Drummer und über 40 Farben, alle ab Lager. Weicher Griff, saubere Passformen, in fünf Jahren von uns über 80.000 Mal bedruckt.', for: 'Premium-Merch, Firmenkleidung, Bio-Ansprüche' },
-  { t: 'Stedman', tag: 'Preisstark, robust, viele Größen', d: 'Classic-T, Comfort-T, Classic Hoodie und Polo bis 5XL. Wenn 200 Vereinsshirts oder Eventkleidung kalkulierbar bleiben müssen, ohne dass der Druck leidet.', for: 'Vereine, Events, Großauflagen, Workwear' },
-  { t: 'Build Your Brand', tag: 'Heavy Oversize, Boxy, Acid Wash', d: 'Die Blanks, mit denen Streetwear-Marken heute starten: 240er Heavy Oversize Tees, Boxy Hoodies, Ultra Heavy Sweats. Schwerer Stoff, tiefe Schulter, Brand-Look ohne eigene Produktion.', for: 'Streetwear-Brands, Drops, Merch mit Statement' },
-  { t: 'Urban Classics', tag: 'Streetwear-Basics, große Farbpalette', d: 'Oversized Tees, Hoodies, Longsleeves und Caps zu fairen Preisen. Die Schwestermarke von Build Your Brand für Kollektionen, die breit aufgestellt sein sollen.', for: 'Erste Kollektion, Caps und Accessoires, Nachbestellung' },
+  { t: 'Stanley/Stella', img: '/img/lager-rohware.jpg', pos: 'center 40%', tag: 'Bio-Baumwolle, GOTS, Fair Wear', d: 'Der Standard für Marken, die Qualität zeigen wollen. Creator, Crafter, Cruiser, Drummer und über 40 Farben, alle ab Lager. Weicher Griff, saubere Passformen, in fünf Jahren von uns über 80.000 Mal bedruckt.', for: 'Premium-Merch, Firmenkleidung, Bio-Ansprüche' },
+  { t: 'Stedman', img: '/img/lager-regal-werkstatt.jpg', pos: 'center 60%', tag: 'Preisstark, robust, viele Größen', d: 'Classic-T, Comfort-T, Classic Hoodie und Polo bis 5XL. Wenn 200 Vereinsshirts oder Eventkleidung kalkulierbar bleiben müssen, ohne dass der Druck leidet.', for: 'Vereine, Events, Großauflagen, Workwear' },
+  { t: 'Build Your Brand', img: '/img/streetwear-trio.jpg', pos: 'center 20%', tag: 'Heavy Oversize, Boxy, Acid Wash', d: 'Die Blanks, mit denen Streetwear-Marken heute starten: 240er Heavy Oversize Tees, Boxy Hoodies, Ultra Heavy Sweats. Schwerer Stoff, tiefe Schulter, Brand-Look ohne eigene Produktion.', for: 'Streetwear-Brands, Drops, Merch mit Statement' },
+  { t: 'Urban Classics', img: '/img/hero-rack.jpg', pos: 'center', tag: 'Streetwear-Basics, große Farbpalette', d: 'Oversized Tees, Hoodies, Longsleeves und Caps zu fairen Preisen. Die Schwestermarke von Build Your Brand für Kollektionen, die breit aufgestellt sein sollen.', for: 'Erste Kollektion, Caps und Accessoires, Nachbestellung' },
 ];
 const faqs = [
   { q: 'Welche Blanks eignen sich für eine Streetwear-Brand?', a: 'Heavy Oversize T-Shirts ab 240 g/m², Boxy Hoodies und Ultra Heavy Sweats von Build Your Brand oder Urban Classics. Schwerer Stoff, tiefe Schultern, kräftige Farben. Genau der Look, den Marken wie Peso, LFDY oder Pegador tragen. Wir haben sie ab Lager oder besorgen sie in wenigen Tagen.' },
@@ -32,23 +33,14 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
     imageAlt="Vier Models in unbedruckten Oversize-Hoodies in Hellblau, Rosa, Sand und Navy sitzen vor grauem Studiohintergrund"
   />
 
-  <section class="section">
+  <section class="section partners">
     <div class="container">
       <div class="section-head reveal">
         <h2>Vier Partner, ein Anspruch: Der Druck muss halten</h2>
         <p>Wir haben jedes dieser Textilien selbst gewaschen, gepresst und reklamiert, bevor es ins Sortiment kam. Was hier steht, empfehlen wir auch, wenn du fragst.</p>
       </div>
-      <div class="brands">
-        {brands.map((b, i) => (
-          <div class={`brand reveal reveal-d${i % 2}`}>
-            <span class="tag">{b.tag}</span>
-            <h3>{b.t}</h3>
-            <p>{b.d}</p>
-            <p class="for"><Icon name="check" weight="bold" size={14} /> {b.for}</p>
-          </div>
-        ))}
-      </div>
     </div>
+    <Tiles cols={2} items={brands.map((b) => ({ img: b.img, pos: b.pos, tag: b.tag, t: b.t, d: `${b.d} Für: ${b.for}.` }))} rows="clamp(300px, 30vw, 440px)" />
   </section>
 
   <section class="section brand-section" id="brand-gruenden">
@@ -112,6 +104,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
 </Base>
 
 <style>
+  .partners { padding-bottom: 0; }
   :global(.phero-img img) { object-position: center 20% !important; }
   .brands { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .brand { padding: 28px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); display: grid; gap: 10px; align-content: start; }

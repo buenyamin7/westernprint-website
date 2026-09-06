@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Tiles from '../components/Tiles.astro';
 import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import ContactForm from '../components/ContactForm.astro';
@@ -15,26 +16,18 @@ const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'Tex
     cta={{ label: 'Angebot in 24h', href: '#anfrage' }}
   />
 
-  <section class="section">
+  <section class="section audience">
     <div class="container">
       <div class="section-head reveal">
         <h2>Für wen wir in Auflage drucken</h2>
       </div>
-      <div class="grid grid-4">
-        {[
-          { icon: 'users', t: 'Vereine und Teams', d: 'Trikots, Trainingsshirts, Fanartikel mit Namen und Nummern.' },
-          { icon: 'buildings', t: 'Firmen und Corporate', d: 'Workwear, Polos und Hoodies mit Logo. Auf Wunsch mit Nachbestell-Shop.' },
-          { icon: 'sparkle', t: 'Messen und Events', d: 'Crew-Shirts und Give-aways termingerecht zum Event.' },
-          { icon: 'stack', t: 'Schulen und Abschluss', d: 'Abi-Shirts und Kita-Abschluss mit allen Namen auf dem Rücken.' },
-        ].map((b, i) => (
-          <div class={`feat reveal reveal-d${i}`}>
-            <div class="icon-box"><Icon name={b.icon} size={22} /></div>
-            <h3>{b.t}</h3>
-            <p>{b.d}</p>
-          </div>
-        ))}
-      </div>
     </div>
+    <Tiles cols={2} items={[
+      { href: '#anfrage', img: '/img/referenz-live2luv.jpg', pos: 'center 55%', t: 'Vereine und Teams', d: 'Trikots, Trainingsshirts, Fanartikel mit Namen und Nummern.', cta: 'Anfrage' },
+      { href: '#anfrage', img: '/img/werkstatt-heisspresse.jpg', pos: 'center 40%', t: 'Firmen und Corporate', d: 'Workwear, Polos und Hoodies mit Logo. Auf Wunsch mit Nachbestell-Shop.', cta: 'Anfrage' },
+      { href: '#anfrage', img: '/img/streetwear-group.jpg', pos: 'center 30%', t: 'Messen und Events', d: 'Crew-Shirts und Give-aways termingerecht zum Event.', cta: 'Anfrage' },
+      { href: '#anfrage', img: '/img/packtisch.jpg', t: 'Schulen und Abschluss', d: 'Abi-Shirts und Kita-Abschluss mit allen Namen auf dem Rücken.', cta: 'Anfrage' },
+    ]} rows="clamp(260px, 24vw, 360px)" />
   </section>
 
   <section class="section-tight info-section">
@@ -69,6 +62,7 @@ const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'Tex
 </Base>
 
 <style>
+  .audience { padding-bottom: 0; }
   .feat { display: grid; gap: 12px; padding: 26px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); }
   .feat p { color: var(--text-2); font-size: 15px; }
   .info-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
