@@ -23,12 +23,12 @@ export const site = {
 };
 
 export const nav = [
-  { label: 'Für wen', href: '/fuer' },
   { label: 'Druckverfahren', href: '/druckverfahren' },
   { label: 'Großauflagen', href: '/grossauflagen' },
   { label: 'Textilien', href: '/textilien' },
   { label: 'Print-on-Demand', href: '/print-on-demand' },
   { label: 'Über uns', href: '/ueber-uns' },
+  { label: 'Für wen', href: '/fuer' },
 ];
 
 export const stats = [
