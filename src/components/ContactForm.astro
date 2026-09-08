@@ -131,6 +131,7 @@ const topics = ['Print-on-Demand Fulfillment', 'Großauflage ab 50 Stück', 'B2B
         const j = await res.json().catch(() => ({}));
         if (!res.ok || !j.ok) throw new Error(j.error || String(res.status));
         form.reset();
+        (window as any).wpTrack?.('lead');
         setNote('ok', 'Danke! Deine Anfrage ist angekommen. Wir melden uns werktags meist innerhalb weniger Stunden per E-Mail.');
       } catch (ex) {
         const why = (ex as Error).message; const known = /fehlt|ungültig/.test(why);

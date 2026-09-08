@@ -5,6 +5,7 @@ import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import Icon from '../components/Icon.astro';
+import Consent from '../components/Consent.astro';
 import { site } from '../data/site';
 
 interface Props {
@@ -104,6 +105,7 @@ const ldBlocks = [orgLd, webLd, ...(crumbLd ? [crumbLd] : []), ...(Array.isArray
       <slot />
     </main>
     <Footer />
+    <Consent />
 
     {!hideCta && <div class="mobile-cta" aria-label="Schnellkontakt">
       <a href={site.whatsapp} target="_blank" rel="noopener" class="btn btn-ghost" aria-label="WhatsApp schreiben"><Icon name="whatsapp-logo" size={20} /> WhatsApp</a>

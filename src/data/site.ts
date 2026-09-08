@@ -20,6 +20,9 @@ export const site = {
   // Motiv-Uploads im Shop: Cloudinary (kostenlos). Leer = Datei wird nach der Bestellung angefordert.
   cloudinary: { cloudName: 'c5unvw6r', uploadPreset: 'westernprint' },
   ogImage: '/og-default.jpg',
+  // Google Ads Conversion-Tag. id = 'AW-XXXXXXXXXX' aus dem Google-Ads-Konto, conversions = Labels je Aktion.
+  // Leer lassen = kein Tag, kein Banner, Seite bleibt cookielos.
+  googleAds: { id: '', conversions: { lead: '', whatsapp: '' } },
 };
 
 export const nav = [
