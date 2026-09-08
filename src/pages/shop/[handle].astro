@@ -300,17 +300,17 @@ const details = [
   .crumbs { font-size: 14px; margin-bottom: 18px; display: flex; gap: 8px; flex-wrap: wrap; } .crumbs a:hover { color: var(--text); }
   .pgrid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
   .pvisual { position: sticky; top: calc(var(--nav-h) + 16px); }
-  .stage { position: relative; border-radius: var(--radius-card); overflow: hidden; background: #f4f4f4; border: 1px solid var(--line); }
-  .stage img[data-stage-img] { width: 100%; aspect-ratio: 4 / 5; object-fit: contain; padding: 4%; box-sizing: border-box; }
+  .stage { position: relative; border-radius: 22px; overflow: hidden; background: radial-gradient(70% 55% at 50% 60%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 75%); }
+  .stage img[data-stage-img] { width: 100%; aspect-ratio: 4 / 5; object-fit: contain; padding: 4%; box-sizing: border-box; filter: drop-shadow(0 30px 40px rgba(0,0,0,0.45)); }
   .motif { position: absolute; transform: translate(-50%, -50%); cursor: grab; touch-action: none; filter: drop-shadow(0 1px 1px rgba(0,0,0,.25)); max-width: none; }
   .motif:active { cursor: grabbing; }
-  .stage-tabs { position: absolute; top: 12px; right: 12px; display: flex; background: rgba(255,255,255,.92); border-radius: 999px; padding: 3px; box-shadow: 0 2px 10px rgba(0,0,0,.12); }
-  .stage-tabs button { border: 0; background: transparent; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; color: #333; cursor: pointer; }
-  .stage-tabs button.is-on { background: #111; color: #fff; }
+  .stage-tabs { position: absolute; top: 12px; right: 12px; display: flex; background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: 3px; }
+  .stage-tabs button { border: 0; background: transparent; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--text-2); cursor: pointer; }
+  .stage-tabs button.is-on { background: var(--accent); color: var(--accent-ink); }
   .stage-hint { position: absolute; left: 12px; bottom: 12px; font-size: 12px; padding: 5px 10px; border-radius: 999px; background: rgba(0,0,0,.65); color: #fff; display: inline-flex; gap: 6px; align-items: center; }
   .thumbs { display: flex; gap: 8px; margin-top: 10px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   .thumbs::-webkit-scrollbar { display: none; }
-  .thumbs button { flex: none; width: 64px; border-radius: 8px; overflow: hidden; border: 2px solid var(--line); background: #f4f4f4; padding: 0; cursor: pointer; }
+  .thumbs button { flex: none; width: 64px; border-radius: 10px; overflow: hidden; border: 2px solid transparent; background: var(--surface); padding: 2px; cursor: pointer; }
   .thumbs button.is-on { border-color: var(--accent); }
   .thumbs img { aspect-ratio: 4 / 5; object-fit: contain; }
 
