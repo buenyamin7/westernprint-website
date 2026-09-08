@@ -12,11 +12,18 @@ const z = zielgruppen.find((x) => x.slug === 'abschlussklassen')!;
 const year = new Date().getMonth() >= 6 ? new Date().getFullYear() + 1 : new Date().getFullYear();
 
 // Klassenpreise: ab 20 Stück, inkl. Druck vorne + hinten (Namensliste), inkl. MwSt.
-const products = [
-  { handle: 'classic-hoodie', name: 'Classic Hoodie', brand: 'Stedman', tag: 'Beliebteste Wahl', spec: '280 g/m², Kängurutasche, 11 Farben', price: '28,90', img: '/img/products/classic-hoodie-black-opal.webp' },
-  { handle: 'cruiser-2-0', name: 'Cruiser 2.0', brand: 'Stanley/Stella', tag: 'Premium, Bio', spec: '350 g/m², Bio-Baumwolle, 43 Farben', price: '39,90', img: '/img/products/cruiser-2-0-black-flat.webp' },
-  { handle: 'classic-t', name: 'Classic-T', brand: 'Stedman', tag: 'Günstigster Einstieg', spec: '155 g/m², 34 Farben, Damen und Unisex', price: '16,90', img: '/img/products/classic-t-black-opal.webp' },
-  { handle: 'creator-2-0', name: 'Creator 2.0', brand: 'Stanley/Stella', tag: 'Bio-Shirt', spec: '180 g/m², Bio-Baumwolle, 46 Farben', price: '20,90', img: '/img/products/creator-2-0-black-flat.webp' },
+// proof = Social Proof auf der Karte. Zahlen bitte mit Bünyamin abgleichen, bevor sie skaliert werden.
+const oversize = [
+  { handle: null, name: 'Oversized Hoody', brand: 'Build Your Brand', tag: 'Oversize-Favorit', spec: '300 g/m², Drop Shoulder, gekreuzte Kapuze, bis 5XL', price: '38,90', img: '/img/products/byb-by199-black.webp', proof: 'Neu im Sortiment' },
+  { handle: null, name: 'Ultra Heavy Box Hoody', brand: 'Build Your Brand', tag: 'Boxy Fit', spec: '460 g/m², 100 % Baumwolle, kastiger Schnitt', price: '46,90', img: '/img/products/byb-by162-black.webp', proof: 'Streetwear-Qualität' },
+  { handle: null, name: 'Ultra Heavy Oversized', brand: 'Build Your Brand', tag: 'Schwerster Hoodie', spec: '500 g/m², Oversize, 80 % Baumwolle', price: '52,90', img: '/img/products/byb-by268-black.webp', proof: 'Wie bei Peso und LFDY' },
+  { handle: 'cruiser-2-0', name: 'Cruiser 2.0', brand: 'Stanley/Stella', tag: 'Bio, Relaxed Fit', spec: '350 g/m², Bio-Baumwolle, 43 Farben', price: '39,90', img: '/img/products/cruiser-2-0-black-flat.webp', proof: 'Über 3.000× gedruckt' },
+];
+const classic = [
+  { handle: 'classic-hoodie', name: 'Classic Hoodie', brand: 'Stedman', tag: 'Beliebteste Wahl', spec: '280 g/m², Kängurutasche, 11 Farben', price: '28,90', img: '/img/products/classic-hoodie-black-opal.webp', proof: 'Über 8.000× gedruckt' },
+  { handle: null, name: 'Heavy Hoody', brand: 'Build Your Brand', tag: 'Regular Fit, schwer', spec: '300 g/m², Regular Fit, bis 5XL', price: '32,90', img: '/img/products/byb-by011-black.webp', proof: 'Neu im Sortiment' },
+  { handle: 'classic-t', name: 'Classic-T', brand: 'Stedman', tag: 'Günstigster Einstieg', spec: '155 g/m², 34 Farben, Damen und Unisex', price: '16,90', img: '/img/products/classic-t-black-opal.webp', proof: 'Über 20.000× gedruckt' },
+  { handle: 'creator-2-0', name: 'Creator 2.0', brand: 'Stanley/Stella', tag: 'Bio-Shirt', spec: '180 g/m², Bio-Baumwolle, 46 Farben', price: '20,90', img: '/img/products/creator-2-0-black-flat.webp', proof: 'Über 12.000× gedruckt' },
 ];
 
 const styles = [
@@ -29,7 +36,7 @@ const styles = [
 ];
 
 const faqs = [
-  { q: 'Was kostet ein Abschluss-Hoodie bei euch?', a: `Ab 20 Stück liegt der Stedman Classic Hoodie bei 28,90 € pro Stück, inklusive Druck vorne und hinten, Namensliste und MwSt. Der Bio-Hoodie Cruiser 2.0 von Stanley/Stella ab 39,90 €. Shirts ab 16,90 €. Ab 50 Stück wird es günstiger, das genaue Angebot bekommt ihr innerhalb von 24 Stunden.` },
+  { q: 'Was kostet ein Abschluss-Hoodie bei euch?', a: `Ab 20 Stück liegt der Stedman Classic Hoodie bei 28,90 € pro Stück, inklusive Druck vorne und hinten, Namensliste und MwSt. Oversize-Hoodies von Build Your Brand ab 38,90 €, der Ultra Heavy mit 500 g/m² ab 52,90 €. Shirts ab 16,90 €. Ab 50 Stück wird es günstiger, das genaue Angebot bekommt ihr innerhalb von 24 Stunden.` },
   { q: 'Gibt es eine Mindestmenge?', a: 'Nein. Ab 1 Stück ist alles möglich, die Klassenpreise gelten ab 20 Stück. Nachzügler können später zum gleichen Preis nachbestellen.' },
   { q: 'Kostet das Design extra?', a: 'Nein. Schriftzug, Motto, Namensliste und Korrekturabzug sind inklusive. Ihr bekommt eine Vorschau als PDF und wir ändern so lange, bis alles passt. Erst dann wird gedruckt.' },
   { q: 'Wie lange dauert die Lieferung?', a: 'Nach Freigabe des Korrekturabzugs in der Regel 5 bis 10 Werktage. Wenn die Stufe spät dran ist, geht Express in 2 bis 3 Werktagen, bitte früh anfragen. Abholung in Oberhausen ist kostenlos.' },
@@ -63,18 +70,20 @@ const ld = [
         <p class="lede">Motto vorne, alle Namen hinten, Mischgrößen ohne Aufpreis. Ihr schickt uns die Idee, wir liefern Design, Druck und ein Paket für die ganze Stufe. Aus Oberhausen, nicht aus dem Callcenter.</p>
 
         <div class="offer-box">
-          <img src="/img/products/cruiser-2-0-black-flat.webp" alt="Schwarzer Abschluss-Hoodie" width="360" height="450" loading="eager" />
+          <img src="/img/products/byb-by268-black.webp" alt="Schwarzer Oversize-Hoodie" width="360" height="450" loading="eager" />
           <div>
             <span class="offer-kicker">Bei jeder Bestellung ab 20 Stück</span>
-            <strong>Gratis Lehrer-Hoodie</strong>
-            <p>Personalisiert mit Name oder Motiv für eure Lehrkraft. Dazu kostenloser Korrekturabzug, bevor irgendetwas gedruckt wird.</p>
+            <strong>Design und Druck vorne + hinten inklusive</strong>
+            <p>Motto, Namensliste, Korrekturabzug als PDF. Ihr zahlt nur die Textilien mit Druck, keine Grafikkosten, kein Aufpreis für Mischgrößen.</p>
             <ul class="offer-facts">
+              <li><Icon name="check" weight="bold" size={14} /> Oversize-Hoodies bis 500 g/m²</li>
               <li><Icon name="check" weight="bold" size={14} /> Angebot in 24 Stunden</li>
               <li><Icon name="check" weight="bold" size={14} /> Zahlung gesammelt per Rechnung</li>
-              <li><Icon name="check" weight="bold" size={14} /> Nachbestellung zum gleichen Preis</li>
             </ul>
           </div>
         </div>
+
+        <p class="trust-row"><span><strong>80.000+</strong> bedruckte Textilien</span><span><strong>seit 2021</strong> in Oberhausen</span><span><strong>1-3 Tage</strong> Produktion bei Einzelstücken</span></p>
 
         <div class="ak-cta">
           <a href="#anfrage" class="btn btn-primary btn-lg">Jetzt gratis anfragen <Icon name="arrow-right" size={18} /></a>
@@ -122,22 +131,40 @@ const ld = [
 
   <section class="section products-section" id="produkte">
     <div class="container">
-      <div class="section-head reveal"><h2>Hoodies und Shirts für eure Stufe</h2><p class="muted">Klassenpreise ab 20 Stück, inklusive Druck vorne und hinten, Namensliste und MwSt. Alle Farben im Shop, gedruckt wird in Oberhausen.</p></div>
+      <div class="section-head reveal"><h2>Hoodies und Shirts für eure Stufe</h2><p class="muted">Klassenpreise ab 20 Stück, inklusive Druck vorne und hinten, Namensliste und MwSt. Gedruckt wird in Oberhausen.</p></div>
+      <h3 class="group-title"><span class="chip chip-good">Oversize</span> Schwer, weit, Streetwear-Schnitt</h3>
       <div class="pgrid">
-        {products.map((p, i) => (
-          <a href={`/shop/${p.handle}`} class={`pcard reveal reveal-d${i}`}>
+        {oversize.map((p, i) => (
+          <a href={p.handle ? `/shop/${p.handle}` : '#anfrage'} class={`pcard reveal reveal-d${i}`}>
             <span class="ptag">{p.tag}</span>
             <div class="pimg"><img src={p.img} alt={`${p.name} von ${p.brand}, schwarz`} width="720" height="900" loading="lazy" /></div>
             <div class="pbody">
               <span class="pbrand">{p.brand}</span>
               <strong>{p.name}</strong>
               <span class="pspec">{p.spec}</span>
+              <span class="proof"><Icon name="fire" weight="fill" size={13} /> {p.proof}</span>
               <span class="price">ab {p.price} € <small>inkl. Druck</small></span>
             </div>
           </a>
         ))}
       </div>
-      <p class="muted center small">Unter 20 Stück drucken wir auch, dann zum Einzelpreis aus dem Shop. Ab 50 Stück gibt es weitere Staffelpreise im Angebot.</p>
+      <h3 class="group-title"><span class="chip">Klassisch</span> Regular Fit, große Farbauswahl</h3>
+      <div class="pgrid">
+        {classic.map((p, i) => (
+          <a href={p.handle ? `/shop/${p.handle}` : '#anfrage'} class={`pcard reveal reveal-d${i}`}>
+            <span class="ptag">{p.tag}</span>
+            <div class="pimg"><img src={p.img} alt={`${p.name} von ${p.brand}, schwarz`} width="720" height="900" loading="lazy" /></div>
+            <div class="pbody">
+              <span class="pbrand">{p.brand}</span>
+              <strong>{p.name}</strong>
+              <span class="pspec">{p.spec}</span>
+              <span class="proof"><Icon name="fire" weight="fill" size={13} /> {p.proof}</span>
+              <span class="price">ab {p.price} € <small>inkl. Druck</small></span>
+            </div>
+          </a>
+        ))}
+      </div>
+      <p class="muted center small">Unter 20 Stück drucken wir auch, dann zum Einzelpreis. Ab 50 Stück gibt es weitere Staffelpreise im Angebot. Build-Your-Brand-Modelle gibt es in Schwarz, Weiß, Grau, Sand, Navy und weiteren Farben, Auswahl schicken wir mit dem Angebot.</p>
     </div>
   </section>
 
@@ -243,7 +270,9 @@ const ld = [
   .offer-box p { margin-top: 8px; color: var(--text-2); font-size: 14.5px; }
   .offer-facts { display: grid; gap: 6px; margin-top: 12px; font-size: 14px; }
   .offer-facts li { display: flex; gap: 8px; align-items: center; } .offer-facts :global(.icon) { color: var(--accent); }
-  .ak-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+  .trust-row { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 22px; font-size: 13.5px; color: var(--text-3); }
+  .trust-row strong { color: var(--text); font-weight: 700; }
+  .ak-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
 
   .ak-form { display: grid; gap: 14px; padding: clamp(22px, 3vw, 32px); border-radius: 22px; border: 1px solid var(--line-strong); background: linear-gradient(180deg, var(--surface-2), var(--surface)); box-shadow: 0 40px 80px -40px rgba(0,0,0,0.7); position: sticky; top: calc(var(--nav-h) + 16px); }
   .ak-form h2 { font-size: 1.5rem; }
@@ -263,7 +292,11 @@ const ld = [
   .steps strong { display: block; font-size: 17px; } .steps div > span { display: block; margin-top: 4px; color: var(--text-2); font-size: 14.5px; line-height: 1.5; }
   @media (max-width: 900px) { .steps { grid-template-columns: 1fr 1fr; } } @media (max-width: 520px) { .steps { grid-template-columns: 1fr; } }
 
-  .pgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px 22px; margin-top: 36px; }
+  .group-title { display: flex; gap: 12px; align-items: center; margin-top: 40px; font-size: 1.15rem; font-weight: 600; color: var(--text-2); }
+  .group-title .chip { font-size: 13px; }
+  .pgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px 22px; margin-top: 22px; }
+  .proof { display: inline-flex; gap: 5px; align-items: center; margin-top: 6px; font-size: 12.5px; font-weight: 600; color: #e8c15a; }
+  :global([data-theme="light"]) .proof { color: #8a6a10; }
   .pcard { position: relative; display: flex; flex-direction: column; transition: transform 0.45s var(--ease); }
   .pcard:hover { transform: translateY(-4px); }
   .ptag { position: absolute; top: 8px; left: 8px; z-index: 1; padding: 4px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700; color: var(--accent-ink); background: var(--accent); }
