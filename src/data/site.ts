@@ -22,7 +22,7 @@ export const site = {
   ogImage: '/og-default.jpg',
   // Google Ads Conversion-Tag. id = 'AW-XXXXXXXXXX' aus dem Google-Ads-Konto, conversions = Labels je Aktion.
   // Leer lassen = kein Tag, kein Banner, Seite bleibt cookielos.
-  googleAds: { id: '', conversions: { lead: '', whatsapp: '' } },
+  googleAds: { id: 'AW-17529116277', conversions: { lead: 'hJN4CIXNlfIcEPWsxKZB', whatsapp: 'ntGqCIjNlfIcEPWsxKZB' } },
 };
 
 export const nav = [
