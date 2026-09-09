@@ -107,6 +107,7 @@ const ld = [
           <div class="field"><label for="ak-product">Was soll es werden?</label><select class="select" id="ak-product" name="product"><option>Hoodies</option><option>Shirts</option><option>Hoodies und Shirts</option><option>Noch offen</option></select></div>
           <div class="field"><label for="ak-when">Wann braucht ihr es?</label><input class="input" id="ak-when" name="when" type="text" placeholder="z. B. bis Ende Juni" /></div>
         </div>
+        <div class="field"><label for="ak-source">Wie habt ihr uns gefunden? <span class="optional">(optional)</span></label><select class="select" id="ak-source" name="source"><option value="">Bitte wählen</option><option>Google</option><option>Instagram</option><option>TikTok</option><option>Empfehlung</option><option>Lehrkraft / Schule</option><option>Sonstiges</option></select></div>
         <div class="field"><label for="ak-msg">Motto, Ideen, Fragen <span class="optional">(optional)</span></label><textarea class="textarea" id="ak-msg" name="message" rows="3" placeholder="z. B. Motto ABIkalypse, Namensliste hinten, schwarz und bordeaux"></textarea></div>
         <div class="field"><label class="checkbox"><input type="checkbox" name="privacy" required /><span>Ich habe die <a href="/datenschutz" class="accent">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Daten zur Bearbeitung der Anfrage einverstanden.</span></label><span class="error">Bitte bestätige den Datenschutzhinweis.</span></div>
         <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="sr-only" aria-hidden="true" />
@@ -240,7 +241,7 @@ const ld = [
       const message = [`Anfrage Abschlussklassen über westernprint.de`, `Schule/Klasse: ${d.school}`, `Stückzahl: ${d.qty}`, `Produkt: ${d.product}`, d.when ? `Termin: ${d.when}` : '', '', d.message || ''].filter((l) => l !== '').join('\n');
       submit.disabled = true; submit.textContent = 'Wird gesendet...';
       try {
-        const res = await fetch(form.dataset.endpoint!, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: d.name, email: d.email, phone: d.phone, topic: 'Abschlussklassen', qty: d.qty, message, page: location.pathname }) });
+        const res = await fetch(form.dataset.endpoint!, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: d.name, email: d.email, phone: d.phone, topic: 'Abschlussklassen', qty: d.qty, message, page: location.pathname, source: d.source }) });
         const j = await res.json().catch(() => ({}));
         if (!res.ok || !j.ok) throw new Error(j.error || String(res.status));
         form.reset();

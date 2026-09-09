@@ -45,6 +45,10 @@ const topics = ['Print-on-Demand Fulfillment', 'Großauflage ab 50 Stück', 'B2B
     </div>
   )}
   <div class="field">
+    <label for="cf-source">Wie hast du uns gefunden? <span class="optional">(optional)</span></label>
+    <select class="select" id="cf-source" name="source"><option value="">Bitte wählen</option><option>Google</option><option>Instagram</option><option>TikTok</option><option>Empfehlung</option><option>Shopify App Store</option><option>Sonstiges</option></select>
+  </div>
+  <div class="field">
     <label for="cf-msg">Nachricht</label>
     <textarea class="textarea" id="cf-msg" name="message" required placeholder="Produkt, Motiv, Termin, Besonderheiten. Dateien schickst du uns anschließend per WhatsApp oder E-Mail."></textarea>
     <span class="error">Bitte beschreib kurz dein Projekt.</span>
@@ -115,6 +119,7 @@ const topics = ['Print-on-Demand Fulfillment', 'Großauflage ab 50 Stück', 'B2B
         `Thema: ${data.topic}`,
         data.qty ? `Stückzahl: ${data.qty}` : '',
         data.shop ? `Shop: ${data.shop}` : '',
+        data.source ? `Gefunden über: ${data.source}` : '',
         ``,
         data.message,
       ].filter((l) => l !== '');
