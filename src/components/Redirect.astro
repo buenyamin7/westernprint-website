@@ -14,7 +14,7 @@ const target = to.startsWith('http') ? to : `https://westernprint.de${to}`;
     <meta http-equiv="refresh" content={`0; url=${target}`} />
     <script is:inline set:html={`location.replace(${JSON.stringify(target)})`} />
   </head>
-  <body style="font-family:system-ui;padding:40px;background:#0b0d0c;color:#f1f4f2">
-    <p>Diese Seite ist umgezogen: <a style="color:#4fcf78" href={target}>{target}</a></p>
+  <body style="font-family:system-ui;padding:40px;background:#111312;color:#ebeae5">
+    <p>Diese Seite ist umgezogen: <a style="color:#8fd3a0" href={target}>{target}</a></p>
   </body>
 </html>

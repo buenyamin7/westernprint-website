@@ -25,13 +25,91 @@ export const site = {
   googleAds: { id: 'AW-17529116277', conversions: { lead: 'hJN4CIXNlfIcEPWsxKZB', whatsapp: 'ntGqCIjNlfIcEPWsxKZB' } },
 };
 
-export const nav = [
-  { label: 'Druckverfahren', href: '/druckverfahren' },
-  { label: 'Großauflagen', href: '/grossauflagen' },
-  { label: 'Textilien', href: '/textilien' },
-  { label: 'Print-on-Demand', href: '/print-on-demand' },
+export type NavChild = { label: string; href: string; hint?: string };
+export type NavItem = { label: string; href: string; children?: NavChild[]; groups?: { title: string; items: NavChild[] }[]; cta?: { label: string; href: string; text: string } };
+
+// Hauptnavigation mit Untermenüs (Desktop: Hover/Fokus, Mobil: Akkordeon).
+export const nav: NavItem[] = [
+  {
+    label: 'Leistungen', href: '/druckverfahren',
+    groups: [
+      { title: 'Druckverfahren', items: [
+        { label: 'DTF-Druck', href: '/druckverfahren', hint: 'Kräftige Farben, jede Stoffart, ab 1 Stück' },
+        { label: 'DTG-Druck', href: '/druckverfahren', hint: 'Fotorealistisch auf Baumwolle' },
+        { label: 'Sublimation', href: '/druckverfahren', hint: 'Allover auf Polyester und Sportbekleidung' },
+        { label: 'Verfahren vergleichen', href: '/druckverfahren#vergleich', hint: 'Welches Verfahren wofür?' },
+      ] },
+      { title: 'Auftragsarten', items: [
+        { label: 'Großauflagen ab 50 Stück', href: '/grossauflagen', hint: 'Staffelpreise, Korrekturabzug, fester Liefertermin' },
+        { label: 'Textildruck Oberhausen', href: '/textildruck-oberhausen', hint: 'Vor Ort im Ruhrgebiet, Abholung möglich' },
+        { label: 'Textilien und Marken', href: '/textilien', hint: 'Stanley/Stella, BYB, Neutral, JHK' },
+        { label: 'Muster bestellen', href: '/sample', hint: 'Ein Stück mit deinem Motiv testen' },
+      ] },
+    ],
+    cta: { label: 'Angebot in 24 Stunden', href: '/kontakt', text: 'Motiv und Stückzahl schicken, wir antworten mit festem Preis und Liefertermin.' },
+  },
+  {
+    label: 'Print-on-Demand', href: '/print-on-demand',
+    groups: [
+      { title: 'Für Shop-Betreiber', items: [
+        { label: 'Fulfillment für Shopify', href: '/print-on-demand', hint: 'Drucken, verpacken, versenden in 1-3 Tagen' },
+        { label: 'Unsere Shopify-App', href: '/print-on-demand#app', hint: 'Installieren, designen, verkaufen' },
+        { label: 'B2B-Partner werden', href: '/b2b-partner', hint: 'Konditionen für Agenturen und Wiederverkäufer' },
+        { label: 'Eigene Brand gründen', href: '/textilien#brand-gruenden', hint: 'Ohne Lager, ohne Mindestmenge' },
+      ] },
+    ],
+    cta: { label: 'Muster anfordern', href: '/sample', text: 'Erst anfassen, dann entscheiden: Ein Sample mit deinem Motiv.' },
+  },
+  {
+    label: 'Für wen', href: '/fuer',
+    groups: [
+      { title: 'Schule & Bildung', items: [
+        { label: 'Abschlussklassen', href: '/fuer/abschlussklassen' },
+        { label: 'Kitas und Schulen', href: '/fuer/kitas-und-schulen' },
+        { label: 'Hochschulen', href: '/fuer/hochschulen-und-fachschaften' },
+      ] },
+      { title: 'Vereine & Gemeinden', items: [
+        { label: 'Sportvereine und Teams', href: '/fuer/sportvereine' },
+        { label: 'Vereine und Ehrenamt', href: '/fuer/vereine-und-ehrenamt' },
+        { label: 'Feuerwehr und Rettung', href: '/fuer/feuerwehr-und-rettungsdienst' },
+        { label: 'Kirchen, Moscheen, Kultur', href: '/fuer/moscheen-und-kulturvereine' },
+      ] },
+      { title: 'Betriebe & Gewerbe', items: [
+        { label: 'Handwerksbetriebe', href: '/fuer/handwerksbetriebe' },
+        { label: 'Firmen und Büro', href: '/fuer/firmen-und-buero' },
+        { label: 'Gastro und Hotels', href: '/fuer/restaurants-und-cafes' },
+        { label: 'Fitness und Kampfsport', href: '/fuer/fitness-und-kampfsport' },
+      ] },
+      { title: 'Marken & Events', items: [
+        { label: 'Streetwear-Brands', href: '/fuer/streetwear-brands' },
+        { label: 'Bands, Künstler, Creator', href: '/fuer/bands-und-kuenstler' },
+        { label: 'Events und Festivals', href: '/fuer/events-und-festivals' },
+        { label: 'JGA und Feiern', href: '/fuer/jga-und-feiern' },
+      ] },
+    ],
+  },
+  {
+    label: 'Shop', href: '/shop',
+    groups: [
+      { title: 'Kategorien', items: [
+        { label: 'T-Shirts', href: '/shop?kategorie=T-Shirts' },
+        { label: 'Hoodies', href: '/shop?kategorie=Hoodies' },
+        { label: 'Sweatshirts', href: '/shop?kategorie=Sweatshirts' },
+        { label: 'Polos', href: '/shop?kategorie=Polos' },
+        { label: 'Jacken', href: '/shop?kategorie=Jacken' },
+        { label: 'Tank Tops', href: '/shop?kategorie=Tank%20Tops' },
+      ] },
+      { title: 'Weitere', items: [
+        { label: 'Kinder', href: '/shop?kategorie=Kinder' },
+        { label: 'Baby', href: '/shop?kategorie=Baby' },
+        { label: 'Taschen', href: '/shop?kategorie=Taschen' },
+        { label: 'Accessoires', href: '/shop?kategorie=Accessoires' },
+        { label: 'Alle Produkte', href: '/shop' },
+      ] },
+    ],
+    cta: { label: 'Warenkorb', href: '/warenkorb', text: 'Ab 1 Stück, Motiv hochladen, Vorschau sehen, bestellen.' },
+  },
   { label: 'Über uns', href: '/ueber-uns' },
-  { label: 'Für wen', href: '/fuer' },
 ];
 
 export const stats = [
