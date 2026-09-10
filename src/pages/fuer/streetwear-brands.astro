@@ -301,9 +301,8 @@ const ld = [
   .pgrid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
   .pcard { position: relative; display: flex; flex-direction: column; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); overflow: hidden; transition: transform 0.5s var(--ease), border-color 0.4s var(--ease); }
   .pcard:hover { transform: translateY(-4px); border-color: var(--line-strong); }
-  .pimg { position: relative; background: radial-gradient(75% 65% at 50% 42%, #3a3f3c 0%, #2b2f2d 55%, #23272522 100%), #262a28; }
-  :global([data-theme="light"]) .pimg { background: radial-gradient(75% 65% at 50% 42%, #3f4442 0%, #2e3230 60%, #262a28 100%); }
-  .pimg img { aspect-ratio: 4 / 5; object-fit: contain; width: 100%; padding: 10% 8% 4%; box-sizing: border-box; filter: drop-shadow(0 22px 26px rgba(0,0,0,0.6)); transition: transform 0.7s var(--ease); }
+  .pimg { position: relative; background: radial-gradient(80% 70% at 50% 40%, #a9afab 0%, #858b87 55%, #6b716d 100%); }
+  .pimg img { aspect-ratio: 4 / 5; object-fit: contain; width: 100%; padding: 10% 8% 4%; box-sizing: border-box; filter: drop-shadow(0 22px 26px rgba(0,0,0,0.45)); transition: transform 0.7s var(--ease); }
   .pcard:hover .pimg img { transform: scale(1.04); }
   .pbody { display: grid; gap: 6px; padding: 16px 18px 18px; border-top: 1px solid var(--line); }
   .pbody strong { font-family: 'Bricolage Grotesque Variable', sans-serif; font-weight: 700; font-size: 1.05rem; letter-spacing: -0.01em; }
