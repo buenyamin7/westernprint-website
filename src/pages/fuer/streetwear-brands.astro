@@ -1,6 +1,6 @@
 ---
 // Landingpage für Streetwear-Brands und Label-Gründer. Zielseite der Google-Ads-Kampagne "Streetwear Brands"
-// und Antwortseite für KI-Suche (ChatGPT, Perplexity): klare Fakten, Mengen, Preise, Ablauf, FAQ.
+// und Antwortseite für KI-Suche (ChatGPT, Perplexity): klare Fakten, Mengen, Ablauf, FAQ. Keine Preise, Angebot in 24h.
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import Faq from '../../components/Faq.astro';
@@ -10,96 +10,154 @@ import { zielgruppen } from '../../data/zielgruppen';
 
 const z = zielgruppen.find((x) => x.slug === 'streetwear-brands')!;
 
-// Blanks für Labels. Preise netto je Stück ab 50 Stück, inkl. Frontdruck (bis 30 x 40 cm) und Nackenprint.
-// Zahlen sind kalkuliert aus EK + Druckstaffel, bitte mit Bünyamin abgleichen, bevor sie skaliert werden.
 const blanks = [
-  { code: 'BY102', name: 'Heavy Oversize Tee', brand: 'Build Your Brand', tag: 'Der Standard', spec: '240 g/m², 100 % Baumwolle, Drop Shoulder, S bis 5XL', price: '16,90', img: '/img/products/byb-by102-black.webp', proof: 'Das Shirt der meisten Brands' },
-  { code: 'BY163', name: 'Ultra Heavy Cotton Box Tee', brand: 'Build Your Brand', tag: 'Boxy, 300 g', spec: '300 g/m², kastiger Schnitt, steht wie ein Brett', price: '20,90', img: '/img/products/byb-by163-black.webp', proof: 'Schwerstes Tee im Sortiment' },
-  { code: 'BY199', name: 'Oversized Hoody', brand: 'Build Your Brand', tag: 'Oversize-Favorit', spec: '300 g/m², Drop Shoulder, gekreuzte Kapuze', price: '31,90', img: '/img/products/byb-by199-black.webp', proof: 'Meistverkaufter Hoodie' },
-  { code: 'BY162', name: 'Ultra Heavy Box Hoody', brand: 'Build Your Brand', tag: 'Boxy Fit', spec: '460 g/m², 100 % Baumwolle, kastig', price: '38,90', img: '/img/products/byb-by162-black.webp', proof: 'Peso-Look' },
-  { code: 'BY268', name: 'Ultra Heavy Oversized', brand: 'Build Your Brand', tag: 'Schwerster Hoodie', spec: '500 g/m², Oversize, 80 % Baumwolle', price: '43,90', img: '/img/products/byb-by268-black.webp', proof: 'Wie bei LFDY und 6PM' },
+  { code: 'BY102', name: 'Heavy Oversize Tee', brand: 'Build Your Brand', spec: ['240 g/m²', 'Drop Shoulder', 'S bis 5XL'], img: '/img/products/byb-by102-black.webp', note: 'Das Tee, das die meisten Brands tragen.' },
+  { code: 'BY163', name: 'Ultra Heavy Cotton Box Tee', brand: 'Build Your Brand', spec: ['300 g/m²', 'Boxy Fit', 'Steht wie ein Brett'], img: '/img/products/byb-by163-black.webp', note: 'Schwerstes Tee im Sortiment.' },
+  { code: 'BY199', name: 'Oversized Hoody', brand: 'Build Your Brand', spec: ['300 g/m²', 'Gekreuzte Kapuze', 'Drop Shoulder'], img: '/img/products/byb-by199-black.webp', note: 'Der meistgedruckte Hoodie.' },
+  { code: 'BY162', name: 'Ultra Heavy Box Hoody', brand: 'Build Your Brand', spec: ['460 g/m²', '100 % Baumwolle', 'Boxy Fit'], img: '/img/products/byb-by162-black.webp', note: 'Kastig, schwer, dicht.' },
+  { code: 'BY268', name: 'Ultra Heavy Oversized', brand: 'Build Your Brand', spec: ['500 g/m²', 'Oversize', 'Brushed Fleece'], img: '/img/products/byb-by268-black.webp', note: 'Der schwerste Hoodie, den wir drucken.' },
 ];
 
 const services = [
   { icon: 'tag', t: 'Nackenprint statt Etikett', d: 'Alle Blanks sind tearaway. Wir entfernen das Herstelleretikett und drucken dein Label per DTF in den Nacken. Sieht aus wie eingewebt.' },
-  { icon: 'arrows-out-line-horizontal', t: 'Front, Rücken, Ärmel, Saum', d: 'Bis 30 x 40 cm pro Position. Kleine Logos, große Backprints, Ärmelschriftzüge. Jede Position hat einen festen Preis.' },
-  { icon: 'package', t: 'Hangtags und Verpackung', d: 'Du lieferst Hangtags und Polybags, wir bringen sie an und verpacken versandfertig. Ohne Aufpreis, solange es nicht ein Lager füllt.' },
-  { icon: 'truck', t: 'Neutraler Versand an deine Kunden', d: 'Bei Print-on-Demand geht das Paket ohne westernprint-Absender raus. Deine Marke, dein Name, deine Rechnung.' },
-  { icon: 'archive', t: 'Lager und Nachproduktion', d: 'Druckdaten, Farben und Positionen bleiben gespeichert. Nachdrop in identischer Qualität, ab 10 Stück pro Motiv.' },
-  { icon: 'chat-circle-dots', t: 'Beratung von Leuten, die drucken', d: 'Welche Grammatur, welcher Schnitt, welche Druckgröße auf Boxy Fit. Antwort kommt aus der Werkstatt, nicht aus dem Ticketsystem.' },
+  { icon: 'arrows-out-line-horizontal', t: 'Front, Rücken, Ärmel, Saum', d: 'Bis 30 x 40 cm pro Position. Kleine Logos, große Backprints, Ärmelschriftzüge. Jede Position mit festem Preis im Angebot.' },
+  { icon: 'package', t: 'Hangtags und Verpackung', d: 'Du lieferst Hangtags und Polybags, wir bringen sie an und verpacken versandfertig. Ohne Aufpreis, solange es kein Lager füllt.' },
+  { icon: 'truck', t: 'Neutraler Versand', d: 'Bei Print-on-Demand geht das Paket ohne westernprint-Absender raus. Deine Marke, dein Name, deine Rechnung.' },
+  { icon: 'archive', t: 'Nachproduktion', d: 'Druckdaten, Farben und Positionen bleiben gespeichert. Nachdrop in identischer Qualität, ab 10 Stück pro Motiv.' },
+  { icon: 'chat-circle-dots', t: 'Beratung aus der Werkstatt', d: 'Welche Grammatur, welcher Schnitt, welche Druckgröße auf Boxy Fit. Antwort von Leuten, die drucken, nicht aus dem Ticketsystem.' },
 ];
 
 const compare = [
-  { k: 'Stückpreis Heavy Oversize Tee', wp: 'ab 16,90 € netto ab 50 Stück', pod: '25 bis 30 € pro Stück', fab: 'ab 8 € bei 300+ Stück' },
   { k: 'Mindestmenge', wp: 'Sample ab 1, Drop ab 50', pod: '1 Stück', fab: '300 bis 500 pro Modell' },
-  { k: 'Deine Marge bei 49 € Verkaufspreis', wp: 'rund 30 €', pod: 'rund 15 €', fab: 'rund 38 €, aber Vorkasse für 300 Stück' },
+  { k: 'Preisgestaltung', wp: 'Werkstattpreis, direkt', pod: 'Plattformaufschlag pro Stück', fab: 'Günstig, aber Vorkasse für die ganze Auflage' },
   { k: 'Eigenes Label im Nacken', wp: 'Ja, DTF-Nackenprint', pod: 'Meist nicht oder Aufpreis', fab: 'Ja, eingewebt' },
   { k: 'Blanks', wp: 'Build Your Brand, Urban Classics, Stanley/Stella', pod: 'Gildan, Bella+Canvas', fab: 'Eigener Schnitt' },
   { k: 'Lieferzeit', wp: 'Sample 1 bis 3 Werktage, Drop 7 bis 10', pod: '5 bis 8 Werktage', fab: '8 bis 14 Wochen' },
   { k: 'Fulfillment für deinen Shop', wp: 'Ja, Shopify-App', pod: 'Ja', fab: 'Nein' },
+  { k: 'Ansprechpartner', wp: 'Eine Person, WhatsApp', pod: 'Ticketsystem', fab: 'Agent, Zeitverschiebung' },
 ];
 
 const faqs = [
-  { q: 'Was kostet ein Drop für meine Streetwear-Brand?', a: 'Ab 50 Stück liegt das Heavy Oversize Tee (240 g/m²) bei 16,90 € netto pro Stück inklusive Frontdruck und Nackenprint, der Oversized Hoody (300 g/m²) bei 31,90 €, der Ultra Heavy Hoody mit 500 g/m² bei 43,90 €. Ab 100 Stück wird es günstiger. Das genaue Angebot bekommst du innerhalb von 24 Stunden.' },
-  { q: 'Gibt es eine Mindestmenge?', a: 'Ein Sample geht ab 1 Stück zum Einzelpreis. Die Drop-Preise gelten ab 50 Stück pro Bestellung, gemischt über Modelle, Größen und Farben. Nachdrops ab 10 Stück pro Motiv.' },
+  { q: 'Was kostet ein Drop für meine Streetwear-Brand?', a: 'Das hängt von Blank, Druckpositionen und Stückzahl ab. Du bekommst innerhalb von 24 Stunden ein Angebot mit festen Stückpreisen für Sample, Drop ab 50 Stück und Nachdrop. Ab 100 Stück sinkt der Stückpreis deutlich.' },
+  { q: 'Gibt es eine Mindestmenge?', a: 'Ein Sample geht ab 1 Stück. Die Drop-Konditionen gelten ab 50 Stück pro Bestellung, gemischt über Modelle, Größen und Farben. Nachdrops ab 10 Stück pro Motiv.' },
   { q: 'Welche Blanks nehmen Streetwear-Brands?', a: 'Heavy Oversize Tees ab 240 g/m² und Boxy oder Oversize Hoodies ab 300 g/m² von Build Your Brand, dazu Urban Classics und Stanley/Stella für Bio-Baumwolle. Das sind dieselben Blanks, die bekannte deutsche Streetwear-Labels nutzen. Wir beraten zu Grammatur und Schnitt.' },
   { q: 'Kann ich mein eigenes Label in den Nacken machen?', a: 'Ja. Die Blanks haben tearaway-Etiketten. Wir entfernen das Herstellerlabel und drucken deinen Nackenprint per DTF, deckend und waschfest. Hangtags bringen wir an, wenn du sie lieferst.' },
   { q: 'Wie starte ich mit wenig Budget?', a: 'Sample bestellen, Fotos machen, Vorbestellungen im Shop sammeln, dann den Drop ab 50 Stück produzieren. Oder direkt Print-on-Demand: Wir drucken und versenden jede Shop-Bestellung einzeln, du zahlst nur, was verkauft ist.' },
   { q: 'Wie funktioniert Print-on-Demand für meine Marke?', a: 'Du verbindest deinen Shopify-Shop mit unserer App. Bestellungen laufen automatisch bei uns ein, wir drucken in 1 bis 3 Werktagen und versenden neutral mit DHL an deine Kunden. Kein Lager, keine Vorkasse für Ware.' },
   { q: 'Hält DTF-Druck auf Heavy Cotton?', a: 'Ja. DTF ist dehnbar, deckend auf Schwarz und waschfest bis 60 °C. Für Vintage-Looks drucken wir auf Wunsch mit reduzierter Deckung. Fotorealistische Motive gehen per DTG auf Baumwolle.' },
   { q: 'Wie lange dauert ein Drop?', a: 'Sample in 1 bis 3 Werktagen. Drop ab 50 Stück in der Regel 7 bis 10 Werktage nach Freigabe des Korrekturabzugs. Express nach Absprache. Abholung in Oberhausen oder Versand deutschlandweit.' },
-  { q: 'Verkauft ihr auch unbedruckte Blanks?', a: 'Ja, für Labels, die bei uns produzieren, liefern wir Blanks von Build Your Brand und Urban Classics auch unbedruckt mit, zum Beispiel für Fotoshootings oder eigene Veredelung.' },
+  { q: 'Verkauft ihr auch unbedruckte Blanks?', a: 'Für Labels, die bei uns produzieren, liefern wir Blanks von Build Your Brand und Urban Classics auch unbedruckt mit, zum Beispiel für Fotoshootings oder eigene Veredelung.' },
 ];
 
 const ld = [
-  { '@context': 'https://schema.org', '@type': 'Service', name: 'Streetwear-Brand produzieren lassen', serviceType: 'Textildruck und Fulfillment für Modelabels', description: z.description, provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: { '@type': 'Country', name: 'Deutschland' }, audience: { '@type': 'Audience', audienceType: 'Streetwear-Brands, Modelabels, Gründer' }, url: `${site.url}/fuer/streetwear-brands`, offers: { '@type': 'Offer', priceCurrency: 'EUR', price: '16.90', description: 'Heavy Oversize Tee ab 16,90 € netto inklusive Frontdruck und Nackenprint, ab 50 Stück. Sample ab 1 Stück.' } },
+  { '@context': 'https://schema.org', '@type': 'Service', name: 'Streetwear-Brand produzieren lassen', serviceType: 'Textildruck und Fulfillment für Modelabels', description: z.description, provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: { '@type': 'Country', name: 'Deutschland' }, audience: { '@type': 'Audience', audienceType: 'Streetwear-Brands, Modelabels, Gründer' }, url: `${site.url}/fuer/streetwear-brands` },
   { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Start', item: site.url }, { '@type': 'ListItem', position: 2, name: 'Für wen wir drucken', item: `${site.url}/fuer` }, { '@type': 'ListItem', position: 3, name: 'Streetwear-Brands', item: `${site.url}/fuer/streetwear-brands` }] },
 ];
 ---
-<Base title="Streetwear-Brand produzieren lassen: Blanks, Nackenprint, Drop ab 50" description="Eigene Streetwear-Marke ohne Fabrik: Heavy Oversize Tees und Hoodies von Build Your Brand, DTF-Druck mit Nackenprint, Sample in 3 Tagen, Drop ab 50 Stück ab 16,90 € netto, danach Print-on-Demand. Druckerei in Oberhausen." jsonLd={ld} ogImage={z.image}>
-
-  <div class="usp-bar" aria-label="Vorteile">
-    <div class="container usp-track">
-      <span><Icon name="t-shirt" size={16} /> Sample ab 1 Stück in 1 bis 3 Werktagen</span>
-      <span><Icon name="tag" size={16} /> Nackenprint statt Herstelleretikett</span>
-      <span><Icon name="stack" size={16} /> Drop ab 50 Stück, gemischt</span>
-      <span><Icon name="truck" size={16} /> Print-on-Demand mit neutralem Versand</span>
-    </div>
-  </div>
+<Base title="Streetwear-Brand produzieren lassen: Blanks, Nackenprint, Drop ab 50" description="Eigene Streetwear-Marke ohne Fabrik: Heavy Oversize Tees und Hoodies von Build Your Brand, DTF-Druck mit Nackenprint, Sample in 3 Tagen, Drop ab 50 Stück, danach Print-on-Demand mit neutralem Versand. Druckerei in Oberhausen, Angebot in 24 Stunden." jsonLd={ld} ogImage="/img/streetwear-trio.jpg">
 
   <section class="sw-hero">
     <div class="container sw-hero-grid">
       <div class="sw-copy">
-        <span class="eyebrow">Für Streetwear-Brands, Labels und Gründer</span>
-        <h1>Deine Brand. Unsere Werkstatt. <span class="hl">Kein Fabrik-Minimum.</span></h1>
-        <p class="lede">Heavy Oversize Tee, Boxy Hoodie, dein Label im Nacken. Erst ein Sample, dann der Drop ab 50 Stück, danach drucken und versenden wir jede Shop-Bestellung für dich. Aus Oberhausen, für ganz Deutschland.</p>
-
-        <div class="offer-box">
-          <img src="/img/products/byb-by102-black.webp" alt="Schwarzes Heavy Oversize Tee" width="360" height="450" loading="eager" />
-          <div>
-            <span class="offer-kicker">Einstieg</span>
-            <strong>Sample in 3 Tagen, Drop ab 50 Stück</strong>
-            <p>Heavy Oversize Tee ab 16,90 € netto, Oversized Hoody ab 31,90 € netto, jeweils inklusive Frontdruck und Nackenprint. Dieselben Blanks wie die bekannten Brands.</p>
-            <ul class="offer-facts">
-              <li><Icon name="check" weight="bold" size={14} /> Build Your Brand, Urban Classics, Stanley/Stella</li>
-              <li><Icon name="check" weight="bold" size={14} /> Angebot in 24 Stunden, Korrekturabzug als PDF</li>
-              <li><Icon name="check" weight="bold" size={14} /> Shopify-App für Print-on-Demand danach</li>
-            </ul>
-          </div>
-        </div>
-
-        <p class="trust-row"><span><strong>80.000+</strong> bedruckte Textilien</span><span><strong>seit 2021</strong> in Oberhausen</span><span><strong>12</strong> Shops auf unserer POD-App</span></p>
-
+        <p class="sw-kicker">Streetwear-Brands, Labels, Gründer</p>
+        <h1>Deine Brand.<br />Unsere Werkstatt.<br /><span class="hl">Kein Fabrik-Minimum.</span></h1>
+        <p class="lede">Heavy Oversize Tee, Boxy Hoodie, dein Label im Nacken. Erst ein Sample, dann der Drop ab 50 Stück, danach drucken und versenden wir jede Shop-Bestellung für dich.</p>
         <div class="sw-cta">
           <a href="#anfrage" class="btn btn-primary btn-lg">Sample oder Drop anfragen <Icon name="arrow-right" size={18} /></a>
-          <a href={site.whatsapp + '?text=' + encodeURIComponent('Hallo westernprint, ich baue eine Streetwear-Brand auf und möchte ein Sample / einen Drop anfragen.')} class="btn btn-secondary btn-lg" target="_blank" rel="noopener"><Icon name="whatsapp-logo" size={18} /> Per WhatsApp</a>
+          <a href={site.whatsapp + '?text=' + encodeURIComponent('Hallo westernprint, ich baue eine Streetwear-Brand auf und möchte ein Sample / einen Drop anfragen.')} class="btn btn-secondary btn-lg" target="_blank" rel="noopener"><Icon name="whatsapp-logo" size={18} /> WhatsApp</a>
+        </div>
+        <ul class="trust" aria-label="Fakten">
+          <li><strong>80.000+</strong><span>bedruckte Textilien</span></li>
+          <li><strong>1 bis 3</strong><span>Werktage bis zum Sample</span></li>
+          <li><strong>ab 50</strong><span>Stück pro Drop, gemischt</span></li>
+          <li><strong>2021</strong><span>gegründet in Oberhausen</span></li>
+        </ul>
+      </div>
+
+      <figure class="sw-visual">
+        <img src="/img/streetwear-trio.jpg" alt="Drei Personen in schweren Oversize-Shirts von Build Your Brand" width="1120" height="1400" loading="eager" fetchpriority="high" />
+        <figcaption>
+          <span class="mono">BY102 · Heavy Oversize Tee</span>
+          <span>240 g/m² · Nackenprint · Sample in 3 Tagen</span>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="container brands" aria-label="Blanks, die wir bedrucken">
+      <span class="brands-label">Blanks ab Lager</span>
+      <span class="wordmark">Build Your Brand</span>
+      <span class="wordmark">Urban Classics</span>
+      <span class="wordmark">Stanley/Stella</span>
+      <span class="wordmark">Stedman</span>
+    </div>
+  </section>
+
+  <section class="section-tight steps-section">
+    <div class="container">
+      <div class="section-head reveal"><h2>Vom ersten Sample zur laufenden Brand</h2><p>Drei Stufen, du steigst ein, wo du stehst. Kein Vertrag, keine Vorkasse für Ware, die du noch nicht verkauft hast.</p></div>
+      <ol class="steps">
+        <li class="reveal"><span class="num">01</span><div><strong>Sample</strong><span>Blank wählen, Motiv schicken, Korrekturabzug freigeben. Ein Stück in 1 bis 3 Werktagen für Fotos, Anprobe und Vorbestellungen.</span></div></li>
+        <li class="reveal reveal-d1"><span class="num">02</span><div><strong>Drop ab 50 Stück</strong><span>Modelle, Größen und Farben gemischt. Nackenprint, Hangtags, Polybags, ein Paket oder Abholung. 7 bis 10 Werktage.</span></div></li>
+        <li class="reveal reveal-d2"><span class="num">03</span><div><strong>Print-on-Demand</strong><span>Shop an unsere Shopify-App anbinden. Wir drucken jede Bestellung einzeln und versenden neutral an deine Kunden.</span></div></li>
+        <li class="reveal reveal-d3"><span class="num">04</span><div><strong>Nachdrop</strong><span>Druckdaten bleiben bei uns. Bestseller nachproduzieren ab 10 Stück pro Motiv, in identischer Qualität.</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section products-section" id="blanks">
+    <div class="container">
+      <div class="section-head reveal"><h2>Blanks, die Brands tragen</h2><p>Schwer, weit, sauber verarbeitet. Alle Modelle mit tearaway-Etikett für deinen Nackenprint, in Schwarz, Weiß, Sand, Grau, Navy und weiteren Farben. Preise pro Stück nach Menge und Positionen, im Angebot in 24 Stunden.</p></div>
+      <div class="pgrid">
+        {blanks.map((p, i) => (
+          <a href="#anfrage" class={`pcard reveal reveal-d${i % 4}`}>
+            <div class="pimg"><img src={p.img} alt={`${p.name} von ${p.brand}, schwarz`} width="720" height="900" loading="lazy" /></div>
+            <div class="pbody">
+              <span class="mono">{p.code}</span>
+              <strong>{p.name}</strong>
+              <ul class="specs">{p.spec.map((s) => <li>{s}</li>)}</ul>
+              <span class="pnote">{p.note}</span>
+              <span class="plink">Sample anfragen <Icon name="arrow-right" size={14} /></span>
+            </div>
+          </a>
+        ))}
+      </div>
+      <p class="muted center small">Dazu Urban Classics (Heavy Oversize, Acid Washed), Stanley/Stella für Bio-Baumwolle, Zipper, Sweater, Caps und Beanies. Eigene Blanks kannst du anliefern, dann zahlst du nur den Druck.</p>
+    </div>
+  </section>
+
+  <section class="section-tight services-section">
+    <div class="container">
+      <div class="section-head reveal"><h2>Was ein Shirt zum Markenprodukt macht</h2><p>Die Details, die du bei einer Plattform nicht bekommst.</p></div>
+      <div class="services">
+        {services.map((s, i) => (
+          <div class={`service reveal reveal-d${i % 3}`}>
+            <Icon name={s.icon} size={22} />
+            <strong>{s.t}</strong>
+            <p>{s.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section form-section" id="anfrage">
+    <div class="container form-grid">
+      <div class="form-copy reveal">
+        <h2>Angebot in 24 Stunden</h2>
+        <p>Kurz die Eckdaten. Du bekommst Stückpreise pro Blank und Druckposition, einen Zeitplan und auf Wunsch den Termin fürs Sample. Werktags meist innerhalb weniger Stunden, von jemandem aus der Werkstatt.</p>
+        <ul class="form-facts">
+          <li><Icon name="check" weight="bold" size={14} /> Sample ab 1 Stück, Drop ab 50</li>
+          <li><Icon name="check" weight="bold" size={14} /> Korrekturabzug als PDF vor dem Druck</li>
+          <li><Icon name="check" weight="bold" size={14} /> Shopify-App für Print-on-Demand danach</li>
+          <li><Icon name="check" weight="bold" size={14} /> Versand deutschlandweit, Abholung in Oberhausen</li>
+        </ul>
+        <div class="form-detail">
+          <img src="/img/druck-makro.jpg" alt="Nahaufnahme eines DTF-Drucks auf schwarzem Stoff" width="1400" height="1050" loading="lazy" />
+          <span>DTF-Druck, waschfest bis 60 °C, deckend auf Schwarz.</span>
         </div>
       </div>
 
-      <form class="sw-form" id="anfrage" data-endpoint={site.formEndpoint} novalidate>
-        <h2>Angebot in 24 Stunden</h2>
-        <p class="muted">Kurz die Eckdaten. Du bekommst Preise pro Blank, Druckpositionen und einen Zeitplan, werktags meist innerhalb weniger Stunden.</p>
+      <form class="sw-form reveal reveal-d1" data-endpoint={site.formEndpoint} novalidate>
         <div class="row">
           <div class="field"><label for="sw-brand">Name deiner Brand <span class="optional">(oder Arbeitstitel)</span></label><input class="input" id="sw-brand" name="brand" type="text" placeholder="z. B. NORDWEST STUDIO" /></div>
           <div class="field"><label for="sw-stage">Wo stehst du?</label><select class="select" id="sw-stage" name="stage" required><option value="" disabled selected>Bitte wählen</option><option>Idee, brauche Sample</option><option>Erster Drop geplant</option><option>Brand läuft, suche Produzent</option><option>Print-on-Demand für meinen Shop</option></select><span class="error">Bitte auswählen.</span></div>
@@ -126,58 +184,9 @@ const ld = [
     </div>
   </section>
 
-  <section class="section-tight steps-section">
-    <div class="container">
-      <div class="section-head reveal"><h2>Vom ersten Sample zur laufenden Brand</h2><p class="muted">Drei Stufen, du steigst ein, wo du stehst. Kein Vertrag, keine Vorkasse für Ware, die du noch nicht verkauft hast.</p></div>
-      <ol class="steps">
-        <li class="reveal"><span class="num">1</span><div><strong>Sample</strong><span>Blank wählen, Motiv schicken, Korrekturabzug freigeben. Ein Stück in 1 bis 3 Werktagen für Fotos, Anprobe und Vorbestellungen.</span></div></li>
-        <li class="reveal reveal-d1"><span class="num">2</span><div><strong>Drop ab 50 Stück</strong><span>Modelle, Größen und Farben gemischt. Nackenprint, Hangtags, Polybags, ein Paket oder Abholung. 7 bis 10 Werktage.</span></div></li>
-        <li class="reveal reveal-d2"><span class="num">3</span><div><strong>Print-on-Demand</strong><span>Shop an unsere Shopify-App anbinden. Wir drucken jede Bestellung einzeln und versenden neutral an deine Kunden.</span></div></li>
-        <li class="reveal reveal-d3"><span class="num">4</span><div><strong>Nachdrop</strong><span>Druckdaten bleiben bei uns. Bestseller nachproduzieren ab 10 Stück pro Motiv, in identischer Qualität.</span></div></li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="section products-section" id="blanks">
-    <div class="container">
-      <div class="section-head reveal"><h2>Blanks, die Brands tragen</h2><p class="muted">Preise netto pro Stück ab 50 Stück, inklusive Frontdruck bis 30 x 40 cm und Nackenprint. Ab 100 Stück günstiger, Sample zum Einzelpreis. Farben: Schwarz, Weiß, Sand, Grau, Navy und weitere.</p></div>
-      <div class="pgrid">
-        {blanks.map((p, i) => (
-          <a href="#anfrage" class={`pcard reveal reveal-d${i % 4}`}>
-            <span class="ptag">{p.tag}</span>
-            <div class="pimg"><img src={p.img} alt={`${p.name} von ${p.brand}, schwarz`} width="720" height="900" loading="lazy" /></div>
-            <div class="pbody">
-              <span class="pbrand">{p.brand} · {p.code}</span>
-              <strong>{p.name}</strong>
-              <span class="pspec">{p.spec}</span>
-              <span class="proof"><Icon name="fire" weight="fill" size={13} /> {p.proof}</span>
-              <span class="price">ab {p.price} € <small>netto, inkl. Druck</small></span>
-            </div>
-          </a>
-        ))}
-      </div>
-      <p class="muted center small">Dazu Urban Classics (Heavy Oversize, Acid Washed), Stanley/Stella für Bio-Baumwolle, Zipper, Sweater, Caps und Beanies. Eigene Blanks kannst du anliefern, dann zahlst du nur den Druck.</p>
-    </div>
-  </section>
-
-  <section class="section-tight services-section">
-    <div class="container">
-      <div class="section-head reveal"><h2>Was du bekommst, außer Druck</h2><p class="muted">Die Details, die ein Shirt von einem Markenprodukt unterscheiden.</p></div>
-      <div class="services">
-        {services.map((s, i) => (
-          <div class={`service reveal reveal-d${i % 3}`}>
-            <span class="icon-box"><Icon name={s.icon} size={22} /></span>
-            <strong>{s.t}</strong>
-            <p>{s.d}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
   <section class="section compare-section">
     <div class="container">
-      <div class="section-head reveal"><h2>Werkstatt statt Plattform, Drop statt Fabrik</h2><p class="muted">Ehrlicher Vergleich für ein Heavy Oversize Tee, das du für 49 € verkaufst.</p></div>
+      <div class="section-head reveal"><h2>Werkstatt statt Plattform, Drop statt Fabrik</h2><p>Ehrlicher Vergleich für ein Label, das mit einem Drop starten will.</p></div>
       <div class="table-wrap reveal">
         <table class="cmp-table">
           <thead><tr><th></th><th class="hi">westernprint</th><th>POD-Plattform</th><th>Fabrik (PT/TR)</th></tr></thead>
@@ -186,27 +195,24 @@ const ld = [
           </tbody>
         </table>
       </div>
-      <p class="muted center small">Plattformpreise sind Marktdurchschnitt Stand 2026, Fabrikpreise Richtwerte für Cut-and-Sew in Portugal oder der Türkei ohne Versand und Zoll.</p>
     </div>
   </section>
 
   <section class="section quality-section">
     <div class="container quality-grid">
-      <div class="reveal">
-        <span class="eyebrow">Qualität</span>
+      <div class="quality-img reveal">
+        <img src="/img/streetwear-group.jpg" alt="Vier Personen in schweren Oversize-Hoodies" width="1120" height="1400" loading="lazy" />
+      </div>
+      <div class="reveal reveal-d1">
         <h2>Druck, der nach der zehnten Wäsche noch nach Marke aussieht</h2>
         <p class="muted">Kein Plastisol-Gefühl, kein Riss nach drei Wäschen. DTF auf Heavy Cotton, deckend auf Schwarz, dehnbar. Jedes Teil wird vor dem Verpacken geprüft.</p>
         <ul class="quality-list">
-          <li><span class="icon-box"><Icon name="drop" size={20} /></span><div><strong>DTF, waschfest bis 60 °C</strong><span>Feine Linien, Farbverläufe, Fotos. Auf Wunsch reduzierte Deckung für Vintage-Look.</span></div></li>
-          <li><span class="icon-box"><Icon name="t-shirt" size={20} /></span><div><strong>Blanks bis 500 g/m²</strong><span>Build Your Brand, Urban Classics, Stanley/Stella. Wir lagern die gängigen Modelle in Schwarz und Weiß.</span></div></li>
-          <li><span class="icon-box"><Icon name="factory" size={20} /></span><div><strong>Gedruckt in Oberhausen</strong><span>Eigene Epson-Maschinen, eigene Heißpressen, kein Zwischenhändler.</span></div></li>
-          <li><span class="icon-box"><Icon name="storefront" size={20} /></span><div><strong>Shopify-App für danach</strong><span>Bestellungen laufen automatisch ein, Versand neutral mit DHL, Tracking an deine Kunden.</span></div></li>
+          <li><strong>DTF, waschfest bis 60 °C</strong><span>Feine Linien, Farbverläufe, Fotos. Auf Wunsch reduzierte Deckung für Vintage-Look.</span></li>
+          <li><strong>Blanks bis 500 g/m²</strong><span>Build Your Brand, Urban Classics, Stanley/Stella. Die gängigen Modelle in Schwarz und Weiß liegen bei uns auf Lager.</span></li>
+          <li><strong>Gedruckt in Oberhausen</strong><span>Eigene Epson-Maschinen, eigene Heißpressen, kein Zwischenhändler.</span></li>
+          <li><strong>Shopify-App für danach</strong><span>Bestellungen laufen automatisch ein, Versand neutral mit DHL, Tracking an deine Kunden.</span></li>
         </ul>
         <div class="sw-cta"><a href="/print-on-demand" class="btn btn-secondary">Print-on-Demand ansehen</a><a href="/druckverfahren" class="btn btn-secondary">Druckverfahren</a></div>
-      </div>
-      <div class="quality-img reveal reveal-d1">
-        <img src="/img/streetwear-trio.jpg" alt="Drei Personen in schweren Oversize-Shirts" width="900" height="1000" loading="lazy" />
-        <img class="detail" src="/img/druck-makro.jpg" alt="Nahaufnahme eines DTF-Drucks" width="600" height="450" loading="lazy" />
       </div>
     </div>
   </section>
@@ -254,81 +260,102 @@ const ld = [
 </script>
 
 <style>
-  .usp-bar { background: var(--accent); color: var(--accent-ink); font-size: 13.5px; font-weight: 600; overflow: hidden; }
-  .usp-track { display: flex; gap: 32px; justify-content: space-between; padding-top: 9px; padding-bottom: 9px; white-space: nowrap; }
-  .usp-track span { display: inline-flex; gap: 7px; align-items: center; }
-  @media (max-width: 900px) { .usp-track { justify-content: flex-start; overflow-x: auto; scrollbar-width: none; } .usp-track::-webkit-scrollbar { display: none; } }
+  /* Editorial, monochrom, viel Luft. Ein Akzent, keine Kästchen-Grids. */
+  .mono { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); }
 
-  .sw-hero { padding: clamp(40px, 6vw, 80px) 0 clamp(48px, 6vw, 88px); background: radial-gradient(900px 500px at 10% 0%, var(--accent-soft), transparent 70%); }
-  .sw-hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(32px, 5vw, 72px); align-items: start; }
-  .sw-copy h1 { margin-top: 14px; font-size: clamp(2.2rem, 4.6vw, 3.8rem); letter-spacing: -0.02em; text-wrap: balance; }
-  .sw-copy .lede { margin-top: 18px; max-width: 56ch; }
-  .offer-box { display: grid; grid-template-columns: 150px 1fr; gap: 20px; align-items: center; margin-top: 30px; padding: 22px 26px 22px 12px; border-radius: 22px; border: 1px solid var(--accent-line); background: linear-gradient(160deg, color-mix(in srgb, var(--accent) 14%, var(--surface)), var(--surface) 65%); box-shadow: 0 0 70px -30px color-mix(in srgb, var(--accent) 70%, transparent); }
-  .offer-box img { width: 100%; filter: drop-shadow(0 18px 22px rgba(0,0,0,0.5)); transform: rotate(-6deg); }
-  .offer-kicker { display: block; font-size: 12.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); }
-  .offer-box strong { display: block; margin-top: 4px; font-family: 'Bricolage Grotesque Variable', sans-serif; font-size: clamp(1.4rem, 2.2vw, 1.85rem); line-height: 1.05; color: var(--accent); }
-  .offer-box p { margin-top: 8px; color: var(--text-2); font-size: 14.5px; }
-  .offer-facts { display: grid; gap: 6px; margin-top: 12px; font-size: 14px; }
-  .offer-facts li { display: flex; gap: 8px; align-items: center; } .offer-facts :global(.icon) { color: var(--accent); }
-  .trust-row { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 22px; font-size: 13.5px; color: var(--text-3); }
-  .trust-row strong { color: var(--text); font-weight: 700; }
-  .sw-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
+  .sw-hero { position: relative; padding: clamp(48px, 7vw, 104px) 0 0; overflow: hidden; }
+  .sw-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(1100px 600px at 85% 20%, rgba(255,255,255,0.05), transparent 65%); pointer-events: none; }
+  .sw-hero-grid { position: relative; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
+  .sw-kicker { font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+  .sw-copy h1 { margin-top: 18px; font-size: clamp(2.6rem, 5.4vw, 4.9rem); line-height: 0.98; letter-spacing: -0.03em; font-variation-settings: 'opsz' 96, 'wdth' 96; text-wrap: balance; }
+  .sw-copy .lede { margin-top: 24px; max-width: 52ch; font-size: 1.15rem; }
+  .sw-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
 
-  .sw-form { display: grid; gap: 14px; padding: clamp(22px, 3vw, 32px); border-radius: 22px; border: 1px solid var(--line-strong); background: linear-gradient(180deg, var(--surface-2), var(--surface)); box-shadow: 0 40px 80px -40px rgba(0,0,0,0.7); position: sticky; top: calc(var(--nav-h) + 16px); }
-  .sw-form h2 { font-size: 1.5rem; }
-  .sw-form .muted { font-size: 14.5px; margin-top: -6px; }
+  .trust { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 44px; border-top: 1px solid var(--line-strong); }
+  .trust li { display: grid; gap: 4px; padding: 18px 18px 0 0; border-right: 1px solid var(--line); margin-right: 18px; }
+  .trust li:last-child { border-right: 0; margin-right: 0; }
+  .trust strong { font-family: 'Bricolage Grotesque Variable', sans-serif; font-weight: 750; font-size: clamp(1.5rem, 2.4vw, 2.1rem); letter-spacing: -0.02em; line-height: 1; color: var(--text); }
+  .trust span { font-size: 13px; line-height: 1.35; color: var(--text-2); }
+
+  .sw-visual { position: relative; margin: 0; border-radius: 16px; overflow: hidden; border: 1px solid var(--line-strong); aspect-ratio: 4 / 5; background: #111; }
+  .sw-visual img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; filter: saturate(0.55) contrast(1.06); transform: scale(1.02); transition: transform 1.2s var(--ease), filter 1.2s var(--ease); }
+  .sw-visual:hover img { transform: scale(1.05); filter: saturate(0.85) contrast(1.04); }
+  .sw-visual::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(8,10,9,0.92) 100%); pointer-events: none; }
+  .sw-visual figcaption { position: absolute; left: 22px; right: 22px; bottom: 20px; z-index: 1; display: grid; gap: 4px; color: #f1f4f2; font-size: 14px; }
+  .sw-visual figcaption .mono { color: rgba(241,244,242,0.7); }
+
+  .brands { display: flex; gap: clamp(20px, 4vw, 56px); align-items: center; flex-wrap: wrap; margin-top: clamp(40px, 6vw, 72px); padding-top: 22px; padding-bottom: 22px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .brands-label { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); margin-right: auto; }
+  .wordmark { font-family: 'Bricolage Grotesque Variable', sans-serif; font-weight: 750; font-size: clamp(1rem, 1.5vw, 1.25rem); letter-spacing: -0.01em; color: var(--text-2); }
+  @media (max-width: 900px) { .sw-hero-grid { grid-template-columns: 1fr; } .sw-visual { max-height: 520px; order: -1; } .trust { grid-template-columns: 1fr 1fr; } .trust li:nth-child(2) { border-right: 0; } .brands-label { width: 100%; margin-bottom: 4px; } }
+
+  .steps-section { border-bottom: 1px solid var(--line); }
+  .section-head p { margin-top: 12px; }
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 8px; border-top: 1px solid var(--line-strong); }
+  .steps li { display: grid; gap: 14px; padding: 28px 24px 0 0; border-right: 1px solid var(--line); margin-right: 24px; }
+  .steps li:last-child { border-right: 0; margin-right: 0; }
+  .steps .num { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 13px; letter-spacing: 0.1em; color: var(--accent); }
+  .steps strong { display: block; font-family: 'Bricolage Grotesque Variable', sans-serif; font-weight: 700; font-size: 1.25rem; letter-spacing: -0.01em; } .steps div > span { display: block; margin-top: 6px; color: var(--text-2); font-size: 14.5px; line-height: 1.55; }
+  @media (max-width: 900px) { .steps { grid-template-columns: 1fr 1fr; row-gap: 28px; } .steps li:nth-child(2) { border-right: 0; } } @media (max-width: 520px) { .steps { grid-template-columns: 1fr; } .steps li { border-right: 0; margin-right: 0; } }
+
+  .pgrid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+  .pcard { position: relative; display: flex; flex-direction: column; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); overflow: hidden; transition: transform 0.5s var(--ease), border-color 0.4s var(--ease); }
+  .pcard:hover { transform: translateY(-4px); border-color: var(--line-strong); }
+  .pimg { position: relative; background: radial-gradient(70% 60% at 50% 45%, rgba(255,255,255,0.07), transparent 70%), var(--bg-2); }
+  .pimg img { aspect-ratio: 4 / 5; object-fit: contain; width: 100%; padding: 10% 8% 4%; box-sizing: border-box; filter: drop-shadow(0 26px 30px rgba(0,0,0,0.55)); transition: transform 0.7s var(--ease); }
+  .pcard:hover .pimg img { transform: scale(1.04); }
+  .pbody { display: grid; gap: 6px; padding: 16px 18px 18px; border-top: 1px solid var(--line); }
+  .pbody strong { font-family: 'Bricolage Grotesque Variable', sans-serif; font-weight: 700; font-size: 1.05rem; letter-spacing: -0.01em; }
+  .specs { display: flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 2px; font-size: 12.5px; color: var(--text-2); }
+  .specs li { position: relative; } .specs li + li::before { content: '·'; position: absolute; left: -7px; color: var(--text-3); }
+  .pnote { margin-top: 6px; font-size: 13px; color: var(--text-3); line-height: 1.45; }
+  .plink { display: inline-flex; gap: 6px; align-items: center; margin-top: 10px; font-size: 13.5px; font-weight: 600; color: var(--accent); }
+  .center { text-align: center; } .small { font-size: 13.5px; margin-top: 30px; }
+  @media (max-width: 1100px) { .pgrid { grid-template-columns: repeat(3, 1fr); } } @media (max-width: 700px) { .pgrid { grid-template-columns: 1fr 1fr; gap: 12px; } .pbody { padding: 12px 14px 14px; } }
+
+  .services-section { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg-2); }
+  .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--line-strong); }
+  .service { display: grid; gap: 12px; align-content: start; padding: 28px 28px 32px 0; margin-right: 28px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .service:nth-child(3n) { border-right: 0; margin-right: 0; } .service:nth-last-child(-n+3) { border-bottom: 0; }
+  .service :global(.icon) { color: var(--accent); }
+  .service strong { font-family: 'Bricolage Grotesque Variable', sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: -0.01em; } .service p { color: var(--text-2); font-size: 14.5px; line-height: 1.55; }
+  @media (max-width: 900px) { .services { grid-template-columns: 1fr 1fr; } .service:nth-child(3n) { border-right: 1px solid var(--line); margin-right: 28px; } .service:nth-child(2n) { border-right: 0; margin-right: 0; } .service:nth-last-child(-n+3) { border-bottom: 1px solid var(--line); } .service:nth-last-child(-n+2) { border-bottom: 0; } }
+  @media (max-width: 520px) { .services { grid-template-columns: 1fr; } .service { border-right: 0 !important; margin-right: 0 !important; border-bottom: 1px solid var(--line) !important; } .service:last-child { border-bottom: 0 !important; } }
+
+  .form-section { scroll-margin-top: calc(var(--nav-h) + 12px); }
+  .form-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .form-copy h2 { font-size: clamp(1.9rem, 3.2vw, 2.6rem); letter-spacing: -0.02em; }
+  .form-copy > p { margin-top: 14px; color: var(--text-2); font-size: 1.05rem; max-width: 46ch; }
+  .form-facts { display: grid; gap: 10px; margin-top: 24px; font-size: 14.5px; }
+  .form-facts li { display: flex; gap: 10px; align-items: center; } .form-facts :global(.icon) { color: var(--accent); flex: none; }
+  .form-detail { position: relative; margin-top: 32px; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 4 / 3; max-width: 440px; }
+  .form-detail img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.7); }
+  .form-detail span { position: absolute; left: 16px; right: 16px; bottom: 14px; font-size: 13px; color: #f1f4f2; text-shadow: 0 1px 8px rgba(0,0,0,0.8); }
+  .sw-form { display: grid; gap: 14px; padding: clamp(22px, 3vw, 36px); border-radius: 16px; border: 1px solid var(--line-strong); background: var(--surface); }
   .sw-form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .sw-form textarea { min-height: 84px; }
   .form-trust { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--text-3); }
   .form-trust span { display: inline-flex; gap: 5px; align-items: center; } .form-trust :global(.icon) { color: var(--accent); }
-  @media (max-width: 900px) { .sw-hero-grid { grid-template-columns: 1fr; } .sw-form { position: static; } .sw-form .row { grid-template-columns: 1fr; } }
-  @media (max-width: 520px) { .offer-box { grid-template-columns: 1fr; padding: 20px; } .offer-box img { max-width: 160px; margin: 0 auto; } }
+  @media (max-width: 900px) { .form-grid { grid-template-columns: 1fr; } .sw-form .row { grid-template-columns: 1fr; } .form-detail { display: none; } }
 
-  .steps-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .section-head .muted { margin-top: 10px; max-width: 62ch; }
-  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 36px; }
-  .steps li { display: grid; gap: 12px; padding: 24px; border-radius: 18px; border: 1px solid var(--line); background: var(--surface); }
-  .steps .num { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 12px; font-family: 'Bricolage Grotesque Variable', sans-serif; font-weight: 800; font-size: 17px; color: var(--accent-ink); background: var(--accent); box-shadow: 0 0 30px -8px var(--accent); }
-  .steps strong { display: block; font-size: 17px; } .steps div > span { display: block; margin-top: 4px; color: var(--text-2); font-size: 14.5px; line-height: 1.5; }
-  @media (max-width: 900px) { .steps { grid-template-columns: 1fr 1fr; } } @media (max-width: 520px) { .steps { grid-template-columns: 1fr; } }
-
-  .pgrid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px 18px; margin-top: 30px; }
-  .proof { display: inline-flex; gap: 5px; align-items: center; margin-top: 6px; font-size: 12.5px; font-weight: 600; color: #e8c15a; }
-  :global([data-theme="light"]) .proof { color: #8a6a10; }
-  .pcard { position: relative; display: flex; flex-direction: column; transition: transform 0.45s var(--ease); }
-  .pcard:hover { transform: translateY(-4px); }
-  .ptag { position: absolute; top: 8px; left: 8px; z-index: 1; padding: 4px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700; color: var(--accent-ink); background: var(--accent); }
-  .pimg img { aspect-ratio: 4 / 5; object-fit: contain; width: 100%; padding: 4%; box-sizing: border-box; filter: drop-shadow(0 18px 24px rgba(0,0,0,0.35)); transition: transform 0.6s var(--ease); }
-  .pcard:hover .pimg img { transform: scale(1.04); }
-  .pbody { display: grid; gap: 3px; padding: 12px 4px 0; }
-  .pbrand { font-size: 12.5px; color: var(--text-3); } .pbody strong { font-size: 16.5px; } .pspec { font-size: 13px; color: var(--text-2); }
-  .price { margin-top: 8px; font-weight: 700; color: var(--accent); font-size: 1.15rem; } .price small { font-weight: 400; color: var(--text-3); font-size: 12.5px; }
-  .center { text-align: center; } .small { font-size: 13.5px; margin-top: 28px; }
-  @media (max-width: 1100px) { .pgrid { grid-template-columns: repeat(3, 1fr); } } @media (max-width: 700px) { .pgrid { grid-template-columns: 1fr 1fr; } }
-
-  .services-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 36px; }
-  .service { display: grid; gap: 10px; align-content: start; padding: 24px; border-radius: 18px; border: 1px solid var(--line); background: var(--surface); }
-  .service strong { font-size: 16.5px; } .service p { color: var(--text-2); font-size: 14.5px; line-height: 1.55; }
-  @media (max-width: 900px) { .services { grid-template-columns: 1fr 1fr; } } @media (max-width: 520px) { .services { grid-template-columns: 1fr; } }
-
-  .table-wrap { overflow-x: auto; margin-top: 32px; border-radius: 18px; border: 1px solid var(--line); background: var(--surface); }
+  .compare-section { border-top: 1px solid var(--line); }
+  .table-wrap { overflow-x: auto; border-top: 1px solid var(--line-strong); }
   .cmp-table { width: 100%; border-collapse: collapse; min-width: 720px; font-size: 14.5px; }
-  .cmp-table th, .cmp-table td { padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
-  .cmp-table thead th { font-family: 'Bricolage Grotesque Variable', sans-serif; font-size: 15px; color: var(--text-3); background: var(--bg-2); }
-  .cmp-table tbody th { font-weight: 600; color: var(--text); width: 26%; }
+  .cmp-table th, .cmp-table td { padding: 16px 18px 16px 0; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .cmp-table thead th { font-family: 'Bricolage Grotesque Variable', sans-serif; font-weight: 700; font-size: 15px; color: var(--text-3); }
+  .cmp-table tbody th { font-weight: 600; color: var(--text); width: 24%; }
   .cmp-table td { color: var(--text-2); }
-  .cmp-table .hi { color: var(--accent); font-weight: 600; background: color-mix(in srgb, var(--accent) 7%, transparent); }
+  .cmp-table .hi { color: var(--text); font-weight: 600; }
   .cmp-table thead .hi { color: var(--accent); }
-  .cmp-table tr:last-child th, .cmp-table tr:last-child td { border-bottom: 0; }
 
-  .quality-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
-  .quality-grid .muted { margin-top: 14px; max-width: 56ch; font-size: 1.05rem; }
-  .quality-list { display: grid; gap: 16px; margin: 28px 0 30px; }
-  .quality-list li { display: flex; gap: 16px; align-items: flex-start; } .quality-list .icon-box { flex: none; }
-  .quality-list strong { display: block; font-size: 16px; } .quality-list div > span { display: block; margin-top: 3px; color: var(--text-2); font-size: 14.5px; }
-  .quality-img { position: relative; }
-  .quality-img img:first-child { width: 100%; border-radius: 22px; object-fit: cover; aspect-ratio: 4 / 4.6; }
-  .quality-img .detail { position: absolute; right: -20px; bottom: -28px; width: 46%; border-radius: 16px; border: 4px solid var(--bg); box-shadow: 0 30px 60px -20px rgba(0,0,0,0.8); }
-  @media (max-width: 900px) { .quality-grid { grid-template-columns: 1fr; } .quality-img .detail { right: 0; } }
+  .quality-section { border-top: 1px solid var(--line); }
+  .quality-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
+  .quality-grid h2 { font-size: clamp(1.9rem, 3.2vw, 2.6rem); letter-spacing: -0.02em; text-wrap: balance; }
+  .quality-grid .muted { margin-top: 14px; max-width: 52ch; font-size: 1.05rem; }
+  .quality-list { display: grid; gap: 0; margin: 28px 0 30px; border-top: 1px solid var(--line-strong); }
+  .quality-list li { display: grid; gap: 4px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .quality-list strong { font-size: 16px; } .quality-list span { color: var(--text-2); font-size: 14.5px; line-height: 1.5; }
+  .quality-img { border-radius: 16px; overflow: hidden; border: 1px solid var(--line-strong); aspect-ratio: 4 / 5; }
+  .quality-img img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; filter: saturate(0.6) contrast(1.05); }
+  @media (max-width: 900px) { .quality-grid { grid-template-columns: 1fr; } .quality-img { max-height: 480px; } }
 </style>
