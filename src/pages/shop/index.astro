@@ -92,10 +92,10 @@ const count = (c: string) => products.filter((p) => p.category === c).length;
   .pgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px 22px; }
   .pcard { display: flex; flex-direction: column; border-radius: 18px; transition: transform 0.45s var(--ease); }
   .pcard:hover { transform: translateY(-4px); }
-  .pimg { position: relative; border-radius: 18px; overflow: hidden; }
+  .pimg { position: relative; border-radius: 18px; overflow: hidden; background: radial-gradient(80% 70% at 50% 40%, #a9afab 0%, #858b87 55%, #6b716d 100%); }
   .pimg::after { content: ''; position: absolute; left: 12%; right: 12%; bottom: 4%; height: 10%; border-radius: 50%; background: radial-gradient(ellipse, rgba(0,0,0,0.55), transparent 70%); filter: blur(10px); opacity: 0; transition: opacity 0.45s var(--ease); pointer-events: none; }
   :global([data-theme="light"]) .pimg::after { background: radial-gradient(ellipse, rgba(0,0,0,0.18), transparent 70%); }
-  .pimg img { aspect-ratio: 4 / 5; object-fit: contain; width: 100%; padding: 3%; box-sizing: border-box; transition: transform 0.6s var(--ease); filter: drop-shadow(0 18px 24px rgba(0,0,0,0.35)); }
+  .pimg img { aspect-ratio: 4 / 5; object-fit: contain; width: 100%; padding: 8% 6% 4%; box-sizing: border-box; transition: transform 0.6s var(--ease); filter: drop-shadow(0 22px 26px rgba(0,0,0,0.45)); }
   .pcard:hover .pimg img { transform: scale(1.04); }
   .pimg .hover { position: absolute; inset: 0; opacity: 0; transition: opacity 0.45s var(--ease); object-fit: cover; padding: 0; filter: none; border-radius: 18px; }
   .pcard:hover .hover { opacity: 1; }
