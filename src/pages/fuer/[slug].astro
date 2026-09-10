@@ -8,7 +8,7 @@ import Tiles from '../../components/Tiles.astro';
 import { site } from '../../data/site';
 import { zielgruppen } from '../../data/zielgruppen';
 
-export function getStaticPaths() { return zielgruppen.filter((z) => z.slug !== 'abschlussklassen').map((z) => ({ params: { slug: z.slug }, props: { z } })); }
+export function getStaticPaths() { return zielgruppen.filter((z) => z.slug !== 'abschlussklassen' && z.slug !== 'streetwear-brands').map((z) => ({ params: { slug: z.slug }, props: { z } })); }
 const { z } = Astro.props;
 const related = zielgruppen.filter((o) => o.slug !== z.slug && o.group === z.group).slice(0, 3);
 const more = zielgruppen.filter((o) => o.slug !== z.slug && o.group !== z.group).slice(0, 3 - related.length);
