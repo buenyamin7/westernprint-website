@@ -241,7 +241,7 @@ const ld = [
       const message = [`Anfrage Abschlussklassen über westernprint.de`, `Schule/Klasse: ${d.school}`, `Stückzahl: ${d.qty}`, `Produkt: ${d.product}`, d.when ? `Termin: ${d.when}` : '', '', d.message || ''].filter((l) => l !== '').join('\n');
       submit.disabled = true; submit.textContent = 'Wird gesendet...';
       try {
-        const res = await fetch(form.dataset.endpoint!, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: d.name, email: d.email, phone: d.phone, topic: 'Abschlussklassen', qty: d.qty, message, page: location.pathname, source: d.source }) });
+        const res = await fetch(form.dataset.endpoint!, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: d.name, email: d.email, phone: d.phone, topic: 'Abschlussklassen', qty: d.qty, message, gclid: (window as any).wpGclid?.() || '', page: location.pathname, source: d.source }) });
         const j = await res.json().catch(() => ({}));
         if (!res.ok || !j.ok) throw new Error(j.error || String(res.status));
         form.reset();

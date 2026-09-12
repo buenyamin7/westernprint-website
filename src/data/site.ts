@@ -22,7 +22,7 @@ export const site = {
   ogImage: '/og-default.jpg',
   // Google Ads Conversion-Tag. id = 'AW-XXXXXXXXXX' aus dem Google-Ads-Konto, conversions = Labels je Aktion.
   // Leer lassen = kein Tag, kein Banner, Seite bleibt cookielos.
-  googleAds: { id: 'AW-17529116277', conversions: { lead: 'hJN4CIXNlfIcEPWsxKZB', whatsapp: 'ntGqCIjNlfIcEPWsxKZB' } },
+  googleAds: { id: 'AW-17529116277', conversions: { lead: 'hJN4CIXNlfIcEPWsxKZB', whatsapp: 'ntGqCIjNlfIcEPWsxKZB', appstore: 'MXs8COLs2_UcEPWsxKZB' } },
 };
 
 export type NavChild = { label: string; href: string; hint?: string };
@@ -43,7 +43,7 @@ export const nav: NavItem[] = [
         { label: 'Großauflagen ab 50 Stück', href: '/grossauflagen', hint: 'Staffelpreise, Korrekturabzug, fester Liefertermin' },
         { label: 'Textildruck Oberhausen', href: '/textildruck-oberhausen', hint: 'Vor Ort im Ruhrgebiet, Abholung möglich' },
         { label: 'Textilien und Marken', href: '/textilien', hint: 'Stanley/Stella, BYB, Neutral, JHK' },
-        { label: 'Muster bestellen', href: '/sample', hint: 'Ein Stück mit deinem Motiv testen' },
+        { label: 'Muster bestellen', href: '/sample', hint: 'Ein Stück mit deinem Motiv testen, ab 1 Stück' },
       ] },
     ],
     cta: { label: 'Angebot in 24 Stunden', href: '/kontakt', text: 'Motiv und Stückzahl schicken, wir antworten mit festem Preis und Liefertermin.' },
@@ -87,27 +87,6 @@ export const nav: NavItem[] = [
         { label: 'JGA und Feiern', href: '/fuer/jga-und-feiern' },
       ] },
     ],
-  },
-  {
-    label: 'Shop', href: '/shop',
-    groups: [
-      { title: 'Kategorien', items: [
-        { label: 'T-Shirts', href: '/shop?kategorie=T-Shirts' },
-        { label: 'Hoodies', href: '/shop?kategorie=Hoodies' },
-        { label: 'Sweatshirts', href: '/shop?kategorie=Sweatshirts' },
-        { label: 'Polos', href: '/shop?kategorie=Polos' },
-        { label: 'Jacken', href: '/shop?kategorie=Jacken' },
-        { label: 'Tank Tops', href: '/shop?kategorie=Tank%20Tops' },
-      ] },
-      { title: 'Weitere', items: [
-        { label: 'Kinder', href: '/shop?kategorie=Kinder' },
-        { label: 'Baby', href: '/shop?kategorie=Baby' },
-        { label: 'Taschen', href: '/shop?kategorie=Taschen' },
-        { label: 'Accessoires', href: '/shop?kategorie=Accessoires' },
-        { label: 'Alle Produkte', href: '/shop' },
-      ] },
-    ],
-    cta: { label: 'Warenkorb', href: '/warenkorb', text: 'Ab 1 Stück, Motiv hochladen, Vorschau sehen, bestellen.' },
   },
   { label: 'Über uns', href: '/ueber-uns' },
 ];

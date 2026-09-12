@@ -15,6 +15,9 @@ const enabled = Boolean(ads?.id);
       gtag('js', new Date());
       gtag('config', id);
       var choice = null; try { choice = localStorage.getItem('wp-consent'); } catch (e) {}
+      // Google-Klick-ID (gclid) 90 Tage merken, damit Anfragen später als Offline-Conversion importiert werden können. Kein Cookie, nur lokal.
+      try { var g = new URLSearchParams(location.search).get('gclid'); if (g) localStorage.setItem('wp-gclid', JSON.stringify({ id: g, t: Date.now() })); } catch (e) {}
+      window.wpGclid = function () { try { var o = JSON.parse(localStorage.getItem('wp-gclid') || 'null'); return o && Date.now() - o.t < 90 * 864e5 ? o.id : ''; } catch (e) { return ''; } };
       function loadTag() { if (window.__wpTag) return; window.__wpTag = 1; var s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id; document.head.appendChild(s); }
       function grant() { gtag('consent', 'update', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted' }); loadTag(); }
       window.wpConsent = function (v) { try { localStorage.setItem('wp-consent', v); } catch (e) {} if (v === 'all') grant(); var b = document.getElementById('consent'); if (b) b.hidden = true; };
@@ -22,7 +25,7 @@ const enabled = Boolean(ads?.id);
       if (choice === 'all') grant();
       document.addEventListener('DOMContentLoaded', function () {
         if (!choice) { var b = document.getElementById('consent'); if (b) b.hidden = false; }
-        document.addEventListener('click', function (e) { var a = e.target && e.target.closest && e.target.closest('a[href*="wa.me"]'); if (a) window.wpTrack('whatsapp'); });
+        document.addEventListener('click', function (e) { var a = e.target && e.target.closest && e.target.closest('a[href*="wa.me"]'); if (a) window.wpTrack('whatsapp'); var b = e.target && e.target.closest && e.target.closest('a[href*="apps.shopify.com"]'); if (b) window.wpTrack('appstore'); });
       });
     </script>
     <div id="consent" class="consent" hidden role="dialog" aria-label="Hinweis zur Conversion-Messung">

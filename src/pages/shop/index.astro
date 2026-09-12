@@ -7,7 +7,7 @@ const products = await getProducts();
 const cats = CATEGORY_ORDER.filter((c) => products.some((p) => p.category === c));
 const count = (c: string) => products.filter((p) => p.category === c).length;
 ---
-<Base title="Textilien mit eigenem Motiv bedrucken" description={`${products.length} Textilien von Stanley/Stella und Stedman mit deinem Motiv bedrucken: T-Shirts, Hoodies, Polos, Kinder, Baby, Taschen. Ab 1 Stück, DTF-Druck in Oberhausen, Versand in 1-3 Werktagen.`}>
+<Base noindex={true} title="Textilien mit eigenem Motiv bedrucken" description={`${products.length} Textilien von Stanley/Stella und Stedman mit deinem Motiv bedrucken: T-Shirts, Hoodies, Polos, Kinder, Baby, Taschen. Ab 1 Stück, DTF-Druck in Oberhausen, Versand in 1-3 Werktagen.`}>
   <section class="shop-head">
     <div class="container">
       <span class="eyebrow">Shop</span>

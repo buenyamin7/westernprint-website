@@ -17,7 +17,7 @@ const details = [
   ['Marke', p.brand], ['Für', p.gender], ['Farben', `${p.colors.length}`], ['Größen', `${p.sizes[0]} bis ${p.sizes[p.sizes.length - 1]}`],
 ].filter(Boolean) as [string, string][];
 ---
-<Base title={`${p.title} bedrucken lassen`} description={`${p.title} von ${p.brand} mit eigenem Motiv per DTF bedrucken. ${p.colors.length} Farben, Größen ${p.sizes[0]} bis ${p.sizes[p.sizes.length - 1]}, ab 1 Stück, Versand in 1-3 Werktagen.`} ogImage={p.image ?? undefined} jsonLd={ld} hideCta={true}>
+<Base noindex={true} title={`${p.title} bedrucken lassen`} description={`${p.title} von ${p.brand} mit eigenem Motiv per DTF bedrucken. ${p.colors.length} Farben, Größen ${p.sizes[0]} bis ${p.sizes[p.sizes.length - 1]}, ab 1 Stück, Versand in 1-3 Werktagen.`} ogImage={p.image ?? undefined} jsonLd={ld} hideCta={true}>
   <section class="pp">
     <div class="container">
       <nav class="crumbs muted" aria-label="Pfad"><a href="/shop">Shop</a> <span>/</span> <a href={`/shop?kategorie=${encodeURIComponent(p.category)}`}>{p.category}</a> <span>/</span> <span>{p.title}</span></nav>

@@ -253,7 +253,7 @@ const ld = [
       const message = [`Anfrage Streetwear-Brand über westernprint.de`, d.brand ? `Brand: ${d.brand}` : '', `Stand: ${d.stage}`, `Stückzahl: ${d.qty}`, `Produkt: ${d.product}`, '', d.message || ''].filter((l) => l !== '').join('\n');
       submit.disabled = true; submit.textContent = 'Wird gesendet...';
       try {
-        const res = await fetch(form.dataset.endpoint!, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: d.name, email: d.email, phone: d.phone, topic: 'Streetwear-Brand', qty: d.qty, message, page: location.pathname, source: d.source }) });
+        const res = await fetch(form.dataset.endpoint!, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: d.name, email: d.email, phone: d.phone, topic: 'Streetwear-Brand', qty: d.qty, message, gclid: (window as any).wpGclid?.() || '', page: location.pathname, source: d.source }) });
         const j = await res.json().catch(() => ({}));
         if (!res.ok || !j.ok) throw new Error(j.error || String(res.status));
         form.reset();
