@@ -3,11 +3,12 @@
 // Ohne site.googleAds.id wird nichts gerendert, die Seite bleibt komplett cookielos.
 import { site } from '../data/site';
 const ads = site.googleAds;
+const meta = site.metaPixel;
 const enabled = Boolean(ads?.id);
 ---
 {enabled && (
   <Fragment>
-    <script is:inline define:vars={{ id: ads.id, conv: ads.conversions }}>
+    <script is:inline define:vars={{ id: ads.id, conv: ads.conversions, metaId: meta?.id || '' }}>
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
       window.gtag = gtag;
@@ -19,9 +20,16 @@ const enabled = Boolean(ads?.id);
       try { var g = new URLSearchParams(location.search).get('gclid'); if (g) localStorage.setItem('wp-gclid', JSON.stringify({ id: g, t: Date.now() })); } catch (e) {}
       window.wpGclid = function () { try { var o = JSON.parse(localStorage.getItem('wp-gclid') || 'null'); return o && Date.now() - o.t < 90 * 864e5 ? o.id : ''; } catch (e) { return ''; } };
       function loadTag() { if (window.__wpTag) return; window.__wpTag = 1; var s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id; document.head.appendChild(s); }
-      function grant() { gtag('consent', 'update', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted' }); loadTag(); }
+      // Meta-Pixel: erst nach Einwilligung laden. PageView auf jeder Seite, Lead bei Anfrage, plus eigenes Event für Streetwear/POD-Seiten (Retargeting-Zielgruppen).
+      function loadMeta() {
+        if (!metaId || window.__wpMeta) return; window.__wpMeta = 1;
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', metaId); fbq('track', 'PageView');
+        var p = location.pathname; if (/\/fuer\/streetwear-brands/.test(p)) fbq('trackCustom', 'StreetwearSeite'); if (/\/print-on-demand|\/b2b-partner/.test(p)) fbq('trackCustom', 'PODSeite');
+      }
+      function grant() { gtag('consent', 'update', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted' }); loadTag(); loadMeta(); }
       window.wpConsent = function (v) { try { localStorage.setItem('wp-consent', v); } catch (e) {} if (v === 'all') grant(); var b = document.getElementById('consent'); if (b) b.hidden = true; };
-      window.wpTrack = function (name, value) { var label = conv && conv[name]; if (!label || !window.__wpTag) return; gtag('event', 'conversion', { send_to: id + '/' + label, value: value || 0, currency: 'EUR' }); };
+      window.wpTrack = function (name, value) { if (window.__wpMeta && window.fbq) { try { fbq('track', name === 'lead' ? 'Lead' : 'Contact', { content_name: name }); } catch (e) {} } var label = conv && conv[name]; if (!label || !window.__wpTag) return; gtag('event', 'conversion', { send_to: id + '/' + label, value: value || 0, currency: 'EUR' }); };
       if (choice === 'all') grant();
       document.addEventListener('DOMContentLoaded', function () {
         if (!choice) { var b = document.getElementById('consent'); if (b) b.hidden = false; }
@@ -29,7 +37,7 @@ const enabled = Boolean(ads?.id);
       });
     </script>
     <div id="consent" class="consent" hidden role="dialog" aria-label="Hinweis zur Conversion-Messung">
-      <p><strong>Kurze Frage.</strong> Dürfen wir messen, ob unsere Google-Anzeigen zu Anfragen führen? Dafür setzt Google ein Cookie. Ohne Zustimmung funktioniert die Seite genauso, nur ohne Messung. <a href="/datenschutz">Details</a></p>
+      <p><strong>Kurze Frage.</strong> Dürfen wir messen, ob unsere Anzeigen bei Google und Meta (Facebook, Instagram) zu Anfragen führen, und dir dort passende Anzeigen zeigen? Dafür setzen Google und Meta Cookies. Ohne Zustimmung funktioniert die Seite genauso, nur ohne Messung. <a href="/datenschutz">Details</a></p>
       <div class="consent-btns">
         <button type="button" class="btn btn-secondary" onclick="wpConsent('none')">Nur notwendige</button>
         <button type="button" class="btn btn-primary" onclick="wpConsent('all')">Einverstanden</button>

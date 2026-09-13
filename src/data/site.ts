@@ -22,6 +22,8 @@ export const site = {
   ogImage: '/og-default.jpg',
   // Google Ads Conversion-Tag. id = 'AW-XXXXXXXXXX' aus dem Google-Ads-Konto, conversions = Labels je Aktion.
   // Leer lassen = kein Tag, kein Banner, Seite bleibt cookielos.
+  // Meta-Pixel (Retargeting). Lädt nur nach Einwilligung im Consent-Banner. Leer = kein Pixel.
+  metaPixel: { id: '1785636949494821' },
   googleAds: { id: 'AW-17529116277', conversions: { lead: 'hJN4CIXNlfIcEPWsxKZB', whatsapp: 'ntGqCIjNlfIcEPWsxKZB', appstore: 'MXs8COLs2_UcEPWsxKZB' } },
 };
 
