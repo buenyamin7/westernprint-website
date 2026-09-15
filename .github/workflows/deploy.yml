@@ -28,6 +28,10 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sitemap
+          path: dist/sitemap-0.xml
 
   deploy:
     needs: build
@@ -38,3 +42,22 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  indexnow:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/download-artifact@v4
+        with:
+          name: sitemap
+      - name: Geänderte Seiten an Bing melden (IndexNow)
+        run: |
+          sleep 60
+          node scripts/indexnow.mjs sitemap-0.xml $(git diff --name-only HEAD~1 HEAD 2>/dev/null)
+        continue-on-error: true
