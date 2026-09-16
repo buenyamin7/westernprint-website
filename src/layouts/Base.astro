@@ -17,7 +17,9 @@ interface Props {
   noindex?: boolean;
 }
 const { title, description, ogImage = site.ogImage, jsonLd, noindex = false , hideCta = false } = Astro.props;
-const canonical = new URL(Astro.url.pathname.replace(/\/$/, '') || '/', site.url).href;
+// build.format 'file' liefert beim Build Pfade mit .html bzw. /index.html. Kanonisch sind die sauberen URLs aus der Sitemap.
+const cleanPath = Astro.url.pathname.replace(/\.html$/, '').replace(/(^|\/)index$/, '$1').replace(/\/$/, '') || '/';
+const canonical = new URL(cleanPath, site.url).href;
 const fullTitle = title.includes('westernprint') ? title : `${title} | westernprint`;
 
 const orgLd = {
@@ -57,8 +59,8 @@ const orgLd = {
   ],
 };
 const webLd = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': `${site.url}/#website`, url: site.url, name: 'westernprint', inLanguage: 'de-DE', publisher: { '@id': `${site.url}/#organization` } };
-const pathParts = (Astro.url.pathname.replace(/\/$/, '') || '/').split('/').filter(Boolean);
-const crumbNames: Record<string, string> = { 'print-on-demand': 'Print-on-Demand', 'b2b-partner': 'B2B-Partner', grossauflagen: 'Großauflagen', druckverfahren: 'Druckverfahren', textilien: 'Textilien', 'ueber-uns': 'Über uns', kontakt: 'Kontakt', shop: 'Shop', warenkorb: 'Warenkorb', 'textildruck-oberhausen': 'Textildruck Oberhausen', impressum: 'Impressum', datenschutz: 'Datenschutz', agb: 'AGB', widerruf: 'Widerruf', versand: 'Versand' };
+const pathParts = cleanPath.split('/').filter(Boolean);
+const crumbNames: Record<string, string> = { fuer: 'Für wen wir drucken', 'print-on-demand': 'Print-on-Demand', 'b2b-partner': 'B2B-Partner', grossauflagen: 'Großauflagen', druckverfahren: 'Druckverfahren', textilien: 'Textilien', 'ueber-uns': 'Über uns', kontakt: 'Kontakt', shop: 'Shop', warenkorb: 'Warenkorb', 'textildruck-oberhausen': 'Textildruck Oberhausen', impressum: 'Impressum', datenschutz: 'Datenschutz', agb: 'AGB', widerruf: 'Widerruf', versand: 'Versand' };
 const crumbLd = pathParts.length ? { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
   { '@type': 'ListItem', position: 1, name: 'Startseite', item: site.url },
   ...pathParts.map((part, i) => ({ '@type': 'ListItem', position: i + 2, name: crumbNames[part] ?? title.split('|')[0].trim(), item: `${site.url}/${pathParts.slice(0, i + 1).join('/')}` })),
