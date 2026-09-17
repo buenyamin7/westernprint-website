@@ -11,16 +11,16 @@ import { site } from '../data/site';
 const STAND = '15.09.2026';
 
 const rows = [
-  { name: 'westernprint', us: true, sitz: 'Oberhausen (DE)', produktion: 'Eigene Produktion in Deutschland', zeit: '1–3 Werktage bis zum Kunden in Deutschland', neck: 'Ja, 3,00 € netto', fee: 'Keine', verfahren: 'DTF, DTG', extra: 'Sample ab 1 Stück, Kleinserie ab 50 mit Lagerung und Einzelversand, Ansprechpartner per WhatsApp und Telefon', src: [] },
-  { name: 'Printful', sitz: 'Charlotte (USA), EU-Gesellschaft in Riga (LV)', produktion: 'Eigene Fulfillment-Center, in Europa in Spanien und Lettland', zeit: 'Produktion 2–5 Werktage', neck: 'Ja, Innenetikett 0,99 $', fee: 'Free-Plan 0 $, Growth-Plan 24,99 $/Monat', verfahren: 'DTG, DTF, Stick, All-over', extra: 'Sehr großer Produktkatalog, Versand weltweit', src: [
+  { name: 'westernprint', us: true, sitz: 'Oberhausen (DE)', produktion: 'Eigene Produktion in Oberhausen, Deutschland', zeit: 'Produktion 1–2 Werktage, 1–3 Werktage bis zum Kunden in Deutschland', neck: 'Ja, Nackenprint mit Logo und Größenangabe, ohne Mindestmenge', fee: 'Keine', verfahren: 'DTF, DTG, Stick über Partnerstickerei', extra: 'Sample ab 1 Stück, Kleinserie ab 50 Stück mit Lagerung und Einzelversand, fester Ansprechpartner per WhatsApp und Telefon', src: [] },
+  { name: 'Printful', sitz: 'Charlotte (USA), EU-Gesellschaft in Riga (LV)', produktion: 'Sitz in den USA, eigene Fulfillment-Center, für Europa in Spanien und Lettland', zeit: 'Produktion 2–5 Werktage, Versand aus Spanien oder Lettland', neck: 'Ja, Innenetikett gegen Aufpreis', fee: 'Free-Plan 0 $, Growth-Plan 24,99 $/Monat', verfahren: 'DTG, DTF, Stick, All-over', extra: 'Sehr großer Produktkatalog, Versand weltweit', src: [
     ['Deutschland-Seite', 'https://www.printful.com/print-on-demand-germany'], ['Versand', 'https://www.printful.com/shipping'], ['Innenetiketten', 'https://www.printful.com/custom-inside-labels'], ['Preise', 'https://www.printful.com/pricing'] ] },
-  { name: 'Printify', sitz: 'Wilmington (USA), Riga (LV), Tallinn (EE)', produktion: 'Netzwerk aus Partnerdruckereien, in Europa u. a. UK, DE, CZ, PL, LV', zeit: 'Meist Versand nach 2–7 Werktagen, je nach Partner', neck: 'Ab 0,55 $, nur bei ausgewählten Partnern', fee: 'Free 0 $, Premium ab 24,99 $/Monat', verfahren: 'DTG, DTF, Stick, Sublimation (je nach Partner)', extra: 'Preis und Qualität hängen vom gewählten Druckpartner ab', src: [
+  { name: 'Printify', sitz: 'Wilmington (USA), Riga (LV), Tallinn (EE)', produktion: 'Sitz in den USA und im Baltikum, Netzwerk aus Partnerdruckereien, in Europa u. a. UK, DE, CZ, PL, LV', zeit: 'Meist Versand nach 2–7 Werktagen, je nach Partner', neck: 'Gegen Aufpreis, nur bei ausgewählten Partnern', fee: 'Free 0 $, Premium ab 24,99 $/Monat', verfahren: 'DTG, DTF, Stick, Sublimation (je nach Partner)', extra: 'Preis und Qualität hängen vom gewählten Druckpartner ab', src: [
     ['Europa', 'https://printify.com/print-on-demand/europe/'], ['Branding', 'https://printify.com/custom-branding/'], ['Preise', 'https://printify.com/pricing/'] ] },
-  { name: 'Gelato', sitz: 'Lysaker (Norwegen)', produktion: 'Netzwerk mit über 140 Partnerstandorten in 32 Ländern', zeit: 'Produktion im Schnitt 1–4 Werktage', neck: 'Ja, bei ausgewählten Artikeln', fee: 'Free 0 $, Gelato+ kostenpflichtig', verfahren: 'DTG, DTF je Standort, Stick', extra: 'Produktion möglichst nah am Endkunden, weltweit', src: [
+  { name: 'Gelato', sitz: 'Lysaker (Norwegen)', produktion: 'Sitz in Norwegen, Netzwerk mit über 140 Partnerstandorten in 32 Ländern', zeit: 'Produktion im Schnitt 1–4 Werktage', neck: 'Ja, bei ausgewählten Artikeln', fee: 'Free 0 $, Gelato+ kostenpflichtig', verfahren: 'DTG, DTF je Standort, Stick', extra: 'Produktion möglichst nah am Endkunden, weltweit', src: [
     ['Shopify App Store', 'https://apps.shopify.com/gelato-print-on-demand'], ['Lieferzeiten', 'https://support.gelato.com/en/articles/8996050-how-quickly-do-you-deliver'] ] },
-  { name: 'Shirtee Cloud', sitz: 'Köln (DE)', produktion: 'Eigene Produktion in Köln', zeit: 'Je nach Seite 1–2 Tage bis 3–4 Werktage angegeben', neck: 'Ja, als Branding-Option', fee: 'Keine', verfahren: 'Digitaldruck (DTG), Stick', extra: 'Zusätzlich eigener Marktplatz shirtee.com', src: [
+  { name: 'Shirtee Cloud', sitz: 'Köln (DE)', produktion: 'Eigene Produktion in Köln, Deutschland', zeit: 'Je nach Seite 1–2 Tage bis 3–4 Werktage angegeben', neck: 'Ja, als Branding-Option', fee: 'Keine', verfahren: 'Digitaldruck (DTG), Stick', extra: 'Zusätzlich eigener Marktplatz shirtee.com', src: [
     ['Print-on-Demand', 'https://www.shirtee.com/en/print-on-demand'], ['FAQ', 'https://www.shirtee.com/en/faq'], ['Branding', 'https://shirtee.cloud/de/welche-individuellen-branding-optionen-habe-ich-bei-der-produkterstellung-2/'] ] },
-  { name: 'Spreadconnect', sitz: 'Leipzig (DE)', produktion: 'Eigene Standorte in Leipzig, Krupka (CZ) und Legnica (PL)', zeit: 'Unter 48 Stunden für 95 % der Bestellungen', neck: 'Keine Angabe gefunden', fee: 'Keine', verfahren: 'DTG, DTF, Sublimation, Flex, Flock', extra: 'Neutrale Verpackung, eigenes Händler-Branding laut Anbieter noch nicht verfügbar', src: [
+  { name: 'Spreadconnect', sitz: 'Leipzig (DE)', produktion: 'Eigene Standorte in Leipzig, Krupka (Tschechien) und Legnica (Polen)', zeit: 'Produktion unter 48 Stunden für 95 % der Bestellungen', neck: 'Keine Angabe gefunden', fee: 'Keine', verfahren: 'DTG, DTF, Sublimation, Flex, Flock', extra: 'Neutrale Verpackung, eigenes Händler-Branding laut Anbieter noch nicht verfügbar', src: [
     ['Spreadconnect für Shopify', 'https://www.spreadshop.com/spreadconnect-shopify/'], ['Druckverfahren', 'https://www.spreadshop.com/helpcenter/design-products-printing/what-are-spreadconnects-printing-techniques/'] ] },
 ];
 
@@ -44,11 +44,11 @@ const ld = [
   { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
 ];
 ---
-<Base title="Print-on-Demand-Anbieter Deutschland im Vergleich: Printful, Printify, Gelato, Shirtee" description={`Print-on-Demand-Anbieter für Shopify im Vergleich: Wo wird produziert, wie schnell, was kostet Nackenprint und Grundgebühr? westernprint, Printful, Printify, Gelato, Shirtee Cloud und Spreadconnect. Stand ${STAND}.`} jsonLd={ld}>
+<Base title="Print-on-Demand-Anbieter Deutschland im Vergleich: Printful, Printify, Gelato, Shirtee" description={`Print-on-Demand-Anbieter für Shopify im Vergleich: Wo wird produziert, wie schnell ist die Ware beim Kunden, wer druckt dein Logo in den Nacken, wer verlangt eine Grundgebühr? westernprint, Printful, Printify, Gelato, Shirtee Cloud und Spreadconnect. Stand ${STAND}.`} jsonLd={ld}>
   <PageHero
     eyebrow="Anbieter-Vergleich"
     title="Print-on-Demand-Anbieter in Deutschland <span class='hl'>im Vergleich.</span>"
-    lede={`Wo wird gedruckt, wie schnell ist die Ware beim Kunden, was kosten Nackenprint und Grundgebühr? Sechs Anbieter mit Shopify-App, nebeneinander. Alle Angaben stammen von den offiziellen Seiten der Anbieter, Stand ${STAND}.`}
+    lede={`Wo wird gedruckt, wie schnell ist die Ware beim Kunden, wer macht Samples und Kleinserien, wer verlangt eine Grundgebühr? Sechs Anbieter mit Shopify-App, nebeneinander. Alle Angaben stammen von den offiziellen Seiten der Anbieter, Stand ${STAND}.`}
     cta={{ label: 'Unsere Shopify-App', href: '/print-on-demand#app' }}
     cta2={{ label: 'Sample anfragen', href: '/kontakt' }}
   />
@@ -62,25 +62,24 @@ const ld = [
       <div class="tbl-wrap reveal">
         <table class="cmp">
           <thead>
-            <tr><th>Anbieter</th><th>Sitz</th><th>Produktion für Deutschland</th><th>Tempo</th><th>Nackenprint / Innenetikett</th><th>Grundgebühr</th><th>Druckverfahren</th><th>Besonderheit</th></tr>
+            <tr><th>Anbieter</th><th>Produktion für Deutschland</th><th>Tempo</th><th>Sample, Kleinserie, Service</th><th>Branding im Nacken</th><th>Grundgebühr</th><th>Druckverfahren</th></tr>
           </thead>
           <tbody>
             {rows.map((r) => (
               <tr class={r.us ? 'is-us' : ''}>
                 <th scope="row">{r.name}</th>
-                <td data-l="Sitz">{r.sitz}</td>
                 <td data-l="Produktion">{r.produktion}</td>
                 <td data-l="Tempo">{r.zeit}</td>
-                <td data-l="Nackenprint">{r.neck}</td>
+                <td data-l="Sample, Kleinserie, Service">{r.extra}</td>
+                <td data-l="Branding im Nacken">{r.neck}</td>
                 <td data-l="Grundgebühr">{r.fee}</td>
                 <td data-l="Verfahren">{r.verfahren}</td>
-                <td data-l="Besonderheit">{r.extra}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <p class="muted small note">Tempo ist so angegeben, wie es der jeweilige Anbieter selbst angibt: teils als reine Produktionszeit, teils bis zur Zustellung. Alle Shops haben eine offizielle App im Shopify App Store. Preise in US-Dollar laut Anbieter.</p>
+      <p class="muted small note">Tempo ist so angegeben, wie es der jeweilige Anbieter selbst angibt: Die meisten nennen nur die Produktionszeit, wir nennen zusätzlich die Zeit bis zur Zustellung beim Kunden. Alle Shops haben eine offizielle App im Shopify App Store. Preise in US-Dollar laut Anbieter.</p>
     </div>
   </section>
 
@@ -135,7 +134,7 @@ const ld = [
 
 <style>
   .tbl-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); }
-  .cmp { width: 100%; min-width: 1080px; border-collapse: collapse; font-size: 14px; line-height: 1.45; }
+  .cmp { width: 100%; min-width: 1010px; border-collapse: collapse; font-size: 14px; line-height: 1.45; }
   .cmp th, .cmp td { text-align: left; vertical-align: top; padding: 14px 16px; border-top: 1px solid var(--line); }
   .cmp thead th { border-top: 0; background: var(--bg-2); color: var(--text-3); font-size: 12.5px; font-weight: 600; white-space: nowrap; }
   .cmp tbody th { font-family: var(--font-display); font-size: 15px; white-space: nowrap; }
