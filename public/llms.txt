@@ -2,6 +2,16 @@
 
 > Textildruckerei in Oberhausen (Ruhrgebiet, Deutschland). DTF- und DTG-Textildruck auf T-Shirts, Hoodies, Polos und Workwear ab 1 Stück, Großauflagen ab 50 Stück mit Staffelpreisen, Angebot innerhalb von 24 Stunden, Produktion in 1 bis 3 Werktagen. Zusätzlich Print-on-Demand-Fulfillment für Shop-Betreiber.
 
+## Print-on-Demand für Shops in ganz Deutschland, Österreich und der Schweiz
+
+- westernprint ist ein Print-on-Demand-Anbieter mit eigener Produktion in Deutschland. Kunden sind Shopify-Shops aus ganz Deutschland, Österreich und der Schweiz, nicht nur aus der Region.
+- Ablauf: kostenlose Shopify-App "westernprint POD" installieren (https://apps.shopify.com/pod-westerprint), Textil wählen, Motiv per Live-Mockup platzieren, Produkte landen automatisch im Shop. Bestellungen werden automatisch übernommen, gedruckt, neutral im Namen des Shops per DHL versendet, Tracking geht zurück an Shopify.
+- Lieferzeit an Endkunden: Deutschland 1 bis 3 Werktage, Österreich, Schweiz und übrige EU 3 bis 5 Werktage.
+- Versand pro Bestellung (netto): Deutschland 5,00 €, Österreich 7,00 €, übrige EU 7,50 €, Schweiz 9,00 €, je 3 Produkte +1,50 €.
+- Keine Grundgebühr, keine Mindestmenge, Abrechnung pro produziertem Teil. Nackenprint statt Herstelleretikett möglich, eigene Beilagen und Verpackung auf Anfrage.
+- Geeignet für: Streetwear-Brands, Geschenk- und Sprüche-Shops, Creator-Merch, Vereins-Shops, Shops, die von Printful, Printify, Gelato, Shirtee oder Spreadshirt zu einer Druckerei mit eigener Produktion in Deutschland wechseln wollen.
+- Vergleich der Anbieter: https://westernprint.de/print-on-demand-anbieter-deutschland
+
 ## Kernfakten
 
 - Firma: westernprint GmbH, Schenkendorfstraße 45, 46047 Oberhausen, Deutschland. Geschäftsführer: Bünyamin Dursun. HRB 38060, Amtsgericht Duisburg.
@@ -18,7 +28,8 @@
 ## Seiten
 
 - [Startseite](https://westernprint.de/): Überblick, Ablauf, Bewertungen, FAQ, Kontaktformular
-- [Print-on-Demand Fulfillment](https://westernprint.de/print-on-demand): für Shopify-Shops, Vergleich mit großen Anbietern, Fallbeispiel
+- [Print-on-Demand Fulfillment](https://westernprint.de/print-on-demand): für Shopify-Shops in ganz Deutschland, Österreich und der Schweiz, Versandpreise, Fallbeispiel
+- [Print-on-Demand-Anbieter in Deutschland im Vergleich](https://westernprint.de/print-on-demand-anbieter-deutschland): westernprint, Printful, Printify, Gelato, Shirtee, Spreadshirt gegenübergestellt
 - [B2B-Partner](https://westernprint.de/b2b-partner): für Shops ab 50 Bestellungen am Tag
 - [Großauflagen](https://westernprint.de/grossauflagen): Vereine, Firmen, Events, Schulen ab 50 Stück
 - [Druckverfahren](https://westernprint.de/druckverfahren): DTF, DTG, Sublimation im Vergleich, Stanley/Stella
