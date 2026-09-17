@@ -57,7 +57,6 @@ export const nav: NavItem[] = [
         { label: 'Fulfillment für Shopify', href: '/print-on-demand', hint: 'Drucken, verpacken, versenden in 1-3 Tagen' },
         { label: 'Unsere Shopify-App', href: '/print-on-demand#app', hint: 'Installieren, designen, verkaufen' },
         { label: 'B2B-Partner werden', href: '/b2b-partner', hint: 'Konditionen für Agenturen und Wiederverkäufer' },
-        { label: 'Anbieter im Vergleich', href: '/print-on-demand-anbieter-deutschland', hint: 'Printful, Shirtee und Co. gegenübergestellt' },
         { label: 'Eigene Brand gründen', href: '/textilien#brand-gruenden', hint: 'Ohne Lager, ohne Mindestmenge' },
       ] },
     ],
