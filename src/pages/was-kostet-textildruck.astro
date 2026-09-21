@@ -1,0 +1,151 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../data/site';
+
+// Preisbeispiele: netto zzgl. MwSt., ein Druck (Brust ODER Rücken), Stand im Datum unten.
+// Bei Änderungen auch die FAQ-Antworten und llms.txt anpassen.
+const STAND = '21.09.2026';
+
+const tabellen = [
+  {
+    t: 'T-Shirt Basic (Stedman Classic-T, 155 g)',
+    d: 'Der günstige Klassiker für Vereine, Events und Give-aways.',
+    zeilen: [['1 Stück', '17,90 €'], ['10 Stück', '12,90 €'], ['25 Stück', '10,90 €'], ['50 Stück', '9,40 €'], ['100 Stück', '8,40 €']],
+  },
+  {
+    t: 'T-Shirt Bio (Stanley/Stella Creator 2.0, 180 g)',
+    d: 'Bio-Baumwolle, GOTS, weicher Griff. Für Brands und Firmen, die auf Qualität achten.',
+    zeilen: [['1 Stück', '19,90 €'], ['10 Stück', '14,90 €'], ['25 Stück', '12,90 €'], ['50 Stück', '11,40 €'], ['100 Stück', '10,40 €']],
+  },
+  {
+    t: 'Poloshirt (Stedman Classic Polo, 170 g)',
+    d: 'Für Standpersonal, Werkstatt, Gastro und Empfang.',
+    zeilen: [['1 Stück', '22,90 €'], ['10 Stück', '17,90 €'], ['25 Stück', '15,90 €'], ['50 Stück', '14,50 €'], ['100 Stück', '13,40 €']],
+  },
+  {
+    t: 'Hoodie (Stedman Classic Hoodie, 280 g)',
+    d: 'Abschlussklassen, Teams, Merch. Auch als Sweatjacke möglich.',
+    zeilen: [['1 Stück', '29,90 €'], ['10 Stück', '24,90 €'], ['25 Stück', '22,90 €'], ['50 Stück', '21,40 €'], ['100 Stück', '19,90 €']],
+  },
+];
+
+const zusatz = [
+  { t: 'Zweite Druckseite', p: 'ab 3,50 €', d: 'Vorne und hinten bedruckt, zum Beispiel Logo vorne, großes Motiv hinten.' },
+  { t: 'Nackenprint statt Herstelleretikett', p: '3,00 €', d: 'Dein Logo mit Größenangabe direkt ins Textil gedruckt.' },
+  { t: 'Namen und Rückennummern', p: 'ab 5,90 €', d: 'Jedes Teil einzeln, Liste mit Name, Nummer und Größe reicht.' },
+  { t: 'Ärmeldruck oder kleines Zusatzmotiv', p: 'ab 2,52 €', d: 'Zum Beispiel Sponsor am Ärmel oder Schriftzug am Saum.' },
+  { t: 'Einrichtung, Sieb, Datencheck', p: '0,00 €', d: 'Wir berechnen keine Einrichtungskosten und keine Druckvorbereitung.' },
+  { t: 'Versand innerhalb Deutschlands', p: 'ab 5,90 €', d: 'DHL mit Sendungsverfolgung. Abholung in Oberhausen ist kostenlos.' },
+];
+
+const faktoren = [
+  { icon: 't-shirt', t: 'Das Textil', d: 'Ein Basic-Shirt kostet uns im Einkauf gut 2 €, ein schwerer Oversize-Hoodie über 25 €. Das ist der größte Unterschied im Preis, nicht der Druck.' },
+  { icon: 'stack', t: 'Die Stückzahl', d: 'Jeder Auftrag wird einmal eingerichtet. Bei einem Teil trägt dieses eine Teil die ganze Arbeit, bei 100 verteilt sie sich. Deshalb fällt der Stückpreis mit der Menge deutlich.' },
+  { icon: 'printer', t: 'Die Druckpositionen', d: 'Jede Position ist ein eigener Arbeitsschritt: Brust, Rücken, Ärmel, Nacken. Die Größe des Motivs spielt dabei kaum eine Rolle, die Anzahl der Positionen schon.' },
+];
+
+const faqs = [
+  { q: 'Was kostet es, 50 T-Shirts bedrucken zu lassen?', a: `Bei 50 Basic-Shirts mit einem Druck liegt der Stückpreis bei etwa 9,40 € netto, also rund 470 € netto für die ganze Serie. Mit Bio-Baumwolle sind es etwa 11,40 € pro Stück. Ein zweiter Druck auf dem Rücken kostet ab 3,50 € zusätzlich pro Teil. Stand: ${STAND}.` },
+  { q: 'Was kostet ein einzelnes T-Shirt?', a: 'Ein einzelnes bedrucktes Shirt liegt bei etwa 17,90 € netto, ein Hoodie bei etwa 29,90 € netto. Wir drucken ab 1 Stück, ohne Mindestmenge und ohne Einrichtungsgebühr.' },
+  { q: 'Warum ist ein einzelnes Teil so viel teurer als 100?', a: 'Weil der Aufwand fast derselbe ist: Datei prüfen, Druckdatei anlegen, Maschine einrichten, drucken, pressen, kontrollieren, verpacken. Bei 100 Teilen verteilt sich diese Arbeit, bei einem Teil nicht.' },
+  { q: 'Fallen Einrichtungskosten oder Kosten für die Druckdatei an?', a: 'Nein. Wir berechnen keine Einrichtung, keine Siebkosten und keinen Datencheck. Du zahlst Textil, Druck und Versand, sonst nichts.' },
+  { q: 'Was kostet der Druck auf mitgebrachter Ware?', a: 'Wenn du deine eigenen Textilien anlieferst, berechnen wir nur den Druck: kleines Logo auf der Brust ab 3,90 €, großes Motiv auf dem Rücken ab 6,90 € netto pro Teil. Bitte vorher kurz das Material nennen, damit wir prüfen, ob der Druck darauf hält.' },
+  { q: 'Ist DTG teurer als DTF?', a: 'Im Preis liegen beide Verfahren nah beieinander. Wir wählen nach Textil und Motiv: DTF hält auf Baumwolle und Polyester und ist bei Auflagen schneller, DTG geht direkt ins Gewebe und fühlt sich weicher an, funktioniert aber nur auf Baumwolle.' },
+  { q: 'Sind die Preise brutto oder netto?', a: 'Alle Angaben auf dieser Seite sind netto, also zzgl. 19 % Mehrwertsteuer. Ein Preis von 9,40 € netto entspricht 11,19 € brutto.' },
+  { q: 'Wie schnell geht es?', a: 'Einzelstücke und kleine Mengen sind in 1 bis 3 Werktagen fertig, Serien ab 50 Stück in 5 bis 7 Werktagen. Express ist auf Anfrage möglich, sag uns einfach deinen Termin.' },
+];
+
+const ld = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'Service', name: 'Textildruck mit Preisbeispielen', serviceType: 'Textildruck', provider: { '@id': `${site.url}/#organization` }, areaServed: [{ '@type': 'City', name: 'Oberhausen' }, { '@type': 'Country', name: 'Deutschland' }], url: `${site.url}/was-kostet-textildruck`, offers: { '@type': 'Offer', priceCurrency: 'EUR', price: '8.40', description: 'T-Shirt bedruckt ab 8,40 € netto bei 100 Stück, ab 1 Stück möglich, keine Einrichtungskosten' } },
+];
+---
+<Base title="Was kostet Textildruck? Preisbeispiele für 1 bis 100 Stück" description="Was kostet es, T-Shirts oder Hoodies bedrucken zu lassen? Echte Preisbeispiele für 1, 10, 25, 50 und 100 Stück, alle netto, ohne Einrichtungskosten. Druckerei in Oberhausen." jsonLd={ld}>
+  <PageHero
+    eyebrow="Preise"
+    title="Was kostet Textildruck? <span class='hl'>Hier stehen Zahlen.</span>"
+    lede={`Keine Preisliste auf Anfrage, sondern echte Beispiele: T-Shirt, Polo und Hoodie für 1, 10, 25, 50 und 100 Stück. Alle Preise netto zzgl. MwSt., Stand ${STAND}.`}
+    image="/img/packtisch.jpg"
+    imageAlt="Frisch bedruckte Shirts auf dem Packtisch"
+    cta={{ label: 'Angebot in 24h', href: '/kontakt' }}
+    cta2={{ label: 'Per WhatsApp', href: site.whatsapp }}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Preisbeispiele mit einem Druck</h2>
+        <p>Ein Motiv auf Brust oder Rücken, Textil inklusive. Mischgrößen kosten keinen Aufpreis, Mehrfarbigkeit auch nicht.</p>
+      </div>
+      <div class="grid grid-2">
+        {tabellen.map((tb, i) => (
+          <div class={`pcard reveal reveal-d${i % 3}`}>
+            <h3>{tb.t}</h3>
+            <p class="muted small">{tb.d}</p>
+            <table class="ptab">
+              <tbody>
+                {tb.zeilen.map(([m, p]) => (<tr><th scope="row">{m}</th><td>{p}</td></tr>))}
+              </tbody>
+            </table>
+            <p class="muted small">Preis pro Stück, netto zzgl. MwSt.</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight extras">
+    <div class="container">
+      <div class="section-head reveal"><h2>Was zusätzlich kostet, und was nicht</h2></div>
+      <ul class="xlist reveal">
+        {zusatz.map((z) => (
+          <li>
+            <div class="xhead"><strong>{z.t}</strong><span class="xprice">{z.p}</span></div>
+            <span class="muted small">{z.d}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="muted small note">Alle Preise netto zzgl. 19 % MwSt. Die Beispiele gelten für gängige Modelle und Standardgrößen. Schwere Oversize-Ware, Jacken oder Sonderfarben liegen höher, wir nennen den genauen Preis im Angebot.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal"><h2>Wovon der Preis wirklich abhängt</h2></div>
+      <div class="grid grid-3">
+        {faktoren.map((f, i) => (
+          <div class={`fit reveal reveal-d${i}`}>
+            <div class="icon-box"><Icon name={f.icon} size={22} /></div>
+            <h3>{f.t}</h3>
+            <p>{f.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faqs} title="Häufige Fragen zu den Kosten" />
+  <CtaBand title="Sag uns Motiv und Stückzahl" text="Du bekommst innerhalb von 24 Stunden einen festen Preis und einen Liefertermin, keine Preisspanne." />
+</Base>
+
+<style>
+  .pcard { display: grid; gap: 10px; padding: 26px; border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); }
+  .ptab { width: 100%; border-collapse: collapse; margin-top: 4px; }
+  .ptab th, .ptab td { padding: 10px 0; border-top: 1px solid var(--line); text-align: left; font-size: 15px; }
+  .ptab th { font-weight: 500; color: var(--text-2); }
+  .ptab td { text-align: right; font-family: var(--font-display); font-size: 17px; }
+  .ptab tr:first-child th, .ptab tr:first-child td { border-top: 0; }
+  .extras { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .xlist { display: grid; gap: 16px; max-width: 70ch; }
+  .xlist li { display: grid; gap: 4px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+  .xlist li:last-child { border-bottom: 0; padding-bottom: 0; }
+  .xhead { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; }
+  .xprice { font-family: var(--font-display); color: var(--accent); white-space: nowrap; }
+  .fit { display: grid; gap: 12px; padding: 26px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); }
+  .fit p { color: var(--text-2); font-size: 15px; }
+  .note { margin-top: 20px; max-width: 80ch; }
+</style>

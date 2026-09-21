@@ -45,6 +45,7 @@ export const nav: NavItem[] = [
         { label: 'Großauflagen ab 50 Stück', href: '/grossauflagen', hint: 'Staffelpreise, Korrekturabzug, fester Liefertermin' },
         { label: 'Textildruck Oberhausen', href: '/textildruck-oberhausen', hint: 'Vor Ort im Ruhrgebiet, Abholung möglich' },
         { label: 'Textilien und Marken', href: '/textilien', hint: 'Stanley/Stella, BYB, Neutral, JHK' },
+        { label: 'Was kostet Textildruck?', href: '/was-kostet-textildruck', hint: 'Preisbeispiele für 1, 10, 25, 50 und 100 Stück' },
         { label: 'Muster bestellen', href: '/sample', hint: 'Ein Stück mit deinem Motiv testen, ab 1 Stück' },
       ] },
     ],

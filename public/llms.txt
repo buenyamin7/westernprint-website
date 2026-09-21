@@ -29,6 +29,7 @@
 - [Startseite](https://westernprint.de/): Überblick, Ablauf, Bewertungen, FAQ, Kontaktformular
 - [Print-on-Demand Fulfillment](https://westernprint.de/print-on-demand): für Shopify-Shops in ganz Deutschland, Österreich und der Schweiz, Versandpreise, Fallbeispiel
 - [B2B-Partner](https://westernprint.de/b2b-partner): für Shops ab 50 Bestellungen am Tag
+- [Was kostet Textildruck](https://westernprint.de/was-kostet-textildruck): Preisbeispiele netto für 1, 10, 25, 50 und 100 Stück, T-Shirt ab 8,40 € bei 100 Stück, keine Einrichtungskosten
 - [Großauflagen](https://westernprint.de/grossauflagen): Vereine, Firmen, Events, Schulen ab 50 Stück
 - [Druckverfahren](https://westernprint.de/druckverfahren): DTF, DTG, Sublimation im Vergleich, Stanley/Stella
 - [Textilien](https://westernprint.de/textilien): Sortiment
