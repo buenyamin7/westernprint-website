@@ -10,6 +10,7 @@ const faqs = [
   { q: 'Wie funktioniert euer Print-on-Demand-Service genau?', a: 'Du verbindest deinen Shop mit unserem System. Sobald eine Bestellung eingeht, übernehmen wir Druck, Verpackung und Versand, komplett automatisiert und in deinem Namen.' },
   { q: 'Gibt es Mindestbestellmengen?', a: 'Nein. Wir produzieren ab 1 Stück, perfekt für Einzelbestellungen oder personalisierte Produkte.' },
   { q: 'Wie schnell sind die Lieferzeiten?', a: 'Innerhalb Deutschlands in der Regel 1 bis 3 Werktage, auch im Q4. Europaweit meist 3 bis 5 Tage.' },
+  { q: 'Wo wird produziert und wohin versendet ihr?', a: 'Produziert wird ausschließlich in unserer eigenen Werkstatt in Oberhausen, auf eigenen Epson-Maschinen und Heißpressen. Versendet wird deutschlandweit per DHL, neutral im Namen deines Shops. Österreich, Schweiz und die übrige EU sind ebenfalls möglich.' },
   { q: 'Wie läuft die Anbindung meines Shops?', a: 'Du bekommst Zugang zu deinem Kundenportal. Dort verbindest du deinen Shopify-Store per App oder Bestellimport. Auf Wunsch richten wir alles gemeinsam ein.' },
   { q: 'Wie läuft die Abrechnung?', a: 'Wöchentliche Abrechnung über alle produzierten Artikel zu festen Preisen pro Produkt. Transparent und planbar, ohne Einrichtungsgebühr.' },
   { q: 'Kann ich eigene Verpackung oder Beilagen nutzen?', a: 'Ja. Neutraler Versand ist Standard, eigene Flyer, Hangtags oder Innenlabel setzen wir auf Anfrage um.' },
@@ -18,11 +19,11 @@ const appLd = { '@context': 'https://schema.org', '@type': 'SoftwareApplication'
 const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'Print-on-Demand Fulfillment für Shopify', serviceType: 'Print-on-Demand Fulfillment', provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: ['DE', 'AT', 'CH', 'EU'], url: 'https://westernprint.de/print-on-demand', offers: { '@type': 'Offer', description: 'Feste Preise pro Produkt inklusive Druck, keine Einrichtungsgebühr, keine Mindestmenge' } };
 const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 ---
-<Base title="Print-on-Demand Fulfillment für Shopify" description="Shop verbinden, verkaufen, wir drucken und versenden neutral in deinem Namen. Print-on-Demand ab 1 Stück aus Oberhausen, 1-3 Werktage Lieferzeit, feste Preise." jsonLd={[svcLd, appLd, faqLd]}>
+<Base title="Print-on-Demand für Shopify aus Oberhausen, Versand deutschlandweit" description="Shop verbinden, verkaufen, wir drucken und versenden neutral in deinem Namen. Produktion auf eigenen Maschinen in Oberhausen, Versand deutschlandweit, ab 1 Stück, 1-3 Werktage, feste Preise." jsonLd={[svcLd, appLd, faqLd]}>
   <PageHero
     eyebrow="Print-on-Demand"
     title="Dein Fulfillment-Partner für Shopify. <span class='hl'>Ab 1 Stück.</span>"
-    lede="Du verkaufst, wir drucken, verpacken und versenden direkt an deine Kunden. Produktion in Deutschland, direkter Support, konstante Qualität."
+    lede="Wir produzieren auf eigenen Maschinen in Oberhausen und versenden deutschlandweit direkt an die Kunden deines Shopify-Shops. Ab einem Stück, per DTF und DTG, neutral in deinem Namen."
     image="/img/pod-versand.jpg"
     imageAlt="Packtisch bei westernprint: Reihen fertig verpackter Kraftpapier-Versandtaschen mit Etikett, vorne ein schwarzes Shirt in der offenen Tasche"
     cta={{ label: 'App im Shopify App Store', href: 'https://apps.shopify.com/pod-westerprint' }}
@@ -37,7 +38,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
       </div>
       <div class="grid grid-3">
         {[
-          { icon: 'factory', t: 'Produktion in Deutschland', d: 'Alle Drucke entstehen auf unseren Epson-Maschinen in Oberhausen. Planbar, schnell, kontrollierbar.' },
+          { icon: 'factory', t: 'Produktion in Oberhausen', d: 'Alle Drucke entstehen auf unseren eigenen Epson-Maschinen, nicht bei wechselnden Partnerdruckereien. Versand deutschlandweit per DHL.' },
           { icon: 'package', t: 'Neutraler Versand', d: 'Kein westernprint-Logo, keine Rechnung von uns im Paket. Dein Kunde sieht nur dich.' },
           { icon: 'clock', t: '1 bis 3 Werktage', d: 'Auch in der Black Week und im Weihnachtsgeschäft, wenn andere bis zu 14 Tage brauchen.' },
           { icon: 'plugs-connected', t: 'Shopify-Anbindung', d: 'Bestellungen laufen automatisch zu uns. Tracking geht automatisch zurück in deinen Shop.' },
