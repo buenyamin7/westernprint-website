@@ -1,0 +1,197 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Faq from '../components/Faq.astro';
+import { site } from '../data/site';
+
+const nah = [
+  { c: 'Mülheim an der Ruhr', d: 'Direkt nebenan. Abholung oft am selben Tag möglich.' },
+  { c: 'Duisburg', d: 'Rund 20 Minuten über die A40. Abholung oder Lieferung, wie es dir passt.' },
+  { c: 'Essen', d: 'Rund 20 Minuten. Viele Vereine und Betriebe aus Essen holen selbst ab.' },
+  { c: 'Bottrop', d: 'Kurzer Weg über die A42. Abholung lohnt sich, Versand geht natürlich auch.' },
+  { c: 'Dinslaken', d: 'Rund 20 Minuten. Für Serien liefern wir direkt zu dir.' },
+];
+const weiter = [
+  'Gelsenkirchen', 'Bochum', 'Herne', 'Dortmund', 'Recklinghausen',
+  'Castrop-Rauxel', 'Gladbeck', 'Moers', 'Krefeld', 'Düsseldorf',
+];
+
+const faqs = [
+  { q: 'Druckt ihr auch für Kunden aus Essen, Duisburg oder Bochum?', a: 'Ja. Unsere Druckerei steht in Oberhausen, produziert wird für das ganze Ruhrgebiet. Aus Mülheim, Duisburg, Essen, Bottrop und Dinslaken bist du in etwa 20 Minuten bei uns. Alles Weitere liefern wir per DHL, innerhalb des Reviers in der Regel am nächsten Werktag nach Versand.' },
+  { q: 'Lohnt sich die Abholung oder soll ich liefern lassen?', a: 'Bei Einzelstücken und kleinen Mengen aus den Nachbarstädten lohnt sich die Abholung, du sparst die Versandkosten von 5,00 € netto. Bei größeren Serien liefern wir, das Paket kostet bei einer Sammelbestellung kaum mehr als die Fahrt.' },
+  { q: 'Wie schnell geht das?', a: 'Einzelstücke und kleine Mengen sind in der Regel in 1 bis 3 Werktagen fertig. Serien ab 50 Stück brauchen 5 bis 7 Werktage nach Freigabe des Korrekturabzugs. Wenn du einen festen Termin hast, sag ihn uns direkt, Express ist oft möglich.' },
+  { q: 'Kann ich eigene Textilien vorbeibringen?', a: 'Ja. Angelieferte Ware bedrucken wir, egal ob Vereinstrikots, Arbeitskleidung oder etwas, das du schon im Schrank hast. Wir prüfen vorher, ob das Material für DTF geeignet ist. Bei Polyester und Funktionsstoffen drucken wir mit niedrigerer Temperatur, das klappt problemlos.' },
+  { q: 'Seid ihr bei 50 Shirts der günstigste Anbieter?', a: 'Nein, und das sagen wir offen. Bei 50 gleichen Shirts mit einem einfarbigen Logo ist Siebdruck bei reinen Mengendruckereien billiger. Wir drucken DTF und DTG, dafür sind wir stark bei allem, was Siebdruck teuer macht: mehrfarbige Motive, verschiedene Größen und Farben in einer Bestellung, Namen und Nummern pro Teil, kleine Mengen, kurze Termine. Wenn es bei dir wirklich nur um 50 identische Shirts geht, sagen wir dir das ehrlich.' },
+  { q: 'Was kostet eine Vereinsbestellung ungefähr?', a: 'Bedruckte Vereinsshirts gibt es ab 7,90 € netto, 50 Basic-Shirts mit einem Druck liegen bei etwa 9,40 € netto pro Stück. Namen und Nummern kosten ab 5,90 € netto pro Teil. Genaue Beispiele stehen auf unserer Preisseite.' },
+];
+
+const ld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Textildruck im Ruhrgebiet',
+    serviceType: 'Textildruck, DTF-Druck, DTG-Druck, Vereinskleidung, Arbeitskleidung',
+    provider: { '@id': `${site.url}/#organization` },
+    areaServed: [
+      'Oberhausen', 'Mülheim an der Ruhr', 'Duisburg', 'Essen', 'Bottrop', 'Dinslaken',
+      'Gelsenkirchen', 'Bochum', 'Herne', 'Dortmund', 'Recklinghausen', 'Castrop-Rauxel',
+      'Gladbeck', 'Moers', 'Krefeld', 'Düsseldorf', 'Ruhrgebiet', 'Nordrhein-Westfalen',
+    ],
+    url: `${site.url}/textildruck-ruhrgebiet`,
+  },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+<Base
+  title="Textildruck Ruhrgebiet: Essen, Duisburg, Mülheim, Bottrop"
+  description="Textildruck fürs ganze Ruhrgebiet, gedruckt in Oberhausen. Vereinskleidung, Arbeitskleidung, Abi-Shirts und Einzelstücke per DTF und DTG. Abholung aus Essen, Duisburg, Mülheim und Bottrop in rund 20 Minuten."
+  jsonLd={ld}
+>
+  <PageHero
+    eyebrow="Ruhrgebiet"
+    title="Textildruck fürs Revier. <span class='hl'>Gedruckt in Oberhausen.</span>"
+    lede="Vereinstrikots, Firmenpolos, Abi-Shirts und Einzelstücke für Essen, Duisburg, Mülheim, Bottrop und das ganze Ruhrgebiet. Eigene Maschinen, kein Zwischenhändler, ab einem Stück."
+    image="/img/werkstatt-heisspresse.jpg"
+    imageAlt="Fertig bedrucktes Shirt aus der westernprint Druckerei in Oberhausen"
+    cta={{ label: 'Angebot in 24 Stunden', href: '#anfrage' }}
+    cta2={{ label: 'Was kostet das?', href: '/was-kostet-textildruck' }}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Aus diesen Städten kommst du in rund 20 Minuten zu uns</h2>
+        <p>Unsere Werkstatt steht in der Schenkendorfstraße in Oberhausen, mitten im Revier. Aus der direkten Nachbarschaft lohnt sich die Abholung, du sparst dir den Versand.</p>
+      </div>
+      <div class="cities reveal">
+        {nah.map((n) => (
+          <div class="city">
+            <div class="city-head"><Icon name="map-pin" size={18} weight="bold" /><strong>{n.c}</strong></div>
+            <p>{n.d}</p>
+          </div>
+        ))}
+      </div>
+      <div class="reveal far">
+        <h3>Weiter im Revier und am Niederrhein</h3>
+        <p class="muted">Hierhin liefern wir per DHL mit Sendungsnummer, nach Versand in der Regel am nächsten Werktag:</p>
+        <ul class="chips">{weiter.map((c) => <li>{c}</li>)}</ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Wofür das Revier bei uns druckt</h2>
+      </div>
+      <div class="grid grid-4">
+        {[
+          { icon: 'users', t: 'Vereine und Teams', d: 'Trikots mit Namen und Nummern, Trainingsshirts, Fanartikel. Fußball, Kampfsport, Karneval, Schützen.', href: '/fuer/sportvereine' },
+          { icon: 'buildings', t: 'Betriebe und Handwerk', d: 'Polos, Hoodies und Workwear mit Logo. Auch auf eure eigene Kleidung gedruckt.', href: '/fuer/handwerksbetriebe' },
+          { icon: 'graduation-cap', t: 'Schulen und Abschluss', d: 'Abi-Shirts und Kita-Abschluss mit allen Namen. Eine Sammelbestellung, ein Liefertermin.', href: '/fuer/abschlussklassen' },
+          { icon: 'confetti', t: 'Feiern und Einzelstücke', d: 'Junggesellenabschied, Geburtstag, Geschenk. Ein Shirt reicht, keine Mindestmenge.', href: '/fuer/jga-und-feiern' },
+        ].map((b, i) => (
+          <a class={`feat feat-link reveal reveal-d${i}`} href={b.href}>
+            <div class="icon-box"><Icon name={b.icon} size={22} /></div>
+            <h3>{b.t}</h3>
+            <p>{b.d}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Was es kostet, und wann wir nicht der Richtige sind</h2>
+      </div>
+      <div class="honest reveal">
+        <div class="hcol">
+          <h3>Preisanker</h3>
+          <ul class="plist">
+            <li><span>Einzelnes bedrucktes Shirt</span><strong>ab 17,90 €</strong></li>
+            <li><span>50 Basic-Shirts, ein Druck</span><strong>ca. 9,40 € pro Stück</strong></li>
+            <li><span>Bedruckte Vereinsshirts</span><strong>ab 7,90 €</strong></li>
+            <li><span>Hoodie mit Druck</span><strong>ab 29,90 €</strong></li>
+          </ul>
+          <p class="muted small">Alle Preise netto zzgl. MwSt., ohne Einrichtungskosten. <a class="accent" href="/was-kostet-textildruck">Alle Staffeln und Beispiele</a></p>
+        </div>
+        <div class="hcol">
+          <h3>Wann Siebdruck besser ist</h3>
+          <p>Wenn du 50 oder mehr <strong>identische</strong> Shirts mit einem <strong>einfarbigen</strong> Logo brauchst, ist eine reine Mengendruckerei mit Siebdruck günstiger als wir. Das sagen wir dir lieber vorher.</p>
+          <p>Wir drucken DTF und DTG. Stark sind wir genau da, wo Siebdruck teuer wird:</p>
+          <ul class="ylist">
+            <li><Icon name="check" size={14} weight="bold" /> mehrfarbige oder fotorealistische Motive</li>
+            <li><Icon name="check" size={14} weight="bold" /> jedes Teil anders, Namen und Nummern</li>
+            <li><Icon name="check" size={14} weight="bold" /> gemischte Größen und Farben in einer Bestellung</li>
+            <li><Icon name="check" size={14} weight="bold" /> kleine Mengen und kurze Termine</li>
+            <li><Icon name="check" size={14} weight="bold" /> eigene, angelieferte Textilien</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>So läuft es ab</h2>
+      </div>
+      <ol class="steps reveal">
+        <li><span class="num">01</span><div><strong>Anfrage</strong><span>Sag uns Teil, Menge, Größen und schick das Motiv. Angebot innerhalb von 24 Stunden.</span></div></li>
+        <li><span class="num">02</span><div><strong>Dateicheck und Korrekturabzug</strong><span>Wir prüfen Auflösung, Transparenz und Druckgröße und schicken dir eine Vorschau mit den genauen Maßen in Zentimetern.</span></div></li>
+        <li><span class="num">03</span><div><strong>Produktion</strong><span>Einzelstücke 1 bis 3 Werktage, Serien ab 50 Stück 5 bis 7 Werktage nach deiner Freigabe.</span></div></li>
+        <li><span class="num">04</span><div><strong>Abholung oder Versand</strong><span>Abholung in Oberhausen nach Absprache, Montag bis Freitag 9 bis 18 Uhr. Oder per DHL mit Sendungsnummer zu dir.</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <Faq items={faqs} title="Fragen aus dem Revier" />
+
+  <section class="section" id="anfrage">
+    <div class="container narrow">
+      <div class="section-head reveal">
+        <h2>Anfrage aus dem Ruhrgebiet</h2>
+        <p>Schreib uns, was du brauchst. Antwort innerhalb von 24 Stunden, auch am Wochenende.</p>
+      </div>
+      <ContactForm />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .cities { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .city { padding: 20px 22px; border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); }
+  .city-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .city-head .icon { color: var(--accent); }
+  .city p { color: var(--text-2); font-size: 14.5px; margin: 0; }
+  .far { margin-top: 36px; }
+  .far h3 { margin-bottom: 6px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; padding: 0; list-style: none; }
+  .chips li { padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); font-size: 14px; color: var(--text-2); }
+  .feat-link { display: block; text-decoration: none; color: inherit; transition: border-color 160ms ease, transform 160ms ease; }
+  .feat-link:hover { border-color: var(--accent-line); transform: translateY(-2px); }
+  .honest { display: grid; grid-template-columns: 1fr 1.15fr; gap: 28px; }
+  .hcol { padding: clamp(22px, 2.6vw, 32px); border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); }
+  .hcol h3 { margin-bottom: 14px; }
+  .hcol p { color: var(--text-2); font-size: 15px; }
+  .hcol p + p { margin-top: 12px; }
+  .plist { display: grid; gap: 10px; padding: 0; list-style: none; }
+  .plist li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--line); font-size: 15px; }
+  .plist li:last-child { border-bottom: 0; }
+  .plist span { color: var(--text-2); }
+  .plist strong { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .ylist { display: grid; gap: 9px; margin-top: 12px; padding: 0; list-style: none; color: var(--text-2); font-size: 15px; }
+  .ylist li { display: flex; gap: 9px; align-items: flex-start; }
+  .ylist .icon { color: var(--accent); flex: none; margin-top: 4px; }
+  .steps { display: grid; gap: 14px; padding: 0; list-style: none; counter-reset: none; }
+  .steps li { display: flex; gap: 18px; align-items: flex-start; padding: 20px 22px; border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); }
+  .steps .num { font-size: 13px; font-weight: 700; color: var(--accent); letter-spacing: 0.04em; padding-top: 2px; }
+  .steps div { display: grid; gap: 4px; }
+  .steps strong { font-size: 15.5px; }
+  .steps span { color: var(--text-2); font-size: 14.5px; }
+  @media (max-width: 860px) { .honest { grid-template-columns: 1fr; } }
+</style>
