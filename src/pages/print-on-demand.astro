@@ -149,11 +149,35 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
     </div>
   </section>
 
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Versandkosten und Lieferzeiten</h2>
+        <p>Jede Bestellung geht per DHL mit Tracking direkt an deinen Kunden, neutral verpackt im Namen deines Shops. Alle Preise netto.</p>
+      </div>
+      <div class="ship-table reveal">
+        <div class="ship-row ship-head"><span>Zielland</span><span>Lieferzeit</span><span>Versand pro Bestellung</span></div>
+        <div class="ship-row"><span>Deutschland</span><span>1 bis 3 Werktage</span><span>5,00 &euro;</span></div>
+        <div class="ship-row"><span>&Ouml;sterreich</span><span>3 bis 5 Werktage</span><span>7,00 &euro;</span></div>
+        <div class="ship-row"><span>&Uuml;brige EU</span><span>3 bis 5 Werktage</span><span>7,50 &euro;</span></div>
+        <div class="ship-row"><span>Schweiz</span><span>3 bis 5 Werktage</span><span>9,00 &euro;</span></div>
+      </div>
+      <p class="muted small ship-note">Je 3 Produkte in einer Bestellung kommen 1,50 &euro; dazu. Die Lieferzeit gilt ab Versand, die Produktion dauert 1 bis 3 Werktage.</p>
+    </div>
+  </section>
+
   <Faq items={faqs} title="Fragen zum POD-Fulfillment" />
   <CtaBand title="Bereit für ein echtes Upgrade?" text="Wechsel zu einer Druckerei mit Verstand. Wir schauen uns deinen Shop an und sagen dir ehrlich, was wir besser machen können." />
 </Base>
 
 <style>
+  .ship-table { display: grid; border: 1px solid var(--line); border-radius: var(--radius-card); overflow: hidden; background: var(--surface); }
+  .ship-row { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 12px; padding: 14px 20px; border-top: 1px solid var(--line); font-size: 15px; }
+  .ship-row:first-child { border-top: 0; }
+  .ship-row span:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+  .ship-head { background: var(--bg-2); color: var(--text-3); font-size: 13px; font-weight: 600; }
+  .ship-note { margin-top: 14px; }
+  @media (max-width: 600px) { .ship-row { grid-template-columns: 1fr 1fr; } .ship-row span:nth-child(2) { order: 3; grid-column: 1 / -1; color: var(--text-3); font-size: 13.5px; } }
   .app-section { position: relative; overflow: hidden; }
   .app-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(60% 80% at 85% 50%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%); pointer-events: none; }
   .app-grid { position: relative; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(32px, 5vw, 80px); align-items: center; }
