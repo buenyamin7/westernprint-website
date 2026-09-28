@@ -5,63 +5,219 @@ import Icon from '../components/Icon.astro';
 import Faq from '../components/Faq.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { site } from '../data/site';
+import { bewertungen } from '../data/bewertungen';
+// Preisbeispiele: netto zzgl. MwSt., ein Druck (Brust ODER Rücken). Daten und Stand stehen in src/data/preise.ts.
+// Kurzfassung, Antwortsätze, Fragen-Antworten und JSON-LD werden daraus generiert.
+// Die FAQ-Antworten weiter unten sind Fließtext: bei Preisänderungen dort und in public/llms.txt mitprüfen.
+import { STAND, tabellen, zusatz } from '../data/preise';
 
-// Preisbeispiele: netto zzgl. MwSt., ein Druck (Brust ODER Rücken), Stand im Datum unten.
-// Bei Änderungen auch die FAQ-Antworten und llms.txt anpassen.
-const STAND = '21.09.2026';
+// ---------- Helfer: aus den Preisdaten Zahlen und Sätze machen ----------
+// Fehlt eine Staffel oder ein Posten, bricht der Build bewusst ab, statt falsche Sätze auszuliefern.
+type Tabelle = (typeof tabellen)[number];
+/** '10 Stück' -> 10 */
+const stueck = (menge: string) => parseInt(menge, 10);
+/** '12,90 €' oder 'ab 3,50 €' -> '12.90' bzw. '3.50' (Punkt-Dezimal fürs JSON-LD) */
+const euroZahl = (p: string) => {
+  const m = p.match(/(\d+),(\d{2})/);
+  if (!m) throw new Error(`Preis nicht lesbar: ${p}`);
+  return `${m[1]}.${m[2]}`;
+};
+const istAb = (p: string) => p.trim().startsWith('ab ');
+/** 'Hoodie (Stedman Classic Hoodie, 280 g)' -> 'Hoodie' */
+const name = (tb: Tabelle) => tb.t.split(' (')[0];
+/** 'Hoodie (Stedman Classic Hoodie, 280 g)' -> 'Stedman Classic Hoodie, 280 g' */
+const modell = (tb: Tabelle) => tb.t.match(/\((.+)\)/)?.[1] ?? '';
+const preis = (tb: Tabelle, menge: number) => {
+  const z = tb.zeilen.find(([m]) => stueck(m) === menge);
+  if (!z) throw new Error(`Keine Staffel ${menge} Stück für ${tb.t}`);
+  return z[1];
+};
+const textil = (anfang: string) => {
+  const tb = tabellen.find((x) => x.t.startsWith(anfang));
+  if (!tb) throw new Error(`Textil fehlt in preise.ts: ${anfang}`);
+  return tb;
+};
+const extra = (anfang: string) => {
+  const z = zusatz.find((x) => x.t.startsWith(anfang));
+  if (!z) throw new Error(`Zusatzposten fehlt in preise.ts: ${anfang}`);
+  return z.p;
+};
+/** Unbestimmter Artikel für generierte Sätze: "ein T-Shirt", "ein Hoodie", "eine Jacke" */
+const ein = (n: string) => (/^(Jacke|Sweatjacke|Weste|Tasche)/.test(n) ? 'eine' : 'ein');
+/** 'Stanley/Stella Creator 2.0, 180 g' -> 'Stanley/Stella' */
+const marke = (tb: Tabelle) => modell(tb).split(' ')[0];
 
-const tabellen = [
+const basic = textil('T-Shirt Basic');
+const bio = textil('T-Shirt Bio');
+const polo = textil('Poloshirt');
+const hoodie = textil('Hoodie');
+
+// Die Texte unten sagen "keine Einrichtungskosten". Bekommt die Einrichtung in preise.ts einen Preis, erst die Texte anpassen.
+if (euroZahl(extra('Einrichtung')) !== '0.00') throw new Error('Einrichtung ist laut preise.ts nicht mehr kostenlos: Texte auf /was-kostet-textildruck anpassen.');
+
+const allePreise = tabellen.flatMap((tb) => tb.zeilen.map(([m, p]) => ({ tb, m, p, n: Number(euroZahl(p)) })));
+const guenstigster = allePreise.reduce((a, b) => (b.n < a.n ? b : a));
+const teuerster = allePreise.reduce((a, b) => (b.n > a.n ? b : a));
+
+// Kurzfassung oben auf der Seite. Erster Satz mit "in Oberhausen", die Spanne gilt ausdrücklich für die Preisbeispiele.
+const kurzfassung = [
+  `Die Preisbeispiele von westernprint in Oberhausen reichen mit einem Druck von ${guenstigster.p} bis ${teuerster.p} netto pro Stück.`,
+  'westernprint druckt in eigener Produktion in Oberhausen und versendet deutschlandweit.',
+  `Ein ${name(basic)} von ${marke(basic)} kostet einzeln ${preis(basic, 1)}, bei 100 Stück ${preis(basic, 100)} pro Stück.`,
+  `Das ${name(bio)} von ${marke(bio)} liegt einzeln bei ${preis(bio, 1)} und bei 100 Stück bei ${preis(bio, 100)}.`,
+  `${ein(name(polo)) === 'eine' ? 'Eine' : 'Ein'} ${name(polo)} kostet einzeln ${preis(polo, 1)} und bei 100 Stück ${preis(polo, 100)}, ${ein(name(hoodie))} ${name(hoodie)} ${preis(hoodie, 1)} und ${preis(hoodie, 100)}.`,
+  'Der Stückpreis fällt mit der Menge, weil sich die Arbeit auf mehr Teile verteilt.',
+  'westernprint druckt ab 1 Stück, ohne Mindestmenge und ohne Einrichtungskosten.',
+  `Eine zweite Druckseite kostet ${extra('Zweite Druckseite')} zusätzlich, Namen und Rückennummern ${extra('Namen und Rückennummern')} pro Teil.`,
+  `Alle Preise netto zzgl. 19 % MwSt., Stand ${STAND}.`,
+].join(' ');
+
+// Ein Antwortsatz pro Preiskarte, Staffeln 10, 50 und 100 Stück. Name und Modell stehen in der Kartenüberschrift,
+// der Stand in der Fußzeile der Karte.
+const antwortsatz = (tb: Tabelle) => {
+  const [[m0, p0], ...rest] = [10, 50, 100].map((m) => [m, preis(tb, m)] as const);
+  const [mL, pL] = rest[rest.length - 1];
+  const mitte = rest.slice(0, -1).map(([m, p]) => `, bei ${m} Stück ${p}`).join('');
+  return `Bei ${m0} Stück kostet ${ein(name(tb))} ${name(tb)} ${p0} pro Stück${mitte} und bei ${mL} Stück ${pL} (netto zzgl. MwSt.).`;
+};
+
+// Typische Anfragen als Frage mit direkter Antwort (je 40 bis 60 Wörter).
+const fragen = [
   {
-    t: 'T-Shirt Basic (Stedman Classic-T, 155 g)',
-    d: 'Der günstige Klassiker für Vereine, Events und Give-aways.',
-    zeilen: [['1 Stück', '17,90 €'], ['10 Stück', '12,90 €'], ['25 Stück', '10,90 €'], ['50 Stück', '9,40 €'], ['100 Stück', '8,40 €']],
+    q: 'Was kostet es, 100 T-Shirts bedrucken zu lassen?',
+    a: [
+      `Ein T-Shirt Basic (${modell(basic)}) mit einem Druck kostet bei westernprint in Oberhausen ${preis(basic, 100)} netto pro Stück, wenn du 100 Stück bestellst.`,
+      `Das T-Shirt Bio (${modell(bio)}) kostet bei 100 Stück ${preis(bio, 100)} pro Stück.`,
+      `Ein zweiter Druck auf dem Rücken kostet ${extra('Zweite Druckseite')} zusätzlich pro Teil.`,
+      'Einrichtungskosten fallen nicht an.',
+      `Alle Preise netto zzgl. MwSt., Stand ${STAND}.`,
+    ].join(' '),
   },
   {
-    t: 'T-Shirt Bio (Stanley/Stella Creator 2.0, 180 g)',
-    d: 'Bio-Baumwolle, GOTS, weicher Griff. Für Brands und Firmen, die auf Qualität achten.',
-    zeilen: [['1 Stück', '19,90 €'], ['10 Stück', '14,90 €'], ['25 Stück', '12,90 €'], ['50 Stück', '11,40 €'], ['100 Stück', '10,40 €']],
+    q: 'Was kostet es, 10 Hoodies bedrucken zu lassen?',
+    a: [
+      `Ein Hoodie (${modell(hoodie)}) mit einem Druck kostet bei westernprint in Oberhausen ${preis(hoodie, 10)} netto pro Stück, wenn du 10 Stück bestellst.`,
+      `Ein einzelner Hoodie kostet ${preis(hoodie, 1)}, bei 50 Stück sind es ${preis(hoodie, 50)} pro Stück.`,
+      `Namen und Rückennummern kosten ${extra('Namen und Rückennummern')} pro Teil zusätzlich.`,
+      'Mischgrößen kosten keinen Aufpreis.',
+      `Alle Preise netto zzgl. MwSt., Stand ${STAND}.`,
+    ].join(' '),
   },
   {
-    t: 'Poloshirt (Stedman Classic Polo, 170 g)',
-    d: 'Für Standpersonal, Werkstatt, Gastro und Empfang.',
-    zeilen: [['1 Stück', '22,90 €'], ['10 Stück', '17,90 €'], ['25 Stück', '15,90 €'], ['50 Stück', '14,50 €'], ['100 Stück', '13,40 €']],
-  },
-  {
-    t: 'Hoodie (Stedman Classic Hoodie, 280 g)',
-    d: 'Abschlussklassen, Teams, Merch. Auch als Sweatjacke möglich.',
-    zeilen: [['1 Stück', '29,90 €'], ['10 Stück', '24,90 €'], ['25 Stück', '22,90 €'], ['50 Stück', '21,40 €'], ['100 Stück', '19,90 €']],
+    q: 'Was kostet es, 25 Poloshirts bedrucken zu lassen?',
+    a: [
+      `Ein Poloshirt (${modell(polo)}) mit einem Druck kostet bei westernprint in Oberhausen ${preis(polo, 25)} netto pro Stück, wenn du 25 Stück bestellst.`,
+      `Bei 50 Stück sind es ${preis(polo, 50)}, bei 100 Stück ${preis(polo, 100)} pro Stück.`,
+      `Ein Ärmeldruck oder ein kleines Zusatzmotiv kostet ${extra('Ärmeldruck')} zusätzlich.`,
+      'Einrichtungskosten fallen nicht an.',
+      `Alle Preise netto zzgl. MwSt., Stand ${STAND}.`,
+    ].join(' '),
   },
 ];
 
-const zusatz = [
-  { t: 'Zweite Druckseite', p: 'ab 3,50 €', d: 'Vorne und hinten bedruckt, zum Beispiel Logo vorne, großes Motiv hinten.' },
-  { t: 'Nackenprint statt Herstelleretikett', p: '3,00 €', d: 'Dein Logo mit Größenangabe direkt ins Textil gedruckt.' },
-  { t: 'Namen und Rückennummern', p: 'ab 5,90 €', d: 'Jedes Teil einzeln, Liste mit Name, Nummer und Größe reicht.' },
-  { t: 'Ärmeldruck oder kleines Zusatzmotiv', p: 'ab 2,52 €', d: 'Zum Beispiel Sponsor am Ärmel oder Schriftzug am Saum.' },
-  { t: 'Einrichtung, Sieb, Datencheck', p: '0,00 €', d: 'Wir berechnen keine Einrichtungskosten und keine Druckvorbereitung.' },
-  { t: 'Versand innerhalb Deutschlands', p: 'ab 5,90 €', d: 'DHL mit Sendungsverfolgung. Abholung in Oberhausen ist kostenlos.' },
-];
+// Direkte Antwort unter der Frage zu den Zusatzkosten (40 bis 60 Wörter).
+// Versand: 4,90 € laut Versandbedingungen (vom Inhaber am 28.09.2026 bestätigt). Steht hinter dem Netto-Satz, weil der Betrag aus den Versandbedingungen stammt.
+const zusatzAntwort = [
+  'Zum Stückpreis kommen bei westernprint in Oberhausen nur weitere Druckpositionen und der Versand dazu.',
+  `Eine zweite Druckseite kostet ${extra('Zweite Druckseite')}, Namen und Rückennummern ${extra('Namen und Rückennummern')} pro Teil.`,
+  `Ein Ärmeldruck kostet ${extra('Ärmeldruck')}, ein Nackenprint ${extra('Nackenprint')}.`,
+  'Einrichtungskosten fallen nicht an.',
+  `Alle Druckpreise netto zzgl. MwSt., Stand ${STAND}.`,
+  `Der Versand innerhalb Deutschlands kostet ${extra('Versand')} mit DHL und Sendungsnummer, die Abholung in Oberhausen ist kostenlos.`,
+].join(' ');
 
 const faktoren = [
   { icon: 't-shirt', t: 'Das Textil', d: 'Ein Basic-Shirt kostet uns im Einkauf gut 2 €, ein schwerer Oversize-Hoodie über 25 €. Das ist der größte Unterschied im Preis, nicht der Druck.' },
-  { icon: 'stack', t: 'Die Stückzahl', d: 'Jeder Auftrag wird einmal eingerichtet. Bei einem Teil trägt dieses eine Teil die ganze Arbeit, bei 100 verteilt sie sich. Deshalb fällt der Stückpreis mit der Menge deutlich.' },
+  { icon: 'stack', t: 'Die Stückzahl', d: 'Jeder Auftrag braucht dieselbe Vorbereitung: Datei prüfen, Druckdatei anlegen, Maschine einstellen. Bei einem einzelnen Shirt fällt diese Arbeit voll an, bei 100 Shirts verteilt sie sich. Deshalb fällt der Stückpreis mit der Menge deutlich.' },
   { icon: 'printer', t: 'Die Druckpositionen', d: 'Jede Position ist ein eigener Arbeitsschritt: Brust, Rücken, Ärmel, Nacken. Die Größe des Motivs spielt dabei kaum eine Rolle, die Anzahl der Positionen schon.' },
 ];
 
+// Kurze Einleitung zu den drei Faktor-Karten darunter. Die Details stehen in den Karten, nicht doppelt hier.
+const faktorText = [
+  'Der Preis für Textildruck bei westernprint in Oberhausen hängt von drei Faktoren ab: Textil, Stückzahl und Druckpositionen.',
+  `Wie stark die Stückzahl wirkt, zeigt das T-Shirt Basic: einzeln ${preis(basic, 1)}, bei 100 Stück ${preis(basic, 100)} pro Stück, netto zzgl. MwSt. (Stand ${STAND}).`,
+].join(' ');
+
 const faqs = [
-  { q: 'Was kostet es, 50 T-Shirts bedrucken zu lassen?', a: `Bei 50 Basic-Shirts mit einem Druck liegt der Stückpreis bei etwa 9,40 € netto, also rund 470 € netto für die ganze Serie. Mit Bio-Baumwolle sind es etwa 11,40 € pro Stück. Ein zweiter Druck auf dem Rücken kostet ab 3,50 € zusätzlich pro Teil. Stand: ${STAND}.` },
+  { q: 'Was kostet es, 50 T-Shirts bedrucken zu lassen?', a: `Bei 50 Basic-Shirts mit einem Druck liegt der Stückpreis bei etwa 9,40 € netto, also rund 470 € netto für die ganze Serie. Mit Bio-Baumwolle sind es etwa 11,40 € pro Stück. Ein zweiter Druck auf dem Rücken kostet ab 3,50 € zusätzlich pro Teil, netto zzgl. MwSt. (Stand ${STAND}).` },
   { q: 'Was kostet ein einzelnes T-Shirt?', a: 'Ein einzelnes bedrucktes Shirt liegt bei etwa 17,90 € netto, ein Hoodie bei etwa 29,90 € netto. Wir drucken ab 1 Stück, ohne Mindestmenge und ohne Einrichtungsgebühr.' },
   { q: 'Warum ist ein einzelnes Teil so viel teurer als 100?', a: 'Weil der Aufwand fast derselbe ist: Datei prüfen, Druckdatei anlegen, Maschine einrichten, drucken, pressen, kontrollieren, verpacken. Bei 100 Teilen verteilt sich diese Arbeit, bei einem Teil nicht.' },
   { q: 'Fallen Einrichtungskosten oder Kosten für die Druckdatei an?', a: 'Nein. Wir berechnen keine Einrichtung, keine Siebkosten und keinen Datencheck. Du zahlst Textil, Druck und Versand, sonst nichts.' },
   { q: 'Was kostet der Druck auf mitgebrachter Ware?', a: 'Wenn du deine eigenen Textilien anlieferst, berechnen wir nur den Druck: kleines Logo auf der Brust ab 3,90 €, großes Motiv auf dem Rücken ab 6,90 € netto pro Teil. Bitte vorher kurz das Material nennen, damit wir prüfen, ob der Druck darauf hält.' },
   { q: 'Ist DTG teurer als DTF?', a: 'Im Preis liegen beide Verfahren nah beieinander. Wir wählen nach Textil und Motiv: DTF hält auf Baumwolle und Polyester und ist bei Auflagen schneller, DTG geht direkt ins Gewebe und fühlt sich weicher an, funktioniert aber nur auf Baumwolle.' },
   { q: 'Sind die Preise brutto oder netto?', a: 'Alle Angaben auf dieser Seite sind netto, also zzgl. 19 % Mehrwertsteuer. Ein Preis von 9,40 € netto entspricht 11,19 € brutto.' },
-  { q: 'Wie schnell geht es?', a: 'Einzelstücke und kleine Mengen sind in 1 bis 3 Werktagen fertig, Serien ab 50 Stück in 5 bis 7 Werktagen. Express ist auf Anfrage möglich, sag uns einfach deinen Termin.' },
+  { q: 'Wie schnell geht es?', a: 'Einzelstücke und kleine Mengen sind in 1 bis 3 Werktagen fertig, Serien ab 50 Stück 5 bis 7 Werktage nach Freigabe. Express ist auf Anfrage möglich, sag uns einfach deinen Termin.' },
 ];
+
+const sterne = bewertungen.schnitt.toFixed(1).replace('.', ',');
+
+// JSON-LD: Angebotskatalog vollständig aus tabellen und zusatz generiert, jeder Preis steht sichtbar auf der Seite.
+// eligibleQuantity nennt genau die Stückzahl der Tabellenzeile (Preisbeispiel), keine Staffelbereiche.
+const stueckEinheit = { unitCode: 'C62', unitText: 'Stück' };
+const offerCatalog = {
+  '@type': 'OfferCatalog',
+  name: `Preisbeispiele Textildruck, Stand ${STAND}`,
+  itemListElement: [
+    ...tabellen.map((tb) => ({
+      '@type': 'OfferCatalog',
+      name: `${tb.t} mit einem Druck`,
+      description: tb.d,
+      itemListElement: tb.zeilen.map(([m, p]) => ({
+        '@type': 'Offer',
+        name: `${tb.t} mit einem Druck, ${m}`,
+        itemOffered: { '@type': 'Service', name: `Textildruck auf ${name(tb)} (${modell(tb)}), ein Druck auf Brust oder Rücken`, serviceType: 'Textildruck' },
+        price: euroZahl(p),
+        priceCurrency: 'EUR',
+        priceSpecification: {
+          '@type': 'UnitPriceSpecification',
+          price: euroZahl(p),
+          priceCurrency: 'EUR',
+          valueAddedTaxIncluded: false,
+          referenceQuantity: { '@type': 'QuantitativeValue', value: 1, ...stueckEinheit },
+          eligibleQuantity: { '@type': 'QuantitativeValue', minValue: stueck(m), maxValue: stueck(m), ...stueckEinheit },
+        },
+      })),
+    })),
+    {
+      '@type': 'OfferCatalog',
+      name: 'Zusatzleistungen',
+      // Versand steht nicht im Katalog: der Katalog ist netto, die 4,90 € stammen aus den Versandbedingungen.
+      itemListElement: zusatz.filter((z) => !/versand/i.test(z.t)).map((z) => ({
+        '@type': 'Offer',
+        name: z.t,
+        description: `${z.p} netto zzgl. MwSt. ${z.d}`,
+        priceCurrency: 'EUR',
+        priceSpecification: {
+          '@type': 'PriceSpecification',
+          priceCurrency: 'EUR',
+          valueAddedTaxIncluded: false,
+          ...(istAb(z.p) ? { minPrice: euroZahl(z.p) } : { price: euroZahl(z.p) }),
+        },
+      })),
+    },
+  ],
+};
 
 const ld = [
   { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
-  { '@context': 'https://schema.org', '@type': 'Service', name: 'Textildruck mit Preisbeispielen', serviceType: 'Textildruck', provider: { '@id': `${site.url}/#organization` }, areaServed: [{ '@type': 'City', name: 'Oberhausen' }, { '@type': 'Country', name: 'Deutschland' }], url: `${site.url}/was-kostet-textildruck`, offers: { '@type': 'Offer', priceCurrency: 'EUR', price: '8.40', description: 'T-Shirt bedruckt ab 8,40 € netto bei 100 Stück, ab 1 Stück möglich, keine Einrichtungskosten' } },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Textildruck mit Preisbeispielen',
+    serviceType: 'Textildruck',
+    provider: { '@id': `${site.url}/#organization` },
+    areaServed: [{ '@type': 'City', name: 'Oberhausen' }, { '@type': 'Country', name: 'Deutschland' }],
+    url: `${site.url}/was-kostet-textildruck`,
+    termsOfService: `Alle Preise netto zzgl. 19 % MwSt., Stand ${STAND}. Preis pro Stück mit einem Druck (Brust oder Rücken), Textil inklusive. Keine Einrichtungskosten, keine Mindestmenge.`,
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'EUR',
+      price: euroZahl(guenstigster.p),
+      priceSpecification: { '@type': 'UnitPriceSpecification', price: euroZahl(guenstigster.p), priceCurrency: 'EUR', valueAddedTaxIncluded: false },
+      description: `${name(guenstigster.tb)} bedruckt ab ${guenstigster.p} netto bei ${guenstigster.m}, ab 1 Stück möglich, keine Einrichtungskosten`,
+    },
+    hasOfferCatalog: offerCatalog,
+  },
 ];
 ---
 <Base title="Was kostet Textildruck? Preisbeispiele für 1 bis 100 Stück" description="Was kostet es, T-Shirts oder Hoodies bedrucken zu lassen? Echte Preisbeispiele für 1, 10, 25, 50 und 100 Stück, alle netto, ohne Einrichtungskosten. Druckerei in Oberhausen." jsonLd={ld}>
@@ -75,6 +231,19 @@ const ld = [
     cta2={{ label: 'Per WhatsApp', href: site.whatsapp }}
   />
 
+  <section class="section-tight kurz">
+    <div class="container">
+      <div class="kurz-wrap reveal">
+        <h2>Textildruck-Preise in Kürze</h2>
+        <p class="kurz-text">{kurzfassung}</p>
+        <p class="rating-line">
+          <span class="rstars" aria-hidden="true">{Array.from({ length: 5 }).map(() => <Icon name="star" weight="fill" size={16} />)}</span>
+          <a href="/bewertungen">{sterne} von 5 Sternen bei {bewertungen.anzahl} Google-Bewertungen</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container">
       <div class="section-head reveal">
@@ -86,12 +255,21 @@ const ld = [
           <div class={`pcard reveal reveal-d${i % 3}`}>
             <h3>{tb.t}</h3>
             <p class="muted small">{tb.d}</p>
+            <p class="pans">{antwortsatz(tb)}</p>
             <table class="ptab">
               <tbody>
                 {tb.zeilen.map(([m, p]) => (<tr><th scope="row">{m}</th><td>{p}</td></tr>))}
               </tbody>
             </table>
-            <p class="muted small">Preis pro Stück, netto zzgl. MwSt.</p>
+            <p class="muted small">Preis pro Stück, netto zzgl. MwSt., Stand {STAND}.</p>
+          </div>
+        ))}
+      </div>
+      <div class="grid grid-3 qa">
+        {fragen.map((f, i) => (
+          <div class={`qa-item reveal reveal-d${i}`}>
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
           </div>
         ))}
       </div>
@@ -100,7 +278,10 @@ const ld = [
 
   <section class="section-tight extras">
     <div class="container">
-      <div class="section-head reveal"><h2>Was zusätzlich kostet, und was nicht</h2></div>
+      <div class="section-head reveal">
+        <h2>Welche Kosten kommen zum Stückpreis dazu?</h2>
+        <p>{zusatzAntwort}</p>
+      </div>
       <ul class="xlist reveal">
         {zusatz.map((z) => (
           <li>
@@ -115,7 +296,10 @@ const ld = [
 
   <section class="section">
     <div class="container">
-      <div class="section-head reveal"><h2>Wovon der Preis wirklich abhängt</h2></div>
+      <div class="section-head wide reveal">
+        <h2>Wovon der Preis wirklich abhängt</h2>
+        <p>{faktorText}</p>
+      </div>
       <div class="grid grid-3">
         {faktoren.map((f, i) => (
           <div class={`fit reveal reveal-d${i}`}>
@@ -133,18 +317,31 @@ const ld = [
 </Base>
 
 <style>
+  .kurz { border-bottom: 1px solid var(--line); }
+  .kurz-wrap { display: grid; gap: 18px; max-width: 76ch; }
+  .kurz-text { color: var(--text-2); font-size: 1.1rem; }
+  .rating-line { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; }
+  .rating-line a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line-strong); }
+  .rating-line a:hover { color: var(--accent); text-decoration-color: currentColor; }
+  .rstars { display: inline-flex; gap: 3px; color: var(--accent); }
   .pcard { display: grid; gap: 10px; padding: 26px; border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); }
+  .pans { font-size: 15px; line-height: 1.55; }
   .ptab { width: 100%; border-collapse: collapse; margin-top: 4px; }
   .ptab th, .ptab td { padding: 10px 0; border-top: 1px solid var(--line); text-align: left; font-size: 15px; }
   .ptab th { font-weight: 500; color: var(--text-2); }
   .ptab td { text-align: right; font-family: var(--font-display); font-size: 17px; }
   .ptab tr:first-child th, .ptab tr:first-child td { border-top: 0; }
+  .qa { margin-top: clamp(40px, 5vw, 64px); }
+  .qa-item { display: grid; gap: 10px; align-content: start; padding-top: 20px; border-top: 1px solid var(--line-strong); }
+  .qa-item p { color: var(--text-2); font-size: 15px; }
   .extras { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .xlist { display: grid; gap: 16px; max-width: 70ch; }
   .xlist li { display: grid; gap: 4px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
   .xlist li:last-child { border-bottom: 0; padding-bottom: 0; }
   .xhead { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; }
   .xprice { font-family: var(--font-display); color: var(--accent); white-space: nowrap; }
+  .wide { max-width: 76ch; }
+  .wide p { max-width: 74ch; }
   .fit { display: grid; gap: 12px; padding: 26px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); }
   .fit p { color: var(--text-2); font-size: 15px; }
   .note { margin-top: 20px; max-width: 80ch; }

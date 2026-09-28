@@ -2,11 +2,20 @@
 import Base from '../../layouts/Base.astro';
 import Tiles from '../../components/Tiles.astro';
 import CtaBand from '../../components/CtaBand.astro';
+import Faq from '../../components/Faq.astro';
 import { zielgruppen, groups } from '../../data/zielgruppen';
-import { site } from '../../data/site';
-const ld = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Für wen wir drucken', url: `${site.url}/fuer`, hasPart: zielgruppen.map((z) => ({ '@type': 'WebPage', name: z.title, url: `${site.url}/fuer/${z.slug}` })) };
+import { site, oeffnungszeiten } from '../../data/site';
+// Die Übersicht ist selbst der Seitenknoten #webpage (Typ CollectionPage, siehe Base.astro), hasPart hängt daran.
+const hasPart = zielgruppen.map((z) => ({ '@type': 'WebPage', name: z.title, url: `${site.url}/fuer/${z.slug}` }));
+// Kurze FAQ für KI-Suche: jede Antwort steht für sich, Fakten wie auf den Zielgruppen-Seiten.
+const faqs = [
+  { q: 'Für welche Gruppen druckt westernprint?', a: `westernprint ist eine Textildruckerei in Oberhausen und hat für ${zielgruppen.length} Kundengruppen eigene Seiten. Im Bereich Schule und Bildung sind das Kitas, Schulen, Hochschulen und Abschlussklassen. Bei Vereinen und Gemeinden sind es Sportvereine, ehrenamtliche Vereine, Kirchen, Moscheen, Feuerwehren, Parteien und Initiativen. Handwerk, Firmen, Fitnessstudios, Messeaussteller, Gastronomie, Hotels und Einzelhandel bestellen Team-Kleidung mit Logo. Für Events, Feiern, Hochzeiten, Bands, E-Sports-Teams, Agenturen und Streetwear-Brands druckt westernprint Shirts und Merch. Jede Gruppe hat eine eigene Seite mit typischen Produkten, Ablauf und häufigen Fragen.` },
+  { q: 'Gibt es eine Mindestmenge?', a: 'Nein, westernprint druckt ab 1 Stück. Staffelpreise gelten ab 10 Stück, Großauflagen beginnen bei 50 Stück. Einrichtungskosten fallen nicht an, und Mischgrößen kosten keinen Aufpreis. Das Angebot kommt an Werktagen innerhalb von 24 Stunden.' },
+  { q: 'Wo wird gedruckt?', a: `westernprint druckt in der eigenen Produktion in Oberhausen, ${site.address.street} im Marienviertel. Gedruckt wird per DTF und DTG, dazu kommt Sublimation. Einzelstücke sind in 1 bis 3 Werktagen fertig, Serien 5 bis 7 Werktage nach Freigabe. Versendet wird deutschlandweit mit DHL und Sendungsnummer. Die Abholung in Oberhausen ist kostenlos, ${oeffnungszeiten.text} nach kurzer Absprache.` },
+];
+const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 ---
-<Base title="Textildruck für Vereine, Firmen, Schulen, Gastro und Events" description="Für wen wir drucken: Abschlussklassen, Sportvereine, Kirchen und Moscheen, Handwerk, Gastronomie, Events, Bands und Streetwear-Brands. Textildruck aus Oberhausen ab 1 Stück, Angebot in 24 Stunden." jsonLd={ld}>
+<Base title="Textildruck für Vereine, Firmen, Schulen, Gastro und Events" description="Für wen wir drucken: Abschlussklassen, Sportvereine, Kirchen und Moscheen, Handwerk, Gastronomie, Events, Bands und Streetwear-Brands. Textildruck aus Oberhausen ab 1 Stück, Angebot in 24 Stunden." jsonLd={faqLd} pageType="CollectionPage" pageLdExtra={{ hasPart }}>
   <section class="section-tight head">
     <div class="container">
       <span class="eyebrow">Für wen wir drucken</span>
@@ -20,6 +29,7 @@ const ld = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 
       <Tiles items={zielgruppen.filter((z) => z.group === g).map((z) => ({ href: `/fuer/${z.slug}`, img: z.image, pos: z.imagePos, t: z.name, d: z.lede.split('. ')[0] + '.', cta: 'Zur Seite' }))} rows="clamp(220px, 20vw, 300px)" />
     </section>
   ))}
+  <Faq items={faqs} title="Häufige Fragen" />
   <CtaBand />
 </Base>
 <style>

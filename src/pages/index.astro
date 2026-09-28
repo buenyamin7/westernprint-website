@@ -5,13 +5,21 @@ import Testimonials from '../components/Testimonials.astro';
 import Faq from '../components/Faq.astro';
 import ContactForm from '../components/ContactForm.astro';
 import Tiles from '../components/Tiles.astro';
+import { imgInfo } from '../lib/imgsize.mjs';
 import { site, stats, faqs } from '../data/site';
+import { bewertungen, rezensionen } from '../data/bewertungen';
 
 const faqLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
 };
+// Bewertungen: Zahlen und Zitat kommen aus src/data/bewertungen.ts (echte Google-Rezensionen).
+const schnitt = bewertungen.schnitt.toFixed(1).replace('.', ',');
+// "2026-09-28" -> "28.09.2026", wie auf /bewertungen.
+const stand = bewertungen.stand.split('-').reverse().join('.');
+// Im Hero steht eine ungekürzte Rezension, die Referenzen weiter unten zeigen dann die übrigen.
+const heroReview = rezensionen.find((r) => !r.gekuerzt) ?? rezensionen[0];
 const prints = [
   { src: '/img/referenz-live2luv.jpg', alt: 'Zwei bedruckte Shirts von live2luv auf dem Werkstattboden: hellblau mit Blumenmotiv, weiß mit pinkem Herz' },
   { src: '/img/lager-regal-werkstatt.jpg', alt: 'Lager bei westernprint: Regal mit gefalteten Rohware-Shirts und Hoodies, Kleiderstange, Heißpressen und Packtisch vor der Ziegelwand' },
@@ -21,20 +29,39 @@ const prints = [
   { src: '/img/werkstatt-heisspresse.jpg', alt: 'Werkstatt von westernprint: Mitarbeiter an der Heißpresse, Ziegelwand, Regale mit Textilien' },
   { src: '/img/packtisch.jpg', alt: 'Frisch bedruckte Shirts auf dem Packtisch mit Klebeband, Schere und Versandkarton' },
 ];
+
+// Echte Maße und WebP-Varianten (640/960/1400, scripts/make-image-variants.mjs), wie in PageHero und Tiles.
+// Fehlt eine Variante, bleibt srcset leer und der Browser lädt das Original.
+const heroImg = await imgInfo('/img/hero-rack.jpg');
+const aboutImg = await imgInfo('/img/werkstatt-heisspresse.jpg');
+const printImgs = await Promise.all(prints.map((p) => imgInfo(p.src)));
+// sizes = gezeichnete Breite bei object-fit: cover, im Browser gemessen (390 bis 1440 px Viewport).
+// Hero: volle Breite, Höhe am Desktop 880 bis 920 px (min(94vh, 920px)), mobil höher (Inhalt, 1086 bis 1444 px).
+// Das Querformat wird also mindestens 920 px mal Seitenverhältnis breit gezeichnet, erst darüber 100vw.
+const heroMin = heroImg.width && heroImg.height ? Math.round((920 * heroImg.width) / heroImg.height) : 1635;
+const heroSizes = `(max-width: ${heroMin}px) ${heroMin}px, 100vw`;
+// Galerie: Kachel min(72vw, 460px) im 4:3-Ausschnitt. Breitere Formate als 4:3 werden entsprechend breiter gezeichnet.
+const printSizes = (w: number | null, h: number | null) => {
+  const f = w && h ? Math.max(1, w / h / (4 / 3)) : 1;
+  return `(max-width: 639px) ${Math.round(72 * f)}vw, ${Math.round(460 * f)}px`;
+};
+// Über uns: mobil volle Breite (4:3-Box, Hochformat füllt die Breite). Desktop Spalte 45vw, bis rund 1210 px
+// Viewport ist die Spalte aber etwa 810 px hoch, das Hochformat wird dann rund 545 px breit gezeichnet.
+const aboutSizes = '(max-width: 900px) 100vw, (max-width: 1210px) 545px, 45vw';
 ---
 <Base
   title="Textildruck Oberhausen: DTF- und DTG-Druck ab 1 Stück | westernprint"
-  description="Textildruck aus Oberhausen: T-Shirts, Hoodies und Workwear per DTF und DTG bedrucken lassen. Ab 1 Stück, Staffelpreise ab 50, Angebot in 24 Stunden, Produktion in 1 bis 3 Werktagen."
+  description="Textildruck aus Oberhausen: T-Shirts, Hoodies und Workwear per DTF und DTG bedrucken lassen. Ab 1 Stück, Staffelpreise ab 10, Angebot in 24 Stunden, Einzelstücke in 1 bis 3 Werktagen."
   jsonLd={faqLd}
 >
   <!-- Hero: vollflächiges Bild, Text links, Bewertung rechts, Kennzahlen unten (stoff3-Stil) -->
   <section class="hero">
-    <img class="hero-bg" src="/img/hero-rack.jpg" alt="" width="1672" height="941" loading="eager" fetchpriority="high" aria-hidden="true" />
+    <img class="hero-bg" src="/img/hero-rack.jpg" srcset={heroImg.srcset} sizes={heroImg.srcset ? heroSizes : undefined} alt="" width={heroImg.width ?? 1672} height={heroImg.height ?? 941} loading="eager" fetchpriority="high" aria-hidden="true" />
     <div class="container hero-grid">
       <div class="hero-text">
         <span class="badge">Inhouse-Produktion in Oberhausen. Ab 1 Stück.</span>
         <h1>Textildruck aus Oberhausen, <span class="hl">der hält.</span> Vom Einzelstück bis zur Großauflage.</h1>
-        <p class="lede">T-Shirts, Hoodies, Polos und Workwear mit deinem Motiv. DTF und DTG auf Stanley/Stella und Stedman, gedruckt auf eigenen Maschinen. Angebot in 24 Stunden, fertig in 1 bis 3 Werktagen.</p>
+        <p class="lede">T-Shirts, Hoodies, Polos und Workwear mit deinem Motiv. DTF und DTG auf Stanley/Stella und Stedman, gedruckt auf eigenen Maschinen. Angebot in 24 Stunden, Einzelstücke fertig in 1 bis 3 Werktagen.</p>
         <div class="hero-cta">
           <a href="/kontakt" class="btn btn-primary btn-lg">Angebot in 24h <Icon name="arrow-right" size={18} /></a>
           <a href="/print-on-demand" class="btn btn-secondary btn-lg">Print-on-Demand für Shops</a>
@@ -43,8 +70,9 @@ const prints = [
       <div class="hero-visual">
         <figure class="review card">
           <div class="stars" aria-label="5 von 5 Sternen">{Array.from({ length: 5 }).map(() => <Icon name="star" weight="fill" size={14} />)}</div>
-          <blockquote>„Seit dem Wechsel hat sich mein Retourenanteil halbiert. Kunden loben endlich wieder die Qualität.“</blockquote>
-          <figcaption>Tim R., POD-Shop-Betreiber</figcaption>
+          <blockquote>„{heroReview.text}{heroReview.gekuerzt ? ' […]' : ''}“</blockquote>
+          <figcaption>{heroReview.name}, Google-Bewertung</figcaption>
+          <a href="/bewertungen" class="review-link">{schnitt} von 5 Sternen bei {bewertungen.anzahl} Google-Bewertungen <Icon name="arrow-right" size={14} /></a>
         </figure>
       </div>
     </div>
@@ -65,6 +93,16 @@ const prints = [
     </div>
   </section>
 
+  <!-- Kurzprofil: zitierfähige Definition direkt unter dem Hero. Nur belegte Fakten, siehe llms.txt. -->
+  <section class="section-tight kurzprofil" id="was-ist-westernprint">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Was ist westernprint?</h2>
+        <p>westernprint ist eine Textildruckerei mit eigener Produktion in Oberhausen im Ruhrgebiet. westernprint gibt es seit 2021 und bedruckt T-Shirts, Hoodies, Polos und Workwear. Die Verfahren sind DTF und DTG, dazu kommt Sublimation für Tassen, Accessoires und All-over-Drucke auf weißem Polyester. Der DTG-Druck läuft auf Epson SureColor F2100 und F2200. Gedruckt wird ausschließlich im eigenen Haus, nicht bei wechselnden Partnerdruckereien. Von Oberhausen aus geht der Versand mit DHL deutschlandweit, die Abholung vor Ort ist kostenlos. Du bestellst ab 1 Stück, Staffelpreise beginnen bei 10 Stück. Großauflagen starten bei 50 Stück, Einrichtungskosten entstehen nicht. Ein Angebot mit festem Preis kommt innerhalb von 24 Stunden an Werktagen. Vor dem Druck bekommst du einen Korrekturabzug. Einzelstücke sind in 1 bis 3 Werktagen fertig, Serien 5 bis 7 Werktage nach Freigabe. Für Shopify-Shops druckt und versendet westernprint jede Bestellung per Print-on-Demand. Die Anbindung läuft über die Shopify-App „westernprint POD“, die Installation ist kostenlos. Bei Google hat westernprint <a href="/bewertungen" class="accent">{schnitt} von 5 Sternen bei {bewertungen.anzahl} Bewertungen</a> (Stand {stand}).</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Leistungen: randloses Bildraster, volle Breite -->
   <section class="section leistungen" id="leistungen">
     <div class="container">
@@ -74,7 +112,7 @@ const prints = [
       </div>
     </div>
     <Tiles items={[
-      { href: '/druckverfahren', img: '/img/druck-outside.jpg', pos: 'center 40%', tag: 'Unser Standard', t: 'DTF-Transferdruck', d: 'Brillante Farben, feine Linien, waschbeständig bis 60 °C. Auf Baumwolle, Mischgewebe und Polyester. Ab 1 Stück.', big: true, cta: 'So funktioniert DTF' },
+      { href: '/druckverfahren', img: '/img/druck-outside.jpg', pos: 'center 40%', tag: 'Unser Standard', t: 'DTF-Transferdruck', d: 'Brillante Farben, feine Linien, waschfest. Auf Baumwolle, Mischgewebe und Polyester. Ab 1 Stück.', big: true, cta: 'So funktioniert DTF' },
       { href: '/druckverfahren', img: '/img/druck-makro.jpg', tag: 'Fotorealistisch', t: 'DTG-Direktdruck', d: 'Direkt ins Gewebe gedruckt, weicher Griff. Für Einzelstücke und Bio-Baumwolle.', cta: 'Verfahren vergleichen' },
       { href: '/grossauflagen', img: '/img/lager-regal-werkstatt.jpg', pos: 'center 60%', tag: 'Ab 50 Stück', t: 'Großauflagen', d: 'Vereine, Firmen, Schulen, Events. Staffelpreise, Korrekturabzug, fester Liefertermin.', cta: 'Angebot in 24h' },
       { href: '/textilien', img: '/img/streetwear-group.jpg', pos: 'center 30%', tag: 'Über 500 Farben', t: 'Textilien ab Lager', d: 'Stanley/Stella, Stedman, Build Your Brand, Urban Classics. Oder du lieferst eigene Ware an.', cta: 'Sortiment ansehen' },
@@ -110,7 +148,7 @@ const prints = [
           <dl>
             <div><dt>Motiv</dt><dd>PNG, PDF oder Skizze</dd></div>
             <div><dt>Textil</dt><dd>Shirt, Hoodie, Polo, eigene Ware</dd></div>
-            <div><dt>Stückzahl</dt><dd>ab 1, Staffel ab 50</dd></div>
+            <div><dt>Stückzahl</dt><dd>ab 1, Staffel ab 10</dd></div>
             <div><dt>Druckposition</dt><dd>Brust, Rücken, Ärmel</dd></div>
             <div class="total"><dt>Antwort</dt><dd>in 24 Stunden</dd></div>
           </dl>
@@ -132,9 +170,9 @@ const prints = [
       <div class="marquee-track">
         {[0, 1].map((copy) => (
           <div class="marquee-group" aria-hidden={copy === 1}>
-            {prints.map((p) => (
+            {prints.map((p, i) => (
               <figure>
-                <img src={p.src} alt={copy === 0 ? p.alt : ''} width="1400" height="1050" loading="lazy" draggable="false" />
+                <img src={p.src} srcset={printImgs[i].srcset} sizes={printImgs[i].srcset ? printSizes(printImgs[i].width, printImgs[i].height) : undefined} alt={copy === 0 ? p.alt : ''} width={printImgs[i].width ?? 1400} height={printImgs[i].height ?? 1050} loading="lazy" draggable="false" />
               </figure>
             ))}
           </div>
@@ -147,11 +185,11 @@ const prints = [
   <section class="section about">
     <div class="container about-grid">
       <div class="about-img reveal">
-        <img src="/img/werkstatt-heisspresse.jpg" alt="Die westernprint Werkstatt in Oberhausen: Heißpressen, Regale mit Rohware, Packtisch" width="1024" height="1536" loading="lazy" />
+        <img src="/img/werkstatt-heisspresse.jpg" srcset={aboutImg.srcset} sizes={aboutImg.srcset ? aboutSizes : undefined} alt="Die westernprint Werkstatt in Oberhausen: Heißpressen, Regale mit Rohware, Packtisch" width={aboutImg.width ?? 1024} height={aboutImg.height ?? 1536} loading="lazy" />
       </div>
       <div class="about-text">
         <h2 class="reveal">Aus Frust gegründet. Aus Erfahrung gewachsen.</h2>
-        <p class="muted reveal reveal-d1">2021 haben wir selbst drucken lassen: lange Lieferzeiten, keine Antwort auf Mails, Drucke, die nach drei Wäschen rissen. Also haben wir die Druckerei gebaut, die wir damals gebraucht hätten. Heute haben über 80.000 bedruckte Teile unsere Werkstatt in Oberhausen verlassen.</p>
+        <p class="muted reveal reveal-d1">2021 haben wir selbst drucken lassen: lange Lieferzeiten, keine Antwort auf Mails, Drucke, die nach drei Wäschen rissen. Also haben wir die Druckerei gebaut, die wir damals gebraucht hätten. Für unsere Print-on-Demand-Partner haben wir seit 2021 über 80.000 Endkunden direkt aus Oberhausen beliefert. Die Partner-Shops haben in dieser Zeit mit Produkten aus unserer Produktion über 1 Mio. € Umsatz gemacht.</p>
         <ul class="usps">
           {[
             { icon: 'factory', t: 'Inhouse in Oberhausen', d: 'Eigene Epson-Maschinen, keine Fremdvergabe.' },
@@ -188,7 +226,7 @@ const prints = [
     ]} rows="clamp(240px, 22vw, 320px)" />
   </section>
 
-  <Testimonials />
+  <Testimonials ohne={[heroReview.name]} />
 
   <Faq items={faqs} intro="Alles, was du vor dem ersten Auftrag wissen willst." />
 
@@ -235,6 +273,8 @@ const prints = [
   .review .stars { display: flex; gap: 2px; color: var(--accent); }
   .review blockquote { margin: 0; font-size: 14.5px; line-height: 1.5; font-style: italic; color: #fff; }
   .review figcaption { font-size: 13px; color: rgba(255,255,255,.6); }
+  .review-link { display: inline-flex; align-items: center; gap: 6px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.14); font-size: 13px; font-weight: 600; color: #fff; transition: color 0.2s var(--ease); }
+  .review-link:hover { color: var(--accent); }
   .hero-stats { position: relative; z-index: 2; border-top: 1px solid rgba(255,255,255,.14); padding: 6px 0 clamp(28px, 4vh, 44px); }
   @media (max-width: 1000px) { .hero { min-height: 0; } .hero-grid { grid-template-columns: 1fr; } .hero-visual { justify-content: flex-start; } .review { max-width: none; } .hero-bg { object-position: 60% 50%; } }
 
@@ -248,6 +288,11 @@ const prints = [
   .hero-brands span { font-size: 12.5px; color: rgba(255,255,255,.5); }
   .hero-brands b { font-family: var(--font-display); font-variation-settings: 'wdth' 108; font-weight: 800; font-size: 14px; letter-spacing: -0.01em; color: rgba(255,255,255,.7); white-space: nowrap; }
   @media (max-width: 800px) { .stats-grid { grid-template-columns: 1fr 1fr; } .stat:nth-child(3) { border-left: 0; padding-left: 0; } .stat:nth-child(n+3) { border-top: 1px solid rgba(255,255,255,.14); padding-top: 18px; margin-top: 18px; } }
+
+  /* Kurzprofil */
+  .kurzprofil { padding-bottom: 0; }
+  .kurzprofil .section-head { max-width: 76ch; margin-bottom: 0; }
+  .kurzprofil .section-head p { max-width: 72ch; }
 
   /* Bento */
   .leistungen, .einsatz { padding-bottom: 0; }

@@ -1,25 +1,53 @@
 User-agent: *
+Content-Signal: ai-train=yes, search=yes, ai-input=yes
 Allow: /
 Disallow: /warenkorb
 
-# KI-Crawler ausdrücklich erlaubt (GEO)
+# KI-Crawler ausdrücklich erlaubt (GEO).
+# Ein Crawler mit eigenem Block liest nur diesen Block, darum stehen Content-Signal und Disallow hier noch einmal.
 User-agent: GPTBot
+Content-Signal: ai-train=yes, search=yes, ai-input=yes
 Allow: /
+Disallow: /warenkorb
+
 User-agent: OAI-SearchBot
+Content-Signal: ai-train=yes, search=yes, ai-input=yes
 Allow: /
+Disallow: /warenkorb
+
 User-agent: ChatGPT-User
+Content-Signal: ai-train=yes, search=yes, ai-input=yes
 Allow: /
+Disallow: /warenkorb
+
 User-agent: ClaudeBot
+Content-Signal: ai-train=yes, search=yes, ai-input=yes
 Allow: /
+Disallow: /warenkorb
+
 User-agent: Claude-SearchBot
+Content-Signal: ai-train=yes, search=yes, ai-input=yes
 Allow: /
+Disallow: /warenkorb
+
 User-agent: PerplexityBot
+Content-Signal: ai-train=yes, search=yes, ai-input=yes
 Allow: /
+Disallow: /warenkorb
+
 User-agent: Google-Extended
+Content-Signal: ai-train=yes, search=yes, ai-input=yes
 Allow: /
+Disallow: /warenkorb
+
 User-agent: Applebot-Extended
+Content-Signal: ai-train=yes, search=yes, ai-input=yes
 Allow: /
+Disallow: /warenkorb
+
 User-agent: Bingbot
+Content-Signal: ai-train=yes, search=yes, ai-input=yes
 Allow: /
+Disallow: /warenkorb
 
 Sitemap: https://westernprint.de/sitemap-index.xml

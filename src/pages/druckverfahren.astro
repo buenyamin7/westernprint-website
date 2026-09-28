@@ -4,39 +4,92 @@ import Tiles from '../components/Tiles.astro';
 import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import { imgInfo } from '../lib/imgsize.mjs';
+
+// def = Definitionssatz, steht zuerst in der Karte und in der ItemList. desc = Ablauf im Detail.
 const methods = [
   { key: 'dtf', icon: 'film-strip', name: 'DTF-Druck', sub: 'Direct-to-Film', featured: true, badge: 'Unser Standard',
+    def: 'DTF-Druck (Direct to Film) ist ein Verfahren, bei dem das Motiv über eine bedruckte Transferfolie aufs Textil gepresst wird.',
     desc: 'Das Motiv wird spiegelverkehrt auf eine PET-Folie gedruckt, mit Schmelzkleber bepudert und eingebrannt. Die fertige Transferfolie pressen wir mit der Heißpresse aufs Textil.',
-    pros: ['Funktioniert auf fast allen Stoffen und Farben', 'Deckend auf dunklen und schwarzen Textilien', 'Sehr dehnbar, ideal für Sportkleidung', 'Kräftige, deckende Farben und feine Linien', 'Waschfest bis 60 °C', 'Keine Mindestmenge, ab 1 Stück', 'Kein Entgittern wie beim Flexdruck'],
+    pros: ['Funktioniert auf fast allen Stoffen und Farben', 'Deckend auf dunklen und schwarzen Textilien', 'Sehr dehnbar, ideal für Sportkleidung', 'Kräftige, deckende Farben und feine Linien', 'Waschfest, Pflege bei 30 Grad', 'Keine Mindestmenge, ab 1 Stück', 'Kein Entgittern wie beim Flexdruck'],
     cons: ['Leichter Film auf dem Stoff spürbar', 'Bei sehr großen Flächen etwas steifer'],
     ideal: 'T-Shirts, Hoodies, Caps, Sporttextilien, dunkle Stoffe, Polyester, Baumwolltaschen, Arbeitskleidung' },
   { key: 'dtg', icon: 't-shirt', name: 'DTG-Druck', sub: 'Direct-to-Garment', featured: false,
-    desc: 'Die Tinte wird direkt in die Textilfaser gedruckt, wie ein Tintenstrahldrucker für Kleidung. Auf dunklen Stoffen legen wir vorher eine weiße Unterschicht an.',
+    def: 'DTG-Druck (Direct to Garment) ist ein Verfahren, bei dem die Tinte direkt in die Textilfaser gedruckt wird.',
+    desc: 'Der Drucker arbeitet wie ein Tintenstrahldrucker, nur für Kleidung. Auf dunklen Stoffen legen wir vorher eine weiße Unterschicht an.',
     pros: ['Weichstes Druckergebnis, kein Film, nur Tinte', 'Fotorealistisch mit unbegrenzt vielen Farben', 'Feine Verläufe und Details', 'Sehr natürliches Tragegefühl', 'Wasserbasierte Tinten, gute Umweltbilanz'],
-    cons: ['Nur auf Baumwolle und hohem Baumwollanteil', 'Auf dunklen Stoffen Vorbehandlung nötig', 'Für große Auflagen langsamer als DTF'],
+    cons: ['Nur auf Baumwolle und Stoffen mit hohem Baumwollanteil', 'Auf dunklen Stoffen Vorbehandlung nötig', 'Für große Auflagen langsamer als DTF'],
     ideal: 'Weiße und helle Shirts, Fotodrucke, Kunstprints, Einzelstücke, Print-on-Demand' },
-  { key: 'sub', icon: 'coffee', name: 'Sublimation', sub: 'Transfer in die Beschichtung', featured: false,
-    desc: 'Die Farbe wird per Hitze gasförmig und dampft in die Polyester-Beschichtung ein. Der Druck sitzt im Material statt darauf.',
+  { key: 'sublimation', icon: 'coffee', name: 'Sublimation', sub: 'Transfer in die Beschichtung', featured: false,
+    def: 'Sublimation ist ein Verfahren, bei dem die Farbe per Hitze gasförmig wird und in Polyester oder eine Polyester-Beschichtung eindringt.',
+    desc: 'Der Druck sitzt im Material statt darauf.',
     pros: ['Nicht spürbar, nichts blättert ab', 'Spülmaschinen- und kratzfest', 'Brillante, leuchtende Farben', 'Vollflächiger Druck bis an den Rand'],
     cons: ['Nur auf hellen Polyester- oder beschichteten Flächen', 'Keine dunklen Untergründe', 'Nicht für Baumwolle'],
     ideal: 'Tassen, Trikots aus Polyester, Mousepads, Schlüsselanhänger, Flaggen, Accessoires' },
 ];
-const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'DTF-, DTG- und Sublimationsdruck', serviceType: 'Textildruck', provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: 'DE', url: 'https://westernprint.de/druckverfahren' };
+
+// Offizielle Seiten der Standards. Jede URL am 28.09.2026 per curl geprüft (HTTP 200).
+const certs = [
+  { t: 'GOTS (Global Organic Textile Standard)', href: 'https://global-standards.org/our-standards/gots' },
+  { t: 'GRS (Global Recycled Standard)', href: 'https://textileexchange.org/recycled-claim-global-recycled-standard/' },
+  { t: 'OEKO-TEX Standard 100', href: 'https://www.oeko-tex.com/de/unsere-standards/oeko-tex-standard-100' },
+  { t: 'PETA-Approved Vegan', href: 'https://www.peta.org.uk/lifestyle/peta-approved-vegan/' },
+  { t: 'Fair Wear Foundation, Leader-Status', href: 'https://www.fairwear.org/' },
+];
+
+const werkstattImg = await imgInfo('/img/werkstatt-heisspresse.jpg');
+
+// Maschinen und Ablauf: vom Inhaber am 18.09.2026 bestätigt. Kein DTF-Druckermodell nennen, solange es nicht bestätigt ist.
+const ausstattung = [
+  { t: 'DTG-Drucker', d: 'Epson SureColor F2100 und Epson SureColor F2200' },
+  { t: 'Maximale DTG-Druckfläche', d: '40 x 50 cm' },
+  { t: 'Dunkle Textilien im DTG', d: 'Vorbehandlung auf einer Pretreat-Maschine, fixiert auf der Heißpresse' },
+  { t: 'DTF-Transfers', d: 'Aufgebracht auf der Heißpresse' },
+  { t: 'Standort', d: 'Eigene Produktion in Oberhausen, Versand deutschlandweit mit DHL oder Abholung vor Ort' },
+];
+
+const faqs = [
+  { q: 'Was ist der Unterschied zwischen DTF und DTG?', a: 'Beim DTF-Druck wird das Motiv auf eine Folie gedruckt und mit der Heißpresse aufs Textil gepresst. Beim DTG-Druck geht die Tinte direkt in die Textilfaser. DTF funktioniert auf fast allen Stoffen und deckt auch auf dunklen und schwarzen Textilien. DTG fühlt sich weicher an, druckt aber nur auf Baumwolle und auf Stoffen mit hohem Baumwollanteil. westernprint nutzt beide Verfahren in der eigenen Produktion in Oberhausen.' },
+  { q: 'Welches Druckverfahren eignet sich für Polyester?', a: 'Für Polyester eignen sich DTF-Druck und Sublimation. DTF funktioniert auf fast allen Stoffen, auch auf Polyester, und ist sehr dehnbar. Deshalb passt DTF gut zu Sportkleidung. Sublimation geht nur auf hellem Polyester und beschichteten Flächen, zum Beispiel auf Trikots oder Tassen. DTG kommt für Polyester nicht infrage. Es druckt nur auf Baumwolle und auf Stoffen mit hohem Baumwollanteil.' },
+  { q: 'Kann man dunkle und schwarze Textilien bedrucken?', a: 'Ja. westernprint bedruckt dunkle und schwarze Textilien per DTF oder DTG. DTF druckt auch auf dunklen Stoffen deckend. Für DTG auf dunkler Baumwolle wird das Textil zuerst auf einer Pretreat-Maschine vorbehandelt und auf der Heißpresse fixiert. Danach legen wir eine weiße Unterschicht an. Sublimation eignet sich nicht für dunkle Untergründe.' },
+  { q: 'Wie groß darf das Motiv sein?', a: 'Im DTG-Druck bedruckt westernprint eine Fläche von maximal 40 x 50 cm. Vor dem Druck bekommst du einen Korrekturabzug mit den genauen Maßen in Zentimetern. Für den Preis zählt vor allem die Zahl der Druckpositionen, weniger die Größe des Motivs.' },
+  { q: 'Welche Dateiformate braucht ihr?', a: 'Am besten schickst du ein PNG mit transparentem Hintergrund in 300 dpi. Ein vektorisiertes PDF geht ebenfalls. westernprint prüft jede Datei vor dem Druck und meldet sich, wenn etwas nicht passt. Für eine Anfrage reicht auch eine Skizze.' },
+  { q: 'Wie pflege ich bedruckte Textilien?', a: 'Bedruckte Textilien wäschst du bei 30 Grad und auf links gedreht. Nimm keinen Weichspüler und gib die Teile nicht in den Trockner. Alle Hinweise stehen auf der Seite „Pflege bedruckter Textilien“ unter westernprint.de/pflege-bedruckter-textilien.' },
+];
+
+const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'DTF-, DTG- und Sublimationsdruck', serviceType: 'Textildruck', provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: { '@type': 'Country', name: 'Deutschland' }, url: 'https://westernprint.de/druckverfahren' };
+const listLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Druckverfahren im Vergleich: DTF, DTG und Sublimation',
+  url: 'https://westernprint.de/druckverfahren#vergleich',
+  numberOfItems: methods.length,
+  itemListElement: methods.map((m, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: { '@type': 'Service', name: m.name, alternateName: m.sub, description: `${m.def} ${m.desc}`, serviceType: 'Textildruck', provider: { '@id': 'https://westernprint.de/#organization' }, url: `https://westernprint.de/druckverfahren#${m.key}` },
+  })),
+};
+const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 ---
-<Base title="Druckverfahren: DTF, DTG und Sublimation" description="Welches Druckverfahren für welches Textil: DTF, DTG und Sublimation im Vergleich. Haltbarkeit, Farben, Stückzahlen. Alles auf Epson-Maschinen in Oberhausen." jsonLd={svcLd}>
+<Base title="Druckverfahren: DTF, DTG und Sublimation" description="Welches Druckverfahren für welches Textil: DTF, DTG und Sublimation im Vergleich. Haltbarkeit, Farben, Stückzahlen. DTG auf Epson SureColor F2100 und F2200, eigene Produktion in Oberhausen." jsonLd={[svcLd, listLd, faqLd]}>
   <PageHero
     eyebrow="Druckverfahren"
     title="DTF, DTG oder Sublimation? <span class='hl'>Wir wählen das passende Verfahren.</span>"
-    lede="Höchste Qualität trifft auf moderne Technik. Bei uns läuft alles über Epson-Maschinen mit Fokus auf DTF und DTG, für Tassen und Accessoires auf Sublimation."
+    lede="westernprint druckt in der eigenen Produktion in Oberhausen und versendet deutschlandweit. DTF ist unser Standard, DTG nutzen wir für weiche Drucke auf Baumwolle. Tassen und Accessoires bedrucken wir per Sublimation."
     image="/img/druck-makro.jpg"
     imageAlt="Detailaufnahme eines DTF-Drucks, jede Linie gestochen scharf"
   />
 
   <section class="section methods-section">
     <div class="container">
+      <div class="section-head reveal">
+        <h2>Die drei Verfahren im Überblick</h2>
+      </div>
     </div>
     <Tiles items={[
-      { img: '/img/druck-outside.jpg', pos: 'center 40%', tag: 'Standard für Auflagen und Einzelstücke', t: 'DTF (Direct to Film)', d: 'Motiv auf Folie gedruckt, mit Kleberpulver aufs Textil gepresst. Deckend auf hellen und dunklen Stoffen, dehnbar, waschfest bis 60 °C. Für komplexe Motive, Farbverläufe und alle Materialien von Baumwolle bis Polyester.', big: true },
+      { img: '/img/druck-outside.jpg', pos: 'center 40%', tag: 'Standard für Auflagen und Einzelstücke', t: 'DTF (Direct to Film)', d: 'Motiv auf Folie gedruckt, mit Kleberpulver aufs Textil gepresst. Deckend auf hellen und dunklen Stoffen, dehnbar und waschfest. Für komplexe Motive, Farbverläufe und alle Materialien von Baumwolle bis Polyester.', big: true },
       { img: '/img/druck-makro.jpg', tag: 'Fotorealistische Einzelstücke', t: 'DTG (Direct to Garment)', d: 'Direkt ins Gewebe gedruckt. Weicher Griff, feinste Details, ideal für Fotos und viele Farben auf Baumwolle.' },
       { img: '/img/tasse-sublimation.jpg', pos: 'center 55%', tag: 'Tassen, Taschen, Accessoires', t: 'Sublimation', d: 'Farbe wird per Hitze in die Beschichtung eingedampft. Satte Farben, spülmaschinenfest, praktisch unzerstörbar.' },
     ]} rows="clamp(260px, 26vw, 380px)" />
@@ -50,7 +103,7 @@ const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'DTF
       </div>
       <div class="compare">
         {methods.map((m, i) => (
-          <article class={`cmp reveal reveal-d${i}` + (m.featured ? ' featured' : '')}>
+          <article id={m.key} class={`cmp reveal reveal-d${i}` + (m.featured ? ' featured' : '')}>
             {m.badge && <span class="cmp-badge">{m.badge}</span>}
             <header class="cmp-head">
               <span class="icon-box"><Icon name={m.icon} size={26} /></span>
@@ -59,7 +112,7 @@ const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'DTF
                 <span class="cmp-sub">{m.sub}</span>
               </div>
             </header>
-            <p class="cmp-desc">{m.desc}</p>
+            <p class="cmp-desc">{m.def} {m.desc}</p>
             <h4 class="cmp-label">Vorteile</h4>
             <ul class="cmp-list pros">
               {m.pros.map((x) => <li><Icon name="check" size={14} weight="bold" />{x}</li>)}
@@ -72,6 +125,7 @@ const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'DTF
           </article>
         ))}
       </div>
+      <p class="cmp-note reveal"><Icon name="washing-machine" size={20} /><span>Pflegehinweis von westernprint: bedruckte Textilien bei 30 Grad waschen, auf links gedreht, ohne Weichspüler und nicht in den Trockner. <a href="/pflege-bedruckter-textilien">Zur Pflegeanleitung</a></span></p>
     </div>
   </section>
 
@@ -80,13 +134,11 @@ const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'DTF
       <div class="reveal">
         <span class="eyebrow">Textilpartner</span>
         <h2>Warum wir auf Stanley/Stella setzen</h2>
-        <p class="muted">Stanley/Stella ist europäischer Marktführer für Premium-Basics aus Bio-Baumwolle. Die Lieferkette ist vom Saatgut bis zum fertigen Shirt rückverfolgbar. Für uns der beste Untergrund für DTF und DTG: brillante Farben, bis zu 15 Prozent weniger Tinte.</p>
+        <p class="muted"><a href="https://stanleystella.com/de-eu/" target="_blank" rel="noopener">Stanley/Stella</a> ist europäischer Marktführer für Premium-Basics aus Bio-Baumwolle. Die Lieferkette ist vom Saatgut bis zum fertigen Shirt rückverfolgbar. Für uns der beste Untergrund für DTF und DTG: brillante Farben, bis zu 15 Prozent weniger Tinte.</p>
         <ul class="certs">
-          <li><Icon name="seal-check" size={18} /> GOTS (Global Organic Textile Standard)</li>
-          <li><Icon name="seal-check" size={18} /> GRS (Global Recycled Standard)</li>
-          <li><Icon name="seal-check" size={18} /> OEKO-TEX Standard 100</li>
-          <li><Icon name="seal-check" size={18} /> PETA-Approved Vegan</li>
-          <li><Icon name="seal-check" size={18} /> Fair Wear Foundation, Leader-Status</li>
+          {certs.map((c) => (
+            <li><a href={c.href} target="_blank" rel="noopener"><Icon name="seal-check" size={18} /><span>{c.t}</span><Icon name="arrow-up-right" size={14} class="ext" /><span class="sr-only"> (öffnet in neuem Tab)</span></a></li>
+          ))}
         </ul>
         <a href="/textilien" class="btn btn-secondary">Textilien ansehen</a>
       </div>
@@ -97,6 +149,24 @@ const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'DTF
     </div>
   </section>
 
+  <section class="section-tight production-section" id="ausstattung">
+    <div class="container production-grid">
+      <div class="production-img reveal">
+        <img src="/img/werkstatt-heisspresse.jpg" srcset={werkstattImg.srcset} sizes={werkstattImg.srcset ? '(max-width: 900px) 100vw, 40vw' : undefined} alt="Werkstatt von westernprint in Oberhausen: Mitarbeiter an der Heißpresse, daneben Drucker und Regale mit Textilien" width={werkstattImg.width ?? 933} height={werkstattImg.height ?? 1400} loading="lazy" />
+      </div>
+      <div class="reveal reveal-d1">
+        <span class="eyebrow">Produktion in Oberhausen</span>
+        <h2>Womit wir drucken</h2>
+        <p class="muted">westernprint druckt in der eigenen Produktion in Oberhausen und versendet deutschlandweit mit DHL. Die DTG-Drucke laufen auf der Epson SureColor F2100 und F2200. DTF-Transfers pressen wir auf der Heißpresse auf.</p>
+        <dl class="specs">
+          {ausstattung.map((a) => <div><dt>{a.t}</dt><dd>{a.d}</dd></div>)}
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faqs} title="Fragen zu den Druckverfahren" />
+
   <CtaBand title="Unsicher, welches Verfahren passt?" text="Schick uns dein Motiv und das Wunschtextil. Wir sagen dir, was am besten hält und am besten aussieht." />
 </Base>
 
@@ -104,7 +174,7 @@ const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'DTF
   .compare-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .compare-section .section-head .muted { max-width: 62ch; margin-top: 10px; }
   .compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 22px; margin-top: 40px; align-items: stretch; }
-  .cmp { position: relative; display: flex; flex-direction: column; padding: clamp(24px, 3vw, 36px); border-radius: 22px; border: 1px solid var(--line); background: linear-gradient(180deg, var(--surface-2), var(--surface)); transition: transform 0.5s var(--ease), border-color 0.4s var(--ease); }
+  .cmp { position: relative; display: flex; flex-direction: column; padding: clamp(24px, 3vw, 36px); border-radius: 22px; border: 1px solid var(--line); background: linear-gradient(180deg, var(--surface-2), var(--surface)); transition: transform 0.5s var(--ease), border-color 0.4s var(--ease); scroll-margin-top: calc(var(--nav-h) + 32px); }
   .cmp:hover { transform: translateY(-4px); border-color: var(--line-strong); }
   .cmp.featured { border-color: var(--accent-line); box-shadow: 0 0 0 1px var(--accent-line), 0 0 70px -30px color-mix(in srgb, var(--accent) 70%, transparent); }
   .cmp-badge { position: absolute; top: -13px; left: 28px; padding: 5px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: 0.02em; color: var(--accent-ink); background: var(--accent); }
@@ -123,17 +193,34 @@ const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'DTF
   :global([data-theme="light"]) .cmp-list.cons :global(.icon) { color: #8a6a10; }
   .cmp-ideal { margin-top: auto; padding-top: 22px; border-top: 1px solid var(--line); font-size: 13.5px; line-height: 1.55; color: var(--text-3); }
   .cmp-ideal strong { color: var(--text); font-weight: 600; }
+  .cmp-note { display: flex; gap: 12px; align-items: flex-start; margin-top: 32px; max-width: 78ch; color: var(--text-2); font-size: 15px; line-height: 1.6; }
+  .cmp-note :global(.icon) { flex: none; margin-top: 1px; color: var(--accent); }
+  .cmp-note a, .brand-grid .muted a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
   .brand-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
   .brand-grid .muted { margin-top: 14px; max-width: 58ch; font-size: 1.05rem; }
   .certs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 26px 0 30px; font-size: 14.5px; }
-  .certs li { display: flex; gap: 10px; align-items: center; padding: 10px 14px; border-radius: 12px; background: linear-gradient(180deg, var(--surface-2), var(--surface)); border: 1px solid var(--line); }
+  .certs a { display: flex; gap: 10px; align-items: center; height: 100%; padding: 10px 14px; border-radius: 12px; background: linear-gradient(180deg, var(--surface-2), var(--surface)); border: 1px solid var(--line); transition: border-color 0.3s var(--ease); }
+  .certs a:hover { border-color: var(--line-strong); }
   .certs :global(.icon) { color: var(--accent); flex: none; }
+  .certs a :global(.ext) { margin-left: auto; color: var(--text-3); }
   .brand-imgs { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 24px 0 40px; }
   .brand-imgs::before { content: ''; position: absolute; inset: 10% 0; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%); filter: blur(30px); pointer-events: none; }
   .brand-imgs img { position: relative; border-radius: 20px; border: 1px solid var(--line); transition: transform 0.6s var(--ease); box-shadow: 0 30px 60px -30px rgba(0,0,0,0.8); }
   .brand-imgs img:first-child { transform: rotate(-4deg) translateY(10px); }
   .brand-imgs img:last-child { transform: rotate(3deg) translateY(50px); }
   .brand-imgs:hover img { transform: rotate(0) translateY(20px); }
-  @media (max-width: 600px) { .certs { grid-template-columns: 1fr; } }
-  @media (max-width: 900px) { .brand-grid { grid-template-columns: 1fr; } }
+  .production-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .production-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+  .production-grid .muted { margin-top: 14px; max-width: 58ch; font-size: 1.05rem; }
+  .production-img img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 45%; border-radius: 20px; border: 1px solid var(--line); box-shadow: 0 40px 80px -40px rgba(0,0,0,0.8); }
+  .specs { display: grid; margin: 26px 0 0; border-top: 1px solid var(--line-strong); }
+  .specs div { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 15px; line-height: 1.5; }
+  .specs dt { color: var(--text-2); }
+  .specs dd { margin: 0; color: var(--text); font-weight: 500; }
+  @media (max-width: 600px) { .certs { grid-template-columns: 1fr; } .specs div { grid-template-columns: 1fr; gap: 2px; } }
+  @media (max-width: 900px) {
+    .brand-grid, .production-grid { grid-template-columns: 1fr; }
+    .production-img { order: 2; }
+    .production-img img { aspect-ratio: 4 / 3; }
+  }
 </style>

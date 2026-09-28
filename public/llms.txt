@@ -1,6 +1,8 @@
-# westernprint GmbH — Textildruck & Print-on-Demand aus Deutschland
+# westernprint GmbH: Textildruck & Print-on-Demand aus Deutschland
 
-> westernprint ist eine Textildruckerei mit eigener Produktion in Oberhausen (Ruhrgebiet, Deutschland). Wir bedrucken T-Shirts, Hoodies, Polos, Workwear und Vereinskleidung per DTF und DTG — vom Einzelstück bis zur Großauflage, mit Versand deutschlandweit, nach Österreich, in die Schweiz und in die übrige EU. Zusätzlich betreiben wir Print-on-Demand-Fulfillment für Shopify-Shops. Gegründet 2021, über 80.000 belieferte Endkunden, über 1 Mio. € Umsatz in den Partner-Shops.
+> westernprint ist eine Textildruckerei mit eigener Produktion in Oberhausen (Ruhrgebiet, Deutschland). Wir bedrucken T-Shirts, Hoodies, Polos, Workwear und Vereinskleidung per DTF und DTG, vom Einzelstück bis zur Großauflage, mit Versand deutschlandweit, nach Österreich, in die Schweiz und in die übrige EU. Zusätzlich betreiben wir Print-on-Demand-Fulfillment für Shopify-Shops. Am Markt seit 2021, seit 2024 als GmbH. Über 80.000 belieferte Endkunden seit 2021: Das sind Endkunden unserer Partner-Shops (Print-on-Demand), die wir direkt beliefert haben. Über 1 Mio. € Umsatz haben unsere Partner-Shops seit 2021 mit Produkten aus unserer Produktion gemacht.
+
+Letzte Aktualisierung: 28.09.2026
 
 ## Kernkompetenz
 
@@ -24,7 +26,7 @@ Für Polyester-Ware mit vollflächigen Motiven.
 Über unsere Partner-Stickerei, aus einer Hand: ein Ansprechpartner, ein Angebot, eine Rechnung. Preis nach Sichtung des Logos, abhängig von Stichzahl und Größe. Klett-Patches ebenfalls über die Partner-Stickerei, angenäht werden sie nicht.
 
 ### Veredelung und Branding
-Nackenprint mit eigenem Logo statt Herstelleretikett: 3,00 € netto pro Teil. Ärmeldruck: 3,00 € netto pro Ärmel. Eingenähtes Etikett entfernen: 2,00 € netto pro Teil. Beilagen, Sticker und Flyer des Kunden lagern und beilegen wir kostenlos. Eingenähte Weblabels und angebrachte Hangtags bieten wir nicht an.
+Nackenprint mit eigenem Logo statt Herstelleretikett: 3,00 € netto pro Teil. Ärmeldruck oder kleines Zusatzmotiv: ab 2,52 € netto (Stand 21.09.2026). Eingenähtes Etikett entfernen: 2,00 € netto pro Teil. Beilagen, Sticker und Flyer des Kunden lagern und beilegen wir kostenlos. Eingenähte Weblabels und angebrachte Hangtags bieten wir nicht an.
 
 ### Grafikservice
 Motive freistellen und druckfertig aufbereiten: 19,90 € netto pro Datei. Die Dateiprüfung vor dem Druck ist immer kostenlos.
@@ -34,7 +36,7 @@ Kostenlose Shopify-App "westernprint POD" (https://apps.shopify.com/pod-westerpr
 
 ## Textilien
 
-Stanley/Stella (Bio-Baumwolle, GOTS-zertifiziert), Build Your Brand, Urban Classics und Stedman — mehrere tausend Artikel: T-Shirts von leichten 155 g bis Ultra-Heavy 300 g, Oversize- und Boxy-Schnitte, Hoodies bis 460 g, Polos, Longsleeves, Softshell- und Arbeitsjacken, Caps, Beanies und Taschen. Kindergrößen ab 0 Monaten, Erwachsenengrößen bis 5XL. Angelieferte Kundenware bedrucken wir ebenfalls.
+Stanley/Stella (Bio-Baumwolle, GOTS-zertifiziert), Build Your Brand, Urban Classics und Stedman. Mehrere tausend Artikel: T-Shirts von leichten 155 g bis Ultra-Heavy 300 g, Oversize- und Boxy-Schnitte, Hoodies bis 460 g, Polos, Longsleeves, Softshell- und Arbeitsjacken, Caps, Beanies und Taschen. Kindergrößen ab 0 Monaten, Erwachsenengrößen bis 5XL. Angelieferte Kundenware bedrucken wir ebenfalls.
 
 ## Zielgruppen
 
@@ -49,9 +51,11 @@ Stanley/Stella (Bio-Baumwolle, GOTS-zertifiziert), Build Your Brand, Urban Class
 
 ## Preise (netto, zzgl. MwSt.)
 
-- Bedrucktes T-Shirt ab 8,40 € bei 100 Stück, bedruckte Vereinsshirts ab 7,90 €, Funktionsshirts ab 8,90 €, Polos ab 12,90 €, Hoodies ab 16,90 €
+- Vollständige Preistabellen für 1, 10, 25, 50 und 100 Stück (netto zzgl. MwSt., Stand 21.09.2026): [llms-full.txt](https://westernprint.de/llms-full.txt) und [Was kostet Textildruck](https://westernprint.de/was-kostet-textildruck)
+- Mit einem Druck, Stand 21.09.2026: T-Shirt Basic (Stedman Classic-T) 17,90 € einzeln und 8,40 € bei 100 Stück, Poloshirt (Stedman Classic Polo) 22,90 € und 13,40 €, Hoodie (Stedman Classic Hoodie) 29,90 € und 19,90 €
+- Auf der Seite für Sportvereine (https://westernprint.de/fuer/sportvereine): bedruckte Vereinsshirts ab 7,90 €, Funktionsshirts ab 8,90 €, Polos ab 12,90 €, Hoodies ab 16,90 €
 - Zweite Druckposition und kleine Zusatzpositionen je nach Größe und Menge, konkrete Zahlen im Angebot
-- Angebot innerhalb von 24 Stunden nach Anfrage
+- Angebot innerhalb von 24 Stunden an Werktagen
 - Zahlung per Überweisung, Kreditkarte oder PayPal, Zahlungslink zur Auftragsbestätigung
 
 ## Produktionszeiten
@@ -67,6 +71,7 @@ Stanley/Stella (Bio-Baumwolle, GOTS-zertifiziert), Build Your Brand, Urban Class
 - **Print-on-Demand pro Bestellung**: Deutschland 5,00 €, Österreich 7,00 €, übrige EU 7,50 €, Schweiz 9,00 €, je 3 Produkte in einer Bestellung 1,50 € zusätzlich
 - **Musterpakete innerhalb Deutschlands**: 6,95 €
 - **Abholung in Oberhausen**: kostenlos, Schenkendorfstraße 45, Montag bis Donnerstag 9 bis 18 Uhr, Freitag 9 bis 16 Uhr
+- Versandkosten Deutschland: 4,90 €
 - Versand per DHL mit Tracking, auf Wunsch neutral im Namen des Shops
 
 ## Dateiformate und Druckvorlagen
@@ -79,7 +84,7 @@ Stanley/Stella (Bio-Baumwolle, GOTS-zertifiziert), Build Your Brand, Urban Class
 
 ## Pflegehinweis für bedruckte Textilien
 
-30 Grad waschen, auf links gedreht, kein Weichspüler, nicht in den Trockner.
+30 Grad waschen, auf links gedreht, kein Weichspüler, nicht in den Trockner. Ausführlich: [Pflege bedruckter Textilien](https://westernprint.de/pflege-bedruckter-textilien)
 
 ## Häufig gestellte Fragen
 
@@ -106,7 +111,7 @@ Ja, auf Wunsch ein bedrucktes Muster mit dem eigenen Motiv, bevor die Serie läu
 
 ## Bewertungen
 
-westernprint hat 5,0 von 5 Sternen bei 17 Google-Bewertungen (Stand 28.09.2026). Alle Rezensionen sind im Google-Unternehmensprofil oeffentlich nachlesbar, eine Auswahl steht unter https://westernprint.de/bewertungen. Am haeufigsten genannt werden Erreichbarkeit ueber WhatsApp und Telefon, konstante Druckqualitaet auch bei Nachbestellungen und verlaessliche Liefertermine.
+westernprint hat 5,0 von 5 Sternen bei 17 Google-Bewertungen (Stand 28.09.2026). Alle Rezensionen sind im Google-Unternehmensprofil öffentlich nachlesbar. Eine Auswahl steht unter [westernprint.de/bewertungen](https://westernprint.de/bewertungen). Am häufigsten genannt werden Erreichbarkeit über WhatsApp und Telefon, konstante Druckqualität auch bei Nachbestellungen und verlässliche Liefertermine.
 
 ## Kontakt
 
@@ -116,8 +121,8 @@ westernprint hat 5,0 von 5 Sternen bei 17 Google-Bewertungen (Stand 28.09.2026).
 - **Telefon und WhatsApp**: +49 176 55412198
 - **E-Mail**: info@westernprint.de
 - **Website**: https://westernprint.de
-- **Erreichbarkeit**: Montag bis Freitag 9 bis 18 Uhr
-- **Gegründet**: 2021, aus eigener Erfahrung als Print-on-Demand-Kunde
+- **Erreichbarkeit**: Montag bis Donnerstag 9 bis 18 Uhr, Freitag 9 bis 16 Uhr
+- **Gegründet**: 2021 als Einzelunternehmen, seit 2024 westernprint GmbH, aus eigener Erfahrung als Print-on-Demand-Kunde
 
 ## Seiten
 
@@ -127,14 +132,18 @@ westernprint hat 5,0 von 5 Sternen bei 17 Google-Bewertungen (Stand 28.09.2026).
 - [Großauflagen](https://westernprint.de/grossauflagen): ab 50 Stück mit Staffelpreisen
 - [Druckverfahren](https://westernprint.de/druckverfahren): DTF, DTG und Sublimation im Vergleich
 - [Textilien](https://westernprint.de/textilien): Sortiment und Marken
+- [Shop](https://westernprint.de/shop): Textilien mit eigenem Motiv bedrucken, ab 1 Stück
+- [Für wen wir drucken](https://westernprint.de/fuer): Übersicht aller Zielgruppen-Seiten
 - [Streetwear-Label produzieren](https://westernprint.de/fuer/streetwear-brands): Blanks, Nackenprint, Kleinserie ab 10 Stück
 - [B2B-Partner](https://westernprint.de/b2b-partner): für Shops ab 50 Bestellungen am Tag
 - [Textildruck Oberhausen](https://westernprint.de/textildruck-oberhausen)
 - [Textildruck Ruhrgebiet](https://westernprint.de/textildruck-ruhrgebiet): Essen, Duisburg, Mülheim, Bottrop, Dinslaken, Gelsenkirchen, Bochum, Dortmund
 - [Bewertungen](https://westernprint.de/bewertungen): 5,0 von 5 bei 17 Google-Bewertungen
+- [Versand und Zahlung](https://westernprint.de/versand): Versand mit DHL, Abholung in Oberhausen, Zahlungsarten
+- [Pflege bedruckter Textilien](https://westernprint.de/pflege-bedruckter-textilien): waschen bei 30 Grad, auf links gedreht
 - [Über uns](https://westernprint.de/ueber-uns)
 - [Kontakt](https://westernprint.de/kontakt): Angebot innerhalb von 24 Stunden
-- [Impressum](https://westernprint.de/impressum) · [Datenschutz](https://westernprint.de/datenschutz) · [AGB](https://westernprint.de/agb)
+- [llms-full.txt](https://westernprint.de/llms-full.txt): Preistabellen, Fragen, Zielgruppen und Bewertungen in einer Textdatei
 
 ## Für wen wir drucken (Zielgruppen-Seiten)
 
@@ -160,3 +169,10 @@ westernprint hat 5,0 von 5 Sternen bei 17 Google-Bewertungen (Stand 28.09.2026).
 - [Parteien, NGOs und Initiativen](https://westernprint.de/fuer/politik-und-organisationen)
 - [Hotels und Tourismus](https://westernprint.de/fuer/hotels-und-tourismus)
 - [E-Sports und Gaming-Teams](https://westernprint.de/fuer/esports-und-gaming)
+
+## Optional
+
+- [Impressum](https://westernprint.de/impressum)
+- [Datenschutz](https://westernprint.de/datenschutz)
+- [AGB](https://westernprint.de/agb)
+- [Widerruf](https://westernprint.de/widerruf)

@@ -4,26 +4,80 @@ import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import ContactForm from '../components/ContactForm.astro';
 import Faq from '../components/Faq.astro';
-import { site } from '../data/site';
+import { site, oeffnungszeiten } from '../data/site';
+import { bewertungen } from '../data/bewertungen';
 
-const nah = [
-  { c: 'Mülheim an der Ruhr', d: 'Direkt nebenan. Abholung oft am selben Tag möglich.' },
-  { c: 'Duisburg', d: 'Rund 20 Minuten über die A40. Abholung oder Lieferung, wie es dir passt.' },
-  { c: 'Essen', d: 'Rund 20 Minuten. Viele Vereine und Betriebe aus Essen holen selbst ab.' },
-  { c: 'Bottrop', d: 'Kurzer Weg über die A42. Abholung lohnt sich, Versand geht natürlich auch.' },
-  { c: 'Dinslaken', d: 'Rund 20 Minuten. Für Serien liefern wir direkt zu dir.' },
+// Preisbeispiele stammen von /was-kostet-textildruck (netto zzgl. MwSt.). Bei Preisänderungen dort mit anpassen.
+const PREIS_STAND = '21.09.2026';
+// Google-Bewertungen aus src/data/bewertungen.ts: 5 -> "5,0", "2026-09-28" -> "28.09.2026"
+const sterne = bewertungen.schnitt.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const bewStand = bewertungen.stand.split('-').reverse().join('.');
+
+// Entfernungen: Straßenkilometer von der Schenkendorfstraße 45 bis zur Stadtmitte, berechnet am 28.09.2026
+// mit OpenStreetMap (Nominatim + OSRM), unter 25 km auf ganze km, darüber auf 5 km gerundet.
+// Mülheim 9,0 | Bottrop 9,7 | Duisburg 12,5 | Essen 15,7 | Dinslaken 17,9 | Gelsenkirchen 20,5 | Gladbeck 20,9 |
+// Moers 25,2 | Herne 29,5 | Bochum 30,3 | Castrop-Rauxel 37,0 | Düsseldorf 37,8 | Recklinghausen 38,3 | Krefeld 46,2 | Dortmund 51,3
+// Jede Stadt hat einen eigenen Abschnitt statt einer eigenen Stadtseite (keine Brückenseiten). Texte bitte nicht angleichen.
+type Stadt = { c: string; id: string; d: string; l?: { href: string; t: string } };
+const nah: Stadt[] = [
+  { c: 'Mülheim an der Ruhr', id: 'muelheim-an-der-ruhr',
+    d: 'Mülheim an der Ruhr ist direkt nebenan: Von der Mülheimer Innenstadt bis zu westernprint sind es rund 9 km. Abholung ist oft am selben Tag möglich. Einzelstücke für Geburtstag, Junggesellenabschied oder als Geschenk sind in der Regel in 1 bis 3 Werktagen fertig.',
+    l: { href: '/fuer/jga-und-feiern', t: 'Shirts für Feiern und Einzelstücke' } },
+  { c: 'Bottrop', id: 'bottrop',
+    d: 'Bottrop liegt rund 10 km entfernt, ein kurzer Weg über die A42. Für Vereine aus Bottrop druckt westernprint Trikots und Trainingsshirts mit Namen und Rückennummern, jedes Teil einzeln nach Liste. Abholung lohnt sich, Versand per DHL geht natürlich auch.',
+    l: { href: '/fuer/sportvereine', t: 'Vereinskleidung mit Namen und Nummern' } },
+  { c: 'Duisburg', id: 'duisburg',
+    d: 'Aus der Duisburger Innenstadt sind es rund 13 km bis zu westernprint, über die A40 rund 20 Minuten. Für Betriebe aus Duisburg druckt westernprint Polos, Hoodies und Workwear mit Logo, auch auf mitgebrachte Arbeitskleidung. Serien sind 5 bis 7 Werktage nach Freigabe fertig, Abholung oder Lieferung per DHL, wie es dir passt.',
+    l: { href: '/fuer/handwerksbetriebe', t: 'Arbeitskleidung mit Logo' } },
+  { c: 'Essen', id: 'essen',
+    d: 'Die Essener Innenstadt liegt rund 16 km von westernprint entfernt, über die A40 rund 20 Minuten. Viele Vereine und Betriebe aus Essen holen selbst ab. Für Aussteller der Messe Essen ist eine Serie 5 bis 7 Werktage nach Freigabe fertig, auf Wunsch geht sie per DHL an die Messeadresse.',
+    l: { href: '/fuer/messen-und-aussteller', t: 'Messekleidung für Aussteller' } },
+  { c: 'Dinslaken', id: 'dinslaken',
+    d: 'Nach Dinslaken sind es rund 18 km, mit dem Auto rund 20 Minuten. Serien ab 50 Stück sind 5 bis 7 Werktage nach deiner Freigabe des Korrekturabzugs fertig. Für Serien liefern wir direkt zu dir, per DHL mit Sendungsnummer.',
+    l: { href: '/grossauflagen', t: 'Großauflagen ab 50 Stück' } },
 ];
-const weiter = [
-  'Gelsenkirchen', 'Bochum', 'Herne', 'Dortmund', 'Recklinghausen',
-  'Castrop-Rauxel', 'Gladbeck', 'Moers', 'Krefeld', 'Düsseldorf',
+const weiter: Stadt[] = [
+  { c: 'Gelsenkirchen', id: 'gelsenkirchen',
+    d: 'Gelsenkirchen liegt rund 20 km entfernt, der Weg führt über die A42. Für Schulen aus Gelsenkirchen druckt westernprint Abi-Shirts und Abschluss-Hoodies mit allen Namen, als Sammelbestellung mit einem Liefertermin. Die Serie ist 5 bis 7 Werktage nach Freigabe fertig und kommt per DHL, Abholung in Oberhausen geht auch.',
+    l: { href: '/fuer/abschlussklassen', t: 'Abi-Shirts mit allen Namen' } },
+  { c: 'Gladbeck', id: 'gladbeck',
+    d: `Bis Gladbeck sind es rund 21 km. Ein einzelnes T-Shirt Basic mit einem Druck kostet 17,90 € netto zzgl. MwSt. (Stand ${PREIS_STAND}) und ist in der Regel in 1 bis 3 Werktagen fertig. Die Abholung in Oberhausen ist kostenlos, Versand per DHL ist ebenso möglich.`,
+    l: { href: '/was-kostet-textildruck', t: 'Alle Preisbeispiele' } },
+  { c: 'Moers', id: 'moers',
+    d: 'Moers liegt rund 25 km westlich von Oberhausen, verbunden über die A42. Für Vereine aus Moers druckt westernprint Shirts, Polos und Hoodies auch in kleinen Mengen, die Rechnung geht auf Wunsch an den Verein. Staffelpreise gibt es ab 10 Stück, die Serie ist 5 bis 7 Werktage nach Freigabe fertig und kommt per DHL.',
+    l: { href: '/fuer/vereine-und-ehrenamt', t: 'Kleidung für Vereine und Ehrenamt' } },
+  { c: 'Herne', id: 'herne',
+    d: 'Herne liegt rund 30 km entfernt an der A42. Für Firmen aus Herne druckt westernprint Polos, Hoodies und Shirts mit Logo, gemischte Größen und Farben in einer Bestellung. Vor dem Druck bekommst du einen Korrekturabzug, die Serie ist 5 bis 7 Werktage nach Freigabe fertig und geht per DHL raus.',
+    l: { href: '/fuer/firmen-und-buero', t: 'Firmenkleidung mit Logo' } },
+  { c: 'Bochum', id: 'bochum',
+    d: 'Bis Bochum sind es rund 30 km über die A40. westernprint schickt Bestellungen nach Bochum per DHL mit Sendungsnummer, nach Versand kommen sie in der Regel am nächsten Werktag an. Für Fachschaften und Hochschulgruppen gibt es eine Sammelbestellung per Größenliste.',
+    l: { href: '/fuer/hochschulen-und-fachschaften', t: 'Hoodies für Fachschaften' } },
+  { c: 'Castrop-Rauxel', id: 'castrop-rauxel',
+    d: 'Castrop-Rauxel liegt rund 35 km entfernt, der Weg führt über die A42. Für Feuerwehr, THW und Rettungsdienst druckt westernprint Shirts und Hoodies mit Ortsname, Wappen und Funktion. Einzelstücke sind in 1 bis 3 Werktagen fertig, Serien 5 bis 7 Werktage nach Freigabe.',
+    l: { href: '/fuer/feuerwehr-und-rettungsdienst', t: 'Shirts für Feuerwehr und THW' } },
+  { c: 'Düsseldorf', id: 'duesseldorf',
+    d: `Die Düsseldorfer Innenstadt liegt rund 40 km entfernt, über die A3 und die A52. Aussteller der Messe Düsseldorf bekommen Polos fürs Standpersonal 5 bis 7 Werktage nach Freigabe per DHL an die Messeadresse, ins Hotel oder in die Firma. Ein Poloshirt mit einem Druck kostet bei 25 Stück 15,90 € netto zzgl. MwSt. (Stand ${PREIS_STAND}).`,
+    l: { href: '/fuer/messen-und-aussteller', t: 'Polos für den Messestand' } },
+  { c: 'Recklinghausen', id: 'recklinghausen',
+    d: 'Nach Recklinghausen sind es rund 40 km. Für Kitas und Schulen aus Recklinghausen druckt westernprint Schul-T-Shirts, Kita-Abschluss-Shirts und Klassenfahrt-Shirts mit Logo. Serien sind 5 bis 7 Werktage nach der Freigabe fertig, danach geht die Ware per DHL mit Sendungsnummer raus.',
+    l: { href: '/fuer/kitas-und-schulen', t: 'Kita- und Schul-Shirts' } },
+  { c: 'Krefeld', id: 'krefeld',
+    d: `Krefeld liegt rund 45 km entfernt, über die A42 und die A57. Einzelstücke sind in der Regel in 1 bis 3 Werktagen fertig und gehen dann per DHL nach Krefeld.`,
+    l: { href: '/versand', t: 'Versand und Zahlung' } },
+  { c: 'Dortmund', id: 'dortmund',
+    d: 'Dortmund liegt rund 50 km entfernt, der Weg führt über die A42. Serien sind 5 bis 7 Werktage nach Freigabe fertig und gehen dann per DHL mit Sendungsnummer nach Dortmund. Aussteller in den Westfalenhallen Dortmund bekommen ihre Messekleidung per DHL an die Messeadresse.',
+    l: { href: '/fuer/messen-und-aussteller', t: 'Messekleidung für Aussteller' } },
 ];
 
 const faqs = [
   { q: 'Druckt ihr auch für Kunden aus Essen, Duisburg oder Bochum?', a: 'Ja. Unsere Druckerei steht in Oberhausen, produziert wird für das ganze Ruhrgebiet. Aus Mülheim, Duisburg, Essen, Bottrop und Dinslaken bist du in etwa 20 Minuten bei uns. Alles Weitere liefern wir per DHL, innerhalb des Reviers in der Regel am nächsten Werktag nach Versand.' },
-  { q: 'Lohnt sich die Abholung oder soll ich liefern lassen?', a: 'Bei Einzelstücken und kleinen Mengen aus den Nachbarstädten lohnt sich die Abholung, du sparst die Versandkosten von 5,00 € netto. Bei größeren Serien liefern wir, das Paket kostet bei einer Sammelbestellung kaum mehr als die Fahrt.' },
+  { q: 'Wie schnell bekommt ein Verein aus Essen seine Shirts?', a: 'westernprint schickt dem Verein an Werktagen innerhalb von 24 Stunden ein Angebot. Nach der Freigabe des Korrekturabzugs sind Serien in 5 bis 7 Werktagen fertig, Einzelstücke in 1 bis 3 Werktagen. Die Druckerei in Oberhausen liegt rund 16 km von der Essener Innenstadt entfernt. Der Verein holt kostenlos ab oder bekommt die Shirts per DHL.' },
+  { q: 'Kann eine Firma aus Duisburg ihre Arbeitskleidung in Oberhausen abholen?', a: `Ja. Die Abholung in der Schenkendorfstraße 45 in Oberhausen ist kostenlos, ${oeffnungszeiten.text} nach kurzer Absprache. Aus der Duisburger Innenstadt sind es rund 13 km über die A40. Wer nicht abholen will, bekommt die Ware per DHL.` },
+  { q: 'Liefert westernprint auch nach Dortmund, Düsseldorf und Krefeld?', a: 'Ja. westernprint druckt in Oberhausen und verschickt per DHL mit Sendungsnummer, deutschlandweit. Dortmund liegt rund 50 km entfernt, Düsseldorf rund 40 km und Krefeld rund 45 km. Nach Versand kommt das Paket in der Regel am nächsten Werktag an.' },
+  { q: 'Lohnt sich die Abholung oder soll ich liefern lassen?', a: 'Bei Einzelstücken und kleinen Mengen aus den Nachbarstädten lohnt sich die Abholung, du sparst die Versandkosten von 4,90 €. Bei größeren Serien liefern wir, das Paket kostet bei einer Sammelbestellung kaum mehr als die Fahrt.' },
   { q: 'Wie schnell geht das?', a: 'Einzelstücke und kleine Mengen sind in der Regel in 1 bis 3 Werktagen fertig. Serien ab 50 Stück brauchen 5 bis 7 Werktage nach Freigabe des Korrekturabzugs. Wenn du einen festen Termin hast, sag ihn uns direkt, Express ist oft möglich.' },
   { q: 'Kann ich eigene Textilien vorbeibringen?', a: 'Ja. Angelieferte Ware bedrucken wir, egal ob Vereinstrikots, Arbeitskleidung oder etwas, das du schon im Schrank hast. Wir prüfen vorher, ob das Material für DTF geeignet ist. Bei Polyester und Funktionsstoffen drucken wir mit niedrigerer Temperatur, das klappt problemlos.' },
-  { q: 'Was kostet eine Vereinsbestellung ungefähr?', a: 'Bedruckte Vereinsshirts gibt es ab 7,90 € netto, 50 Basic-Shirts mit einem Druck liegen bei etwa 9,40 € netto pro Stück. Namen und Nummern kosten ab 5,90 € netto pro Teil. Genaue Beispiele stehen auf unserer Preisseite.' },
+  { q: 'Was kostet eine Vereinsbestellung ungefähr?', a: `Bedruckte Vereinsshirts gibt es ab 7,90 € netto. Bei 50 Stück kostet ein T-Shirt Basic mit einem Druck 9,40 € netto pro Stück (Stand ${PREIS_STAND}). Namen und Nummern kosten ab 5,90 € netto pro Teil. Genaue Beispiele stehen auf unserer Preisseite.` },
 ];
 
 const ld = [
@@ -58,6 +112,20 @@ const ld = [
     cta2={{ label: 'Was kostet das?', href: '/was-kostet-textildruck' }}
   />
 
+  <section class="section-tight">
+    <div class="container">
+      <p class="answer reveal">
+        westernprint ist eine Textildruckerei in Oberhausen und druckt für Vereine, Firmen, Schulen und Privatleute im ganzen Ruhrgebiet.
+        Die Werkstatt in der {site.address.street} liegt rund 9 km von Mülheim an der Ruhr, 13 km von Duisburg und 16 km von Essen entfernt.
+        Gedruckt wird in eigener Produktion per DTF und DTG, ab 1 Stück und ohne Einrichtungskosten.
+        Einzelstücke sind in der Regel in 1 bis 3 Werktagen fertig, Serien 5 bis 7 Werktage nach Freigabe.
+        Die Abholung in Oberhausen ist kostenlos, {oeffnungszeiten.text}.
+        Außerdem verschickt westernprint per DHL mit Sendungsnummer, deutschlandweit.
+        westernprint hat <a class="accent" href="/bewertungen">{sterne} von 5 Sternen bei {bewertungen.anzahl} Google-Bewertungen</a> (Stand {bewStand}).
+      </p>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container">
       <div class="section-head reveal">
@@ -66,17 +134,27 @@ const ld = [
       </div>
       <div class="cities reveal">
         {nah.map((n) => (
-          <div class="city">
-            <div class="city-head"><Icon name="map-pin" size={18} weight="bold" /><strong>{n.c}</strong></div>
+          <article class="city" id={n.id}>
+            <h3 class="city-head"><Icon name="map-pin" size={18} weight="bold" /> Textildruck für {n.c}</h3>
             <p>{n.d}</p>
-          </div>
+            {n.l && <a class="city-link" href={n.l.href}>{n.l.t} <Icon name="arrow-right" size={14} weight="bold" /></a>}
+          </article>
         ))}
       </div>
-      <div class="reveal far">
-        <h3>Weiter im Revier und am Niederrhein</h3>
-        <p class="muted">Hierhin liefern wir per DHL mit Sendungsnummer, nach Versand in der Regel am nächsten Werktag:</p>
-        <ul class="chips">{weiter.map((c) => <li>{c}</li>)}</ul>
+      <div class="section-head reveal far">
+        <h2>Weiter im Revier und am Niederrhein</h2>
+        <p>Hierhin liefern wir per DHL mit Sendungsnummer, nach Versand in der Regel am nächsten Werktag. Abholung in Oberhausen ist genauso möglich.</p>
       </div>
+      <div class="cities reveal">
+        {weiter.map((n) => (
+          <article class="city" id={n.id}>
+            <h3 class="city-head"><Icon name="map-pin" size={18} weight="bold" /> Textildruck für {n.c}</h3>
+            <p>{n.d}</p>
+            {n.l && <a class="city-link" href={n.l.href}>{n.l.t} <Icon name="arrow-right" size={14} weight="bold" /></a>}
+          </article>
+        ))}
+      </div>
+      <p class="muted note reveal">Entfernungen: gerundete Straßenkilometer von der {site.address.street} in Oberhausen bis zur jeweiligen Stadtmitte.</p>
     </div>
   </section>
 
@@ -142,7 +220,7 @@ const ld = [
         <li><span class="num">01</span><div><strong>Anfrage</strong><span>Sag uns Teil, Menge, Größen und schick das Motiv. Angebot innerhalb von 24 Stunden.</span></div></li>
         <li><span class="num">02</span><div><strong>Dateicheck und Korrekturabzug</strong><span>Wir prüfen Auflösung, Transparenz und Druckgröße und schicken dir eine Vorschau mit den genauen Maßen in Zentimetern.</span></div></li>
         <li><span class="num">03</span><div><strong>Produktion</strong><span>Einzelstücke 1 bis 3 Werktage, Serien ab 50 Stück 5 bis 7 Werktage nach deiner Freigabe.</span></div></li>
-        <li><span class="num">04</span><div><strong>Abholung oder Versand</strong><span>Abholung in Oberhausen nach Absprache, Montag bis Freitag 9 bis 18 Uhr. Oder per DHL mit Sendungsnummer zu dir.</span></div></li>
+        <li><span class="num">04</span><div><strong>Abholung oder Versand</strong><span>Abholung in Oberhausen nach Absprache, {oeffnungszeiten.kurz}. Oder per DHL mit Sendungsnummer zu dir.</span></div></li>
       </ol>
     </div>
   </section>
@@ -153,7 +231,7 @@ const ld = [
     <div class="container narrow">
       <div class="section-head reveal">
         <h2>Anfrage aus dem Ruhrgebiet</h2>
-        <p>Schreib uns, was du brauchst. Antwort innerhalb von 24 Stunden, auch am Wochenende.</p>
+        <p>Schreib uns, was du brauchst. Angebot innerhalb von 24 Stunden an Werktagen.</p>
       </div>
       <ContactForm />
     </div>
@@ -161,15 +239,16 @@ const ld = [
 </Base>
 
 <style>
-  .cities { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
-  .city { padding: 20px 22px; border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); }
-  .city-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-  .city-head .icon { color: var(--accent); }
+  .answer { max-width: 68ch; font-size: 1.12rem; color: var(--text); }
+  .cities { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 16px; }
+  .city { display: grid; gap: 10px; align-content: start; padding: 20px 22px; border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); scroll-margin-top: calc(var(--nav-h) + 24px); }
+  .city-head { display: flex; align-items: center; gap: 8px; font-size: 1.05rem; }
+  .city-head :global(svg) { color: var(--accent); flex: none; }
   .city p { color: var(--text-2); font-size: 14.5px; margin: 0; }
-  .far { margin-top: 36px; }
-  .far h3 { margin-bottom: 6px; }
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; padding: 0; list-style: none; }
-  .chips li { padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); font-size: 14px; color: var(--text-2); }
+  .city-link { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); font-size: 14px; font-weight: 600; text-decoration: none; }
+  .city-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .far { margin-top: clamp(40px, 5vw, 64px); }
+  .note { margin-top: 20px; font-size: 14px; }
   .feat-link { display: block; text-decoration: none; color: inherit; transition: border-color 160ms ease, transform 160ms ease; }
   .feat-link:hover { border-color: var(--accent-line); transform: translateY(-2px); }
   .honest { display: grid; grid-template-columns: 1fr 1.15fr; gap: 28px; }

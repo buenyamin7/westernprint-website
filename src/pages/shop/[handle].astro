@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import { getProducts, euro, PRINT_SIZES } from '../../lib/shopify';
 import { site } from '../../data/site';
+import { swatchSrc } from '../../lib/imgsize.mjs';
 
 export async function getStaticPaths() {
   const products = await getProducts();
@@ -25,7 +26,7 @@ const details = [
         <!-- Vorschau -->
         <div class="pvisual">
           <div class="stage" data-stage>
-            <img src={p.image} alt={`${p.title} ${p.colors[0]?.name ?? ''}`} width="900" height="1125" data-stage-img />
+            <img src={p.image} alt={`${p.title} ${p.colors[0]?.name ?? ''}`} width="900" height="1125" fetchpriority="high" data-stage-img />
             <img class="motif" data-motif hidden alt="" draggable="false" />
             <div class="stage-tabs" data-side-tabs>
               <button type="button" class="is-on" data-view="front">Vorne</button>
@@ -34,7 +35,8 @@ const details = [
             <span class="stage-hint" data-stage-hint hidden><Icon name="arrows-out-cardinal" size={14} /> Motiv verschieben</span>
           </div>
           <div class="thumbs">
-            {gallery.map((g, i) => <button type="button" class={i === 0 ? 'is-on' : ''} data-thumb={g}><img src={g} alt="" width="120" height="150" loading="lazy" /></button>)}
+            {/* data-thumb = volles Bild für die Bühne, img = 128 x 160 px Vorschau (scripts/make-swatches.mjs) */}
+            {gallery.map((g, i) => <button type="button" class={i === 0 ? 'is-on' : ''} data-thumb={g}><img src={swatchSrc(g)} alt="" width="128" height="160" loading="lazy" /></button>)}
           </div>
         </div>
 
@@ -51,8 +53,9 @@ const details = [
             <div class="swatches">
               {p.colors.map((c, i) => (
                 <label class={`swatch ${c.image ? 'has-img' : ''}`} title={c.name} style={`--sw:${c.hex || '#e6e6e6'}`}>
+                  {/* data-image bleibt das volle Foto für die Bühne, das Muster selbst lädt nur die kleine Vorschau */}
                   <input type="radio" name="color" value={c.id} checked={i === 0} data-image={c.image} data-back={c.back} data-name={c.name} />
-                  {c.image ? <img src={c.image} alt={c.name} width="64" height="80" loading="lazy" /> : <i style={`background:${c.hex || '#ccc'}`}></i>}
+                  {c.image ? <img src={swatchSrc(c.image)} alt={c.name} width="64" height="80" loading="lazy" /> : <i style={`background:${c.hex || '#ccc'}`}></i>}
                 </label>
               ))}
             </div>
@@ -119,7 +122,7 @@ const details = [
       </div>
       <div class="card card-pad">
         <h2>So wird gedruckt</h2>
-        <p class="muted">Wir drucken per DTF (Direct to Film): deckend auf hellen und dunklen Stoffen, dehnbar, waschfest bei 30 bis 40 Grad. Das Motiv sollte als PNG mit transparentem Hintergrund und mindestens 300 dpi vorliegen. Wir prüfen jede Datei vor dem Druck und melden uns, wenn etwas nicht passt.</p>
+        <p class="muted">Wir drucken per DTF (Direct to Film): deckend auf hellen und dunklen Stoffen, dehnbar, waschfest bei 30 Grad. Das Motiv sollte als PNG mit transparentem Hintergrund und mindestens 300 dpi vorliegen. Wir prüfen jede Datei vor dem Druck und melden uns, wenn etwas nicht passt.</p>
         <h3>Druckgrößen</h3>
         <ul class="sizes-list">{PRINT_SIZES.map((s) => <li><strong>{s.label}</strong> {s.hint}, +{s.surcharge} € je Seite</li>)}</ul>
         <h3>Größen</h3>

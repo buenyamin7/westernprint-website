@@ -3,18 +3,46 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
 import { site } from '../data/site';
 import { bewertungen, rezensionen } from '../data/bewertungen';
 
 const initials = (n: string) => n.split(' ').map((p) => p[0]).join('').slice(0, 2).toUpperCase();
+// "2026-09-28" -> "28.09.2026"
+const standDe = bewertungen.stand.split('-').reverse().join('.');
+// 5 -> "5,0", 4.9 -> "4,9" (nicht "4.9,0")
+const sterne = bewertungen.schnitt.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+
+// Nur Fakten, die auf dieser Seite schon stehen.
+const faqs = [
+  {
+    q: 'Woher stammen die Bewertungen?',
+    a: `Die Bewertungen stammen aus dem ${bewertungen.quelle}-Unternehmensprofil von westernprint in Oberhausen. Kundinnen und Kunden haben sie selbst bei ${bewertungen.quelle} geschrieben. Stand ${standDe}: ${sterne} von 5 Sternen bei ${bewertungen.anzahl} Bewertungen.`,
+  },
+  {
+    q: 'Kann westernprint Bewertungen bearbeiten oder löschen?',
+    a: `Nein. westernprint kann die Bewertungen bei ${bewertungen.quelle} weder bearbeiten noch löschen. Gekürzte Zitate auf dieser Seite sind mit […] gekennzeichnet.`,
+  },
+  {
+    q: 'Wo stehen alle Bewertungen?',
+    a: `Alle ${bewertungen.anzahl} Bewertungen stehen im ${bewertungen.quelle}-Profil der ${site.legalName}. Dort steht auch der vollständige Text der gekürzten Zitate. Der Link „Alle Bewertungen bei ${bewertungen.quelle}“ oben auf dieser Seite führt direkt dorthin.`,
+  },
+  {
+    q: 'Wann fragt westernprint nach einer Bewertung?',
+    a: 'westernprint bittet nach jedem abgeschlossenen Auftrag um eine Rückmeldung. Die Bewertung schreiben Kundinnen und Kunden selbst.',
+  },
+];
+const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 ---
 <Base
   title="Bewertungen und Erfahrungen mit westernprint in Oberhausen"
-  description={`westernprint hat ${bewertungen.schnitt},0 von 5 Sternen bei ${bewertungen.anzahl} Google-Bewertungen. Echte Erfahrungen von Vereinen, Handwerksbetrieben, Shop-Betreibern und Privatkunden mit unserem Textildruck in Oberhausen.`}
+  description={`westernprint hat ${sterne} von 5 Sternen bei ${bewertungen.anzahl} Google-Bewertungen. Echte Erfahrungen von Vereinen, Handwerksbetrieben, Shop-Betreibern und Privatkunden mit unserem Textildruck in Oberhausen.`}
+  showRating={true}
+  jsonLd={faqLd}
 >
   <PageHero
     eyebrow="Bewertungen"
-    title={`${bewertungen.schnitt},0 von 5 Sternen bei <span class='hl'>${bewertungen.anzahl} Google-Bewertungen</span>`}
+    title={`${sterne} von 5 Sternen bei <span class='hl'>${bewertungen.anzahl} Google-Bewertungen</span>`}
     lede="Echte Rezensionen aus unserem Google-Unternehmensprofil. Nicht ausgewählt, nicht geschönt, alle öffentlich nachlesbar."
     image="/img/werkstatt-heisspresse.jpg"
     imageAlt="Werkstatt von westernprint in Oberhausen mit Heißpressen"
@@ -26,11 +54,12 @@ const initials = (n: string) => n.split(' ').map((p) => p[0]).join('').slice(0, 
     <div class="container">
       <div class="rating-head reveal">
         <div class="rating-big">
-          <strong>{bewertungen.schnitt},0</strong>
-          <div class="stars" aria-label={`${bewertungen.schnitt} von 5 Sternen`}>
+          <strong>{sterne}</strong>
+          <div class="stars" aria-label={`${sterne} von 5 Sternen`}>
             {Array.from({ length: 5 }).map(() => <Icon name="star" weight="fill" size={20} />)}
           </div>
           <span class="muted small">{bewertungen.anzahl} Bewertungen bei {bewertungen.quelle}</span>
+          <span class="rating-stand">Stand: <time datetime={bewertungen.stand}>{standDe}</time></span>
         </div>
         <p class="rating-note">
           Wir fragen nach jedem abgeschlossenen Auftrag nach einer Rückmeldung. Was unten steht, haben
@@ -85,6 +114,8 @@ const initials = (n: string) => n.split(' ').map((p) => p[0]).join('').slice(0, 
     </div>
   </section>
 
+  <Faq title="Fragen zu den Bewertungen" items={faqs} />
+
   <CtaBand
     title="Selbst ausprobieren?"
     text="Schick uns Motiv und Stückzahl. Du bekommst innerhalb von 24 Stunden ein Angebot mit festem Preis und festem Liefertermin."
@@ -95,6 +126,7 @@ const initials = (n: string) => n.split(' ').map((p) => p[0]).join('').slice(0, 
   .rating-head { display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: center; margin-bottom: 36px; }
   .rating-big { display: grid; justify-items: center; gap: 6px; padding: 20px 28px; border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); }
   .rating-big strong { font-size: 44px; line-height: 1; font-variant-numeric: tabular-nums; }
+  .rating-stand { color: var(--text-3); font-size: 13px; }
   .rating-note { margin: 0; color: var(--text-2); max-width: 62ch; }
   .stars { display: inline-flex; gap: 2px; color: #f5a623; }
   .rev blockquote { margin: 12px 0 16px; }

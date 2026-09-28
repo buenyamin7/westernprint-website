@@ -21,6 +21,8 @@ export interface Rezension {
   datum: string;
   text: string;
   gekuerzt?: boolean;
+  /** schema.org-Typ des Verfassers im Review-Markup (/bewertungen). Standard: Person. Firmenprofile: Organization. */
+  autorTyp?: 'Person' | 'Organization';
 }
 
 export const rezensionen: Rezension[] = [
@@ -40,6 +42,7 @@ export const rezensionen: Rezension[] = [
   {
     name: 'Rohrreinigung RAK',
     rolle: 'Arbeitskleidung mit Beflockung',
+    autorTyp: 'Organization',
     datum: 'vor einem Jahr',
     text: 'Von Anfang an war die Kommunikation mit Herrn Dursun super. Ich habe ihm mitgeteilt, dass ich für mein Unternehmen nach passender Arbeitskleidung samt Beflockung suche, und war mit dem Ergebnis äußerst überrascht.',
     gekuerzt: true,

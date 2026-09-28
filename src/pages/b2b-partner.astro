@@ -3,8 +3,19 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import ContactForm from '../components/ContactForm.astro';
+import Faq from '../components/Faq.astro';
+
+// Antworten nur aus Seitentext und belegten Fakten (Produktion Oberhausen, DTG-Maschinen, App, Ablauf).
+const faqs = [
+  { q: 'Für wen ist die B2B-Partnerschaft bei westernprint gedacht?', a: 'Die B2B-Partnerschaft richtet sich an wachsende Shops und Marken mit 50 oder mehr Bestellungen am Tag oder kurz davor. westernprint übernimmt für sie das White-Label-Fulfillment. Druck, Verpackung und Versand laufen neutral im Namen deines Shops.' },
+  { q: 'Wo produziert westernprint und wohin wird versendet?', a: 'westernprint produziert in der eigenen Werkstatt in Oberhausen, per DTF und DTG. Versendet wird deutschlandweit per DHL mit Tracking, neutral im Namen deines Shops. Österreich, die Schweiz und die übrige EU sind ebenfalls möglich.' },
+  { q: 'Wie startet die Zusammenarbeit?', a: 'Die Zusammenarbeit startet mit einem Erstgespräch von 30 Minuten. Darin geht es um Volumen, Produkte und eure bisherigen Probleme. Danach plant westernprint mit dir Produkte, Abläufe, Branding-Wünsche und Schnittstellen. Mit Testbestellungen prüft westernprint Qualität, Laufzeiten und Abläufe an echten Bestellungen. Erst dann geht es live.' },
+  { q: 'Wie prüft westernprint die Qualität?', a: 'Jedes Teil wird vor dem Versand geprüft. westernprint druckt auf eigenen Maschinen, DTG auf der Epson SureColor F2100 und F2200. Vor dem Live-Start testet westernprint Qualität und Zeiten an echten Testbestellungen.' },
+  { q: 'Wie wird mein Shopify-Shop angebunden?', a: 'westernprint bindet Shopify-Shops über die eigene App „westernprint POD“ oder per Bestellimport an. Die Installation der App ist kostenlos. Schnittstellen und Automationen legt westernprint im Setup gemeinsam mit dir fest. Das Tracking geht automatisch zurück in deinen Shop.' },
+];
+const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 ---
-<Base title="B2B POD-Partner für Shops ab 50 Orders am Tag" description="White-Label-Fulfillment für wachsende Shops und Marken: fester Ansprechpartner, Qualitätskontrolle vor Versand, stabile Abläufe bei Launches und im Q4.">
+<Base title="B2B POD-Partner für Shops ab 50 Orders am Tag" description="White-Label-Fulfillment für wachsende Shops und Marken: fester Ansprechpartner, Qualitätskontrolle vor Versand, stabile Abläufe bei Launches und im Q4." jsonLd={faqLd}>
   <PageHero
     eyebrow="B2B-Partnerschaft"
     title="Warum große POD-Druckereien beim Skalieren <span class='hl'>scheitern</span>"
@@ -53,6 +64,8 @@ import ContactForm from '../components/ContactForm.astro';
       </ol>
     </div>
   </section>
+
+  <Faq items={faqs} title="Fragen zur B2B-Partnerschaft" />
 
   <section class="section" id="anfrage">
     <div class="container form-grid">

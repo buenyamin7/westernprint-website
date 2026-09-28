@@ -13,8 +13,8 @@ const { items, title = 'Häufige Fragen', intro } = Astro.props;
     <div class="faq reveal reveal-d1">
       {items.map((f) => (
         <details>
-          <summary>{f.q} <Icon name="caret-down" size={18} /></summary>
-          <div class="answer">{f.a}</div>
+          <summary><h3 class="faq-q">{f.q}</h3> <Icon name="caret-down" size={18} /></summary>
+          <div class="answer"><p>{f.a}</p></div>
         </details>
       ))}
     </div>

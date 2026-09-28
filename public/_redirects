@@ -15,4 +15,3 @@
 /collections/*                         /shop  301
 /products/:handle                      /shop/:handle  301
 /cart                                  /warenkorb  301
-/account/*                             https://shop.westernprint.de/account/:splat 301

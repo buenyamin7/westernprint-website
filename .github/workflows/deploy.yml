@@ -18,7 +18,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # Volle git-Historie: src/lib/lastmod.mjs liest daraus lastmod, dateModified und die Stand-Zeile.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -47,9 +50,10 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
+      # Volle Historie: ein Push kann mehrere Commits enthalten, gemeldet wird der ganze Bereich.
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -57,7 +61,15 @@ jobs:
         with:
           name: sitemap
       - name: Geänderte Seiten an Bing melden (IndexNow)
+        env:
+          BEFORE: ${{ github.event.before }}
         run: |
           sleep 60
-          node scripts/indexnow.mjs sitemap-0.xml $(git diff --name-only HEAD~1 HEAD 2>/dev/null)
+          # Alle Commits dieses Pushs (before..HEAD). Ohne gültiges before (erster Push, manueller Start) nur der letzte Commit.
+          if [ -n "$BEFORE" ] && [ "$BEFORE" != "0000000000000000000000000000000000000000" ] && git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
+            RANGE="$BEFORE"
+          else
+            RANGE="HEAD~1"
+          fi
+          node scripts/indexnow.mjs sitemap-0.xml $(git diff --name-only "$RANGE" HEAD 2>/dev/null)
         continue-on-error: true

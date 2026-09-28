@@ -4,7 +4,10 @@ import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Faq from '../components/Faq.astro';
-import { site } from '../data/site';
+import { site, oeffnungszeiten } from '../data/site';
+import { bewertungen } from '../data/bewertungen';
+
+const schnitt = bewertungen.schnitt.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
 const faqs = [
   { q: 'Wie funktioniert euer Print-on-Demand-Service genau?', a: 'Du verbindest deinen Shop mit unserem System. Sobald eine Bestellung eingeht, übernehmen wir Druck, Verpackung und Versand, komplett automatisiert und in deinem Namen.' },
@@ -14,10 +17,11 @@ const faqs = [
   { q: 'Was kostet der Versand an meine Kunden?', a: 'Pro Bestellung netto: Deutschland 5,00 €, Österreich 7,00 €, übrige EU 7,50 €, Schweiz 9,00 €. Je 3 Produkte in einer Bestellung kommen 1,50 € dazu. Versand per DHL mit Tracking, neutral in deinem Namen.' },
   { q: 'Wo wird produziert und wohin versendet ihr?', a: 'Produziert wird ausschließlich in unserer eigenen Werkstatt in Oberhausen, also in Deutschland, auf eigenen Epson-Maschinen und Heißpressen. Keine Weitergabe an wechselnde Partnerdruckereien im Ausland. Versendet wird deutschlandweit per DHL, neutral im Namen deines Shops. Österreich, Schweiz und die übrige EU sind ebenfalls möglich.' },
   { q: 'Wie läuft die Anbindung meines Shops?', a: 'Du bekommst Zugang zu deinem Kundenportal. Dort verbindest du deinen Shopify-Store per App oder Bestellimport. Auf Wunsch richten wir alles gemeinsam ein.' },
+  { q: 'Was kostet die Shopify-App westernprint POD?', a: 'Die Installation der App „westernprint POD“ ist kostenlos, eine App-Gebühr gibt es nicht. Pro Bestellung zahlst du Produktion und Versand.' },
   { q: 'Wie läuft die Abrechnung?', a: 'Wöchentliche Abrechnung über alle produzierten Artikel zu festen Preisen pro Produkt. Transparent und planbar, ohne Einrichtungsgebühr.' },
   { q: 'Kann ich eigene Verpackung oder Beilagen nutzen?', a: 'Ja. Neutraler Versand ist Standard, eigene Flyer, Hangtags oder Innenlabel setzen wir auf Anfrage um.' },
 ];
-const appLd = { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'westernprint POD', applicationCategory: 'BusinessApplication', operatingSystem: 'Shopify', url: 'https://apps.shopify.com/pod-westerprint', offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR', description: 'Kostenlos installieren, Produktionskosten pro Bestellung' }, publisher: { '@id': 'https://westernprint.de/#organization' }, description: 'Print-on-Demand und Fulfillment made in Germany: Textil wählen, Design per Live-Mockup platzieren, Produkte landen automatisch im Shop. Bestellungen drucken und versenden wir per DHL mit Tracking zurück in Shopify.' };
+const appLd = { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'westernprint POD', applicationCategory: 'BusinessApplication', operatingSystem: 'Shopify', url: 'https://apps.shopify.com/pod-westerprint', applicationSubCategory: 'Print-on-Demand', offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR', description: 'Kostenlose Installation, keine App-Gebühr. Pro Bestellung fallen Produktion und Versand an.' }, publisher: { '@id': 'https://westernprint.de/#organization' }, description: 'Print-on-Demand und Fulfillment made in Germany: Textil wählen, Design per Live-Mockup platzieren, Produkte landen automatisch im Shop. Bestellungen drucken und versenden wir per DHL mit Tracking zurück in Shopify.' };
 const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'Print-on-Demand Fulfillment für Shopify-Shops in Deutschland, Österreich und der Schweiz', serviceType: 'Print-on-Demand Fulfillment', provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: [{ '@type': 'Country', name: 'Deutschland' }, { '@type': 'Country', name: 'Österreich' }, { '@type': 'Country', name: 'Schweiz' }, { '@type': 'Place', name: 'Europäische Union' }], url: 'https://westernprint.de/print-on-demand', offers: { '@type': 'Offer', description: 'Feste Preise pro Produkt inklusive Druck, keine Einrichtungsgebühr, keine Mindestmenge' } };
 const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 ---
@@ -25,12 +29,25 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
   <PageHero
     eyebrow="Print-on-Demand"
     title="Print-on-Demand aus Deutschland für deinen Shopify-Shop. <span class='hl'>Ab 1 Stück.</span>"
-    lede="Wir produzieren auf eigenen Maschinen in Oberhausen und versenden deutschlandweit direkt an die Kunden deines Shopify-Shops. Ab einem Stück, per DTF und DTG, neutral in deinem Namen."
+    lede="Print-on-Demand bedeutet: Ein Produkt wird erst gedruckt, wenn ein Kunde es in deinem Shop bestellt hat. westernprint druckt diese Bestellungen in Oberhausen und versendet sie deutschlandweit direkt an deine Kunden, neutral in deinem Namen."
     image="/img/pod-versand.jpg"
     imageAlt="Packtisch bei westernprint: Reihen fertig verpackter Kraftpapier-Versandtaschen mit Etikett, vorne ein schwarzes Shirt in der offenen Tasche"
     cta={{ label: 'App im Shopify App Store', href: 'https://apps.shopify.com/pod-westerprint' }}
     cta2={{ label: 'Angebot in 24h', href: '/kontakt' }}
   />
+
+  <section class="section-tight pod-answer-section">
+    <div class="container pod-answer">
+      <h2 class="reveal">Wie arbeitet westernprint als Print-on-Demand-Partner?</h2>
+      <div class="reveal reveal-d1">
+        <p class="lede pod-answer-text">westernprint produziert Print-on-Demand-Bestellungen in Oberhausen auf eigenen Maschinen, per DTF und DTG. Für DTG setzt westernprint die Epson SureColor F2100 und F2200 ein. Als Textilien stehen Stanley/Stella und Stedman zur Wahl. Die Produktion dauert 1 bis 3 Werktage. Jedes Teil wird vor dem Verpacken geprüft. Danach versendet westernprint die Bestellung per DHL mit Tracking deutschlandweit an deine Kunden. Der Versand läuft neutral in deinem Namen, ohne westernprint-Logo im Paket. Deinen Shopify-Shop verbindest du über die eigene App „westernprint POD“ aus dem Shopify App Store. Die Installation ist kostenlos, pro Bestellung zahlst du Produktion und Versand. Eine Mindestmenge gibt es nicht, westernprint druckt ab 1 Stück. Dein fester Ansprechpartner ist {oeffnungszeiten.text} erreichbar, per WhatsApp, Telefon und E-Mail. Seit 2021 hat westernprint über 80.000 Endkunden von Partner-Shops direkt beliefert. Über 1 Mio. € Umsatz haben unsere Partner-Shops seit 2021 mit Produkten aus unserer Produktion gemacht.</p>
+        <a class="rating-line" href="/bewertungen">
+          <span class="stars" aria-hidden="true">{Array.from({ length: 5 }).map(() => <Icon name="star" weight="fill" size={16} />)}</span>
+          <span>{schnitt} von 5 Sternen bei {bewertungen.anzahl} Google-Bewertungen</span>
+        </a>
+      </div>
+    </div>
+  </section>
 
   <section class="section">
     <div class="container">
@@ -66,6 +83,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
         </a>
         <h2>Unsere eigene Shopify-App. <span class="hl">Installieren, designen, verkaufen.</span></h2>
         <p class="muted">Kein Excel, kein E-Mail-Pingpong. Mit der westernprint POD App verbindest du deinen Shop in zwei Minuten mit unserer Produktion in Oberhausen. Alles Weitere läuft automatisch.</p>
+        <p class="muted">„westernprint POD“ ist die eigene Shopify-App von westernprint. Die Installation ist kostenlos, eine App-Gebühr gibt es nicht. Pro Bestellung zahlst du Produktion und Versand.</p>
         <ol class="app-steps">
           <li><span class="num">1</span><div><strong>App installieren</strong><span>Kostenlos aus dem Shopify App Store, keine Grundgebühr.</span></div></li>
           <li><span class="num">2</span><div><strong>Textil wählen</strong><span>Stanley/Stella und Stedman Blanks mit Farben und Größen.</span></div></li>
@@ -74,7 +92,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
         </ol>
         <div class="app-cta">
           <a href="https://apps.shopify.com/pod-westerprint" class="btn btn-primary btn-lg" target="_blank" rel="noopener">App installieren <Icon name="arrow-square-out" size={18} /></a>
-          <span class="app-note">Kostenlos. Du zahlst nur die Produktion pro Bestellung.</span>
+          <span class="app-note">Kostenlos. Pro Bestellung zahlst du Produktion und Versand.</span>
         </div>
       </div>
       <a class="app-card reveal reveal-d1" href="https://apps.shopify.com/pod-westerprint" target="_blank" rel="noopener" aria-label="westernprint POD im Shopify App Store öffnen">
@@ -92,6 +110,13 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
           <li><Icon name="check" weight="bold" size={14} /> DHL-Tracking zurück in den Shop</li>
           <li><Icon name="check" weight="bold" size={14} /> Bio-Textilien, Druck in Oberhausen</li>
         </ul>
+        <dl class="app-meta">
+          <div><dt>Preis</dt><dd>Kostenlose Installation</dd></div>
+          <div><dt>App-Gebühr</dt><dd>Keine</dd></div>
+          <div><dt>Pro Bestellung</dt><dd>Produktion und Versand</dd></div>
+          <div><dt>Kategorie</dt><dd>Print-on-Demand</dd></div>
+          <div><dt>Textilien</dt><dd>Stanley/Stella, Stedman</dd></div>
+        </dl>
         <div class="app-card-foot">
           <img src="/img/shopify-bag.svg" alt="" width="16" height="18" />
           <span>apps.shopify.com/pod-westerprint</span>
@@ -128,6 +153,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
           </ul>
         </div>
       </div>
+      <p class="compare-summary reveal">westernprint gibt dir einen direkten Ansprechpartner per WhatsApp, Telefon und E-Mail. Jedes Teil wird vor dem Versand geprüft. westernprint druckt per DTF und DTG in Oberhausen und versendet deutschlandweit. Die Produktion dauert 1 bis 3 Werktage, auch im Weihnachtsgeschäft. Eigene Labels, Beilagen und Sonderformate setzt westernprint auf Anfrage um.</p>
     </div>
   </section>
 
@@ -173,6 +199,18 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
 </Base>
 
 <style>
+  .pod-answer { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
+  .pod-answer-text { max-width: 64ch; }
+  .rating-line { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 22px; font-size: 15px; font-weight: 600; color: var(--text); text-decoration: none; }
+  .rating-line .stars { display: inline-flex; gap: 2px; color: var(--accent); }
+  .rating-line:hover span:last-child { text-decoration: underline; text-underline-offset: 3px; }
+  @media (max-width: 900px) { .pod-answer { grid-template-columns: 1fr; } }
+  .app-meta { display: grid; gap: 0; margin: 20px 0 0; padding-top: 6px; border-top: 1px solid var(--line); font-size: 14px; }
+  .app-meta div { display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+  .app-meta div:last-child { border-bottom: 0; }
+  .app-meta dt { color: var(--text-3); }
+  .app-meta dd { margin: 0; color: var(--text); text-align: right; }
+  .compare-summary { margin-top: 28px; max-width: 72ch; color: var(--text-2); font-size: 1.05rem; }
   .ship-table { display: grid; border: 1px solid var(--line); border-radius: var(--radius-card); overflow: hidden; background: var(--surface); }
   .ship-row { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 12px; padding: 14px 20px; border-top: 1px solid var(--line); font-size: 15px; }
   .ship-row:first-child { border-top: 0; }
