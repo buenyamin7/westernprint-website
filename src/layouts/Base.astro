@@ -7,6 +7,7 @@ import Footer from '../components/Footer.astro';
 import Icon from '../components/Icon.astro';
 import Consent from '../components/Consent.astro';
 import { site } from '../data/site';
+import { bewertungen, rezensionen } from '../data/bewertungen';
 
 interface Props {
   title: string;
@@ -50,6 +51,13 @@ const orgLd = {
   ],
   contactPoint: [{ '@type': 'ContactPoint', contactType: 'sales', telephone: site.phone, email: site.email, availableLanguage: ['de', 'en'], areaServed: 'DE' }],
   sameAs: [site.instagram, site.tiktok],
+  aggregateRating: { '@type': 'AggregateRating', ratingValue: String(bewertungen.schnitt), reviewCount: String(bewertungen.anzahl), bestRating: '5', worstRating: '1' },
+  review: rezensionen.map((r) => ({
+    '@type': 'Review',
+    reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
+    author: { '@type': 'Person', name: r.name },
+    reviewBody: r.text,
+  })),
   knowsAbout: ['Print-on-Demand', 'DTF-Druck', 'DTG-Druck', 'Textildruck', 'Sublimationsdruck', 'Shopify Fulfillment', 'Dropshipping', 'Stanley/Stella', 'Merchandise'],
   makesOffer: [
     { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Print-on-Demand Fulfillment für Shopify-Shops', url: `${site.url}/print-on-demand` } },

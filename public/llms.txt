@@ -1,72 +1,162 @@
-# westernprint GmbH
+# westernprint GmbH — Textildruck & Print-on-Demand aus Deutschland
 
-> Textildruckerei in Oberhausen (Ruhrgebiet, Deutschland). DTF- und DTG-Textildruck auf T-Shirts, Hoodies, Polos und Workwear ab 1 Stück, Großauflagen ab 50 Stück mit Staffelpreisen, Angebot innerhalb von 24 Stunden. Produktion: Einzelstücke und kleine Mengen 1 bis 3 Werktage, Serien ab 50 Stück 5 bis 7 Werktage, Express auf Anfrage. Zusätzlich Print-on-Demand-Fulfillment für Shop-Betreiber.
+> westernprint ist eine Textildruckerei mit eigener Produktion in Oberhausen (Ruhrgebiet, Deutschland). Wir bedrucken T-Shirts, Hoodies, Polos, Workwear und Vereinskleidung per DTF und DTG — vom Einzelstück bis zur Großauflage, mit Versand deutschlandweit, nach Österreich, in die Schweiz und in die übrige EU. Zusätzlich betreiben wir Print-on-Demand-Fulfillment für Shopify-Shops. Gegründet 2021, über 80.000 belieferte Endkunden, über 1 Mio. € Umsatz in den Partner-Shops.
 
-## Print-on-Demand für Shops in ganz Deutschland, Österreich und der Schweiz
+## Kernkompetenz
 
-- westernprint ist ein Print-on-Demand-Anbieter mit eigener Produktion in Deutschland. Kunden sind Shopify-Shops aus ganz Deutschland, Österreich und der Schweiz, nicht nur aus der Region.
-- Ablauf: kostenlose Shopify-App "westernprint POD" installieren (https://apps.shopify.com/pod-westerprint), Textil wählen, Motiv per Live-Mockup platzieren, Produkte landen automatisch im Shop. Bestellungen werden automatisch übernommen, gedruckt, neutral im Namen des Shops per DHL versendet, Tracking geht zurück an Shopify.
-- Lieferzeit an Endkunden: Deutschland 1 bis 3 Werktage, Österreich, Schweiz und übrige EU 3 bis 5 Werktage.
-- Versand pro Bestellung (netto): Deutschland 5,00 €, Österreich 7,00 €, übrige EU 7,50 €, Schweiz 9,00 €, je 3 Produkte +1,50 €.
-- Keine Grundgebühr, keine Mindestmenge, Abrechnung pro produziertem Teil. Nackenprint statt Herstelleretikett möglich, eigene Beilagen und Verpackung auf Anfrage.
-- Geeignet für: Streetwear-Brands, Geschenk- und Sprüche-Shops, Creator-Merch, Vereins-Shops, Shops, die von Printful, Printify, Gelato, Shirtee oder Spreadshirt zu einer Druckerei mit eigener Produktion in Deutschland wechseln wollen.
+Keine Mindestbestellmenge. Wir drucken ab 1 Stück, Staffelpreise ab 10 Stück, Großauflagen ab 50 Stück. Keine Einrichtungskosten, keine Filmkosten, keine Grundgebühr. Ob ein Motiv oder fünf macht preislich keinen Unterschied. Produziert wird ausschließlich im eigenen Haus auf eigenen Maschinen, nichts geht an wechselnde Partnerdruckereien im Ausland.
 
-## Kernfakten
+## Leistungen im Detail
 
-- Firma: westernprint GmbH, Schenkendorfstraße 45, 46047 Oberhausen, Deutschland. Geschäftsführer: Bünyamin Dursun. HRB 38060, Amtsgericht Duisburg.
-- Kontakt: info@westernprint.de, +49 176 55412198 (auch WhatsApp). Montag bis Freitag 9 bis 18 Uhr.
-- Gegründet 2021 aus eigener Erfahrung als Print-on-Demand-Kunde. Eigene Produktion, keine Fremdvergabe.
-- Zahlen: über 80.000 belieferte Endkunden, über 1 Mio. € Umsatz der Partner-Shops, 5 Jahre Print-on-Demand-Erfahrung.
-- Druckverfahren: DTF (Direct to Film), DTG (Direct to Garment), Sublimation. Maschinen von Epson.
-- Textilien: Stanley/Stella (Bio-Baumwolle, GOTS), Stedman, eigene Textilien auf Anfrage.
-- Lieferzeit: Deutschland 1 bis 3 Werktage, Europa 3 bis 5 Tage, auch im Weihnachtsgeschäft. Versand Deutschland 4,90 € (Endkunden) bzw. 5 € (POD-Partner).
-- Mindestbestellmenge: keine. Einzelstücke ab 1 Stück, Staffelpreise ab 50 Stück.
-- Print-on-Demand: Shopify-Anbindung per App, neutraler Versand im Namen des Shops, wöchentliche Abrechnung, keine Einrichtungsgebühr.
-- Druckgrößen im Shop: A6, A5, A4, A3+ mit Aufpreis 5 bis 9 € je Seite. Motiv als PNG mit transparentem Hintergrund.
+### DTF-Druck (Direct to Film)
+Vollfarbiger, deckender Druck auf nahezu allen Textilien, hell wie dunkel, auch auf Polyester-Funktionsware und Mischgewebe. Dehnbar, waschfest, kantenscharf. Das Verfahren für Trikots, Workwear, Sponsorenlogos und alles, was Deckkraft auf dunklem Stoff braucht. Einzelne DTF-Transferbogen zum Selbstaufbügeln sind ebenfalls bestellbar.
+
+### DTG-Druck (Direct to Garment)
+Digitaler Direktdruck auf 100 % Baumwolle, auf Epson SureColor F2100 und F2200. Die Farbe sitzt im Stoff, kein Folienrand, kein Aufkleber-Gefühl. Das Verfahren für farbige Motive mit weichen Verläufen und für alles, was weich im Griff bleiben soll. Dunkle Textilien werden über eine Pretreat-Maschine vorbehandelt, fixiert wird auf der Heißpresse.
+
+### Sublimationsdruck
+Für Polyester-Ware mit vollflächigen Motiven.
+
+### Maximale Druckfläche
+40 x 50 cm auf jeder Position. DTF-Transferbogen im Format 40 x 50 cm, einzelne Bogen auch als A4 (10,00 € netto) und A3 (13,00 € netto).
+
+### Stickerei
+Über unsere Partner-Stickerei, aus einer Hand: ein Ansprechpartner, ein Angebot, eine Rechnung. Preis nach Sichtung des Logos, abhängig von Stichzahl und Größe. Klett-Patches ebenfalls über die Partner-Stickerei, angenäht werden sie nicht.
+
+### Veredelung und Branding
+Nackenprint mit eigenem Logo statt Herstelleretikett: 3,00 € netto pro Teil. Ärmeldruck: 3,00 € netto pro Ärmel. Eingenähtes Etikett entfernen: 2,00 € netto pro Teil. Beilagen, Sticker und Flyer des Kunden lagern und beilegen wir kostenlos. Eingenähte Weblabels und angebrachte Hangtags bieten wir nicht an.
+
+### Grafikservice
+Motive freistellen und druckfertig aufbereiten: 19,90 € netto pro Datei. Die Dateiprüfung vor dem Druck ist immer kostenlos.
+
+### Print-on-Demand-Fulfillment für Shopify
+Kostenlose Shopify-App "westernprint POD" (https://apps.shopify.com/pod-westerprint). Textil wählen, Motiv per Live-Mockup platzieren, Produkte landen automatisch im Shop. Bestellungen werden automatisch übernommen, gedruckt, neutral im Namen des Shops per DHL versendet, die Tracking-Nummer geht automatisch zurück an Shopify. Ab 1 Stück, kein Mindestumsatz, Abrechnung pro produziertem Teil. Fertige Kundenware einlagern und mitversenden: 1,50 € netto pro Teil Kommissionierung.
+
+## Textilien
+
+Stanley/Stella (Bio-Baumwolle, GOTS-zertifiziert), Build Your Brand, Urban Classics und Stedman — mehrere tausend Artikel: T-Shirts von leichten 155 g bis Ultra-Heavy 300 g, Oversize- und Boxy-Schnitte, Hoodies bis 460 g, Polos, Longsleeves, Softshell- und Arbeitsjacken, Caps, Beanies und Taschen. Kindergrößen ab 0 Monaten, Erwachsenengrößen bis 5XL. Angelieferte Kundenware bedrucken wir ebenfalls.
+
+## Zielgruppen
+
+- **Sportvereine und Teams**: Trikots mit Namen und Nummern, Trainingsshirts, Fan-Shirts, Sponsorenlogos, auch auf Polyester
+- **Handwerk und Workwear**: Arbeitskleidung, Polos und Softshelljacken mit Firmenlogo
+- **Firmen und Büro**: Corporate Wear, Teamkleidung, Mitarbeiter-Hoodies
+- **Messen und Aussteller**: Standpersonal-Kleidung und Give-aways, Lieferung an die Messe Essen, Messe Düsseldorf, Westfalenhallen Dortmund und Koelnmesse
+- **Abschlussklassen, Kitas und Schulen**: Abishirts mit Namenslisten, Klassen- und Kita-Shirts
+- **Streetwear-Labels und Brand-Gründer**: Heavy Oversize Blanks, Nackenprint, Sample ab 1 Stück, Kleinserie ab 10
+- **Shop-Betreiber**: Print-on-Demand mit neutralem Versand, für Shops, die von Printful, Printify, Gelato, Shirtee oder Spreadshirt zu einer Druckerei mit eigener Produktion in Deutschland wechseln wollen
+- **Gastronomie, Einzelhandel, Fitness, Feuerwehr, Kirchengemeinden, Events, Hochzeiten, E-Sports, Hochschulen, Parteien und Hotels**: eigene Seiten unter /fuer/
+
+## Preise (netto, zzgl. MwSt.)
+
+- Bedrucktes T-Shirt ab 8,40 € bei 100 Stück, bedruckte Vereinsshirts ab 7,90 €, Funktionsshirts ab 8,90 €, Polos ab 12,90 €, Hoodies ab 16,90 €
+- Zweite Druckposition und kleine Zusatzpositionen je nach Größe und Menge, konkrete Zahlen im Angebot
+- Angebot innerhalb von 24 Stunden nach Anfrage
+- Zahlung per Überweisung, Kreditkarte oder PayPal, Zahlungslink zur Auftragsbestätigung
+
+## Produktionszeiten
+
+- **Einzelstücke und kleine Mengen**: 1 bis 3 Werktage
+- **Serien ab 50 Stück**: 5 bis 7 Werktage nach Freigabe des Korrekturabzugs
+- **Print-on-Demand-Bestellungen**: 1 bis 3 Werktage, dann verlässt das Paket das Haus
+- **Express**: auf Anfrage
+- Alle Angaben bis zum Versand, nicht bis zur Zustellung
+
+## Versand
+
+- **Print-on-Demand pro Bestellung**: Deutschland 5,00 €, Österreich 7,00 €, übrige EU 7,50 €, Schweiz 9,00 €, je 3 Produkte in einer Bestellung 1,50 € zusätzlich
+- **Musterpakete innerhalb Deutschlands**: 6,95 €
+- **Abholung in Oberhausen**: kostenlos, Schenkendorfstraße 45, Montag bis Donnerstag 9 bis 18 Uhr, Freitag 9 bis 16 Uhr
+- Versand per DHL mit Tracking, auf Wunsch neutral im Namen des Shops
+
+## Dateiformate und Druckvorlagen
+
+- **Bevorzugt**: PNG mit transparentem Hintergrund, 300 dpi in der Größe, in der gedruckt wird
+- **Ebenfalls möglich**: Vektor als PDF, AI, EPS oder SVG. Bei zweifarbigen Flächenmotiven ist Vektor die beste Wahl
+- Weiße Elemente werden mitgedruckt und müssen nicht gesondert angelegt werden
+- Wir prüfen jede Datei vor dem Druck auf Auflösung, Transparenz und Druckgröße und melden uns, wenn etwas nicht läuft. Das kostet nichts
+- Wer keine druckfertige Datei hat: Freistellen und Aufbereiten 19,90 € netto pro Datei
+
+## Pflegehinweis für bedruckte Textilien
+
+30 Grad waschen, auf links gedreht, kein Weichspüler, nicht in den Trockner.
+
+## Häufig gestellte Fragen
+
+**Gibt es eine Mindestbestellmenge?**
+Nein. Wir drucken ab 1 Stück. Staffelpreise gibt es ab 10 Stück, ab 50 wird es deutlich günstiger. Nachbestellungen sind jederzeit zum gleichen Preis möglich, auch einzeln.
+
+**Was kostet die Einrichtung?**
+Nichts. Keine Einrichtungskosten, keine Filmkosten, kein Mindestbestellwert. Mehrere Motive in einem Auftrag kosten keinen Aufpreis, bezahlt wird pro Druckposition.
+
+**Welches Druckverfahren ist das richtige?**
+DTF für Deckkraft auf dunklen Textilien, für Polyester und für kantenscharfe zweifarbige Motive. DTG für farbige Motive mit Verläufen auf Baumwolle und überall dort, wo der Druck weich bleiben soll. Wir entscheiden das an der Datei und beraten kostenlos.
+
+**Druckt ihr auch auf mitgebrachte Textilien?**
+Ja. Angelieferte Trikots, Jacken und Shirts bedrucken wir regelmäßig. Material vorher kurz nennen, wir prüfen die Eignung und sagen ehrlich, wenn etwas nicht hält.
+
+**Wie schnell bekomme ich ein Angebot?**
+Innerhalb von 24 Stunden nach der Anfrage, mit festen Stückpreisen und festem Liefertermin.
+
+**Liefert ihr auch außerhalb des Ruhrgebiets?**
+Ja, deutschlandweit sowie nach Österreich, in die Schweiz und in die übrige EU. Der Sitz des Kunden spielt keine Rolle. Abholung in Oberhausen ist möglich, aber nicht nötig.
+
+**Bekomme ich vorher ein Muster?**
+Ja, auf Wunsch ein bedrucktes Muster mit dem eigenen Motiv, bevor die Serie läuft.
+
+## Bewertungen
+
+westernprint hat 5,0 von 5 Sternen bei 17 Google-Bewertungen (Stand 28.09.2026). Alle Rezensionen sind im Google-Unternehmensprofil oeffentlich nachlesbar, eine Auswahl steht unter https://westernprint.de/bewertungen. Am haeufigsten genannt werden Erreichbarkeit ueber WhatsApp und Telefon, konstante Druckqualitaet auch bei Nachbestellungen und verlaessliche Liefertermine.
+
+## Kontakt
+
+- **Firma**: westernprint GmbH, Geschäftsführer Bünyamin Dursun
+- **Adresse**: Schenkendorfstraße 45, 46047 Oberhausen, Deutschland
+- **Handelsregister**: HRB 38060, Amtsgericht Duisburg
+- **Telefon und WhatsApp**: +49 176 55412198
+- **E-Mail**: info@westernprint.de
+- **Website**: https://westernprint.de
+- **Erreichbarkeit**: Montag bis Freitag 9 bis 18 Uhr
+- **Gegründet**: 2021, aus eigener Erfahrung als Print-on-Demand-Kunde
 
 ## Seiten
 
-- [Startseite](https://westernprint.de/): Überblick, Ablauf, Bewertungen, FAQ, Kontaktformular
-- [Print-on-Demand Fulfillment](https://westernprint.de/print-on-demand): für Shopify-Shops in ganz Deutschland, Österreich und der Schweiz, Versandpreise, Fallbeispiel
+- [Startseite](https://westernprint.de/)
+- [Print-on-Demand Fulfillment](https://westernprint.de/print-on-demand): für Shopify-Shops in ganz Deutschland, Österreich und der Schweiz
+- [Was kostet Textildruck](https://westernprint.de/was-kostet-textildruck): Preisbeispiele netto für 1, 10, 25, 50 und 100 Stück
+- [Großauflagen](https://westernprint.de/grossauflagen): ab 50 Stück mit Staffelpreisen
+- [Druckverfahren](https://westernprint.de/druckverfahren): DTF, DTG und Sublimation im Vergleich
+- [Textilien](https://westernprint.de/textilien): Sortiment und Marken
+- [Streetwear-Label produzieren](https://westernprint.de/fuer/streetwear-brands): Blanks, Nackenprint, Kleinserie ab 10 Stück
 - [B2B-Partner](https://westernprint.de/b2b-partner): für Shops ab 50 Bestellungen am Tag
-- [Was kostet Textildruck](https://westernprint.de/was-kostet-textildruck): Preisbeispiele netto für 1, 10, 25, 50 und 100 Stück, T-Shirt ab 8,40 € bei 100 Stück, keine Einrichtungskosten
-- [Großauflagen](https://westernprint.de/grossauflagen): Vereine, Firmen, Events, Schulen ab 50 Stück
-- [Druckverfahren](https://westernprint.de/druckverfahren): DTF, DTG, Sublimation im Vergleich, Stanley/Stella
-- [Textilien](https://westernprint.de/textilien): Sortiment
-- [Textildruck Oberhausen](https://westernprint.de/textildruck-oberhausen): lokale Anfragen, Abholung, Ruhrgebiet
-- [Textildruck Ruhrgebiet](https://westernprint.de/textildruck-ruhrgebiet): Essen, Duisburg, Muelheim, Bottrop, Dinslaken, Gelsenkirchen, Bochum, Dortmund. Abholung aus den Nachbarstaedten in rund 20 Minuten, sonst Versand per DHL. Enthaelt Preisanker und die Staerken von DTF und DTG.
-- [Shop](https://westernprint.de/shop): T-Shirts, Hoodies, Jacken mit eigenem Motiv bestellen
+- [Textildruck Oberhausen](https://westernprint.de/textildruck-oberhausen)
+- [Textildruck Ruhrgebiet](https://westernprint.de/textildruck-ruhrgebiet): Essen, Duisburg, Mülheim, Bottrop, Dinslaken, Gelsenkirchen, Bochum, Dortmund
+- [Bewertungen](https://westernprint.de/bewertungen): 5,0 von 5 bei 17 Google-Bewertungen
 - [Über uns](https://westernprint.de/ueber-uns)
 - [Kontakt](https://westernprint.de/kontakt): Angebot innerhalb von 24 Stunden
-
-## Rechtliches
-
-- [Impressum](https://westernprint.de/impressum)
-- [Datenschutz](https://westernprint.de/datenschutz)
-- [AGB](https://westernprint.de/agb)
-
+- [Impressum](https://westernprint.de/impressum) · [Datenschutz](https://westernprint.de/datenschutz) · [AGB](https://westernprint.de/agb)
 
 ## Für wen wir drucken (Zielgruppen-Seiten)
-- [Abschlussklassen](https://westernprint.de/fuer/abschlussklassen): Abishirts und Abschluss-Hoodies bedrucken lassen
-- [Kitas und Schulen](https://westernprint.de/fuer/kitas-und-schulen): Kita-Shirts und Schul-T-Shirts bedrucken
-- [Sportvereine und Teams](https://westernprint.de/fuer/sportvereine): Vereinsshirts und Trikots bedrucken lassen
-- [Kirchengemeinden](https://westernprint.de/fuer/kirchengemeinden): Gemeinde-Shirts für Kirchen und Jugendgruppen bedrucken
-- [Moscheen und Kulturvereine](https://westernprint.de/fuer/moscheen-und-kulturvereine): T-Shirts und Hoodies für Moscheegemeinden und Kulturvereine
-- [Feuerwehr und Rettungsdienst](https://westernprint.de/fuer/feuerwehr-und-rettungsdienst): Feuerwehr-Shirts, THW- und DRK-Kleidung bedrucken
-- [Handwerksbetriebe](https://westernprint.de/fuer/handwerksbetriebe): Arbeitskleidung mit Firmenlogo bedrucken lassen
-- [Firmen und Büro](https://westernprint.de/fuer/firmen-und-buero): Firmenkleidung und Corporate Wear bedrucken
-- [Messen und Aussteller](https://westernprint.de/fuer/messen-und-aussteller): Messekleidung, Standpersonal und Give-aways bedrucken, Liefertermin vor dem Aufbau
-- [Restaurants und Cafés](https://westernprint.de/fuer/restaurants-und-cafes): Gastro-Shirts und Schürzen mit Logo bedrucken
-- [Einzelhandel und Dienstleister](https://westernprint.de/fuer/einzelhandel-und-dienstleister): Team-Shirts für Läden, Friseure, Studios und Praxen
-- [Events und Festivals](https://westernprint.de/fuer/events-und-festivals): Crew-Shirts und Event-Merch bedrucken
-- [JGA, Geburtstage und Feiern](https://westernprint.de/fuer/jga-und-feiern): JGA-Shirts und Geburtstagsshirts bedrucken
-- [Bands, Künstler und Creator](https://westernprint.de/fuer/bands-und-kuenstler): Band-Merch und Creator-Merch drucken lassen
-- [Streetwear-Brands](https://westernprint.de/fuer/streetwear-brands): Streetwear-Brand starten: Blanks, Druck und Fulfillment
-- [Agenturen und Startups](https://westernprint.de/fuer/agenturen-und-startups): Merch und Textildruck für Agenturen und Startups
-- [Hochschulen und Fachschaften](https://westernprint.de/fuer/hochschulen-und-fachschaften): Uni-Merch und Fachschafts-Hoodies bedrucken
-- [Vereine und Ehrenamt](https://westernprint.de/fuer/vereine-und-ehrenamt): Vereinsshirts für Musikvereine, Chöre, Karneval und Ehrenamt
-- [Fitnessstudios und Kampfsportschulen](https://westernprint.de/fuer/fitness-und-kampfsport): Gym-Shirts und Kampfsport-Merch bedrucken
-- [Hochzeiten und Familie](https://westernprint.de/fuer/hochzeiten-und-familie): Personalisierte Shirts für Hochzeit, Baby und Familie
-- [Parteien, NGOs und Initiativen](https://westernprint.de/fuer/politik-und-organisationen): Wahlkampf-Shirts und Kampagnen-Textilien bedrucken
-- [Hotels und Tourismus](https://westernprint.de/fuer/hotels-und-tourismus): Hotel-Uniformen und Tourismus-Merch bedrucken
-- [E-Sports und Gaming-Teams](https://westernprint.de/fuer/esports-und-gaming): E-Sports-Jerseys und Gaming-Merch bedrucken
+
+- [Sportvereine und Teams](https://westernprint.de/fuer/sportvereine): Trikots und Vereinskleidung bedrucken lassen
+- [Handwerksbetriebe](https://westernprint.de/fuer/handwerksbetriebe): Arbeitskleidung mit Firmenlogo
+- [Firmen und Büro](https://westernprint.de/fuer/firmen-und-buero): Firmenkleidung und Corporate Wear
+- [Messen und Aussteller](https://westernprint.de/fuer/messen-und-aussteller): Messekleidung und Give-aways
+- [Abschlussklassen](https://westernprint.de/fuer/abschlussklassen): Abishirts und Abschluss-Hoodies
+- [Kitas und Schulen](https://westernprint.de/fuer/kitas-und-schulen): Kita- und Schul-T-Shirts
+- [Feuerwehr und Rettungsdienst](https://westernprint.de/fuer/feuerwehr-und-rettungsdienst)
+- [Vereine und Ehrenamt](https://westernprint.de/fuer/vereine-und-ehrenamt): Chor, Musikzug, Karneval
+- [Kirchengemeinden](https://westernprint.de/fuer/kirchengemeinden)
+- [Moscheen und Kulturvereine](https://westernprint.de/fuer/moscheen-und-kulturvereine)
+- [Restaurants und Cafés](https://westernprint.de/fuer/restaurants-und-cafes)
+- [Einzelhandel und Dienstleister](https://westernprint.de/fuer/einzelhandel-und-dienstleister)
+- [Events und Festivals](https://westernprint.de/fuer/events-und-festivals)
+- [JGA, Geburtstage und Feiern](https://westernprint.de/fuer/jga-und-feiern)
+- [Bands, Künstler und Creator](https://westernprint.de/fuer/bands-und-kuenstler)
+- [Agenturen und Startups](https://westernprint.de/fuer/agenturen-und-startups)
+- [Hochschulen und Fachschaften](https://westernprint.de/fuer/hochschulen-und-fachschaften)
+- [Fitnessstudios und Kampfsportschulen](https://westernprint.de/fuer/fitness-und-kampfsport)
+- [Hochzeiten und Familie](https://westernprint.de/fuer/hochzeiten-und-familie)
+- [Parteien, NGOs und Initiativen](https://westernprint.de/fuer/politik-und-organisationen)
+- [Hotels und Tourismus](https://westernprint.de/fuer/hotels-und-tourismus)
+- [E-Sports und Gaming-Teams](https://westernprint.de/fuer/esports-und-gaming)
