@@ -20,7 +20,7 @@ Digitaler Direktdruck auf 100 % Baumwolle, auf Epson SureColor F2100 und F2200. 
 Für Polyester-Ware mit vollflächigen Motiven.
 
 ### Maximale Druckfläche
-Im DTG-Druck maximal 40 x 50 cm, das ist die Fläche für große Motive auf Brust oder Rücken. Für Ärmel und Nacken gilt sie nicht, dort ist die Druckfläche kleiner. DTF-Transferbogen im Format 40 x 50 cm, einzelne Bogen auch als A4 für 10,00 € netto (11,90 € brutto) und A3 für 13,00 € netto (15,47 € brutto).
+Im DTG-Druck maximal 40 x 50 cm, das ist die Fläche für große Motive auf Brust oder Rücken. Im DTF-Druck maximal 30 x 40 cm pro Position. Für Ärmel und Nacken ist die Druckfläche kleiner. DTF-Transferbogen im Format 40 x 50 cm, einzelne Bogen auch als A4 für 10,00 € netto (11,90 € brutto) und A3 für 13,00 € netto (15,47 € brutto).
 
 ### Stickerei
 Über unsere Partner-Stickerei, aus einer Hand: ein Ansprechpartner, ein Angebot, eine Rechnung. Preis nach Sichtung des Logos, abhängig von Stichzahl und Größe. Klett-Patches ebenfalls über die Partner-Stickerei, angenäht werden sie nicht.
@@ -53,7 +53,7 @@ Stanley/Stella (Bio-Baumwolle, GOTS-zertifiziert), Build Your Brand, Urban Class
 
 - Vollständige Preistabellen für 1, 10, 25, 50 und 100 Stück (netto zzgl. MwSt. und brutto, Stand 21.09.2026): [llms-full.txt](https://westernprint.de/llms-full.txt) und [Was kostet Textildruck](https://westernprint.de/was-kostet-textildruck)
 - Mit einem Druck, Stand 21.09.2026, jeweils einzeln und bei 100 Stück: T-Shirt Basic (Stedman Classic-T) 17,90 € netto (21,30 € brutto) und 8,40 € netto (10,00 € brutto), Poloshirt (Stedman Classic Polo) 22,90 € netto (27,25 € brutto) und 13,40 € netto (15,95 € brutto), Hoodie (Stedman Classic Hoodie) 29,90 € netto (35,58 € brutto) und 19,90 € netto (23,68 € brutto)
-- Auf der Seite für Sportvereine (https://westernprint.de/fuer/sportvereine): bedruckte Vereinsshirts ab 7,90 € netto (9,40 € brutto), Funktionsshirts ab 8,90 € netto (10,59 € brutto), Polos ab 12,90 € netto (15,35 € brutto), Hoodies ab 16,90 € netto (20,11 € brutto)
+- Auf der Seite für Sportvereine (https://westernprint.de/fuer/sportvereine): T-Shirt Basic bei 100 Stück 8,40 € netto (10,00 € brutto), Poloshirt 13,40 € netto (15,95 € brutto), Hoodie 19,90 € netto (23,68 € brutto), Funktionsshirts auf Anfrage; Namen und Rückennummern ab 5,90 € netto (7,02 € brutto) pro Teil
 - Zweite Druckposition und kleine Zusatzpositionen je nach Größe und Menge, konkrete Zahlen im Angebot
 - Angebot innerhalb von 24 Stunden an Werktagen
 - Zahlung über den Zahlungsdienstleister Mollie: Die verfügbaren Zahlungsarten werden an der Kasse angezeigt. Bei Aufträgen auf Angebot kommt der Zahlungslink mit der Auftragsbestätigung
@@ -63,7 +63,7 @@ Stanley/Stella (Bio-Baumwolle, GOTS-zertifiziert), Build Your Brand, Urban Class
 - **Einzelstücke und kleine Mengen**: 1 bis 3 Werktage
 - **Serien ab 50 Stück**: 5 bis 7 Werktage nach Freigabe des Korrekturabzugs
 - **Print-on-Demand-Bestellungen**: 1 bis 3 Werktage, dann verlässt das Paket das Haus
-- **Express**: auf Anfrage
+- **Express**: auf Anfrage, je nach Stückzahl und Auslastung
 - Alle Angaben bis zum Versand, nicht bis zur Zustellung. Von der Bestellung bis zur Lieferung: siehe Versand und Lieferung
 
 ## Versand und Lieferung
