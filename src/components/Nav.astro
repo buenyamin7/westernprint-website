@@ -53,6 +53,8 @@ const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith
         <span class="only-dark"><Icon name="sun" size={18} /></span>
         <span class="only-light"><Icon name="moon" size={18} /></span>
       </button>
+      {/* Nur sichtbar, wenn der Warenkorb Artikel enthält (Shop ist bewusst nicht in der Navigation). Siehe Skript unten. */}
+      <a href="/warenkorb" class="icon-btn cart-btn" data-cart-link hidden><Icon name="shopping-bag" size={18} /><span class="sr-only">Warenkorb, Artikel:</span><span class="cart-count" data-cart-count hidden>0</span></a>
       <a href="/kontakt" class="btn btn-primary btn-sm nav-cta">Angebot in 24h</a>
       <button class="icon-btn menu-btn" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
         <span class="when-closed"><Icon name="list" size={22} /></span>
@@ -121,6 +123,15 @@ const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith
   const header = document.querySelector('[data-nav]')!;
   const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 24);
   onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+  // Warenkorb-Link: refreshCount() und jede Änderung in scripts/cart setzen hidden am Zähler (0 = versteckt).
+  // Der Link übernimmt diesen Zustand, auch wenn auf der Produktseite etwas hinzukommt oder die Bestellung den Korb leert.
+  const cartLink = document.querySelector<HTMLAnchorElement>('[data-cart-link]');
+  const cartCount = cartLink?.querySelector<HTMLElement>('[data-cart-count]');
+  if (cartLink && cartCount) {
+    const syncCart = () => { cartLink.hidden = cartCount.hidden; };
+    new MutationObserver(syncCart).observe(cartCount, { attributes: true, attributeFilter: ['hidden'] });
+    syncCart();
+  }
 </script>
 
 <style>

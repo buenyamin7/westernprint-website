@@ -3,6 +3,8 @@
 // hier immer denselben Stand haben wie auf den Seiten:
 //   src/data/preise.ts (Preistabellen), src/data/site.ts (Kontakt, allgemeine FAQ),
 //   src/data/zielgruppen.ts (/fuer/<slug>), src/data/bewertungen.ts (/bewertungen).
+// Ausnahme: /fuer/abschlussklassen und /fuer/streetwear-brands haben eigene Seiten mit eigenen
+// Inhalten und FAQ. Für sie steht hier nur ein Verweis, damit keine abweichenden Aussagen entstehen.
 // Versand: 4,90 € laut Versandbedingungen (vom Inhaber bestätigt 28.09.2026).
 import type { APIRoute } from 'astro';
 import { site, faqs, oeffnungszeiten } from '../data/site';
@@ -60,6 +62,10 @@ const SEITEN: [string, string][] = [
   ['/widerruf', 'Widerruf'],
 ];
 
+// Zielgruppen mit eigener Seite unter src/pages/fuer/ (wie der Filter in getStaticPaths von fuer/[slug].astro).
+// Ihre sichtbaren Angebote und FAQ stehen dort, nicht in zielgruppen.ts. Darum hier nur ein Verweis statt Intro und FAQ.
+const EIGENE_SEITE = new Set(['abschlussklassen', 'streetwear-brands']);
+
 /** Reiner Text: HTML-Reste und doppelte Leerzeichen entfernen. */
 const text = (t: string) => t.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 /** Tabellenzelle: senkrechte Striche maskieren. */
@@ -74,7 +80,6 @@ const GESPERRT: RegExp[] = [
   /an den (messe)?stand\b/i, // Lieferung an den Messestand
   /fahren wir[^.]*selbst|bringen die teile/i, // Selbst zur Messe fahren, Teile an den Stand bringen
   /miriam/i, // Fallbeispiel "Miriam"
-  /ab 7,90/i, // Einstiegspreis Vereinsshirt, nur auf der Vereinsseite
 ];
 const gesperrt = (t: string) => GESPERRT.some((re) => re.test(t));
 // Sätze trennen, ohne nach Abkürzungen wie "z. B." oder "ca." zu schneiden.
@@ -199,6 +204,10 @@ function markdown(): string {
   // Zielgruppen
   z.push('## Zielgruppen', '', `Jede Zielgruppe hat eine eigene Seite. Übersicht: [Für wen wir drucken](${url('/fuer')})`, '');
   for (const g of zielgruppen) {
+    if (EIGENE_SEITE.has(g.slug)) {
+      z.push(`### ${text(g.name)}`, '', `Alle Angaben und häufigen Fragen stehen auf der eigenen Seite: ${url(`/fuer/${g.slug}`)}`, '');
+      continue;
+    }
     z.push(`### ${text(g.name)}`, '', `URL: ${url(`/fuer/${g.slug}`)}`, '', absatz(g.intro), '');
     for (const f of erlaubt(g.faqs)) z.push(`#### ${text(f.q)}`, '', text(f.a), '');
   }

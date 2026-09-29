@@ -47,7 +47,7 @@ const countries = [['DE', 'Deutschland'], ['AT', 'Österreich'], ['CH', 'Schweiz
 </Base>
 
 <script>
-  import { getCart, subtotal, lineTotal, euro } from '../scripts/cart';
+  import { getCart, subtotal, lineTotal, euro, rememberOrder } from '../scripts/cart';
   const root = document.querySelector<HTMLElement>('.kasse')!;
   const $ = <T extends HTMLElement>(s: string) => root.querySelector<T>(s)!;
   const esc = (s: string) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
@@ -79,6 +79,7 @@ const countries = [['DE', 'Deutschland'], ['AT', 'Österreich'], ['CH', 'Schweiz
     try {
       const res = await fetch(`${root.dataset.endpoint}/checkout`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ lines, customer: data }) });
       const j = await res.json(); if (!res.ok || !j.url) throw new Error(j.error || 'Kasse nicht erreichbar');
+      if (j.orderNo) rememberOrder(j.orderNo);
       location.href = j.url;
     } catch (ex) { err.hidden = false; err.textContent = 'Das hat nicht geklappt: ' + (ex as Error).message + '. Versuch es nochmal oder schreib uns per WhatsApp.'; btn.disabled = false; btn.innerHTML = 'Weiter zur Bezahlung'; }
   });

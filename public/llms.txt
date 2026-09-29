@@ -2,7 +2,7 @@
 
 > westernprint ist eine Textildruckerei mit eigener Produktion in Oberhausen (Ruhrgebiet, Deutschland). Wir bedrucken T-Shirts, Hoodies, Polos, Workwear und Vereinskleidung per DTF und DTG, vom Einzelstück bis zur Großauflage, mit Versand deutschlandweit, nach Österreich, in die Schweiz und in die übrige EU. Zusätzlich betreiben wir Print-on-Demand-Fulfillment für Shopify-Shops. Am Markt seit 2021, seit 2024 als GmbH. Über 80.000 belieferte Endkunden seit 2021: Das sind Endkunden unserer Partner-Shops (Print-on-Demand), die wir direkt beliefert haben. Über 1 Mio. € Umsatz haben unsere Partner-Shops seit 2021 mit Produkten aus unserer Produktion gemacht.
 
-Letzte Aktualisierung: 28.09.2026
+Letzte Aktualisierung: 29.09.2026
 
 ## Kernkompetenz
 
@@ -20,13 +20,13 @@ Digitaler Direktdruck auf 100 % Baumwolle, auf Epson SureColor F2100 und F2200. 
 Für Polyester-Ware mit vollflächigen Motiven.
 
 ### Maximale Druckfläche
-40 x 50 cm auf jeder Position. DTF-Transferbogen im Format 40 x 50 cm, einzelne Bogen auch als A4 (10,00 € netto) und A3 (13,00 € netto).
+Im DTG-Druck maximal 40 x 50 cm, das ist die Fläche für große Motive auf Brust oder Rücken. Für Ärmel und Nacken gilt sie nicht, dort ist die Druckfläche kleiner. DTF-Transferbogen im Format 40 x 50 cm, einzelne Bogen auch als A4 (10,00 € netto) und A3 (13,00 € netto).
 
 ### Stickerei
 Über unsere Partner-Stickerei, aus einer Hand: ein Ansprechpartner, ein Angebot, eine Rechnung. Preis nach Sichtung des Logos, abhängig von Stichzahl und Größe. Klett-Patches ebenfalls über die Partner-Stickerei, angenäht werden sie nicht.
 
 ### Veredelung und Branding
-Nackenprint mit eigenem Logo statt Herstelleretikett: 3,00 € netto pro Teil. Ärmeldruck oder kleines Zusatzmotiv: ab 2,52 € netto (Stand 21.09.2026). Eingenähtes Etikett entfernen: 2,00 € netto pro Teil. Beilagen, Sticker und Flyer des Kunden lagern und beilegen wir kostenlos. Eingenähte Weblabels und angebrachte Hangtags bieten wir nicht an.
+Nackenprint mit eigenem Logo statt Herstelleretikett: 3,00 € netto pro Teil. Ärmeldruck oder kleines Zusatzmotiv: ab 2,52 € netto (Stand 21.09.2026). Eingenähtes Etikett entfernen: 2,00 € netto pro Teil. Beilagen, Sticker und Flyer des Kunden lagern und beilegen wir kostenlos. Hangtags, die der Kunde liefert, bringen wir an, bei Print-on-Demand auf Anfrage. Hangtags und eingenähte Weblabels stellen wir nicht selbst her.
 
 ### Grafikservice
 Motive freistellen und druckfertig aufbereiten: 19,90 € netto pro Datei. Die Dateiprüfung vor dem Druck ist immer kostenlos.
@@ -69,7 +69,7 @@ Stanley/Stella (Bio-Baumwolle, GOTS-zertifiziert), Build Your Brand, Urban Class
 ## Versand
 
 - **Print-on-Demand pro Bestellung**: Deutschland 5,00 €, Österreich 7,00 €, übrige EU 7,50 €, Schweiz 9,00 €, je 3 Produkte in einer Bestellung 1,50 € zusätzlich
-- **Musterpakete innerhalb Deutschlands**: 6,95 €
+- **Musterpakete innerhalb Deutschlands**: 7,00 €
 - **Abholung in Oberhausen**: kostenlos, Schenkendorfstraße 45, Montag bis Donnerstag 9 bis 18 Uhr, Freitag 9 bis 16 Uhr
 - Versandkosten Deutschland: 4,90 €
 - Versand per DHL mit Tracking, auf Wunsch neutral im Namen des Shops

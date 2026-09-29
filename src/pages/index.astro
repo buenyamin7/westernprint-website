@@ -219,7 +219,7 @@ const aboutSizes = '(max-width: 900px) 100vw, (max-width: 1210px) 545px, 45vw';
     <Tiles items={[
       { href: '/fuer/sportvereine', img: '/img/vereinskleidung-trikots.jpg', pos: 'center 55%', t: 'Vereine und Teams', d: 'Trikots, Trainingsshirts, Fan-Merch mit Namen und Nummern. Mischgrößen ohne Aufpreis.' },
       { href: '/fuer/firmen-und-buero', img: '/img/workwear-team-halle.jpg', pos: 'center 40%', t: 'Firmen und Workwear', d: 'Poloshirts, Hoodies und Jacken mit Logo. Nachbestellung jederzeit zu Staffelpreisen.' },
-      { href: '/fuer/abschlussklassen', img: '/img/streetwear-group.jpg', pos: 'center 30%', t: 'Events und Abschluss', d: 'Abishirts, JGA, Festival-Crew, Messe. Ein Motiv, viele Größen, fester Termin.' },
+      { href: '/fuer/abschlussklassen', img: '/img/streetwear-group.jpg', pos: 'center 30%', t: 'Events und Abschluss', d: 'Abishirts, JGA, Festival-Crew. Ein Motiv, viele Größen, fester Termin.' },
       { href: '/fuer/restaurants-und-cafes', img: '/img/packtisch.jpg', t: 'Gastro und Handel', d: 'Schürzen, Shirts und Caps fürs Team. Einheitlich, waschfest, schnell nachbestellt.' },
       { href: '/fuer/streetwear-brands', img: '/img/streetwear-trio.jpg', pos: 'center 25%', t: 'Streetwear-Brands', d: 'Heavy Oversize Blanks, Nackenprint statt Etikett. Sample ab 1 Stück, Drop ab 50.' },
       { href: '/print-on-demand', img: '/img/werkstatt-dtf-drucker.jpg', pos: 'center 45%', t: 'Shop-Betreiber', d: 'Print-on-Demand: Wir drucken und versenden deine Shop-Bestellungen neutral in deinem Namen.' },
@@ -264,17 +264,19 @@ const aboutSizes = '(max-width: 900px) 100vw, (max-width: 1210px) 545px, 45vw';
     background: linear-gradient(90deg, rgba(17,19,18,.94) 0%, rgba(17,19,18,.84) 36%, rgba(17,19,18,.5) 68%, rgba(17,19,18,.3) 100%), linear-gradient(180deg, rgba(17,19,18,.3) 0%, rgba(17,19,18,0) 30%, rgba(17,19,18,.55) 75%, rgba(17,19,18,.96) 100%); }
   .hero-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: clamp(32px, 5vw, 72px); align-items: center; position: relative; z-index: 2; padding-bottom: clamp(32px, 5vh, 56px); }
   .hero-text h1 { color: #fff; font-size: clamp(2.3rem, 4.9vw, 3.9rem); }
+  /* Der Hero bleibt auch im hellen Modus dunkel, deshalb hier der helle Akzent statt des dunkleren Hellmodus-Grüns. */
+  .hero-text h1 .hl { color: var(--accent-on-dark, #8fd3a0); }
   .hero-text .badge { margin-bottom: 22px; background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.16); color: #fff; }
   .hero-text .lede { margin-top: 22px; color: rgba(255,255,255,.78); max-width: 560px; }
   .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
   .hero-cta .btn-secondary { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2); color: #fff; }
   .hero-visual { display: flex; justify-content: flex-end; }
   .review { max-width: 360px; padding: 22px 24px; margin: 0; display: grid; gap: 10px; background: rgba(20,24,22,.55); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
-  .review .stars { display: flex; gap: 2px; color: var(--accent); }
+  .review .stars { display: flex; gap: 2px; color: var(--accent-on-dark, #8fd3a0); }
   .review blockquote { margin: 0; font-size: 14.5px; line-height: 1.5; font-style: italic; color: #fff; }
   .review figcaption { font-size: 13px; color: rgba(255,255,255,.6); }
   .review-link { display: inline-flex; align-items: center; gap: 6px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.14); font-size: 13px; font-weight: 600; color: #fff; transition: color 0.2s var(--ease); }
-  .review-link:hover { color: var(--accent); }
+  .review-link:hover { color: var(--accent-on-dark, #8fd3a0); }
   .hero-stats { position: relative; z-index: 2; border-top: 1px solid rgba(255,255,255,.14); padding: 6px 0 clamp(28px, 4vh, 44px); }
   @media (max-width: 1000px) { .hero { min-height: 0; } .hero-grid { grid-template-columns: 1fr; } .hero-visual { justify-content: flex-start; } .review { max-width: none; } .hero-bg { object-position: 60% 50%; } }
 

@@ -195,8 +195,8 @@ const ldBlocks = [orgLd, webLd, personLd, ...(webPageLd ? [webPageLd] : []), ...
     </div>}
 
     <script>
-      import { refreshCount } from '../scripts/cart';
-      refreshCount();
+      import { refreshCount, watchCount } from '../scripts/cart';
+      refreshCount(); watchCount();
     </script>
     <script>
       // Mobile menu
@@ -231,7 +231,7 @@ const ldBlocks = [orgLd, webLd, personLd, ...(webPageLd ? [webPageLd] : []), ...
       }
       @media (min-width: 900px) { .mobile-cta { display: none; } }
     </style>
-      <!-- Cloudflare Web Analytics: cookielos, keine personenbezogenen Daten, kein Banner nötig -->
+      <!-- Cloudflare Web Analytics: läuft ohne Einwilligung. Setzt keine Cookies und nutzt keinen lokalen Speicher, liest aber Browserangaben aus und meldet die aufgerufene Adresse samt Parametern (auch ?gclid) an Cloudflare; dabei wird die IP-Adresse verarbeitet. Ob das ohne Banner nach § 25 TDDDG trägt, entscheidet der Inhaber (siehe Datenschutzerklärung Ziffer 4). -->
     <script is:inline type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "41025087d4824c86a6deeed1a90e9dfd"}'></script>
   </body>
 </html>

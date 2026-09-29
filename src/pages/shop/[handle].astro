@@ -11,6 +11,11 @@ export async function getStaticPaths() {
 }
 const { product: p } = Astro.props;
 const gallery = [p.image, p.modelImage, ...p.extraImages].filter((x, i, a) => x && a.indexOf(x) === i) as string[];
+// Zugänglicher Name je Galerie-Button (die Vorschaubilder haben leeres alt). Farbname nur, wenn das Bild einer Farbe gehört.
+const thumbLabel = (g: string, i: number) => {
+  const c = p.colors.find((x) => x.image === g || x.back === g);
+  return `Ansicht ${i + 1} von ${gallery.length}${c ? `, ${c.name}${c.back === g ? ' hinten' : ''}` : ''}`;
+};
 const clientData = { product: { id: p.id, handle: p.handle, title: p.title, price: p.price, image: p.image, colors: p.colors, sizes: p.sizes, variants: p.variants }, sizes: PRINT_SIZES, cloud: site.cloudinary };
 const ld = { '@context': 'https://schema.org', '@type': 'Product', name: `${p.title} bedrucken`, image: gallery.map((g) => `${site.url}${g}`), description: `${p.title} von ${p.brand} mit eigenem Motiv bedrucken. ${p.colors.length} Farben, Größen ${p.sizes[0]} bis ${p.sizes[p.sizes.length - 1]}.`, brand: { '@type': 'Brand', name: p.brand }, offers: { '@type': 'Offer', priceCurrency: 'EUR', price: (p.price + 5).toFixed(2), availability: 'https://schema.org/InStock', url: `${site.url}/shop/${p.handle}` } };
 const details = [
@@ -36,7 +41,7 @@ const details = [
           </div>
           <div class="thumbs">
             {/* data-thumb = volles Bild für die Bühne, img = 128 x 160 px Vorschau (scripts/make-swatches.mjs) */}
-            {gallery.map((g, i) => <button type="button" class={i === 0 ? 'is-on' : ''} data-thumb={g}><img src={swatchSrc(g)} alt="" width="128" height="160" loading="lazy" /></button>)}
+            {gallery.map((g, i) => <button type="button" class={i === 0 ? 'is-on' : ''} data-thumb={g} aria-label={thumbLabel(g, i)}><img src={swatchSrc(g)} alt="" width="128" height="160" loading="lazy" /></button>)}
           </div>
         </div>
 
@@ -54,7 +59,7 @@ const details = [
               {p.colors.map((c, i) => (
                 <label class={`swatch ${c.image ? 'has-img' : ''}`} title={c.name} style={`--sw:${c.hex || '#e6e6e6'}`}>
                   {/* data-image bleibt das volle Foto für die Bühne, das Muster selbst lädt nur die kleine Vorschau */}
-                  <input type="radio" name="color" value={c.id} checked={i === 0} data-image={c.image} data-back={c.back} data-name={c.name} />
+                  <input type="radio" name="color" value={c.id} checked={i === 0} aria-label={c.name} data-image={c.image} data-back={c.back} data-name={c.name} />
                   {c.image ? <img src={swatchSrc(c.image)} alt={c.name} width="64" height="80" loading="lazy" /> : <i style={`background:${c.hex || '#ccc'}`}></i>}
                 </label>
               ))}
@@ -96,7 +101,7 @@ const details = [
 
           <div class="buy">
             <div class="qty-row">
-              <span>Menge</span>
+              <label for="qty">Menge</label>
               <div class="qty"><button type="button" data-qty="-1" aria-label="Weniger">−</button><input id="qty" name="qty" type="number" min="1" max="99" value="1" /><button type="button" data-qty="1" aria-label="Mehr">+</button></div>
             </div>
             <ul class="calc" data-calc></ul>
@@ -311,7 +316,8 @@ const details = [
   .stage-tabs button { border: 0; background: transparent; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--text-2); cursor: pointer; }
   .stage-tabs button.is-on { background: var(--accent); color: var(--accent-ink); }
   .stage-hint { position: absolute; left: 12px; bottom: 12px; font-size: 12px; padding: 5px 10px; border-radius: 999px; background: rgba(0,0,0,.65); color: #fff; display: inline-flex; gap: 6px; align-items: center; }
-  .thumbs { display: flex; gap: 8px; margin-top: 10px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  /* Innenabstand samt Gegenmargin, damit overflow den Fokusrahmen (2px + 3px Abstand) der Buttons nicht abschneidet. */
+  .thumbs { display: flex; gap: 8px; margin: 5px -5px 0; padding: 5px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   .thumbs::-webkit-scrollbar { display: none; }
   .thumbs button { flex: none; width: 64px; border-radius: 10px; overflow: hidden; border: 2px solid transparent; background: #858b87; padding: 2px; cursor: pointer; }
   .thumbs button.is-on { border-color: var(--accent); }
@@ -347,6 +353,8 @@ const details = [
   .side-opt { position: relative; padding: 12px; border-radius: 12px; border: 1px solid var(--line-strong); text-align: center; font-size: 14px; font-weight: 500; cursor: pointer; }
   .side-opt input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
   .side-opt:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+  /* Tastaturfokus: die Radios selbst sind unsichtbar, deshalb bekommt die sichtbare Hülle den Rahmen. */
+  .swatch:has(input:focus-visible), .chip:has(input:focus-visible), .side-opt:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
   .print-side { border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin: 0; display: grid; gap: 12px; background: var(--surface); }
   .print-side[hidden] { display: none; }
   .print-side legend { padding: 0 6px; font-size: 13px; font-weight: 600; color: var(--text-2); }

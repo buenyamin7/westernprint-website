@@ -2,10 +2,17 @@
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import CtaBand from '../../components/CtaBand.astro';
-import { getProducts, euro, CATEGORY_ORDER } from '../../lib/shopify';
+import { getProducts, euro, CATEGORY_ORDER, PRINT_SIZES } from '../../lib/shopify';
 const products = await getProducts();
 const cats = CATEGORY_ORDER.filter((c) => products.some((p) => p.category === c));
 const count = (c: string) => products.filter((p) => p.category === c).length;
+// Kleinster kaufbarer Preis je Stück, gerechnet wie Konfigurator und Warenkorb (Variantenpreis + Druckaufschlag je Seite):
+// günstigste verfügbare Variante plus kleinste Druckgröße auf nur einer Seite. Ohne Druck ist nichts bestellbar.
+const minPrint = PRINT_SIZES.reduce((a, b) => (b.surcharge < a.surcharge ? b : a));
+const fromPrice = (p: (typeof products)[number]) => {
+  const av = p.variants.filter((v) => v.available).map((v) => v.price);
+  return (av.length ? Math.min(...av) : p.price) + minPrint.surcharge;
+};
 ---
 <Base title="Textilien mit eigenem Motiv bedrucken" description={`${products.length} Textilien von Stanley/Stella und Stedman mit deinem Motiv bedrucken: T-Shirts, Hoodies, Polos, Kinder, Baby, Taschen. Ab 1 Stück, DTF-Druck in Oberhausen, Versand in 1-3 Werktagen.`}>
   <section class="shop-head">
@@ -50,7 +57,7 @@ const count = (c: string) => products.filter((p) => p.category === c).length;
                 </span>
                 <span class="sizes">{p.sizes[0]} bis {p.sizes[p.sizes.length - 1]}</span>
               </div>
-              <span class="price">ab {euro(p.price)} <small>zzgl. Druck ab 5 €</small></span>
+              <span class="price">ab {euro(fromPrice(p))} <small>inkl. {minPrint.label}-Druck</small></span>
             </div>
           </a>
         ))}
