@@ -47,7 +47,7 @@ const vergleich = [
   { k: 'Dunkle Textilien', dtf: 'Ja, deckend auch auf Schwarz', dtg: 'Ja, nach Vorbehandlung auf der Pretreat-Maschine und mit weißer Unterschicht', sub: 'Nein, keine dunklen Untergründe' },
   { k: 'Haptik', dtf: 'Leichter Film spürbar, sehr dehnbar, bei sehr großen Flächen etwas steifer', dtg: 'Weichstes Ergebnis, kein Film, nur Tinte', sub: 'Nicht spürbar, der Druck sitzt im Material' },
   { k: 'Stückzahl', dtf: 'Ab 1 Stück, keine Mindestmenge. Standard für Auflagen und Einzelstücke', dtg: 'Einzelstücke und Print-on-Demand. Bei großen Auflagen langsamer als DTF', sub: 'Auf Anfrage' },
-  { k: 'Motive', dtf: 'Komplexe Motive und Farbverläufe, kräftige Farben, feine Linien', dtg: 'Fotorealistisch, unbegrenzt viele Farben, feine Verläufe und Details. Druckfläche bis 40 x 50 cm', sub: 'Brillante, leuchtende Farben, vollflächig bis an den Rand' },
+  { k: 'Motive', dtf: 'Komplexe Motive und Farbverläufe, kräftige Farben, feine Linien. Druckfläche bis 30 x 40 cm pro Position', dtg: 'Fotorealistisch, unbegrenzt viele Farben, feine Verläufe und Details. Druckfläche bis 40 x 50 cm', sub: 'Brillante, leuchtende Farben, vollflächig bis an den Rand' },
 ];
 
 const werkstattImg = await imgInfo('/img/werkstatt-heisspresse.jpg');
@@ -56,6 +56,7 @@ const werkstattImg = await imgInfo('/img/werkstatt-heisspresse.jpg');
 const ausstattung = [
   { t: 'DTG-Drucker', d: 'Epson SureColor F2100 und Epson SureColor F2200' },
   { t: 'Maximale DTG-Druckfläche', d: '40 x 50 cm' },
+  { t: 'Maximale DTF-Druckfläche', d: '30 x 40 cm pro Position' },
   { t: 'Dunkle Textilien im DTG', d: 'Vorbehandlung auf einer Pretreat-Maschine, fixiert auf der Heißpresse' },
   { t: 'DTF-Transfers', d: 'Aufgebracht auf der Heißpresse' },
   { t: 'Standort', d: 'Eigene Produktion in Oberhausen, Versand deutschlandweit mit DHL oder Abholung vor Ort' },
