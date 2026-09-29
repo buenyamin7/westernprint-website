@@ -5,13 +5,26 @@ import { oeffnungszeiten } from '../data/site';
 import html from '../content/legal/versand-und-zahlungsbedingungen.html?raw';
 
 const title = 'Versand und Zahlung';
-const description = `Versandkosten, Lieferzeiten und Zahlungsbedingungen der westernprint GmbH. Versand mit DHL und Sendungsnummer oder kostenlose Abholung in Oberhausen, ${oeffnungszeiten.kurz}.`;
+const description = `Versandkosten, Lieferzeiten und Zahlungsbedingungen der westernprint GmbH. Versand mit DHL und Sendungsnummer, ab 500 € versandkostenfrei, oder kostenlose Abholung in Oberhausen, ${oeffnungszeiten.kurz}.`;
 
-// Fragen zu Versand und Abholung. Nur belegte Angaben, bewusst ohne Versandbeträge (noch ungeklärt).
+// Fragen zu Versand und Abholung. Versandkosten, Lieferzeit und Lieferländer vom Inhaber am 29.09.2026 festgelegt
+// (gleiche Werte wie im Kassen-Worker, src/catalog.js SHIPPING). Beträge der Kasse sind brutto.
 const faqs = [
   {
     q: 'Wie lange dauert es, bis meine Bestellung verschickt wird?',
-    a: 'westernprint produziert jede Bestellung in Oberhausen und versendet sie deutschlandweit mit DHL. Einzelstücke sind in 1 bis 3 Werktagen fertig. Serien brauchen 5 bis 7 Werktage nach deiner Freigabe des Korrekturabzugs. Im Angebot steht ein fester Liefertermin für deine Bestellung.',
+    a: 'westernprint produziert jede Bestellung in Oberhausen und versendet sie mit DHL, in Deutschland und ins Ausland. Einzelstücke sind in 1 bis 3 Werktagen fertig. Serien brauchen 5 bis 7 Werktage nach deiner Freigabe des Korrekturabzugs. Im Angebot steht ein fester Liefertermin für deine Bestellung.',
+  },
+  {
+    q: 'Wie lange dauert die Lieferung?',
+    a: 'Von der Bestellung bis zur Lieferung vergehen 3 bis 5 Werktage. Das gilt für Bestellungen im Shop, für Einzelstücke und für Samples, in Deutschland genauso wie im Ausland. Bei Serien steht der Liefertermin im Angebot.',
+  },
+  {
+    q: 'Was kostet der Versand?',
+    a: 'Der Versand innerhalb Deutschlands kostet 4,90 €. Nach Österreich, in die Schweiz und in die übrigen Lieferländer kostet er 9,90 €. Ab 500 € Warenwert (brutto) ist der Versand in alle Lieferländer kostenlos. Die Abholung in Oberhausen ist ebenfalls kostenlos.',
+  },
+  {
+    q: 'Liefert ihr auch ins Ausland?',
+    a: 'Ja. westernprint liefert außer nach Deutschland auch nach Österreich, in die Schweiz, in die Niederlande, nach Belgien, Luxemburg, Frankreich, Italien, Spanien, Polen, Dänemark und Tschechien. Der Versand in diese Länder kostet 9,90 €, ab 500 € Warenwert ist er kostenlos. Von der Bestellung bis zur Lieferung vergehen auch hier 3 bis 5 Werktage. Bei Lieferungen in die Schweiz können Einfuhrabgaben anfallen, die der Empfänger trägt.',
   },
   {
     q: 'Kann ich meine Bestellung in Oberhausen abholen?',
@@ -41,7 +54,7 @@ const ld = {
     </div>
   </section>
 
-  <Faq items={faqs} title="Fragen zu Versand und Abholung" intro="Versand mit DHL und Sendungsnummer oder kostenlose Abholung in Oberhausen." />
+  <Faq items={faqs} title="Fragen zu Versand und Abholung" intro="Versand mit DHL und Sendungsnummer, ab 500 € versandkostenfrei, oder kostenlose Abholung in Oberhausen." />
 </Base>
 
 <style>

@@ -26,7 +26,7 @@ const prints = [
   { src: '/img/druck-outside.jpg', alt: 'Nahaufnahme eines mehrfarbigen DTF-Drucks mit Bergmotiv auf grau meliertem Sweatshirt' },
   { src: '/img/druck-makro.jpg', alt: 'Nahaufnahme eines DTF-Drucks auf grau meliertem Shirt, jede Masche und die matte Druckoberfläche sichtbar' },
   { src: '/img/lager-rohware.jpg', alt: 'Regal mit gefalteten Rohware-Shirts und Hoodies nach Farben sortiert, davor eine Heißpresse' },
-  { src: '/img/werkstatt-heisspresse.jpg', alt: 'Werkstatt von westernprint: Mitarbeiter an der Heißpresse, Ziegelwand, Regale mit Textilien' },
+  { src: '/img/werkstatt-heisspresse.jpg', alt: 'Werkstatt von westernprint: Gründer und Geschäftsführer Bünyamin Dursun an der Heißpresse, Ziegelwand, Regale mit Textilien' },
   { src: '/img/packtisch.jpg', alt: 'Frisch bedruckte Shirts auf dem Packtisch mit Klebeband, Schere und Versandkarton' },
 ];
 
@@ -51,7 +51,7 @@ const aboutSizes = '(max-width: 900px) 100vw, (max-width: 1210px) 545px, 45vw';
 ---
 <Base
   title="Textildruck Oberhausen: DTF- und DTG-Druck ab 1 Stück | westernprint"
-  description="Textildruck aus Oberhausen: T-Shirts, Hoodies und Workwear per DTF und DTG bedrucken lassen. Ab 1 Stück, Staffelpreise ab 10, Angebot in 24 Stunden, Einzelstücke in 1 bis 3 Werktagen."
+  description="Textildruck aus Oberhausen: T-Shirts, Hoodies und Workwear per DTF und DTG bedrucken lassen. Ab 1 Stück, Staffelpreise ab 10, Angebot in 24 Stunden, Einzelstücke fertig in 1 bis 3 Werktagen."
   jsonLd={faqLd}
 >
   <!-- Hero: vollflächiges Bild, Text links, Bewertung rechts, Kennzahlen unten (stoff3-Stil) -->
@@ -88,7 +88,7 @@ const aboutSizes = '(max-width: 900px) 100vw, (max-width: 1210px) 545px, 45vw';
       </div>
       <div class="hero-brands" aria-label="Textilmarken ab Lager">
         <span>Textilien ab Lager von</span>
-        {['Stanley/Stella', 'Stedman', 'Build Your Brand', 'Urban Classics', 'Neutral', 'JHK'].map((b) => <b>{b}</b>)}
+        {['Stanley/Stella', 'Stedman', 'Build Your Brand', 'Urban Classics'].map((b) => <b>{b}</b>)}
       </div>
     </div>
   </section>
@@ -98,7 +98,7 @@ const aboutSizes = '(max-width: 900px) 100vw, (max-width: 1210px) 545px, 45vw';
     <div class="container">
       <div class="section-head reveal">
         <h2>Was ist westernprint?</h2>
-        <p>westernprint ist eine Textildruckerei mit eigener Produktion in Oberhausen im Ruhrgebiet. westernprint gibt es seit 2021 und bedruckt T-Shirts, Hoodies, Polos und Workwear. Die Verfahren sind DTF und DTG, dazu kommt Sublimation für Tassen, Accessoires und All-over-Drucke auf weißem Polyester. Der DTG-Druck läuft auf Epson SureColor F2100 und F2200. Gedruckt wird ausschließlich im eigenen Haus, nicht bei wechselnden Partnerdruckereien. Von Oberhausen aus geht der Versand mit DHL deutschlandweit, die Abholung vor Ort ist kostenlos. Du bestellst ab 1 Stück, Staffelpreise beginnen bei 10 Stück. Großauflagen starten bei 50 Stück, Einrichtungskosten entstehen nicht. Ein Angebot mit festem Preis kommt innerhalb von 24 Stunden an Werktagen. Vor dem Druck bekommst du einen Korrekturabzug. Einzelstücke sind in 1 bis 3 Werktagen fertig, Serien 5 bis 7 Werktage nach Freigabe. Für Shopify-Shops druckt und versendet westernprint jede Bestellung per Print-on-Demand. Die Anbindung läuft über die Shopify-App „westernprint POD“, die Installation ist kostenlos. Bei Google hat westernprint <a href="/bewertungen" class="accent">{schnitt} von 5 Sternen bei {bewertungen.anzahl} Bewertungen</a> (Stand {stand}).</p>
+        <p>westernprint ist eine Textildruckerei mit eigener Produktion in Oberhausen im Ruhrgebiet. westernprint gibt es seit 2021 und bedruckt T-Shirts, Hoodies, Polos und Workwear. Die Verfahren sind DTF und DTG, dazu kommt Sublimation für Tassen, Accessoires und All-over-Drucke auf weißem Polyester. Der DTG-Druck läuft auf Epson SureColor F2100 und F2200. Gedruckt wird ausschließlich im eigenen Haus, nicht bei wechselnden Partnerdruckereien. Von Oberhausen aus geht der Versand mit DHL deutschlandweit, geliefert wird auch ins europäische Ausland. Die Abholung vor Ort ist kostenlos. Du bestellst ab 1 Stück, Staffelpreise beginnen bei 10 Stück. Großauflagen starten bei 50 Stück, Einrichtungskosten entstehen nicht. Ein Angebot mit festem Preis kommt innerhalb von 24 Stunden an Werktagen. Vor dem Druck bekommst du einen Korrekturabzug. Einzelstücke sind in 1 bis 3 Werktagen fertig, Serien 5 bis 7 Werktage nach Freigabe. Für Shopify-Shops druckt und versendet westernprint jede Bestellung per Print-on-Demand. Die Anbindung läuft über die Shopify-App „westernprint POD“, die Installation ist kostenlos. Bei Google hat westernprint <a href="/bewertungen" class="accent">{schnitt} von 5 Sternen bei {bewertungen.anzahl} Bewertungen</a> (Stand {stand}).</p>
       </div>
     </div>
   </section>
@@ -107,7 +107,7 @@ const aboutSizes = '(max-width: 900px) 100vw, (max-width: 1210px) 545px, 45vw';
   <section class="section leistungen" id="leistungen">
     <div class="container">
       <div class="section-head reveal">
-        <h2>Druck, der nach 50 Wäschen noch sitzt</h2>
+        <h2>Druck, der hält</h2>
         <p>Ob ein einzelnes Geschenk, 30 Shirts für den Verein oder 500 Teile für die Firma: Wir drucken alles selbst in Oberhausen, auf eigenen Epson-Maschinen.</p>
       </div>
     </div>
@@ -132,7 +132,7 @@ const aboutSizes = '(max-width: 900px) 100vw, (max-width: 1210px) 545px, 45vw';
           {[
             { icon: 'chat-circle-dots', t: 'Anfrage senden', d: 'Motiv, Textil, Stückzahl und Wunschtermin. Per Formular, WhatsApp oder Mail, auch als Skizze.' },
             { icon: 'file-text', t: 'Angebot in 24 Stunden', d: 'Fester Preis, Korrekturabzug mit deinem Motiv auf dem Textil, Liefertermin. Du gibst frei.' },
-            { icon: 'package', t: 'Druck und Versand', d: 'Einzelstücke in 1 bis 3 Werktagen, Serien ab 50 Stück in 5 bis 7 Werktagen. Jedes Teil geprüft, Versand mit DHL oder Abholung in Oberhausen.' },
+            { icon: 'package', t: 'Druck und Versand', d: 'Einzelstücke fertig in 1 bis 3 Werktagen, Serien ab 50 Stück in 5 bis 7 Werktagen. Jedes Teil geprüft, Versand mit DHL oder Abholung in Oberhausen.' },
           ].map((s, i) => (
             <li class={`step reveal reveal-d${i}`}>
               <div class="icon-box"><Icon name={s.icon} size={22} /></div>
@@ -185,7 +185,7 @@ const aboutSizes = '(max-width: 900px) 100vw, (max-width: 1210px) 545px, 45vw';
   <section class="section about">
     <div class="container about-grid">
       <div class="about-img reveal">
-        <img src="/img/werkstatt-heisspresse.jpg" srcset={aboutImg.srcset} sizes={aboutImg.srcset ? aboutSizes : undefined} alt="Die westernprint Werkstatt in Oberhausen: Heißpressen, Regale mit Rohware, Packtisch" width={aboutImg.width ?? 1024} height={aboutImg.height ?? 1536} loading="lazy" />
+        <img src="/img/werkstatt-heisspresse.jpg" srcset={aboutImg.srcset} sizes={aboutImg.srcset ? aboutSizes : undefined} alt="Die westernprint Werkstatt in Oberhausen: Gründer und Geschäftsführer Bünyamin Dursun an der Heißpresse, Regale mit Rohware, Packtisch" width={aboutImg.width ?? 1024} height={aboutImg.height ?? 1536} loading="lazy" />
       </div>
       <div class="about-text">
         <h2 class="reveal">Aus Frust gegründet. Aus Erfahrung gewachsen.</h2>
@@ -193,7 +193,7 @@ const aboutSizes = '(max-width: 900px) 100vw, (max-width: 1210px) 545px, 45vw';
         <ul class="usps">
           {[
             { icon: 'factory', t: 'Inhouse in Oberhausen', d: 'Eigene Epson-Maschinen, keine Fremdvergabe.' },
-            { icon: 'clock', t: '1 bis 3 Werktage', d: 'Einzelstücke und kleine Mengen. Serien ab 50 Stück in 5 bis 7 Werktagen, Express auf Anfrage.' },
+            { icon: 'clock', t: '1 bis 3 Werktage', d: 'So schnell sind Einzelstücke und kleine Mengen fertig. Serien ab 50 Stück in 5 bis 7 Werktagen, Express auf Anfrage.' },
             { icon: 'chat-circle-dots', t: 'Direkter Draht', d: 'WhatsApp und Telefon statt Ticketsystem.' },
             { icon: 'seal-check', t: 'Stanley/Stella und Stedman', d: 'Bio-Baumwolle und Basics, über 500 Farben ab Lager.' },
           ].map((u, i) => (

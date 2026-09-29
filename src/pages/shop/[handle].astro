@@ -17,13 +17,14 @@ const thumbLabel = (g: string, i: number) => {
   return `Ansicht ${i + 1} von ${gallery.length}${c ? `, ${c.name}${c.back === g ? ' hinten' : ''}` : ''}`;
 };
 const clientData = { product: { id: p.id, handle: p.handle, title: p.title, price: p.price, image: p.image, colors: p.colors, sizes: p.sizes, variants: p.variants }, sizes: PRINT_SIZES, cloud: site.cloudinary };
-const ld = { '@context': 'https://schema.org', '@type': 'Product', name: `${p.title} bedrucken`, image: gallery.map((g) => `${site.url}${g}`), description: `${p.title} von ${p.brand} mit eigenem Motiv bedrucken. ${p.colors.length} Farben, Größen ${p.sizes[0]} bis ${p.sizes[p.sizes.length - 1]}.`, brand: { '@type': 'Brand', name: p.brand }, offers: { '@type': 'Offer', priceCurrency: 'EUR', price: (p.price + 5).toFixed(2), availability: 'https://schema.org/InStock', url: `${site.url}/shop/${p.handle}` } };
+// Shop-Preise sind Bruttopreise inkl. 19 % MwSt.: der Kassen-Worker übergibt sie an Mollie mit vatRate 19 % (westernprint-checkout, src/index.js).
+const ld = { '@context': 'https://schema.org', '@type': 'Product', name: `${p.title} bedrucken`, image: gallery.map((g) => `${site.url}${g}`), description: `${p.title} von ${p.brand} mit eigenem Motiv bedrucken. ${p.colors.length} Farben, Größen ${p.sizes[0]} bis ${p.sizes[p.sizes.length - 1]}.`, brand: { '@type': 'Brand', name: p.brand }, offers: { '@type': 'Offer', priceCurrency: 'EUR', price: (p.price + 5).toFixed(2), priceSpecification: { '@type': 'PriceSpecification', price: (p.price + 5).toFixed(2), priceCurrency: 'EUR', valueAddedTaxIncluded: true }, availability: 'https://schema.org/InStock', url: `${site.url}/shop/${p.handle}` } };
 const details = [
   p.grammage && ['Grammatur', p.grammage], p.fit && ['Passform', p.fit], p.composition && ['Material', p.composition],
   ['Marke', p.brand], ['Für', p.gender], ['Farben', `${p.colors.length}`], ['Größen', `${p.sizes[0]} bis ${p.sizes[p.sizes.length - 1]}`],
 ].filter(Boolean) as [string, string][];
 ---
-<Base noindex={true} title={`${p.title} bedrucken lassen`} description={`${p.title} von ${p.brand} mit eigenem Motiv per DTF bedrucken. ${p.colors.length} Farben, Größen ${p.sizes[0]} bis ${p.sizes[p.sizes.length - 1]}, ab 1 Stück, Versand in 1-3 Werktagen.`} ogImage={p.image ?? undefined} jsonLd={ld} hideCta={true}>
+<Base noindex={true} title={`${p.title} bedrucken lassen`} description={`${p.title} von ${p.brand} mit eigenem Motiv per DTF bedrucken. ${p.colors.length} Farben, Größen ${p.sizes[0]} bis ${p.sizes[p.sizes.length - 1]}, ab 1 Stück, Lieferung in 3 bis 5 Werktagen.`} ogImage={p.image ?? undefined} jsonLd={ld} hideCta={true}>
   <section class="pp">
     <div class="container">
       <nav class="crumbs muted" aria-label="Pfad"><a href="/shop">Shop</a> <span>/</span> <a href={`/shop?kategorie=${encodeURIComponent(p.category)}`}>{p.category}</a> <span>/</span> <span>{p.title}</span></nav>
@@ -50,7 +51,7 @@ const details = [
           <div class="ptitle">
             <span class="pbrand">{p.brand} <span>{p.gender}</span> {p.brand === 'Stanley/Stella' && <em class="bio">Bio-Baumwolle</em>}</span>
             <h1>{p.title}</h1>
-            <p class="pprice"><strong data-total>{euro(p.price + 5)}</strong> <span class="muted">inkl. Druck und MwSt., zzgl. Versand</span></p>
+            <p class="pprice"><strong data-total>{euro(p.price + 5)}</strong> <span class="muted">inkl. Druck und MwSt., zzgl. <a href="/versand">Versand</a></span></p>
           </div>
 
           <div class="step">
@@ -109,8 +110,8 @@ const details = [
             <p class="form-note" data-note hidden></p>
             <ul class="trust">
               <li><Icon name="printer" size={16} /> DTF-Druck in Oberhausen, waschfest</li>
-              <li><Icon name="truck" size={16} /> Versand 4,90 €, 1 bis 3 Werktage</li>
-              <li><Icon name="shield-check" size={16} /> PayPal, Klarna, Karte, Apple Pay</li>
+              <li><Icon name="truck" size={16} /> Versand Deutschland 4,90 €, Ausland 9,90 €, versandkostenfrei ab 500 €, Lieferung in 3 bis 5 Werktagen</li>
+              <li><Icon name="shield-check" size={16} /> Sichere Zahlung über Mollie, die verfügbaren Zahlungsarten werden an der Kasse angezeigt</li>
             </ul>
           </div>
         </form>
@@ -331,6 +332,8 @@ const details = [
   .pprice { margin-top: 10px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
   .pprice strong { font-size: 1.6rem; letter-spacing: -0.02em; }
   .pprice .muted { font-size: 13px; }
+  .pprice a { text-decoration: underline; text-underline-offset: 3px; }
+  .pprice a:hover { color: var(--text); }
 
   .step { display: grid; gap: 12px; padding-top: 18px; border-top: 1px solid var(--line); }
   .step-h { display: flex; align-items: center; gap: 10px; }

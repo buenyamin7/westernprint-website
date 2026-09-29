@@ -8,6 +8,7 @@ import { site, oeffnungszeiten } from '../data/site';
 import { bewertungen } from '../data/bewertungen';
 
 // Preisbeispiele stammen von /was-kostet-textildruck (netto zzgl. MwSt.). Bei Preisänderungen dort mit anpassen.
+// Brutto daneben = netto x 1,19, kaufmännisch auf Cent gerundet.
 const PREIS_STAND = '21.09.2026';
 // Google-Bewertungen aus src/data/bewertungen.ts: 5 -> "5,0", "2026-09-28" -> "28.09.2026"
 const sterne = bewertungen.schnitt.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -41,7 +42,7 @@ const weiter: Stadt[] = [
     d: 'Gelsenkirchen liegt rund 20 km entfernt, der Weg führt über die A42. Für Schulen aus Gelsenkirchen druckt westernprint Abi-Shirts und Abschluss-Hoodies mit allen Namen, als Sammelbestellung mit einem Liefertermin. Die Serie ist 5 bis 7 Werktage nach Freigabe fertig und kommt per DHL, Abholung in Oberhausen geht auch.',
     l: { href: '/fuer/abschlussklassen', t: 'Abi-Shirts mit allen Namen' } },
   { c: 'Gladbeck', id: 'gladbeck',
-    d: `Bis Gladbeck sind es rund 21 km. Ein einzelnes T-Shirt Basic mit einem Druck kostet 17,90 € netto zzgl. MwSt. (Stand ${PREIS_STAND}) und ist in der Regel in 1 bis 3 Werktagen fertig. Die Abholung in Oberhausen ist kostenlos, Versand per DHL ist ebenso möglich.`,
+    d: `Bis Gladbeck sind es rund 21 km. Ein einzelnes T-Shirt Basic mit einem Druck kostet 17,90 € netto (21,30 € brutto, Stand ${PREIS_STAND}) und ist in der Regel in 1 bis 3 Werktagen fertig. Die Abholung in Oberhausen ist kostenlos, Versand per DHL ist ebenso möglich.`,
     l: { href: '/was-kostet-textildruck', t: 'Alle Preisbeispiele' } },
   { c: 'Moers', id: 'moers',
     d: 'Moers liegt rund 25 km westlich von Oberhausen, verbunden über die A42. Für Vereine aus Moers druckt westernprint Shirts, Polos und Hoodies auch in kleinen Mengen, die Rechnung geht auf Wunsch an den Verein. Staffelpreise gibt es ab 10 Stück, die Serie ist 5 bis 7 Werktage nach Freigabe fertig und kommt per DHL.',
@@ -50,13 +51,13 @@ const weiter: Stadt[] = [
     d: 'Herne liegt rund 30 km entfernt an der A42. Für Firmen aus Herne druckt westernprint Polos, Hoodies und Shirts mit Logo, gemischte Größen und Farben in einer Bestellung. Vor dem Druck bekommst du einen Korrekturabzug, die Serie ist 5 bis 7 Werktage nach Freigabe fertig und geht per DHL raus.',
     l: { href: '/fuer/firmen-und-buero', t: 'Firmenkleidung mit Logo' } },
   { c: 'Bochum', id: 'bochum',
-    d: 'Bis Bochum sind es rund 30 km über die A40. westernprint schickt Bestellungen nach Bochum per DHL mit Sendungsnummer, nach Versand kommen sie in der Regel am nächsten Werktag an. Für Fachschaften und Hochschulgruppen gibt es eine Sammelbestellung per Größenliste.',
+    d: 'Bis Bochum sind es rund 30 km über die A40. westernprint schickt Bestellungen nach Bochum per DHL mit Sendungsnummer, ein Einzelstück ist in der Regel 3 bis 5 Werktage nach der Bestellung da. Für Fachschaften und Hochschulgruppen gibt es eine Sammelbestellung per Größenliste.',
     l: { href: '/fuer/hochschulen-und-fachschaften', t: 'Hoodies für Fachschaften' } },
   { c: 'Castrop-Rauxel', id: 'castrop-rauxel',
     d: 'Castrop-Rauxel liegt rund 35 km entfernt, der Weg führt über die A42. Für Feuerwehr, THW und Rettungsdienst druckt westernprint Shirts und Hoodies mit Ortsname, Wappen und Funktion. Einzelstücke sind in 1 bis 3 Werktagen fertig, Serien 5 bis 7 Werktage nach Freigabe.',
     l: { href: '/fuer/feuerwehr-und-rettungsdienst', t: 'Shirts für Feuerwehr und THW' } },
   { c: 'Düsseldorf', id: 'duesseldorf',
-    d: `Die Düsseldorfer Innenstadt liegt rund 40 km entfernt, über die A3 und die A52. Aussteller der Messe Düsseldorf bekommen Polos fürs Standpersonal 5 bis 7 Werktage nach Freigabe per DHL an die Messeadresse, ins Hotel oder in die Firma. Ein Poloshirt mit einem Druck kostet bei 25 Stück 15,90 € netto zzgl. MwSt. (Stand ${PREIS_STAND}).`,
+    d: `Die Düsseldorfer Innenstadt liegt rund 40 km entfernt, über die A3 und die A52. Aussteller der Messe Düsseldorf bekommen Polos fürs Standpersonal 5 bis 7 Werktage nach Freigabe per DHL an die Messeadresse, ins Hotel oder in die Firma. Ein Poloshirt mit einem Druck kostet bei 25 Stück 15,90 € netto (18,92 € brutto, Stand ${PREIS_STAND}).`,
     l: { href: '/fuer/messen-und-aussteller', t: 'Polos für den Messestand' } },
   { c: 'Recklinghausen', id: 'recklinghausen',
     d: 'Nach Recklinghausen sind es rund 40 km. Für Kitas und Schulen aus Recklinghausen druckt westernprint Schul-T-Shirts, Kita-Abschluss-Shirts und Klassenfahrt-Shirts mit Logo. Serien sind 5 bis 7 Werktage nach der Freigabe fertig, danach geht die Ware per DHL mit Sendungsnummer raus.',
@@ -70,14 +71,14 @@ const weiter: Stadt[] = [
 ];
 
 const faqs = [
-  { q: 'Druckt ihr auch für Kunden aus Essen, Duisburg oder Bochum?', a: 'Ja. Unsere Druckerei steht in Oberhausen, produziert wird für das ganze Ruhrgebiet. Aus Mülheim, Duisburg, Essen, Bottrop und Dinslaken bist du in etwa 20 Minuten bei uns. Alles Weitere liefern wir per DHL, innerhalb des Reviers in der Regel am nächsten Werktag nach Versand.' },
+  { q: 'Druckt ihr auch für Kunden aus Essen, Duisburg oder Bochum?', a: 'Ja. Unsere Druckerei steht in Oberhausen, produziert wird für das ganze Ruhrgebiet. Aus Mülheim, Duisburg, Essen, Bottrop und Dinslaken bist du in etwa 20 Minuten bei uns. Alles Weitere liefern wir per DHL, Einzelstücke in der Regel 3 bis 5 Werktage nach der Bestellung.' },
   { q: 'Wie schnell bekommt ein Verein aus Essen seine Shirts?', a: 'westernprint schickt dem Verein an Werktagen innerhalb von 24 Stunden ein Angebot. Nach der Freigabe des Korrekturabzugs sind Serien in 5 bis 7 Werktagen fertig, Einzelstücke in 1 bis 3 Werktagen. Die Druckerei in Oberhausen liegt rund 16 km von der Essener Innenstadt entfernt. Der Verein holt kostenlos ab oder bekommt die Shirts per DHL.' },
   { q: 'Kann eine Firma aus Duisburg ihre Arbeitskleidung in Oberhausen abholen?', a: `Ja. Die Abholung in der Schenkendorfstraße 45 in Oberhausen ist kostenlos, ${oeffnungszeiten.text} nach kurzer Absprache. Aus der Duisburger Innenstadt sind es rund 13 km über die A40. Wer nicht abholen will, bekommt die Ware per DHL.` },
-  { q: 'Liefert westernprint auch nach Dortmund, Düsseldorf und Krefeld?', a: 'Ja. westernprint druckt in Oberhausen und verschickt per DHL mit Sendungsnummer, deutschlandweit. Dortmund liegt rund 50 km entfernt, Düsseldorf rund 40 km und Krefeld rund 45 km. Nach Versand kommt das Paket in der Regel am nächsten Werktag an.' },
-  { q: 'Lohnt sich die Abholung oder soll ich liefern lassen?', a: 'Bei Einzelstücken und kleinen Mengen aus den Nachbarstädten lohnt sich die Abholung, du sparst die Versandkosten von 4,90 €. Bei größeren Serien liefern wir, das Paket kostet bei einer Sammelbestellung kaum mehr als die Fahrt.' },
+  { q: 'Liefert westernprint auch nach Dortmund, Düsseldorf und Krefeld?', a: 'Ja. westernprint druckt in Oberhausen und verschickt per DHL mit Sendungsnummer, deutschlandweit. Dortmund liegt rund 50 km entfernt, Düsseldorf rund 40 km und Krefeld rund 45 km. Von der Bestellung bis zur Lieferung vergehen bei Einzelstücken in der Regel 3 bis 5 Werktage.' },
+  { q: 'Lohnt sich die Abholung oder soll ich liefern lassen?', a: 'Bei Einzelstücken und kleinen Mengen aus den Nachbarstädten lohnt sich die Abholung, du sparst die Versandkosten von 4,90 €. Bei größeren Serien liefern wir: Ab 500 € Warenwert (brutto) ist der Versand kostenlos, darunter kostet das Paket bei einer Sammelbestellung kaum mehr als die Fahrt.' },
   { q: 'Wie schnell geht das?', a: 'Einzelstücke und kleine Mengen sind in der Regel in 1 bis 3 Werktagen fertig. Serien ab 50 Stück brauchen 5 bis 7 Werktage nach Freigabe des Korrekturabzugs. Wenn du einen festen Termin hast, sag ihn uns direkt, Express ist oft möglich.' },
   { q: 'Kann ich eigene Textilien vorbeibringen?', a: 'Ja. Angelieferte Ware bedrucken wir, egal ob Vereinstrikots, Arbeitskleidung oder etwas, das du schon im Schrank hast. Wir prüfen vorher, ob das Material für DTF geeignet ist. Bei Polyester und Funktionsstoffen drucken wir mit niedrigerer Temperatur, das klappt problemlos.' },
-  { q: 'Was kostet eine Vereinsbestellung ungefähr?', a: `Bedruckte Vereinsshirts gibt es ab 7,90 € netto. Bei 50 Stück kostet ein T-Shirt Basic mit einem Druck 9,40 € netto pro Stück (Stand ${PREIS_STAND}). Namen und Nummern kosten ab 5,90 € netto pro Teil. Genaue Beispiele stehen auf unserer Preisseite.` },
+  { q: 'Was kostet eine Vereinsbestellung ungefähr?', a: `Bedruckte Vereinsshirts gibt es ab 7,90 € netto (9,40 € brutto). Bei 50 Stück kostet ein T-Shirt Basic mit einem Druck 9,40 € netto (11,19 € brutto) pro Stück (Stand ${PREIS_STAND}). Namen und Nummern kosten ab 5,90 € netto (7,02 € brutto) pro Teil. Genaue Beispiele stehen auf unserer Preisseite.` },
 ];
 
 const ld = [
@@ -107,7 +108,7 @@ const ld = [
     title="Textildruck fürs Revier. <span class='hl'>Gedruckt in Oberhausen.</span>"
     lede="Vereinstrikots, Firmenpolos, Abi-Shirts und Einzelstücke für Essen, Duisburg, Mülheim, Bottrop und das ganze Ruhrgebiet. Eigene Maschinen, kein Zwischenhändler, ab einem Stück."
     image="/img/werkstatt-heisspresse.jpg"
-    imageAlt="Fertig bedrucktes Shirt aus der westernprint Druckerei in Oberhausen"
+    imageAlt="Bünyamin Dursun an der Heißpresse in der westernprint-Werkstatt in Oberhausen"
     cta={{ label: 'Angebot in 24 Stunden', href: '#anfrage' }}
     cta2={{ label: 'Was kostet das?', href: '/was-kostet-textildruck' }}
   />
@@ -143,7 +144,7 @@ const ld = [
       </div>
       <div class="section-head reveal far">
         <h2>Weiter im Revier und am Niederrhein</h2>
-        <p>Hierhin liefern wir per DHL mit Sendungsnummer, nach Versand in der Regel am nächsten Werktag. Abholung in Oberhausen ist genauso möglich.</p>
+        <p>Hierhin liefern wir per DHL mit Sendungsnummer, Einzelstücke in der Regel 3 bis 5 Werktage nach der Bestellung. Abholung in Oberhausen ist genauso möglich.</p>
       </div>
       <div class="cities reveal">
         {weiter.map((n) => (
@@ -189,12 +190,12 @@ const ld = [
         <div class="hcol">
           <h3>Preisanker</h3>
           <ul class="plist">
-            <li><span>Einzelnes bedrucktes Shirt</span><strong>ab 17,90 €</strong></li>
-            <li><span>50 Basic-Shirts, ein Druck</span><strong>ca. 9,40 € pro Stück</strong></li>
-            <li><span>Bedruckte Vereinsshirts</span><strong>ab 7,90 €</strong></li>
-            <li><span>Hoodie mit Druck</span><strong>ab 29,90 €</strong></li>
+            <li><span>Einzelnes bedrucktes Shirt</span><strong>ab 17,90 € netto <span class="gross">(21,30 € brutto)</span></strong></li>
+            <li><span>50 Basic-Shirts, ein Druck</span><strong>ca. 9,40 € netto <span class="gross">(11,19 € brutto) pro Stück</span></strong></li>
+            <li><span>Bedruckte Vereinsshirts</span><strong>ab 7,90 € netto <span class="gross">(9,40 € brutto)</span></strong></li>
+            <li><span>Hoodie mit Druck</span><strong>ab 29,90 € netto <span class="gross">(35,58 € brutto)</span></strong></li>
           </ul>
-          <p class="muted small">Alle Preise netto zzgl. MwSt., ohne Einrichtungskosten. <a class="accent" href="/was-kostet-textildruck">Alle Staffeln und Beispiele</a></p>
+          <p class="muted small">Alle Preise netto zzgl. 19 % MwSt., in Klammern brutto, ohne Einrichtungskosten. <a class="accent" href="/was-kostet-textildruck">Alle Staffeln und Beispiele</a></p>
         </div>
         <div class="hcol">
           <h3>Wofür DTF und DTG gemacht sind</h3>
@@ -260,7 +261,8 @@ const ld = [
   .plist li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--line); font-size: 15px; }
   .plist li:last-child { border-bottom: 0; }
   .plist span { color: var(--text-2); }
-  .plist strong { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .plist strong { font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right; }
+  .plist .gross { display: block; font-size: 13.5px; font-weight: 400; }
   .ylist { display: grid; gap: 9px; margin-top: 12px; padding: 0; list-style: none; color: var(--text-2); font-size: 15px; }
   .ylist li { display: flex; gap: 9px; align-items: flex-start; }
   .ylist .icon { color: var(--accent); flex: none; margin-top: 4px; }

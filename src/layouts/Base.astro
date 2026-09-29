@@ -59,8 +59,9 @@ const orgLd = {
   openingHoursSpecification: oeffnungszeiten.schema.map((z) => ({ '@type': 'OpeningHoursSpecification', dayOfWeek: z.tage, opens: z.von, closes: z.bis })),
   priceRange: '€€',
   currenciesAccepted: 'EUR',
-  // Wie die sichtbare FAQ in src/data/site.ts ("Wie bezahle ich?"). Google Pay ist sichtbar nirgends genannt: beim Inhaber klären.
-  paymentAccepted: 'PayPal, Klarna, Kreditkarte, Überweisung, Apple Pay, Google Pay, Rechnung (B2B)',
+  // Wie die sichtbare FAQ in src/data/site.ts ("Wie bezahle ich?"). Zahlungsdienstleister ist Mollie, einzelne Zahlungsarten
+  // werden bewusst nicht festgeschrieben (Entscheidung des Inhabers vom 29.09.2026): Sie stehen an der Kasse.
+  paymentAccepted: 'Online-Zahlung über Mollie (Zahlungsarten laut Kasse), Vorkasse, Rechnung nach Absprache (Firmen und Vereine)',
   areaServed: [
     { '@type': 'Country', name: 'Deutschland' }, { '@type': 'Country', name: 'Österreich' }, { '@type': 'Country', name: 'Schweiz' },
     { '@type': 'City', name: 'Oberhausen' }, { '@type': 'City', name: 'Essen' }, { '@type': 'City', name: 'Duisburg' }, { '@type': 'City', name: 'Mülheim an der Ruhr' }, { '@type': 'City', name: 'Bottrop' }, { '@type': 'City', name: 'Gelsenkirchen' }, { '@type': 'City', name: 'Düsseldorf' },
@@ -87,6 +88,7 @@ const orgLd = {
 };
 const webLd = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': `${site.url}/#website`, url: site.url, name: 'westernprint', inLanguage: 'de-DE', publisher: { '@id': `${site.url}/#organization` } };
 // Inhaber als eigener Knoten, auf den founder und employee zeigen. Sichtbar belegt auf /ueber-uns.
+// Das Foto an der Heißpresse zeigt ihn selbst (vom Inhaber bestätigt 29.09.2026).
 const personLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
@@ -96,6 +98,7 @@ const personLd = {
   familyName: 'Dursun',
   jobTitle: 'Geschäftsführer',
   url: `${site.url}/ueber-uns`,
+  image: { '@type': 'ImageObject', url: `${site.url}/img/werkstatt-heisspresse.jpg`, caption: 'Bünyamin Dursun, Gründer und Geschäftsführer von westernprint, an der Heißpresse in Oberhausen' },
   worksFor: { '@id': `${site.url}/#organization` },
   knowsAbout: ['DTF-Druck', 'DTG-Druck', 'Sublimationsdruck', 'Textilveredelung', 'Print-on-Demand-Fulfillment', 'Shopify-Fulfillment', 'Vereinskleidung', 'Arbeitskleidung mit Logo', 'Messebekleidung'],
 };

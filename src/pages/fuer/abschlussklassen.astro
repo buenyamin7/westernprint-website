@@ -39,14 +39,14 @@ const faqs = [
   { q: 'Was kostet ein Abschluss-Hoodie bei euch?', a: `Ab 20 Stück liegt der Stedman Classic Hoodie bei 28,90 € pro Stück, inklusive Druck vorne und hinten, Namensliste und MwSt. Oversize-Hoodies von Build Your Brand ab 38,90 €, der Ultra Heavy mit 500 g/m² ab 52,90 €. Shirts ab 16,90 €. Ab 50 Stück wird es günstiger, das genaue Angebot bekommt ihr innerhalb von 24 Stunden.` },
   { q: 'Gibt es eine Mindestmenge?', a: 'Nein. Ab 1 Stück ist alles möglich, die Klassenpreise gelten ab 20 Stück. Nachzügler können später zum gleichen Preis nachbestellen.' },
   { q: 'Kostet das Design extra?', a: 'Nein. Schriftzug, Motto, Namensliste und Korrekturabzug sind inklusive. Ihr bekommt eine Vorschau als PDF und wir ändern so lange, bis alles passt. Erst dann wird gedruckt.' },
-  { q: 'Wie lange dauert die Lieferung?', a: 'Nach Freigabe des Korrekturabzugs in der Regel 5 bis 7 Werktage. Wenn die Stufe spät dran ist, geht Express in 2 bis 3 Werktagen, bitte früh anfragen. Abholung in Oberhausen ist kostenlos.' },
+  { q: 'Wie lange dauert die Lieferung?', a: 'Nach Freigabe des Korrekturabzugs in der Regel 5 bis 7 Werktage. Wenn die Stufe spät dran ist, geht eine Express-Produktion in 2 bis 3 Werktagen, bitte früh anfragen. Abholung in Oberhausen ist kostenlos.' },
   { q: 'Können wir Größen und Farben mischen?', a: 'Ja, ohne Aufpreis. Ein Ansprechpartner sammelt die Liste, wir liefern alles sortiert und beschriftet in einem Paket.' },
-  { q: 'Wie bezahlen wir als Klasse?', a: 'Nach Freigabe bekommt ihr eine Rechnung mit Zahlungslink: Überweisung, Kreditkarte, PayPal oder Klarna. Eine Person zahlt gesammelt, wir brauchen keine Einzelzahlungen.' },
+  { q: 'Wie bezahlen wir als Klasse?', a: 'Nach Freigabe bekommt ihr eine Rechnung mit Zahlungslink, die verfügbaren Zahlungsarten werden beim Bezahlen angezeigt. Eine Person zahlt gesammelt, wir brauchen keine Einzelzahlungen.' },
   { q: 'Hält der Druck?', a: 'Wir drucken per DTF, deckend auf dunklen Stoffen, dehnbar und waschfest. Das Verfahren nutzen wir auch für Vereine und Firmen, die ihre Sachen täglich waschen.' },
 ];
 
 const ld = [
-  { '@context': 'https://schema.org', '@type': 'Service', name: 'Abschluss-Hoodies und Abishirts bedrucken', serviceType: 'Textildruck', description: z.description, provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: [{ '@type': 'City', name: 'Oberhausen' }, { '@type': 'AdministrativeArea', name: 'Ruhrgebiet' }, { '@type': 'Country', name: 'Deutschland' }], audience: { '@type': 'Audience', audienceType: 'Abschlussklassen, Abiturjahrgänge, Schulklassen' }, url: `${site.url}/fuer/abschlussklassen`, offers: { '@type': 'Offer', priceCurrency: 'EUR', price: '16.90', description: 'Abschluss-Shirts ab 16,90 €, Hoodies ab 28,90 € inklusive Druck vorne und hinten, ab 20 Stück' } },
+  { '@context': 'https://schema.org', '@type': 'Service', name: 'Abschluss-Hoodies und Abishirts bedrucken', serviceType: 'Textildruck', description: z.description, provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: [{ '@type': 'City', name: 'Oberhausen' }, { '@type': 'AdministrativeArea', name: 'Ruhrgebiet' }, { '@type': 'Country', name: 'Deutschland' }], audience: { '@type': 'Audience', audienceType: 'Abschlussklassen, Abiturjahrgänge, Schulklassen' }, url: `${site.url}/fuer/abschlussklassen`, offers: { '@type': 'Offer', priceCurrency: 'EUR', price: '16.90', priceSpecification: { '@type': 'PriceSpecification', minPrice: '16.90', priceCurrency: 'EUR', valueAddedTaxIncluded: true }, description: 'Abschluss-Shirts ab 16,90 €, Hoodies ab 28,90 € inklusive Druck vorne und hinten und MwSt., ab 20 Stück' } },
   { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Startseite', item: site.url }, { '@type': 'ListItem', position: 2, name: 'Für wen wir drucken', item: `${site.url}/fuer` }, { '@type': 'ListItem', position: 3, name: 'Abschlussklassen', item: `${site.url}/fuer/abschlussklassen` }] },
 ];
@@ -144,7 +144,7 @@ const ld = [
               <strong>{p.name}</strong>
               <span class="pspec">{p.spec}</span>
               <span class="proof"><Icon name="fire" weight="fill" size={13} /> {p.proof}</span>
-              <span class="price">ab {p.price} € <small>inkl. Druck</small></span>
+              <span class="price">ab {p.price} € <small>inkl. Druck und MwSt.</small></span>
             </div>
           </a>
         ))}
@@ -160,7 +160,7 @@ const ld = [
               <strong>{p.name}</strong>
               <span class="pspec">{p.spec}</span>
               <span class="proof"><Icon name="fire" weight="fill" size={13} /> {p.proof}</span>
-              <span class="price">ab {p.price} € <small>inkl. Druck</small></span>
+              <span class="price">ab {p.price} € <small>inkl. Druck und MwSt.</small></span>
             </div>
           </a>
         ))}

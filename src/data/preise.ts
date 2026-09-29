@@ -1,6 +1,8 @@
 // Preisbeispiele westernprint: netto zzgl. 19 % MwSt., ein Druck (Brust ODER Rücken), Textil inklusive.
 // Einzige Quelle für /was-kostet-textildruck (Tabellen, generierte Antwortsätze, JSON-LD)
 // und /llms-full.txt. Bei Preisänderungen hier ändern und STAND anpassen.
+// Hier stehen nur Nettopreise. Den Bruttopreis (netto x 1,19, auf Cent gerundet) rechnet die Seite selbst aus.
+// Ausnahme: Posten mit istBrutto (Versand) sind schon Endpreise inkl. MwSt. und werden nicht umgerechnet.
 // Die statischen FAQ-Antworten auf /was-kostet-textildruck und public/llms.txt dann mitprüfen.
 
 export const STAND = '21.09.2026';
@@ -28,11 +30,12 @@ export const tabellen: { t: string; d: string; zeilen: [string, string][] }[] = 
   },
 ];
 
-export const zusatz: { t: string; p: string; d: string }[] = [
+export const zusatz: { t: string; p: string; d: string; istBrutto?: boolean }[] = [
   { t: 'Zweite Druckseite', p: 'ab 3,50 €', d: 'Vorne und hinten bedruckt, zum Beispiel Logo vorne, großes Motiv hinten.' },
   { t: 'Nackenprint statt Herstelleretikett', p: '3,00 €', d: 'Dein Logo mit Größenangabe direkt ins Textil gedruckt.' },
-  { t: 'Namen und Rückennummern', p: '4,90 €', d: 'Jedes Teil einzeln, Liste mit Name, Nummer und Größe reicht.' },
+  { t: 'Namen und Rückennummern', p: 'ab 5,90 €', d: 'Jedes Teil einzeln, Liste mit Name, Nummer und Größe reicht.' },
   { t: 'Ärmeldruck oder kleines Zusatzmotiv', p: 'ab 2,52 €', d: 'Zum Beispiel Sponsor am Ärmel oder Schriftzug am Saum.' },
   { t: 'Einrichtung, Sieb, Datencheck', p: '0,00 €', d: 'Wir berechnen keine Einrichtungskosten und keine Druckvorbereitung.' },
-  { t: 'Versand innerhalb Deutschlands', p: '4,90 €', d: 'DHL mit Sendungsverfolgung. Abholung in Oberhausen ist kostenlos.' },
+  // Versandkosten wie an der Kasse (Kassen-Worker): Endpreis inkl. MwSt., ab 500 € Warenwert versandkostenfrei.
+  { t: 'Versand innerhalb Deutschlands', p: '4,90 €', d: 'DHL mit Sendungsverfolgung, versandkostenfrei ab 500 € Warenwert (brutto). Abholung in Oberhausen ist kostenlos.', istBrutto: true },
 ];

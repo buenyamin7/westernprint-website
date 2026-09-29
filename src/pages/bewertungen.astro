@@ -45,7 +45,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
     title={`${sterne} von 5 Sternen bei <span class='hl'>${bewertungen.anzahl} Google-Bewertungen</span>`}
     lede="Echte Rezensionen aus unserem Google-Unternehmensprofil. Nicht ausgewählt, nicht geschönt, alle öffentlich nachlesbar."
     image="/img/werkstatt-heisspresse.jpg"
-    imageAlt="Werkstatt von westernprint in Oberhausen mit Heißpressen"
+    imageAlt="Bünyamin Dursun an der Heißpresse in der westernprint-Werkstatt in Oberhausen"
     cta={{ label: 'Alle Bewertungen bei Google', href: bewertungen.profilUrl }}
     cta2={{ label: 'Angebot in 24h', href: '/kontakt' }}
   />
@@ -102,7 +102,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
         {[
           { icon: 'chat-circle-dots', t: 'Erreichbarkeit', d: 'WhatsApp, Telefon, E-Mail. Ein fester Ansprechpartner statt Ticketsystem, meist am selben Tag eine Antwort.' },
           { icon: 'shield-check', t: 'Konstante Qualität', d: 'Eigene Maschinen in Oberhausen, Sichtprüfung vor dem Verpacken. Nachbestellungen sehen aus wie die erste Lieferung.' },
-          { icon: 'clock', t: 'Verlässliche Termine', d: 'Einzelstücke in 1 bis 3 Werktagen, Serien in 5 bis 7. Wenn etwas eng wird, sagen wir es vorher.' },
+          { icon: 'clock', t: 'Verlässliche Termine', d: 'Einzelstücke sind in 1 bis 3 Werktagen fertig, Serien in 5 bis 7 nach Freigabe. Wenn etwas eng wird, sagen wir es vorher.' },
         ].map((b, i) => (
           <div class={`feat reveal reveal-d${i % 3}`}>
             <div class="icon-box"><Icon name={b.icon} size={22} /></div>

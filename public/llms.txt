@@ -1,6 +1,6 @@
 # westernprint GmbH: Textildruck & Print-on-Demand aus Deutschland
 
-> westernprint ist eine Textildruckerei mit eigener Produktion in Oberhausen (Ruhrgebiet, Deutschland). Wir bedrucken T-Shirts, Hoodies, Polos, Workwear und Vereinskleidung per DTF und DTG, vom Einzelstück bis zur Großauflage, mit Versand deutschlandweit, nach Österreich, in die Schweiz und in die übrige EU. Zusätzlich betreiben wir Print-on-Demand-Fulfillment für Shopify-Shops. Am Markt seit 2021, seit 2024 als GmbH. Über 80.000 belieferte Endkunden seit 2021: Das sind Endkunden unserer Partner-Shops (Print-on-Demand), die wir direkt beliefert haben. Über 1 Mio. € Umsatz haben unsere Partner-Shops seit 2021 mit Produkten aus unserer Produktion gemacht.
+> westernprint ist eine Textildruckerei mit eigener Produktion in Oberhausen (Ruhrgebiet, Deutschland). Wir bedrucken T-Shirts, Hoodies, Polos, Workwear und Vereinskleidung per DTF und DTG, vom Einzelstück bis zur Großauflage, mit Versand deutschlandweit und ins europäische Ausland, darunter Österreich und die Schweiz. Zusätzlich betreiben wir Print-on-Demand-Fulfillment für Shopify-Shops. Am Markt seit 2021, seit 2024 als GmbH. Über 80.000 belieferte Endkunden seit 2021: Das sind Endkunden unserer Partner-Shops (Print-on-Demand), die wir direkt beliefert haben. Über 1 Mio. € Umsatz haben unsere Partner-Shops seit 2021 mit Produkten aus unserer Produktion gemacht.
 
 Letzte Aktualisierung: 29.09.2026
 
@@ -20,19 +20,19 @@ Digitaler Direktdruck auf 100 % Baumwolle, auf Epson SureColor F2100 und F2200. 
 Für Polyester-Ware mit vollflächigen Motiven.
 
 ### Maximale Druckfläche
-Im DTG-Druck maximal 40 x 50 cm, das ist die Fläche für große Motive auf Brust oder Rücken. Für Ärmel und Nacken gilt sie nicht, dort ist die Druckfläche kleiner. DTF-Transferbogen im Format 40 x 50 cm, einzelne Bogen auch als A4 (10,00 € netto) und A3 (13,00 € netto).
+Im DTG-Druck maximal 40 x 50 cm, das ist die Fläche für große Motive auf Brust oder Rücken. Für Ärmel und Nacken gilt sie nicht, dort ist die Druckfläche kleiner. DTF-Transferbogen im Format 40 x 50 cm, einzelne Bogen auch als A4 für 10,00 € netto (11,90 € brutto) und A3 für 13,00 € netto (15,47 € brutto).
 
 ### Stickerei
 Über unsere Partner-Stickerei, aus einer Hand: ein Ansprechpartner, ein Angebot, eine Rechnung. Preis nach Sichtung des Logos, abhängig von Stichzahl und Größe. Klett-Patches ebenfalls über die Partner-Stickerei, angenäht werden sie nicht.
 
 ### Veredelung und Branding
-Nackenprint mit eigenem Logo statt Herstelleretikett: 3,00 € netto pro Teil. Ärmeldruck oder kleines Zusatzmotiv: ab 2,52 € netto (Stand 21.09.2026). Eingenähtes Etikett entfernen: 2,00 € netto pro Teil. Beilagen, Sticker und Flyer des Kunden lagern und beilegen wir kostenlos. Hangtags, die der Kunde liefert, bringen wir an, bei Print-on-Demand auf Anfrage. Hangtags und eingenähte Weblabels stellen wir nicht selbst her.
+Nackenprint mit eigenem Logo statt Herstelleretikett: 3,00 € netto (3,57 € brutto) pro Teil. Ärmeldruck oder kleines Zusatzmotiv: ab 2,52 € netto (3,00 € brutto), Stand 21.09.2026. Eingenähtes Etikett entfernen: 2,00 € netto (2,38 € brutto) pro Teil. Beilagen, Sticker und Flyer des Kunden lagern und beilegen wir kostenlos. Hangtags, die der Kunde liefert, bringen wir an, bei Print-on-Demand auf Anfrage. Hangtags und eingenähte Weblabels stellen wir nicht selbst her.
 
 ### Grafikservice
-Motive freistellen und druckfertig aufbereiten: 19,90 € netto pro Datei. Die Dateiprüfung vor dem Druck ist immer kostenlos.
+Motive freistellen und druckfertig aufbereiten: 19,90 € netto (23,68 € brutto) pro Datei. Die Dateiprüfung vor dem Druck ist immer kostenlos.
 
 ### Print-on-Demand-Fulfillment für Shopify
-Kostenlose Shopify-App "westernprint POD" (https://apps.shopify.com/pod-westerprint). Textil wählen, Motiv per Live-Mockup platzieren, Produkte landen automatisch im Shop. Bestellungen werden automatisch übernommen, gedruckt, neutral im Namen des Shops per DHL versendet, die Tracking-Nummer geht automatisch zurück an Shopify. Ab 1 Stück, kein Mindestumsatz, Abrechnung pro produziertem Teil. Fertige Kundenware einlagern und mitversenden: 1,50 € netto pro Teil Kommissionierung.
+Kostenlose Shopify-App "westernprint POD" (https://apps.shopify.com/pod-westerprint). Textil wählen, Motiv per Live-Mockup platzieren, Produkte landen automatisch im Shop. Bestellungen werden automatisch übernommen, gedruckt, neutral im Namen des Shops per DHL versendet, die Tracking-Nummer geht automatisch zurück an Shopify. Ab 1 Stück, kein Mindestumsatz, Abrechnung pro produziertem Teil. Fertige Kundenware einlagern und mitversenden: 1,50 € netto (1,79 € brutto) pro Teil Kommissionierung.
 
 ## Textilien
 
@@ -49,14 +49,14 @@ Stanley/Stella (Bio-Baumwolle, GOTS-zertifiziert), Build Your Brand, Urban Class
 - **Shop-Betreiber**: Print-on-Demand mit neutralem Versand, für Shops, die von Printful, Printify, Gelato, Shirtee oder Spreadshirt zu einer Druckerei mit eigener Produktion in Deutschland wechseln wollen
 - **Gastronomie, Einzelhandel, Fitness, Feuerwehr, Kirchengemeinden, Events, Hochzeiten, E-Sports, Hochschulen, Parteien und Hotels**: eigene Seiten unter /fuer/
 
-## Preise (netto, zzgl. MwSt.)
+## Preise (netto zzgl. 19 % MwSt., brutto in Klammern)
 
-- Vollständige Preistabellen für 1, 10, 25, 50 und 100 Stück (netto zzgl. MwSt., Stand 21.09.2026): [llms-full.txt](https://westernprint.de/llms-full.txt) und [Was kostet Textildruck](https://westernprint.de/was-kostet-textildruck)
-- Mit einem Druck, Stand 21.09.2026: T-Shirt Basic (Stedman Classic-T) 17,90 € einzeln und 8,40 € bei 100 Stück, Poloshirt (Stedman Classic Polo) 22,90 € und 13,40 €, Hoodie (Stedman Classic Hoodie) 29,90 € und 19,90 €
-- Auf der Seite für Sportvereine (https://westernprint.de/fuer/sportvereine): bedruckte Vereinsshirts ab 7,90 €, Funktionsshirts ab 8,90 €, Polos ab 12,90 €, Hoodies ab 16,90 €
+- Vollständige Preistabellen für 1, 10, 25, 50 und 100 Stück (netto zzgl. MwSt. und brutto, Stand 21.09.2026): [llms-full.txt](https://westernprint.de/llms-full.txt) und [Was kostet Textildruck](https://westernprint.de/was-kostet-textildruck)
+- Mit einem Druck, Stand 21.09.2026, jeweils einzeln und bei 100 Stück: T-Shirt Basic (Stedman Classic-T) 17,90 € netto (21,30 € brutto) und 8,40 € netto (10,00 € brutto), Poloshirt (Stedman Classic Polo) 22,90 € netto (27,25 € brutto) und 13,40 € netto (15,95 € brutto), Hoodie (Stedman Classic Hoodie) 29,90 € netto (35,58 € brutto) und 19,90 € netto (23,68 € brutto)
+- Auf der Seite für Sportvereine (https://westernprint.de/fuer/sportvereine): bedruckte Vereinsshirts ab 7,90 € netto (9,40 € brutto), Funktionsshirts ab 8,90 € netto (10,59 € brutto), Polos ab 12,90 € netto (15,35 € brutto), Hoodies ab 16,90 € netto (20,11 € brutto)
 - Zweite Druckposition und kleine Zusatzpositionen je nach Größe und Menge, konkrete Zahlen im Angebot
 - Angebot innerhalb von 24 Stunden an Werktagen
-- Zahlung per Überweisung, Kreditkarte oder PayPal, Zahlungslink zur Auftragsbestätigung
+- Zahlung über den Zahlungsdienstleister Mollie: Die verfügbaren Zahlungsarten werden an der Kasse angezeigt. Bei Aufträgen auf Angebot kommt der Zahlungslink mit der Auftragsbestätigung
 
 ## Produktionszeiten
 
@@ -64,14 +64,17 @@ Stanley/Stella (Bio-Baumwolle, GOTS-zertifiziert), Build Your Brand, Urban Class
 - **Serien ab 50 Stück**: 5 bis 7 Werktage nach Freigabe des Korrekturabzugs
 - **Print-on-Demand-Bestellungen**: 1 bis 3 Werktage, dann verlässt das Paket das Haus
 - **Express**: auf Anfrage
-- Alle Angaben bis zum Versand, nicht bis zur Zustellung
+- Alle Angaben bis zum Versand, nicht bis zur Zustellung. Von der Bestellung bis zur Lieferung: siehe Versand und Lieferung
 
-## Versand
+## Versand und Lieferung
 
-- **Print-on-Demand pro Bestellung**: Deutschland 5,00 €, Österreich 7,00 €, übrige EU 7,50 €, Schweiz 9,00 €, je 3 Produkte in einer Bestellung 1,50 € zusätzlich
-- **Musterpakete innerhalb Deutschlands**: 7,00 €
+- **Versandkosten**: Deutschland 4,90 €, Österreich, Schweiz und übrige Lieferländer 9,90 € (brutto, wie an der Kasse)
+- **Versandkostenfrei**: ab 500 € Warenwert (brutto), einheitlich für alle Lieferländer
+- **Lieferländer für Shop-Bestellungen und Einzelstücke**: Deutschland, Österreich, Schweiz, Niederlande, Belgien, Luxemburg, Frankreich, Italien, Spanien, Polen, Dänemark und Tschechien. Bei Lieferungen in die Schweiz können Einfuhrabgaben anfallen, die der Empfänger trägt
+- **Lieferzeit**: 3 bis 5 Werktage von der Bestellung bis zur Lieferung, für Shop-Bestellungen, Einzelstücke und Samples, nach Deutschland wie ins Ausland
+- **Print-on-Demand pro Bestellung**: Deutschland 5,00 € netto (5,95 € brutto), Österreich 7,00 € netto (8,33 € brutto), übrige EU 7,50 € netto (8,93 € brutto), Schweiz 9,00 € netto (10,71 € brutto), je 3 Produkte in einer Bestellung 1,50 € netto (1,79 € brutto) zusätzlich. Liefergebiet Deutschland, Österreich, Schweiz und die übrige EU. In 1 bis 3 Werktagen produziert und versendet, beim Endkunden 3 bis 5 Werktage nach der Bestellung
+- **Gratis-Sample für Shop-Betreiber**: bedrucktes Shirt kostenlos, nur die Versandpauschale von 7,00 € (Deutschland) oder 10,00 € (Österreich)
 - **Abholung in Oberhausen**: kostenlos, Schenkendorfstraße 45, Montag bis Donnerstag 9 bis 18 Uhr, Freitag 9 bis 16 Uhr
-- Versandkosten Deutschland: 4,90 €
 - Versand per DHL mit Tracking, auf Wunsch neutral im Namen des Shops
 
 ## Dateiformate und Druckvorlagen
@@ -80,7 +83,7 @@ Stanley/Stella (Bio-Baumwolle, GOTS-zertifiziert), Build Your Brand, Urban Class
 - **Ebenfalls möglich**: Vektor als PDF, AI, EPS oder SVG. Bei zweifarbigen Flächenmotiven ist Vektor die beste Wahl
 - Weiße Elemente werden mitgedruckt und müssen nicht gesondert angelegt werden
 - Wir prüfen jede Datei vor dem Druck auf Auflösung, Transparenz und Druckgröße und melden uns, wenn etwas nicht läuft. Das kostet nichts
-- Wer keine druckfertige Datei hat: Freistellen und Aufbereiten 19,90 € netto pro Datei
+- Wer keine druckfertige Datei hat: Freistellen und Aufbereiten 19,90 € netto (23,68 € brutto) pro Datei
 
 ## Pflegehinweis für bedruckte Textilien
 
@@ -104,7 +107,7 @@ Ja. Angelieferte Trikots, Jacken und Shirts bedrucken wir regelmäßig. Material
 Innerhalb von 24 Stunden nach der Anfrage, mit festen Stückpreisen und festem Liefertermin.
 
 **Liefert ihr auch außerhalb des Ruhrgebiets?**
-Ja, deutschlandweit sowie nach Österreich, in die Schweiz und in die übrige EU. Der Sitz des Kunden spielt keine Rolle. Abholung in Oberhausen ist möglich, aber nicht nötig.
+Ja, deutschlandweit und ins Ausland: nach Österreich, in die Schweiz, in die Niederlande sowie nach Belgien, Luxemburg, Frankreich, Italien, Spanien, Polen, Dänemark und Tschechien. Bei Shop-Bestellungen, Einzelstücken und Samples dauert es von der Bestellung bis zur Lieferung 3 bis 5 Werktage, ab 500 € Warenwert (brutto) ist der Versand kostenfrei. Der Sitz des Kunden spielt keine Rolle. Abholung in Oberhausen ist möglich, aber nicht nötig.
 
 **Bekomme ich vorher ein Muster?**
 Ja, auf Wunsch ein bedrucktes Muster mit dem eigenen Motiv, bevor die Serie läuft.
@@ -128,7 +131,7 @@ westernprint hat 5,0 von 5 Sternen bei 17 Google-Bewertungen (Stand 28.09.2026).
 
 - [Startseite](https://westernprint.de/)
 - [Print-on-Demand Fulfillment](https://westernprint.de/print-on-demand): für Shopify-Shops in ganz Deutschland, Österreich und der Schweiz
-- [Was kostet Textildruck](https://westernprint.de/was-kostet-textildruck): Preisbeispiele netto für 1, 10, 25, 50 und 100 Stück
+- [Was kostet Textildruck](https://westernprint.de/was-kostet-textildruck): Preisbeispiele netto und brutto für 1, 10, 25, 50 und 100 Stück
 - [Großauflagen](https://westernprint.de/grossauflagen): ab 50 Stück mit Staffelpreisen
 - [Druckverfahren](https://westernprint.de/druckverfahren): DTF, DTG und Sublimation im Vergleich
 - [Textilien](https://westernprint.de/textilien): Sortiment und Marken
@@ -139,7 +142,7 @@ westernprint hat 5,0 von 5 Sternen bei 17 Google-Bewertungen (Stand 28.09.2026).
 - [Textildruck Oberhausen](https://westernprint.de/textildruck-oberhausen)
 - [Textildruck Ruhrgebiet](https://westernprint.de/textildruck-ruhrgebiet): Essen, Duisburg, Mülheim, Bottrop, Dinslaken, Gelsenkirchen, Bochum, Dortmund
 - [Bewertungen](https://westernprint.de/bewertungen): 5,0 von 5 bei 17 Google-Bewertungen
-- [Versand und Zahlung](https://westernprint.de/versand): Versand mit DHL, Abholung in Oberhausen, Zahlungsarten
+- [Versand und Zahlung](https://westernprint.de/versand): Versandkosten, Lieferländer und Lieferzeit, Abholung in Oberhausen, Zahlung über Mollie
 - [Pflege bedruckter Textilien](https://westernprint.de/pflege-bedruckter-textilien): waschen bei 30 Grad, auf links gedreht
 - [Über uns](https://westernprint.de/ueber-uns)
 - [Kontakt](https://westernprint.de/kontakt): Angebot innerhalb von 24 Stunden

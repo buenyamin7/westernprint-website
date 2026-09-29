@@ -8,6 +8,7 @@ import { site, oeffnungszeiten } from '../data/site';
 import { bewertungen } from '../data/bewertungen';
 
 // Preisbeispiele stammen von /was-kostet-textildruck (netto zzgl. MwSt.). Bei Preisänderungen dort mit anpassen.
+// Brutto daneben = netto x 1,19, kaufmännisch auf Cent gerundet.
 const PREIS_STAND = '21.09.2026';
 // Google-Bewertungen aus src/data/bewertungen.ts: 5 -> "5,0", "2026-09-28" -> "28.09.2026"
 const sterne = bewertungen.schnitt.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -46,7 +47,7 @@ const ld = [
     title="Textildruck in Oberhausen. <span class='hl'>Eigene Druckerei, keine Zwischenhändler.</span>"
     lede="T-Shirts, Hoodies, Polos und Trikots mit deinem Motiv, gedruckt in der Schenkendorfstraße in Oberhausen. Ab 1 Stück, Abholung möglich, Lieferung nach Essen, Duisburg, Mülheim, Bottrop und ins ganze Ruhrgebiet."
     image="/img/werkstatt-heisspresse.jpg"
-    imageAlt="Fertig bedrucktes Shirt aus der westernprint Druckerei in Oberhausen"
+    imageAlt="Bünyamin Dursun an der Heißpresse in der westernprint-Werkstatt in Oberhausen"
     cta={{ label: 'Angebot in 24h', href: '#anfrage' }}
   />
 
@@ -56,8 +57,8 @@ const ld = [
         westernprint ist eine Textildruckerei in Oberhausen, {site.address.street} im Marienviertel.
         westernprint gibt es seit 2021 und druckt in eigener Produktion, per DTF und DTG.
         Bedruckt werden T-Shirts, Hoodies, Polos und Trikots, ab 1 Stück und ohne Einrichtungskosten.
-        Ein einzelnes T-Shirt Basic (Stedman Classic-T) mit einem Druck kostet 17,90 € netto zzgl. MwSt.
-        Bei 50 Stück sind es 9,40 € pro Stück (Stand {PREIS_STAND}).
+        Ein einzelnes T-Shirt Basic (Stedman Classic-T) mit einem Druck kostet 17,90 € netto (21,30 € brutto).
+        Bei 50 Stück sind es 9,40 € netto (11,19 € brutto) pro Stück (Stand {PREIS_STAND}).
         Einzelstücke sind in der Regel in 1 bis 3 Werktagen fertig, Serien 5 bis 7 Werktage nach Freigabe.
         Abholung und Beratung vor Ort gibt es {oeffnungszeiten.text}, nach kurzer Absprache.
         Die Abholung in Oberhausen ist kostenlos.

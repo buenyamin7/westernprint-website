@@ -5,7 +5,9 @@
 //   src/data/zielgruppen.ts (/fuer/<slug>), src/data/bewertungen.ts (/bewertungen).
 // Ausnahme: /fuer/abschlussklassen und /fuer/streetwear-brands haben eigene Seiten mit eigenen
 // Inhalten und FAQ. Für sie steht hier nur ein Verweis, damit keine abweichenden Aussagen entstehen.
-// Versand: 4,90 € laut Versandbedingungen (vom Inhaber bestätigt 28.09.2026).
+// Preise: netto aus preise.ts, brutto rechnet diese Datei daneben aus (netto x 1,19, kaufmännisch auf Cent).
+// Versand, Lieferzeit, Lieferländer und Zahlung: Entscheidungen des Inhabers vom 29.09.2026, Beträge und Länder
+// wie im Kassen-Worker (westernprint-checkout, src/catalog.js SHIPPING). Versandkosten sind dort schon brutto.
 import type { APIRoute } from 'astro';
 import { site, faqs, oeffnungszeiten } from '../data/site';
 import { STAND, tabellen, zusatz } from '../data/preise';
@@ -29,11 +31,14 @@ const isoAusDe = (d: string) => {
   return m ? `${m[3]}-${m[2]}-${m[1]}` : undefined;
 };
 
+// Stand der festen Texte in dieser Datei (Versand, Lieferung, Zahlung nach den Entscheidungen vom 29.09.2026).
+const STAND_TEXTE = '2026-09-29';
+
 // Letzte Aktualisierung wie Sitemap und Stand-Zeile: letzter Commit der Quelldateien.
-// Ohne git der jüngste Datenstand (Bewertungen oder Preise), bewusst kein Builddatum.
+// Ohne git der jüngste Datenstand (Bewertungen, Preise oder feste Texte), bewusst kein Builddatum.
 function letzteAktualisierung(): string {
   const git = gitDates(QUELLEN)?.modified;
-  const daten = [bewertungen.stand, isoAusDe(STAND)].filter((d): d is string => Boolean(d)).sort().at(-1);
+  const daten = [bewertungen.stand, isoAusDe(STAND), STAND_TEXTE].filter((d): d is string => Boolean(d)).sort().at(-1);
   return formatDateDe(git ?? daten) ?? '';
 }
 
@@ -43,7 +48,7 @@ const SEITEN: [string, string][] = [
   ['/textildruck-oberhausen', 'Textildruck in Oberhausen: Adresse, Abholung und Ablauf vor Ort'],
   ['/textildruck-ruhrgebiet', 'Textildruck im Ruhrgebiet: Entfernung und Lieferung für Essen, Duisburg, Mülheim, Bottrop und weitere Städte'],
   ['/', 'Startseite'],
-  ['/was-kostet-textildruck', 'Was kostet Textildruck: Preisbeispiele netto für 1, 10, 25, 50 und 100 Stück'],
+  ['/was-kostet-textildruck', 'Was kostet Textildruck: Preisbeispiele netto und brutto für 1, 10, 25, 50 und 100 Stück'],
   ['/druckverfahren', 'Druckverfahren: DTF, DTG und Sublimation im Vergleich, Ausstattung der Produktion'],
   ['/grossauflagen', 'Großauflagen: Textildruck ab 50 Stück'],
   ['/textilien', 'Textilien: Sortiment und Marken'],
@@ -52,7 +57,7 @@ const SEITEN: [string, string][] = [
   ['/shop', 'Shop: Textilien mit eigenem Motiv bedrucken, ab 1 Stück'],
   ['/bewertungen', 'Bewertungen: Google-Rezensionen von westernprint'],
   ['/pflege-bedruckter-textilien', 'Pflege bedruckter Textilien: Pflegeanleitung für DTF- und DTG-Drucke'],
-  ['/versand', 'Versand und Zahlung: DHL, Abholung in Oberhausen, Zahlungsarten'],
+  ['/versand', 'Versand und Zahlung: Versandkosten, Lieferländer und Lieferzeit, Abholung in Oberhausen, Zahlung über Mollie'],
   ['/ueber-uns', 'Über uns: westernprint und der Inhaber Bünyamin Dursun'],
   ['/kontakt', 'Kontakt: Angebot innerhalb von 24 Stunden an Werktagen'],
   ['/fuer', 'Für wen wir drucken: Übersicht aller Zielgruppen-Seiten'],
@@ -72,6 +77,22 @@ const text = (t: string) => t.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim(
 const zelle = (t: string) => text(t).replace(/\|/g, '\\|');
 const url = (pfad: string) => `${site.url}${pfad}`;
 
+// Brutto neben netto (Entscheidung des Inhabers vom 29.09.2026). Gerechnet wird in Cent, gerundet kaufmännisch.
+const BETRAG = /(\d{1,3}(?:\.\d{3})+|\d+),(\d{2})\s?€/g;
+const euro = (cent: number) => `${Math.floor(cent / 100).toLocaleString('de-DE')},${String(cent % 100).padStart(2, '0')} €`;
+/** Reine Nettoangabe: "ab 3,50 €" bleibt, ein angehängtes "netto" oder "(… brutto)" fällt weg. */
+const nettoText = (p: string) => text(p).replace(/\s*\([^)]*brutto[^)]*\)/gi, '').replace(/\s+netto\b/gi, '').trim();
+/** Netto -> brutto mit 19 % MwSt.: "ab 3,50 €" -> "ab 4,17 €", "17,90 €" -> "21,30 €". */
+const bruttoText = (p: string) =>
+  nettoText(p).replace(BETRAG, (_, ganz: string, cent: string) => euro(Math.floor(((Number(ganz.replace(/\./g, '')) * 100 + Number(cent)) * 119 + 50) / 100)));
+
+// Versand und Lieferung. Beträge wie an der Kasse (brutto, nicht umrechnen), Länder wie SHIPPING im Kassen-Worker.
+const LIEFERLAENDER = ['Deutschland', 'Österreich', 'Schweiz', 'Niederlande', 'Belgien', 'Luxemburg', 'Frankreich', 'Italien', 'Spanien', 'Polen', 'Dänemark', 'Tschechien'];
+const aufzaehlung = (l: string[]) => `${l.slice(0, -1).join(', ')} und ${l[l.length - 1]}`;
+const VERSANDKOSTEN = 'Deutschland 4,90 €, Österreich, Schweiz und übrige Lieferländer 9,90 € (brutto, wie an der Kasse)';
+const VERSANDFREI = 'Versandkostenfrei ab 500 € Warenwert (brutto), einheitlich für alle Lieferländer.';
+const LIEFERZEIT = 'Von der Bestellung bis zur Lieferung vergehen bei Shop-Bestellungen, Einzelstücken und Samples 3 bis 5 Werktage, nach Deutschland wie ins Ausland.';
+
 // Gesperrte Aussagen: ungeklärt oder nicht belegt. Auf ihren Seiten bleiben sie stehen,
 // hier werden sie nicht weiterverbreitet. Absätze verlieren nur den betroffenen Satz,
 // FAQ-Einträge entfallen ganz (sonst bleiben Antworten mit losen Bezügen wie "damit" zurück).
@@ -79,7 +100,6 @@ const GESPERRT: RegExp[] = [
   /wasch\w*[^.]*\b60\s*(°|grad)|\b60\s*(°|grad)[^.]*wasch/i, // Waschtemperatur 60 Grad
   /an den (messe)?stand\b/i, // Lieferung an den Messestand
   /fahren wir[^.]*selbst|bringen die teile/i, // Selbst zur Messe fahren, Teile an den Stand bringen
-  /miriam/i, // Fallbeispiel "Miriam"
 ];
 const gesperrt = (t: string) => GESPERRT.some((re) => re.test(t));
 // Sätze trennen, ohne nach Abkürzungen wie "z. B." oder "ca." zu schneiden.
@@ -134,7 +154,7 @@ function markdown(): string {
       'Für DTG setzt westernprint die Epson SureColor F2100 und F2200 ein. Die maximale DTG-Druckfläche beträgt 40 x 50 cm. ' +
       'Dunkle Textilien werden für DTG auf einer Pretreat-Maschine vorbehandelt und auf der Heißpresse fixiert. ' +
       'DTF-Transfers kommen auf der Heißpresse auf das Textil. ' +
-      'Produziert wird in Oberhausen, versendet wird deutschlandweit mit DHL und Sendungsnummer.',
+      'Produziert wird in Oberhausen, versendet wird mit DHL und Sendungsnummer, deutschlandweit und ins europäische Ausland.',
     '',
     'Textilmarken: Stanley/Stella, Stedman, Build Your Brand und Urban Classics.',
     '',
@@ -155,12 +175,21 @@ function markdown(): string {
     '- Angebot innerhalb von 24 Stunden an Werktagen.',
     '- Vor dem Druck kommt ein Korrekturabzug zur Freigabe.',
     '- Einzelstücke sind in 1 bis 3 Werktagen fertig. Serien brauchen 5 bis 7 Werktage nach Freigabe.',
-    `- Versand innerhalb Deutschlands 4,90 € mit DHL und Sendungsnummer oder kostenlose Abholung in Oberhausen. Details: [Versand und Zahlung](${url('/versand')})`,
+    `- ${LIEFERZEIT}`,
     '- Druckdaten bleiben für Nachbestellungen gespeichert.',
+    '',
+    '## Versand und Zahlung',
+    '',
+    `- Versandkosten: ${VERSANDKOSTEN}.`,
+    `- ${VERSANDFREI}`,
+    `- Lieferländer für Shop-Bestellungen und Einzelstücke: ${aufzaehlung(LIEFERLAENDER)}. Bei Lieferungen in die Schweiz können Einfuhrabgaben anfallen, die der Empfänger trägt.`,
+    `- Versand mit DHL und Sendungsnummer oder kostenlose Abholung in Oberhausen. Details: [Versand und Zahlung](${url('/versand')})`,
+    '- Zahlung über den Zahlungsdienstleister Mollie. Die verfügbaren Zahlungsarten werden an der Kasse angezeigt.',
     '',
     '## Print-on-Demand für Shopify',
     '',
     'westernprint bindet Shopify-Shops über die eigene App "westernprint POD" an. Die Installation der App ist kostenlos. ' +
+      'Print-on-Demand-Bestellungen werden in 1 bis 3 Werktagen produziert und versendet und sind 3 bis 5 Werktage nach der Bestellung beim Endkunden, in Deutschland, Österreich, der Schweiz und der übrigen EU. ' +
       `App: [westernprint POD im Shopify App Store](https://apps.shopify.com/pod-westerprint). Mehr dazu: [Print-on-Demand](${url('/print-on-demand')})`,
     '',
   );
@@ -169,20 +198,20 @@ function markdown(): string {
   z.push(
     '## Preise',
     '',
-    `Alle Preise netto zzgl. 19 % MwSt., Stand ${STAND}. Ein Druck (Brust oder Rücken), Textil inklusive. ` +
+    `Alle Preise netto zzgl. 19 % MwSt. und daneben brutto inkl. 19 % MwSt., Stand ${STAND}. Ein Druck (Brust oder Rücken), Textil inklusive. ` +
       `Quelle: [Was kostet Textildruck](${url('/was-kostet-textildruck')})`,
     '',
   );
   for (const t of tabellen) {
-    z.push(`### ${text(t.t)}`, '', text(t.d), '', '| Menge | Preis pro Stück (netto zzgl. MwSt.) |', '| --- | --- |');
-    for (const [menge, preis] of t.zeilen) z.push(`| ${zelle(menge)} | ${zelle(preis)} |`);
+    z.push(`### ${text(t.t)}`, '', text(t.d), '', '| Menge | Preis pro Stück netto (zzgl. MwSt.) | Preis pro Stück brutto (inkl. MwSt.) |', '| --- | --- | --- |');
+    for (const [menge, preis] of t.zeilen) z.push(`| ${zelle(menge)} | ${zelle(nettoText(preis))} | ${zelle(bruttoText(preis))} |`);
     z.push('');
   }
-  // Versand separat unter der Tabelle, weil die Tabelle netto ist.
-  const zusatzOhneVersand = zusatz.filter((x) => !/versand/i.test(x.t));
-  z.push(`### Zusatzleistungen (netto zzgl. MwSt., Stand ${STAND})`, '', '| Leistung | Preis | Hinweis |', '| --- | --- | --- |');
-  for (const x of zusatzOhneVersand) z.push(`| ${zelle(x.t)} | ${zelle(x.p)} | ${zelle(x.d)} |`);
-  z.push('', `Versand innerhalb Deutschlands: ${(zusatz.find((x) => /versand/i.test(x.t)) ?? { p: '4,90 €' }).p} mit DHL und Sendungsnummer. Die Abholung in Oberhausen ist kostenlos.`, '');
+  // Versand separat unter der Tabelle: Die Versandkosten sind schon brutto (istBrutto in preise.ts) und werden nicht umgerechnet.
+  const zusatzOhneVersand = zusatz.filter((x) => !(x.istBrutto || /versand/i.test(x.t)));
+  z.push(`### Zusatzleistungen (Stand ${STAND})`, '', '| Leistung | Preis netto (zzgl. MwSt.) | Preis brutto (inkl. MwSt.) | Hinweis |', '| --- | --- | --- | --- |');
+  for (const x of zusatzOhneVersand) z.push(`| ${zelle(x.t)} | ${zelle(nettoText(x.p))} | ${zelle(bruttoText(x.p))} | ${zelle(x.d)} |`);
+  z.push('', `Versandkosten: ${VERSANDKOSTEN}. ${VERSANDFREI} Die Abholung in Oberhausen ist kostenlos.`, '');
 
   // Pflege
   z.push(

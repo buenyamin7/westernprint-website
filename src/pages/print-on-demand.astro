@@ -13,8 +13,8 @@ const faqs = [
   { q: 'Wie funktioniert euer Print-on-Demand-Service genau?', a: 'Du verbindest deinen Shop mit unserem System. Sobald eine Bestellung eingeht, übernehmen wir Druck, Verpackung und Versand, komplett automatisiert und in deinem Namen.' },
   { q: 'Gibt es Mindestbestellmengen?', a: 'Nein. Wir produzieren ab 1 Stück, perfekt für Einzelbestellungen oder personalisierte Produkte.' },
   { q: 'Liefert ihr an Kunden in ganz Deutschland?', a: 'Ja. Wir drucken für Shops aus ganz Deutschland, Österreich und der Schweiz und versenden per DHL direkt an deine Kunden, egal ob in Hamburg, München, Wien oder Zürich. Wo dein Shop sitzt, spielt keine Rolle.' },
-  { q: 'Wie schnell sind die Lieferzeiten?', a: 'Innerhalb Deutschlands in der Regel 1 bis 3 Werktage, auch im Q4. Nach Österreich, in die Schweiz und in die übrige EU meist 3 bis 5 Tage.' },
-  { q: 'Was kostet der Versand an meine Kunden?', a: 'Pro Bestellung netto: Deutschland 5,00 €, Österreich 7,00 €, übrige EU 7,50 €, Schweiz 9,00 €. Je 3 Produkte in einer Bestellung kommen 1,50 € dazu. Versand per DHL mit Tracking, neutral in deinem Namen.' },
+  { q: 'Wie schnell sind die Lieferzeiten?', a: 'Jede Bestellung wird in 1 bis 3 Werktagen produziert und versendet, auch im Q4. Bei deinen Kunden kommt sie in der Regel 3 bis 5 Werktage nach der Bestellung an, in Deutschland genauso wie in Österreich, der Schweiz und der übrigen EU.' },
+  { q: 'Was kostet der Versand an meine Kunden?', a: 'Pro Bestellung: Deutschland 5,00 € netto (5,95 € brutto), Österreich 7,00 € netto (8,33 € brutto), übrige EU 7,50 € netto (8,93 € brutto), Schweiz 9,00 € netto (10,71 € brutto). Je 3 Produkte in einer Bestellung kommen 1,50 € netto (1,79 € brutto) dazu. Versand per DHL mit Tracking, neutral in deinem Namen.' },
   { q: 'Wo wird produziert und wohin versendet ihr?', a: 'Produziert wird ausschließlich in unserer eigenen Werkstatt in Oberhausen, also in Deutschland, auf eigenen Epson-Maschinen und Heißpressen. Keine Weitergabe an wechselnde Partnerdruckereien im Ausland. Versendet wird deutschlandweit per DHL, neutral im Namen deines Shops. Österreich, Schweiz und die übrige EU sind ebenfalls möglich.' },
   { q: 'Wie läuft die Anbindung meines Shops?', a: 'Du bekommst Zugang zu deinem Kundenportal. Dort verbindest du deinen Shopify-Store per App oder Bestellimport. Auf Wunsch richten wir alles gemeinsam ein.' },
   { q: 'Was kostet die Shopify-App westernprint POD?', a: 'Die Installation der App „westernprint POD“ ist kostenlos, eine App-Gebühr gibt es nicht. Pro Bestellung zahlst du Produktion und Versand.' },
@@ -25,7 +25,7 @@ const appLd = { '@context': 'https://schema.org', '@type': 'SoftwareApplication'
 const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'Print-on-Demand Fulfillment für Shopify-Shops in Deutschland, Österreich und der Schweiz', serviceType: 'Print-on-Demand Fulfillment', provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: [{ '@type': 'Country', name: 'Deutschland' }, { '@type': 'Country', name: 'Österreich' }, { '@type': 'Country', name: 'Schweiz' }, { '@type': 'Place', name: 'Europäische Union' }], url: 'https://westernprint.de/print-on-demand', offers: { '@type': 'Offer', description: 'Feste Preise pro Produkt inklusive Druck, keine Einrichtungsgebühr, keine Mindestmenge' } };
 const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 ---
-<Base title="Print-on-Demand Anbieter aus Deutschland: Fulfillment für Shopify" description="Print-on-Demand für Shopify-Shops in ganz Deutschland, Österreich und der Schweiz. Wir drucken in eigener Produktion in Oberhausen und versenden neutral in deinem Namen. Ab 1 Stück, 1-3 Werktage, kostenlose App, feste Preise." jsonLd={[svcLd, appLd, faqLd]}>
+<Base title="Print-on-Demand Anbieter aus Deutschland: Fulfillment für Shopify" description="Print-on-Demand für Shopify-Shops in ganz Deutschland, Österreich und der Schweiz. Wir drucken in eigener Produktion in Oberhausen und versenden neutral in deinem Namen. Ab 1 Stück, Produktion in 1-3 Werktagen, kostenlose App, feste Preise." jsonLd={[svcLd, appLd, faqLd]}>
   <PageHero
     eyebrow="Print-on-Demand"
     title="Print-on-Demand aus Deutschland für deinen Shopify-Shop. <span class='hl'>Ab 1 Stück.</span>"
@@ -40,7 +40,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
     <div class="container pod-answer">
       <h2 class="reveal">Wie arbeitet westernprint als Print-on-Demand-Partner?</h2>
       <div class="reveal reveal-d1">
-        <p class="lede pod-answer-text">westernprint produziert Print-on-Demand-Bestellungen in Oberhausen auf eigenen Maschinen, per DTF und DTG. Für DTG setzt westernprint die Epson SureColor F2100 und F2200 ein. Als Textilien stehen Stanley/Stella und Stedman zur Wahl. Die Produktion dauert 1 bis 3 Werktage. Jedes Teil wird vor dem Verpacken geprüft. Danach versendet westernprint die Bestellung per DHL mit Tracking deutschlandweit an deine Kunden. Der Versand läuft neutral in deinem Namen, ohne westernprint-Logo im Paket. Deinen Shopify-Shop verbindest du über die eigene App „westernprint POD“ aus dem Shopify App Store. Die Installation ist kostenlos, pro Bestellung zahlst du Produktion und Versand. Eine Mindestmenge gibt es nicht, westernprint druckt ab 1 Stück. Dein fester Ansprechpartner ist {oeffnungszeiten.text} erreichbar, per WhatsApp, Telefon und E-Mail. Seit 2021 hat westernprint über 80.000 Endkunden von Partner-Shops direkt beliefert. Über 1 Mio. € Umsatz haben unsere Partner-Shops seit 2021 mit Produkten aus unserer Produktion gemacht.</p>
+        <p class="lede pod-answer-text">westernprint produziert Print-on-Demand-Bestellungen in Oberhausen auf eigenen Maschinen, per DTF und DTG. Für DTG setzt westernprint die Epson SureColor F2100 und F2200 ein. Als Textilien stehen Stanley/Stella und Stedman zur Wahl. Die Produktion dauert 1 bis 3 Werktage. Jedes Teil wird vor dem Verpacken geprüft. Danach versendet westernprint die Bestellung per DHL mit Tracking deutschlandweit an deine Kunden. Bei ihnen kommt sie in der Regel 3 bis 5 Werktage nach der Bestellung an. Der Versand läuft neutral in deinem Namen, ohne westernprint-Logo im Paket. Deinen Shopify-Shop verbindest du über die eigene App „westernprint POD“ aus dem Shopify App Store. Die Installation ist kostenlos, pro Bestellung zahlst du Produktion und Versand. Eine Mindestmenge gibt es nicht, westernprint druckt ab 1 Stück. Dein fester Ansprechpartner ist {oeffnungszeiten.text} erreichbar, per WhatsApp, Telefon und E-Mail. Seit 2021 hat westernprint über 80.000 Endkunden von Partner-Shops direkt beliefert. Über 1 Mio. € Umsatz haben unsere Partner-Shops seit 2021 mit Produkten aus unserer Produktion gemacht.</p>
         <a class="rating-line" href="/bewertungen">
           <span class="stars" aria-hidden="true">{Array.from({ length: 5 }).map(() => <Icon name="star" weight="fill" size={16} />)}</span>
           <span>{schnitt} von 5 Sternen bei {bewertungen.anzahl} Google-Bewertungen</span>
@@ -59,7 +59,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
         {[
           { icon: 'factory', t: 'Produktion in Oberhausen', d: 'Alle Drucke entstehen auf unseren eigenen Epson-Maschinen, nicht bei wechselnden Partnerdruckereien. Versand deutschlandweit per DHL.' },
           { icon: 'package', t: 'Neutraler Versand', d: 'Kein westernprint-Logo, keine Rechnung von uns im Paket. Dein Kunde sieht nur dich.' },
-          { icon: 'clock', t: '1 bis 3 Werktage', d: 'Auch in der Black Week und im Weihnachtsgeschäft.' },
+          { icon: 'clock', t: 'Produktion in 1 bis 3 Werktagen', d: 'Auch in der Black Week und im Weihnachtsgeschäft. Deine Kunden haben ihre Bestellung in 3 bis 5 Werktagen.' },
           { icon: 'plugs-connected', t: 'Shopify-Anbindung', d: 'Bestellungen laufen automatisch zu uns. Tracking geht automatisch zurück in deinen Shop.' },
           { icon: 'shield-check', t: 'Qualitätskontrolle', d: 'Jedes Teil wird vor dem Verpacken geprüft. Reklamationen kosten dich sonst Zeit und Werbebudget.' },
           { icon: 'chat-circle-dots', t: 'Persönlicher Support', d: 'WhatsApp, Telefon, E-Mail. Ein fester Ansprechpartner, kein Ticketsystem.' },
@@ -148,7 +148,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
             <li><Icon name="check" weight="bold" size={16} /> Direkter Ansprechpartner, schnelle Entscheidungen</li>
             <li><Icon name="check" weight="bold" size={16} /> Qualitätskontrolle vor jedem Versand</li>
             <li><Icon name="check" weight="bold" size={16} /> DTF und DTG, deckend und waschbeständig</li>
-            <li><Icon name="check" weight="bold" size={16} /> 1 bis 3 Werktage, auch im Weihnachtsgeschäft</li>
+            <li><Icon name="check" weight="bold" size={16} /> Produktion in 1 bis 3 Werktagen, auch im Weihnachtsgeschäft</li>
             <li><Icon name="check" weight="bold" size={16} /> Individuelle Umsetzung: Labels, Beilagen, Sonderformate</li>
           </ul>
         </div>
@@ -164,7 +164,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
           <span class="eyebrow">Fallbeispiel</span>
           <h2>Miriam: von 8 Tagen Lieferzeit zu ruhigem Schlaf</h2>
           <p class="muted">Miriam betreibt seit über zwei Jahren einen Shopify-Store für personalisierte Geschenke. Beim alten Anbieter löste sich der Druck nach wenigen Wäschen, der Versand dauerte bis zu 8 Werktage, der Support war nicht erreichbar. Sie verlor Stammkunden und bekam schlechte Bewertungen.</p>
-          <p class="muted">Seit Oktober 2023 produziert sie mit uns. Auch in der Black Week und zu Weihnachten liefern wir in 1 bis 3 Tagen.</p>
+          <p class="muted">Seit Oktober 2023 produziert sie mit uns. Auch in der Black Week und zu Weihnachten produzieren und versenden wir ihre Bestellungen in 1 bis 3 Werktagen.</p>
           <blockquote>„Ich schlafe wieder ruhig, weil ich weiß, dass jede Bestellung sitzt. Egal ob im Januar oder mitten im Weihnachtsstress.“<footer>Miriam, Kundin seit Oktober 2023</footer></blockquote>
         </div>
         <ul class="results reveal reveal-d1">
@@ -181,16 +181,16 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
     <div class="container">
       <div class="section-head reveal">
         <h2>Versandkosten und Lieferzeiten</h2>
-        <p>Jede Bestellung geht per DHL mit Tracking direkt an deinen Kunden, neutral verpackt im Namen deines Shops. Alle Preise netto.</p>
+        <p>Jede Bestellung geht per DHL mit Tracking direkt an deinen Kunden, neutral verpackt im Namen deines Shops. Alle Preise netto zzgl. MwSt., in Klammern brutto.</p>
       </div>
       <div class="ship-table reveal">
         <div class="ship-row ship-head"><span>Zielland</span><span>Lieferzeit</span><span>Versand pro Bestellung</span></div>
-        <div class="ship-row"><span>Deutschland</span><span>1 bis 3 Werktage</span><span>5,00 &euro;</span></div>
-        <div class="ship-row"><span>&Ouml;sterreich</span><span>3 bis 5 Werktage</span><span>7,00 &euro;</span></div>
-        <div class="ship-row"><span>&Uuml;brige EU</span><span>3 bis 5 Werktage</span><span>7,50 &euro;</span></div>
-        <div class="ship-row"><span>Schweiz</span><span>3 bis 5 Werktage</span><span>9,00 &euro;</span></div>
+        <div class="ship-row"><span>Deutschland</span><span>3 bis 5 Werktage</span><span>5,00 &euro; netto <small class="gross">(5,95 &euro; brutto)</small></span></div>
+        <div class="ship-row"><span>&Ouml;sterreich</span><span>3 bis 5 Werktage</span><span>7,00 &euro; netto <small class="gross">(8,33 &euro; brutto)</small></span></div>
+        <div class="ship-row"><span>&Uuml;brige EU</span><span>3 bis 5 Werktage</span><span>7,50 &euro; netto <small class="gross">(8,93 &euro; brutto)</small></span></div>
+        <div class="ship-row"><span>Schweiz</span><span>3 bis 5 Werktage</span><span>9,00 &euro; netto <small class="gross">(10,71 &euro; brutto)</small></span></div>
       </div>
-      <p class="muted small ship-note">Je 3 Produkte in einer Bestellung kommen 1,50 &euro; dazu. Die Lieferzeit gilt ab Versand, die Produktion dauert 1 bis 3 Werktage.</p>
+      <p class="muted small ship-note">Je 3 Produkte in einer Bestellung kommen 1,50 &euro; netto (1,79 &euro; brutto) dazu. Die Lieferzeit gilt ab Bestellung und enthält die Produktion von 1 bis 3 Werktagen.</p>
     </div>
   </section>
 
@@ -217,6 +217,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
   .ship-row span:last-child { text-align: right; font-variant-numeric: tabular-nums; }
   .ship-head { background: var(--bg-2); color: var(--text-3); font-size: 13px; font-weight: 600; }
   .ship-note { margin-top: 14px; }
+  .ship-row .gross { display: block; font-size: 13px; color: var(--text-3); }
   @media (max-width: 600px) { .ship-row { grid-template-columns: 1fr 1fr; } .ship-row span:nth-child(2) { order: 3; grid-column: 1 / -1; color: var(--text-3); font-size: 13.5px; } }
   .app-section { position: relative; overflow: hidden; }
   .app-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(60% 80% at 85% 50%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%); pointer-events: none; }

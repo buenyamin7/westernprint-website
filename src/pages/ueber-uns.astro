@@ -14,6 +14,8 @@ const sterne = bewertungen.schnitt.toLocaleString('de-DE', { minimumFractionDigi
 const bewStand = bewertungen.stand.split('-').reverse().join('.');
 
 const werkstattImg = await imgInfo('/img/lager-regal-werkstatt.jpg');
+// Foto im Abschnitt #inhaber: der Mann an der Heißpresse ist Bünyamin Dursun (vom Inhaber am 29.09.2026 bestätigt).
+const inhaberImg = await imgInfo('/img/werkstatt-heisspresse.jpg');
 
 // Steckbrief zum Inhaber. Belegt sichtbar das Person-Schema aus Base.astro (@id /ueber-uns#inhaber).
 const steckbrief = [
@@ -57,7 +59,7 @@ const faqs = [
   },
   {
     q: 'Wo druckt westernprint?',
-    a: `westernprint druckt in der eigenen Produktion in Oberhausen, ${site.address.street}. Gedruckt wird ausschließlich im eigenen Haus, nicht bei wechselnden Partnerdruckereien. Der DTG-Druck läuft auf Epson SureColor F2100 und F2200. DTF-Transfers pressen wir auf der Heißpresse auf. Von Oberhausen aus versendet westernprint mit DHL deutschlandweit.`,
+    a: `westernprint druckt in der eigenen Produktion in Oberhausen, ${site.address.street}. Gedruckt wird ausschließlich im eigenen Haus, nicht bei wechselnden Partnerdruckereien. Der DTG-Druck läuft auf Epson SureColor F2100 und F2200. DTF-Transfers pressen wir auf der Heißpresse auf. Von Oberhausen aus versendet westernprint mit DHL deutschlandweit und liefert auch ins Ausland, zum Beispiel nach Österreich, in die Schweiz und in die Niederlande.`,
   },
   {
     q: 'Seit wann gibt es westernprint?',
@@ -111,8 +113,6 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
         <h2>Wer hinter westernprint steht</h2>
         <p>Bünyamin Dursun hat westernprint 2021 in Oberhausen gegründet und führt die westernprint GmbH als Geschäftsführer. Vor der Gründung war er selbst Kunde bei Print-on-Demand-Druckereien. Dort erlebte er immer wieder lange Lieferzeiten und Mails ohne Antwort. Daraus ist die eigene Druckerei entstanden.</p>
         <p>Heute führt Bünyamin Dursun die eigene Produktion in Oberhausen. Seit 2021 hat westernprint über 80.000 Endkunden von Partner-Shops direkt beliefert.</p>
-      </div>
-      <div class="reveal reveal-d1">
         <dl class="specs">
           {steckbrief.map((s) => <div><dt>{s.t}</dt><dd>{s.d}</dd></div>)}
           <div>
@@ -125,6 +125,10 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
           </div>
         </dl>
       </div>
+      <figure class="owner-photo reveal reveal-d1">
+        <img src="/img/werkstatt-heisspresse.jpg" srcset={inhaberImg.srcset} sizes={inhaberImg.srcset ? '(max-width: 900px) 100vw, 40vw' : undefined} alt="Bünyamin Dursun, Gründer und Geschäftsführer von westernprint, an der Heißpresse in der Werkstatt in Oberhausen, daneben Drucker und Regale mit Textilien" width={inhaberImg.width ?? 933} height={inhaberImg.height ?? 1400} loading="lazy" />
+        <figcaption>Bünyamin Dursun an der Heißpresse in Oberhausen</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -136,7 +140,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
       <div class="reveal reveal-d1">
         <span class="eyebrow">Eigene Produktion in Oberhausen</span>
         <h2>Womit wir arbeiten</h2>
-        <p class="muted">westernprint druckt in der eigenen Produktion in Oberhausen und versendet deutschlandweit mit DHL. Die DTG-Drucke laufen auf der Epson SureColor F2100 und F2200.</p>
+        <p class="muted">westernprint druckt in der eigenen Produktion in Oberhausen, versendet deutschlandweit mit DHL und liefert auch ins Ausland. Die DTG-Drucke laufen auf der Epson SureColor F2100 und F2200.</p>
         <dl class="specs">
           {ausstattung.map((a) => <div><dt>{a.t}</dt><dd>{a.d}</dd></div>)}
         </dl>
@@ -183,8 +187,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
   <section class="section">
     <div class="container gallery-grid">
       <img src="/img/druck-makro.jpg" alt="Nahaufnahme eines DTF-Drucks auf grau meliertem Shirt" width="1448" height="1086" loading="lazy" class="reveal" />
-      <img src="/img/werkstatt-heisspresse.jpg" alt="Werkstatt von westernprint mit Heißpressen und Regalen" width="1024" height="1536" loading="lazy" class="tall reveal reveal-d1" />
-      <img src="/img/packtisch.jpg" alt="Frisch bedruckte Shirts auf dem Packtisch" width="1448" height="1086" loading="lazy" class="reveal reveal-d2" />
+      <img src="/img/packtisch.jpg" alt="Frisch bedruckte Shirts auf dem Packtisch" width="1448" height="1086" loading="lazy" class="reveal reveal-d1" />
     </div>
   </section>
 
@@ -204,6 +207,9 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
   .band-section, .values-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   #inhaber, #produktion, #qualitaet { scroll-margin-top: calc(var(--nav-h) + 16px); }
   .owner-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(32px, 5vw, 72px); align-items: start; }
+  .owner-photo { margin: 0; }
+  .owner-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 50%; border-radius: 20px; border: 1px solid var(--line); }
+  .owner-photo figcaption { margin-top: 10px; color: var(--text-2); font-size: 14px; }
   .owner-text p { color: var(--text-2); margin-top: 16px; max-width: 62ch; font-size: 1.05rem; }
   .owner-text h2 + p { margin-top: 20px; }
   .contact-links { display: grid; gap: 4px; }
@@ -214,7 +220,6 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
   .production-img img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 20% center; border-radius: 20px; border: 1px solid var(--line); }
 
   .specs { display: grid; margin: 26px 0 0; border-top: 1px solid var(--line-strong); }
-  .owner-grid .specs { margin-top: 8px; }
   .specs div { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 15px; line-height: 1.5; }
   .specs dt { color: var(--text-2); }
   .specs dd { margin: 0; color: var(--text); font-weight: 500; }
@@ -233,17 +238,15 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
 
   .value { display: grid; gap: 12px; padding: 26px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); align-content: start; }
   .value p { color: var(--text-2); font-size: 15px; }
-  .gallery-grid { display: grid; grid-template-columns: 1fr 0.7fr 1fr; gap: 16px; align-items: stretch; }
+  .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: stretch; }
   .gallery-grid img { border-radius: var(--radius-card); border: 1px solid var(--line); object-fit: cover; height: 100%; aspect-ratio: 4 / 3; }
-  .gallery-grid img.tall { aspect-ratio: auto; }
   @media (max-width: 900px) {
     .story, .owner-grid, .production-grid { grid-template-columns: minmax(0, 1fr); }
     .story-stats { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .owner-photo { max-width: 520px; }
     .production-img { order: 2; }
     .production-img img { aspect-ratio: 16 / 9; }
     .qa-steps { grid-template-columns: 1fr 1fr; }
-    .gallery-grid { grid-template-columns: 1fr 1fr; }
-    .gallery-grid img.tall { display: none; }
   }
   @media (max-width: 600px) {
     .qa-steps { grid-template-columns: 1fr; }

@@ -58,7 +58,7 @@ export const nav: NavItem[] = [
       { title: 'Auftragsarten', items: [
         { label: 'Großauflagen ab 50 Stück', href: '/grossauflagen', hint: 'Staffelpreise, Korrekturabzug, fester Liefertermin' },
         { label: 'Textildruck Oberhausen', href: '/textildruck-oberhausen', hint: 'Vor Ort im Ruhrgebiet, Abholung möglich' },
-        { label: 'Textilien und Marken', href: '/textilien', hint: 'Stanley/Stella, BYB, Neutral, JHK' },
+        { label: 'Textilien und Marken', href: '/textilien', hint: 'Stanley/Stella, Stedman, BYB, Urban Classics' },
         { label: 'Was kostet Textildruck?', href: '/was-kostet-textildruck', hint: 'Preisbeispiele für 1, 10, 25, 50 und 100 Stück' },
         { label: 'Muster bestellen', href: '/sample', hint: 'Ein Stück mit deinem Motiv testen, ab 1 Stück' },
       ] },
@@ -113,7 +113,8 @@ export const stats = [
   { value: '80.000+', label: 'Endkunden beliefert' },
   { value: 'Ab 1 Stück', label: 'ohne Mindestmenge' },
   { value: '24 h', label: 'bis zum Angebot' },
-  { value: '1-3 Tage', label: 'Produktion und Versand' },
+  // Einzelstücke, Shop und Muster: von der Bestellung bis zur Lieferung 3 bis 5 Werktage (Inhaber, 29.09.2026).
+  { value: '3-5', label: 'Werktage bis zur Lieferung' },
 ];
 
 export const faqs = [
@@ -131,7 +132,7 @@ export const faqs = [
   },
   {
     q: 'Wie schnell wird geliefert?',
-    a: 'Einzelstücke sind in der Regel in 1 bis 3 Werktagen fertig, auch im Weihnachtsgeschäft. Serien brauchen 5 bis 7 Werktage nach Freigabe des Korrekturabzugs. Danach geht die Ware mit DHL und Sendungsnummer raus, die Abholung in Oberhausen ist kostenlos.',
+    a: 'Einzelstücke sind in der Regel in 1 bis 3 Werktagen fertig, auch im Weihnachtsgeschäft. Von der Bestellung bis zur Lieferung sind es bei Einzelstücken, Shop-Bestellungen und Mustern 3 bis 5 Werktage, nach Deutschland wie ins Ausland. Serien brauchen 5 bis 7 Werktage nach Freigabe des Korrekturabzugs. Danach geht die Ware mit DHL und Sendungsnummer raus, die Abholung in Oberhausen ist kostenlos.',
   },
   {
     q: 'Welche Druckverfahren nutzt ihr?',
@@ -139,7 +140,7 @@ export const faqs = [
   },
   {
     q: 'Welche Textilien bedruckt ihr?',
-    a: 'Standard ist Stanley/Stella (Bio-Baumwolle, GOTS-zertifiziert). Dazu Stedman und auf Anfrage weitere Marken. Eigene Textilien kannst du uns zusenden.',
+    a: 'Standard ist Stanley/Stella (Bio-Baumwolle, GOTS-zertifiziert). Dazu Stedman, Build Your Brand und Urban Classics, auf Anfrage weitere Marken. Eigene Textilien kannst du uns zusenden.',
   },
   {
     q: 'Welches Dateiformat braucht ihr?',
@@ -147,7 +148,7 @@ export const faqs = [
   },
   {
     q: 'Wie bezahle ich?',
-    a: 'Einzelstücke im Shop per PayPal, Klarna, Kreditkarte oder Überweisung. Aufträge auf Angebot per Vorkasse oder Rechnung, Firmen und Vereine auf Rechnung nach Absprache.',
+    a: 'Einzelstücke im Shop bezahlst du über unseren Zahlungsdienstleister Mollie, die verfügbaren Zahlungsarten werden an der Kasse angezeigt. Aufträge auf Angebot per Vorkasse oder Rechnung, Firmen und Vereine auf Rechnung nach Absprache.',
   },
   {
     q: 'Macht ihr auch Print-on-Demand für Shops?',
