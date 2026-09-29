@@ -11,7 +11,7 @@ export const bewertungen = {
   schnitt: 5,
   anzahl: 17,
   quelle: 'Google',
-  profilUrl: 'https://www.google.com/maps/place/westernprint+GmbH',
+  profilUrl: 'https://www.google.com/maps?cid=475747385609305411', // eindeutige Profil-ID (cid), vom Inhaber am 29.09.2026 geliefert
   stand: '2026-09-28',
 };
 

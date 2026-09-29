@@ -64,8 +64,8 @@ const orgLd = {
   founder: { '@id': personId },
   employee: { '@id': personId },
   address: { '@type': 'PostalAddress', streetAddress: site.address.street, postalCode: site.address.zip, addressLocality: site.address.city, addressRegion: 'Nordrhein-Westfalen', addressCountry: 'DE' },
-  geo: { '@type': 'GeoCoordinates', latitude: 51.4795853, longitude: 6.8677457 },
-  hasMap: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(`${site.legalName}, ${site.address.street}, ${site.address.zip} ${site.address.city}`),
+  geo: { '@type': 'GeoCoordinates', latitude: 51.4795954, longitude: 6.8676972 },
+  hasMap: bewertungen.profilUrl,
   // Aus src/data/site.ts (oeffnungszeiten), dieselbe Quelle wie die sichtbaren Texte.
   openingHoursSpecification: oeffnungszeiten.schema.map((z) => ({ '@type': 'OpeningHoursSpecification', dayOfWeek: z.tage, opens: z.von, closes: z.bis })),
   priceRange: '€€',
@@ -85,6 +85,7 @@ const orgLd = {
     site.tiktok,
     'https://apps.shopify.com/pod-westerprint',
     bewertungen.profilUrl,
+    'https://www.google.com/search?kgmid=/g/11w8fbqc_h', // Knowledge-Graph-Entität laut Google-Profil-Link
     'https://www.gelbeseiten.de/gsbiz/8c72d796-dfd3-433d-baf1-da554fe6d64b',
     'https://www.youtube.com/@westernprint1',
   ],
@@ -181,8 +182,8 @@ const ldBlocks = [orgLd, webLd, personLd, ...(webPageLd ? [webPageLd] : []), ...
     <meta name="msvalidate.01" content="5C73211D1EE34CDF2B3972DFCE607F87" />
     <meta name="geo.region" content="DE-NW" />
     <meta name="geo.placename" content="Oberhausen" />
-    <meta name="geo.position" content="51.4795853;6.8677457" />
-    <meta name="ICBM" content="51.4795853, 6.8677457" />
+    <meta name="geo.position" content="51.4795954;6.8676972" />
+    <meta name="ICBM" content="51.4795954, 6.8676972" />
     <meta name="author" content="westernprint GmbH" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="westernprint" />
