@@ -10,6 +10,8 @@ import { imgInfo } from '../lib/imgsize.mjs';
 // Pflegeanleitung vom Inhaber (Bünyamin Dursun): 30 Grad, auf links gedreht, kein Weichspüler, nicht in den Trockner.
 // Als Empfehlung formulieren, nicht als Grenze. Keine höhere Temperatur nennen, keine Waschzyklen, keine Haltbarkeitszusagen.
 // Bügeln bewusst nicht erwähnt: dazu gibt es auf der Website noch keine Aussage des Inhabers.
+// Presskanten (leichte Abdrücke der Heißpresse rund um den Druck): verschwinden nach der ersten Wäsche, kein Mangel
+// (vom Inhaber am 28.09.2026 bestätigt). Keine Temperaturgrenze und keine Bügelregel dazuschreiben.
 const regeln = [
   { icon: 'thermometer-simple', t: 'Bei 30 Grad waschen',
     d: 'westernprint empfiehlt für DTF- und DTG-Drucke eine Wäsche bei 30 Grad. Eine niedrige Temperatur belastet den Druck weniger als eine heiße Wäsche. Das gilt auch für das Textil selbst, also für Stoff, Farbe und Form.' },
@@ -26,6 +28,7 @@ const faqs = [
   { q: 'Gilt die Pflegeanleitung für DTF- und DTG-Druck gleichermaßen?', a: 'Ja. Die Pflegeanleitung von westernprint gilt für DTF- und DTG-Drucke. Beim DTF-Druck wird das Motiv auf eine Folie gedruckt und mit der Heißpresse aufs Textil gepresst. Beim DTG-Druck geht die Tinte direkt in die Textilfaser. Für beide Verfahren empfiehlt westernprint dieselbe schonende Wäsche.' },
   { q: 'Warum soll ich bedruckte Textilien ohne Weichspüler waschen?', a: 'Weichspüler legt sich als dünne Schicht auf die Fasern des Textils. Diese Schicht kann sich auch auf dem Druck absetzen. westernprint empfiehlt deshalb, bedruckte Textilien ohne Weichspüler zu waschen. Das gilt für DTF- und DTG-Drucke.' },
   { q: 'Darf ein bedrucktes T-Shirt in den Trockner?', a: 'westernprint empfiehlt, bedruckte T-Shirts nicht in den Trockner zu geben. Im Trockner wirken Hitze und Reibung gleichzeitig auf den Druck. Baumwolle kann dort außerdem einlaufen. Die Empfehlung gilt für DTF- und DTG-Drucke.' },
+  { q: 'Was sind die Abdrücke rund um den Druck?', a: 'Die leichten Abdrücke rund um den Druck sind Presskanten, also Abdrücke der Heißpresse. Sie entstehen beim Pressen in der Produktion von westernprint. Presskanten verschwinden nach der ersten Wäsche und sind kein Mangel. Wasch das Teil wie empfohlen bei 30 Grad, auf links gedreht.' },
   { q: 'Kann ich die Pflegeanleitung an die Kunden meines Shops weitergeben?', a: 'Ja. Die Pflegeanleitung von westernprint für deine Kunden lautet: bei 30 Grad auf links gedreht waschen, kein Weichspüler, nicht in den Trockner. Du kannst sie zum Beispiel in deine Produktbeschreibungen übernehmen.' },
 ];
 
@@ -40,6 +43,9 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
     image="/img/druck-makro.jpg"
     imageAlt="Nahaufnahme eines mehrfarbigen Drucks auf grau meliertem Sweatstoff"
   />
+  <div class="container">
+    <p class="byline">Von <a href="/ueber-uns#inhaber" rel="author">Bünyamin Dursun</a>, Gründer und Geschäftsführer von westernprint</p>
+  </div>
 
   <section class="section-tight">
     <div class="container intro">
@@ -103,6 +109,9 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
 </Base>
 
 <style>
+  .byline { padding-top: 20px; font-size: 14px; color: var(--text-3); }
+  .byline a { color: var(--text-2); text-decoration: underline; text-underline-offset: 3px; }
+  .byline a:hover { color: var(--accent); }
   .intro { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: center; }
   .answer { max-width: 68ch; font-size: 1.12rem; color: var(--text); }
   .glance-title { font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-3); margin-bottom: 14px; }

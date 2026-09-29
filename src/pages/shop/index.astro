@@ -9,6 +9,8 @@ const count = (c: string) => products.filter((p) => p.category === c).length;
 // Kleinster kaufbarer Preis je Stück, gerechnet wie Konfigurator und Warenkorb (Variantenpreis + Druckaufschlag je Seite):
 // günstigste verfügbare Variante plus kleinste Druckgröße auf nur einer Seite. Ohne Druck ist nichts bestellbar.
 const minPrint = PRINT_SIZES.reduce((a, b) => (b.surcharge < a.surcharge ? b : a));
+// Transparentes 1x1-GIF als src der Hover-Bilder, bis das Modelfoto beim ersten Maus-Hover nachgeladen wird.
+const PLATZHALTER = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 const fromPrice = (p: (typeof products)[number]) => {
   const av = p.variants.filter((v) => v.available).map((v) => v.price);
   return (av.length ? Math.min(...av) : p.price) + minPrint.surcharge;
@@ -46,7 +48,8 @@ const fromPrice = (p: (typeof products)[number]) => {
           <a href={`/shop/${p.handle}`} class="pcard" data-cat={p.category} data-brand={p.brand}>
             <div class="pimg">
               <img src={p.image} alt={`${p.title} von ${p.brand}`} width="900" height="1125" loading={i < 8 ? 'eager' : 'lazy'} />
-              {p.modelImage && p.modelImage !== p.image && <img class="hover" src={p.modelImage} alt="" width="900" height="1125" loading="lazy" />}
+              {/* Modelfoto für den Maus-Hover: src ist ein transparentes 1x1-GIF (Pflichtattribut), das Skript unten lädt das Foto erst beim ersten Hover mit der Maus. */}
+              {p.modelImage && p.modelImage !== p.image && <img class="hover" src={PLATZHALTER} data-src={p.modelImage} alt="" width="900" height="1125" decoding="async" />}
               {p.brand === 'Stanley/Stella' && <span class="badge-bio">Bio</span>}
             </div>
             <div class="pbody">
@@ -66,7 +69,7 @@ const fromPrice = (p: (typeof products)[number]) => {
       </div>
     </div>
   </section>
-  <CtaBand title="Mehr als ein paar Stück?" text="Ab 50 Stück gibt es Staffelpreise. Schick uns Motiv, Textil und Stückzahl, du bekommst ein Angebot innerhalb von 24 Stunden." />
+  <CtaBand title="Mehr als ein paar Stück?" text="Staffelpreise gibt es ab 10 Stück, Großauflagen ab 50 Stück. Schick uns Motiv, Textil und Stückzahl, du bekommst ein Angebot innerhalb von 24 Stunden." />
 </Base>
 
 <script>
@@ -84,6 +87,24 @@ const fromPrice = (p: (typeof products)[number]) => {
   }
   chips.forEach((ch) => ch.addEventListener('click', () => { if (ch.dataset.cat) cat = ch.dataset.cat; else brand = ch.dataset.brand!; apply(); }));
   apply();
+
+  // Hover-Modelfotos (zusammen rund 4 MB) erst laden, wenn eine Maus über die Kachel fährt.
+  // Touch und Stift lösen nichts aus, auf dem Handy wird also kein Modelfoto geladen.
+  // Eingeblendet wird erst nach dem Laden (.is-loaded), damit die Überblendung wie bisher weich bleibt.
+  cards.forEach((card) => {
+    const img = card.querySelector<HTMLImageElement>('img.hover[data-src]');
+    if (!img) return;
+    const load = (e: PointerEvent) => {
+      if (e.pointerType !== 'mouse') return;
+      card.removeEventListener('pointerenter', load);
+      card.removeEventListener('pointermove', load);
+      img.addEventListener('load', () => img.classList.add('is-loaded'), { once: true });
+      img.src = img.dataset.src!;
+    };
+    card.addEventListener('pointerenter', load);
+    // Steht der Mauszeiger beim Laden schon auf einer Kachel, kommt kein pointerenter. Die erste Bewegung lädt dann.
+    card.addEventListener('pointermove', load);
+  });
 </script>
 
 <style>
@@ -109,7 +130,7 @@ const fromPrice = (p: (typeof products)[number]) => {
   .pimg img { aspect-ratio: 4 / 5; object-fit: contain; width: 100%; padding: 8% 6% 4%; box-sizing: border-box; transition: transform 0.6s var(--ease); filter: drop-shadow(0 22px 26px rgba(0,0,0,0.45)); }
   .pcard:hover .pimg img { transform: scale(1.04); }
   .pimg .hover { position: absolute; inset: 0; opacity: 0; transition: opacity 0.45s var(--ease); object-fit: cover; padding: 0; filter: none; border-radius: 18px; }
-  .pcard:hover .hover { opacity: 1; }
+  .pcard:hover .hover.is-loaded { opacity: 1; }
   .badge-bio { position: absolute; top: 10px; left: 10px; padding: 3px 9px; border-radius: 999px; background: #1f8f42; color: #fff; font-size: 11.5px; font-weight: 600; }
   .pbody { display: flex; flex-direction: column; gap: 4px; padding: 14px 4px 0; font-size: 14.5px; }
   .pbrand { font-size: 12.5px; color: var(--text-2); }

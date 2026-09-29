@@ -30,12 +30,24 @@ const methods = [
 ];
 
 // Offizielle Seiten der Standards. Jede URL am 28.09.2026 per curl geprüft (HTTP 200).
+// Fair Wear ist kein Siegel auf dem Textil, sondern eine Mitgliedschaft der Marke: Stanley/Stella ist Mitglied mit Leader-Status.
 const certs = [
   { t: 'GOTS (Global Organic Textile Standard)', href: 'https://global-standards.org/our-standards/gots' },
   { t: 'GRS (Global Recycled Standard)', href: 'https://textileexchange.org/recycled-claim-global-recycled-standard/' },
   { t: 'OEKO-TEX Standard 100', href: 'https://www.oeko-tex.com/de/unsere-standards/oeko-tex-standard-100' },
   { t: 'PETA-Approved Vegan', href: 'https://www.peta.org.uk/lifestyle/peta-approved-vegan/' },
-  { t: 'Fair Wear Foundation, Leader-Status', href: 'https://www.fairwear.org/' },
+  { t: 'Mitglied der Fair Wear Foundation, Leader-Status', href: 'https://www.fairwear.org/', icon: 'handshake' },
+];
+
+// Vergleichstabelle: Jede Zelle fasst nur zusammen, was auf dieser Seite schon steht (methods, Kacheln, Ausstattung, Fragen).
+// Ändert sich dort etwas, hier mitziehen. Für Sublimation nennt die Seite keine Stückzahl, deshalb steht dort keine Zahl.
+// Keine maximale DTF-Druckfläche nennen, solange sie nicht bestätigt ist.
+const vergleich = [
+  { k: 'Geeignete Stoffe', dtf: 'Fast alle Stoffe, von Baumwolle bis Polyester', dtg: 'Nur Baumwolle und Stoffe mit hohem Baumwollanteil', sub: 'Nur helles Polyester und beschichtete Flächen, nicht für Baumwolle' },
+  { k: 'Dunkle Textilien', dtf: 'Ja, deckend auch auf Schwarz', dtg: 'Ja, nach Vorbehandlung auf der Pretreat-Maschine und mit weißer Unterschicht', sub: 'Nein, keine dunklen Untergründe' },
+  { k: 'Haptik', dtf: 'Leichter Film spürbar, sehr dehnbar, bei sehr großen Flächen etwas steifer', dtg: 'Weichstes Ergebnis, kein Film, nur Tinte', sub: 'Nicht spürbar, der Druck sitzt im Material' },
+  { k: 'Stückzahl', dtf: 'Ab 1 Stück, keine Mindestmenge. Standard für Auflagen und Einzelstücke', dtg: 'Einzelstücke und Print-on-Demand. Bei großen Auflagen langsamer als DTF', sub: 'Auf Anfrage' },
+  { k: 'Motive', dtf: 'Komplexe Motive und Farbverläufe, kräftige Farben, feine Linien', dtg: 'Fotorealistisch, unbegrenzt viele Farben, feine Verläufe und Details. Druckfläche bis 40 x 50 cm', sub: 'Brillante, leuchtende Farben, vollflächig bis an den Rand' },
 ];
 
 const werkstattImg = await imgInfo('/img/werkstatt-heisspresse.jpg');
@@ -81,6 +93,9 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
     image="/img/druck-makro.jpg"
     imageAlt="Detailaufnahme eines DTF-Drucks, jede Linie gestochen scharf"
   />
+  <div class="container">
+    <p class="byline">Von <a href="/ueber-uns#inhaber" rel="author">Bünyamin Dursun</a>, Gründer und Geschäftsführer von westernprint</p>
+  </div>
 
   <section class="section methods-section">
     <div class="container">
@@ -105,25 +120,45 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
         {methods.map((m, i) => (
           <article id={m.key} class={`cmp reveal reveal-d${i}` + (m.featured ? ' featured' : '')}>
             {m.badge && <span class="cmp-badge">{m.badge}</span>}
-            <header class="cmp-head">
+            <div class="cmp-head">
               <span class="icon-box"><Icon name={m.icon} size={26} /></span>
               <div>
                 <h3>{m.name}</h3>
                 <span class="cmp-sub">{m.sub}</span>
               </div>
-            </header>
+            </div>
             <p class="cmp-desc">{m.def} {m.desc}</p>
-            <h4 class="cmp-label">Vorteile</h4>
+            <h4 class="cmp-label">Vorteile<span class="sr-only"> von {m.name}</span></h4>
             <ul class="cmp-list pros">
               {m.pros.map((x) => <li><Icon name="check" size={14} weight="bold" />{x}</li>)}
             </ul>
-            <h4 class="cmp-label">Zu bedenken</h4>
+            <h4 class="cmp-label">Zu bedenken<span class="sr-only"> bei {m.name}</span></h4>
             <ul class="cmp-list cons">
               {m.cons.map((x) => <li><Icon name="tilde" size={14} weight="bold" />{x}</li>)}
             </ul>
             <p class="cmp-ideal"><strong>Ideal für:</strong> {m.ideal}</p>
           </article>
         ))}
+      </div>
+      {/* Überschrift außerhalb des scrollenden Rahmens, damit sie bei 375 px nicht abgeschnitten wird. Die caption bleibt für Screenreader. */}
+      <h3 class="cmp-table-title reveal" id="vergleich-tabelle">DTF, DTG und Sublimation im Vergleich</h3>
+      <div class="cmp-table-wrap reveal" role="region" aria-labelledby="vergleich-tabelle" tabindex="0">
+        <table class="cmp-table">
+          <caption class="sr-only">DTF, DTG und Sublimation im Vergleich</caption>
+          <thead>
+            <tr>
+              <th scope="col"><span class="sr-only">Merkmal</span></th>
+              <th scope="col" class="hi">DTF-Druck</th>
+              <th scope="col">DTG-Druck</th>
+              <th scope="col">Sublimation</th>
+            </tr>
+          </thead>
+          <tbody>
+            {vergleich.map((r) => (
+              <tr><th scope="row">{r.k}</th><td>{r.dtf}</td><td>{r.dtg}</td><td>{r.sub}</td></tr>
+            ))}
+          </tbody>
+        </table>
       </div>
       <p class="cmp-note reveal"><Icon name="washing-machine" size={20} /><span>Pflegehinweis von westernprint: bedruckte Textilien bei 30 Grad waschen, auf links gedreht, ohne Weichspüler und nicht in den Trockner. <a href="/pflege-bedruckter-textilien">Zur Pflegeanleitung</a></span></p>
     </div>
@@ -134,10 +169,10 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
       <div class="reveal">
         <span class="eyebrow">Textilpartner</span>
         <h2>Warum wir auf Stanley/Stella setzen</h2>
-        <p class="muted"><a href="https://stanleystella.com/de-eu/" target="_blank" rel="noopener">Stanley/Stella</a> ist europäischer Marktführer für Premium-Basics aus Bio-Baumwolle. Die Lieferkette ist vom Saatgut bis zum fertigen Shirt rückverfolgbar. Für uns der beste Untergrund für DTF und DTG: brillante Farben, bis zu 15 Prozent weniger Tinte.</p>
+        <p class="muted"><a href="https://stanleystella.com/de-eu/" target="_blank" rel="noopener">Stanley/Stella</a> stellt Premium-Basics aus Bio-Baumwolle her. Die Lieferkette ist vom Saatgut bis zum fertigen Shirt rückverfolgbar. Stanley/Stella ist Mitglied der Fair Wear Foundation mit Leader-Status. Für uns ist Stanley/Stella der beste Untergrund für DTF und DTG, weil die Farben darauf brillant wirken.</p>
         <ul class="certs">
           {certs.map((c) => (
-            <li><a href={c.href} target="_blank" rel="noopener"><Icon name="seal-check" size={18} /><span>{c.t}</span><Icon name="arrow-up-right" size={14} class="ext" /><span class="sr-only"> (öffnet in neuem Tab)</span></a></li>
+            <li><a href={c.href} target="_blank" rel="noopener"><Icon name={c.icon ?? 'seal-check'} size={18} /><span>{c.t}</span><Icon name="arrow-up-right" size={14} class="ext" /><span class="sr-only"> (öffnet in neuem Tab)</span></a></li>
           ))}
         </ul>
         <a href="/textilien" class="btn btn-secondary">Textilien ansehen</a>
@@ -171,6 +206,9 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
 </Base>
 
 <style>
+  .byline { padding-top: 20px; font-size: 14px; color: var(--text-3); }
+  .byline a { color: var(--text-2); text-decoration: underline; text-underline-offset: 3px; }
+  .byline a:hover { color: var(--accent); }
   .compare-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .compare-section .section-head .muted { max-width: 62ch; margin-top: 10px; }
   .compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 22px; margin-top: 40px; align-items: stretch; }
@@ -193,6 +231,16 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
   :global([data-theme="light"]) .cmp-list.cons :global(.icon) { color: #8a6a10; }
   .cmp-ideal { margin-top: auto; padding-top: 22px; border-top: 1px solid var(--line); font-size: 13.5px; line-height: 1.55; color: var(--text-3); }
   .cmp-ideal strong { color: var(--text); font-weight: 600; }
+  .cmp-table-title { margin-top: clamp(40px, 5vw, 64px); margin-bottom: 16px; font-family: var(--font-display); font-size: clamp(1.25rem, 1.7vw, 1.5rem); font-weight: 700; letter-spacing: -0.01em; color: var(--text); }
+  .cmp-table-wrap { overflow-x: auto; }
+  .cmp-table { width: 100%; min-width: 680px; border-collapse: collapse; font-size: 14.5px; }
+  .cmp-table th, .cmp-table td { padding: 16px 18px 16px 0; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); line-height: 1.5; }
+  .cmp-table thead th { border-top: 1px solid var(--line-strong); font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--text-3); }
+  .cmp-table thead .hi { color: var(--accent); }
+  .cmp-table tbody th { width: 18%; font-weight: 600; color: var(--text); }
+  /* Erste Spalte läuft beim seitlichen Scrollen mit, damit die Zeilen auf dem Handy zuordenbar bleiben. */
+  .cmp-table tbody th, .cmp-table thead th:first-child { position: sticky; left: 0; z-index: 1; background: var(--bg-2); }
+  .cmp-table td { color: var(--text-2); }
   .cmp-note { display: flex; gap: 12px; align-items: flex-start; margin-top: 32px; max-width: 78ch; color: var(--text-2); font-size: 15px; line-height: 1.6; }
   .cmp-note :global(.icon) { flex: none; margin-top: 1px; color: var(--accent); }
   .cmp-note a, .brand-grid .muted a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }

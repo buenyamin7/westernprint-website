@@ -1,17 +1,38 @@
+# Weiterleitungen der alten Shopify-URLs für Netlify und Cloudflare Pages (GitHub Pages ignoriert diese Datei).
+# Gleiche Ziele wie die statischen Stubs unter src/pages/pages, products, collections, policies und cart.astro.
+# Ändert sich dort etwas, hier mitziehen. Spezifische Regeln stehen vor den Platzhalter-Regeln.
 /pages/pod-druckverfahren-fulfillment  /print-on-demand  301
+/pages/pod-fulfillment                 /print-on-demand  301
+/pages/pod-2                           /print-on-demand  301
 /pages/b2b-pod-anfragen                /b2b-partner      301
 /pages/grossbestellung                 /grossauflagen    301
+/pages/grossbestellungen               /grossauflagen    301
 /pages/druckverfahren-und-textilanbieter /druckverfahren 301
+/pages/druckverfahren-st-st            /druckverfahren   301
 /pages/pod-preise                      /kontakt          301
 /pages/bestellen                       /textilien        301
+/pages/produkte                        /textilien        301
 /pages/uber-uns                        /ueber-uns        301
+/pages/ueber-uns                       /ueber-uns        301
 /pages/contact                         /kontakt          301
 /pages/impressum                       /impressum        301
 /pages/agb                             /agb              301
 /pages/datenschutzerklarung            /datenschutz      301
-/policies/privacy-policy               /datenschutz      301
 /pages/widerrufsbelehrung-fur-verbraucher /widerruf      301
 /pages/versand-und-zahlungsbedingungen /versand          301
+/policies/privacy-policy               /datenschutz      301
+/policies/terms-of-service             /agb              301
+/policies/refund-policy                /widerruf         301
+/policies/shipping-policy              /versand          301
+/policies/legal-notice                 /impressum        301
+/policies/contact-information          /impressum        301
 /collections/*                         /shop  301
+# Alte Produkt-Handles, die nicht mehr im Katalog sind (src/pages/products/[...alt].astro): auf /shop, nicht auf /shop/:handle.
+/products/breezer                      /shop  301
+/products/chaser                       /shop  301
+/products/puffer                       /shop  301
+/products/radder-2-0                   /shop  301
+/products/stanley-quester              /shop  301
+/products/stella-guider                /shop  301
 /products/:handle                      /shop/:handle  301
 /cart                                  /warenkorb  301

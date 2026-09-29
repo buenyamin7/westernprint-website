@@ -43,7 +43,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
   <PageHero
     eyebrow="Bewertungen"
     title={`${sterne} von 5 Sternen bei <span class='hl'>${bewertungen.anzahl} Google-Bewertungen</span>`}
-    lede="Echte Rezensionen aus unserem Google-Unternehmensprofil. Nicht ausgewählt, nicht geschönt, alle öffentlich nachlesbar."
+    lede={`Echte Rezensionen aus unserem Google-Unternehmensprofil. Eine Auswahl von ${rezensionen.length} der ${bewertungen.anzahl} Rezensionen, gekürzte Stellen sind mit […] markiert. Alle sind bei ${bewertungen.quelle} öffentlich nachlesbar.`}
     image="/img/werkstatt-heisspresse.jpg"
     imageAlt="Bünyamin Dursun an der Heißpresse in der westernprint-Werkstatt in Oberhausen"
     cta={{ label: 'Alle Bewertungen bei Google', href: bewertungen.profilUrl }}
@@ -78,7 +78,9 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
               <span class="avatar">{initials(r.name)}</span>
               <span class="who">
                 <strong>{r.name}</strong>
-                <span>{r.rolle ? `${r.rolle} · ${r.datum}` : r.datum}</span>
+                {r.rolle && <span>{r.rolle}</span>}
+                {/* Relative Angabe aus Google, sie gilt nur zum Stand des Ablesens. */}
+                <span>{r.datum} laut {bewertungen.quelle}, Stand <time datetime={bewertungen.stand}>{standDe}</time></span>
               </span>
             </figcaption>
           </figure>

@@ -96,6 +96,7 @@ export const nav: NavItem[] = [
         { label: 'Firmen und Büro', href: '/fuer/firmen-und-buero' },
         { label: 'Gastro und Hotels', href: '/fuer/restaurants-und-cafes' },
         { label: 'Fitness und Kampfsport', href: '/fuer/fitness-und-kampfsport' },
+        { label: 'Messen und Aussteller', href: '/fuer/messen-und-aussteller' },
       ] },
       { title: 'Marken & Events', items: [
         { label: 'Streetwear-Brands', href: '/fuer/streetwear-brands' },

@@ -7,15 +7,17 @@ import Faq from '../components/Faq.astro';
 import Tiles from '../components/Tiles.astro';
 import { site } from '../data/site';
 
+// Keine Aussagen über fremde Marken (welche Labels welche Blanks tragen) und keine unbelegten Markt- oder Druckzahlen.
+// Fair Wear ist eine Mitgliedschaft von Stanley/Stella (Leader-Status), kein Siegel auf dem Textil.
 const brands = [
-  { t: 'Stanley/Stella', img: '/img/lager-rohware.jpg', pos: 'center 40%', tag: 'Bio-Baumwolle, GOTS, Fair Wear', d: 'Der Standard für Marken, die Qualität zeigen wollen. Creator, Crafter, Cruiser, Drummer und über 40 Farben, alle ab Lager. Weicher Griff und saubere Passformen.', for: 'Premium-Merch, Firmenkleidung, Bio-Ansprüche' },
+  { t: 'Stanley/Stella', img: '/img/lager-rohware.jpg', pos: 'center 40%', tag: 'Bio-Baumwolle, GOTS, Fair-Wear-Mitglied', d: 'Unser Standard für Marken, die Qualität zeigen wollen. Creator, Crafter, Cruiser, Drummer und über 40 Farben, alle ab Lager. Weicher Griff und saubere Passformen.', for: 'Premium-Merch, Firmenkleidung, Bio-Ansprüche' },
   { t: 'Stedman', img: '/img/lager-regal-werkstatt.jpg', pos: 'center 60%', tag: 'Preisstark, robust, viele Größen', d: 'Classic-T, Comfort-T, Classic Hoodie und Polo bis 5XL. Wenn 200 Vereinsshirts oder Eventkleidung kalkulierbar bleiben müssen, ohne dass der Druck leidet.', for: 'Vereine, Events, Großauflagen, Workwear' },
-  { t: 'Build Your Brand', img: '/img/streetwear-trio.jpg', pos: 'center 20%', tag: 'Heavy Oversize, Boxy, Acid Wash', d: 'Die Blanks, mit denen Streetwear-Marken heute starten: 240er Heavy Oversize Tees, Boxy Hoodies, Ultra Heavy Sweats. Schwerer Stoff, tiefe Schulter, Brand-Look ohne eigene Produktion.', for: 'Streetwear-Brands, Drops, Merch mit Statement' },
+  { t: 'Build Your Brand', img: '/img/streetwear-trio.jpg', pos: 'center 20%', tag: 'Heavy Oversize, Boxy, Acid Wash', d: 'Blanks für Streetwear: 240er Heavy Oversize Tees, Boxy Hoodies, Ultra Heavy Sweats. Schwerer Stoff, tiefe Schulter, Brand-Look ohne eigene Produktion.', for: 'Streetwear-Brands, Drops, Merch mit Statement' },
   { t: 'Urban Classics', img: '/img/hero-rack.jpg', pos: 'center', tag: 'Streetwear-Basics, große Farbpalette', d: 'Oversized Tees, Hoodies, Longsleeves und Caps zu fairen Preisen. Die Schwestermarke von Build Your Brand für Kollektionen, die breit aufgestellt sein sollen.', for: 'Erste Kollektion, Caps und Accessoires, Nachbestellung' },
 ];
 const faqs = [
-  { q: 'Welche Blanks eignen sich für eine Streetwear-Brand?', a: 'Heavy Oversize T-Shirts ab 240 g/m², Boxy Hoodies und Ultra Heavy Sweats von Build Your Brand oder Urban Classics. Schwerer Stoff, tiefe Schultern, kräftige Farben. Genau der Look, den Marken wie Peso, LFDY oder Pegador tragen. Wir haben sie ab Lager oder besorgen sie in wenigen Tagen.' },
-  { q: 'Wie viele Stück brauche ich, um eine eigene Brand zu starten?', a: 'Ein Sample reicht. Wir drucken ab 1 Stück, damit du dein Design in der Hand hältst, bevor du Geld in Ware steckst. Ab 50 Stück gibt es Staffelpreise, ab 100 wird es richtig günstig. Nachbestellen kannst du jederzeit in kleinen Mengen.' },
+  { q: 'Welche Blanks eignen sich für eine Streetwear-Brand?', a: 'Heavy Oversize T-Shirts ab 240 g/m², Boxy Hoodies und Ultra Heavy Sweats von Build Your Brand oder Urban Classics. Schwerer Stoff, tiefe Schultern, kräftige Farben. Wir haben sie ab Lager oder besorgen sie in wenigen Tagen.' },
+  { q: 'Wie viele Stück brauche ich, um eine eigene Brand zu starten?', a: 'Ein Sample reicht. Wir drucken ab 1 Stück, damit du dein Design in der Hand hältst, bevor du Geld in Ware steckst. Staffelpreise gibt es ab 10 Stück, Großauflagen ab 50 Stück. Nachbestellen kannst du jederzeit in kleinen Mengen.' },
   { q: 'Kann ich das Etikett im Nacken durch meinen Brand-Namen ersetzen?', a: 'Ja. Viele Blanks von Build Your Brand und Urban Classics sind tearaway oder ohne Etikett. Wir drucken deinen Nackenprint per DTF, das sieht aus wie ein eigenes Label und ist waschfest.' },
   { q: 'Was kostet ein bedrucktes Heavy Oversize Shirt?', a: 'Das hängt von Blank, Stückzahl und Druckgröße ab. Du bekommst innerhalb von 24 Stunden ein Angebot mit festem Stückpreis, getrennt nach Textil und Druck. Ein Sample bestellst du direkt im Shop.' },
   { q: 'Übernehmt ihr auch den Versand an meine Kunden?', a: 'Ja, mit Print-on-Demand: Du verkaufst über deinen Shop, wir drucken und verschicken jede Bestellung neutral in deinem Namen. So startest du ohne Lager und ohne Vorkasse für Ware.' },
@@ -50,12 +52,12 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
       </div>
       <div class="brand-text">
         <h2 class="reveal">Eigene Streetwear-Brand gründen, ohne eigene Produktion</h2>
-        <p class="muted reveal reveal-d1">Peso, LFDY, Pegador: Die meisten Marken, die du heute auf der Straße siehst, haben mit fertigen Blanks angefangen. Schwere Oversize-Shirts, Boxy Hoodies, ein starkes Motiv, ein Nackenprint statt Etikett. Genau das bauen wir mit dir. Du bringst Design und Community, wir liefern Textil, Druck und Versand.</p>
+        <p class="muted reveal reveal-d1">Eine eigene Brand geht auch mit fertigen Blanks: schwere Oversize-Shirts, Boxy Hoodies, ein starkes Motiv und ein Nackenprint statt Etikett. Genau das bauen wir mit dir. Du bringst Design und Community, wir liefern Textil, Druck und Versand.</p>
         <ul class="steps-list">
           {[
             { t: 'Blank wählen', d: 'Heavy Oversize Tee, Boxy Hoodie oder Ultra Heavy Sweat von Build Your Brand und Urban Classics. Wir beraten zu Grammatur, Schnitt und Farbe.' },
             { t: 'Sample drucken', d: 'Ein Stück, dein Motiv, dein Nackenprint. In 3 bis 5 Werktagen in der Hand. Erst dann entscheidest du über die Auflage.' },
-            { t: 'Drop produzieren', d: 'Ab 50 Stück Staffelpreise, Mischgrößen ohne Aufpreis, fester Liefertermin für deinen Release.' },
+            { t: 'Drop produzieren', d: 'Staffelpreise ab 10 Stück, Großauflagen ab 50 Stück, Mischgrößen ohne Aufpreis, fester Liefertermin für deinen Release.' },
             { t: 'Skalieren', d: 'Wenn der Shop läuft: Print-on-Demand. Wir drucken und versenden jede Bestellung neutral in deinem Namen, ohne Lager.' },
           ].map((s, i) => (
             <li class={`reveal reveal-d${i + 1}`}><strong>{s.t}</strong><span>{s.d}</span></li>

@@ -35,21 +35,32 @@ const cleanPath = Astro.url.pathname.replace(/\.html$/, '').replace(/(^|\/)index
 const canonical = new URL(cleanPath, site.url).href;
 const fullTitle = title.includes('westernprint') ? title : `${title} | westernprint`;
 const personId = `${site.url}/ueber-uns#inhaber`;
+// Lieferländer wie auf /versand, in den AGB und an der Kasse (src/pages/kasse.astro). Ändert sich die Liste, dort mitziehen.
+const lieferlaender = ['Deutschland', 'Österreich', 'Schweiz', 'Niederlande', 'Belgien', 'Luxemburg', 'Frankreich', 'Italien', 'Spanien', 'Polen', 'Dänemark', 'Tschechien'];
+const staedte = ['Oberhausen', 'Essen', 'Duisburg', 'Mülheim an der Ruhr', 'Bottrop', 'Gelsenkirchen', 'Düsseldorf'];
+// Ratgeberseiten und /ueber-uns: Der Inhaber verantwortet die Inhalte, author zeigt auf den Person-Knoten.
+const authorPaths = ['/druckverfahren', '/pflege-bedruckter-textilien', '/was-kostet-textildruck', '/ueber-uns'];
 
 const orgLd = {
   '@context': 'https://schema.org',
   '@type': ['LocalBusiness', 'Organization'],
   '@id': `${site.url}/#organization`,
   name: site.legalName,
+  legalName: site.legalName,
   alternateName: ['westernprint', 'westernprint Druckerei Oberhausen'],
   url: site.url,
   logo: { '@type': 'ImageObject', url: `${site.url}/icon-512.png`, width: 512, height: 512 },
   image: `${site.url}${site.ogImage}`,
   telephone: site.phone,
   email: site.email,
-  description: 'Textildruckerei in Oberhausen (Ruhrgebiet): DTF- und DTG-Druck auf T-Shirts, Hoodies und Workwear ab 1 Stück, Staffelpreise ab 10 Stück, Großauflagen ab 50 Stück, Angebot in 24 Stunden. Auch Print-on-Demand-Fulfillment für Shops.',
+  description: 'Textildruckerei in Oberhausen (Ruhrgebiet): DTF- und DTG-Druck auf T-Shirts, Hoodies und Workwear ab 1 Stück, Staffelpreise ab 10 Stück, Großauflagen ab 50 Stück, Angebot in 24 Stunden. Auch Print-on-Demand-Fulfillment für Shops. Gegründet 2021, seit 2024 als GmbH.',
   slogan: 'Textildruck, der hält.',
-  foundingDate: '2024', // westernprint GmbH; das Geschäft gibt es seit 2021 (bis 2024 Einzelunternehmen)
+  // Dieser Knoten ist die westernprint GmbH (legalName, HRB, USt-IdNr.), gegründet 2024. Das Geschäft gibt es seit 2021
+  // (bis 2024 Einzelunternehmen), das steht in description und sichtbar als "seit 2021".
+  foundingDate: '2024',
+  // Registerdaten und USt-IdNr. wie im Impressum (src/content/legal/impressum.html).
+  vatID: 'DE369060880',
+  identifier: { '@type': 'PropertyValue', propertyID: 'Handelsregister', value: 'HRB 38060, Amtsgericht Duisburg' },
   founder: { '@id': personId },
   employee: { '@id': personId },
   address: { '@type': 'PostalAddress', streetAddress: site.address.street, postalCode: site.address.zip, addressLocality: site.address.city, addressRegion: 'Nordrhein-Westfalen', addressCountry: 'DE' },
@@ -63,12 +74,20 @@ const orgLd = {
   // werden bewusst nicht festgeschrieben (Entscheidung des Inhabers vom 29.09.2026): Sie stehen an der Kasse.
   paymentAccepted: 'Online-Zahlung über Mollie (Zahlungsarten laut Kasse), Vorkasse, Rechnung nach Absprache (Firmen und Vereine)',
   areaServed: [
-    { '@type': 'Country', name: 'Deutschland' }, { '@type': 'Country', name: 'Österreich' }, { '@type': 'Country', name: 'Schweiz' },
-    { '@type': 'City', name: 'Oberhausen' }, { '@type': 'City', name: 'Essen' }, { '@type': 'City', name: 'Duisburg' }, { '@type': 'City', name: 'Mülheim an der Ruhr' }, { '@type': 'City', name: 'Bottrop' }, { '@type': 'City', name: 'Gelsenkirchen' }, { '@type': 'City', name: 'Düsseldorf' },
+    ...lieferlaender.map((name) => ({ '@type': 'Country', name })),
+    ...staedte.map((name) => ({ '@type': 'City', name })),
   ],
   contactPoint: [{ '@type': 'ContactPoint', contactType: 'sales', telephone: site.phone, email: site.email, availableLanguage: ['de', 'en'], areaServed: 'DE' }],
-  // Nur Profile, die per curl mit 200 oder 3xx antworten (geprüft am 28.09.2026).
-  sameAs: [site.instagram, site.tiktok, 'https://apps.shopify.com/pod-westerprint', bewertungen.profilUrl],
+  // Nur Profile, die per curl mit 200 oder 3xx antworten (geprüft am 28.09.2026, GelbeSeiten und YouTube am 29.09.2026).
+  // Facebook fehlt bewusst: Die Seite heißt "westernprint.de | Oberhausen", läuft aber noch unter facebook.com/clearprint.eu. Erst nach der Umbenennung aufnehmen.
+  sameAs: [
+    site.instagram,
+    site.tiktok,
+    'https://apps.shopify.com/pod-westerprint',
+    bewertungen.profilUrl,
+    'https://www.gelbeseiten.de/gsbiz/8c72d796-dfd3-433d-baf1-da554fe6d64b',
+    'https://www.youtube.com/@westernprint1',
+  ],
   ...(showRating ? {
     aggregateRating: { '@type': 'AggregateRating', ratingValue: String(bewertungen.schnitt), reviewCount: String(bewertungen.anzahl), bestRating: '5', worstRating: '1' },
     review: rezensionen.map((r) => ({
@@ -114,6 +133,8 @@ const webPageLd = noindex ? null : {
   description,
   isPartOf: { '@id': `${site.url}/#website` },
   about: { '@id': `${site.url}/#organization` },
+  publisher: { '@id': `${site.url}/#organization` },
+  ...(authorPaths.includes(cleanPath) ? { author: { '@id': personId } } : {}),
   inLanguage: 'de-DE',
   ...(pageDates?.modified ? { dateModified: pageDates.modified } : {}),
   ...(pageDates?.published ? { datePublished: pageDates.published } : {}),

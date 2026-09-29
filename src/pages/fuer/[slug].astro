@@ -27,7 +27,7 @@ const iconFor = (t: string) => /hoodie|sweat|pullover/i.test(t) ? 'hoodie' : /ca
 const UNGEKLAERT = /wasch\w*[^.]*\b60\s*(°|grad)|\b60\s*(°|grad)[^.]*wasch|an den (messe)?stand\b/i;
 const schemaText = (t: string) => t.split(/(?<=\.)\s+/).filter((satz) => !UNGEKLAERT.test(satz)).join(' ');
 const ld = [
-  { '@context': 'https://schema.org', '@type': 'Service', name: z.title, serviceType: 'Textildruck', description: schemaText(z.description), provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: [{ '@type': 'City', name: 'Oberhausen' }, { '@type': 'AdministrativeArea', name: 'Ruhrgebiet' }, { '@type': 'AdministrativeArea', name: 'Nordrhein-Westfalen' }, { '@type': 'Country', name: 'Deutschland' }], audience: { '@type': 'Audience', audienceType: z.name }, url: `${site.url}/fuer/${z.slug}`, offers: { '@type': 'Offer', description: 'Angebot innerhalb von 24 Stunden, ab 1 Stück, Staffelpreise ab 10 bis 50 Stück' } },
+  { '@context': 'https://schema.org', '@type': 'Service', name: z.title, serviceType: 'Textildruck', description: schemaText(z.description), provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: [{ '@type': 'City', name: 'Oberhausen' }, { '@type': 'AdministrativeArea', name: 'Ruhrgebiet' }, { '@type': 'AdministrativeArea', name: 'Nordrhein-Westfalen' }, { '@type': 'Country', name: 'Deutschland' }], audience: { '@type': 'Audience', audienceType: z.name }, url: `${site.url}/fuer/${z.slug}`, offers: { '@type': 'Offer', description: 'Angebot innerhalb von 24 Stunden, ab 1 Stück, Staffelpreise ab 10 Stück, Großauflagen ab 50 Stück' } },
   { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: z.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Startseite', item: site.url }, { '@type': 'ListItem', position: 2, name: 'Für wen wir drucken', item: `${site.url}/fuer` }, { '@type': 'ListItem', position: 3, name: z.name, item: `${site.url}/fuer/${z.slug}` }] },
 ];
@@ -37,7 +37,10 @@ const ld = [
 
   <section class="section-tight">
     <div class="container zg-intro">
-      <p class="lede answer">{z.intro}</p>
+      <div class="zg-answer">
+        <h2>{z.introFrage}</h2>
+        <p class="lede answer">{z.intro}</p>
+      </div>
       <ul class="facts">
         <li><Icon name="clock" size={18} /> Angebot in 24 Stunden</li>
         <li><Icon name="printer" size={18} /> Produktion in Oberhausen</li>
@@ -51,7 +54,7 @@ const ld = [
     <div class="container">
       <div class="offer-head">
         <h2>Was wir für {z.name} drucken</h2>
-        <p class="muted">Typische Teile, die wir für diese Gruppe bedrucken. Alles ab Lager, in allen Größen, mit eurem Motiv.</p>
+        <p class="muted">{z.produkteText ?? 'Typische Teile, die wir für diese Gruppe bedrucken.'}</p>
       </div>
       <ul class="products">
         {z.products.map((p, i) => (
@@ -76,7 +79,7 @@ const ld = [
     <div class="container">
       <div class="steps-head">
         <h2>In drei Schritten zu euren Textilien</h2>
-        <p class="muted">Kein Ticketsystem, kein Warten. Ihr schreibt, wir antworten innerhalb von 24 Stunden mit einem festen Preis.</p>
+        <p class="muted">{z.ablaufText ?? 'Kein Ticketsystem, kein Warten. Ihr schreibt, wir antworten innerhalb von 24 Stunden mit einem festen Preis.'}</p>
       </div>
       <ol class="steps">
         {steps.map((st, i) => (
@@ -125,6 +128,7 @@ const ld = [
 
 <style>
   .zg-intro { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: center; }
+  .zg-answer h2 { margin-bottom: 16px; font-size: clamp(1.45rem, 2.4vw, 2rem); }
   .answer { max-width: 68ch; font-size: 1.12rem; color: var(--text); }
   .facts { display: grid; gap: 10px; } .facts li { display: flex; gap: 10px; align-items: center; color: var(--text-2); font-size: 15px; }
   .facts :global(svg) { color: var(--accent); flex: none; }
