@@ -8,7 +8,7 @@ import Tiles from '../components/Tiles.astro';
 import { site } from '../data/site';
 
 const brands = [
-  { t: 'Stanley/Stella', img: '/img/lager-rohware.jpg', pos: 'center 40%', tag: 'Bio-Baumwolle, GOTS, Fair Wear', d: 'Der Standard für Marken, die Qualität zeigen wollen. Creator, Crafter, Cruiser, Drummer und über 40 Farben, alle ab Lager. Weicher Griff, saubere Passformen, in fünf Jahren von uns über 80.000 Mal bedruckt.', for: 'Premium-Merch, Firmenkleidung, Bio-Ansprüche' },
+  { t: 'Stanley/Stella', img: '/img/lager-rohware.jpg', pos: 'center 40%', tag: 'Bio-Baumwolle, GOTS, Fair Wear', d: 'Der Standard für Marken, die Qualität zeigen wollen. Creator, Crafter, Cruiser, Drummer und über 40 Farben, alle ab Lager. Weicher Griff und saubere Passformen.', for: 'Premium-Merch, Firmenkleidung, Bio-Ansprüche' },
   { t: 'Stedman', img: '/img/lager-regal-werkstatt.jpg', pos: 'center 60%', tag: 'Preisstark, robust, viele Größen', d: 'Classic-T, Comfort-T, Classic Hoodie und Polo bis 5XL. Wenn 200 Vereinsshirts oder Eventkleidung kalkulierbar bleiben müssen, ohne dass der Druck leidet.', for: 'Vereine, Events, Großauflagen, Workwear' },
   { t: 'Build Your Brand', img: '/img/streetwear-trio.jpg', pos: 'center 20%', tag: 'Heavy Oversize, Boxy, Acid Wash', d: 'Die Blanks, mit denen Streetwear-Marken heute starten: 240er Heavy Oversize Tees, Boxy Hoodies, Ultra Heavy Sweats. Schwerer Stoff, tiefe Schulter, Brand-Look ohne eigene Produktion.', for: 'Streetwear-Brands, Drops, Merch mit Statement' },
   { t: 'Urban Classics', img: '/img/hero-rack.jpg', pos: 'center', tag: 'Streetwear-Basics, große Farbpalette', d: 'Oversized Tees, Hoodies, Longsleeves und Caps zu fairen Preisen. Die Schwestermarke von Build Your Brand für Kollektionen, die breit aufgestellt sein sollen.', for: 'Erste Kollektion, Caps und Accessoires, Nachbestellung' },
@@ -27,7 +27,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
   <PageHero
     eyebrow="Textilien und Partner"
     title="Blanks, die deine Brand <span class='hl'>verdient</span>"
-    lede="Wir drucken auf Textilien von vier Partnern, die wir seit Jahren verarbeiten: Stanley/Stella, Stedman, Build Your Brand und Urban Classics. Ab Lager, in allen Größen, ab 1 Stück."
+    lede="Wir drucken in Oberhausen auf Textilien von vier Partnern, die wir seit Jahren verarbeiten: Stanley/Stella, Stedman, Build Your Brand und Urban Classics. Ab Lager, in allen Größen, ab 1 Stück."
     cta={{ label: 'Angebot in 24h', href: '/kontakt' }}
     image="/img/streetwear-group.jpg"
     imageAlt="Vier Models in unbedruckten Oversize-Hoodies in Hellblau, Rosa, Sand und Navy sitzen vor grauem Studiohintergrund"
@@ -54,7 +54,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
         <ul class="steps-list">
           {[
             { t: 'Blank wählen', d: 'Heavy Oversize Tee, Boxy Hoodie oder Ultra Heavy Sweat von Build Your Brand und Urban Classics. Wir beraten zu Grammatur, Schnitt und Farbe.' },
-            { t: 'Sample drucken', d: 'Ein Stück, dein Motiv, dein Nackenprint. In 1 bis 3 Werktagen in der Hand. Erst dann entscheidest du über die Auflage.' },
+            { t: 'Sample drucken', d: 'Ein Stück, dein Motiv, dein Nackenprint. In 3 bis 5 Werktagen in der Hand. Erst dann entscheidest du über die Auflage.' },
             { t: 'Drop produzieren', d: 'Ab 50 Stück Staffelpreise, Mischgrößen ohne Aufpreis, fester Liefertermin für deinen Release.' },
             { t: 'Skalieren', d: 'Wenn der Shop läuft: Print-on-Demand. Wir drucken und versenden jede Bestellung neutral in deinem Namen, ohne Lager.' },
           ].map((s, i) => (
@@ -94,7 +94,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
     <div class="container shop-band reveal">
       <div>
         <h2>Sample gesucht?</h2>
-        <p class="muted">Jedes Textil aus dem Sortiment bekommst du als Muster mit deinem Motiv. Ab 1 Stück, in 1 bis 3 Werktagen bei dir.</p>
+        <p class="muted">Jedes Textil aus dem Sortiment bekommst du als Muster mit deinem Motiv. Ab 1 Stück, in 3 bis 5 Werktagen bei dir.</p>
       </div>
       <a href="/sample" class="btn btn-primary btn-lg">Muster bestellen <Icon name="arrow-right" size={18} /></a>
     </div>

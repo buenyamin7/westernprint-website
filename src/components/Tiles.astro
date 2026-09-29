@@ -1,16 +1,24 @@
 ---
 // Randloses Bildraster: Fotos mit Text darüber, keine Rahmen. Wird für Leistungen, Zielgruppen und Partner benutzt.
 import Icon from './Icon.astro';
+import { imgInfo } from '../lib/imgsize.mjs';
 interface Tile { href?: string; img: string; pos?: string; tag?: string; t: string; d: string; big?: boolean; cta?: string; alt?: string }
 interface Props { items: Tile[]; cols?: 2 | 3; rows?: string; class?: string }
 const { items, cols = 3, rows = 'clamp(260px, 26vw, 380px)', class: cls = '' } = Astro.props;
+// Echte Maße und WebP-Varianten (640/960/1400, scripts/make-image-variants.mjs), falls erzeugt.
+const infos = await Promise.all(items.map((c) => imgInfo(c.img)));
+// Anzeigebreite je Kachel: das Raster läuft randlos über die volle Breite (Spalten siehe Media Queries unten).
+const sizesFor = (big?: boolean) => cols === 2
+  ? (big ? '100vw' : '(max-width: 600px) 100vw, 50vw')
+  : (big ? '(max-width: 900px) 100vw, 67vw' : '(max-width: 600px) 100vw, (max-width: 900px) 50vw, 34vw');
 ---
 <div class={`tiles cols-${cols} ${cls}`} style={`--rows:${rows}`}>
   {items.map((c, i) => {
     const Tag = c.href ? 'a' : 'div';
+    const info = infos[i];
     return (
       <Tag href={c.href} class={`tile ${c.big ? 'tile-big' : ''} reveal reveal-d${i % 3}`}>
-        <img src={c.img} alt={c.alt ?? ''} width="1400" height="1050" loading="lazy" style={c.pos ? `object-position:${c.pos}` : undefined} />
+        <img src={c.img} srcset={info.srcset} sizes={info.srcset ? sizesFor(c.big) : undefined} alt={c.alt ?? ''} width={info.width ?? 1400} height={info.height ?? 1050} loading="lazy" style={c.pos ? `object-position:${c.pos}` : undefined} />
         <div class="tile-body">
           {c.tag && <span class="tile-tag">{c.tag}</span>}
           <h3>{c.t}</h3>

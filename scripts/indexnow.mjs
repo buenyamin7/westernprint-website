@@ -7,15 +7,24 @@ const HOST = 'westernprint.de';
 const [sitemapPath, ...changed] = process.argv.slice(2);
 
 const all = [...readFileSync(sitemapPath, 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-// Layout, Komponenten, Daten oder Styles geändert: alle Seiten melden. Sonst nur die geänderten Seiten.
-const global = changed.length === 0 || changed.some((f) => /^src\/(layouts|components|data|styles|content)\//.test(f) || f === 'astro.config.mjs');
+// Layout, Komponenten, Daten, Hilfsfunktionen oder Styles geändert: alle Seiten melden. Sonst nur die geänderten Seiten.
+const global = changed.length === 0 || changed.some((f) => /^src\/(layouts|components|data|styles|content|lib)\//.test(f) || f === 'astro.config.mjs');
 let urls = all;
 if (!global) {
-  const paths = changed
-    .filter((f) => f.startsWith('src/pages/') && f.endsWith('.astro') && !f.includes('['))
+  const pages = changed.filter((f) => f.startsWith('src/pages/') && f.endsWith('.astro'));
+  const paths = pages
+    .filter((f) => !f.includes('['))
     .map((f) => '/' + f.replace(/^src\/pages\//, '').replace(/\.astro$/, '').replace(/(^|\/)index$/, ''))
     .map((p) => (p === '/' ? '' : p.replace(/\/$/, '')));
-  urls = all.filter((u) => paths.includes(new URL(u).pathname.replace(/\/$/, '')));
+  // Dynamische Routen wie src/pages/fuer/[slug].astro: alle URLs unter /fuer/ melden.
+  const prefixes = pages
+    .filter((f) => f.includes('['))
+    .map((f) => '/' + f.replace(/^src\/pages\//, '').replace(/\/?\[[^\]]+\]\.astro$/, '') + '/')
+    .map((p) => p.replace(/\/{2,}/g, '/'));
+  urls = all.filter((u) => {
+    const p = new URL(u).pathname.replace(/\/$/, '');
+    return paths.includes(p) || prefixes.some((pre) => p.startsWith(pre));
+  });
 }
 if (!urls.length) { console.log('IndexNow: keine Seiten zu melden'); process.exit(0); }
 

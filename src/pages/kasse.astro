@@ -27,7 +27,7 @@ const countries = [['DE', 'Deutschland'], ['AT', 'Österreich'], ['CH', 'Schweiz
           <label class="checkbox"><input type="checkbox" name="agb" required /><span>Ich akzeptiere die <a href="/agb" class="accent" target="_blank">AGB</a> und habe die <a href="/widerruf" class="accent" target="_blank">Widerrufsbelehrung</a> sowie die <a href="/datenschutz" class="accent" target="_blank">Datenschutzerklärung</a> gelesen. Individuell bedruckte Ware ist vom Widerruf ausgeschlossen.</span></label>
           <span class="error" data-agb-error hidden>Bitte AGB bestätigen.</span>
           <button type="submit" class="btn btn-primary btn-lg" data-pay>Weiter zur Bezahlung <Icon name="arrow-right" size={18} /></button>
-          <p class="muted small">Du wirst zu Mollie weitergeleitet: PayPal, Klarna, Apple Pay, Kreditkarte, SEPA. Der Betrag wird erst dort bezahlt.</p>
+          <p class="muted small">Du wirst zu unserem Zahlungsdienstleister Mollie weitergeleitet. Dort werden dir die verfügbaren Zahlungsarten angezeigt, der Betrag wird erst dort bezahlt.</p>
           <p class="form-note err" data-error hidden></p>
         </form>
         <aside class="card card-pad summary">
@@ -38,7 +38,8 @@ const countries = [['DE', 'Deutschland'], ['AT', 'Österreich'], ['CH', 'Schweiz
             <div><dt>Versand <span class="muted" data-ship-label></span></dt><dd data-ship></dd></div>
             <div class="total"><dt>Gesamt</dt><dd data-total></dd></div>
           </dl>
-          <p class="muted small">inkl. 19 % MwSt.</p>
+          <p class="muted small">inkl. 19 % MwSt. Versandkostenfrei ab 500 € Warenwert in alle Lieferländer.</p>
+          <p class="muted small" data-ch-note hidden>Bei Lieferung in die Schweiz können Einfuhrabgaben anfallen, die der Empfänger trägt.</p>
           <a href="/warenkorb" class="muted small">Warenkorb bearbeiten</a>
         </aside>
       </div>
@@ -47,20 +48,25 @@ const countries = [['DE', 'Deutschland'], ['AT', 'Österreich'], ['CH', 'Schweiz
 </Base>
 
 <script>
-  import { getCart, subtotal, lineTotal, euro } from '../scripts/cart';
+  import { getCart, subtotal, lineTotal, euro, rememberOrder } from '../scripts/cart';
   const root = document.querySelector<HTMLElement>('.kasse')!;
   const $ = <T extends HTMLElement>(s: string) => root.querySelector<T>(s)!;
   const esc = (s: string) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
-  const SHIP: Record<string, { amount: number; label: string }> = { DE: { amount: 4.9, label: '(1-3 Werktage)' }, EU: { amount: 9.9, label: '(3-5 Werktage)' } };
+  // Wie der Kassen-Worker (catalog.js): Deutschland 4,90 €, übrige Lieferländer 9,90 €, versandkostenfrei ab 500 € Warenwert (brutto)
+  const SHIP = { DE: 4.9, AUSLAND: 9.9 };
+  const FREE_SHIPPING_FROM = 500;
   const items = getCart();
   if (new URLSearchParams(location.search).get('abgebrochen')) $('[data-cancelled]').hidden = false;
   if (!items.length) { location.replace('/warenkorb'); }
 
   function render() {
-    const country = $<HTMLSelectElement>('#k-country').value; const ship = SHIP[country === 'DE' ? 'DE' : 'EU'];
+    const country = $<HTMLSelectElement>('#k-country').value; const sub = subtotal(items);
+    const free = Math.round(sub * 100) >= FREE_SHIPPING_FROM * 100;
+    const ship = { amount: free ? 0 : SHIP[country === 'DE' ? 'DE' : 'AUSLAND'], label: free ? '(versandkostenfrei ab 500 €, 3-5 Werktage)' : '(3-5 Werktage)' };
     $('[data-items]').innerHTML = items.map((i) => `<li><span>${i.quantity} x ${esc(i.title)} ${esc(i.color)} / ${esc(i.size)}<small>${esc(i.side)}${i.sizeFront ? `, vorne ${esc(i.sizeFront)}` : ''}${i.sizeBack ? `, hinten ${esc(i.sizeBack)}` : ''}</small></span><strong>${euro(lineTotal(i))}</strong></li>`).join('');
-    $('[data-sub]').textContent = euro(subtotal(items)); $('[data-ship]').textContent = euro(ship.amount); $('[data-ship-label]').textContent = ship.label;
-    $('[data-total]').textContent = euro(subtotal(items) + ship.amount);
+    $('[data-sub]').textContent = euro(sub); $('[data-ship]').textContent = euro(ship.amount); $('[data-ship-label]').textContent = ship.label;
+    $('[data-total]').textContent = euro(sub + ship.amount);
+    $('[data-ch-note]').hidden = country !== 'CH';
   }
   $('#k-country').addEventListener('change', render); render();
 
@@ -79,6 +85,7 @@ const countries = [['DE', 'Deutschland'], ['AT', 'Österreich'], ['CH', 'Schweiz
     try {
       const res = await fetch(`${root.dataset.endpoint}/checkout`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ lines, customer: data }) });
       const j = await res.json(); if (!res.ok || !j.url) throw new Error(j.error || 'Kasse nicht erreichbar');
+      if (j.orderNo) rememberOrder(j.orderNo);
       location.href = j.url;
     } catch (ex) { err.hidden = false; err.textContent = 'Das hat nicht geklappt: ' + (ex as Error).message + '. Versuch es nochmal oder schreib uns per WhatsApp.'; btn.disabled = false; btn.innerHTML = 'Weiter zur Bezahlung'; }
   });
@@ -98,8 +105,8 @@ const countries = [['DE', 'Deutschland'], ['AT', 'Österreich'], ['CH', 'Schweiz
   .items :global(li) { display: flex; justify-content: space-between; gap: 12px; }
   .items :global(small) { display: block; color: var(--text-3); font-size: 12.5px; }
   .summary dl { margin: 0; display: grid; gap: 6px; border-top: 1px solid var(--line); padding-top: 12px; }
-  .summary dl div { display: flex; justify-content: space-between; font-size: 14.5px; }
-  .summary dd { margin: 0; font-variant-numeric: tabular-nums; }
+  .summary dl div { display: flex; justify-content: space-between; gap: 12px; font-size: 14.5px; }
+  .summary dd { margin: 0; font-variant-numeric: tabular-nums; white-space: nowrap; }
   .summary .total { font-weight: 700; font-size: 17px; padding-top: 6px; }
   .summary .total dd { color: var(--accent); }
   @media (max-width: 800px) { .kgrid { grid-template-columns: 1fr; } .summary { position: static; order: -1; } .row, .row-3 { grid-template-columns: 1fr; } }

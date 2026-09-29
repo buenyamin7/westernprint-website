@@ -17,7 +17,7 @@ Marketing-Website der westernprint GmbH, gebaut mit Astro (statisch, kein Server
 | Kontakt | `src/pages/kontakt.astro` | `/pages/contact` |
 | Impressum, Datenschutz, AGB, Widerruf, Versand | `src/pages/*.astro` + `src/content/legal/*.html` | `/pages/...` |
 
-Alle Weiterleitungen stehen in `public/_redirects` (Netlify, Cloudflare Pages) und `vercel.json` (Vercel).
+Alle Weiterleitungen stehen in `public/_redirects` (Netlify, Cloudflare Pages). Auf GitHub Pages greifen die statischen Weiterleitungsseiten unter `src/pages/pages`, `products`, `collections`, `policies` und `cart.astro`.
 
 ## Wo was geändert wird
 

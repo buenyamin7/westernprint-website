@@ -31,6 +31,23 @@ function announce(items: CartItem[]) {
   document.querySelectorAll<HTMLElement>('[data-cart-count]').forEach((el) => { el.textContent = String(n); el.hidden = n === 0; });
 }
 export function refreshCount() { announce(getCart()); }
+/** Zähler aktuell halten: nach Zurück/Vor (Seite aus dem bfcache) und nach Änderungen in einem anderen Tab. */
+export function watchCount() {
+  addEventListener('pageshow', (e) => { if (e.persisted) refreshCount(); });
+  addEventListener('storage', (e) => { if (e.key === KEY || e.key === null) refreshCount(); });
+}
+
+// Bestellnummer des laufenden Bezahlvorgangs. Die Bestellseite leert den Warenkorb nur, wenn er zu genau dieser Bestellung gehört.
+const PENDING = 'wp-checkout-order';
+/** Kasse: Bestellnummer merken, bevor zu Mollie weitergeleitet wird. */
+export function rememberOrder(orderNo: string) { try { localStorage.setItem(PENDING, orderNo); } catch {} }
+/** Bestellseite: Warenkorb leeren, wenn er in dieser Kasse für diese Bestellnummer abgeschickt wurde. Danach Merker löschen. */
+export function clearCartFor(orderNo: string) {
+  let pending = ''; try { pending = localStorage.getItem(PENDING) || ''; } catch {}
+  if (!orderNo || pending !== orderNo) return;
+  clearCart();
+  try { localStorage.removeItem(PENDING); } catch {}
+}
 export const euro = (n: number | string) => Number(n).toFixed(2).replace('.', ',') + ' €';
 
 /** Kasse: Warenkorb an den Worker schicken, Mollie-URL zurück. */

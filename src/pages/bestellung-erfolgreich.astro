@@ -5,10 +5,15 @@ import { site } from '../data/site';
 ---
 <Base title="Deine Bestellung" description="Bestellstatus und Bestätigung." noindex={true} hideCta={true}>
   <section class="section">
-    <div class="container done" data-endpoint={site.checkoutApi}>
-      <div class="icon-box big"><Icon name="check" weight="bold" size={28} /></div>
-      <h1>Danke, deine Bestellung ist da.</h1>
-      <p class="lede" data-msg>Wir prüfen deine Daten und starten die Produktion. Die Bestätigung kommt per E-Mail.</p>
+    <div class="container done" data-endpoint={site.checkoutApi} data-state="loading" aria-busy="true">
+      <div class="icon-box big">
+        <span data-icon="loading" class="spin"><Icon name="circle-notch" weight="bold" size={28} /></span>
+        <span data-icon="ok" hidden><Icon name="check" weight="bold" size={28} /></span>
+        <span data-icon="pending" hidden><Icon name="hourglass" weight="bold" size={28} /></span>
+        <span data-icon="problem" hidden><Icon name="warning" weight="bold" size={28} /></span>
+      </div>
+      <h1 data-h1>Wir prüfen deine Bestellung...</h1>
+      <p class="lede" data-msg aria-live="polite">Einen Moment bitte.</p>
       <div class="card card-pad summary" data-summary hidden>
         <p><strong>Bestellnummer:</strong> <span data-no></span></p>
         <ul data-items></ul>
@@ -39,55 +44,122 @@ import { site } from '../data/site';
           <a data-mail class="btn btn-secondary"><Icon name="envelope" size={18} /> Per E-Mail</a>
         </div>
       </div>
-      <a href="/shop" class="btn btn-secondary">Zurück zum Shop</a>
+      <div class="card card-pad contact" data-contact hidden>
+        <div class="actions">
+          <a href={site.whatsapp} data-contact-wa data-no-track class="btn btn-primary" target="_blank" rel="noopener"><Icon name="whatsapp-logo" size={18} /> Per WhatsApp</a>
+          <a href={`mailto:${site.email}`} data-contact-mail class="btn btn-secondary"><Icon name="envelope" size={18} /> Per E-Mail</a>
+        </div>
+        <p class="muted small">WhatsApp {site.phone} · {site.email}</p>
+      </div>
+      <div class="actions">
+        <a href="/warenkorb" class="btn btn-primary" data-retry hidden><Icon name="shopping-cart" size={18} /> Zurück zum Warenkorb</a>
+        <button type="button" class="btn btn-secondary" data-reload hidden><Icon name="arrow-clockwise" size={18} /> Status neu laden</button>
+        <a href="/shop" class="btn btn-secondary">Zurück zum Shop</a>
+      </div>
     </div>
   </section>
 </Base>
 
 <script>
-  import { clearCart } from '../scripts/cart';
+  import { clearCartFor } from '../scripts/cart';
   const root = document.querySelector<HTMLElement>('.done')!;
+  const $ = <T extends HTMLElement = HTMLElement>(s: string) => root.querySelector<T>(s)!;
   const id = new URLSearchParams(location.search).get('order');
-  if (id) {
-    clearCart();
-    fetch(`${root.dataset.endpoint}/order?order=${encodeURIComponent(id)}`).then((r) => r.json()).then((o) => {
-      if (!o.orderNo) return;
-      root.querySelector('[data-no]')!.textContent = o.orderNo;
-      root.querySelector('[data-email]')!.textContent = o.email;
-      root.querySelector('[data-items]')!.innerHTML = o.items.map((l: string) => `<li>${l.split(' | ')[0]}</li>`).join('');
-      (root.querySelector('[data-summary]') as HTMLElement).hidden = false;
-      const msg = root.querySelector('[data-msg]')!; const h1 = root.querySelector('h1')!;
-      if (o.status === 'Zahlung offen') msg.textContent = 'Deine Zahlung wird noch bestätigt. Sobald sie da ist, bekommst du die Bestätigung per E-Mail.';
-      if (o.status === 'Wartet auf Überweisung') msg.textContent = 'Deine Bestellung ist gespeichert. Sobald deine Überweisung bei uns eingeht, bekommst du die Bestätigung per E-Mail und wir starten den Druck.';
-      if (o.status === 'In Produktion') { h1.textContent = 'Deine Bestellung wird gerade gedruckt.'; msg.textContent = 'Sobald das Paket unterwegs ist, bekommst du die Sendungsnummer per E-Mail.'; }
-      if (o.status === 'Versendet') { h1.textContent = 'Deine Bestellung ist unterwegs.'; msg.textContent = 'Das Paket wurde übergeben. Mit der Sendungsnummer kannst du es verfolgen.'; }
-      if (o.status === 'Storniert') { h1.textContent = 'Diese Bestellung wurde storniert.'; msg.textContent = 'Falls schon bezahlt wurde, erstatten wir den Betrag über den genutzten Zahlungsweg.'; }
-      if (o.bank) {
-        const b = root.querySelector<HTMLElement>('[data-bank]')!; b.hidden = false;
-        const set = (k: string, v: string) => (b.querySelector(`[data-bank-${k}]`)!.textContent = v);
-        set('amount', String(o.bank.amount).replace('.', ',') + ' €'); set('iban', (o.bank.iban || '').replace(/(.{4})/g, '$1 ').trim()); set('bic', o.bank.bic || ''); set('holder', o.bank.holder || ''); set('ref', o.bank.reference || '');
-        set('until', o.bank.until ? new Date(o.bank.until).toLocaleDateString('de-DE') : '');
-      }
-      if (o.tracking) {
-        const t = root.querySelector<HTMLElement>('[data-track]')!; t.hidden = false;
-        t.querySelector('[data-track-no]')!.textContent = o.tracking; t.querySelector('[data-track-carrier]')!.textContent = o.carrier ? `(${o.carrier})` : '';
-        const a = t.querySelector<HTMLAnchorElement>('[data-track-link]')!; if (o.trackingUrl) a.href = o.trackingUrl; else a.hidden = true;
-      }
-      if (o.status === 'Abgebrochen') msg.textContent = 'Die Zahlung ist nicht abgeschlossen worden. Du kannst es im Warenkorb erneut versuchen.';
-      if (o.needsUpload) {
-        const hint = root.querySelector<HTMLElement>('[data-upload-hint]')!; hint.hidden = false;
-        const text = encodeURIComponent(`Hallo, hier mein Motiv zur Bestellung ${o.orderNo}.`);
-        (hint.querySelector('[data-wa]') as HTMLAnchorElement).href = `https://wa.me/4917655412198?text=${text}`;
-        (hint.querySelector('[data-mail]') as HTMLAnchorElement).href = `mailto:info@westernprint.de?subject=${encodeURIComponent('Motiv zur Bestellung ' + o.orderNo)}&body=${text}`;
-      }
-    }).catch(() => {});
+  const orderNo = id && /^WP-[A-Z0-9-]{6,20}$/.test(id) ? id : ''; // Format wie im Kassen-Worker (ORDER_RE)
+
+  // Statuswerte aus dem Kassen-Worker bzw. Airtable "Shop-Bestellungen" (Feld Status).
+  // ok = bezahlt. pending = Zahlung läuft noch. failed = Zahlung nicht abgeschlossen.
+  // Warenkorb wird bei ok und bei „Wartet auf Überweisung“ geleert (Bestellung steht, Bankdaten sind da), aber nur für die Bestellung aus dieser Kasse.
+  type State = 'ok' | 'pending' | 'failed' | 'cancelled' | 'unclear';
+  const STATUS: Record<string, [State, string, string]> = {
+    'Neu': ['ok', 'Danke, deine Bestellung ist da.', 'Wir prüfen deine Daten und starten die Produktion. Die Bestätigung kommt per E-Mail.'],
+    'In Produktion': ['ok', 'Deine Bestellung wird gerade gedruckt.', 'Sobald das Paket unterwegs ist, bekommst du die Sendungsnummer per E-Mail.'],
+    'Versendet': ['ok', 'Deine Bestellung ist unterwegs.', 'Das Paket wurde übergeben. Mit der Sendungsnummer kannst du es verfolgen.'],
+    'Zahlung offen': ['pending', 'Deine Zahlung wird noch verarbeitet.', 'Sobald sie bestätigt ist, bekommst du die Bestätigung per E-Mail. Bitte bestell in der Zwischenzeit nicht noch einmal.'],
+    'Wartet auf Überweisung': ['pending', 'Deine Bestellung ist gespeichert.', 'Sobald deine Überweisung bei uns eingeht, bekommst du die Bestätigung per E-Mail und wir starten den Druck.'],
+    'Abgebrochen': ['failed', 'Die Zahlung wurde nicht abgeschlossen.', 'Du kannst es im Warenkorb erneut versuchen.'],
+    'Storniert': ['cancelled', 'Diese Bestellung wurde storniert.', 'Falls schon bezahlt wurde, erstatten wir den Betrag über den genutzten Zahlungsweg.'],
+  };
+
+  function show(state: State, title: string, text: string, reload = state === 'pending' || (state === 'unclear' && !!orderNo)) {
+    root.dataset.state = state; root.removeAttribute('aria-busy');
+    const icon = state === 'ok' ? 'ok' : state === 'pending' ? 'pending' : 'problem';
+    root.querySelectorAll<HTMLElement>('[data-icon]').forEach((el) => (el.hidden = el.dataset.icon !== icon));
+    $('[data-h1]').textContent = title; $('[data-msg]').textContent = text;
+    $('[data-retry]').hidden = state !== 'failed';
+    $('[data-reload]').hidden = !reload;
+    $('[data-contact]').hidden = !(state === 'unclear' || state === 'cancelled');
   }
+
+  // Kontaktknöpfe mit Bestellnummer vorbefüllen.
+  function prefillContact() {
+    const text = encodeURIComponent(`Hallo, ich habe eine Frage zu meiner Bestellung ${orderNo}.`);
+    $<HTMLAnchorElement>('[data-contact-wa]').href += `?text=${text}`;
+    $<HTMLAnchorElement>('[data-contact-mail]').href += `?subject=${encodeURIComponent('Bestellung ' + orderNo)}&body=${text}`;
+  }
+
+  // Keine Nummer, unbekannte Bestellung, Fehler: nichts behaupten, Kontaktweg zeigen, Warenkorb bleibt.
+  function unclear() {
+    if (!orderNo) return show('unclear', 'Wir können diesen Link keiner Bestellung zuordnen.', 'Wenn du gerade bezahlt hast oder eine Frage zu deiner Bestellung hast, schreib uns per WhatsApp oder E-Mail.');
+    show('unclear', 'Wir können deine Bestellung gerade nicht abrufen.', `Wenn du gerade bezahlt hast, bestell bitte nicht noch einmal, sondern schreib uns per WhatsApp oder E-Mail mit deiner Bestellnummer ${orderNo}. Dann sehen wir nach.`);
+    prefillContact();
+  }
+
+  // Bestellung gefunden, aber Status nicht in der Tabelle: neutral bleiben, Neuladen hilft hier nicht.
+  function otherStatus() {
+    show('unclear', `Deine Bestellung ${orderNo}`, 'Den genauen Stand können wir dir hier nicht anzeigen. Schreib uns per WhatsApp oder E-Mail mit deiner Bestellnummer, dann sehen wir für dich nach.', false);
+    prefillContact();
+  }
+
+  function render(o: any) {
+    const entry = STATUS[o.status];
+    if (!entry) return otherStatus();
+    const [state, title, text] = entry;
+    show(state, title, text);
+    if (state === 'ok' || state === 'pending') {
+      $('[data-no]').textContent = o.orderNo;
+      $('[data-email]').textContent = o.email;
+      const list = $('[data-items]'); list.replaceChildren(...(o.items || []).map((l: string) => { const li = document.createElement('li'); li.textContent = l.split(' | ')[0]; return li; }));
+      $('[data-summary]').hidden = false;
+    }
+    if (o.bank) {
+      const b = $('[data-bank]'); b.hidden = false;
+      const set = (k: string, v: string) => (b.querySelector(`[data-bank-${k}]`)!.textContent = v);
+      set('amount', String(o.bank.amount).replace('.', ',') + ' €'); set('iban', (o.bank.iban || '').replace(/(.{4})/g, '$1 ').trim()); set('bic', o.bank.bic || ''); set('holder', o.bank.holder || ''); set('ref', o.bank.reference || '');
+      set('until', o.bank.until ? new Date(o.bank.until).toLocaleDateString('de-DE') : '');
+    }
+    if (o.tracking) {
+      const t = $('[data-track]'); t.hidden = false;
+      t.querySelector('[data-track-no]')!.textContent = o.tracking; t.querySelector('[data-track-carrier]')!.textContent = o.carrier ? `(${o.carrier})` : '';
+      const a = t.querySelector<HTMLAnchorElement>('[data-track-link]')!; if (o.trackingUrl) a.href = o.trackingUrl; else a.hidden = true;
+    }
+    if (o.needsUpload && (state === 'ok' || state === 'pending')) {
+      const hint = $('[data-upload-hint]'); hint.hidden = false;
+      const text = encodeURIComponent(`Hallo, hier mein Motiv zur Bestellung ${o.orderNo}.`);
+      (hint.querySelector('[data-wa]') as HTMLAnchorElement).href = `https://wa.me/4917655412198?text=${text}`;
+      (hint.querySelector('[data-mail]') as HTMLAnchorElement).href = `mailto:info@westernprint.de?subject=${encodeURIComponent('Motiv zur Bestellung ' + o.orderNo)}&body=${text}`;
+    }
+    // Erst wenn die Bestellung steht (bezahlt oder Überweisung angelegt), ist der Warenkorb erledigt.
+    if (state === 'ok' || o.status === 'Wartet auf Überweisung') clearCartFor(orderNo);
+  }
+
+  $('[data-reload]').addEventListener('click', () => location.reload());
+  if (!orderNo) unclear();
+  else fetch(`${root.dataset.endpoint}/order?order=${encodeURIComponent(orderNo)}`, { signal: AbortSignal.timeout?.(15000) })
+    .then(async (r) => { const o = await r.json(); if (!r.ok || !o.orderNo) throw new Error('Bestellung nicht gefunden'); return o; })
+    .then(render)
+    .catch(unclear);
 </script>
 
 <style>
   .done { max-width: 640px; display: grid; gap: 22px; justify-items: start; }
   .big { width: 60px; height: 60px; border-radius: 16px; }
-  .summary, .upload-hint, .bank, .track { width: 100%; display: grid; gap: 10px; justify-items: start; }
+  .big > span { display: grid; place-items: center; }
+  .done[data-state="loading"] .big, .done[data-state="pending"] .big, .done[data-state="unclear"] .big { color: var(--text-2); }
+  .done[data-state="failed"] .big, .done[data-state="cancelled"] .big { color: var(--danger); }
+  .spin { animation: wp-spin 1s linear infinite; }
+  @keyframes wp-spin { to { transform: rotate(360deg); } }
+  .summary, .upload-hint, .bank, .track, .contact { width: 100%; display: grid; gap: 10px; justify-items: start; }
   .bankdata { display: grid; gap: 6px; margin: 0; width: 100%; }
   .bankdata div { display: grid; grid-template-columns: 150px 1fr; gap: 12px; font-size: 15px; }
   .bankdata dt { color: var(--text-3); } .bankdata dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }

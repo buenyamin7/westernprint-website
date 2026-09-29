@@ -10,12 +10,12 @@ const topics = ['Print-on-Demand Fulfillment', 'Großauflage ab 50 Stück', 'B2B
     <div class="field">
       <label for="cf-name">Name</label>
       <input class="input" id="cf-name" name="name" type="text" autocomplete="name" required />
-      <span class="error">Bitte gib deinen Namen an.</span>
+      <span class="error" id="cf-name-error">Bitte gib deinen Namen an.</span>
     </div>
     <div class="field">
       <label for="cf-email">E-Mail</label>
       <input class="input" id="cf-email" name="email" type="email" autocomplete="email" required />
-      <span class="error">Bitte gib eine gültige E-Mail-Adresse an.</span>
+      <span class="error" id="cf-email-error">Bitte gib eine gültige E-Mail-Adresse an.</span>
     </div>
   </div>
   <div class="row">
@@ -29,7 +29,7 @@ const topics = ['Print-on-Demand Fulfillment', 'Großauflage ab 50 Stück', 'B2B
         <option value="" disabled selected={!topic}>Bitte wählen</option>
         {topics.map((t) => <option value={t} selected={t === topic}>{t}</option>)}
       </select>
-      <span class="error">Bitte wähle ein Thema.</span>
+      <span class="error" id="cf-topic-error">Bitte wähle ein Thema.</span>
     </div>
   </div>
   {!compact && (
@@ -51,14 +51,14 @@ const topics = ['Print-on-Demand Fulfillment', 'Großauflage ab 50 Stück', 'B2B
   <div class="field">
     <label for="cf-msg">Nachricht</label>
     <textarea class="textarea" id="cf-msg" name="message" required placeholder="Produkt, Motiv, Termin, Besonderheiten. Dateien schickst du uns anschließend per WhatsApp oder E-Mail."></textarea>
-    <span class="error">Bitte beschreib kurz dein Projekt.</span>
+    <span class="error" id="cf-msg-error">Bitte beschreib kurz dein Projekt.</span>
   </div>
   <div class="field">
     <label class="checkbox">
-      <input type="checkbox" name="privacy" required />
+      <input type="checkbox" id="cf-privacy" name="privacy" required />
       <span>Ich habe die <a href="/datenschutz" class="accent">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Daten zur Bearbeitung der Anfrage einverstanden.</span>
     </label>
-    <span class="error">Bitte bestätige den Datenschutzhinweis.</span>
+    <span class="error" id="cf-privacy-error">Bitte bestätige den Datenschutzhinweis.</span>
   </div>
   <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="sr-only" aria-hidden="true" />
   <div class="actions">
@@ -83,19 +83,34 @@ const topics = ['Print-on-Demand Fulfillment', 'Großauflage ab 50 Stück', 'B2B
     const note = form.querySelector<HTMLElement>('[data-note]')!;
     const submit = form.querySelector<HTMLButtonElement>('[data-submit]')!;
     const setNote = (kind: 'ok' | 'err' | '', text: string) => { note.className = 'form-note ' + kind; note.textContent = text; };
+    // Fehlerzustand auch für Screenreader: aria-invalid setzen und die Fehlermeldung des Felds per aria-describedby verknüpfen.
+    const markInvalid = (input: HTMLElement, invalid: boolean) => {
+      const errId = input.closest('.field')?.querySelector<HTMLElement>('.error')?.id;
+      const ids = (input.getAttribute('aria-describedby') || '').split(/\s+/).filter((id) => id && id !== errId);
+      if (invalid && errId) ids.push(errId);
+      if (invalid) input.setAttribute('aria-invalid', 'true'); else input.removeAttribute('aria-invalid');
+      if (ids.length) input.setAttribute('aria-describedby', ids.join(' ')); else input.removeAttribute('aria-describedby');
+    };
 
+    // Gibt die ungültigen Pflichtfelder in Formularreihenfolge zurück.
     const validate = () => {
-      let ok = true;
+      const invalid: HTMLElement[] = [];
       form.querySelectorAll<HTMLElement>('.field').forEach((f) => {
         const input = f.querySelector<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('input, select, textarea');
         if (!input || !input.hasAttribute('required')) return;
         const valid = input instanceof HTMLInputElement && input.type === 'checkbox' ? input.checked : input.checkValidity() && input.value.trim() !== '';
         f.classList.toggle('has-error', !valid);
-        if (!valid) ok = false;
+        markInvalid(input, !valid);
+        if (!valid) invalid.push(input);
       });
-      return ok;
+      return invalid;
     };
-    form.addEventListener('input', (e) => (e.target as HTMLElement).closest('.field')?.classList.remove('has-error'));
+    form.addEventListener('input', (e) => {
+      const field = (e.target as HTMLElement).closest('.field');
+      if (!field?.classList.contains('has-error')) return;
+      field.classList.remove('has-error');
+      markInvalid(e.target as HTMLElement, false);
+    });
     const waBtn = form.querySelector<HTMLAnchorElement>('[data-wa-btn]')!;
     waBtn.addEventListener('click', () => {
       const d = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
@@ -106,7 +121,8 @@ const topics = ['Print-on-Demand Fulfillment', 'Großauflage ab 50 Stück', 'B2B
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       setNote('', '');
-      if (!validate()) { setNote('err', 'Bitte prüfe die markierten Felder.'); return; }
+      const invalid = validate();
+      if (invalid.length) { setNote('err', 'Bitte prüfe die markierten Felder.'); invalid[0].focus(); return; }
       const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
       if (data._gotcha) return;
       const endpoint = form.dataset.endpoint;

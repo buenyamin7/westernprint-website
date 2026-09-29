@@ -1,45 +1,87 @@
 ---
-import { testimonials } from '../data/site';
+// Referenzen: ausschließlich echte Google-Rezensionen aus src/data/bewertungen.ts.
+// Texte dort sind wörtlich übernommen, hier nichts umformulieren.
+import { bewertungen, rezensionen, type Rezension } from '../data/bewertungen';
 import Icon from './Icon.astro';
-const [first, ...rest] = testimonials;
-const initials = (n: string) => n.split(' ').map((p) => p[0]).join('').slice(0, 2);
+
+interface Props {
+  /** Namen von Rezensionen, die auf der Seite schon an anderer Stelle zitiert werden (z. B. im Hero). */
+  ohne?: string[];
+}
+const { ohne = [] } = Astro.props;
+
+const liste = rezensionen.filter((r) => !ohne.includes(r.name));
+// Die längste Rezension bekommt die große Karte, die übrigen behalten ihre Reihenfolge aus der Datendatei.
+const hauptIndex = liste.reduce((best, r, i) => (r.text.length > liste[best].text.length ? i : best), 0);
+const first = liste[hauptIndex];
+const rest = liste.filter((_, i) => i !== hauptIndex);
+// 6 Karten: große Karte über 2 Spalten und 2 Zeilen. 5 Karten: große Karte über 2 Zeilen. So bleibt keine Lücke.
+const layout = rest.length === 5 ? 'wide' : rest.length === 4 ? 'tall' : '';
+
+const schnitt = bewertungen.schnitt.toFixed(1).replace('.', ',');
+// "2026-09-28" -> "28.09.2026", überall dasselbe Format für den Bewertungsstand.
+const stand = bewertungen.stand.split('-').reverse().join('.');
+const initials = (n: string) => n.split(' ').map((p) => p[0]).join('').slice(0, 2).toUpperCase();
+const zitat = (r: Rezension) => `${r.text}${r.gekuerzt ? ' […]' : ''}`;
+const meta = (r: Rezension) => (r.rolle ? `${r.rolle} · ${r.datum}` : r.datum);
+const gekuerzt = liste.some((r) => r.gekuerzt);
 ---
+{first && (
 <section class="section-tight" id="stimmen">
   <div class="container">
     <div class="section-head reveal">
-      <h2>Was Kunden über uns sagen</h2>
-      <p>Die meisten unserer Partner kommen von großen Anbietern zu uns. Und bleiben.</p>
+      <h2>Was Kunden bei Google über uns schreiben</h2>
+      <p class="t-rating">
+        <span class="stars" aria-hidden="true">{Array.from({ length: 5 }).map(() => <Icon name="star" weight="fill" size={16} />)}</span>
+        <span><a href="/bewertungen" class="accent">{schnitt} von 5 Sternen bei {bewertungen.anzahl} Google-Bewertungen</a>, Stand {stand}.</span>
+      </p>
     </div>
-    <div class="tgrid">
+    <div class={`tgrid ${layout}`}>
       <figure class="card card-pad t-main reveal">
         <div class="stars" aria-label="5 von 5 Sternen">{Array.from({ length: 5 }).map(() => <Icon name="star" weight="fill" size={16} />)}</div>
-        <blockquote>{first.quote}</blockquote>
-        <figcaption><span class="avatar">{initials(first.name)}</span><span class="who"><strong>{first.name}</strong><span>{first.role}</span></span></figcaption>
+        <blockquote>{zitat(first)}</blockquote>
+        <figcaption><span class="avatar">{initials(first.name)}</span><span class="who"><strong>{first.name}</strong><span>{meta(first)}</span></span></figcaption>
       </figure>
-      <div class="t-side">
-        {rest.map((t, i) => (
-          <figure class={`card card-pad reveal reveal-d${i + 1}`}>
-            <div class="stars" aria-label="5 von 5 Sternen">{Array.from({ length: 5 }).map(() => <Icon name="star" weight="fill" size={14} />)}</div>
-            <blockquote class="small">{t.quote}</blockquote>
-            <figcaption><span class="avatar">{initials(t.name)}</span><span class="who"><strong>{t.name}</strong><span>{t.role}</span></span></figcaption>
-          </figure>
-        ))}
-      </div>
+      {rest.map((r, i) => (
+        <figure class={`card card-pad reveal reveal-d${(i % 3) + 1}`}>
+          <div class="stars" aria-label="5 von 5 Sternen">{Array.from({ length: 5 }).map(() => <Icon name="star" weight="fill" size={14} />)}</div>
+          <blockquote class="small">{zitat(r)}</blockquote>
+          <figcaption><span class="avatar">{initials(r.name)}</span><span class="who"><strong>{r.name}</strong><span>{meta(r)}</span></span></figcaption>
+        </figure>
+      ))}
     </div>
+    <p class="t-foot muted reveal">
+      {gekuerzt && <>Gekürzte Zitate sind mit […] markiert. Die vollständigen Texte stehen im <a href={bewertungen.profilUrl} target="_blank" rel="noopener" class="accent">Google-Profil von westernprint</a>. </>}
+      <a href="/bewertungen" class="accent">Alle Bewertungen ansehen</a>
+    </p>
   </div>
 </section>
+)}
 
 <style>
-  .tgrid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; }
-  .t-side { display: grid; gap: 20px; }
+  .tgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: stretch; }
+  .tgrid.wide .t-main { grid-column: span 2; grid-row: span 2; }
+  .tgrid.tall { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr); }
+  .tgrid.tall .t-main { grid-row: span 2; }
   figure { margin: 0; display: flex; flex-direction: column; gap: 16px; position: relative; overflow: hidden; }
   figure::before { content: '\201E'; position: absolute; right: 22px; top: -22px; font-family: var(--font-display); font-size: 140px; line-height: 1; font-weight: 800; color: var(--accent); opacity: 0.14; pointer-events: none; }
+  figure figcaption { margin-top: auto; }
   .t-main { justify-content: center; padding: clamp(28px, 4vw, 44px); background: linear-gradient(160deg, color-mix(in srgb, var(--accent) 14%, var(--surface)), var(--surface) 55%); border-color: var(--accent-line); box-shadow: 0 0 60px -24px color-mix(in srgb, var(--accent) 60%, transparent); }
+  .t-main figcaption { margin-top: 0; }
   .stars { display: flex; gap: 3px; color: var(--accent); filter: drop-shadow(0 0 6px color-mix(in srgb, var(--accent) 60%, transparent)); }
+  .t-rating { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; }
+  .t-rating .stars { flex: none; }
+  .t-rating a { font-weight: 600; }
+  .t-rating a:hover, .t-foot a:hover { text-decoration: underline; text-underline-offset: 3px; }
   blockquote { margin: 0; font-size: clamp(1.25rem, 2vw, 1.6rem); line-height: 1.35; letter-spacing: -0.015em; font-weight: 600; text-wrap: pretty; font-family: 'Bricolage Grotesque Variable', 'Inter Variable', sans-serif; }
   blockquote.small { font-size: 1.02rem; font-weight: 400; color: var(--text-2); font-family: inherit; }
   figcaption { display: flex; align-items: center; gap: 12px; font-size: 14px; }
   .avatar { width: 40px; height: 40px; border-radius: 999px; display: grid; place-items: center; font-weight: 700; font-size: 13px; color: var(--accent-ink); background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 85%, white), var(--accent)); flex: none; }
   .who { display: flex; flex-direction: column; } .who span { color: var(--text-3); }
-  @media (max-width: 900px) { .tgrid { grid-template-columns: 1fr; } blockquote { font-size: 1.15rem; } }
+  .t-foot { margin-top: 22px; font-size: 14px; max-width: 72ch; }
+  @media (max-width: 900px) {
+    .tgrid, .tgrid.tall { grid-template-columns: 1fr; }
+    .tgrid.wide .t-main, .tgrid.tall .t-main { grid-column: auto; grid-row: auto; }
+    blockquote { font-size: 1.15rem; }
+  }
 </style>

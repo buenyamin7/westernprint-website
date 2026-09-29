@@ -1,5 +1,62 @@
 ---
-import Legal from '../layouts/Legal.astro';
+import Base from '../layouts/Base.astro';
+import Faq from '../components/Faq.astro';
+import { oeffnungszeiten } from '../data/site';
 import html from '../content/legal/versand-und-zahlungsbedingungen.html?raw';
+
+const title = 'Versand und Zahlung';
+const description = `Versandkosten, Lieferzeiten und Zahlungsbedingungen der westernprint GmbH. Versand mit DHL und Sendungsnummer, ab 500 € versandkostenfrei, oder kostenlose Abholung in Oberhausen, ${oeffnungszeiten.kurz}.`;
+
+// Fragen zu Versand und Abholung. Versandkosten, Lieferzeit und Lieferländer vom Inhaber am 29.09.2026 festgelegt
+// (gleiche Werte wie im Kassen-Worker, src/catalog.js SHIPPING). Beträge der Kasse sind brutto.
+const faqs = [
+  {
+    q: 'Wie lange dauert es, bis meine Bestellung verschickt wird?',
+    a: 'westernprint produziert jede Bestellung in Oberhausen und versendet sie mit DHL, in Deutschland und ins Ausland. Einzelstücke sind in 1 bis 3 Werktagen fertig. Serien brauchen 5 bis 7 Werktage nach deiner Freigabe des Korrekturabzugs. Im Angebot steht ein fester Liefertermin für deine Bestellung.',
+  },
+  {
+    q: 'Wie lange dauert die Lieferung?',
+    a: 'Von der Bestellung bis zur Lieferung vergehen 3 bis 5 Werktage. Das gilt für Bestellungen im Shop, für Einzelstücke und für Samples, in Deutschland genauso wie im Ausland. Bei Serien steht der Liefertermin im Angebot.',
+  },
+  {
+    q: 'Was kostet der Versand?',
+    a: 'Der Versand innerhalb Deutschlands kostet 4,90 €. Nach Österreich, in die Schweiz und in die übrigen Lieferländer kostet er 9,90 €. Ab 500 € Warenwert (brutto) ist der Versand in alle Lieferländer kostenlos. Die Abholung in Oberhausen ist ebenfalls kostenlos.',
+  },
+  {
+    q: 'Liefert ihr auch ins Ausland?',
+    a: 'Ja. westernprint liefert außer nach Deutschland auch nach Österreich, in die Schweiz, in die Niederlande, nach Belgien, Luxemburg, Frankreich, Italien, Spanien, Polen, Dänemark und Tschechien. Der Versand in diese Länder kostet 9,90 €, ab 500 € Warenwert ist er kostenlos. Von der Bestellung bis zur Lieferung vergehen auch hier 3 bis 5 Werktage. Bei Lieferungen in die Schweiz können Einfuhrabgaben anfallen, die der Empfänger trägt.',
+  },
+  {
+    q: 'Kann ich meine Bestellung in Oberhausen abholen?',
+    a: `Ja, die Abholung bei westernprint in Oberhausen ist kostenlos. Die Adresse ist Schenkendorfstraße 45, 46047 Oberhausen, im Marienviertel. Abholen kannst du ${oeffnungszeiten.text}.`,
+  },
+  {
+    q: 'Kann ich meine Sendung verfolgen?',
+    a: 'Ja, westernprint verschickt jedes Paket aus Oberhausen mit DHL und Sendungsnummer. Sobald das Paket unterwegs ist, bekommst du die Sendungsnummer von uns. Damit verfolgst du die Sendung bei DHL bis zur Zustellung. Bei Print-on-Demand geht die Sendungsnummer automatisch zurück in deinen Shopify-Shop.',
+  },
+  {
+    q: 'Liefert ihr auch an Packstationen?',
+    a: 'Nein, westernprint versendet aus Oberhausen nicht an Packstationen oder Postfächer. Bitte gib eine Lieferadresse an, an der jemand das Paket annehmen kann. Alternativ holst du deine Bestellung kostenlos in Oberhausen ab.',
+  },
+];
+
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
 ---
-<Legal title="Versand und Zahlung" description="Versandkosten, Lieferzeiten und Zahlungsbedingungen der westernprint GmbH." html={html} />
+<Base title={title} description={description} jsonLd={ld}>
+  <section class="section">
+    <div class="container">
+      <h1>{title}</h1>
+      <div class="prose" set:html={html} />
+    </div>
+  </section>
+
+  <Faq items={faqs} title="Fragen zu Versand und Abholung" intro="Versand mit DHL und Sendungsnummer, ab 500 € versandkostenfrei, oder kostenlose Abholung in Oberhausen." />
+</Base>
+
+<style>
+  h1 { margin-bottom: 24px; }
+</style>

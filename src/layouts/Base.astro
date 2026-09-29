@@ -6,8 +6,12 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import Icon from '../components/Icon.astro';
 import Consent from '../components/Consent.astro';
-import { site } from '../data/site';
+import { site, oeffnungszeiten } from '../data/site';
 import { bewertungen, rezensionen } from '../data/bewertungen';
+import { pageDates as datesFor, formatDateDe } from '../lib/lastmod.mjs';
+// Die zwei Schriftdateien, die jede Seite sofort braucht: vorab laden. Die Schrift-CSS-Importe oben bleiben unverändert.
+import archivoLatinUrl from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
+import manropeLatinUrl from '@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2?url';
 
 interface Props {
   title: string;
@@ -16,12 +20,21 @@ interface Props {
   hideCta?: boolean;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   noindex?: boolean;
+  /** aggregateRating und review nur dort ausgeben, wo die Bewertungen sichtbar stehen (/bewertungen). */
+  showRating?: boolean;
+  /** Sichtbare Zeile "Stand: TT.MM.JJJJ" am Seitenende unterdrücken. */
+  hideStand?: boolean;
+  /** schema.org-Typ des Seitenknotens #webpage, z. B. 'CollectionPage', 'AboutPage', 'ContactPage'. Standard: 'WebPage'. */
+  pageType?: string;
+  /** Zusätzliche Felder für den Seitenknoten #webpage, z. B. hasPart auf /fuer. */
+  pageLdExtra?: Record<string, unknown>;
 }
-const { title, description, ogImage = site.ogImage, jsonLd, noindex = false , hideCta = false } = Astro.props;
+const { title, description, ogImage = site.ogImage, jsonLd, noindex = false, hideCta = false, showRating = false, hideStand = false, pageType = 'WebPage', pageLdExtra = {} } = Astro.props;
 // build.format 'file' liefert beim Build Pfade mit .html bzw. /index.html. Kanonisch sind die sauberen URLs aus der Sitemap.
 const cleanPath = Astro.url.pathname.replace(/\.html$/, '').replace(/(^|\/)index$/, '$1').replace(/\/$/, '') || '/';
 const canonical = new URL(cleanPath, site.url).href;
 const fullTitle = title.includes('westernprint') ? title : `${title} | westernprint`;
+const personId = `${site.url}/ueber-uns#inhaber`;
 
 const orgLd = {
   '@context': 'https://schema.org',
@@ -30,34 +43,41 @@ const orgLd = {
   name: site.legalName,
   alternateName: ['westernprint', 'westernprint Druckerei Oberhausen'],
   url: site.url,
-  logo: `${site.url}/icon-512.png`,
+  logo: { '@type': 'ImageObject', url: `${site.url}/icon-512.png`, width: 512, height: 512 },
   image: `${site.url}${site.ogImage}`,
   telephone: site.phone,
   email: site.email,
-  description: 'Textildruckerei in Oberhausen (Ruhrgebiet): DTF- und DTG-Druck auf T-Shirts, Hoodies und Workwear ab 1 Stück, Großauflagen ab 50 Stück mit Staffelpreisen, Angebot in 24 Stunden. Auch Print-on-Demand-Fulfillment für Shops.',
+  description: 'Textildruckerei in Oberhausen (Ruhrgebiet): DTF- und DTG-Druck auf T-Shirts, Hoodies und Workwear ab 1 Stück, Staffelpreise ab 10 Stück, Großauflagen ab 50 Stück, Angebot in 24 Stunden. Auch Print-on-Demand-Fulfillment für Shops.',
   slogan: 'Textildruck, der hält.',
-  foundingDate: '2021',
-  founder: { '@type': 'Person', name: 'Bünyamin Dursun' },
+  foundingDate: '2024', // westernprint GmbH; das Geschäft gibt es seit 2021 (bis 2024 Einzelunternehmen)
+  founder: { '@id': personId },
+  employee: { '@id': personId },
   address: { '@type': 'PostalAddress', streetAddress: site.address.street, postalCode: site.address.zip, addressLocality: site.address.city, addressRegion: 'Nordrhein-Westfalen', addressCountry: 'DE' },
   geo: { '@type': 'GeoCoordinates', latitude: 51.4795853, longitude: 6.8677457 },
   hasMap: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(`${site.legalName}, ${site.address.street}, ${site.address.zip} ${site.address.city}`),
-  openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '09:00', closes: '18:00' }],
+  // Aus src/data/site.ts (oeffnungszeiten), dieselbe Quelle wie die sichtbaren Texte.
+  openingHoursSpecification: oeffnungszeiten.schema.map((z) => ({ '@type': 'OpeningHoursSpecification', dayOfWeek: z.tage, opens: z.von, closes: z.bis })),
   priceRange: '€€',
   currenciesAccepted: 'EUR',
-  paymentAccepted: 'PayPal, Klarna, Kreditkarte, Apple Pay, Google Pay, Rechnung (B2B)',
+  // Wie die sichtbare FAQ in src/data/site.ts ("Wie bezahle ich?"). Zahlungsdienstleister ist Mollie, einzelne Zahlungsarten
+  // werden bewusst nicht festgeschrieben (Entscheidung des Inhabers vom 29.09.2026): Sie stehen an der Kasse.
+  paymentAccepted: 'Online-Zahlung über Mollie (Zahlungsarten laut Kasse), Vorkasse, Rechnung nach Absprache (Firmen und Vereine)',
   areaServed: [
     { '@type': 'Country', name: 'Deutschland' }, { '@type': 'Country', name: 'Österreich' }, { '@type': 'Country', name: 'Schweiz' },
     { '@type': 'City', name: 'Oberhausen' }, { '@type': 'City', name: 'Essen' }, { '@type': 'City', name: 'Duisburg' }, { '@type': 'City', name: 'Mülheim an der Ruhr' }, { '@type': 'City', name: 'Bottrop' }, { '@type': 'City', name: 'Gelsenkirchen' }, { '@type': 'City', name: 'Düsseldorf' },
   ],
   contactPoint: [{ '@type': 'ContactPoint', contactType: 'sales', telephone: site.phone, email: site.email, availableLanguage: ['de', 'en'], areaServed: 'DE' }],
-  sameAs: [site.instagram, site.tiktok],
-  aggregateRating: { '@type': 'AggregateRating', ratingValue: String(bewertungen.schnitt), reviewCount: String(bewertungen.anzahl), bestRating: '5', worstRating: '1' },
-  review: rezensionen.map((r) => ({
-    '@type': 'Review',
-    reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
-    author: { '@type': 'Person', name: r.name },
-    reviewBody: r.text,
-  })),
+  // Nur Profile, die per curl mit 200 oder 3xx antworten (geprüft am 28.09.2026).
+  sameAs: [site.instagram, site.tiktok, 'https://apps.shopify.com/pod-westerprint', bewertungen.profilUrl],
+  ...(showRating ? {
+    aggregateRating: { '@type': 'AggregateRating', ratingValue: String(bewertungen.schnitt), reviewCount: String(bewertungen.anzahl), bestRating: '5', worstRating: '1' },
+    review: rezensionen.map((r) => ({
+      '@type': 'Review',
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
+      author: { '@type': r.autorTyp ?? 'Person', name: r.name },
+      reviewBody: r.text,
+    })),
+  } : {}),
   knowsAbout: ['Print-on-Demand', 'DTF-Druck', 'DTG-Druck', 'Textildruck', 'Sublimationsdruck', 'Shopify Fulfillment', 'Dropshipping', 'Stanley/Stella', 'Merchandise'],
   makesOffer: [
     { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Print-on-Demand Fulfillment für Shopify-Shops', url: `${site.url}/print-on-demand` } },
@@ -67,13 +87,58 @@ const orgLd = {
   ],
 };
 const webLd = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': `${site.url}/#website`, url: site.url, name: 'westernprint', inLanguage: 'de-DE', publisher: { '@id': `${site.url}/#organization` } };
+// Inhaber als eigener Knoten, auf den founder und employee zeigen. Sichtbar belegt auf /ueber-uns.
+// Das Foto an der Heißpresse zeigt ihn selbst (vom Inhaber bestätigt 29.09.2026).
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': personId,
+  name: 'Bünyamin Dursun',
+  givenName: 'Bünyamin',
+  familyName: 'Dursun',
+  jobTitle: 'Geschäftsführer',
+  url: `${site.url}/ueber-uns`,
+  image: { '@type': 'ImageObject', url: `${site.url}/img/werkstatt-heisspresse.jpg`, caption: 'Bünyamin Dursun, Gründer und Geschäftsführer von westernprint, an der Heißpresse in Oberhausen' },
+  worksFor: { '@id': `${site.url}/#organization` },
+  knowsAbout: ['DTF-Druck', 'DTG-Druck', 'Sublimationsdruck', 'Textilveredelung', 'Print-on-Demand-Fulfillment', 'Shopify-Fulfillment', 'Vereinskleidung', 'Arbeitskleidung mit Logo', 'Messebekleidung'],
+};
+// Datumsangaben ehrlich aus git (siehe src/lib/lastmod.mjs). Ohne git bleiben die Felder weg.
+const pageDates = noindex ? undefined : datesFor(cleanPath);
+const crumbId = `${canonical}#breadcrumb`;
+const webPageLd = noindex ? null : {
+  '@context': 'https://schema.org',
+  '@type': pageType,
+  '@id': `${canonical}#webpage`,
+  url: canonical,
+  name: fullTitle,
+  description,
+  isPartOf: { '@id': `${site.url}/#website` },
+  about: { '@id': `${site.url}/#organization` },
+  inLanguage: 'de-DE',
+  ...(pageDates?.modified ? { dateModified: pageDates.modified } : {}),
+  ...(pageDates?.published ? { datePublished: pageDates.published } : {}),
+  ...pageLdExtra,
+};
+// Sichtbarer Stand auf allen indexierbaren Seiten außer Startseite und Rechtstexten.
+const standExcluded = ['/', '/impressum', '/datenschutz', '/agb', '/widerruf'];
+const standDate = !noindex && !hideStand && !standExcluded.includes(cleanPath) ? formatDateDe(pageDates?.modified) : undefined;
+
+const pageLd = (Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : []).map((ld) => {
+  // Eigene Brotkrumen einer Seite: Position 1 heißt überall "Startseite", @id für den Verweis aus #webpage.
+  if (ld?.['@type'] !== 'BreadcrumbList' || !Array.isArray(ld.itemListElement)) return ld;
+  return { '@id': crumbId, ...ld, itemListElement: ld.itemListElement.map((it: Record<string, unknown>) => (it?.position === 1 ? { ...it, name: 'Startseite' } : it)) };
+});
+const pageHasCrumbs = pageLd.some((ld) => ld?.['@type'] === 'BreadcrumbList');
 const pathParts = cleanPath.split('/').filter(Boolean);
-const crumbNames: Record<string, string> = { fuer: 'Für wen wir drucken', 'print-on-demand': 'Print-on-Demand', 'b2b-partner': 'B2B-Partner', grossauflagen: 'Großauflagen', druckverfahren: 'Druckverfahren', textilien: 'Textilien', 'ueber-uns': 'Über uns', kontakt: 'Kontakt', shop: 'Shop', warenkorb: 'Warenkorb', 'textildruck-oberhausen': 'Textildruck Oberhausen', impressum: 'Impressum', datenschutz: 'Datenschutz', agb: 'AGB', widerruf: 'Widerruf', versand: 'Versand' };
-const crumbLd = pathParts.length ? { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+const crumbNames: Record<string, string> = { fuer: 'Für wen wir drucken', 'print-on-demand': 'Print-on-Demand', 'b2b-partner': 'B2B-Partner', grossauflagen: 'Großauflagen', druckverfahren: 'Druckverfahren', textilien: 'Textilien', 'ueber-uns': 'Über uns', kontakt: 'Kontakt', shop: 'Shop', warenkorb: 'Warenkorb', 'textildruck-oberhausen': 'Textildruck Oberhausen', 'textildruck-ruhrgebiet': 'Textildruck Ruhrgebiet', 'was-kostet-textildruck': 'Preise und Beispiele', bewertungen: 'Bewertungen', sample: 'Muster bestellen', 'pflege-bedruckter-textilien': 'Pflegehinweise', impressum: 'Impressum', datenschutz: 'Datenschutz', agb: 'AGB', widerruf: 'Widerruf', versand: 'Versand' };
+// Liefert die Seite selbst eine BreadcrumbList, gibt Base keine zweite aus. Seiten mit noindex bekommen keine.
+const crumbLd = pathParts.length && !pageHasCrumbs && !noindex ? { '@context': 'https://schema.org', '@type': 'BreadcrumbList', '@id': crumbId, itemListElement: [
   { '@type': 'ListItem', position: 1, name: 'Startseite', item: site.url },
   ...pathParts.map((part, i) => ({ '@type': 'ListItem', position: i + 2, name: crumbNames[part] ?? title.split('|')[0].trim(), item: `${site.url}/${pathParts.slice(0, i + 1).join('/')}` })),
 ] } : null;
-const ldBlocks = [orgLd, webLd, ...(crumbLd ? [crumbLd] : []), ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [])];
+// #webpage verweist auf die Brotkrumen der Seite, falls es welche gibt.
+if (webPageLd && (crumbLd || pageHasCrumbs)) Object.assign(webPageLd, { breadcrumb: { '@id': crumbId } });
+const ldBlocks = [orgLd, webLd, personLd, ...(webPageLd ? [webPageLd] : []), ...(crumbLd ? [crumbLd] : []), ...pageLd];
 ---
 <!doctype html>
 <html lang="de">
@@ -81,8 +146,12 @@ const ldBlocks = [orgLd, webLd, ...(crumbLd ? [crumbLd] : []), ...(Array.isArray
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <link rel="preconnect" href="https://static.cloudflareinsights.com" crossorigin />
+    <link rel="preload" href={archivoLatinUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={manropeLatinUrl} as="font" type="font/woff2" crossorigin />
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {!noindex && <link rel="canonical" href={canonical} />}
     {noindex && <meta name="robots" content="noindex, follow" />}
     <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -114,6 +183,11 @@ const ldBlocks = [orgLd, webLd, ...(crumbLd ? [crumbLd] : []), ...(Array.isArray
     <Nav />
     <main id="main">
       <slot />
+      {standDate && pageDates?.modified && (
+        <div class="container page-stand">
+          <p>Stand: <time datetime={pageDates.modified}>{standDate}</time></p>
+        </div>
+      )}
     </main>
     <Footer />
     <Consent />
@@ -124,8 +198,8 @@ const ldBlocks = [orgLd, webLd, ...(crumbLd ? [crumbLd] : []), ...(Array.isArray
     </div>}
 
     <script>
-      import { refreshCount } from '../scripts/cart';
-      refreshCount();
+      import { refreshCount, watchCount } from '../scripts/cart';
+      refreshCount(); watchCount();
     </script>
     <script>
       // Mobile menu
@@ -151,6 +225,8 @@ const ldBlocks = [orgLd, webLd, ...(crumbLd ? [crumbLd] : []), ...(Array.isArray
       .skip { position: absolute; left: -999px; top: 8px; z-index: 100; padding: 10px 14px; background: var(--accent); color: var(--accent-ink); border-radius: 999px; font-weight: 600; }
       .skip:focus { left: 12px; }
       main { padding-top: var(--nav-h); }
+      .page-stand { padding-top: 8px; padding-bottom: 28px; }
+      .page-stand p { margin: 0; font-size: 13px; color: var(--text-3); }
       .mobile-cta {
         position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: grid; grid-template-columns: auto 1fr; gap: 10px;
         padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: color-mix(in srgb, var(--bg) 85%, transparent);
@@ -158,7 +234,7 @@ const ldBlocks = [orgLd, webLd, ...(crumbLd ? [crumbLd] : []), ...(Array.isArray
       }
       @media (min-width: 900px) { .mobile-cta { display: none; } }
     </style>
-      <!-- Cloudflare Web Analytics: cookielos, keine personenbezogenen Daten, kein Banner nötig -->
+      <!-- Cloudflare Web Analytics: läuft ohne Einwilligung. Setzt keine Cookies und nutzt keinen lokalen Speicher, liest aber Browserangaben aus und meldet die aufgerufene Adresse samt Parametern (auch ?gclid) an Cloudflare; dabei wird die IP-Adresse verarbeitet. Ob das ohne Banner nach § 25 TDDDG trägt, entscheidet der Inhaber (siehe Datenschutzerklärung Ziffer 4). -->
     <script is:inline type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "41025087d4824c86a6deeed1a90e9dfd"}'></script>
   </body>
 </html>

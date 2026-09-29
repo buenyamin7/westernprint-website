@@ -2,9 +2,9 @@
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import ContactForm from '../components/ContactForm.astro';
-import { site } from '../data/site';
+import { site, oeffnungszeiten } from '../data/site';
 ---
-<Base title="Kontakt und Angebot anfragen" description="Angebot für Textildruck anfragen: Vereine, Firmen, Events, Einzelstücke oder Print-on-Demand. Antwort innerhalb von 24 Stunden, auch per WhatsApp.">
+<Base title="Kontakt und Angebot anfragen" description="Angebot für Textildruck anfragen: Vereine, Firmen, Events, Einzelstücke oder Print-on-Demand. Antwort innerhalb von 24 Stunden, auch per WhatsApp." pageType="ContactPage">
   <section class="section">
     <div class="container contact-grid">
       <div class="reveal">
@@ -19,7 +19,7 @@ import { site } from '../data/site';
         </ul>
         <div class="hours">
           <strong>Erreichbar</strong>
-          <span>Montag bis Freitag, 9 bis 18 Uhr. Angebot innerhalb von 24 Stunden. WhatsApp auch außerhalb, Antwort am nächsten Werktag.</span>
+          <span>{oeffnungszeiten.kurz}. Angebot innerhalb von 24 Stunden. WhatsApp auch außerhalb, Antwort am nächsten Werktag.</span>
         </div>
       </div>
       <div class="card card-pad reveal reveal-d1">

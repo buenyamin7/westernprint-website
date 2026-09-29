@@ -27,6 +27,20 @@ export const site = {
   googleAds: { id: 'AW-17529116277', conversions: { lead: 'hJN4CIXNlfIcEPWsxKZB', whatsapp: 'ntGqCIjNlfIcEPWsxKZB', appstore: 'MXs8COLs2_UcEPWsxKZB' } },
 };
 
+// Öffnungszeiten (Erreichbarkeit und Abholung): EINE Quelle für alle Seitentexte, Fragen und das
+// openingHoursSpecification in Base.astro. public/llms.txt ist statisch und muss von Hand mitgezogen werden.
+// text  = für Fließtext ("Abholen könnt ihr {text} nach kurzer Absprache.")
+// kurz  = für Listen und Steckbriefe
+// schema = für schema.org (dayOfWeek, opens, closes)
+export const oeffnungszeiten = {
+  text: 'Montag bis Donnerstag von 9 bis 18 Uhr und Freitag von 9 bis 16 Uhr',
+  kurz: 'Montag bis Donnerstag 9 bis 18 Uhr, Freitag 9 bis 16 Uhr',
+  schema: [
+    { tage: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'], von: '09:00', bis: '18:00' },
+    { tage: ['Friday'], von: '09:00', bis: '16:00' },
+  ],
+};
+
 export type NavChild = { label: string; href: string; hint?: string };
 export type NavItem = { label: string; href: string; children?: NavChild[]; groups?: { title: string; items: NavChild[] }[]; cta?: { label: string; href: string; text: string } };
 
@@ -44,7 +58,7 @@ export const nav: NavItem[] = [
       { title: 'Auftragsarten', items: [
         { label: 'Großauflagen ab 50 Stück', href: '/grossauflagen', hint: 'Staffelpreise, Korrekturabzug, fester Liefertermin' },
         { label: 'Textildruck Oberhausen', href: '/textildruck-oberhausen', hint: 'Vor Ort im Ruhrgebiet, Abholung möglich' },
-        { label: 'Textilien und Marken', href: '/textilien', hint: 'Stanley/Stella, BYB, Neutral, JHK' },
+        { label: 'Textilien und Marken', href: '/textilien', hint: 'Stanley/Stella, Stedman, BYB, Urban Classics' },
         { label: 'Was kostet Textildruck?', href: '/was-kostet-textildruck', hint: 'Preisbeispiele für 1, 10, 25, 50 und 100 Stück' },
         { label: 'Muster bestellen', href: '/sample', hint: 'Ein Stück mit deinem Motiv testen, ab 1 Stück' },
       ] },
@@ -95,34 +109,18 @@ export const nav: NavItem[] = [
 ];
 
 export const stats = [
-  { value: '80.000+', label: 'bedruckte Textilien' },
+  // 80.000+ = Endkunden der Partner-Shops (Print-on-Demand), die westernprint seit 2021 direkt beliefert hat.
+  { value: '80.000+', label: 'Endkunden beliefert' },
   { value: 'Ab 1 Stück', label: 'ohne Mindestmenge' },
   { value: '24 h', label: 'bis zum Angebot' },
-  { value: '1-3 Tage', label: 'Produktion und Versand' },
-];
-
-export const testimonials = [
-  {
-    quote: 'Vor zwei Jahren von einem großen deutschen Anbieter gewechselt. Support persönlicher, Lieferzeiten spürbar schneller, Druckqualität konstant top.',
-    name: 'Julia M.',
-    role: 'Inhaberin eines Shopify-Shops',
-  },
-  {
-    quote: 'Vier Jahre mit einem asiatischen Dropshipper gearbeitet. Seit dem Wechsel hat sich mein Retourenanteil halbiert und Kunden loben wieder die Qualität.',
-    name: 'Tim R.',
-    role: 'POD-Shop-Betreiber',
-  },
-  {
-    quote: 'Seit 2022 dabei: zuverlässig, erreichbar und fair. Sie denken wirklich mit und gehen auf Wünsche ein. So funktioniert Partnerschaft.',
-    name: 'Mehmet A.',
-    role: 'Betreiber eines Merch-Shops',
-  },
+  // Einzelstücke, Shop und Muster: von der Bestellung bis zur Lieferung 3 bis 5 Werktage (Inhaber, 29.09.2026).
+  { value: '3-5', label: 'Werktage bis zur Lieferung' },
 ];
 
 export const faqs = [
   {
     q: 'Gibt es eine Mindestbestellmenge?',
-    a: 'Nein. Wir produzieren ab 1 Stück. Für Großauflagen ab 50 Stück gibt es Staffelpreise und ein individuelles Angebot.',
+    a: 'Nein. Wir produzieren ab 1 Stück. Staffelpreise gibt es ab 10 Stück, für Großauflagen ab 50 Stück ein individuelles Angebot.',
   },
   {
     q: 'Wie schnell bekomme ich ein Angebot?',
@@ -134,23 +132,23 @@ export const faqs = [
   },
   {
     q: 'Wie schnell wird geliefert?',
-    a: 'Innerhalb Deutschlands in der Regel in 1 bis 3 Werktagen, auch im Weihnachtsgeschäft. Europaweit meist in 3 bis 5 Tagen.',
+    a: 'Einzelstücke sind in der Regel in 1 bis 3 Werktagen fertig, auch im Weihnachtsgeschäft. Von der Bestellung bis zur Lieferung sind es bei Einzelstücken, Shop-Bestellungen und Mustern 3 bis 5 Werktage, nach Deutschland wie ins Ausland. Serien brauchen 5 bis 7 Werktage nach Freigabe des Korrekturabzugs. Danach geht die Ware mit DHL und Sendungsnummer raus, die Abholung in Oberhausen ist kostenlos.',
   },
   {
     q: 'Welche Druckverfahren nutzt ihr?',
-    a: 'DTF (Direct to Film) für Farbverläufe und alle Textilien, DTG (Direct to Garment) für fotorealistische Einzelstücke, Sublimation für Tassen und Accessoires. Alles auf Epson-Maschinen in Oberhausen.',
+    a: 'DTF (Direct to Film) für Farbverläufe und alle Textilien, DTG (Direct to Garment) für fotorealistische Einzelstücke, Sublimation für Tassen und Accessoires. Gedruckt wird in der eigenen Produktion in Oberhausen, DTG auf der Epson SureColor F2100 und F2200.',
   },
   {
     q: 'Welche Textilien bedruckt ihr?',
-    a: 'Standard ist Stanley/Stella (Bio-Baumwolle, GOTS-zertifiziert). Dazu Stedman und auf Anfrage weitere Marken. Eigene Textilien kannst du uns zusenden.',
+    a: 'Standard ist Stanley/Stella (Bio-Baumwolle, GOTS-zertifiziert). Dazu Stedman, Build Your Brand und Urban Classics, auf Anfrage weitere Marken. Eigene Textilien kannst du uns zusenden.',
   },
   {
     q: 'Welches Dateiformat braucht ihr?',
-    a: 'Am besten PNG mit transparentem Hintergrund in 300 dpi oder eine vektorisierte PDF. Wir prüfen jede Datei vor dem Druck und melden uns, wenn etwas nicht passt.',
+    a: 'Am besten ein PNG mit transparentem Hintergrund in 300 dpi oder ein vektorisiertes PDF. Wir prüfen jede Datei vor dem Druck und melden uns, wenn etwas nicht passt.',
   },
   {
     q: 'Wie bezahle ich?',
-    a: 'Einzelstücke im Shop per PayPal, Klarna, Kreditkarte oder Überweisung. Aufträge auf Angebot per Vorkasse oder Rechnung, Firmen und Vereine auf Rechnung nach Absprache.',
+    a: 'Einzelstücke im Shop bezahlst du über unseren Zahlungsdienstleister Mollie, die verfügbaren Zahlungsarten werden an der Kasse angezeigt. Aufträge auf Angebot per Vorkasse oder Rechnung, Firmen und Vereine auf Rechnung nach Absprache.',
   },
   {
     q: 'Macht ihr auch Print-on-Demand für Shops?',

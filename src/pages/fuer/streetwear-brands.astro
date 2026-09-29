@@ -32,7 +32,7 @@ const compare = [
   { k: 'Preisgestaltung', wp: 'Werkstattpreis, direkt', pod: 'Plattformaufschlag pro Stück', fab: 'Günstig, aber Vorkasse für die ganze Auflage' },
   { k: 'Eigenes Label im Nacken', wp: 'Ja, DTF-Nackenprint', pod: 'Meist nicht oder Aufpreis', fab: 'Ja, eingewebt' },
   { k: 'Blanks', wp: 'Build Your Brand, Urban Classics, Stanley/Stella', pod: 'Gildan, Bella+Canvas', fab: 'Eigener Schnitt' },
-  { k: 'Lieferzeit', wp: 'Sample 1 bis 3 Werktage, Serie 5 bis 7', pod: '5 bis 8 Werktage', fab: '8 bis 14 Wochen' },
+  { k: 'Lieferzeit', wp: 'Sample 3 bis 5 Werktage bis zur Lieferung, Serie 5 bis 7 Werktage Produktion nach Freigabe', pod: '5 bis 8 Werktage', fab: '8 bis 14 Wochen' },
   { k: 'Fulfillment für deinen Shop', wp: 'Ja, Shopify-App', pod: 'Ja', fab: 'Nein' },
   { k: 'Ansprechpartner', wp: 'Eine Person, WhatsApp', pod: 'Ticketsystem', fab: 'Agent, Zeitverschiebung' },
 ];
@@ -43,16 +43,16 @@ const faqs = [
   { q: 'Welche Blanks nehmen Streetwear-Brands?', a: 'Heavy Oversize Tees ab 240 g/m² und Boxy oder Oversize Hoodies ab 300 g/m² von Build Your Brand, dazu Urban Classics und Stanley/Stella für Bio-Baumwolle. Das sind dieselben Blanks, die bekannte deutsche Streetwear-Labels nutzen. Wir beraten zu Grammatur und Schnitt.' },
   { q: 'Kann ich mein eigenes Label in den Nacken machen?', a: 'Ja. Die Blanks haben tearaway-Etiketten. Wir entfernen das Herstellerlabel und drucken deinen Nackenprint per DTF, deckend und waschfest. Hangtags bringen wir an, wenn du sie lieferst.' },
   { q: 'Wie starte ich mit wenig Budget?', a: 'Sample bestellen, Fotos machen, Vorbestellungen im Shop sammeln, dann die Kleinserie ab 10 Stück produzieren. Oder direkt Print-on-Demand: Wir drucken und versenden jede Shop-Bestellung einzeln, du zahlst nur, was verkauft ist.' },
-  { q: 'Wie funktioniert Print-on-Demand für meine Marke?', a: 'Du verbindest deinen Shopify-Shop mit unserer App. Bestellungen laufen automatisch bei uns ein, wir drucken in 1 bis 3 Werktagen und versenden neutral mit DHL an deine Kunden. Kein Lager, keine Vorkasse für Ware.' },
-  { q: 'Hält DTF-Druck auf Heavy Cotton?', a: 'Ja. DTF ist dehnbar, deckend auf Schwarz und waschfest bis 60 °C. Für Vintage-Looks drucken wir auf Wunsch mit reduzierter Deckung. Fotorealistische Motive gehen per DTG auf Baumwolle.' },
-  { q: 'Wie lange dauert eine Kleinserie?', a: 'Sample in 1 bis 3 Werktagen. Kleinserien und Drops in der Regel 5 bis 7 Werktage nach Freigabe des Korrekturabzugs. Express nach Absprache. Abholung in Oberhausen oder Versand deutschlandweit.' },
+  { q: 'Wie funktioniert Print-on-Demand für meine Marke?', a: 'Du verbindest deinen Shopify-Shop mit unserer App. Bestellungen laufen automatisch bei uns ein, wir drucken in 1 bis 3 Werktagen und versenden neutral mit DHL an deine Kunden. Bei ihnen kommt das Paket in der Regel 3 bis 5 Werktage nach der Bestellung an. Kein Lager, keine Vorkasse für Ware.' },
+  { q: 'Hält DTF-Druck auf Heavy Cotton?', a: 'Ja. DTF ist dehnbar, deckend auf Schwarz und waschfest. Für Vintage-Looks drucken wir auf Wunsch mit reduzierter Deckung. Fotorealistische Motive gehen per DTG auf Baumwolle.' },
+  { q: 'Wie lange dauert eine Kleinserie?', a: 'Ein Sample ist in 1 bis 3 Werktagen fertig und in der Regel 3 bis 5 Werktage nach der Bestellung bei dir. Kleinserien und Drops in der Regel 5 bis 7 Werktage nach Freigabe des Korrekturabzugs. Express nach Absprache. Abholung in Oberhausen oder Versand deutschlandweit und in elf weitere Länder Europas.' },
   { q: 'Verkauft ihr auch unbedruckte Blanks?', a: 'Für Labels, die bei uns produzieren, liefern wir Blanks von Build Your Brand und Urban Classics auch unbedruckt mit, zum Beispiel für Fotoshootings oder eigene Veredelung.' },
 ];
 
 const ld = [
   { '@context': 'https://schema.org', '@type': 'Service', name: 'Streetwear-Brand produzieren lassen', serviceType: 'Textildruck und Fulfillment für Modelabels', description: z.description, provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: { '@type': 'Country', name: 'Deutschland' }, audience: { '@type': 'Audience', audienceType: 'Streetwear-Brands, Modelabels, Gründer' }, url: `${site.url}/fuer/streetwear-brands` },
   { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
-  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Start', item: site.url }, { '@type': 'ListItem', position: 2, name: 'Für wen wir drucken', item: `${site.url}/fuer` }, { '@type': 'ListItem', position: 3, name: 'Streetwear-Brands', item: `${site.url}/fuer/streetwear-brands` }] },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Startseite', item: site.url }, { '@type': 'ListItem', position: 2, name: 'Für wen wir drucken', item: `${site.url}/fuer` }, { '@type': 'ListItem', position: 3, name: 'Streetwear-Brands', item: `${site.url}/fuer/streetwear-brands` }] },
 ];
 ---
 <Base title="Streetwear-Label produzieren lassen in Deutschland, Kleinserie ab 10 Stück" description="Eigenes Streetwear-Label ohne Fabrik: Heavy Oversize Tees und Hoodies von Build Your Brand, DTF-Druck mit Nackenprint, Sample ab 1 Stück, Kleinserie ab 10 Stück, Drop-Konditionen ab 50. Danach Print-on-Demand mit neutralem Versand. Eigene Produktion in Deutschland, Angebot in 24 Stunden." jsonLd={ld} ogImage="/img/streetwear-trio.jpg">
@@ -68,8 +68,8 @@ const ld = [
           <a href={site.whatsapp + '?text=' + encodeURIComponent('Hallo westernprint, ich baue eine Streetwear-Brand auf und möchte ein Sample / einen Drop anfragen.')} class="btn btn-secondary btn-lg" target="_blank" rel="noopener"><Icon name="whatsapp-logo" size={18} /> WhatsApp</a>
         </div>
         <ul class="trust" aria-label="Fakten">
-          <li><strong>80.000+</strong><span>bedruckte Textilien</span></li>
-          <li><strong>1 bis 3</strong><span>Werktage bis zum Sample</span></li>
+          <li><strong>80.000+</strong><span>Endkunden beliefert</span></li>
+          <li><strong>1 bis 3</strong><span>Werktage bis zum fertigen Sample</span></li>
           <li><strong>ab 10</strong><span>Stück pro Kleinserie, gemischt</span></li>
           <li><strong>2021</strong><span>gegründet in Oberhausen</span></li>
         </ul>
@@ -79,7 +79,7 @@ const ld = [
         <img src="/img/streetwear/backprint.jpg" alt="Schwarzes Heavy Oversize Tee mit großem Rückenprint auf Betonboden" width="1024" height="1536" loading="eager" fetchpriority="high" />
         <figcaption>
           <span class="mono">Backprint · DTF auf Heavy Cotton</span>
-          <span>Deckend auf Schwarz · Sample in 1 bis 3 Werktagen</span>
+          <span>Deckend auf Schwarz · Sample fertig in 1 bis 3 Werktagen</span>
         </figcaption>
       </figure>
     </div>
@@ -103,7 +103,7 @@ const ld = [
     <div class="container">
       <div class="section-head reveal"><h2>Vom ersten Sample zur laufenden Brand</h2><p>Drei Stufen, du steigst ein, wo du stehst. Kein Vertrag, keine Vorkasse für Ware, die du noch nicht verkauft hast.</p></div>
       <ol class="steps">
-        <li class="reveal"><span class="num">01</span><div><strong>Sample</strong><span>Blank wählen, Motiv schicken, Korrekturabzug freigeben. Ein Stück in 1 bis 3 Werktagen für Fotos, Anprobe und Vorbestellungen.</span></div></li>
+        <li class="reveal"><span class="num">01</span><div><strong>Sample</strong><span>Blank wählen, Motiv schicken, Korrekturabzug freigeben. Ein Stück, fertig in 1 bis 3 Werktagen, für Fotos, Anprobe und Vorbestellungen.</span></div></li>
         <li class="reveal reveal-d1"><span class="num">02</span><div><strong>Kleinserie ab 10 Stück</strong><span>Modelle, Größen und Farben gemischt, ab 50 Stück mit Staffelpreisen. Nackenprint, Polybags, ein Paket oder Abholung. 5 bis 7 Werktage.</span></div></li>
         <li class="reveal reveal-d2"><span class="num">03</span><div><strong>Print-on-Demand</strong><span>Shop an unsere Shopify-App anbinden. Wir drucken jede Bestellung einzeln und versenden neutral an deine Kunden.</span></div></li>
         <li class="reveal reveal-d3"><span class="num">04</span><div><strong>Nachdrop</strong><span>Druckdaten bleiben bei uns. Bestseller nachproduzieren ab 10 Stück pro Motiv, in identischer Qualität.</span></div></li>
@@ -156,11 +156,11 @@ const ld = [
           <li><Icon name="check" weight="bold" size={14} /> Sample ab 1 Stück, Kleinserie ab 10</li>
           <li><Icon name="check" weight="bold" size={14} /> Korrekturabzug als PDF vor dem Druck</li>
           <li><Icon name="check" weight="bold" size={14} /> Shopify-App für Print-on-Demand danach</li>
-          <li><Icon name="check" weight="bold" size={14} /> Versand deutschlandweit, Abholung in Oberhausen</li>
+          <li><Icon name="check" weight="bold" size={14} /> Versand deutschlandweit und in elf weitere Länder Europas, Abholung in Oberhausen</li>
         </ul>
         <div class="form-detail">
           <img src="/img/streetwear/heatpress.jpg" alt="Heißpresse in der Werkstatt, DTF-Transfer wird auf ein schwarzes Shirt gepresst" width="1536" height="1024" loading="lazy" />
-          <span>Heißpresse in Oberhausen: DTF-Transfer, waschfest bis 60 °C.</span>
+          <span>Heißpresse in Oberhausen: DTF-Transfer, waschfest.</span>
         </div>
       </div>
 
@@ -214,7 +214,7 @@ const ld = [
         <h2>Druck, der nach der zehnten Wäsche noch nach Marke aussieht</h2>
         <p class="muted">Kein Plastisol-Gefühl, kein Riss nach drei Wäschen. DTF auf Heavy Cotton, deckend auf Schwarz, dehnbar. Jedes Teil wird vor dem Verpacken geprüft.</p>
         <ul class="quality-list">
-          <li><strong>DTF, waschfest bis 60 °C</strong><span>Feine Linien, Farbverläufe, Fotos. Auf Wunsch reduzierte Deckung für Vintage-Look.</span></li>
+          <li><strong>DTF, waschfest</strong><span>Feine Linien, Farbverläufe, Fotos. Auf Wunsch reduzierte Deckung für Vintage-Look.</span></li>
           <li><strong>Blanks bis 500 g/m²</strong><span>Build Your Brand, Urban Classics, Stanley/Stella. Die gängigen Modelle in Schwarz und Weiß liegen bei uns auf Lager.</span></li>
           <li><strong>Gedruckt in Deutschland</strong><span>Eigene Epson-Maschinen und Heißpressen in Oberhausen, kein Zwischenhändler.</span></li>
           <li><strong>Shopify-App für danach</strong><span>Bestellungen laufen automatisch ein, Versand neutral mit DHL, Tracking an deine Kunden.</span></li>

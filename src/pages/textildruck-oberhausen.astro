@@ -4,11 +4,35 @@ import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import ContactForm from '../components/ContactForm.astro';
 import Faq from '../components/Faq.astro';
-import { site } from '../data/site';
+import { site, oeffnungszeiten } from '../data/site';
+import { bewertungen } from '../data/bewertungen';
+
+// Preisbeispiele stammen von /was-kostet-textildruck (netto zzgl. MwSt.). Bei Preisänderungen dort mit anpassen.
+// Brutto daneben = netto x 1,19, kaufmännisch auf Cent gerundet.
+const PREIS_STAND = '21.09.2026';
+// Google-Bewertungen aus src/data/bewertungen.ts: 5 -> "5,0", "2026-09-28" -> "28.09.2026"
+const sterne = bewertungen.schnitt.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const bewStand = bewertungen.stand.split('-').reverse().join('.');
+
+// Städte-Pills verlinken auf die Abschnitte der Ruhrgebiet-Seite (IDs dort in der Städteliste).
+const staedte = [
+  { c: 'Oberhausen' },
+  { c: 'Essen', id: 'essen' },
+  { c: 'Duisburg', id: 'duisburg' },
+  { c: 'Mülheim an der Ruhr', id: 'muelheim-an-der-ruhr' },
+  { c: 'Bottrop', id: 'bottrop' },
+  { c: 'Gelsenkirchen', id: 'gelsenkirchen' },
+  { c: 'Dinslaken', id: 'dinslaken' },
+  { c: 'Moers', id: 'moers' },
+  { c: 'Düsseldorf', id: 'duesseldorf' },
+  { c: 'Bochum', id: 'bochum' },
+  { c: 'Dortmund', id: 'dortmund' },
+  { c: 'Recklinghausen', id: 'recklinghausen' },
+];
 
 const faqs = [
-  { q: 'Kann ich meine Textilien in Oberhausen abholen?', a: 'Ja. Abholung in der Schenkendorfstraße 45 in Oberhausen nach Absprache, Montag bis Freitag zwischen 9 und 18 Uhr. So sparst du dir die Versandkosten.' },
-  { q: 'Druckt ihr auch für Vereine und Firmen aus Essen, Duisburg oder Bottrop?', a: 'Ja. Wir beliefern das ganze Ruhrgebiet und darüber hinaus. Angebot innerhalb von 24 Stunden, Produktion in 5 bis 7 Werktagen, auf Wunsch Lieferung direkt zu dir.' },
+  { q: 'Kann ich meine Textilien in Oberhausen abholen?', a: `Ja. Abholung in der Schenkendorfstraße 45 in Oberhausen nach Absprache, ${oeffnungszeiten.text}. So sparst du dir die Versandkosten.` },
+  { q: 'Druckt ihr auch für Vereine und Firmen aus Essen, Duisburg oder Bottrop?', a: 'Ja. Wir beliefern das ganze Ruhrgebiet und darüber hinaus. Angebot an Werktagen innerhalb von 24 Stunden, Produktion in 5 bis 7 Werktagen nach Freigabe, auf Wunsch Lieferung direkt zu dir.' },
   { q: 'Kann ich eigene Textilien zum Bedrucken vorbeibringen?', a: 'Ja. Bring sie vorbei oder schick sie uns. Wir prüfen vorher, ob das Material für DTF-Druck geeignet ist.' },
   { q: 'Wie schnell geht ein Einzelstück?', a: 'Einzelstücke sind in der Regel in 1 bis 3 Werktagen fertig. Wenn es eilig ist, sag uns den Termin, Express ist oft möglich.' },
 ];
@@ -23,30 +47,58 @@ const ld = [
     title="Textildruck in Oberhausen. <span class='hl'>Eigene Druckerei, keine Zwischenhändler.</span>"
     lede="T-Shirts, Hoodies, Polos und Trikots mit deinem Motiv, gedruckt in der Schenkendorfstraße in Oberhausen. Ab 1 Stück, Abholung möglich, Lieferung nach Essen, Duisburg, Mülheim, Bottrop und ins ganze Ruhrgebiet."
     image="/img/werkstatt-heisspresse.jpg"
-    imageAlt="Fertig bedrucktes Shirt aus der westernprint Druckerei in Oberhausen"
+    imageAlt="Bünyamin Dursun an der Heißpresse in der westernprint-Werkstatt in Oberhausen"
     cta={{ label: 'Angebot in 24h', href: '#anfrage' }}
   />
+
+  <section class="section-tight">
+    <div class="container intro">
+      <p class="answer reveal">
+        westernprint ist eine Textildruckerei in Oberhausen, {site.address.street} im Marienviertel.
+        westernprint gibt es seit 2021 und druckt in eigener Produktion, per DTF und DTG.
+        Bedruckt werden T-Shirts, Hoodies, Polos und Trikots, ab 1 Stück und ohne Einrichtungskosten.
+        Ein einzelnes T-Shirt Basic (Stedman Classic-T) mit einem Druck kostet 17,90 € netto (21,30 € brutto).
+        Bei 50 Stück sind es 9,40 € netto (11,19 € brutto) pro Stück (Stand {PREIS_STAND}).
+        Einzelstücke sind in der Regel in 1 bis 3 Werktagen fertig, Serien 5 bis 7 Werktage nach Freigabe.
+        Abholung und Beratung vor Ort gibt es {oeffnungszeiten.text}, nach kurzer Absprache.
+        Die Abholung in Oberhausen ist kostenlos.
+        Wer nicht abholen kann, bekommt die Ware per DHL, deutschlandweit.
+        Ein Angebot schickt westernprint an Werktagen innerhalb von 24 Stunden.
+        Vor dem Druck gibt es einen Korrekturabzug zur Freigabe.
+        westernprint hat <a class="accent" href="/bewertungen">{sterne} von 5 Sternen bei {bewertungen.anzahl} Google-Bewertungen</a> (Stand {bewStand}).
+      </p>
+      <ul class="facts reveal reveal-d1">
+        <li><Icon name="map-pin" size={18} /> {site.address.street}, {site.address.zip} {site.address.city}</li>
+        <li><Icon name="clock" size={18} /> {oeffnungszeiten.kurz}</li>
+        <li><Icon name="storefront" size={18} /> Abholung vor Ort kostenlos</li>
+        <li><Icon name="truck" size={18} /> Versand mit DHL, deutschlandweit</li>
+        <li><Icon name="star" size={18} /> {sterne} von 5 bei {bewertungen.anzahl} Google-Bewertungen</li>
+      </ul>
+    </div>
+  </section>
 
   <section class="section">
     <div class="container">
       <div class="section-head reveal">
         <h2>Wofür Oberhausen und Umgebung bei uns druckt</h2>
-        <p>Du kommst aus einer der Nachbarstädte? Dann schau auf <a class="accent" href="/textildruck-ruhrgebiet">Textildruck im Ruhrgebiet</a>, dort stehen Abholung, Lieferzeiten und Preise für Essen, Duisburg, Mülheim, Bottrop und das übrige Revier.</p>
+        <p>westernprint druckt in Oberhausen für Vereine, Firmen, Schulen und Privatleute. Jede Gruppe hat eine eigene Seite mit passenden Textilien, Ablauf und Antworten auf häufige Fragen.</p>
       </div>
       <div class="grid grid-4">
         {[
-          { icon: 'users', t: 'Vereine und Teams', d: 'Trikots mit Nummern und Namen, Trainingsshirts, Fanartikel. Vom Fußballverein bis zur Karnevalsgesellschaft.' },
-          { icon: 'buildings', t: 'Firmen und Handwerk', d: 'Polos, Hoodies und Workwear mit Logo für Betriebe aus Oberhausen, Essen und Duisburg.' },
-          { icon: 'stack', t: 'Schulen und Abschluss', d: 'Abi-Shirts und Kita-Abschluss mit allen Namen. Sammelbestellung, ein Liefertermin.' },
-          { icon: 't-shirt', t: 'Einzelstücke', d: 'Geschenk, Junggesellenabschied, eigenes Label. Ein Shirt reicht, Motiv hochladen, fertig.' },
+          { icon: 'users', t: 'Vereine und Teams', d: 'Trikots und Trainingsshirts mit Namen und Nummern, Fanartikel und Vereins-Hoodies, vom Fußballverein bis zur Karnevalsgesellschaft. Staffelpreise gibt es ab 10 Stück.', href: '/fuer/sportvereine', cta: 'Mehr für Vereine' },
+          { icon: 'buildings', t: 'Firmen und Handwerk', d: 'Polos, Hoodies und Workwear mit Logo für Betriebe aus Oberhausen, Essen und Duisburg. Eigene Arbeitskleidung kannst du zum Bedrucken vorbeibringen.', href: '/fuer/handwerksbetriebe', cta: 'Mehr für Betriebe' },
+          { icon: 'stack', t: 'Schulen und Abschluss', d: 'Abi-Shirts und Kita-Abschluss mit allen Namen. Sammelbestellung, ein Liefertermin. Vor dem Druck bekommst du einen Korrekturabzug zur Freigabe.', href: '/fuer/abschlussklassen', cta: 'Mehr für Abschlussklassen' },
+          { icon: 't-shirt', t: 'Einzelstücke', d: 'Geschenk, Junggesellenabschied, eigenes Label. Ein Shirt reicht: Motiv hochladen, in der Regel nach 1 bis 3 Werktagen fertig.', href: '/fuer/jga-und-feiern', cta: 'Mehr für Feiern' },
         ].map((b, i) => (
-          <div class={`feat reveal reveal-d${i}`}>
+          <a class={`feat feat-link reveal reveal-d${i}`} href={b.href}>
             <div class="icon-box"><Icon name={b.icon} size={22} /></div>
             <h3>{b.t}</h3>
             <p>{b.d}</p>
-          </div>
+            <span class="feat-more">{b.cta} <Icon name="arrow-right" size={14} weight="bold" /></span>
+          </a>
         ))}
       </div>
+      <p class="more muted reveal">Du kommst aus einer der Nachbarstädte? Auf <a class="accent" href="/textildruck-ruhrgebiet">Textildruck im Ruhrgebiet</a> stehen Entfernung, Abholung und Lieferzeiten für Essen, Duisburg, Mülheim, Bottrop und das übrige Revier. Alle Zielgruppen findest du unter <a class="accent" href="/fuer">Für wen wir drucken</a>.</p>
     </div>
   </section>
 
@@ -59,14 +111,14 @@ const ld = [
           {site.address.street}<br />
           {site.address.zip} {site.address.city}, Marienviertel
         </address>
-        <p class="muted">Montag bis Freitag, 9 bis 18 Uhr. Abholung und Beratung vor Ort nach kurzer Absprache per WhatsApp oder Telefon. Von der A42, Ausfahrt Oberhausen-Zentrum, in fünf Minuten erreichbar.</p>
+        <p class="muted">Die Werkstatt von westernprint liegt in der {site.address.street} in {site.address.zip} {site.address.city}, im Marienviertel in Alt-Oberhausen. Von der A42, Ausfahrt Oberhausen-Zentrum, bist du in fünf Minuten bei uns. Abholung und Beratung vor Ort gibt es {oeffnungszeiten.text}. Sag vorher kurz per WhatsApp oder Telefon Bescheid, wann du kommst. Die Abholung ist kostenlos.</p>
         <div class="local-cta">
           <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${site.legalName}, ${site.address.street}, ${site.address.zip} ${site.address.city}`)}`} target="_blank" rel="noopener" class="btn btn-secondary"><Icon name="map-pin" size={18} /> Route planen</a>
           <a href={site.whatsapp} target="_blank" rel="noopener" class="btn btn-secondary"><Icon name="whatsapp-logo" size={18} /> WhatsApp</a>
         </div>
       </div>
       <ul class="cities reveal reveal-d1">
-        {['Oberhausen', 'Essen', 'Duisburg', 'Mülheim an der Ruhr', 'Bottrop', 'Gelsenkirchen', 'Dinslaken', 'Moers', 'Düsseldorf', 'Bochum', 'Dortmund', 'Recklinghausen'].map((c) => <li>{c}</li>)}
+        {staedte.map((s) => <li>{s.id ? <a href={`/textildruck-ruhrgebiet#${s.id}`}>{s.c}</a> : s.c}</li>)}
       </ul>
     </div>
   </section>
@@ -87,15 +139,27 @@ const ld = [
 </Base>
 
 <style>
+  .intro { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: center; }
+  .answer { max-width: 68ch; font-size: 1.12rem; color: var(--text); }
+  .facts { display: grid; gap: 10px; }
+  .facts li { display: flex; gap: 10px; align-items: center; color: var(--text-2); font-size: 15px; }
+  .facts :global(svg) { color: var(--accent); flex: none; }
   .feat { display: grid; gap: 12px; padding: 26px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); align-content: start; }
   .feat p { color: var(--text-2); font-size: 15px; }
+  .feat-link { text-decoration: none; color: inherit; transition: border-color 160ms ease, transform 160ms ease; }
+  .feat-link:hover { border-color: var(--accent-line); transform: translateY(-2px); }
+  .feat-more { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); font-size: 14px; font-weight: 600; }
+  .more { margin-top: 28px; max-width: 74ch; }
   .local { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .local-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
   address { font-style: normal; margin: 18px 0 12px; line-height: 1.6; }
+  .local-grid .muted { max-width: 60ch; }
   .local-cta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
   .cities { display: flex; flex-wrap: wrap; gap: 8px; }
   .cities li { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); font-size: 14px; }
+  .cities a { color: inherit; text-decoration: none; }
+  .cities li:has(a):hover { border-color: var(--accent-line); }
   .form-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 48px; align-items: start; }
   .form-grid .muted { margin-top: 14px; max-width: 44ch; }
-  @media (max-width: 900px) { .local-grid, .form-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 900px) { .intro, .local-grid, .form-grid { grid-template-columns: 1fr; } }
 </style>

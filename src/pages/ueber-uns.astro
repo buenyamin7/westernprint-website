@@ -4,9 +4,84 @@ import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import Testimonials from '../components/Testimonials.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { stats } from '../data/site';
+import Faq from '../components/Faq.astro';
+import { site, stats, oeffnungszeiten } from '../data/site';
+import { bewertungen } from '../data/bewertungen';
+import { imgInfo } from '../lib/imgsize.mjs';
+
+// Google-Bewertungen aus src/data/bewertungen.ts: 5 -> "5,0", "2026-09-28" -> "28.09.2026"
+const sterne = bewertungen.schnitt.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const bewStand = bewertungen.stand.split('-').reverse().join('.');
+
+const werkstattImg = await imgInfo('/img/lager-regal-werkstatt.jpg');
+// Foto im Abschnitt #inhaber: der Mann an der Heißpresse ist Bünyamin Dursun (vom Inhaber am 29.09.2026 bestätigt).
+const inhaberImg = await imgInfo('/img/werkstatt-heisspresse.jpg');
+
+// Steckbrief zum Inhaber. Belegt sichtbar das Person-Schema aus Base.astro (@id /ueber-uns#inhaber).
+const steckbrief = [
+  // "Gegründet" bezieht sich auf westernprint, nicht auf die GmbH: darum vor der Firmenzeile und ausdrücklich benannt.
+  { t: 'Gründer und Geschäftsführer', d: 'Bünyamin Dursun' },
+  { t: 'westernprint gegründet', d: '2021 in Oberhausen, seit 2024 als GmbH' },
+  { t: 'Firma', d: `${site.legalName}, HRB 38060, Amtsgericht Duisburg` },
+  { t: 'Adresse', d: `${site.address.street}, ${site.address.zip} ${site.address.city} (Marienviertel)` },
+  { t: 'Erreichbar', d: oeffnungszeiten.kurz },
+];
+
+// Maschinen und Ablauf: vom Inhaber am 18.09.2026 bestätigt (wie /druckverfahren#ausstattung). Kein DTF-Druckermodell nennen.
+const ausstattung = [
+  { t: 'DTG-Drucker', d: 'Epson SureColor F2100 und Epson SureColor F2200' },
+  { t: 'Maximale DTG-Druckfläche', d: '40 x 50 cm' },
+  { t: 'Dunkle Textilien im DTG', d: 'Vorbehandlung auf einer Pretreat-Maschine, fixiert auf der Heißpresse' },
+  { t: 'DTF-Transfers', d: 'Aufgebracht auf der Heißpresse' },
+  { t: 'Sublimation', d: 'Für Tassen, Accessoires und All-over-Drucke auf weißem Polyester' },
+  { t: 'Textilmarken', d: 'Stanley/Stella, Stedman, Build Your Brand, Urban Classics' },
+];
+
+// Nur Prüfschritte, die an anderer Stelle der Website schon zugesagt sind.
+const pruefung = [
+  { t: 'Datei prüfen', d: 'Wir prüfen jede Druckdatei vor dem Druck. Passt etwas nicht, melden wir uns bei dir.' },
+  { t: 'Korrekturabzug', d: 'Vor dem Druck bekommst du einen Korrekturabzug mit deinem Motiv auf dem Textil. Gedruckt wird erst nach deiner Freigabe.' },
+  { t: 'Sichtprüfung', d: 'Jedes Teil wird vor dem Verpacken geprüft.' },
+  { t: 'Nachbestellung', d: 'Deine Druckdaten bleiben für Nachbestellungen gespeichert. So musst du dein Motiv nicht neu schicken.' },
+];
+
+const werte = [
+  { icon: 'truck', t: 'Kurze Lieferzeiten', d: 'Einzelstücke sind in 1 bis 3 Werktagen fertig, Serien in 5 bis 7 Werktagen nach Freigabe.' },
+  { icon: 'chat-circle-dots', t: 'Erreichbarer Support', d: `${oeffnungszeiten.text} per Telefon, WhatsApp und E-Mail. Kein Ticketsystem.` },
+  { icon: 'shield-check', t: 'Geprüfte Qualität', d: 'Eigene Produktion in Oberhausen, Sichtprüfung vor dem Verpacken.' },
+  { icon: 'star', t: 'Bewertet bei Google', d: `${sterne} von 5 Sternen bei ${bewertungen.anzahl} Google-Bewertungen, Stand ${bewStand}.`, href: '/bewertungen', cta: 'Alle Bewertungen' },
+];
+
+const faqs = [
+  {
+    q: 'Wer steht hinter westernprint?',
+    a: 'Hinter westernprint in Oberhausen steht Bünyamin Dursun. Er hat westernprint 2021 gegründet und ist Geschäftsführer der westernprint GmbH. Vorher war er selbst Kunde bei Print-on-Demand-Druckereien. Heute führt er die eigene Produktion in Oberhausen.',
+  },
+  {
+    q: 'Wo druckt westernprint?',
+    a: `westernprint druckt in der eigenen Produktion in Oberhausen, ${site.address.street}. Gedruckt wird ausschließlich im eigenen Haus, nicht bei wechselnden Partnerdruckereien. Der DTG-Druck läuft auf Epson SureColor F2100 und F2200. DTF-Transfers pressen wir auf der Heißpresse auf. Von Oberhausen aus versendet westernprint mit DHL deutschlandweit und liefert auch ins Ausland, zum Beispiel nach Österreich, in die Schweiz und in die Niederlande.`,
+  },
+  {
+    q: 'Seit wann gibt es westernprint?',
+    a: 'westernprint wurde 2021 in Oberhausen von Bünyamin Dursun gegründet. Bis 2024 war westernprint ein Einzelunternehmen, seitdem ist die Firma als westernprint GmbH beim Amtsgericht Duisburg unter HRB 38060 eingetragen. Seit 2021 hat westernprint über 80.000 Endkunden von Partner-Shops direkt beliefert. Über 1 Mio. € Umsatz haben unsere Partner-Shops seit 2021 mit Produkten aus unserer Produktion gemacht.',
+  },
+  {
+    q: 'Kann ich bei westernprint vorbeikommen?',
+    a: `Ja, zur Abholung kannst du nach Absprache bei westernprint in Oberhausen vorbeikommen. Die Adresse ist ${site.address.street}, ${site.address.zip} ${site.address.city}, im Marienviertel. Die Abholung ist ${oeffnungszeiten.text} möglich und kostenlos. Eigene Textilien zum Bedrucken kannst du ebenfalls vorbeibringen. Den Termin stimmst du vorher per Telefon oder WhatsApp mit uns ab.`,
+  },
+  {
+    q: 'Wie erreiche ich westernprint?',
+    a: `westernprint in Oberhausen ist ${oeffnungszeiten.text} erreichbar. Du erreichst uns per Telefon unter ${site.phone}, per WhatsApp und per E-Mail an ${site.email}. Ein Angebot mit festem Preis kommt innerhalb von 24 Stunden an Werktagen.`,
+  },
+];
+const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 ---
-<Base title="Über uns: Druckerei aus Oberhausen" description="2021 selbst frustrierter Druck-Kunde, heute eigene DTF- und DTG-Druckerei in Oberhausen. Warum wir schneller, persönlicher und haltbarer drucken.">
+<Base
+  title="Über uns: Bünyamin Dursun und westernprint in Oberhausen"
+  description={`westernprint aus Oberhausen: 2021 von Bünyamin Dursun gegründet, eigene DTF- und DTG-Produktion, ${sterne} von 5 Sternen bei ${bewertungen.anzahl} Google-Bewertungen.`}
+  jsonLd={faqLd}
+  pageType="AboutPage"
+>
   <PageHero
     eyebrow="Über uns"
     title="Aus Frust geboren. <span class='hl'>Aus Erfahrung gewachsen.</span>"
@@ -31,20 +106,78 @@ import { stats } from '../data/site';
     </div>
   </section>
 
+  <section class="section-tight band-section" id="inhaber">
+    <div class="container owner-grid">
+      <div class="owner-text reveal">
+        <span class="eyebrow">Gründer und Geschäftsführer</span>
+        <h2>Wer hinter westernprint steht</h2>
+        <p>Bünyamin Dursun hat westernprint 2021 in Oberhausen gegründet und führt die westernprint GmbH als Geschäftsführer. Vor der Gründung war er selbst Kunde bei Print-on-Demand-Druckereien. Dort erlebte er immer wieder lange Lieferzeiten und Mails ohne Antwort. Daraus ist die eigene Druckerei entstanden.</p>
+        <p>Heute führt Bünyamin Dursun die eigene Produktion in Oberhausen. Seit 2021 hat westernprint über 80.000 Endkunden von Partner-Shops direkt beliefert.</p>
+        <dl class="specs">
+          {steckbrief.map((s) => <div><dt>{s.t}</dt><dd>{s.d}</dd></div>)}
+          <div>
+            <dt>Kontakt</dt>
+            <dd class="contact-links">
+              <a href={site.phoneHref}>{site.phone}</a>
+              <a href={site.whatsapp} target="_blank" rel="noopener">WhatsApp</a>
+              <a href={`mailto:${site.email}`}>{site.email}</a>
+            </dd>
+          </div>
+        </dl>
+      </div>
+      <figure class="owner-photo reveal reveal-d1">
+        <img src="/img/werkstatt-heisspresse.jpg" srcset={inhaberImg.srcset} sizes={inhaberImg.srcset ? '(max-width: 900px) 100vw, 40vw' : undefined} alt="Bünyamin Dursun, Gründer und Geschäftsführer von westernprint, an der Heißpresse in der Werkstatt in Oberhausen, daneben Drucker und Regale mit Textilien" width={inhaberImg.width ?? 933} height={inhaberImg.height ?? 1400} loading="lazy" />
+        <figcaption>Bünyamin Dursun an der Heißpresse in Oberhausen</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" id="produktion">
+    <div class="container production-grid">
+      <div class="production-img reveal">
+        <img src="/img/lager-regal-werkstatt.jpg" srcset={werkstattImg.srcset} sizes={werkstattImg.srcset ? '(max-width: 900px) 100vw, 45vw' : undefined} alt="Werkstatt von westernprint in Oberhausen: Heißpressen und Regale mit unbedruckten Textilien" width={werkstattImg.width ?? 1400} height={werkstattImg.height ?? 788} loading="lazy" />
+      </div>
+      <div class="reveal reveal-d1">
+        <span class="eyebrow">Eigene Produktion in Oberhausen</span>
+        <h2>Womit wir arbeiten</h2>
+        <p class="muted">westernprint druckt in der eigenen Produktion in Oberhausen, versendet deutschlandweit mit DHL und liefert auch ins Ausland. Die DTG-Drucke laufen auf der Epson SureColor F2100 und F2200.</p>
+        <dl class="specs">
+          {ausstattung.map((a) => <div><dt>{a.t}</dt><dd>{a.d}</dd></div>)}
+        </dl>
+        <a href="/druckverfahren#ausstattung" class="text-link">Verfahren und Ausstattung im Detail <Icon name="arrow-right" size={16} /></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="qualitaet">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>So sichern wir die Qualität</h2>
+        <p>westernprint prüft deinen Auftrag in Oberhausen vor dem Druck und vor dem Verpacken.</p>
+      </div>
+      <ol class="qa-steps">
+        {pruefung.map((p, i) => (
+          <li class={`reveal reveal-d${i}`}>
+            <span class="num">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{p.t}</h3>
+            <p>{p.d}</p>
+          </li>
+        ))}
+      </ol>
+      <p class="care-note reveal"><Icon name="washing-machine" size={20} /><span>Pflegehinweis von westernprint: Bedruckte Textilien bei 30 Grad waschen, auf links gedreht, ohne Weichspüler und nicht in den Trockner. <a href="/pflege-bedruckter-textilien">Zur Pflegeanleitung</a></span></p>
+    </div>
+  </section>
+
   <section class="section-tight values-section">
     <div class="container">
       <div class="section-head reveal"><h2>Wofür wir stehen</h2></div>
       <div class="grid grid-4">
-        {[
-          { icon: 'truck', t: 'Schneller Versand', d: 'Unsere Prozesse laufen effizient. Du wartest nicht, du lieferst.' },
-          { icon: 'chat-circle-dots', t: 'Erreichbarer Support', d: 'Schnell, kompetent und persönlich. Kein Ticketsystem-Wahnsinn.' },
-          { icon: 'printer', t: 'Top-Qualität', d: 'Moderne Epson DTF- und DTG-Technik, jedes Teil manuell geprüft.' },
-          { icon: 'seal-check', t: 'Erfolgsbeweise', d: 'Die meisten Kunden kommen von großen Druckereien zu uns. Und bleiben.' },
-        ].map((v, i) => (
+        {werte.map((v, i) => (
           <div class={`value reveal reveal-d${i}`}>
             <div class="icon-box"><Icon name={v.icon} size={22} /></div>
             <h3>{v.t}</h3>
             <p>{v.d}</p>
+            {v.href && <a href={v.href} class="text-link">{v.cta} <Icon name="arrow-right" size={16} /></a>}
           </div>
         ))}
       </div>
@@ -54,12 +187,12 @@ import { stats } from '../data/site';
   <section class="section">
     <div class="container gallery-grid">
       <img src="/img/druck-makro.jpg" alt="Nahaufnahme eines DTF-Drucks auf grau meliertem Shirt" width="1448" height="1086" loading="lazy" class="reveal" />
-      <img src="/img/werkstatt-heisspresse.jpg" alt="Werkstatt von westernprint mit Heißpressen und Regalen" width="1024" height="1536" loading="lazy" class="tall reveal reveal-d1" />
-      <img src="/img/packtisch.jpg" alt="Frisch bedruckte Shirts auf dem Packtisch" width="1448" height="1086" loading="lazy" class="reveal reveal-d2" />
+      <img src="/img/packtisch.jpg" alt="Frisch bedruckte Shirts auf dem Packtisch" width="1448" height="1086" loading="lazy" class="reveal reveal-d1" />
     </div>
   </section>
 
   <Testimonials />
+  <Faq items={faqs} title="Fragen zu westernprint" intro="Wer hinter westernprint steht, wo gedruckt wird und wie du uns erreichst." />
   <CtaBand title="Lass dein Business durchstarten. Ohne Druckerei-Stress." text="Keine leeren Versprechen, sondern Ergebnisse. Alles, was wir damals vermisst haben, haben wir heute für dich umgesetzt." />
 </Base>
 
@@ -70,11 +203,56 @@ import { stats } from '../data/site';
   .story-stats div { padding: 24px 26px; border-radius: 18px; border: 1px solid var(--accent-line); background: linear-gradient(160deg, color-mix(in srgb, var(--accent) 12%, var(--surface)), var(--surface) 60%); display: grid; gap: 6px; box-shadow: 0 0 40px -22px color-mix(in srgb, var(--accent) 60%, transparent); }
   .story-stats strong { font-family: var(--font-display); font-weight: 800; font-size: 2.4rem; letter-spacing: -0.03em; line-height: 1; color: var(--accent); }
   .story-stats span { color: var(--text-2); font-size: 14px; }
-  .values-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+  .band-section, .values-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  #inhaber, #produktion, #qualitaet { scroll-margin-top: calc(var(--nav-h) + 16px); }
+  .owner-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(32px, 5vw, 72px); align-items: start; }
+  .owner-photo { margin: 0; }
+  .owner-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 50%; border-radius: 20px; border: 1px solid var(--line); }
+  .owner-photo figcaption { margin-top: 10px; color: var(--text-2); font-size: 14px; }
+  .owner-text p { color: var(--text-2); margin-top: 16px; max-width: 62ch; font-size: 1.05rem; }
+  .owner-text h2 + p { margin-top: 20px; }
+  .contact-links { display: grid; gap: 4px; }
+  .contact-links a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+
+  .production-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+  .production-grid .muted { margin-top: 14px; max-width: 58ch; font-size: 1.05rem; }
+  .production-img img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 20% center; border-radius: 20px; border: 1px solid var(--line); }
+
+  .specs { display: grid; margin: 26px 0 0; border-top: 1px solid var(--line-strong); }
+  .specs div { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 15px; line-height: 1.5; }
+  .specs dt { color: var(--text-2); }
+  .specs dd { margin: 0; color: var(--text); font-weight: 500; }
+
+  .text-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 22px; color: var(--accent); font-weight: 600; font-size: 15px; }
+  .text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .value .text-link { margin-top: 2px; justify-self: start; }
+
+  .qa-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; list-style: none; margin: 0; padding: 0; }
+  .qa-steps li { display: grid; gap: 10px; align-content: start; padding-top: 18px; border-top: 1px solid var(--line-strong); }
+  .qa-steps .num { font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; letter-spacing: -0.01em; color: var(--accent); }
+  .qa-steps p { color: var(--text-2); font-size: 15px; }
+  .care-note { display: flex; gap: 12px; align-items: flex-start; margin-top: 36px; max-width: 78ch; color: var(--text-2); font-size: 15px; line-height: 1.6; }
+  .care-note :global(.icon) { flex: none; margin-top: 2px; color: var(--accent); }
+  .care-note a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
   .value { display: grid; gap: 12px; padding: 26px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); align-content: start; }
   .value p { color: var(--text-2); font-size: 15px; }
-  .gallery-grid { display: grid; grid-template-columns: 1fr 0.7fr 1fr; gap: 16px; align-items: stretch; }
+  .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: stretch; }
   .gallery-grid img { border-radius: var(--radius-card); border: 1px solid var(--line); object-fit: cover; height: 100%; aspect-ratio: 4 / 3; }
-  .gallery-grid img.tall { aspect-ratio: auto; }
-  @media (max-width: 900px) { .story { grid-template-columns: 1fr; } .story-stats { position: static; grid-template-columns: 1fr 1fr; } .gallery-grid { grid-template-columns: 1fr 1fr; } .gallery-grid img.tall { display: none; } }
+  @media (max-width: 900px) {
+    .story, .owner-grid, .production-grid { grid-template-columns: minmax(0, 1fr); }
+    .story-stats { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .owner-photo { max-width: 520px; }
+    .production-img { order: 2; }
+    .production-img img { aspect-ratio: 16 / 9; }
+    .qa-steps { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .qa-steps { grid-template-columns: 1fr; }
+    .specs div { grid-template-columns: 1fr; gap: 2px; }
+    .story-stats { gap: 12px; }
+    .story-stats div { padding: 18px 16px; }
+    .story-stats strong { font-size: clamp(1.45rem, 7vw, 2.4rem); }
+  }
 </style>

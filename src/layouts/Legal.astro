@@ -12,5 +12,8 @@ const { title, description, html } = Astro.props;
   </section>
 </Base>
 <style>
-  h1 { margin-bottom: 24px; }
+  /* Lange deutsche Komposita wie „Datenschutzerklärung“ auf schmalen Displays trennen statt überlaufen lassen (lang="de" ist gesetzt).
+     overflow-wrap greift nur, wenn der Browser für Deutsch keine Silbentrennung kann. */
+  h1 { margin-bottom: 24px; -webkit-hyphens: auto; hyphens: auto; overflow-wrap: anywhere; }
+  @media (max-width: 480px) { h1 { font-size: 1.875rem; } }
 </style>

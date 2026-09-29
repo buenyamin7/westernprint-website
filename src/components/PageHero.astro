@@ -1,8 +1,20 @@
 ---
 // Kompakter Seitenkopf für Unterseiten. Optional mit Bild rechts.
 import Icon from './Icon.astro';
+import { imgInfo } from '../lib/imgsize.mjs';
 interface Props { eyebrow?: string; title: string; lede: string; image?: string; imageAlt?: string; cta?: { label: string; href: string }; cta2?: { label: string; href: string } }
 const { eyebrow, title, lede, image, imageAlt = '', cta, cta2 } = Astro.props;
+// Echte Maße und WebP-Varianten (640/960/1400, scripts/make-image-variants.mjs).
+const img = image ? await imgInfo(image) : null;
+// sizes für object-fit: cover. Desktop: Spalte 50vw, Höhe meist um 620 px (min. clamp(440px, 60vh, 720px), sonst Texthöhe),
+// Querformate werden deshalb breiter gezeichnet als die Spalte. Mobil: 4:3-Box über die volle Breite.
+function heroSizes(w: number, h: number) {
+  const ar = w / h;
+  const mobile = Math.max(100, Math.round(75 * ar));
+  const k = Math.round(620 * ar);
+  return `(max-width: 900px) ${mobile}vw, ${ar > 1 ? `(max-width: ${2 * k}px) ${k}px, ` : ''}50vw`;
+}
+const sizes = img?.srcset && img.width && img.height ? heroSizes(img.width, img.height) : undefined;
 ---
 <section class={`phero ${image ? 'has-image' : ''}`}>
   <div class="container phero-grid">
@@ -17,7 +29,7 @@ const { eyebrow, title, lede, image, imageAlt = '', cta, cta2 } = Astro.props;
         </div>
       )}
     </div>
-    {image && <div class="phero-img"><img src={image} alt={imageAlt} width="1400" height="1050" loading="eager" fetchpriority="high" /></div>}
+    {image && <div class="phero-img"><img src={image} srcset={sizes && img?.srcset} sizes={sizes} alt={imageAlt} width={img?.width ?? 1400} height={img?.height ?? 1050} loading="eager" fetchpriority="high" /></div>}
   </div>
 </section>
 

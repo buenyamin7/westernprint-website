@@ -16,7 +16,7 @@ const volumes = ['0 bis 10', '10 bis 50', '50 bis 200', '200 bis 1000', 'über 1
         <ul class="points">
           <li><Icon name="check" weight="bold" size={16} /> Stanley/Stella Bio-Baumwolle, DTF-Druck aus Oberhausen</li>
           <li><Icon name="check" weight="bold" size={16} /> Fühl die Druckqualität, wasch es, zieh es an</li>
-          <li><Icon name="check" weight="bold" size={16} /> Versand in 1 bis 2 Werktagen, kein Abo, keine Verpflichtung</li>
+          <li><Icon name="check" weight="bold" size={16} /> Lieferung in 3 bis 5 Werktagen, kein Abo, keine Verpflichtung</li>
         </ul>
         <a href="#form" class="btn btn-primary btn-lg">Sample bestellen <Icon name="arrow-down" size={18} /></a>
         <p class="muted small">Solange der Vorrat reicht. Ein Sample pro Shop.</p>
@@ -29,7 +29,7 @@ const volumes = ['0 bis 10', '10 bis 50', '50 bis 200', '200 bis 1000', 'über 1
 
   <section class="section-tight">
     <div class="container steps">
-      {[['1', 'Eintragen', 'Store-Name, Größe, Adresse. Dauert eine Minute.'], ['2', '7 € Versand zahlen', 'PayPal, Karte, Klarna oder Überweisung über Mollie.'], ['3', 'Shirt testen', 'Kommt in 1 bis 2 Werktagen. Wenn es passt, binden wir deinen Shop an.']].map(([n, h, t]) => (
+      {[['1', 'Eintragen', 'Store-Name, Größe, Adresse. Dauert eine Minute.'], ['2', '7 € Versand zahlen', 'Bezahlung über Mollie. Die verfügbaren Zahlungsarten werden an der Kasse angezeigt.'], ['3', 'Shirt testen', 'Kommt in 3 bis 5 Werktagen. Wenn es passt, binden wir deinen Shop an.']].map(([n, h, t]) => (
         <div class="card card-pad step"><span class="num">{n}</span><h3>{h}</h3><p class="muted">{t}</p></div>
       ))}
     </div>
@@ -123,16 +123,18 @@ const volumes = ['0 bis 10', '10 bis 50', '50 bis 200', '200 bis 1000', 'über 1
   .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .step { display: grid; gap: 8px; } .step h3 { font-size: 18px; }
   .num { width: 32px; height: 32px; border-radius: 999px; background: var(--accent); color: #0b1410; font-weight: 700; display: grid; place-items: center; font-size: 14px; }
-  .fgrid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(28px, 4vw, 56px); align-items: start; }
+  .fgrid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(28px, 4vw, 56px); align-items: start; }
   .finfo { display: grid; gap: 14px; position: sticky; top: calc(var(--nav-h) + 24px); }
   .trust { display: grid; gap: 8px; font-size: 14px; color: var(--text-2); } .trust li { display: flex; gap: 8px; align-items: center; }
-  .sform { display: grid; gap: 16px; } .sform h3 { font-size: 16px; margin-top: 6px; }
-  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; } .row-3 { grid-template-columns: 1fr 1fr 1fr; }
+  /* minmax(0, 1fr): die Spalte richtet sich nach der Kartenbreite, nicht nach dem breitesten Kind (sonst 375-px-Overflow). */
+  .sform { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; } .sform h3 { font-size: 16px; margin-top: 6px; }
+  .sform [data-pay] { white-space: normal; line-height: 1.3; text-align: center; }
+  .row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; } .row-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .chips { display: flex; gap: 8px; flex-wrap: wrap; }
   .chip { position: relative; } .chip input { position: absolute; opacity: 0; }
   .chip span { display: inline-block; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line-strong); font-weight: 600; cursor: pointer; }
   .chip input:checked + span { background: var(--accent); color: #0b1410; border-color: var(--accent); }
   .small { font-size: 13px; }
-  @media (max-width: 900px) { .sgrid, .fgrid { grid-template-columns: 1fr; } .finfo { position: static; } .steps { grid-template-columns: 1fr; } .svisual { order: -1; } .svisual img { aspect-ratio: 4 / 3; } }
-  @media (max-width: 600px) { .row, .row-3 { grid-template-columns: 1fr; } }
+  @media (max-width: 900px) { .sgrid, .fgrid { grid-template-columns: minmax(0, 1fr); } .finfo { position: static; } .steps { grid-template-columns: 1fr; } .svisual { order: -1; } .svisual img { aspect-ratio: 4 / 3; } }
+  @media (max-width: 600px) { .row, .row-3 { grid-template-columns: minmax(0, 1fr); } }
 </style>

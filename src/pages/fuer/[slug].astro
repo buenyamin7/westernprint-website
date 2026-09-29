@@ -13,14 +13,26 @@ const { z } = Astro.props;
 const related = zielgruppen.filter((o) => o.slug !== z.slug && o.group === z.group).slice(0, 3);
 const more = zielgruppen.filter((o) => o.slug !== z.slug && o.group !== z.group).slice(0, 3 - related.length);
 const rel = [...related, ...more];
+// Drei Schritte: gruppenspezifisch aus zielgruppen.ts, sonst die allgemeinen.
+const stepIcons = ['chat-circle-dots', 'file-text', 'package'];
+const genericSteps = [
+  { t: 'Anfrage senden', d: 'Motiv, Textil, Stückzahl und Wunschtermin. Per Formular, WhatsApp oder Mail, auch als Skizze oder Foto.' },
+  { t: 'Angebot in 24 Stunden', d: 'Fester Stückpreis, Korrekturabzug mit eurem Motiv auf dem Textil, verbindlicher Liefertermin. Ihr gebt frei.' },
+  { t: 'Druck und Lieferung', d: 'Produktion in Oberhausen, jedes Teil geprüft. Versand mit DHL, sortiert nach Größe, oder Abholung.' },
+];
+const steps = (z.steps && z.steps.length === 3 ? z.steps : genericSteps).map((st, i) => ({ ...st, icon: stepIcons[i] }));
 const iconFor = (t: string) => /hoodie|sweat|pullover/i.test(t) ? 'hoodie' : /cap|beanie|mütze/i.test(t) ? 'baseball-cap' : /beutel|tote|tasche|bag/i.test(t) ? 'tote' : /jacke|softshell|weste/i.test(t) ? 'coat-hanger' : /print-on-demand|versand|shop/i.test(t) ? 'package' : /short|hose|jogger/i.test(t) ? 'pants' : 't-shirt';
+// Service-Schema ohne ungeklärte Aussagen (Waschtemperatur, Versandbeträge), wie in llms-full.txt.
+// Der sichtbare Text und die Meta-Description bleiben unverändert, bis der Inhaber entscheidet.
+const UNGEKLAERT = /wasch\w*[^.]*\b60\s*(°|grad)|\b60\s*(°|grad)[^.]*wasch|an den (messe)?stand\b/i;
+const schemaText = (t: string) => t.split(/(?<=\.)\s+/).filter((satz) => !UNGEKLAERT.test(satz)).join(' ');
 const ld = [
-  { '@context': 'https://schema.org', '@type': 'Service', name: z.title, serviceType: 'Textildruck', description: z.description, provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: [{ '@type': 'City', name: 'Oberhausen' }, { '@type': 'AdministrativeArea', name: 'Ruhrgebiet' }, { '@type': 'AdministrativeArea', name: 'Nordrhein-Westfalen' }, { '@type': 'Country', name: 'Deutschland' }], audience: { '@type': 'Audience', audienceType: z.name }, url: `${site.url}/fuer/${z.slug}`, offers: { '@type': 'Offer', description: 'Angebot innerhalb von 24 Stunden, ab 1 Stück, Staffelpreise ab 10 bis 50 Stück' } },
+  { '@context': 'https://schema.org', '@type': 'Service', name: z.title, serviceType: 'Textildruck', description: schemaText(z.description), provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: [{ '@type': 'City', name: 'Oberhausen' }, { '@type': 'AdministrativeArea', name: 'Ruhrgebiet' }, { '@type': 'AdministrativeArea', name: 'Nordrhein-Westfalen' }, { '@type': 'Country', name: 'Deutschland' }], audience: { '@type': 'Audience', audienceType: z.name }, url: `${site.url}/fuer/${z.slug}`, offers: { '@type': 'Offer', description: 'Angebot innerhalb von 24 Stunden, ab 1 Stück, Staffelpreise ab 10 bis 50 Stück' } },
   { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: z.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
-  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Start', item: site.url }, { '@type': 'ListItem', position: 2, name: 'Für wen wir drucken', item: `${site.url}/fuer` }, { '@type': 'ListItem', position: 3, name: z.name, item: `${site.url}/fuer/${z.slug}` }] },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Startseite', item: site.url }, { '@type': 'ListItem', position: 2, name: 'Für wen wir drucken', item: `${site.url}/fuer` }, { '@type': 'ListItem', position: 3, name: z.name, item: `${site.url}/fuer/${z.slug}` }] },
 ];
 ---
-<Base title={`${z.title} | westernprint Oberhausen`} description={z.description} jsonLd={ld} ogImage={z.image}>
+<Base title={`${z.title} | westernprint${z.title.includes('Oberhausen') ? '' : ' Oberhausen'}`} description={z.description} jsonLd={ld} ogImage={z.image}>
   <PageHero eyebrow={z.name} title={z.h1} lede={z.lede} cta={{ label: 'Angebot in 24h', href: '#anfrage' }} cta2={{ label: 'Per WhatsApp', href: site.whatsapp }} image={z.image} imageAlt={z.imageAlt} />
 
   <section class="section-tight">
@@ -67,11 +79,7 @@ const ld = [
         <p class="muted">Kein Ticketsystem, kein Warten. Ihr schreibt, wir antworten innerhalb von 24 Stunden mit einem festen Preis.</p>
       </div>
       <ol class="steps">
-        {[
-          { icon: 'chat-circle-dots', t: 'Anfrage senden', d: 'Motiv, Textil, Stückzahl und Wunschtermin. Per Formular, WhatsApp oder Mail, auch als Skizze oder Foto.' },
-          { icon: 'file-text', t: 'Angebot in 24 Stunden', d: 'Fester Stückpreis, Korrekturabzug mit eurem Motiv auf dem Textil, verbindlicher Liefertermin. Ihr gebt frei.' },
-          { icon: 'package', t: 'Druck und Lieferung', d: 'Produktion in Oberhausen, jedes Teil geprüft. Versand mit DHL, sortiert nach Größe, oder Abholung.' },
-        ].map((st, i) => (
+        {steps.map((st, i) => (
           <li class={`reveal reveal-d${i}`}>
             <div class="step-badge"><span class="step-no">0{i + 1}</span><Icon name={st.icon} size={26} /></div>
             <h3>{st.t}</h3>
@@ -83,7 +91,20 @@ const ld = [
     </div>
   </section>
 
-  <Faq items={z.faqs} title={`Fragen von ${z.name}`} />
+  {z.sections && z.sections.length > 0 && (
+    <section class="section-tight extra-sections">
+      <div class="container extra-grid">
+        {z.sections.map((sec, i) => (
+          <div class={`extra reveal reveal-d${i % 3}`}>
+            <h2>{sec.h}</h2>
+            <p>{sec.p}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <Faq items={z.faqs} title={`Fragen und Antworten für ${z.name}`} />
 
   <section class="section" id="anfrage">
     <div class="container zg-form">
@@ -96,10 +117,10 @@ const ld = [
     </div>
   </section>
 
-  <section class="section-tight related">
+  <nav class="section-tight related" aria-label="Weitere Zielgruppen">
     <div class="container"><h2>Auch für</h2></div>
     <Tiles items={rel.map((o) => ({ href: `/fuer/${o.slug}`, img: o.image, pos: o.imagePos, t: o.name, d: o.lede.split('. ')[0] + '.', cta: 'Zur Seite' }))} rows="clamp(220px, 20vw, 300px)" />
-  </section>
+  </nav>
 </Base>
 
 <style>
@@ -140,8 +161,12 @@ const ld = [
     .steps li h3 { grid-column: 2; align-self: end; } .steps li p { grid-column: 2; }
     .step-badge { grid-row: 1 / span 2; margin: 0; }
   }
-  .zg-form { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(24px, 4vw, 56px); align-items: start; }
+  .zg-form { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
   .zg-form .muted { margin-top: 10px; } .small { font-size: 13px; }
-  .related { padding-bottom: 0; } .related h2 { margin-bottom: 20px; }
-  @media (max-width: 900px) { .zg-intro, .zg-form { grid-template-columns: 1fr; } }
+  .related { display: block; padding-bottom: 0; } .related h2 { margin-bottom: 20px; }
+  .extra-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: clamp(24px, 3vw, 40px); }
+  .extra { display: grid; gap: 10px; align-content: start; padding-top: 20px; border-top: 1px solid var(--line-strong); }
+  .extra h2 { font-size: clamp(1.15rem, 1.6vw, 1.35rem); text-wrap: balance; }
+  .extra p { color: var(--text-2); font-size: 15.5px; max-width: 62ch; }
+  @media (max-width: 900px) { .zg-intro, .zg-form { grid-template-columns: minmax(0, 1fr); } }
 </style>

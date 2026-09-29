@@ -7,7 +7,7 @@ const year = new Date().getFullYear();
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="/img/logo.png" alt="westernprint" width="150" height="57" />
+        <img src="/img/logo-300.webp" alt="westernprint" width="300" height="113" loading="lazy" decoding="async" />
         <p>Textildruckerei aus Oberhausen im Ruhrgebiet. DTF- und DTG-Druck ab 1 Stück, Großauflagen mit Staffelpreisen, Angebot in 24 Stunden. Print-on-Demand für Shop-Betreiber.</p>
         <div class="socials">
           <a href={site.instagram} target="_blank" rel="noopener" aria-label="Instagram"><Icon name="instagram-logo" size={20} /></a>
@@ -22,6 +22,7 @@ const year = new Date().getFullYear();
         <a href="/grossauflagen">Großauflagen ab 50 Stück</a>
         <a href="/druckverfahren">DTF, DTG und Sublimation</a>
         <a href="/textilien">Textilien und Marken</a>
+        <a href="/shop">Shop</a>
         <a href="/textildruck-oberhausen">Textildruck Oberhausen</a>
         <a href="/textildruck-ruhrgebiet">Textildruck Ruhrgebiet</a>
       </div>
@@ -41,7 +42,8 @@ const year = new Date().getFullYear();
         <a href="/bewertungen">Bewertungen</a>
         <a href="/kontakt">Kontakt</a>
         <a href="/was-kostet-textildruck">Preise und Beispiele</a>
-        <a href="/sample">Muster bestellen</a>
+        <a href="/sample">Muster für Shops</a>
+        <a href="/pflege-bedruckter-textilien">Pflegehinweise</a>
       </div>
       <div>
         <h2>Kontakt</h2>
@@ -62,6 +64,7 @@ const year = new Date().getFullYear();
         <a href="/agb">AGB</a>
         <a href="/widerruf">Widerruf</a>
         <a href="/versand">Versand</a>
+        {site.googleAds?.id && <button type="button" class="consent-open" data-consent-open>Datenschutzeinstellungen</button>}
       </nav>
     </div>
   </div>
@@ -83,6 +86,8 @@ const year = new Date().getFullYear();
   .footer-bottom { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--text-3); }
   .footer-bottom nav { display: flex; gap: 18px; flex-wrap: wrap; }
   .footer-bottom nav a:hover { color: var(--text); }
+  .consent-open { background: none; border: 0; padding: 0; cursor: pointer; }
+  .consent-open:hover { color: var(--text); }
   @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; gap: 28px; } }
 </style>

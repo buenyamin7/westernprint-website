@@ -4,15 +4,25 @@ import Tiles from '../components/Tiles.astro';
 import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import ContactForm from '../components/ContactForm.astro';
-const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'Textildruck Großauflagen ab 50 Stück', serviceType: 'Textildruck', provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: 'DE', url: 'https://westernprint.de/grossauflagen', offers: { '@type': 'Offer', description: 'Staffelpreise ab 50 Stück, Angebot innerhalb von 24 Stunden, Produktion in 5 bis 7 Werktagen' } };
+import Faq from '../components/Faq.astro';
+// Preise aus /was-kostet-textildruck (Stand 21.09.2026). Bei Änderungen dort auch hier anpassen. Brutto = netto x 1,19, kaufmännisch gerundet.
+const faqs = [
+  { q: 'Ab wie vielen Stück gibt es Staffelpreise?', a: 'westernprint druckt ab 1 Stück. Staffelpreise gibt es ab 10 Stück, ab 50 Stück zählt ein Auftrag als Großauflage. Ein T-Shirt Basic (Stedman Classic-T) mit einem Druck auf Brust oder Rücken kostet bei 50 Stück 9,40 € netto (11,19 € brutto) und bei 100 Stück 8,40 € netto (10,00 € brutto) pro Stück (Stand 21.09.2026). Weitere Beispiele stehen auf der Seite „Was kostet Textildruck?“.' },
+  { q: 'Wie lange dauert die Produktion einer Serie?', a: 'westernprint druckt Serien in der eigenen Produktion in Oberhausen. Eine Serie ist 5 bis 7 Werktage nach deiner Freigabe des Korrekturabzugs fertig. Danach versenden wir mit DHL deutschlandweit, oder du holst die Ware kostenlos in Oberhausen ab. Express ist auf Anfrage möglich.' },
+  { q: 'Bekomme ich vor dem Druck einen Korrekturabzug?', a: 'Ja. westernprint schickt dir vor dem Druck einen Korrekturabzug mit deinem Motiv auf dem Textil. Darauf siehst du die genauen Maße in Zentimetern. Gedruckt wird erst nach deiner Freigabe.' },
+  { q: 'Kann ich verschiedene Größen in einer Bestellung mischen?', a: 'Ja. westernprint druckt gemischte Größen und Farben in einer Bestellung. Mischgrößen kosten keinen Aufpreis. Schick uns mit der Anfrage einfach die Größenverteilung.' },
+  { q: 'Kann ich auf Rechnung bestellen?', a: 'Ja. Firmen und Vereine bestellen bei westernprint nach Absprache auf Rechnung. Aufträge auf Angebot zahlst du per Vorkasse oder Rechnung. Die Rechnung weist die Umsatzsteuer gesondert aus.' },
+];
+const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'Textildruck Großauflagen ab 50 Stück', serviceType: 'Textildruck', provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: { '@type': 'Country', name: 'Deutschland' }, url: 'https://westernprint.de/grossauflagen', offers: { '@type': 'Offer', description: 'Großauflagen ab 50 Stück, Staffelpreise ab 10 Stück, Angebot innerhalb von 24 Stunden an Werktagen, Produktion in 5 bis 7 Werktagen nach Freigabe' } };
+const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 ---
-<Base title="Textildruck Großauflagen ab 50 Stück" description="Vereinsshirts, Firmenkleidung, Messe-Merch und Abi-Shirts: DTF-Druck ab 50 Stück mit Staffelpreisen. Produktion in Oberhausen, Angebot in 24 Stunden." jsonLd={svcLd}>
+<Base title="Textildruck Großauflagen ab 50 Stück" description="Vereinsshirts, Firmenkleidung, Messe-Merch und Abi-Shirts: DTF-Druck ab 50 Stück mit Staffelpreisen. Produktion in Oberhausen, Angebot in 24 Stunden." jsonLd={[svcLd, faqLd]}>
   <PageHero
     eyebrow="Großauflagen"
     title="Textildruck für Vereine, Firmen und Events. <span class='hl'>Ab 50 Stück.</span>"
-    lede="Ein Ansprechpartner, ein Angebot, ein Liefertermin. Wir drucken Shirts, Hoodies und Polos in Auflage und liefern gesammelt oder direkt an deine Leute."
+    lede="westernprint druckt Shirts, Hoodies und Polos in Auflage, in der eigenen Produktion in Oberhausen. Wir liefern deutschlandweit, gesammelt oder direkt an deine Leute. Ein Ansprechpartner, ein Angebot, ein Liefertermin."
     image="/img/lager-rohware.jpg"
-    imageAlt="Weißes T-Shirt mit mehreren bunten DTF-Drucken auf dem Drucktisch"
+    imageAlt="Regal mit gefalteten Rohware-Shirts und Hoodies, davor eine Heißpresse"
     cta={{ label: 'Angebot in 24h', href: '#anfrage' }}
   />
 
@@ -35,10 +45,10 @@ const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'Tex
       <div class="reveal">
         <h2>Was du wissen solltest</h2>
         <ul class="facts">
-          <li><strong>Staffelpreise ab 50 Stück.</strong> Je mehr Teile, desto günstiger der Stückpreis. Mischgrößen sind kein Problem.</li>
+          <li><strong>Staffelpreise ab 10 Stück, Großauflage ab 50.</strong> Je mehr Teile, desto günstiger der Stückpreis. Mischgrößen sind kein Problem. <a href="/was-kostet-textildruck">Preisbeispiele ansehen</a></li>
           <li><strong>Angebot innerhalb von 24 Stunden.</strong> Schick uns Motiv, Textil und Stückzahl, du bekommst einen festen Preis.</li>
           <li><strong>Produktion in 5 bis 7 Werktagen.</strong> Express auf Anfrage, wenn der Termin drängt.</li>
-          <li><strong>Textilien nach Wahl.</strong> Stanley/Stella, Stedman oder deine eigenen Textilien, die du uns zuschickst.</li>
+          <li><strong>Textilien nach Wahl.</strong> Stanley/Stella, Stedman, Build Your Brand, Urban Classics oder deine eigenen Textilien, die du uns zuschickst.</li>
           <li><strong>Druck, der bleibt.</strong> DTF ist waschfest, dehnbar und deckend, auch auf dunklen Stoffen.</li>
         </ul>
       </div>
@@ -47,6 +57,8 @@ const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'Tex
       </div>
     </div>
   </section>
+
+  <Faq items={faqs} title="Fragen zu Großauflagen" />
 
   <section class="section" id="anfrage">
     <div class="container form-grid">
@@ -69,6 +81,7 @@ const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'Tex
   .info-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
   .facts { display: grid; gap: 16px; margin-top: 24px; color: var(--text-2); font-size: 15.5px; }
   .facts strong { color: var(--text); }
+  .facts a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
   .info-img { border-radius: 20px; border: 1px solid var(--line); aspect-ratio: 4 / 3; object-fit: cover; box-shadow: 0 40px 80px -40px rgba(0,0,0,0.8), 0 0 60px -30px color-mix(in srgb, var(--accent) 50%, transparent); }
   .form-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 48px; align-items: start; }
   .form-grid .muted { margin-top: 14px; max-width: 44ch; }

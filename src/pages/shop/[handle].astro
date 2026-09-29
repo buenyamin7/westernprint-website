@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import { getProducts, euro, PRINT_SIZES } from '../../lib/shopify';
 import { site } from '../../data/site';
+import { swatchSrc } from '../../lib/imgsize.mjs';
 
 export async function getStaticPaths() {
   const products = await getProducts();
@@ -10,14 +11,20 @@ export async function getStaticPaths() {
 }
 const { product: p } = Astro.props;
 const gallery = [p.image, p.modelImage, ...p.extraImages].filter((x, i, a) => x && a.indexOf(x) === i) as string[];
+// Zugänglicher Name je Galerie-Button (die Vorschaubilder haben leeres alt). Farbname nur, wenn das Bild einer Farbe gehört.
+const thumbLabel = (g: string, i: number) => {
+  const c = p.colors.find((x) => x.image === g || x.back === g);
+  return `Ansicht ${i + 1} von ${gallery.length}${c ? `, ${c.name}${c.back === g ? ' hinten' : ''}` : ''}`;
+};
 const clientData = { product: { id: p.id, handle: p.handle, title: p.title, price: p.price, image: p.image, colors: p.colors, sizes: p.sizes, variants: p.variants }, sizes: PRINT_SIZES, cloud: site.cloudinary };
-const ld = { '@context': 'https://schema.org', '@type': 'Product', name: `${p.title} bedrucken`, image: gallery.map((g) => `${site.url}${g}`), description: `${p.title} von ${p.brand} mit eigenem Motiv bedrucken. ${p.colors.length} Farben, Größen ${p.sizes[0]} bis ${p.sizes[p.sizes.length - 1]}.`, brand: { '@type': 'Brand', name: p.brand }, offers: { '@type': 'Offer', priceCurrency: 'EUR', price: (p.price + 5).toFixed(2), availability: 'https://schema.org/InStock', url: `${site.url}/shop/${p.handle}` } };
+// Shop-Preise sind Bruttopreise inkl. 19 % MwSt.: der Kassen-Worker übergibt sie an Mollie mit vatRate 19 % (westernprint-checkout, src/index.js).
+const ld = { '@context': 'https://schema.org', '@type': 'Product', name: `${p.title} bedrucken`, image: gallery.map((g) => `${site.url}${g}`), description: `${p.title} von ${p.brand} mit eigenem Motiv bedrucken. ${p.colors.length} Farben, Größen ${p.sizes[0]} bis ${p.sizes[p.sizes.length - 1]}.`, brand: { '@type': 'Brand', name: p.brand }, offers: { '@type': 'Offer', priceCurrency: 'EUR', price: (p.price + 5).toFixed(2), priceSpecification: { '@type': 'PriceSpecification', price: (p.price + 5).toFixed(2), priceCurrency: 'EUR', valueAddedTaxIncluded: true }, availability: 'https://schema.org/InStock', url: `${site.url}/shop/${p.handle}` } };
 const details = [
   p.grammage && ['Grammatur', p.grammage], p.fit && ['Passform', p.fit], p.composition && ['Material', p.composition],
   ['Marke', p.brand], ['Für', p.gender], ['Farben', `${p.colors.length}`], ['Größen', `${p.sizes[0]} bis ${p.sizes[p.sizes.length - 1]}`],
 ].filter(Boolean) as [string, string][];
 ---
-<Base noindex={true} title={`${p.title} bedrucken lassen`} description={`${p.title} von ${p.brand} mit eigenem Motiv per DTF bedrucken. ${p.colors.length} Farben, Größen ${p.sizes[0]} bis ${p.sizes[p.sizes.length - 1]}, ab 1 Stück, Versand in 1-3 Werktagen.`} ogImage={p.image ?? undefined} jsonLd={ld} hideCta={true}>
+<Base noindex={true} title={`${p.title} bedrucken lassen`} description={`${p.title} von ${p.brand} mit eigenem Motiv per DTF bedrucken. ${p.colors.length} Farben, Größen ${p.sizes[0]} bis ${p.sizes[p.sizes.length - 1]}, ab 1 Stück, Lieferung in 3 bis 5 Werktagen.`} ogImage={p.image ?? undefined} jsonLd={ld} hideCta={true}>
   <section class="pp">
     <div class="container">
       <nav class="crumbs muted" aria-label="Pfad"><a href="/shop">Shop</a> <span>/</span> <a href={`/shop?kategorie=${encodeURIComponent(p.category)}`}>{p.category}</a> <span>/</span> <span>{p.title}</span></nav>
@@ -25,7 +32,7 @@ const details = [
         <!-- Vorschau -->
         <div class="pvisual">
           <div class="stage" data-stage>
-            <img src={p.image} alt={`${p.title} ${p.colors[0]?.name ?? ''}`} width="900" height="1125" data-stage-img />
+            <img src={p.image} alt={`${p.title} ${p.colors[0]?.name ?? ''}`} width="900" height="1125" fetchpriority="high" data-stage-img />
             <img class="motif" data-motif hidden alt="" draggable="false" />
             <div class="stage-tabs" data-side-tabs>
               <button type="button" class="is-on" data-view="front">Vorne</button>
@@ -34,7 +41,8 @@ const details = [
             <span class="stage-hint" data-stage-hint hidden><Icon name="arrows-out-cardinal" size={14} /> Motiv verschieben</span>
           </div>
           <div class="thumbs">
-            {gallery.map((g, i) => <button type="button" class={i === 0 ? 'is-on' : ''} data-thumb={g}><img src={g} alt="" width="120" height="150" loading="lazy" /></button>)}
+            {/* data-thumb = volles Bild für die Bühne, img = 128 x 160 px Vorschau (scripts/make-swatches.mjs) */}
+            {gallery.map((g, i) => <button type="button" class={i === 0 ? 'is-on' : ''} data-thumb={g} aria-label={thumbLabel(g, i)}><img src={swatchSrc(g)} alt="" width="128" height="160" loading="lazy" /></button>)}
           </div>
         </div>
 
@@ -43,7 +51,7 @@ const details = [
           <div class="ptitle">
             <span class="pbrand">{p.brand} <span>{p.gender}</span> {p.brand === 'Stanley/Stella' && <em class="bio">Bio-Baumwolle</em>}</span>
             <h1>{p.title}</h1>
-            <p class="pprice"><strong data-total>{euro(p.price + 5)}</strong> <span class="muted">inkl. Druck und MwSt., zzgl. Versand</span></p>
+            <p class="pprice"><strong data-total>{euro(p.price + 5)}</strong> <span class="muted">inkl. Druck und MwSt., zzgl. <a href="/versand">Versand</a></span></p>
           </div>
 
           <div class="step">
@@ -51,8 +59,9 @@ const details = [
             <div class="swatches">
               {p.colors.map((c, i) => (
                 <label class={`swatch ${c.image ? 'has-img' : ''}`} title={c.name} style={`--sw:${c.hex || '#e6e6e6'}`}>
-                  <input type="radio" name="color" value={c.id} checked={i === 0} data-image={c.image} data-back={c.back} data-name={c.name} />
-                  {c.image ? <img src={c.image} alt={c.name} width="64" height="80" loading="lazy" /> : <i style={`background:${c.hex || '#ccc'}`}></i>}
+                  {/* data-image bleibt das volle Foto für die Bühne, das Muster selbst lädt nur die kleine Vorschau */}
+                  <input type="radio" name="color" value={c.id} checked={i === 0} aria-label={c.name} data-image={c.image} data-back={c.back} data-name={c.name} />
+                  {c.image ? <img src={swatchSrc(c.image)} alt={c.name} width="64" height="80" loading="lazy" /> : <i style={`background:${c.hex || '#ccc'}`}></i>}
                 </label>
               ))}
             </div>
@@ -93,7 +102,7 @@ const details = [
 
           <div class="buy">
             <div class="qty-row">
-              <span>Menge</span>
+              <label for="qty">Menge</label>
               <div class="qty"><button type="button" data-qty="-1" aria-label="Weniger">−</button><input id="qty" name="qty" type="number" min="1" max="99" value="1" /><button type="button" data-qty="1" aria-label="Mehr">+</button></div>
             </div>
             <ul class="calc" data-calc></ul>
@@ -101,8 +110,8 @@ const details = [
             <p class="form-note" data-note hidden></p>
             <ul class="trust">
               <li><Icon name="printer" size={16} /> DTF-Druck in Oberhausen, waschfest</li>
-              <li><Icon name="truck" size={16} /> Versand 4,90 €, 1 bis 3 Werktage</li>
-              <li><Icon name="shield-check" size={16} /> PayPal, Klarna, Karte, Apple Pay</li>
+              <li><Icon name="truck" size={16} /> Versand Deutschland 4,90 €, Ausland 9,90 €, versandkostenfrei ab 500 €, Lieferung in 3 bis 5 Werktagen</li>
+              <li><Icon name="shield-check" size={16} /> Sichere Zahlung über Mollie, die verfügbaren Zahlungsarten werden an der Kasse angezeigt</li>
             </ul>
           </div>
         </form>
@@ -119,7 +128,7 @@ const details = [
       </div>
       <div class="card card-pad">
         <h2>So wird gedruckt</h2>
-        <p class="muted">Wir drucken per DTF (Direct to Film): deckend auf hellen und dunklen Stoffen, dehnbar, waschfest bei 30 bis 40 Grad. Das Motiv sollte als PNG mit transparentem Hintergrund und mindestens 300 dpi vorliegen. Wir prüfen jede Datei vor dem Druck und melden uns, wenn etwas nicht passt.</p>
+        <p class="muted">Wir drucken per DTF (Direct to Film): deckend auf hellen und dunklen Stoffen, dehnbar, waschfest bei 30 Grad. Das Motiv sollte als PNG mit transparentem Hintergrund und mindestens 300 dpi vorliegen. Wir prüfen jede Datei vor dem Druck und melden uns, wenn etwas nicht passt.</p>
         <h3>Druckgrößen</h3>
         <ul class="sizes-list">{PRINT_SIZES.map((s) => <li><strong>{s.label}</strong> {s.hint}, +{s.surcharge} € je Seite</li>)}</ul>
         <h3>Größen</h3>
@@ -308,7 +317,8 @@ const details = [
   .stage-tabs button { border: 0; background: transparent; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--text-2); cursor: pointer; }
   .stage-tabs button.is-on { background: var(--accent); color: var(--accent-ink); }
   .stage-hint { position: absolute; left: 12px; bottom: 12px; font-size: 12px; padding: 5px 10px; border-radius: 999px; background: rgba(0,0,0,.65); color: #fff; display: inline-flex; gap: 6px; align-items: center; }
-  .thumbs { display: flex; gap: 8px; margin-top: 10px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  /* Innenabstand samt Gegenmargin, damit overflow den Fokusrahmen (2px + 3px Abstand) der Buttons nicht abschneidet. */
+  .thumbs { display: flex; gap: 8px; margin: 5px -5px 0; padding: 5px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   .thumbs::-webkit-scrollbar { display: none; }
   .thumbs button { flex: none; width: 64px; border-radius: 10px; overflow: hidden; border: 2px solid transparent; background: #858b87; padding: 2px; cursor: pointer; }
   .thumbs button.is-on { border-color: var(--accent); }
@@ -322,6 +332,8 @@ const details = [
   .pprice { margin-top: 10px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
   .pprice strong { font-size: 1.6rem; letter-spacing: -0.02em; }
   .pprice .muted { font-size: 13px; }
+  .pprice a { text-decoration: underline; text-underline-offset: 3px; }
+  .pprice a:hover { color: var(--text); }
 
   .step { display: grid; gap: 12px; padding-top: 18px; border-top: 1px solid var(--line); }
   .step-h { display: flex; align-items: center; gap: 10px; }
@@ -344,6 +356,8 @@ const details = [
   .side-opt { position: relative; padding: 12px; border-radius: 12px; border: 1px solid var(--line-strong); text-align: center; font-size: 14px; font-weight: 500; cursor: pointer; }
   .side-opt input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
   .side-opt:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+  /* Tastaturfokus: die Radios selbst sind unsichtbar, deshalb bekommt die sichtbare Hülle den Rahmen. */
+  .swatch:has(input:focus-visible), .chip:has(input:focus-visible), .side-opt:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
   .print-side { border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin: 0; display: grid; gap: 12px; background: var(--surface); }
   .print-side[hidden] { display: none; }
   .print-side legend { padding: 0 6px; font-size: 13px; font-weight: 600; color: var(--text-2); }
