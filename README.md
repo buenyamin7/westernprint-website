@@ -1,6 +1,7 @@
-# westernprint.de (neue Website)
+# westernprint.de
 
-Marketing-Website der westernprint GmbH, gebaut mit Astro (statisch, kein Server nötig). Design-Vorbild: stoff3.de, umgesetzt mit westernprint-Grün als Akzent.
+Die westernprint GmbH ist eine Textildruckerei in Oberhausen: DTF- und DTG-Druck auf Textilien ab 1 Stück und Print-on-Demand-Fulfillment für Shopify-Shops.
+Dieses Repo enthält den Quellcode der Website westernprint.de, gebaut mit Astro (statisch, kein Server nötig).
 
 ## Struktur
 
@@ -11,13 +12,15 @@ Marketing-Website der westernprint GmbH, gebaut mit Astro (statisch, kein Server
 | B2B-Partner (50+ Orders/Tag) | `src/pages/b2b-partner.astro` | `/pages/b2b-pod-anfragen` |
 | Großauflagen | `src/pages/grossauflagen.astro` | `/pages/grossbestellung` |
 | Druckverfahren | `src/pages/druckverfahren.astro` | `/pages/druckverfahren-und-textilanbieter` |
-| Preise | `src/pages/preise.astro` | `/pages/pod-preise` |
+| Preisbeispiele | `src/pages/was-kostet-textildruck.astro` (Zahlen aus `src/data/preise.ts`) | – |
 | Textilien | `src/pages/textilien.astro` | `/pages/bestellen` |
 | Über uns | `src/pages/ueber-uns.astro` | `/pages/uber-uns` |
-| Kontakt | `src/pages/kontakt.astro` | `/pages/contact` |
+| Kontakt | `src/pages/kontakt.astro` | `/pages/contact`, `/pages/pod-preise` |
 | Impressum, Datenschutz, AGB, Widerruf, Versand | `src/pages/*.astro` + `src/content/legal/*.html` | `/pages/...` |
 
-Alle Weiterleitungen stehen in `public/_redirects` (Netlify, Cloudflare Pages). Auf GitHub Pages greifen die statischen Weiterleitungsseiten unter `src/pages/pages`, `products`, `collections`, `policies` und `cart.astro`.
+Alle Weiterleitungen stehen in `public/_redirects` (Netlify, Cloudflare Pages). Auf GitHub Pages greifen die statischen Weiterleitungsseiten unter `src/pages/pages`, `products`, `collections`, `policies` und `cart.astro`. Alte Produkt-URLs, deren Produkt nicht mehr im Katalog ist, führen auf `/shop` (`src/pages/products/[...alt].astro`).
+
+GitHub Pages beantwortet URLs mit Schrägstrich am Ende (`/kontakt/`) sonst mit 404. Deshalb legt `scripts/trailing-slash-stubs.mjs` nach dem Build für jede Seite eine Weiterleitung von `/<pfad>/` auf `/<pfad>` an (noindex, Canonical auf die Zielseite). Die Sitemap bleibt davon unberührt.
 
 ## Wo was geändert wird
 
@@ -38,7 +41,7 @@ npm install
 npm run dev
 ```
 
-Build: `npm run build` (Ausgabe in `dist/`).
+Build: `npm run build` (Astro, danach `scripts/trailing-slash-stubs.mjs`; Ausgabe in `dist/`).
 
 ## Deployment (empfohlen: Cloudflare Pages oder Vercel, kostenlos)
 
@@ -53,6 +56,17 @@ Build: `npm run build` (Ausgabe in `dist/`).
 ## SEO
 
 Jede Seite hat Titel, Meta-Description, Canonical, Open Graph, JSON-LD (LocalBusiness, FAQ auf Startseite und POD-Seite). Sitemap und robots.txt werden automatisch erzeugt.
+
+## IndexNow (Bing)
+
+Nach jedem Deploy meldet GitHub Actions die geänderten Seiten per IndexNow an Bing (`scripts/indexnow.mjs`). Weiterleitungen alter Shopify-URLs meldet das Skript mit, wenn ihre Route oder `src/components/Redirect.astro` geändert wurde.
+
+Einmal alles melden (alle Sitemap-URLs, alle Weiterleitungen alter Shopify-URLs, bekannte gelöschte Alt-URLs):
+
+- In GitHub unter Actions > Deploy to GitHub Pages > Run workflow den Haken bei `indexnow_alle` setzen, oder
+- lokal im Projektordner `npm run build`, dann `node scripts/indexnow.mjs --all`. Mit `--all --dry-run` zeigt das Skript nur die Liste und sendet nichts.
+
+Wird `scripts/indexnow.mjs` selbst geändert, meldet der nächste Deploy einmal alles. Ob Bing eine Seite aufgenommen hat, zeigt die URL-Prüfung in den Bing Webmaster Tools.
 
 ## Shop-Katalog aktualisieren
 

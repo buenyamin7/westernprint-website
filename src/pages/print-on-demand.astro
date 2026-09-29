@@ -8,21 +8,24 @@ import { site, oeffnungszeiten } from '../data/site';
 import { bewertungen } from '../data/bewertungen';
 
 const schnitt = bewertungen.schnitt.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+// Lieferländer außer Deutschland, Österreich und Schweiz (Liste wie auf /versand und in den AGB).
+// Für sie gilt im POD der Tarif "übrige Lieferländer".
+const uebrigeLaender = ['Niederlande', 'Belgien', 'Luxemburg', 'Frankreich', 'Italien', 'Spanien', 'Polen', 'Dänemark', 'Tschechien'];
 
 const faqs = [
   { q: 'Wie funktioniert euer Print-on-Demand-Service genau?', a: 'Du verbindest deinen Shop mit unserem System. Sobald eine Bestellung eingeht, übernehmen wir Druck, Verpackung und Versand, komplett automatisiert und in deinem Namen.' },
   { q: 'Gibt es Mindestbestellmengen?', a: 'Nein. Wir produzieren ab 1 Stück, perfekt für Einzelbestellungen oder personalisierte Produkte.' },
   { q: 'Liefert ihr an Kunden in ganz Deutschland?', a: 'Ja. Wir drucken für Shops aus ganz Deutschland, Österreich und der Schweiz und versenden per DHL direkt an deine Kunden, egal ob in Hamburg, München, Wien oder Zürich. Wo dein Shop sitzt, spielt keine Rolle.' },
-  { q: 'Wie schnell sind die Lieferzeiten?', a: 'Jede Bestellung wird in 1 bis 3 Werktagen produziert und versendet, auch im Q4. Bei deinen Kunden kommt sie in der Regel 3 bis 5 Werktage nach der Bestellung an, in Deutschland genauso wie in Österreich, der Schweiz und der übrigen EU.' },
-  { q: 'Was kostet der Versand an meine Kunden?', a: 'Pro Bestellung: Deutschland 5,00 € netto (5,95 € brutto), Österreich 7,00 € netto (8,33 € brutto), übrige EU 7,50 € netto (8,93 € brutto), Schweiz 9,00 € netto (10,71 € brutto). Je 3 Produkte in einer Bestellung kommen 1,50 € netto (1,79 € brutto) dazu. Versand per DHL mit Tracking, neutral in deinem Namen.' },
-  { q: 'Wo wird produziert und wohin versendet ihr?', a: 'Produziert wird ausschließlich in unserer eigenen Werkstatt in Oberhausen, also in Deutschland, auf eigenen Epson-Maschinen und Heißpressen. Keine Weitergabe an wechselnde Partnerdruckereien im Ausland. Versendet wird deutschlandweit per DHL, neutral im Namen deines Shops. Österreich, Schweiz und die übrige EU sind ebenfalls möglich.' },
+  { q: 'Wie schnell sind die Lieferzeiten?', a: 'Jede Bestellung wird in 1 bis 3 Werktagen produziert und versendet, auch im Q4. Bei deinen Kunden kommt sie in der Regel 3 bis 5 Werktage nach der Bestellung an, in Deutschland genauso wie in Österreich, der Schweiz und den übrigen Lieferländern.' },
+  { q: 'Was kostet der Versand an meine Kunden?', a: `Pro Bestellung: Deutschland 5,00 € netto (5,95 € brutto), Österreich 7,00 € netto (8,33 € brutto), übrige Lieferländer (${uebrigeLaender.join(', ')}) 7,50 € netto (8,93 € brutto), Schweiz 9,00 € netto (10,71 € brutto). Je 3 Produkte in einer Bestellung kommen 1,50 € netto (1,79 € brutto) dazu. Versand per DHL mit Tracking, neutral in deinem Namen.` },
+  { q: 'Wo wird produziert und wohin versendet ihr?', a: `Produziert wird ausschließlich in unserer eigenen Werkstatt in Oberhausen, also in Deutschland, auf eigenen Epson-Maschinen und Heißpressen. Keine Weitergabe an wechselnde Partnerdruckereien im Ausland. Versendet wird deutschlandweit per DHL, neutral im Namen deines Shops. Außerdem liefern wir nach Österreich, in die Schweiz, in die Niederlande, nach Belgien, Luxemburg, Frankreich, Italien, Spanien, Polen, Dänemark und Tschechien.` },
   { q: 'Wie läuft die Anbindung meines Shops?', a: 'Du bekommst Zugang zu deinem Kundenportal. Dort verbindest du deinen Shopify-Store per App oder Bestellimport. Auf Wunsch richten wir alles gemeinsam ein.' },
   { q: 'Was kostet die Shopify-App westernprint POD?', a: 'Die Installation der App „westernprint POD“ ist kostenlos, eine App-Gebühr gibt es nicht. Pro Bestellung zahlst du Produktion und Versand.' },
   { q: 'Wie läuft die Abrechnung?', a: 'Wöchentliche Abrechnung über alle produzierten Artikel zu festen Preisen pro Produkt. Transparent und planbar, ohne Einrichtungsgebühr.' },
   { q: 'Kann ich eigene Verpackung oder Beilagen nutzen?', a: 'Ja. Neutraler Versand ist Standard, eigene Flyer, Hangtags oder Innenlabel setzen wir auf Anfrage um.' },
 ];
 const appLd = { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'westernprint POD', applicationCategory: 'BusinessApplication', operatingSystem: 'Shopify', url: 'https://apps.shopify.com/pod-westerprint', applicationSubCategory: 'Print-on-Demand', offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR', description: 'Kostenlose Installation, keine App-Gebühr. Pro Bestellung fallen Produktion und Versand an.' }, publisher: { '@id': 'https://westernprint.de/#organization' }, description: 'Print-on-Demand und Fulfillment made in Germany: Textil wählen, Design per Live-Mockup platzieren, Produkte landen automatisch im Shop. Bestellungen drucken und versenden wir per DHL mit Tracking zurück in Shopify.' };
-const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'Print-on-Demand Fulfillment für Shopify-Shops in Deutschland, Österreich und der Schweiz', serviceType: 'Print-on-Demand Fulfillment', provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: [{ '@type': 'Country', name: 'Deutschland' }, { '@type': 'Country', name: 'Österreich' }, { '@type': 'Country', name: 'Schweiz' }, { '@type': 'Place', name: 'Europäische Union' }], url: 'https://westernprint.de/print-on-demand', offers: { '@type': 'Offer', description: 'Feste Preise pro Produkt inklusive Druck, keine Einrichtungsgebühr, keine Mindestmenge' } };
+const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'Print-on-Demand Fulfillment für Shopify-Shops in Deutschland, Österreich und der Schweiz', serviceType: 'Print-on-Demand Fulfillment', provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: ['Deutschland', 'Österreich', 'Schweiz', ...uebrigeLaender].map((name) => ({ '@type': 'Country', name })), url: 'https://westernprint.de/print-on-demand', offers: { '@type': 'Offer', description: 'Feste Preise pro Produkt inklusive Druck, keine Einrichtungsgebühr, keine Mindestmenge' } };
 const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 ---
 <Base title="Print-on-Demand Anbieter aus Deutschland: Fulfillment für Shopify" description="Print-on-Demand für Shopify-Shops in ganz Deutschland, Österreich und der Schweiz. Wir drucken in eigener Produktion in Oberhausen und versenden neutral in deinem Namen. Ab 1 Stück, Produktion in 1-3 Werktagen, kostenlose App, feste Preise." jsonLd={[svcLd, appLd, faqLd]}>
@@ -187,7 +190,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
         <div class="ship-row ship-head"><span>Zielland</span><span>Lieferzeit</span><span>Versand pro Bestellung</span></div>
         <div class="ship-row"><span>Deutschland</span><span>3 bis 5 Werktage</span><span>5,00 &euro; netto <small class="gross">(5,95 &euro; brutto)</small></span></div>
         <div class="ship-row"><span>&Ouml;sterreich</span><span>3 bis 5 Werktage</span><span>7,00 &euro; netto <small class="gross">(8,33 &euro; brutto)</small></span></div>
-        <div class="ship-row"><span>&Uuml;brige EU</span><span>3 bis 5 Werktage</span><span>7,50 &euro; netto <small class="gross">(8,93 &euro; brutto)</small></span></div>
+        <div class="ship-row"><span>&Uuml;brige Lieferl&auml;nder <small class="ship-countries">{uebrigeLaender.join(', ')}</small></span><span>3 bis 5 Werktage</span><span>7,50 &euro; netto <small class="gross">(8,93 &euro; brutto)</small></span></div>
         <div class="ship-row"><span>Schweiz</span><span>3 bis 5 Werktage</span><span>9,00 &euro; netto <small class="gross">(10,71 &euro; brutto)</small></span></div>
       </div>
       <p class="muted small ship-note">Je 3 Produkte in einer Bestellung kommen 1,50 &euro; netto (1,79 &euro; brutto) dazu. Die Lieferzeit gilt ab Bestellung und enthält die Produktion von 1 bis 3 Werktagen.</p>
@@ -217,7 +220,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
   .ship-row span:last-child { text-align: right; font-variant-numeric: tabular-nums; }
   .ship-head { background: var(--bg-2); color: var(--text-3); font-size: 13px; font-weight: 600; }
   .ship-note { margin-top: 14px; }
-  .ship-row .gross { display: block; font-size: 13px; color: var(--text-3); }
+  .ship-row .gross, .ship-row .ship-countries { display: block; font-size: 13px; color: var(--text-3); }
   @media (max-width: 600px) { .ship-row { grid-template-columns: 1fr 1fr; } .ship-row span:nth-child(2) { order: 3; grid-column: 1 / -1; color: var(--text-3); font-size: 13.5px; } }
   .app-section { position: relative; overflow: hidden; }
   .app-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(60% 80% at 85% 50%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%); pointer-events: none; }

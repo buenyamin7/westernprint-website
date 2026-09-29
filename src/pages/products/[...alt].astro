@@ -1,0 +1,18 @@
+---
+// Alte Shopify-Produkt-URLs, deren Produkt nicht mehr im Katalog ist (z. B. /products/puffer, /products/chaser).
+// Quelle der alten Handles: src/data/products.shopify-backup.json. Ohne diesen Stub liefern sie 404.
+// Aktuelle Produkte leitet products/[handle].astro auf /shop/<handle> weiter. Hier landen nur die übrigen, Ziel ist /shop.
+// Kommt ein Handle zurück in den Katalog, fällt er hier automatisch heraus und führt wieder auf seine Produktseite.
+import Redirect from '../../components/Redirect.astro';
+import backup from '../../data/products.shopify-backup.json';
+import { getProducts } from '../../lib/shopify';
+export async function getStaticPaths() {
+  const current = new Set((await getProducts()).map((p) => p.handle));
+  return (backup as { handle: string }[])
+    .map((p) => p.handle)
+    .filter((handle) => !current.has(handle))
+    .map((alt) => ({ params: { alt }, props: { to: '/shop' } }));
+}
+const { to } = Astro.props;
+---
+<Redirect to={to} />

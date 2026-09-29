@@ -41,7 +41,7 @@ export const rezensionen: Rezension[] = [
   },
   {
     name: 'Rohrreinigung RAK',
-    rolle: 'Arbeitskleidung mit Beflockung',
+    rolle: 'Arbeitskleidung mit Logo',
     autorTyp: 'Organization',
     datum: 'vor einem Jahr',
     text: 'Von Anfang an war die Kommunikation mit Herrn Dursun super. Ich habe ihm mitgeteilt, dass ich für mein Unternehmen nach passender Arbeitskleidung samt Beflockung suche, und war mit dem Ergebnis äußerst überrascht.',

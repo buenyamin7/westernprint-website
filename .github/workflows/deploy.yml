@@ -4,15 +4,22 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      indexnow_alle:
+        description: 'IndexNow: alle URLs melden (Sitemap, Weiterleitungen alter Shopify-URLs, bekannte gelöschte Alt-URLs)'
+        type: boolean
+        default: false
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# Kein Abbruch laufender Läufe (wie im Pages-Startworkflow von GitHub): Sonst bricht ein zweiter Push innerhalb von
+# Build, Deploy und 60 s Wartezeit den IndexNow-Job des ersten ab, und dessen Seiten werden nie gemeldet.
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -31,10 +38,17 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
+      # Sitemap und Weiterleitungs-Stubs der alten Shopify-URLs: scripts/indexnow.mjs meldet beides.
       - uses: actions/upload-artifact@v4
         with:
-          name: sitemap
-          path: dist/sitemap-0.xml
+          name: indexnow
+          path: |
+            dist/sitemap-0.xml
+            dist/cart.html
+            dist/pages/
+            dist/products/
+            dist/collections/
+            dist/policies/
 
   deploy:
     needs: build
@@ -59,10 +73,13 @@ jobs:
           node-version: 22
       - uses: actions/download-artifact@v4
         with:
-          name: sitemap
+          name: indexnow
+          path: dist
       - name: Geänderte Seiten an Bing melden (IndexNow)
         env:
           BEFORE: ${{ github.event.before }}
+          # Manueller Start mit Haken bei indexnow_alle: alles melden. Bei einem Push ist inputs leer.
+          INDEXNOW_ALL: ${{ inputs.indexnow_alle && '1' || '' }}
         run: |
           sleep 60
           # Alle Commits dieses Pushs (before..HEAD). Ohne gültiges before (erster Push, manueller Start) nur der letzte Commit.
@@ -71,5 +88,5 @@ jobs:
           else
             RANGE="HEAD~1"
           fi
-          node scripts/indexnow.mjs sitemap-0.xml $(git diff --name-only "$RANGE" HEAD 2>/dev/null)
+          node scripts/indexnow.mjs dist/sitemap-0.xml $(git diff --name-only "$RANGE" HEAD 2>/dev/null)
         continue-on-error: true

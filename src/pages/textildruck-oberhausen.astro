@@ -6,10 +6,27 @@ import ContactForm from '../components/ContactForm.astro';
 import Faq from '../components/Faq.astro';
 import { site, oeffnungszeiten } from '../data/site';
 import { bewertungen } from '../data/bewertungen';
+import { STAND as PREIS_STAND, tabellen } from '../data/preise';
 
-// Preisbeispiele stammen von /was-kostet-textildruck (netto zzgl. MwSt.). Bei Preisänderungen dort mit anpassen.
-// Brutto daneben = netto x 1,19, kaufmännisch auf Cent gerundet.
-const PREIS_STAND = '21.09.2026';
+// Preisbeispiele kommen aus src/data/preise.ts (netto zzgl. MwSt.), wie auf /was-kostet-textildruck.
+// Brutto daneben = netto x 1,19, kaufmännisch auf Cent gerundet. Fehlt eine Staffel, bricht der Build ab.
+const basic = tabellen.find((tb) => tb.t.startsWith('T-Shirt Basic'));
+if (!basic) throw new Error('T-Shirt Basic fehlt in preise.ts');
+/** 'T-Shirt Basic (Stedman Classic-T, 155 g)' -> 'Stedman Classic-T' */
+const basicModell = basic.t.match(/\(([^,]+),/)?.[1] ?? '';
+const nettoPreis = (menge: number) => {
+  const z = basic.zeilen.find(([m]) => parseInt(m, 10) === menge);
+  if (!z) throw new Error(`Keine Staffel ${menge} Stück für ${basic.t}`);
+  return z[1];
+};
+const bruttoPreis = (p: string) => {
+  const m = p.match(/(\d+),(\d{2})/);
+  if (!m) throw new Error(`Preis nicht lesbar: ${p}`);
+  const c = Math.round(((parseInt(m[1], 10) * 100 + parseInt(m[2], 10)) * 119) / 100);
+  return `${Math.floor(c / 100)},${String(c % 100).padStart(2, '0')} €`;
+};
+/** 1 -> '17,90 € netto (21,30 € brutto)' */
+const nb = (menge: number) => `${nettoPreis(menge)} netto (${bruttoPreis(nettoPreis(menge))} brutto)`;
 // Google-Bewertungen aus src/data/bewertungen.ts: 5 -> "5,0", "2026-09-28" -> "28.09.2026"
 const sterne = bewertungen.schnitt.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 const bewStand = bewertungen.stand.split('-').reverse().join('.');
@@ -32,9 +49,13 @@ const staedte = [
 
 const faqs = [
   { q: 'Kann ich meine Textilien in Oberhausen abholen?', a: `Ja. Abholung in der Schenkendorfstraße 45 in Oberhausen nach Absprache, ${oeffnungszeiten.text}. So sparst du dir die Versandkosten.` },
+  { q: 'Wann ist westernprint in Oberhausen erreichbar?', a: `westernprint in Oberhausen ist ${oeffnungszeiten.text} per WhatsApp und Telefon erreichbar, eine E-Mail kannst du jederzeit schicken. In dieser Zeit kannst du nach kurzer Absprache deine Bestellung in der Werkstatt in der ${site.address.street} abholen oder dich beraten lassen. Ein Angebot bekommst du an Werktagen innerhalb von 24 Stunden.` },
   { q: 'Druckt ihr auch für Vereine und Firmen aus Essen, Duisburg oder Bottrop?', a: 'Ja. Wir beliefern das ganze Ruhrgebiet und darüber hinaus. Angebot an Werktagen innerhalb von 24 Stunden, Produktion in 5 bis 7 Werktagen nach Freigabe, auf Wunsch Lieferung direkt zu dir.' },
-  { q: 'Kann ich eigene Textilien zum Bedrucken vorbeibringen?', a: 'Ja. Bring sie vorbei oder schick sie uns. Wir prüfen vorher, ob das Material für DTF-Druck geeignet ist.' },
+  { q: 'Kann ich eigene Textilien zum Bedrucken vorbeibringen?', a: 'Ja. Wir bedrucken auch Textilien, die du in Oberhausen vorbeibringst oder uns schickst. Vorher prüfen wir, ob das Material für DTF-Druck geeignet ist. Du zahlst dann nur den Druck.' },
   { q: 'Wie schnell geht ein Einzelstück?', a: 'Einzelstücke sind in der Regel in 1 bis 3 Werktagen fertig. Wenn es eilig ist, sag uns den Termin, Express ist oft möglich.' },
+  { q: 'Was kostet ein bedrucktes T-Shirt in Oberhausen?', a: `Ein T-Shirt Basic (${basicModell}) mit einem Druck kostet bei westernprint in Oberhausen einzeln ${nb(1)}. Ab 10 Stück gelten Staffelpreise, bei 10 Stück ${nb(10)} pro Stück, bei 50 Stück ${nb(50)}. Einrichtungskosten fallen nicht an. Alle Preisbeispiele stehen auf der Seite „Was kostet Textildruck?“ (Stand ${PREIS_STAND}).` },
+  // Lieferzeit und Versandkosten wie auf /versand (Inhaber, 29.09.2026). Express hier bewusst nicht erwähnen.
+  { q: 'Wie lange dauert die Lieferung aus Oberhausen?', a: 'Von der Bestellung bis zur Lieferung vergehen bei westernprint 3 bis 5 Werktage. Das gilt für Einzelstücke, Shop-Bestellungen und Muster, innerhalb Deutschlands wie ins Ausland. Serien sind 5 bis 7 Werktage nach Freigabe des Korrekturabzugs fertig, der Liefertermin steht im Angebot. Der Versand mit DHL kostet innerhalb Deutschlands 4,90 € und ins Ausland 9,90 €, ab 500 € Warenwert (brutto) ist er kostenlos.' },
 ];
 const ld = [
   { '@context': 'https://schema.org', '@type': 'Service', name: 'Textildruck Oberhausen', serviceType: 'Textildruck, DTF-Druck, DTG-Druck', provider: { '@id': `${site.url}/#organization` }, areaServed: ['Oberhausen', 'Essen', 'Duisburg', 'Mülheim an der Ruhr', 'Bottrop', 'Gelsenkirchen', 'Ruhrgebiet'], url: `${site.url}/textildruck-oberhausen` },
@@ -52,28 +73,31 @@ const ld = [
   />
 
   <section class="section-tight">
-    <div class="container intro">
-      <p class="answer reveal">
-        westernprint ist eine Textildruckerei in Oberhausen, {site.address.street} im Marienviertel.
-        westernprint gibt es seit 2021 und druckt in eigener Produktion, per DTF und DTG.
-        Bedruckt werden T-Shirts, Hoodies, Polos und Trikots, ab 1 Stück und ohne Einrichtungskosten.
-        Ein einzelnes T-Shirt Basic (Stedman Classic-T) mit einem Druck kostet 17,90 € netto (21,30 € brutto).
-        Bei 50 Stück sind es 9,40 € netto (11,19 € brutto) pro Stück (Stand {PREIS_STAND}).
-        Einzelstücke sind in der Regel in 1 bis 3 Werktagen fertig, Serien 5 bis 7 Werktage nach Freigabe.
-        Abholung und Beratung vor Ort gibt es {oeffnungszeiten.text}, nach kurzer Absprache.
-        Die Abholung in Oberhausen ist kostenlos.
-        Wer nicht abholen kann, bekommt die Ware per DHL, deutschlandweit.
-        Ein Angebot schickt westernprint an Werktagen innerhalb von 24 Stunden.
-        Vor dem Druck gibt es einen Korrekturabzug zur Freigabe.
-        westernprint hat <a class="accent" href="/bewertungen">{sterne} von 5 Sternen bei {bewertungen.anzahl} Google-Bewertungen</a> (Stand {bewStand}).
-      </p>
-      <ul class="facts reveal reveal-d1">
-        <li><Icon name="map-pin" size={18} /> {site.address.street}, {site.address.zip} {site.address.city}</li>
-        <li><Icon name="clock" size={18} /> {oeffnungszeiten.kurz}</li>
-        <li><Icon name="storefront" size={18} /> Abholung vor Ort kostenlos</li>
-        <li><Icon name="truck" size={18} /> Versand mit DHL, deutschlandweit</li>
-        <li><Icon name="star" size={18} /> {sterne} von 5 bei {bewertungen.anzahl} Google-Bewertungen</li>
-      </ul>
+    <div class="container">
+      <h2 class="intro-title reveal">Was bietet die Textildruckerei westernprint in Oberhausen?</h2>
+      <div class="intro">
+        <p class="answer reveal">
+          westernprint ist eine Textildruckerei in Oberhausen, {site.address.street} im Marienviertel.
+          westernprint gibt es seit 2021 und druckt in eigener Produktion, per DTF und DTG.
+          Bedruckt werden T-Shirts, Hoodies, Polos und Trikots, ab 1 Stück und ohne Einrichtungskosten.
+          Ein einzelnes T-Shirt Basic ({basicModell}) mit einem Druck kostet {nb(1)}.
+          Bei 50 Stück sind es {nb(50)} pro Stück (Stand {PREIS_STAND}).
+          Einzelstücke sind in der Regel in 1 bis 3 Werktagen fertig, Serien 5 bis 7 Werktage nach Freigabe.
+          Abholung und Beratung vor Ort gibt es {oeffnungszeiten.text}, nach kurzer Absprache.
+          Die Abholung in Oberhausen ist kostenlos.
+          Wer nicht abholen kann, bekommt die Ware per DHL, deutschlandweit.
+          Ein Angebot schickt westernprint an Werktagen innerhalb von 24 Stunden.
+          Vor dem Druck gibt es einen Korrekturabzug zur Freigabe.
+          westernprint hat <a class="accent" href="/bewertungen">{sterne} von 5 Sternen bei {bewertungen.anzahl} Google-Bewertungen</a> (Stand {bewStand}).
+        </p>
+        <ul class="facts reveal reveal-d1">
+          <li><Icon name="map-pin" size={18} /> {site.address.street}, {site.address.zip} {site.address.city}</li>
+          <li><Icon name="clock" size={18} /> {oeffnungszeiten.kurz}</li>
+          <li><Icon name="storefront" size={18} /> Abholung vor Ort kostenlos</li>
+          <li><Icon name="truck" size={18} /> Versand mit DHL, deutschlandweit</li>
+          <li><Icon name="star" size={18} /> {sterne} von 5 bei {bewertungen.anzahl} Google-Bewertungen</li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -139,6 +163,7 @@ const ld = [
 </Base>
 
 <style>
+  .intro-title { max-width: 26ch; margin-bottom: clamp(20px, 3vw, 32px); }
   .intro { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: center; }
   .answer { max-width: 68ch; font-size: 1.12rem; color: var(--text); }
   .facts { display: grid; gap: 10px; }

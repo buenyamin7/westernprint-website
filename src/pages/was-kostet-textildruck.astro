@@ -249,6 +249,9 @@ const ld = [
     cta={{ label: 'Angebot in 24h', href: '/kontakt' }}
     cta2={{ label: 'Per WhatsApp', href: site.whatsapp }}
   />
+  <div class="container">
+    <p class="byline">Von <a href="/ueber-uns#inhaber" rel="author">Bünyamin Dursun</a>, Gründer und Geschäftsführer von westernprint</p>
+  </div>
 
   <section class="section-tight kurz">
     <div class="container">
@@ -339,6 +342,9 @@ const ld = [
 </Base>
 
 <style>
+  .byline { padding-top: 20px; font-size: 14px; color: var(--text-3); }
+  .byline a { color: var(--text-2); text-decoration: underline; text-underline-offset: 3px; }
+  .byline a:hover { color: var(--accent); }
   .kurz { border-bottom: 1px solid var(--line); }
   .kurz-wrap { display: grid; gap: 18px; max-width: 76ch; }
   .kurz-text { color: var(--text-2); font-size: 1.1rem; }

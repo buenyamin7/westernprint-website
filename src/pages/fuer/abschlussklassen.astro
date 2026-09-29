@@ -12,18 +12,20 @@ const z = zielgruppen.find((x) => x.slug === 'abschlussklassen')!;
 const year = new Date().getMonth() >= 6 ? new Date().getFullYear() + 1 : new Date().getFullYear();
 
 // Klassenpreise: ab 20 Stück, inkl. Druck vorne + hinten (Namensliste), inkl. MwSt.
-// proof = Social Proof auf der Karte. Zahlen bitte mit Bünyamin abgleichen, bevor sie skaliert werden.
+// proof = Merkmal auf der Karte, nur belegbare Eigenschaften (Grammatur, Material, Verarbeitung laut products.json oder Herstellerangabe).
+// Keine Druckzahlen und keine fremden Marken, solange der Inhaber sie nicht mit Quelle und Stand bestätigt hat.
+// Build-Your-Brand-Modelle stehen nicht in products.json: keine Material- oder Verarbeitungsangaben über die spec-Zeile hinaus.
 const oversize = [
   { handle: null, name: 'Oversized Hoody', brand: 'Build Your Brand', tag: 'Oversize-Favorit', spec: '300 g/m², Drop Shoulder, gekreuzte Kapuze, bis 5XL', price: '38,90', img: '/img/products/byb-by199-black.webp', proof: 'Neu im Sortiment' },
   { handle: null, name: 'Ultra Heavy Box Hoody', brand: 'Build Your Brand', tag: 'Boxy Fit', spec: '460 g/m², 100 % Baumwolle, kastiger Schnitt', price: '46,90', img: '/img/products/byb-by162-black.webp', proof: 'Streetwear-Qualität' },
-  { handle: null, name: 'Ultra Heavy Oversized', brand: 'Build Your Brand', tag: 'Schwerster Hoodie', spec: '500 g/m², Oversize, 80 % Baumwolle', price: '52,90', img: '/img/products/byb-by268-black.webp', proof: 'Wie bei Peso und LFDY' },
-  { handle: 'cruiser-2-0', name: 'Cruiser 2.0', brand: 'Stanley/Stella', tag: 'Bio, Relaxed Fit', spec: '350 g/m², Bio-Baumwolle, 43 Farben', price: '39,90', img: '/img/products/cruiser-2-0-black-flat.webp', proof: 'Über 3.000× gedruckt' },
+  { handle: null, name: 'Ultra Heavy Oversized', brand: 'Build Your Brand', tag: 'Schwerster Hoodie', spec: '500 g/m², Oversize, 80 % Baumwolle', price: '52,90', img: '/img/products/byb-by268-black.webp', proof: 'Heavyweight 500 g/m²' },
+  { handle: 'cruiser-2-0', name: 'Cruiser 2.0', brand: 'Stanley/Stella', tag: 'Bio, Relaxed Fit', spec: '350 g/m², Bio-Baumwolle, 43 Farben', price: '39,90', img: '/img/products/cruiser-2-0-black-flat.webp', proof: 'Doppellagige Kapuze' },
 ];
 const classic = [
-  { handle: 'classic-hoodie', name: 'Classic Hoodie', brand: 'Stedman', tag: 'Beliebteste Wahl', spec: '280 g/m², Kängurutasche, 11 Farben', price: '28,90', img: '/img/products/classic-hoodie-black-opal.webp', proof: 'Über 8.000× gedruckt' },
+  { handle: 'classic-hoodie', name: 'Classic Hoodie', brand: 'Stedman', tag: 'Beliebteste Wahl', spec: '280 g/m², Kängurutasche, 11 Farben', price: '28,90', img: '/img/products/classic-hoodie-black-opal.webp', proof: 'Größen XS bis 5XL' },
   { handle: null, name: 'Heavy Hoody', brand: 'Build Your Brand', tag: 'Regular Fit, schwer', spec: '300 g/m², Regular Fit, bis 5XL', price: '32,90', img: '/img/products/byb-by011-black.webp', proof: 'Neu im Sortiment' },
-  { handle: 'classic-t', name: 'Classic-T', brand: 'Stedman', tag: 'Günstigster Einstieg', spec: '155 g/m², 34 Farben, Damen und Unisex', price: '16,90', img: '/img/products/classic-t-black-opal.webp', proof: 'Über 20.000× gedruckt' },
-  { handle: 'creator-2-0', name: 'Creator 2.0', brand: 'Stanley/Stella', tag: 'Bio-Shirt', spec: '180 g/m², Bio-Baumwolle, 46 Farben', price: '20,90', img: '/img/products/creator-2-0-black-flat.webp', proof: 'Über 12.000× gedruckt' },
+  { handle: 'classic-t', name: 'Classic-T', brand: 'Stedman', tag: 'Günstigster Einstieg', spec: '155 g/m², 34 Farben, Damen und Unisex', price: '16,90', img: '/img/products/classic-t-black-opal.webp', proof: 'Ohne Seitennähte' },
+  { handle: 'creator-2-0', name: 'Creator 2.0', brand: 'Stanley/Stella', tag: 'Bio-Shirt', spec: '180 g/m², Bio-Baumwolle, 46 Farben', price: '20,90', img: '/img/products/creator-2-0-black-flat.webp', proof: 'GOTS-zertifiziert' },
 ];
 
 const styles = [
@@ -41,7 +43,7 @@ const faqs = [
   { q: 'Kostet das Design extra?', a: 'Nein. Schriftzug, Motto, Namensliste und Korrekturabzug sind inklusive. Ihr bekommt eine Vorschau als PDF und wir ändern so lange, bis alles passt. Erst dann wird gedruckt.' },
   { q: 'Wie lange dauert die Lieferung?', a: 'Nach Freigabe des Korrekturabzugs in der Regel 5 bis 7 Werktage. Wenn die Stufe spät dran ist, geht eine Express-Produktion in 2 bis 3 Werktagen, bitte früh anfragen. Abholung in Oberhausen ist kostenlos.' },
   { q: 'Können wir Größen und Farben mischen?', a: 'Ja, ohne Aufpreis. Ein Ansprechpartner sammelt die Liste, wir liefern alles sortiert und beschriftet in einem Paket.' },
-  { q: 'Wie bezahlen wir als Klasse?', a: 'Nach Freigabe bekommt ihr eine Rechnung mit Zahlungslink, die verfügbaren Zahlungsarten werden beim Bezahlen angezeigt. Eine Person zahlt gesammelt, wir brauchen keine Einzelzahlungen.' },
+  { q: 'Wie bezahlen wir als Klasse?', a: 'Eine Person zahlt gesammelt für die ganze Stufe, Einzelzahlungen braucht es nicht. Nach der Freigabe kommt ein Zahlungslink über den Zahlungsdienstleister Mollie. Die verfügbaren Zahlungsarten seht ihr beim Bezahlen.' },
   { q: 'Hält der Druck?', a: 'Wir drucken per DTF, deckend auf dunklen Stoffen, dehnbar und waschfest. Das Verfahren nutzen wir auch für Vereine und Firmen, die ihre Sachen täglich waschen.' },
 ];
 
@@ -78,7 +80,7 @@ const ld = [
             <ul class="offer-facts">
               <li><Icon name="check" weight="bold" size={14} /> Oversize-Hoodies bis 500 g/m²</li>
               <li><Icon name="check" weight="bold" size={14} /> Angebot in 24 Stunden</li>
-              <li><Icon name="check" weight="bold" size={14} /> Zahlung gesammelt per Rechnung</li>
+              <li><Icon name="check" weight="bold" size={14} /> Eine Zahlung für die ganze Stufe</li>
             </ul>
           </div>
         </div>
@@ -143,7 +145,7 @@ const ld = [
               <span class="pbrand">{p.brand}</span>
               <strong>{p.name}</strong>
               <span class="pspec">{p.spec}</span>
-              <span class="proof"><Icon name="fire" weight="fill" size={13} /> {p.proof}</span>
+              <span class="proof"><Icon name="seal-check" weight="fill" size={13} /> {p.proof}</span>
               <span class="price">ab {p.price} € <small>inkl. Druck und MwSt.</small></span>
             </div>
           </a>
@@ -159,7 +161,7 @@ const ld = [
               <span class="pbrand">{p.brand}</span>
               <strong>{p.name}</strong>
               <span class="pspec">{p.spec}</span>
-              <span class="proof"><Icon name="fire" weight="fill" size={13} /> {p.proof}</span>
+              <span class="proof"><Icon name="seal-check" weight="fill" size={13} /> {p.proof}</span>
               <span class="price">ab {p.price} € <small>inkl. Druck und MwSt.</small></span>
             </div>
           </a>
@@ -199,7 +201,7 @@ const ld = [
         <p class="muted">Kein dünner Werbestoff, kein Druck, der nach drei Wäschen rissig wird. Wir drucken Abschlussklamotten mit demselben Verfahren wie Arbeitskleidung für Betriebe, die täglich gewaschen wird.</p>
         <ul class="quality-list">
           <li><span class="icon-box"><Icon name="drop" size={20} /></span><div><strong>DTF-Druck, waschfest</strong><span>Deckend auf schwarz, dehnbar, feine Linien und Fotos möglich.</span></div></li>
-          <li><span class="icon-box"><Icon name="t-shirt" size={20} /></span><div><strong>Stoffe bis 350 g/m²</strong><span>Stedman und Stanley/Stella, auf Wunsch Bio-Baumwolle mit GOTS-Zertifikat.</span></div></li>
+          <li><span class="icon-box"><Icon name="t-shirt" size={20} /></span><div><strong>Stoffe von 155 bis 500 g/m²</strong><span>Stedman, Stanley/Stella und Build Your Brand, auf Wunsch Bio-Baumwolle mit GOTS-Zertifikat.</span></div></li>
           <li><span class="icon-box"><Icon name="factory" size={20} /></span><div><strong>Gedruckt in Oberhausen</strong><span>Eigene Epson-Maschinen, jedes Teil wird vor dem Verpacken geprüft.</span></div></li>
           <li><span class="icon-box"><Icon name="chat-circle-dots" size={20} /></span><div><strong>Ein Ansprechpartner</strong><span>WhatsApp, Telefon, E-Mail. Wer anruft, spricht mit jemandem aus der Werkstatt.</span></div></li>
         </ul>
