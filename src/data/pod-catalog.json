@@ -19178,6 +19178,984 @@
  },
  {
   "supplier": "STANLEY_STELLA",
+  "style": "STSK181",
+  "name": "Mini Changer 2.0",
+  "category": "Sweatshirt",
+  "gender": "kids",
+  "colors": [
+   {
+    "id": "C002",
+    "name": "Black",
+    "hex": "#2A2B2D"
+   },
+   {
+    "id": "C727",
+    "name": "French Navy",
+    "hex": "#282D3C"
+   },
+   {
+    "id": "C250",
+    "name": "Heather Grey",
+    "hex": "#98979A"
+   },
+   {
+    "id": "C054",
+    "name": "Natural Raw",
+    "hex": "#E0D5C7"
+   },
+   {
+    "id": "C101",
+    "name": "Fraiche Peche",
+    "hex": "#E6BDA5"
+   },
+   {
+    "id": "C005",
+    "name": "Cotton Pink",
+    "hex": "#F2C1D1"
+   },
+   {
+    "id": "C360",
+    "name": "Pink Joy",
+    "hex": "#F29394"
+   },
+   {
+    "id": "C063",
+    "name": "Lavender",
+    "hex": "#B1AFC4"
+   },
+   {
+    "id": "C230",
+    "name": "Royal Blue",
+    "hex": "#005A92"
+   },
+   {
+    "id": "C149",
+    "name": "Blue Soul",
+    "hex": "#BACFEA"
+   },
+   {
+    "id": "C053",
+    "name": "Bright Blue",
+    "hex": "#5979A2"
+   },
+   {
+    "id": "C702",
+    "name": "Stargazer",
+    "hex": "#39505C"
+   },
+   {
+    "id": "C357",
+    "name": "Pool Blue",
+    "hex": "#87BFBB"
+   },
+   {
+    "id": "C036",
+    "name": "Glazed Green",
+    "hex": "#264445"
+   },
+   {
+    "id": "C060",
+    "name": "Teal Monstera",
+    "hex": "#649B9E"
+   },
+   {
+    "id": "C223",
+    "name": "Khaki",
+    "hex": "#545244"
+   },
+   {
+    "id": "C356",
+    "name": "Viva Yellow",
+    "hex": "#F3DF8F"
+   },
+   {
+    "id": "C730",
+    "name": "Heritage Brown",
+    "hex": "#995444"
+   },
+   {
+    "id": "C147",
+    "name": "Eco Heather",
+    "hex": "#F5F0E9"
+   }
+  ],
+  "sizes": [
+   "98/104",
+   "110/116",
+   "122/128",
+   "134/146",
+   "152/158"
+  ],
+  "ekMin": 8.92,
+  "ekMax": 11.47,
+  "unitPriceFrom": null,
+  "unitPriceTo": null,
+  "imageUrl": null,
+  "description": "1x1-Rippstrick an Halsausschnitt, Ärmelbündchen und unterem Saum\nNackenband aus Single Jersey\nHalbmond aus Oberstoff im Nacken mit 3 mm Doppelabsteppung\nEingesetzte Ärmel\nEinfachabsteppung am Halsausschnitt\nDoppelabsteppung an Armausschnitten, Ärmelbündchen und unterem Saum",
+  "modelImage": null,
+  "grammage": null,
+  "fit": null,
+  "composition": null,
+  "variants": [
+   {
+    "color": "C002",
+    "colorName": "Black",
+    "hex": "#2A2B2D",
+    "size": "3-4/98-104cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 552
+   },
+   {
+    "color": "C002",
+    "colorName": "Black",
+    "hex": "#2A2B2D",
+    "size": "5-6/110-116cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 787
+   },
+   {
+    "color": "C002",
+    "colorName": "Black",
+    "hex": "#2A2B2D",
+    "size": "7-8/122-128cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 941
+   },
+   {
+    "color": "C002",
+    "colorName": "Black",
+    "hex": "#2A2B2D",
+    "size": "9-11/134-146cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 986
+   },
+   {
+    "color": "C002",
+    "colorName": "Black",
+    "hex": "#2A2B2D",
+    "size": "12-13/152-158cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 609
+   },
+   {
+    "color": "C727",
+    "colorName": "French Navy",
+    "hex": "#282D3C",
+    "size": "3-4/98-104cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 583
+   },
+   {
+    "color": "C727",
+    "colorName": "French Navy",
+    "hex": "#282D3C",
+    "size": "5-6/110-116cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 684
+   },
+   {
+    "color": "C727",
+    "colorName": "French Navy",
+    "hex": "#282D3C",
+    "size": "7-8/122-128cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 326
+   },
+   {
+    "color": "C727",
+    "colorName": "French Navy",
+    "hex": "#282D3C",
+    "size": "9-11/134-146cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 218
+   },
+   {
+    "color": "C727",
+    "colorName": "French Navy",
+    "hex": "#282D3C",
+    "size": "12-13/152-158cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 226
+   },
+   {
+    "color": "C250",
+    "colorName": "Heather Grey",
+    "hex": "#98979A",
+    "size": "3-4/98-104cm",
+    "image": null,
+    "ek": 10.5,
+    "stock": 456
+   },
+   {
+    "color": "C250",
+    "colorName": "Heather Grey",
+    "hex": "#98979A",
+    "size": "5-6/110-116cm",
+    "image": null,
+    "ek": 10.5,
+    "stock": 804
+   },
+   {
+    "color": "C250",
+    "colorName": "Heather Grey",
+    "hex": "#98979A",
+    "size": "7-8/122-128cm",
+    "image": null,
+    "ek": 10.5,
+    "stock": 822
+   },
+   {
+    "color": "C250",
+    "colorName": "Heather Grey",
+    "hex": "#98979A",
+    "size": "9-11/134-146cm",
+    "image": null,
+    "ek": 10.5,
+    "stock": 591
+   },
+   {
+    "color": "C250",
+    "colorName": "Heather Grey",
+    "hex": "#98979A",
+    "size": "12-13/152-158cm",
+    "image": null,
+    "ek": 10.5,
+    "stock": 549
+   },
+   {
+    "color": "C054",
+    "colorName": "Natural Raw",
+    "hex": "#E0D5C7",
+    "size": "3-4/98-104cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 0
+   },
+   {
+    "color": "C054",
+    "colorName": "Natural Raw",
+    "hex": "#E0D5C7",
+    "size": "5-6/110-116cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 142
+   },
+   {
+    "color": "C054",
+    "colorName": "Natural Raw",
+    "hex": "#E0D5C7",
+    "size": "7-8/122-128cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 327
+   },
+   {
+    "color": "C054",
+    "colorName": "Natural Raw",
+    "hex": "#E0D5C7",
+    "size": "9-11/134-146cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 633
+   },
+   {
+    "color": "C054",
+    "colorName": "Natural Raw",
+    "hex": "#E0D5C7",
+    "size": "12-13/152-158cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 658
+   },
+   {
+    "color": "C101",
+    "colorName": "Fraiche Peche",
+    "hex": "#E6BDA5",
+    "size": "3-4/98-104cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 88
+   },
+   {
+    "color": "C101",
+    "colorName": "Fraiche Peche",
+    "hex": "#E6BDA5",
+    "size": "5-6/110-116cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 98
+   },
+   {
+    "color": "C101",
+    "colorName": "Fraiche Peche",
+    "hex": "#E6BDA5",
+    "size": "7-8/122-128cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 163
+   },
+   {
+    "color": "C101",
+    "colorName": "Fraiche Peche",
+    "hex": "#E6BDA5",
+    "size": "9-11/134-146cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 149
+   },
+   {
+    "color": "C101",
+    "colorName": "Fraiche Peche",
+    "hex": "#E6BDA5",
+    "size": "12-13/152-158cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 218
+   },
+   {
+    "color": "C005",
+    "colorName": "Cotton Pink",
+    "hex": "#F2C1D1",
+    "size": "3-4/98-104cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 217
+   },
+   {
+    "color": "C005",
+    "colorName": "Cotton Pink",
+    "hex": "#F2C1D1",
+    "size": "5-6/110-116cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 275
+   },
+   {
+    "color": "C005",
+    "colorName": "Cotton Pink",
+    "hex": "#F2C1D1",
+    "size": "7-8/122-128cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 251
+   },
+   {
+    "color": "C005",
+    "colorName": "Cotton Pink",
+    "hex": "#F2C1D1",
+    "size": "9-11/134-146cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 450
+   },
+   {
+    "color": "C005",
+    "colorName": "Cotton Pink",
+    "hex": "#F2C1D1",
+    "size": "12-13/152-158cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 354
+   },
+   {
+    "color": "C360",
+    "colorName": "Pink Joy",
+    "hex": "#F29394",
+    "size": "3-4/98-104cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 439
+   },
+   {
+    "color": "C360",
+    "colorName": "Pink Joy",
+    "hex": "#F29394",
+    "size": "5-6/110-116cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 499
+   },
+   {
+    "color": "C360",
+    "colorName": "Pink Joy",
+    "hex": "#F29394",
+    "size": "7-8/122-128cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 589
+   },
+   {
+    "color": "C360",
+    "colorName": "Pink Joy",
+    "hex": "#F29394",
+    "size": "9-11/134-146cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 606
+   },
+   {
+    "color": "C360",
+    "colorName": "Pink Joy",
+    "hex": "#F29394",
+    "size": "12-13/152-158cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 557
+   },
+   {
+    "color": "C063",
+    "colorName": "Lavender",
+    "hex": "#B1AFC4",
+    "size": "3-4/98-104cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 306
+   },
+   {
+    "color": "C063",
+    "colorName": "Lavender",
+    "hex": "#B1AFC4",
+    "size": "5-6/110-116cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 424
+   },
+   {
+    "color": "C063",
+    "colorName": "Lavender",
+    "hex": "#B1AFC4",
+    "size": "7-8/122-128cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 533
+   },
+   {
+    "color": "C063",
+    "colorName": "Lavender",
+    "hex": "#B1AFC4",
+    "size": "9-11/134-146cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 700
+   },
+   {
+    "color": "C063",
+    "colorName": "Lavender",
+    "hex": "#B1AFC4",
+    "size": "12-13/152-158cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 536
+   },
+   {
+    "color": "C230",
+    "colorName": "Royal Blue",
+    "hex": "#005A92",
+    "size": "3-4/98-104cm",
+    "image": null,
+    "ek": 8.92,
+    "stock": 299
+   },
+   {
+    "color": "C230",
+    "colorName": "Royal Blue",
+    "hex": "#005A92",
+    "size": "5-6/110-116cm",
+    "image": null,
+    "ek": 8.92,
+    "stock": 76
+   },
+   {
+    "color": "C230",
+    "colorName": "Royal Blue",
+    "hex": "#005A92",
+    "size": "7-8/122-128cm",
+    "image": null,
+    "ek": 8.92,
+    "stock": 203
+   },
+   {
+    "color": "C230",
+    "colorName": "Royal Blue",
+    "hex": "#005A92",
+    "size": "9-11/134-146cm",
+    "image": null,
+    "ek": 8.92,
+    "stock": 135
+   },
+   {
+    "color": "C230",
+    "colorName": "Royal Blue",
+    "hex": "#005A92",
+    "size": "12-13/152-158cm",
+    "image": null,
+    "ek": 8.92,
+    "stock": 46
+   },
+   {
+    "color": "C149",
+    "colorName": "Blue Soul",
+    "hex": "#BACFEA",
+    "size": "3-4/98-104cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 214
+   },
+   {
+    "color": "C149",
+    "colorName": "Blue Soul",
+    "hex": "#BACFEA",
+    "size": "5-6/110-116cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 311
+   },
+   {
+    "color": "C149",
+    "colorName": "Blue Soul",
+    "hex": "#BACFEA",
+    "size": "7-8/122-128cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 338
+   },
+   {
+    "color": "C149",
+    "colorName": "Blue Soul",
+    "hex": "#BACFEA",
+    "size": "9-11/134-146cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 421
+   },
+   {
+    "color": "C149",
+    "colorName": "Blue Soul",
+    "hex": "#BACFEA",
+    "size": "12-13/152-158cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 348
+   },
+   {
+    "color": "C053",
+    "colorName": "Bright Blue",
+    "hex": "#5979A2",
+    "size": "3-4/98-104cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 55
+   },
+   {
+    "color": "C053",
+    "colorName": "Bright Blue",
+    "hex": "#5979A2",
+    "size": "5-6/110-116cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 17
+   },
+   {
+    "color": "C053",
+    "colorName": "Bright Blue",
+    "hex": "#5979A2",
+    "size": "7-8/122-128cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 0
+   },
+   {
+    "color": "C053",
+    "colorName": "Bright Blue",
+    "hex": "#5979A2",
+    "size": "9-11/134-146cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 104
+   },
+   {
+    "color": "C053",
+    "colorName": "Bright Blue",
+    "hex": "#5979A2",
+    "size": "12-13/152-158cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 109
+   },
+   {
+    "color": "C702",
+    "colorName": "Stargazer",
+    "hex": "#39505C",
+    "size": "3-4/98-104cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 384
+   },
+   {
+    "color": "C702",
+    "colorName": "Stargazer",
+    "hex": "#39505C",
+    "size": "5-6/110-116cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 428
+   },
+   {
+    "color": "C702",
+    "colorName": "Stargazer",
+    "hex": "#39505C",
+    "size": "7-8/122-128cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 572
+   },
+   {
+    "color": "C702",
+    "colorName": "Stargazer",
+    "hex": "#39505C",
+    "size": "9-11/134-146cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 514
+   },
+   {
+    "color": "C702",
+    "colorName": "Stargazer",
+    "hex": "#39505C",
+    "size": "12-13/152-158cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 397
+   },
+   {
+    "color": "C357",
+    "colorName": "Pool Blue",
+    "hex": "#87BFBB",
+    "size": "3-4/98-104cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 539
+   },
+   {
+    "color": "C357",
+    "colorName": "Pool Blue",
+    "hex": "#87BFBB",
+    "size": "5-6/110-116cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 601
+   },
+   {
+    "color": "C357",
+    "colorName": "Pool Blue",
+    "hex": "#87BFBB",
+    "size": "7-8/122-128cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 591
+   },
+   {
+    "color": "C357",
+    "colorName": "Pool Blue",
+    "hex": "#87BFBB",
+    "size": "9-11/134-146cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 635
+   },
+   {
+    "color": "C357",
+    "colorName": "Pool Blue",
+    "hex": "#87BFBB",
+    "size": "12-13/152-158cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 571
+   },
+   {
+    "color": "C036",
+    "colorName": "Glazed Green",
+    "hex": "#264445",
+    "size": "3-4/98-104cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 320
+   },
+   {
+    "color": "C036",
+    "colorName": "Glazed Green",
+    "hex": "#264445",
+    "size": "5-6/110-116cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 411
+   },
+   {
+    "color": "C036",
+    "colorName": "Glazed Green",
+    "hex": "#264445",
+    "size": "7-8/122-128cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 527
+   },
+   {
+    "color": "C036",
+    "colorName": "Glazed Green",
+    "hex": "#264445",
+    "size": "9-11/134-146cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 628
+   },
+   {
+    "color": "C036",
+    "colorName": "Glazed Green",
+    "hex": "#264445",
+    "size": "12-13/152-158cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 587
+   },
+   {
+    "color": "C060",
+    "colorName": "Teal Monstera",
+    "hex": "#649B9E",
+    "size": "3-4/98-104cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 460
+   },
+   {
+    "color": "C060",
+    "colorName": "Teal Monstera",
+    "hex": "#649B9E",
+    "size": "5-6/110-116cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 524
+   },
+   {
+    "color": "C060",
+    "colorName": "Teal Monstera",
+    "hex": "#649B9E",
+    "size": "7-8/122-128cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 624
+   },
+   {
+    "color": "C060",
+    "colorName": "Teal Monstera",
+    "hex": "#649B9E",
+    "size": "9-11/134-146cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 716
+   },
+   {
+    "color": "C060",
+    "colorName": "Teal Monstera",
+    "hex": "#649B9E",
+    "size": "12-13/152-158cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 523
+   },
+   {
+    "color": "C223",
+    "colorName": "Khaki",
+    "hex": "#545244",
+    "size": "3-4/98-104cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 46
+   },
+   {
+    "color": "C223",
+    "colorName": "Khaki",
+    "hex": "#545244",
+    "size": "5-6/110-116cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 69
+   },
+   {
+    "color": "C223",
+    "colorName": "Khaki",
+    "hex": "#545244",
+    "size": "7-8/122-128cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 58
+   },
+   {
+    "color": "C223",
+    "colorName": "Khaki",
+    "hex": "#545244",
+    "size": "9-11/134-146cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 120
+   },
+   {
+    "color": "C223",
+    "colorName": "Khaki",
+    "hex": "#545244",
+    "size": "12-13/152-158cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 30
+   },
+   {
+    "color": "C356",
+    "colorName": "Viva Yellow",
+    "hex": "#F3DF8F",
+    "size": "3-4/98-104cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 197
+   },
+   {
+    "color": "C356",
+    "colorName": "Viva Yellow",
+    "hex": "#F3DF8F",
+    "size": "5-6/110-116cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 321
+   },
+   {
+    "color": "C356",
+    "colorName": "Viva Yellow",
+    "hex": "#F3DF8F",
+    "size": "7-8/122-128cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 314
+   },
+   {
+    "color": "C356",
+    "colorName": "Viva Yellow",
+    "hex": "#F3DF8F",
+    "size": "9-11/134-146cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 304
+   },
+   {
+    "color": "C356",
+    "colorName": "Viva Yellow",
+    "hex": "#F3DF8F",
+    "size": "12-13/152-158cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 289
+   },
+   {
+    "color": "C730",
+    "colorName": "Heritage Brown",
+    "hex": "#995444",
+    "size": "3-4/98-104cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 347
+   },
+   {
+    "color": "C730",
+    "colorName": "Heritage Brown",
+    "hex": "#995444",
+    "size": "5-6/110-116cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 380
+   },
+   {
+    "color": "C730",
+    "colorName": "Heritage Brown",
+    "hex": "#995444",
+    "size": "7-8/122-128cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 405
+   },
+   {
+    "color": "C730",
+    "colorName": "Heritage Brown",
+    "hex": "#995444",
+    "size": "9-11/134-146cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 459
+   },
+   {
+    "color": "C730",
+    "colorName": "Heritage Brown",
+    "hex": "#995444",
+    "size": "12-13/152-158cm",
+    "image": null,
+    "ek": 9.56,
+    "stock": 294
+   },
+   {
+    "color": "C147",
+    "colorName": "Eco Heather",
+    "hex": "#F5F0E9",
+    "size": "3-4/98-104cm",
+    "image": null,
+    "ek": 11.47,
+    "stock": 368
+   },
+   {
+    "color": "C147",
+    "colorName": "Eco Heather",
+    "hex": "#F5F0E9",
+    "size": "5-6/110-116cm",
+    "image": null,
+    "ek": 11.47,
+    "stock": 344
+   },
+   {
+    "color": "C147",
+    "colorName": "Eco Heather",
+    "hex": "#F5F0E9",
+    "size": "7-8/122-128cm",
+    "image": null,
+    "ek": 11.47,
+    "stock": 378
+   },
+   {
+    "color": "C147",
+    "colorName": "Eco Heather",
+    "hex": "#F5F0E9",
+    "size": "9-11/134-146cm",
+    "image": null,
+    "ek": 11.47,
+    "stock": 495
+   },
+   {
+    "color": "C147",
+    "colorName": "Eco Heather",
+    "hex": "#F5F0E9",
+    "size": "12-13/152-158cm",
+    "image": null,
+    "ek": 11.47,
+    "stock": 356
+   }
+  ]
+ },
+ {
+  "supplier": "STANLEY_STELLA",
   "style": "STJU251",
   "name": "Bomber 2.0",
   "category": "Sweatshirt",
