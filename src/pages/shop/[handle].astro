@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
-import { getProducts, euro, PRINT_SIZES } from '../../lib/shopify';
+import { getProducts, euro, PRINT_SIZES, DEFAULT_PRINT_SIZE, SLEEVE, POD_SECOND_SIDE, hasChest, hasSleeves } from '../../lib/shopify';
 import { site } from '../../data/site';
 import { swatchSrc } from '../../lib/imgsize.mjs';
 
@@ -16,9 +16,14 @@ const thumbLabel = (g: string, i: number) => {
   const c = p.colors.find((x) => x.image === g || x.back === g);
   return `Ansicht ${i + 1} von ${gallery.length}${c ? `, ${c.name}${c.back === g ? ' hinten' : ''}` : ''}`;
 };
-const clientData = { product: { id: p.id, handle: p.handle, title: p.title, price: p.price, image: p.image, colors: p.colors, sizes: p.sizes, variants: p.variants }, sizes: PRINT_SIZES, cloud: site.cloudinary };
+// Preislogik "pod" (Changer-Familie): Variantenpreis enthält eine Druckseite in beliebiger Größe, zweite Seite +5,95 €.
+const pod = p.pricing === 'pod';
+const chest = hasChest(p), sleeves = hasSleeves(p);
+const sizesFor = (k: string) => PRINT_SIZES.filter((s) => (k === 'front' ? chest || !s.frontOnly : !s.frontOnly));
+const startPrice = pod ? p.price : p.price + 5;
+const clientData = { product: { id: p.id, handle: p.handle, title: p.title, price: p.price, pricing: p.pricing ?? null, image: p.image, colors: p.colors, sizes: p.sizes, variants: p.variants }, sizes: PRINT_SIZES, sleeve: SLEEVE, podSecond: POD_SECOND_SIDE, cloud: site.cloudinary };
 // Shop-Preise sind Bruttopreise inkl. 19 % MwSt.: der Kassen-Worker übergibt sie an Mollie mit vatRate 19 % (westernprint-checkout, src/index.js).
-const ld = { '@context': 'https://schema.org', '@type': 'Product', name: `${p.title} bedrucken`, image: gallery.map((g) => `${site.url}${g}`), description: `${p.title} von ${p.brand} mit eigenem Motiv bedrucken. ${p.colors.length} Farben, Größen ${p.sizes[0]} bis ${p.sizes[p.sizes.length - 1]}.`, brand: { '@type': 'Brand', name: p.brand }, offers: { '@type': 'Offer', priceCurrency: 'EUR', price: (p.price + 5).toFixed(2), priceSpecification: { '@type': 'PriceSpecification', price: (p.price + 5).toFixed(2), priceCurrency: 'EUR', valueAddedTaxIncluded: true }, availability: 'https://schema.org/InStock', url: `${site.url}/shop/${p.handle}` } };
+const ld = { '@context': 'https://schema.org', '@type': 'Product', name: `${p.title} bedrucken`, image: gallery.map((g) => `${site.url}${g}`), description: `${p.title} von ${p.brand} mit eigenem Motiv bedrucken. ${p.colors.length} Farben, Größen ${p.sizes[0]} bis ${p.sizes[p.sizes.length - 1]}.`, brand: { '@type': 'Brand', name: p.brand }, offers: { '@type': 'Offer', priceCurrency: 'EUR', price: startPrice.toFixed(2), priceSpecification: { '@type': 'PriceSpecification', price: startPrice.toFixed(2), priceCurrency: 'EUR', valueAddedTaxIncluded: true }, availability: 'https://schema.org/InStock', url: `${site.url}/shop/${p.handle}` } };
 const details = [
   p.grammage && ['Grammatur', p.grammage], p.fit && ['Passform', p.fit], p.composition && ['Material', p.composition],
   ['Marke', p.brand], ['Für', p.gender], ['Farben', `${p.colors.length}`], ['Größen', `${p.sizes[0]} bis ${p.sizes[p.sizes.length - 1]}`],
@@ -51,7 +56,7 @@ const details = [
           <div class="ptitle">
             <span class="pbrand">{p.brand} <span>{p.gender}</span> {p.brand === 'Stanley/Stella' && <em class="bio">Bio-Baumwolle</em>}</span>
             <h1>{p.title}</h1>
-            <p class="pprice"><strong data-total>{euro(p.price + 5)}</strong> <span class="muted">inkl. Druck und MwSt., zzgl. <a href="/versand">Versand</a></span></p>
+            <p class="pprice"><strong data-total>{euro(startPrice)}</strong> <span class="muted">inkl. Druck und MwSt., zzgl. <a href="/versand">Versand</a></span></p>
           </div>
 
           <div class="step">
@@ -82,11 +87,12 @@ const details = [
                 <label class="side-opt"><input type="radio" name="side" value={v} checked={i === 0} /><span>{l}</span></label>
               ))}
             </div>
+            {pod && <p class="print-note">Eine Druckseite in beliebiger Druckgröße ist im Preis enthalten. Die zweite Seite kostet {euro(POD_SECOND_SIDE)}.</p>}
             {['front', 'back'].map((k) => (
-              <fieldset class="print-side" data-side={k}>
+              <fieldset class="print-side" data-side={k} data-upload-box>
                 <legend>{k === 'front' ? 'Vorderseite' : 'Rückseite'}</legend>
                 <div class="chips chips-size">
-                  {PRINT_SIZES.map((s, i) => <label class="chip"><input type="radio" name={`size_${k}`} value={s.key} checked={i === 2} /> <span>{s.label} <small>{s.hint}, +{s.surcharge} €</small></span></label>)}
+                  {sizesFor(k).map((s) => <label class="chip"><input type="radio" name={`size_${k}`} value={s.key} checked={s.key === DEFAULT_PRINT_SIZE} /> <span>{s.label} <small>{s.hint}{!pod && `, +${s.surcharge} €`}</small></span></label>)}
                 </div>
                 <label class="upload" data-upload>
                   <input type="file" name={`file_${k}`} accept=".png,image/png" />
@@ -98,6 +104,27 @@ const details = [
                 <span class="error" data-upload-error hidden></span>
               </fieldset>
             ))}
+            {sleeves && (
+              <fieldset class="print-side" data-sleeves>
+                <legend>Ärmel, optional</legend>
+                <div class="chips chips-size">
+                  {[['left', 'Ärmel links'], ['right', 'Ärmel rechts']].map(([k, l]) => <label class="chip"><input type="checkbox" name={`sleeve_${k}`} value="1" /> <span>{l} <small>{SLEEVE.hint}, +{euro(SLEEVE.surcharge)}</small></span></label>)}
+                </div>
+                {[['left', 'links'], ['right', 'rechts']].map(([k, l]) => (
+                  <div class="sleeve-up" data-sleeve-up={k} data-upload-box hidden>
+                    <label class="upload" data-upload>
+                      <input type="file" name={`file_sleeve_${k}`} accept=".png,image/png" />
+                      <span class="upload-box">
+                        <span class="upload-thumb" data-upload-thumb><Icon name="upload-simple" size={22} /></span>
+                        <span class="upload-text"><strong data-upload-label data-label-empty={`Motiv Ärmel ${l} hochladen`}>Motiv Ärmel {l} hochladen</strong><small data-upload-sub>PNG mit transparentem Hintergrund, max. 10 MB. Du kannst es auch nach der Bestellung schicken.</small></span>
+                      </span>
+                    </label>
+                    <span class="error" data-upload-error hidden></span>
+                  </div>
+                ))}
+              </fieldset>
+            )}
+            <p class="print-info"><Icon name="info" size={16} /> <span>Die Druckgröße ist in allen Kleidergrößen gleich (z. B. A6 = ca. 10 x 15 cm), sie wird nicht an die Kleidergröße angepasst.{chest && <> Standardplatzierung: Vorderseite und Rücken mittig, Oberkante ca. 7 cm unter der Kragennaht; Brustdruck links, Oberkante ca. 10 cm unter der Schulternaht{sleeves && '; Ärmel mittig auf dem Oberarm'}.</>} Das Motiv lässt sich in der Vorschau verschieben.</span></p>
           </div>
 
           <div class="buy">
@@ -130,7 +157,11 @@ const details = [
         <h2>So wird gedruckt</h2>
         <p class="muted">Wir drucken per DTF (Direct to Film): deckend auf hellen und dunklen Stoffen, dehnbar, waschfest bei 30 Grad. Das Motiv sollte als PNG mit transparentem Hintergrund und mindestens 300 dpi vorliegen. Wir prüfen jede Datei vor dem Druck und melden uns, wenn etwas nicht passt.</p>
         <h3>Druckgrößen</h3>
-        <ul class="sizes-list">{PRINT_SIZES.map((s) => <li><strong>{s.label}</strong> {s.hint}, +{s.surcharge} € je Seite</li>)}</ul>
+        {pod && <p class="muted">Eine Druckseite in beliebiger Größe ist im Preis enthalten, die zweite Seite kostet {euro(POD_SECOND_SIDE)}.</p>}
+        <ul class="sizes-list">
+          {sizesFor('front').map((s) => <li><strong>{s.label}</strong> {s.hint}{s.frontOnly ? ', nur vorne' : ''}{!pod && `, +${s.surcharge} € ${s.frontOnly ? '' : 'je Seite'}`.trimEnd()}</li>)}
+          {sleeves && <li><strong>Ärmel</strong> links und/oder rechts, {SLEEVE.hint}, +{euro(SLEEVE.surcharge)} je Ärmel</li>}
+        </ul>
         <h3>Größen</h3>
         <p class="muted">{p.sizes.join(', ')}. Die Maßtabelle des Herstellers schicken wir dir auf Anfrage per WhatsApp, oder du orientierst dich an deiner üblichen Größe: {p.fit ? `${p.fit}.` : 'Die Basics fallen normal aus.'}</p>
       </div>
@@ -142,7 +173,8 @@ const details = [
 <script>
   import { addItem, euro } from '../../scripts/cart';
   const data = JSON.parse(document.getElementById('pdata')!.textContent!);
-  const { product, sizes: SIZES, cloud } = data;
+  const { product, sizes: SIZES, sleeve: SLEEVE, podSecond: POD_SECOND, cloud } = data;
+  const POD = product.pricing === 'pod';
   const form = document.querySelector<HTMLFormElement>('[data-config]')!;
   const $ = <T extends HTMLElement>(s: string, root: ParentNode = form) => root.querySelector<T>(s)!;
   const stage = $<HTMLElement>('[data-stage]', document);
@@ -151,9 +183,14 @@ const details = [
   const hint = $<HTMLElement>('[data-stage-hint]', document);
   const tabs = $<HTMLElement>('[data-side-tabs]', document);
   type Side = 'front' | 'back';
-  const uploads: Record<Side, { url: string; name: string } | null> = { front: null, back: null };
-  const pos: Record<Side, { x: number; y: number }> = { front: { x: 50, y: 40 }, back: { x: 50, y: 38 } };
+  type Slot = Side | 'sleeve_left' | 'sleeve_right';
+  const uploads: Record<Slot, { url: string; name: string } | null> = { front: null, back: null, sleeve_left: null, sleeve_right: null };
+  // Standard: mittig. Brust: links auf der Brust vom Träger aus, also im Bild rechts.
+  const CENTER: Record<Side, { x: number; y: number }> = { front: { x: 50, y: 40 }, back: { x: 50, y: 38 } };
+  const CHEST = { x: 63, y: 32 };
+  const pos: Record<Side, { x: number; y: number }> = { front: { ...CENTER.front }, back: { ...CENTER.back } };
   let view: Side = 'front';
+  let lastFrontSize = '';
 
   const val = (name: string) => form.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`)?.value ?? '';
   const active = () => { const s = val('side'); return { front: s !== 'Rückseite', back: s !== 'Vorderseite' }; };
@@ -161,6 +198,8 @@ const details = [
   const variant = () => product.variants.find((v: any) => v.color === val('color') && v.size === val('size'));
   const qty = () => Math.max(1, Math.min(99, Number($<HTMLInputElement>('#qty').value) || 1));
   const sizeInfo = (key: string) => SIZES.find((s: any) => s.key === key);
+  const sleeveOn = (k: 'left' | 'right') => !!form.querySelector<HTMLInputElement>(`input[name="sleeve_${k}"]:checked`);
+  const cents = (n: number) => Math.round(n * 100) / 100;
 
   function updateAvailability() {
     form.querySelectorAll<HTMLInputElement>('input[name="size"]').forEach((inp) => {
@@ -175,18 +214,25 @@ const details = [
     if (!a[view]) view = a.front ? 'front' : 'back';
     renderStage();
   }
+  // Preis wie im Kassen-Worker (priceLine): normal Basis + Aufschlag je Druckgröße, "pod" Basis inkl. einer Seite + zweite Seite. Ärmel immer je Ärmel.
   function total() {
     const a = active(); const v = variant(); const base = v ? v.price : product.price;
-    const sf = a.front ? sizeInfo(val('size_front')).surcharge : 0, sb = a.back ? sizeInfo(val('size_back')).surcharge : 0;
-    return { base, sf, sb, unit: base + sf + sb, sum: (base + sf + sb) * qty() };
+    const sf = !a.front || POD ? 0 : sizeInfo(val('size_front')).surcharge;
+    const sb = !a.back ? 0 : POD ? (a.front ? POD_SECOND : 0) : sizeInfo(val('size_back')).surcharge;
+    const sl = sleeveOn('left') ? SLEEVE.surcharge : 0, sr = sleeveOn('right') ? SLEEVE.surcharge : 0;
+    const unit = cents(base + sf + sb + sl + sr);
+    return { base, sf, sb, sl, sr, unit, sum: cents(unit * qty()) };
   }
   function renderCalc() {
     const t = total(); const a = active(); const n = qty();
+    const add = (x: number) => (x ? `+ ${euro(x)}` : 'inklusive');
     $('[data-total]').textContent = euro(t.sum);
     $('[data-calc]').innerHTML = [
-      `<li><span>${product.title} ${colorEl().dataset.name} ${val('size') ? '/ ' + val('size') : ''}</span><b>${euro(t.base)}</b></li>`,
-      a.front ? `<li><span>Druck vorne ${val('size_front')}</span><b>+ ${euro(t.sf)}</b></li>` : '',
-      a.back ? `<li><span>Druck hinten ${val('size_back')}</span><b>+ ${euro(t.sb)}</b></li>` : '',
+      `<li><span>${product.title} ${colorEl().dataset.name}${val('size') ? ' / ' + val('size') : ''}${POD ? ', inkl. Druck einer Seite' : ''}</span><b>${euro(t.base)}</b></li>`,
+      a.front ? `<li><span>Druck vorne ${val('size_front')}</span><b>${add(t.sf)}</b></li>` : '',
+      a.back ? `<li><span>Druck hinten ${val('size_back')}${POD && a.front ? ', zweite Seite' : ''}</span><b>${add(t.sb)}</b></li>` : '',
+      t.sl ? `<li><span>Druck Ärmel links</span><b>+ ${euro(t.sl)}</b></li>` : '',
+      t.sr ? `<li><span>Druck Ärmel rechts</span><b>+ ${euro(t.sr)}</b></li>` : '',
       n > 1 ? `<li><span>x ${n} Stück</span><b>${euro(t.sum)}</b></li>` : '',
     ].join('');
   }
@@ -252,18 +298,19 @@ const details = [
 
   form.querySelectorAll<HTMLInputElement>('input[type="file"]').forEach((inp) => {
     inp.addEventListener('change', async () => {
-      const k = inp.name.replace('file_', '') as Side; const box = inp.closest('fieldset')!;
+      const k = inp.name.replace('file_', '') as Slot; const box = inp.closest<HTMLElement>('[data-upload-box]')!;
       const err = $<HTMLElement>('[data-upload-error]', box), label = $<HTMLElement>('[data-upload-label]', box), sub = $<HTMLElement>('[data-upload-sub]', box), thumb = $<HTMLElement>('[data-upload-thumb]', box);
       err.hidden = true; const file = inp.files?.[0]; if (!file) return;
       if (file.type !== 'image/png') { err.textContent = 'Bitte eine PNG-Datei hochladen.'; err.hidden = false; inp.value = ''; return; }
       if (file.size > 10 * 1024 * 1024) { err.textContent = 'Datei ist größer als 10 MB.'; err.hidden = false; inp.value = ''; return; }
+      const emptyLabel = label.dataset.labelEmpty || 'Motiv hochladen';
       label.textContent = 'Wird hochgeladen...'; sub.textContent = file.name;
       try {
         const url = await uploadFile(file); uploads[k] = { url, name: file.name };
         label.textContent = 'Motiv hochgeladen'; sub.textContent = `${file.name}. Zum Ändern erneut klicken.`;
         thumb.innerHTML = `<img src="${url}" alt="">`; box.classList.add('has-file');
-        view = k; renderStage();
-      } catch (e) { err.textContent = (e as Error).message; err.hidden = false; label.textContent = 'Motiv hochladen'; }
+        if (k === 'front' || k === 'back') { view = k; renderStage(); }
+      } catch (e) { err.textContent = (e as Error).message; err.hidden = false; label.textContent = emptyLabel; }
     });
   });
 
@@ -271,7 +318,14 @@ const details = [
     const t = e.target as HTMLInputElement;
     if (t.name === 'color') updateAvailability();
     if (t.name === 'side') updateSides();
-    if (t.name === 'size_front') view = 'front'; if (t.name === 'size_back') view = 'back';
+    if (t.name === 'size_front') {
+      view = 'front';
+      // Brust: Motiv automatisch links auf die Brust setzen; beim Wechsel zurück auf eine große Druckgröße wieder mittig
+      if (t.value === 'Brust') pos.front = { ...CHEST }; else if (lastFrontSize === 'Brust') pos.front = { ...CENTER.front };
+      lastFrontSize = t.value;
+    }
+    if (t.name === 'size_back') view = 'back';
+    if (t.name === 'sleeve_left' || t.name === 'sleeve_right') form.querySelector<HTMLElement>(`[data-sleeve-up="${t.name.replace('sleeve_', '')}"]`)!.hidden = !t.checked;
     updateUI();
   });
   form.addEventListener('input', renderCalc);
@@ -284,23 +338,26 @@ const details = [
     if (!v) { $('[data-size-error]').hidden = false; $<HTMLElement>('[data-sizes]').scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
     $('[data-size-error]').hidden = true;
     const a = active(); const t = total(); const c = colorEl();
-    const up = (k: Side) => (uploads[k] ? (uploads[k]!.url.startsWith('blob:') ? `${uploads[k]!.name} (wird nachgereicht)` : uploads[k]!.url) : '');
+    const up = (k: Slot) => (uploads[k] ? (uploads[k]!.url.startsWith('blob:') ? `${uploads[k]!.name} (wird nachgereicht)` : uploads[k]!.url) : '');
+    const sl = sleeveOn('left'), sr = sleeveOn('right');
     const btn = $<HTMLButtonElement>('[data-add]'); const btnHtml = btn.innerHTML;
     btn.disabled = true; btn.textContent = 'Vorschau wird gespeichert...';
     const mock: Record<Side, string | null> = { front: null, back: null };
     try { [mock.front, mock.back] = await Promise.all([a.front ? renderMockup('front').catch(() => null) : null, a.back ? renderMockup('back').catch(() => null) : null]); } catch {}
     btn.disabled = false; btn.innerHTML = btnHtml;
     addItem({ variantId: v.id, handle: product.handle, title: product.title, color: c.dataset.name || '', size: val('size'), image: (c.dataset.image && c.dataset.image !== 'null' ? c.dataset.image : product.image),
-      quantity: qty(), base: t.base, side: val('side') as any, surcharge: t.sf + t.sb,
+      quantity: qty(), base: t.base, side: val('side') as any, surcharge: cents(t.sf + t.sb + t.sl + t.sr), pricing: POD ? 'pod' : undefined,
       sizeFront: a.front ? val('size_front') : undefined, sizeBack: a.back ? val('size_back') : undefined,
       uploadFront: a.front ? up('front') : undefined, uploadBack: a.back ? up('back') : undefined,
       posFront: a.front ? `${pos.front.x.toFixed(0)}% / ${pos.front.y.toFixed(0)}%` : undefined, posBack: a.back ? `${pos.back.x.toFixed(0)}% / ${pos.back.y.toFixed(0)}%` : undefined,
-      mockupFront: mock.front || undefined, mockupBack: mock.back || undefined });
+      mockupFront: mock.front || undefined, mockupBack: mock.back || undefined,
+      sleeveLeft: sl || undefined, sleeveRight: sr || undefined, uploadSleeveLeft: sl ? up('sleeve_left') : undefined, uploadSleeveRight: sr ? up('sleeve_right') : undefined });
     note.className = 'form-note ok'; note.hidden = false;
     note.innerHTML = `Im Warenkorb. <a href="/warenkorb" class="accent"><b>Zum Warenkorb</b></a> oder weiter stöbern.`;
-    if (!(a.front ? uploads.front : true) || !(a.back ? uploads.back : true)) note.innerHTML += ' <span class="muted">Ohne Motiv? Kein Problem, wir fragen es nach der Bestellung an.</span>';
+    if (!(a.front ? uploads.front : true) || !(a.back ? uploads.back : true) || (sl && !uploads.sleeve_left) || (sr && !uploads.sleeve_right)) note.innerHTML += ' <span class="muted">Ohne Motiv? Kein Problem, wir fragen es nach der Bestellung an.</span>';
   });
 
+  lastFrontSize = val('size_front');
   updateAvailability(); updateSides(); updateUI();
 </script>
 
@@ -370,6 +427,10 @@ const details = [
   .upload:hover .upload-box, .upload:focus-within .upload-box { border-color: var(--accent); }
   .has-file .upload-box { border-style: solid; border-color: var(--accent-line); }
   .error { color: var(--danger); font-size: 13px; }
+  .sleeve-up { display: grid; gap: 6px; } .sleeve-up[hidden] { display: none; }
+  .print-note { font-size: 13.5px; color: var(--text-2); }
+  .print-info { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; line-height: 1.5; color: var(--text-2); }
+  .print-info .icon { color: var(--accent); flex: none; margin-top: 2px; }
 
   .buy { display: grid; gap: 12px; padding: 18px; border-radius: var(--radius-card); border: 1px solid var(--accent-line); background: linear-gradient(135deg, var(--accent-soft), transparent 60%), var(--surface); }
   .qty-row { display: flex; align-items: center; justify-content: space-between; font-size: 14.5px; font-weight: 500; }

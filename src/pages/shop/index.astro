@@ -8,12 +8,13 @@ const cats = CATEGORY_ORDER.filter((c) => products.some((p) => p.category === c)
 const count = (c: string) => products.filter((p) => p.category === c).length;
 // Kleinster kaufbarer Preis je Stück, gerechnet wie Konfigurator und Warenkorb (Variantenpreis + Druckaufschlag je Seite):
 // günstigste verfügbare Variante plus kleinste Druckgröße auf nur einer Seite. Ohne Druck ist nichts bestellbar.
-const minPrint = PRINT_SIZES.reduce((a, b) => (b.surcharge < a.surcharge ? b : a));
+// Preislogik "pod" (Changer-Familie): der Variantenpreis enthält bereits eine Druckseite in beliebiger Größe.
+const minPrint = PRINT_SIZES.filter((s) => !s.frontOnly).reduce((a, b) => (b.surcharge < a.surcharge ? b : a));
 // Transparentes 1x1-GIF als src der Hover-Bilder, bis das Modelfoto beim ersten Maus-Hover nachgeladen wird.
 const PLATZHALTER = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 const fromPrice = (p: (typeof products)[number]) => {
   const av = p.variants.filter((v) => v.available).map((v) => v.price);
-  return (av.length ? Math.min(...av) : p.price) + minPrint.surcharge;
+  return (av.length ? Math.min(...av) : p.price) + (p.pricing === 'pod' ? 0 : minPrint.surcharge);
 };
 ---
 <Base title="Textilien mit eigenem Motiv bedrucken" description={`${products.length} Textilien von Stanley/Stella und Stedman mit deinem Motiv bedrucken: T-Shirts, Hoodies, Polos, Kinder, Baby, Taschen. Ab 1 Stück, DTF-Druck in Oberhausen, Lieferung in 3 bis 5 Werktagen.`}>
@@ -62,7 +63,7 @@ const fromPrice = (p: (typeof products)[number]) => {
                 </span>
                 <span class="sizes">{p.sizes[0]} bis {p.sizes[p.sizes.length - 1]}</span>
               </div>
-              <span class="price">ab {euro(fromPrice(p))} <small>inkl. {minPrint.label}-Druck und MwSt., zzgl. Versand</small></span>
+              <span class="price">ab {euro(fromPrice(p))} <small>inkl. {p.pricing === 'pod' ? 'Druck einer Seite' : `${minPrint.label}-Druck`} und MwSt., zzgl. Versand</small></span>
             </div>
           </a>
         ))}
