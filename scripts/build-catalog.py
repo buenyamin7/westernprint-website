@@ -2,6 +2,7 @@
 """Baut src/data/products.json aus dem POD-App-Export (src/data/pod-catalog.json).
 Lädt Packshots (Stanley/Stella Cloudinary SFM0/SFM1, Stedman CDN) nach public/img/products/ und verkleinert sie."""
 import json, os, re, subprocess, urllib.request, concurrent.futures, math
+from decimal import Decimal, ROUND_HALF_UP
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POD = json.load(open(f"{ROOT}/src/data/pod-catalog.json"))
 OLD = json.load(open(f"{ROOT}/src/data/products.shopify-backup.json"))
@@ -27,6 +28,33 @@ def shop_price(b):
     if old: return old['minPrice']
     net = b['ekMin'] * 1.25 + 3.0
     return math.ceil(net * 1.19 * 2) / 2
+# Sonderpreise Changer-Familie (03.10.2026, der Kundin schriftlich zugesagt): pricing "pod".
+# variant.price = Bruttopreis inkl. EINER Druckseite in beliebiger Druckgröße. Zweite Seite +5,95 €, Ärmel je +3,57 €
+# (rechnen Shop-Seite src/pages/shop/[handle].astro und Kassen-Worker westernprint-checkout/src/catalog.js).
+# 'ek': True = (EK der Variante + 7) x 1,19 kaufmännisch auf Cent, mindestens 'min' (Changer 2.0 "ab 23,63 €").
+POD_PRICING = {'STSB920': {'min': 16.45, 'ek': True}, 'STSK181': {'min': 19.71, 'ek': True}, 'STSU178': {'min': 23.63, 'ek': True}}
+def norm_size(s): return re.sub(r'\s+', '', s.lower())
+def size_keys(db_size):
+    """S/S-Größe aus der DB ('6-12 m/68-80cm', '3-4/98-104cm', 'XL') -> mögliche Shop-Schreibweisen ('6-12m', '3-4y', '98/104', 'xl')."""
+    head, _, cm = db_size.partition('/')
+    keys = {norm_size(db_size), norm_size(head), norm_size(head) + 'y'}
+    if cm: keys.add(norm_size(cm).replace('cm', '').replace('-', '/'))
+    return keys
+def variant_ek(b):
+    """{(Farbe, Shop-Größe): EK} aus den S/S-Varianten des POD-Exports."""
+    out = {}
+    for v in b.get('variants') or []:
+        if v.get('ek') is None: continue
+        for s in b['sizes']:
+            if norm_size(s.strip()) in size_keys(v['size']): out[(v['color'], s.strip())] = v['ek']
+    return out
+def round_cent(x): return float(Decimal(str(x)).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP))
+def pod_variant_price(rule, ek, color, size):
+    if not rule.get('ek'): return rule['min']
+    e = ek.get((color, size))
+    if e is None:  # Kombination fehlt bei S/S: höchster EK dieser Größe, sonst dieser Farbe
+        e = max([x for (c, s), x in ek.items() if s == size] or [x for (c, s), x in ek.items() if c == color] or [0])
+    return max(rule['min'], round_cent((Decimal(str(e)) + 7) * Decimal('1.19')))
 def fetch(url, path):
     if os.path.exists(path): return True
     try:
@@ -47,6 +75,7 @@ for b in POD:
     seen.add(handle)
     sizes = sorted(dict.fromkeys(s.strip() for s in b['sizes']), key=size_rank)
     price = shop_price(b)
+    rule = POD_PRICING.get(b['style']); ek = variant_ek(b); ek_colors = {c for c, _ in ek}
     colors = []
     for c in b['colors']:
         cid, cname = c['id'], c['name']; cs = slug(cname) or cid.lower()
@@ -72,8 +101,13 @@ for b in POD:
         'modelImage': f"/img/products/{model}" if b['modelImage'] else None,
         'extraImages': [i['url'] for i in old['images']] if old else [],
         'colors': colors, 'sizes': sizes, 'price': price, 'minPrice': price,
-        'variants': [{'id': f"{b['style']}-{c['id']}-{s}", 'color': c['id'], 'size': s, 'price': price, 'available': True} for c in b['colors'] for s in sizes],
+        'variants': [{'id': f"{b['style']}-{c['id']}-{s}", 'color': c['id'], 'size': s, 'price': pod_variant_price(rule, ek, c['id'], s) if rule else price,
+                      # S/S: Farbe/Größe, die es bei Stanley/Stella nicht gibt (z. B. 4XL in Modefarben), ist nicht bestellbar
+                      'available': not (b['supplier'] == 'STANLEY_STELLA' and c['id'] in ek_colors and (c['id'], s) not in ek)} for c in b['colors'] for s in sizes],
     })
+    if rule:
+        products[-1]['pricing'] = 'pod'
+        products[-1]['price'] = products[-1]['minPrice'] = min(v['price'] for v in products[-1]['variants'])
 print(len(products), 'Produkte,', sum(len(p['variants']) for p in products), 'Varianten,', len(jobs), 'Bilder zu laden', flush=True)
 with concurrent.futures.ThreadPoolExecutor(12) as ex:
     results = list(ex.map(lambda j: fetch(*j), jobs))

@@ -48,7 +48,7 @@ const countries = [['DE', 'Deutschland'], ['AT', 'Österreich'], ['CH', 'Schweiz
 </Base>
 
 <script>
-  import { getCart, subtotal, lineTotal, euro, rememberOrder } from '../scripts/cart';
+  import { getCart, subtotal, lineTotal, euro, rememberOrder, checkoutLine } from '../scripts/cart';
   const root = document.querySelector<HTMLElement>('.kasse')!;
   const $ = <T extends HTMLElement>(s: string) => root.querySelector<T>(s)!;
   const esc = (s: string) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
@@ -63,7 +63,7 @@ const countries = [['DE', 'Deutschland'], ['AT', 'Österreich'], ['CH', 'Schweiz
     const country = $<HTMLSelectElement>('#k-country').value; const sub = subtotal(items);
     const free = Math.round(sub * 100) >= FREE_SHIPPING_FROM * 100;
     const ship = { amount: free ? 0 : SHIP[country === 'DE' ? 'DE' : 'AUSLAND'], label: free ? '(versandkostenfrei ab 500 €, 3-5 Werktage)' : '(3-5 Werktage)' };
-    $('[data-items]').innerHTML = items.map((i) => `<li><span>${i.quantity} x ${esc(i.title)} ${esc(i.color)} / ${esc(i.size)}<small>${esc(i.side)}${i.sizeFront ? `, vorne ${esc(i.sizeFront)}` : ''}${i.sizeBack ? `, hinten ${esc(i.sizeBack)}` : ''}</small></span><strong>${euro(lineTotal(i))}</strong></li>`).join('');
+    $('[data-items]').innerHTML = items.map((i) => `<li><span>${i.quantity} x ${esc(i.title)} ${esc(i.color)} / ${esc(i.size)}<small>${esc(i.side)}${i.sizeFront ? `, vorne ${esc(i.sizeFront)}` : ''}${i.sizeBack ? `, hinten ${esc(i.sizeBack)}` : ''}${i.sleeveLeft ? ', Ärmel links' : ''}${i.sleeveRight ? ', Ärmel rechts' : ''}</small></span><strong>${euro(lineTotal(i))}</strong></li>`).join('');
     $('[data-sub]').textContent = euro(sub); $('[data-ship]').textContent = euro(ship.amount); $('[data-ship-label]').textContent = ship.label;
     $('[data-total]').textContent = euro(sub + ship.amount);
     $('[data-ch-note]').hidden = country !== 'CH';
@@ -81,7 +81,7 @@ const countries = [['DE', 'Deutschland'], ['AT', 'Österreich'], ['CH', 'Schweiz
     const btn = $<HTMLButtonElement>('[data-pay]'); const err = $('[data-error]'); err.hidden = true;
     btn.disabled = true; btn.textContent = 'Bezahlung wird vorbereitet...';
     const data = Object.fromEntries(new FormData(form).entries());
-    const lines = items.map((i) => ({ variantId: i.variantId, quantity: i.quantity, side: i.side, sizeFront: i.sizeFront, sizeBack: i.sizeBack, uploadFront: i.uploadFront, uploadBack: i.uploadBack, posFront: i.posFront, posBack: i.posBack, mockupFront: i.mockupFront, mockupBack: i.mockupBack }));
+    const lines = items.map(checkoutLine);
     try {
       const res = await fetch(`${root.dataset.endpoint}/checkout`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ lines, customer: data }) });
       const j = await res.json(); if (!res.ok || !j.url) throw new Error(j.error || 'Kasse nicht erreichbar');

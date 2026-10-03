@@ -34,7 +34,10 @@ import { site } from '../data/site';
   import { getCart, updateQty, removeItem, lineTotal, subtotal, euro, type CartItem } from '../scripts/cart';
   const $ = (s: string) => document.querySelector<HTMLElement>(s)!;
   const esc = (s: string) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
-  const SUR: Record<string, number> = { A6: 5, A5: 6, A4: 7, 'A3+': 9 };
+  // Aufschläge je Druckgröße wie PRINT_SIZES (src/lib/shopify.ts); bei pricing "pod" ist eine Seite im Preis, die zweite kostet 5,95 €.
+  const SUR: Record<string, number> = { Brust: 5, A6: 5, A5: 6, A4: 7, 'A3+': 9 };
+  const SLEEVE = 3.57, POD_SECOND = 5.95;
+  const sur = (i: CartItem, k: 'front' | 'back') => i.pricing !== 'pod' ? `+${SUR[k === 'front' ? i.sizeFront! : i.sizeBack!] ?? '?'} €` : k === 'back' && i.sizeFront ? `+${euro(POD_SECOND)}` : 'inklusive';
   const link = (u?: string, m?: string) => (!u ? 'Kein Motiv, wird nachgereicht' : /^https?:/.test(u) ? `<a href="${esc(u)}" target="_blank" rel="noopener" class="accent">Motiv</a>` : esc(u)) + (m ? ` · <a href="${esc(m)}" target="_blank" rel="noopener" class="accent">Vorschau mit Position</a>` : '');
 
   function render(items: CartItem[]) {
@@ -47,11 +50,13 @@ import { site } from '../data/site';
         ${(i.mockupFront || i.mockupBack || i.image) ? `<img src="${esc(i.mockupFront || i.mockupBack || i.image!)}" alt="" width="90" height="112">` : '<div class="thumb-empty"></div>'}
         <div class="line-body">
           <strong>${esc(i.title)}</strong>
-          <span class="muted">${esc(i.color)} / ${esc(i.size)} · ${euro(i.base)} + Druck ${euro(i.surcharge)} je Stück</span>
+          <span class="muted">${esc(i.color)} / ${esc(i.size)} · ${i.pricing === 'pod' ? `${euro(i.base)} inkl. Druck einer Seite${i.surcharge ? ` + ${euro(i.surcharge)}` : ''}` : `${euro(i.base)} + Druck ${euro(i.surcharge)}`} je Stück</span>
           <ul class="attrs">
             <li><span>Druckseite:</span> ${esc(i.side)}</li>
-            ${i.sizeFront ? `<li><span>Vorne ${esc(i.sizeFront)} (+${SUR[i.sizeFront] ?? '?'} €):</span> ${link(i.uploadFront, i.mockupFront)}</li>` : ''}
-            ${i.sizeBack ? `<li><span>Hinten ${esc(i.sizeBack)} (+${SUR[i.sizeBack] ?? '?'} €):</span> ${link(i.uploadBack, i.mockupBack)}</li>` : ''}
+            ${i.sizeFront ? `<li><span>Vorne ${esc(i.sizeFront)} (${sur(i, 'front')}):</span> ${link(i.uploadFront, i.mockupFront)}</li>` : ''}
+            ${i.sizeBack ? `<li><span>Hinten ${esc(i.sizeBack)} (${sur(i, 'back')}):</span> ${link(i.uploadBack, i.mockupBack)}</li>` : ''}
+            ${i.sleeveLeft ? `<li><span>Ärmel links (+${euro(SLEEVE)}):</span> ${link(i.uploadSleeveLeft)}</li>` : ''}
+            ${i.sleeveRight ? `<li><span>Ärmel rechts (+${euro(SLEEVE)}):</span> ${link(i.uploadSleeveRight)}</li>` : ''}
           </ul>
         </div>
         <div class="line-side">

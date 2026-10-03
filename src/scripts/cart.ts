@@ -5,7 +5,9 @@ export interface CartItem {
   id: string; variantId: string; handle: string; title: string; color: string; size: string; image: string | null;
   quantity: number; base: number; side: 'Vorderseite' | 'Rückseite' | 'Beide Seiten';
   sizeFront?: string; sizeBack?: string; uploadFront?: string; uploadBack?: string; posFront?: string; posBack?: string; mockupFront?: string; mockupBack?: string;
-  surcharge: number; // je Stück
+  sleeveLeft?: boolean; sleeveRight?: boolean; uploadSleeveLeft?: string; uploadSleeveRight?: string;
+  pricing?: 'pod'; // Changer-Familie: base enthält eine Druckseite, surcharge = zweite Seite + Ärmel
+  surcharge: number; // je Stück (Druckaufschläge inkl. Ärmel)
 }
 
 export function getCart(): CartItem[] { try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch { return []; } }
@@ -22,7 +24,7 @@ export function updateQty(id: string, quantity: number): CartItem[] {
 }
 export function removeItem(id: string): CartItem[] { const items = getCart().filter((i) => i.id !== id); save(items); return items; }
 export function clearCart() { save([]); }
-export const lineTotal = (i: CartItem) => (i.base + i.surcharge) * i.quantity;
+export const lineTotal = (i: CartItem) => Math.round((i.base + i.surcharge) * i.quantity * 100) / 100;
 export const subtotal = (items: CartItem[]) => items.reduce((s, i) => s + lineTotal(i), 0);
 export const count = (items: CartItem[]) => items.reduce((s, i) => s + i.quantity, 0);
 
@@ -50,11 +52,15 @@ export function clearCartFor(orderNo: string) {
 }
 export const euro = (n: number | string) => Number(n).toFixed(2).replace('.', ',') + ' €';
 
+/** Position im Format, das der Kassen-Worker (priceLine) erwartet. */
+export const checkoutLine = (i: CartItem) => ({ variantId: i.variantId, quantity: i.quantity, side: i.side, sizeFront: i.sizeFront, sizeBack: i.sizeBack, uploadFront: i.uploadFront, uploadBack: i.uploadBack, posFront: i.posFront, posBack: i.posBack, mockupFront: i.mockupFront, mockupBack: i.mockupBack,
+  sleeveLeft: !!i.sleeveLeft, sleeveRight: !!i.sleeveRight, uploadSleeveLeft: i.uploadSleeveLeft, uploadSleeveRight: i.uploadSleeveRight });
+
 /** Kasse: Warenkorb an den Worker schicken, Mollie-URL zurück. */
 export async function startCheckout(endpoint: string): Promise<string> {
   const items = getCart();
   if (!items.length) throw new Error('Warenkorb ist leer');
-  const lines = items.map((i) => ({ variantId: i.variantId, quantity: i.quantity, side: i.side, sizeFront: i.sizeFront, sizeBack: i.sizeBack, uploadFront: i.uploadFront, uploadBack: i.uploadBack, posFront: i.posFront, posBack: i.posBack, mockupFront: i.mockupFront, mockupBack: i.mockupBack }));
+  const lines = items.map(checkoutLine);
   const res = await fetch(`${endpoint}/checkout`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ lines }) });
   const data = await res.json();
   if (!res.ok || !data.url) throw new Error(data.error || 'Kasse nicht erreichbar');
