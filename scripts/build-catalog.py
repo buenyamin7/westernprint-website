@@ -32,7 +32,8 @@ def shop_price(b):
 # variant.price = Bruttopreis inkl. EINER Druckseite in beliebiger Druckgröße. Zweite Seite +5,95 €, Ärmel je +3,57 €
 # (rechnen Shop-Seite src/pages/shop/[handle].astro und Kassen-Worker westernprint-checkout/src/catalog.js).
 # 'ek': True = (EK der Variante + 7) x 1,19 kaufmännisch auf Cent, mindestens 'min' (Changer 2.0 "ab 23,63 €").
-POD_PRICING = {'STSB920': {'min': 16.45, 'ek': True}, 'STSK181': {'min': 19.71, 'ek': True}, 'STSU178': {'min': 23.63, 'ek': True}}
+# 'ek': 'heather' = Festpreis 'min', nur Heather-Farben (teurerer EK) nach derselben Formel (Baby/Mini Changer).
+POD_PRICING = {'STSB920': {'min': 16.45, 'ek': 'heather'}, 'STSK181': {'min': 19.71, 'ek': 'heather'}, 'STSU178': {'min': 23.63, 'ek': True}}
 def norm_size(s): return re.sub(r'\s+', '', s.lower())
 def size_keys(db_size):
     """S/S-Größe aus der DB ('6-12 m/68-80cm', '3-4/98-104cm', 'XL') -> mögliche Shop-Schreibweisen ('6-12m', '3-4y', '98/104', 'xl')."""
@@ -49,8 +50,8 @@ def variant_ek(b):
             if norm_size(s.strip()) in size_keys(v['size']): out[(v['color'], s.strip())] = v['ek']
     return out
 def round_cent(x): return float(Decimal(str(x)).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP))
-def pod_variant_price(rule, ek, color, size):
-    if not rule.get('ek'): return rule['min']
+def pod_variant_price(rule, ek, color, size, cname=''):
+    if not rule.get('ek') or (rule['ek'] == 'heather' and 'heather' not in cname.lower()): return rule['min']
     e = ek.get((color, size))
     if e is None:  # Kombination fehlt bei S/S: höchster EK dieser Größe, sonst dieser Farbe
         e = max([x for (c, s), x in ek.items() if s == size] or [x for (c, s), x in ek.items() if c == color] or [0])
@@ -101,7 +102,7 @@ for b in POD:
         'modelImage': f"/img/products/{model}" if b['modelImage'] else None,
         'extraImages': [i['url'] for i in old['images']] if old else [],
         'colors': colors, 'sizes': sizes, 'price': price, 'minPrice': price,
-        'variants': [{'id': f"{b['style']}-{c['id']}-{s}", 'color': c['id'], 'size': s, 'price': pod_variant_price(rule, ek, c['id'], s) if rule else price,
+        'variants': [{'id': f"{b['style']}-{c['id']}-{s}", 'color': c['id'], 'size': s, 'price': pod_variant_price(rule, ek, c['id'], s, c['name']) if rule else price,
                       # S/S: Farbe/Größe, die es bei Stanley/Stella nicht gibt (z. B. 4XL in Modefarben), ist nicht bestellbar
                       'available': not (b['supplier'] == 'STANLEY_STELLA' and c['id'] in ek_colors and (c['id'], s) not in ek)} for c in b['colors'] for s in sizes],
     })
