@@ -32,7 +32,7 @@ def shop_price(b):
 # variant.price = Bruttopreis inkl. EINER Druckseite in beliebiger Druckgröße. Zweite Seite +5,95 €, Ärmel je +3,57 €
 # (rechnen Shop-Seite src/pages/shop/[handle].astro und Kassen-Worker westernprint-checkout/src/catalog.js).
 # 'ek': True = (EK der Variante + 7) x 1,19 kaufmännisch auf Cent, mindestens 'min' (Changer 2.0 "ab 23,63 €").
-POD_PRICING = {'STSB920': {'min': 16.45}, 'STSK181': {'min': 19.71}, 'STSU178': {'min': 23.63, 'ek': True}}
+POD_PRICING = {'STSB920': {'min': 16.45, 'ek': True}, 'STSK181': {'min': 19.71, 'ek': True}, 'STSU178': {'min': 23.63, 'ek': True}}
 def norm_size(s): return re.sub(r'\s+', '', s.lower())
 def size_keys(db_size):
     """S/S-Größe aus der DB ('6-12 m/68-80cm', '3-4/98-104cm', 'XL') -> mögliche Shop-Schreibweisen ('6-12m', '3-4y', '98/104', 'xl')."""
