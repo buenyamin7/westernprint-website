@@ -60,7 +60,7 @@ export const nav: NavItem[] = [
         { label: 'Textildruck Oberhausen', href: '/textildruck-oberhausen', hint: 'Vor Ort im Ruhrgebiet, Abholung möglich' },
         { label: 'Textilien und Marken', href: '/textilien', hint: 'Stanley/Stella, Stedman, BYB, Urban Classics' },
         { label: 'Was kostet Textildruck?', href: '/was-kostet-textildruck', hint: 'Preisbeispiele für 1, 10, 25, 50 und 100 Stück' },
-        { label: 'Muster bestellen', href: '/sample', hint: 'Ein Stück mit deinem Motiv testen, ab 1 Stück' },
+        { label: 'Muster anfragen', href: '/kontakt', hint: 'Ein Stück mit deinem Motiv testen, ab 1 Stück' },
       ] },
     ],
     cta: { label: 'Angebot in 24 Stunden', href: '/kontakt', text: 'Motiv und Stückzahl schicken, wir antworten mit festem Preis und Liefertermin.' },
@@ -75,7 +75,7 @@ export const nav: NavItem[] = [
         { label: 'Eigene Brand gründen', href: '/textilien#brand-gruenden', hint: 'Ohne Lager, ohne Mindestmenge' },
       ] },
     ],
-    cta: { label: 'Muster anfordern', href: '/sample', text: 'Erst anfassen, dann entscheiden: Ein Sample mit deinem Motiv.' },
+    cta: { label: 'Muster anfragen', href: '/kontakt', text: 'Erst anfassen, dann entscheiden: ein bedrucktes Muster mit deinem Motiv, ab 1 Stück.' },
   },
   {
     label: 'Für wen', href: '/fuer',
