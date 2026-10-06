@@ -34,7 +34,7 @@ export const zusatz: { t: string; p: string; d: string; istBrutto?: boolean }[] 
   { t: 'Zweite Druckseite', p: 'ab 3,50 €', d: 'Vorne und hinten bedruckt, zum Beispiel Logo vorne, großes Motiv hinten.' },
   { t: 'Nackenprint statt Herstelleretikett', p: '3,00 €', d: 'Dein Logo mit Größenangabe direkt ins Textil gedruckt.' },
   { t: 'Namen und Rückennummern', p: 'ab 5,90 €', d: 'Jedes Teil einzeln, Liste mit Name, Nummer und Größe reicht.' },
-  { t: 'Ärmeldruck oder kleines Zusatzmotiv', p: 'ab 2,52 €', d: 'Zum Beispiel Sponsor am Ärmel oder Schriftzug am Saum.' },
+  { t: 'Ärmeldruck oder kleines Zusatzmotiv', p: '3,00 €', d: 'Zum Beispiel Sponsor am Ärmel oder Schriftzug am Saum.' },
   { t: 'Einrichtung, Sieb, Datencheck', p: '0,00 €', d: 'Wir berechnen keine Einrichtungskosten und keine Druckvorbereitung.' },
   // Versandkosten wie an der Kasse (Kassen-Worker): Endpreis inkl. MwSt., ab 500 € Warenwert versandkostenfrei.
   { t: 'Versand innerhalb Deutschlands', p: '4,90 €', d: 'DHL mit Sendungsverfolgung, versandkostenfrei ab 500 € Warenwert (brutto). Abholung in Oberhausen ist kostenlos.', istBrutto: true },

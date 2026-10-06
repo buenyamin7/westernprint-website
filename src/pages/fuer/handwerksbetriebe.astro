@@ -1,0 +1,311 @@
+---
+// Landingpage für Handwerksbetriebe und Service-Firmen (Arbeitskleidung mit Firmenlogo).
+// Aufbau wie /fuer/streetwear-brands: klare Antwort oben, Preistabelle mit Staffeln, Branchen, Ablauf, FAQ.
+// Preise netto, ein Druck (Brust ODER Rücken), Textil inklusive. Quelle: EK aus der POD-App + feste Marge, abgestimmt am 06.10.2026.
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import Faq from '../../components/Faq.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { site, oeffnungszeiten } from '../../data/site';
+
+const STAND = '06.10.2026';
+const brutto = (n: string) => (Math.round(parseFloat(n.replace(',', '.')) * 119) / 100).toFixed(2).replace('.', ',');
+
+const mengen = ['1 Stück', '10 Stück', '25 Stück', '50 Stück', '100 Stück'];
+const preise = [
+  { t: 'T-Shirt', m: 'Stedman Classic-T, 155 g', p: ['17,90', '12,90', '10,90', '9,40', '8,40'] },
+  { t: 'Poloshirt', m: 'Stedman Classic Polo, 170 g', p: ['22,90', '17,90', '15,90', '14,50', '13,40'] },
+  { t: 'Sweatshirt', m: 'Stedman Classic Sweatshirt, 280 g', p: ['27,90', '22,90', '20,90', '19,40', '17,90'] },
+  { t: 'Hoodie', m: 'Stedman Classic Hoodie, 280 g', p: ['29,90', '24,90', '22,90', '21,40', '19,90'] },
+  { t: 'Hemd', m: 'Stanley/Stella Styler, Bio-Baumwolle', p: ['36,90', '30,90', '28,90', '27,40', '25,90'] },
+  { t: 'Softshelljacke', m: 'Stedman Lux Softshell, 250 g', p: ['44,90', '39,90', '37,90', '36,40', '34,90'] },
+];
+
+const zusatz = [
+  { t: 'Zweite Druckseite', p: 'ab 3,50 €', d: 'Logo vorne und groß hinten, zum Beispiel Firmenname mit Telefonnummer auf dem Rücken.' },
+  { t: 'Ärmeldruck', p: '3,00 €', d: 'Pro Ärmel, bis 8 x 8 cm. Zum Beispiel Webadresse oder Innungslogo.' },
+  { t: 'Namen der Mitarbeiter', p: 'ab 5,90 €', d: 'Jedes Teil einzeln, eine Liste mit Name und Größe reicht.' },
+  { t: 'Eigene Arbeitskleidung', p: 'nur Druck', d: 'Ihr liefert Engelbert Strauss, Kübler oder andere Workwear an und zahlt nur den Druck.' },
+  { t: 'Warnwesten', p: 'auf Anfrage', d: 'Wir bedrucken Warnwesten mit eurem Logo, gern auch eure eigenen.' },
+  { t: 'Logo-Datei prüfen', p: '0,00 €', d: 'Wir prüfen jede Datei kostenlos. Muss ein Logo neu aufgebaut oder freigestellt werden, kostet das 19,90 € pro Datei.' },
+];
+
+const branchen = ['Elektriker', 'Sanitär und Heizung (SHK)', 'Maler und Lackierer', 'Dachdecker', 'Tischler und Schreiner', 'Fliesenleger', 'Trockenbau', 'Garten- und Landschaftsbau', 'Kfz-Werkstatt', 'Gebäudereinigung', 'Sicherheitsdienst', 'Entrümpelung und Umzug', 'Hausmeisterservice', 'Bauunternehmen'];
+
+const services = [
+  { icon: 'arrows-clockwise', t: 'Einzeln nachbestellen', d: 'Neuer Azubi, neuer Geselle? Ihr bestellt ein einzelnes Teil nach, mit dem gleichen Druck. Die Druckdaten bleiben bei uns gespeichert.' },
+  { icon: 't-shirt', t: 'Eure eigene Workwear', d: 'Ihr habt schon Arbeitskleidung von Engelbert Strauss oder Kübler? Liefert sie an, wir bedrucken sie und ihr zahlt nur den Druck.' },
+  { icon: 'file-text', t: 'Ordentliche Rechnung', d: 'Rechnung mit ausgewiesener Umsatzsteuer für eure Buchhaltung. Bei Stammkunden ist Zahlung auf Rechnung nach Absprache möglich.' },
+  { icon: 'shield-check', t: 'Hält im Arbeitsalltag', d: 'DTF-Druck ist dehnbar und waschfest und hält auch auf Polyester, Softshell und Mischgewebe.' },
+  { icon: 'map-pin', t: 'Abholen oder liefern lassen', d: 'Kostenlos abholen in Oberhausen oder per DHL mit Sendungsnummer in den Betrieb, deutschlandweit.' },
+  { icon: 'chat-circle-dots', t: 'Ein Ansprechpartner', d: 'Fragen per WhatsApp, Telefon oder Mail, beantwortet von Leuten aus der Werkstatt.' },
+];
+
+const faqs = [
+  { q: 'Wo bekommen Handwerksbetriebe Arbeitskleidung mit Firmenlogo?', a: `Bei westernprint in Oberhausen bekommen Handwerksbetriebe T-Shirts, Poloshirts, Sweatshirts, Hoodies, Hemden und Softshelljacken mit Firmenlogo, ab 1 Stück ohne Mindestmenge. Ein Poloshirt mit Logo kostet bei 10 Stück 17,90 € netto pro Stück. Die Serie ist 5 bis 7 Werktage nach Freigabe fertig, einzelne Teile könnt ihr jederzeit nachbestellen. Stand ${STAND}.` },
+  { q: 'Gibt es eine Mindestmenge?', a: 'Nein. westernprint bedruckt Arbeitskleidung ab 1 Stück. Ab 10 Stück gelten Staffelpreise, ab 50 Stück wird es noch einmal günstiger. Ihr könnt Modelle, Farben und Größen in einer Bestellung mischen.' },
+  { q: 'Was kostet ein Poloshirt mit Firmenlogo?', a: `Ein Poloshirt (Stedman Classic Polo) mit einem Druck kostet bei westernprint 22,90 € netto (${brutto('22,90')} € brutto) als Einzelstück, 17,90 € netto (${brutto('17,90')} € brutto) bei 10 Stück und 14,50 € netto (${brutto('14,50')} € brutto) bei 50 Stück, jeweils pro Stück. Stand ${STAND}.` },
+  { q: 'Was kostet ein T-Shirt mit Firmenlogo für den Betrieb?', a: `Ein T-Shirt (Stedman Classic-T, 155 g) mit einem Druck kostet 17,90 € netto als Einzelstück, 12,90 € netto (${brutto('12,90')} € brutto) bei 10 Stück, 10,90 € netto bei 25 Stück und 9,40 € netto bei 50 Stück, jeweils pro Stück. Ein Ärmeldruck kostet 3,00 € netto pro Ärmel zusätzlich. Stand ${STAND}.` },
+  { q: 'Was kostet eine Softshelljacke mit Logo?', a: `Eine Softshelljacke (Stedman Lux Softshell) mit einem Druck kostet 44,90 € netto als Einzelstück und 39,90 € netto (${brutto('39,90')} € brutto) pro Stück bei 10 Stück. Logo vorne und hinten kostet ab 3,50 € pro Teil zusätzlich. Stand ${STAND}.` },
+  { q: 'Können wir unsere eigene Arbeitskleidung bedrucken lassen?', a: 'Ja. westernprint bedruckt angelieferte Workwear, zum Beispiel von Engelbert Strauss oder Kübler. Ihr zahlt dann nur den Druck. Nennt vorher kurz das Material, wir prüfen, ob es sich eignet. Plant 2 bis 3 Prozent Reserve ein, für Materialfehler an angelieferter Ware haften wir nicht.' },
+  { q: 'Können wir einzelne Teile für neue Mitarbeiter nachbestellen?', a: 'Ja. westernprint speichert eure Druckdaten. Ein neuer Mitarbeiter bekommt sein Shirt oder seine Jacke einzeln nachbestellt, mit dem gleichen Druck wie das übrige Team. Einzelteile sind in der Regel in 1 bis 3 Werktagen fertig.' },
+  { q: 'Hält der Druck auf Arbeitskleidung?', a: 'Ja. DTF-Druck ist dehnbar, reißt nicht und ist waschfest. Er hält auch auf Polyester, Softshell und Mischgewebe. Für eine lange Haltbarkeit wascht ihr die Teile am besten auf links gedreht und ohne Weichspüler.' },
+  { q: 'Bedruckt ihr auch Warnwesten?', a: 'Ja. westernprint bedruckt Warnwesten mit eurem Firmenlogo, auch Warnwesten, die ihr selbst mitbringt. Den Preis nennen wir euch im Angebot innerhalb von 24 Stunden.' },
+  { q: 'Welche Datei braucht ihr von unserem Logo?', a: 'Am besten eine Vektordatei (PDF, AI, SVG) oder ein PNG mit transparentem Hintergrund. Wir prüfen jede Datei kostenlos. Habt ihr nur ein Foto oder eine alte Datei, bauen wir das Logo für 19,90 € netto pro Datei sauber neu auf.' },
+  { q: 'Wie schnell bekommen wir die Arbeitskleidung?', a: `Das Angebot kommt an Werktagen innerhalb von 24 Stunden. Nach eurer Freigabe ist die Serie in 5 bis 7 Werktagen fertig. Ihr holt sie kostenlos in der Schenkendorfstraße 45 in Oberhausen ab, ${oeffnungszeiten.text}, oder sie kommt per DHL mit Sendungsnummer in den Betrieb.` },
+  { q: 'Bekommen wir eine Rechnung mit Umsatzsteuer?', a: 'Ja. Ihr bekommt eine ordentliche Rechnung der westernprint GmbH mit ausgewiesener Umsatzsteuer. Neue Kunden zahlen vorab per Überweisung, für Stammkunden ist Zahlung auf Rechnung nach Absprache möglich.' },
+];
+
+const ld = [
+  { '@context': 'https://schema.org', '@type': 'Service', name: 'Arbeitskleidung mit Firmenlogo bedrucken', serviceType: 'Textildruck für Handwerksbetriebe', description: 'Arbeitskleidung mit Firmenlogo für Handwerksbetriebe: T-Shirts, Polos, Sweatshirts, Hoodies, Hemden und Softshelljacken, ab 1 Stück ohne Mindestmenge, Staffelpreise ab 10 Stück, einzeln nachbestellbar. Eigene Workwear kann angeliefert werden.', provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: [{ '@type': 'City', name: 'Oberhausen' }, { '@type': 'AdministrativeArea', name: 'Ruhrgebiet' }, { '@type': 'AdministrativeArea', name: 'Nordrhein-Westfalen' }, { '@type': 'Country', name: 'Deutschland' }], audience: { '@type': 'BusinessAudience', audienceType: 'Handwerksbetriebe, Bau- und Servicefirmen' }, url: `${site.url}/fuer/handwerksbetriebe`,
+    hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Arbeitskleidung mit Logo, Preis pro Stück bei 10 Stück, ein Druck', itemListElement: preise.map((r) => ({ '@type': 'Offer', name: `${r.t} mit Firmenlogo (${r.m})`, price: r.p[1].replace(',', '.'), priceCurrency: 'EUR', eligibleQuantity: { '@type': 'QuantitativeValue', minValue: 10 }, priceSpecification: { '@type': 'UnitPriceSpecification', price: r.p[1].replace(',', '.'), priceCurrency: 'EUR', valueAddedTaxIncluded: false } })) } },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Startseite', item: site.url }, { '@type': 'ListItem', position: 2, name: 'Für wen wir drucken', item: `${site.url}/fuer` }, { '@type': 'ListItem', position: 3, name: 'Handwerksbetriebe', item: `${site.url}/fuer/handwerksbetriebe` }] },
+];
+---
+<Base title="Arbeitskleidung mit Firmenlogo bedrucken lassen, ab 1 Stück" description="Arbeitskleidung mit Firmenlogo für Handwerksbetriebe: T-Shirts, Polos, Hoodies, Hemden und Softshelljacken ab 1 Stück ohne Mindestmenge. Polo mit Logo ab 14,50 € netto, einzeln nachbestellbar, eigene Workwear möglich. Druckerei in Oberhausen, Angebot in 24 Stunden." jsonLd={ld} ogImage="/img/workwear-team-halle.jpg">
+
+  <section class="hw-hero">
+    <div class="container hw-hero-grid">
+      <div class="hw-copy">
+        <p class="hw-kicker">Handwerk, Bau und Service-Betriebe</p>
+        <h1>Arbeitskleidung mit Firmenlogo.<br /><span class="hl">Ab 1 Stück.</span></h1>
+        <p class="lede">T-Shirts, Polos, Hoodies, Hemden und Softshelljacken mit eurem Logo auf Brust, Rücken oder Ärmel. Keine Mindestmenge, Staffelpreise ab 10 Stück, und für neue Mitarbeiter bestellt ihr einzelne Teile nach. Gedruckt in unserer Werkstatt in Oberhausen.</p>
+        <div class="hw-cta">
+          <a href="#anfrage" class="btn btn-primary btn-lg">Angebot anfragen <Icon name="arrow-right" size={18} /></a>
+          <a href={site.whatsapp + '?text=' + encodeURIComponent('Hallo westernprint, wir brauchen Arbeitskleidung mit unserem Firmenlogo.')} class="btn btn-secondary btn-lg" target="_blank" rel="noopener"><Icon name="whatsapp-logo" size={18} /> WhatsApp</a>
+        </div>
+        <ul class="trust" aria-label="Fakten">
+          <li><strong>ab 1</strong><span>Stück, keine Mindestmenge</span></li>
+          <li><strong>24 h</strong><span>bis zum Angebot an Werktagen</span></li>
+          <li><strong>5 bis 7</strong><span>Werktage bis zur fertigen Serie</span></li>
+          <li><strong>einzeln</strong><span>nachbestellen für neue Mitarbeiter</span></li>
+        </ul>
+      </div>
+      <figure class="hw-visual">
+        <img src="/img/workwear-team-halle.jpg" alt="Team in dunkelblauen Poloshirts mit Firmenlogo und Arbeitshosen in der Werkhalle" width="1672" height="941" loading="eager" fetchpriority="high" />
+      </figure>
+    </div>
+  </section>
+
+  <section class="section-tight answer-section">
+    <div class="container answer reveal">
+      <h2>Kurz gesagt</h2>
+      <p>westernprint in Oberhausen bedruckt Arbeitskleidung mit Firmenlogo für Handwerksbetriebe, ab 1 Stück ohne Mindestmenge. Ein T-Shirt mit Logo kostet bei 10 Stück 12,90 € netto, ein Poloshirt 17,90 € netto, eine Softshelljacke 39,90 € netto pro Stück. Die Serie ist 5 bis 7 Werktage nach Freigabe fertig. Neue Mitarbeiter bekommen ihr Teil einzeln nachbestellt, mit dem gleichen Druck. Eigene Workwear könnt ihr anliefern, dann zahlt ihr nur den Druck.</p>
+    </div>
+  </section>
+
+  <section class="section prices-section" id="preise">
+    <div class="container">
+      <div class="section-head reveal"><h2>Preise für Arbeitskleidung mit Logo</h2><p>Preis pro Stück in Euro, netto zzgl. 19 % MwSt., mit einem Druck (Brust oder Rücken), Textil inklusive. Größen und Farben könnt ihr mischen. Stand {STAND}.</p></div>
+      <div class="table-wrap reveal">
+        <table class="price-table">
+          <thead><tr><th scope="col">Teil</th>{mengen.map((m) => <th scope="col">{m}</th>)}</tr></thead>
+          <tbody>
+            {preise.map((r) => (
+              <tr><th scope="row"><strong>{r.t}</strong><span>{r.m}</span></th>{r.p.map((p) => <td>{p} €</td>)}</tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="extras reveal">
+        {zusatz.map((z) => (
+          <div class="extra"><div class="extra-top"><strong>{z.t}</strong><span class="price">{z.p}</span></div><p>{z.d}</p></div>
+        ))}
+      </div>
+      <p class="muted small">Keine Einrichtungskosten, keine Filmkosten. Das genaue Angebot mit festem Stückpreis bekommt ihr an Werktagen innerhalb von 24 Stunden.</p>
+    </div>
+  </section>
+
+  <section class="section-tight branchen-section">
+    <div class="container">
+      <div class="section-head reveal"><h2>Für diese Betriebe drucken wir</h2><p>Vom Ein-Mann-Betrieb bis zur Firma mit 50 Leuten. Das Logo sitzt auf Brust, Rücken oder Ärmel, auf Wunsch mit Telefonnummer und Webadresse.</p></div>
+      <ul class="chips reveal">{branchen.map((b) => <li>{b}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section-tight services-section">
+    <div class="container">
+      <div class="section-head reveal"><h2>Was Handwerksbetriebe bei uns schätzen</h2></div>
+      <div class="services">
+        {services.map((s, i) => (
+          <div class={`service reveal reveal-d${i % 3}`}>
+            <Icon name={s.icon} size={22} />
+            <strong>{s.t}</strong>
+            <p>{s.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight steps-section">
+    <div class="container">
+      <div class="section-head reveal"><h2>So läuft es ab</h2></div>
+      <ol class="steps">
+        <li class="reveal"><span class="num">01</span><div><strong>Logo schicken</strong><span>Logo, Teile, Größen und Stückzahl per Formular, WhatsApp oder Mail. Ein Foto vom alten Shirt reicht für den Anfang.</span></div></li>
+        <li class="reveal reveal-d1"><span class="num">02</span><div><strong>Angebot und Freigabe</strong><span>Fester Stückpreis und Liefertermin innerhalb von 24 Stunden. Ihr gebt frei, dann drucken wir.</span></div></li>
+        <li class="reveal reveal-d2"><span class="num">03</span><div><strong>Druck und Lieferung</strong><span>Fertig in 5 bis 7 Werktagen. Abholung in Oberhausen oder per DHL in den Betrieb. Nachbestellungen später einzeln.</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section form-section" id="anfrage">
+    <div class="container form-grid">
+      <div class="form-copy reveal">
+        <h2>Angebot in 24 Stunden</h2>
+        <p>Kurz die Eckdaten. Ihr bekommt einen festen Stückpreis für jedes Teil und einen Liefertermin, von jemandem aus der Werkstatt.</p>
+        <ul class="form-facts">
+          <li><Icon name="check" weight="bold" size={14} /> Ab 1 Stück, keine Mindestmenge</li>
+          <li><Icon name="check" weight="bold" size={14} /> Staffelpreise ab 10 Stück</li>
+          <li><Icon name="check" weight="bold" size={14} /> Eigene Workwear bedrucken möglich</li>
+          <li><Icon name="check" weight="bold" size={14} /> Abholung in Oberhausen oder Versand mit DHL</li>
+        </ul>
+        <div class="form-detail">
+          <img src="/img/workwear-stange.jpg" alt="Bedruckte Arbeitskleidung mit Firmenlogo auf einer Kleiderstange" width="1672" height="941" loading="lazy" />
+        </div>
+      </div>
+
+      <form class="hw-form reveal reveal-d1" data-endpoint={site.formEndpoint} novalidate>
+        <div class="row">
+          <div class="field"><label for="hw-firma">Firma</label><input class="input" id="hw-firma" name="firma" type="text" autocomplete="organization" placeholder="z. B. Müller Elektrotechnik" /></div>
+          <div class="field"><label for="hw-branche">Branche</label><select class="select" id="hw-branche" name="branche"><option value="">Bitte wählen</option>{branchen.map((b) => <option>{b}</option>)}<option>Andere</option></select></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="hw-name">Ihr Name</label><input class="input" id="hw-name" name="name" type="text" autocomplete="name" required /><span class="error">Bitte Namen angeben.</span></div>
+          <div class="field"><label for="hw-email">E-Mail</label><input class="input" id="hw-email" name="email" type="email" autocomplete="email" required /><span class="error">Bitte gültige E-Mail angeben.</span></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="hw-phone">Telefon / WhatsApp <span class="optional">(optional)</span></label><input class="input" id="hw-phone" name="phone" type="tel" autocomplete="tel" /></div>
+          <div class="field"><label for="hw-qty">Stückzahl</label><select class="select" id="hw-qty" name="qty" required><option value="" disabled selected>Bitte wählen</option><option>1 bis 9</option><option>10 bis 49</option><option>50 bis 99</option><option>100 und mehr</option><option>Nachbestellung</option></select><span class="error">Bitte Stückzahl wählen.</span></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="hw-product">Welche Teile?</label><select class="select" id="hw-product" name="product"><option>T-Shirts</option><option>Poloshirts</option><option>Sweatshirts oder Hoodies</option><option>Hemden</option><option>Softshelljacken</option><option>Warnwesten</option><option>Mehrere Teile</option><option>Eigene Workwear bedrucken</option></select></div>
+          <div class="field"><label for="hw-source">Wie haben Sie uns gefunden? <span class="optional">(optional)</span></label><select class="select" id="hw-source" name="source"><option value="">Bitte wählen</option><option>Google</option><option>ChatGPT / KI-Suche</option><option>Empfehlung</option><option>Instagram</option><option>Sonstiges</option></select></div>
+        </div>
+        <div class="field"><label for="hw-msg">Logo, Positionen, Fragen <span class="optional">(optional)</span></label><textarea class="textarea" id="hw-msg" name="message" rows="3" placeholder="z. B. 12 Polos navy, Logo links auf der Brust, Firmenname mit Telefonnummer auf dem Rücken"></textarea></div>
+        <div class="field"><label class="checkbox"><input type="checkbox" name="privacy" required /><span>Ich habe die <a href="/datenschutz" class="accent">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Daten zur Bearbeitung der Anfrage einverstanden.</span></label><span class="error">Bitte bestätigen Sie den Datenschutzhinweis.</span></div>
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="sr-only" aria-hidden="true" />
+        <button type="submit" class="btn btn-primary btn-lg" data-submit>Angebot anfragen <Icon name="arrow-right" size={18} /></button>
+        <p class="form-trust"><span><Icon name="check" weight="bold" size={13} /> Unverbindlich</span><span><Icon name="check" weight="bold" size={13} /> Antwort in 24 Stunden</span><span><Icon name="check" weight="bold" size={13} /> Aus der Werkstatt</span></p>
+        <p class="form-note" data-note role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <Faq items={faqs} title="Fragen von Handwerksbetrieben" />
+  <CtaBand title="Arbeitskleidung mit eurem Logo?" text="Schickt uns Logo, Teile und Stückzahl. Ihr bekommt innerhalb von 24 Stunden ein Angebot mit festem Stückpreis, ab 1 Stück." />
+</Base>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('.hw-form');
+  if (form) {
+    const note = form.querySelector<HTMLElement>('[data-note]')!;
+    const submit = form.querySelector<HTMLButtonElement>('[data-submit]')!;
+    const setNote = (kind: string, text: string) => { note.className = 'form-note ' + kind; note.textContent = text; };
+    const validate = () => {
+      let ok = true;
+      form.querySelectorAll<HTMLElement>('.field').forEach((f) => {
+        const input = f.querySelector<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('input, select, textarea');
+        if (!input || !input.hasAttribute('required')) return;
+        const valid = input instanceof HTMLInputElement && input.type === 'checkbox' ? input.checked : input.checkValidity() && input.value.trim() !== '';
+        f.classList.toggle('has-error', !valid); if (!valid) ok = false;
+      });
+      return ok;
+    };
+    form.addEventListener('input', (e) => (e.target as HTMLElement).closest('.field')?.classList.remove('has-error'));
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault(); setNote('', '');
+      if (!validate()) { setNote('err', 'Bitte prüfen Sie die markierten Felder.'); return; }
+      const d = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+      if (d._gotcha) return;
+      const message = ['Anfrage Arbeitskleidung (Handwerk) über westernprint.de', d.firma ? `Firma: ${d.firma}` : '', d.branche ? `Branche: ${d.branche}` : '', `Stückzahl: ${d.qty}`, `Teile: ${d.product}`, '', d.message || ''].filter((l) => l !== '').join('\n');
+      submit.disabled = true; submit.textContent = 'Wird gesendet...';
+      try {
+        const res = await fetch(form.dataset.endpoint!, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: d.name, email: d.email, phone: d.phone, topic: 'Handwerk / Arbeitskleidung', qty: d.qty, message, gclid: (window as any).wpGclid?.() || '', page: location.pathname, source: d.source }) });
+        const j = await res.json().catch(() => ({}));
+        if (!res.ok || !j.ok) throw new Error(j.error || String(res.status));
+        form.reset();
+        (window as any).wpTrack?.('lead');
+        setNote('ok', 'Danke! Ihre Anfrage ist angekommen. Wir melden uns werktags meist innerhalb weniger Stunden per E-Mail oder WhatsApp.');
+      } catch (err) {
+        setNote('err', `Senden hat nicht geklappt (${(err as Error).message}). Schreiben Sie uns direkt per WhatsApp oder an info@westernprint.de.`);
+      } finally { submit.disabled = false; submit.innerHTML = 'Angebot anfragen'; }
+    });
+  }
+</script>
+
+<style>
+  .hw-hero { position: relative; padding: clamp(48px, 7vw, 104px) 0 clamp(32px, 5vw, 64px); overflow: hidden; }
+  .hw-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(1100px 600px at 85% 20%, rgba(255,255,255,0.05), transparent 65%); pointer-events: none; }
+  .hw-hero-grid { position: relative; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
+  .hw-kicker { font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+  .hw-copy h1 { margin-top: 18px; font-size: clamp(2.4rem, 5vw, 4.4rem); line-height: 1; letter-spacing: -0.03em; text-wrap: balance; }
+  .hw-copy .lede { margin-top: 24px; max-width: 54ch; font-size: 1.15rem; }
+  .hw-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+  .trust { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 44px; border-top: 1px solid var(--line-strong); }
+  .trust li { display: grid; gap: 4px; padding: 18px 18px 0 0; border-right: 1px solid var(--line); margin-right: 18px; }
+  .trust li:last-child { border-right: 0; margin-right: 0; }
+  .trust strong { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 2.3vw, 2rem); letter-spacing: -0.02em; line-height: 1; color: var(--text); }
+  .trust span { font-size: 13px; line-height: 1.35; color: var(--text-2); }
+  .hw-visual { margin: 0; border-radius: 16px; overflow: hidden; border: 1px solid var(--line-strong); aspect-ratio: 4 / 3; }
+  .hw-visual img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+  @media (max-width: 900px) { .hw-hero-grid { grid-template-columns: 1fr; } .hw-visual { order: -1; } .trust { grid-template-columns: 1fr 1fr; row-gap: 18px; } .trust li:nth-child(2) { border-right: 0; } }
+
+  .answer-section { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg-2); }
+  .answer h2 { font-size: 1.1rem; letter-spacing: 0.02em; color: var(--accent); }
+  .answer p { margin-top: 10px; max-width: 75ch; font-size: 1.1rem; line-height: 1.65; color: var(--text); }
+
+  .section-head p { margin-top: 12px; }
+  .table-wrap { overflow-x: auto; border-top: 1px solid var(--line-strong); }
+  .price-table { width: 100%; border-collapse: collapse; min-width: 640px; font-size: 15px; }
+  .price-table th, .price-table td { padding: 14px 16px 14px 0; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .price-table thead th { font-weight: 600; font-size: 13.5px; color: var(--text-3); }
+  .price-table thead th:first-child, .price-table tbody th { text-align: left; }
+  .price-table tbody th { display: grid; gap: 2px; white-space: normal; }
+  .price-table tbody th strong { font-size: 15.5px; color: var(--text); }
+  .price-table tbody th span { font-size: 13px; font-weight: 400; color: var(--text-3); }
+  .price-table td { font-variant-numeric: tabular-nums; color: var(--text); }
+  .extras { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 36px; border-top: 1px solid var(--line-strong); }
+  .extra { padding: 20px 24px 20px 0; margin-right: 24px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .extra:nth-child(3n) { border-right: 0; margin-right: 0; }
+  .extra-top { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+  .extra-top strong { font-size: 15.5px; } .extra .price { font-weight: 700; color: var(--accent); white-space: nowrap; }
+  .extra p { margin-top: 6px; font-size: 14px; line-height: 1.5; color: var(--text-2); }
+  .small { font-size: 13.5px; margin-top: 22px; }
+  @media (max-width: 900px) { .extras { grid-template-columns: 1fr; } .extra { border-right: 0; margin-right: 0; } }
+
+  .branchen-section { border-top: 1px solid var(--line); }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chips li { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line-strong); font-size: 14.5px; color: var(--text-2); }
+
+  .services-section { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg-2); }
+  .services { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line-strong); }
+  .service { display: grid; gap: 12px; align-content: start; padding: 28px 28px 32px 0; margin-right: 28px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .service:nth-child(3n) { border-right: 0; margin-right: 0; } .service:nth-last-child(-n+3) { border-bottom: 0; }
+  .service :global(.icon) { color: var(--accent); }
+  .service strong { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; } .service p { color: var(--text-2); font-size: 14.5px; line-height: 1.55; }
+  @media (max-width: 900px) { .services { grid-template-columns: 1fr; } .service { border-right: 0 !important; margin-right: 0 !important; border-bottom: 1px solid var(--line) !important; } .service:last-child { border-bottom: 0 !important; } }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 8px; border-top: 1px solid var(--line-strong); }
+  .steps li { display: grid; gap: 14px; padding: 28px 24px 0 0; border-right: 1px solid var(--line); margin-right: 24px; }
+  .steps li:last-child { border-right: 0; margin-right: 0; }
+  .steps .num { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 13px; letter-spacing: 0.1em; color: var(--accent); }
+  .steps strong { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; } .steps div > span { display: block; margin-top: 6px; color: var(--text-2); font-size: 14.5px; line-height: 1.55; }
+  @media (max-width: 760px) { .steps { grid-template-columns: 1fr; row-gap: 24px; } .steps li { border-right: 0; margin-right: 0; } }
+
+  .form-section { scroll-margin-top: calc(var(--nav-h) + 12px); border-top: 1px solid var(--line); }
+  .form-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .form-copy h2 { font-size: clamp(1.9rem, 3.2vw, 2.6rem); letter-spacing: -0.02em; }
+  .form-copy > p { margin-top: 14px; color: var(--text-2); font-size: 1.05rem; max-width: 46ch; }
+  .form-facts { display: grid; gap: 10px; margin-top: 24px; font-size: 14.5px; }
+  .form-facts li { display: flex; gap: 10px; align-items: center; } .form-facts :global(.icon) { color: var(--accent); flex: none; }
+  .form-detail { margin-top: 32px; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 4 / 3; max-width: 440px; }
+  .form-detail img { width: 100%; height: 100%; object-fit: cover; }
+  .hw-form { display: grid; gap: 14px; padding: clamp(22px, 3vw, 36px); border-radius: 16px; border: 1px solid var(--line-strong); background: var(--surface); }
+  .hw-form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .hw-form textarea { min-height: 84px; }
+  .form-trust { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--text-3); }
+  .form-trust span { display: inline-flex; gap: 5px; align-items: center; } .form-trust :global(.icon) { color: var(--accent); }
+  @media (max-width: 900px) { .form-grid { grid-template-columns: 1fr; } .hw-form .row { grid-template-columns: 1fr; } .form-detail { display: none; } }
+</style>
