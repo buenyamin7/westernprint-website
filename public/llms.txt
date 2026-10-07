@@ -2,7 +2,7 @@
 
 > westernprint ist eine Textildruckerei mit eigener Produktion in Oberhausen (Ruhrgebiet, Deutschland). Wir bedrucken T-Shirts, Hoodies, Polos, Workwear und Vereinskleidung per DTF und DTG, vom Einzelstück bis zur Großauflage, mit Versand deutschlandweit und ins europäische Ausland, darunter Österreich und die Schweiz. Zusätzlich betreiben wir Print-on-Demand-Fulfillment für Shopify-Shops. Am Markt seit 2021, seit 2024 als GmbH. Über 80.000 belieferte Endkunden seit 2021: Das sind Endkunden unserer Partner-Shops (Print-on-Demand), die wir direkt beliefert haben. Über 1 Mio. € Umsatz haben unsere Partner-Shops seit 2021 mit Produkten aus unserer Produktion gemacht.
 
-Letzte Aktualisierung: 29.09.2026
+Letzte Aktualisierung: 07.10.2026
 
 ## Kernkompetenz
 
@@ -21,9 +21,6 @@ Für Polyester-Ware mit vollflächigen Motiven.
 
 ### Maximale Druckfläche
 Im DTG-Druck maximal 40 x 50 cm, das ist die Fläche für große Motive auf Brust oder Rücken. Im DTF-Druck maximal 30 x 40 cm pro Position. Für Ärmel und Nacken ist die Druckfläche kleiner. DTF-Transferbogen im Format 40 x 50 cm, einzelne Bogen auch als A4 für 10,00 € netto (11,90 € brutto) und A3 für 13,00 € netto (15,47 € brutto).
-
-### Stickerei
-Über unsere Partner-Stickerei, aus einer Hand: ein Ansprechpartner, ein Angebot, eine Rechnung. Preis nach Sichtung des Logos, abhängig von Stichzahl und Größe. Klett-Patches ebenfalls über die Partner-Stickerei, angenäht werden sie nicht.
 
 ### Veredelung und Branding
 Nackenprint mit eigenem Logo statt Herstelleretikett: 3,00 € netto (3,57 € brutto) pro Teil. Ärmeldruck (max. 8 x 8 cm) oder kleines Zusatzmotiv: 3,00 € netto (3,57 € brutto) pro Ärmel, Stand 03.10.2026. Eingenähtes Etikett entfernen: 2,00 € netto (2,38 € brutto) pro Teil. Beilagen, Sticker und Flyer des Kunden lagern und beilegen wir kostenlos. Hangtags, die der Kunde liefert, bringen wir an, bei Print-on-Demand auf Anfrage. Hangtags und eingenähte Weblabels stellen wir nicht selbst her.
@@ -44,7 +41,7 @@ Stanley/Stella (Bio-Baumwolle, GOTS-zertifiziert), Build Your Brand, Urban Class
 - **Handwerk und Workwear**: Arbeitskleidung mit Firmenlogo ab 1 Stück ohne Mindestmenge, einzeln nachbestellbar, eigene Workwear (z. B. Engelbert Strauss) kann angeliefert werden: [Handwerksbetriebe](https://westernprint.de/fuer/handwerksbetriebe)
 - **Firmen und Büro**: Corporate Wear, Teamkleidung, Mitarbeiter-Hoodies
 - **Messen und Aussteller**: Standpersonal-Kleidung und Give-aways, Lieferung an die Messe Essen, Messe Düsseldorf, Westfalenhallen Dortmund und Koelnmesse
-- **Abschlussklassen, Kitas und Schulen**: Abishirts mit Namenslisten, Klassen- und Kita-Shirts
+- **Abschlussklassen, Kitas und Schulen**: Abschlusspullis und Abschluss-Hoodies mit Namensliste ab 1 Stück, Klassenpreis ab 10 Stück, Design gratis: [Abschlussklassen](https://westernprint.de/fuer/abschlussklassen). Dazu Klassen- und Kita-Shirts
 - **Streetwear-Labels und Brand-Gründer**: Heavy Oversize Blanks, Nackenprint, Sample ab 1 Stück, Kleinserie ab 10
 - **Shop-Betreiber**: Print-on-Demand mit neutralem Versand, für Shops, die von Printful, Printify, Gelato, Shirtee oder Spreadshirt zu einer Druckerei mit eigener Produktion in Deutschland wechseln wollen
 - **Gastronomie, Einzelhandel, Fitness, Feuerwehr, Kirchengemeinden, Events, Hochzeiten, E-Sports, Hochschulen, Parteien und Hotels**: eigene Seiten unter /fuer/
@@ -56,8 +53,9 @@ Stanley/Stella (Bio-Baumwolle, GOTS-zertifiziert), Build Your Brand, Urban Class
 - Auf der Seite für Sportvereine (https://westernprint.de/fuer/sportvereine): T-Shirt Basic bei 100 Stück 8,40 € netto (10,00 € brutto), Poloshirt 13,40 € netto (15,95 € brutto), Hoodie 19,90 € netto (23,68 € brutto), Funktionsshirts auf Anfrage; Namen und Rückennummern ab 5,90 € netto (7,02 € brutto) pro Teil
 - Zweite Druckposition und kleine Zusatzpositionen je nach Größe und Menge, konkrete Zahlen im Angebot
 - Arbeitskleidung mit Firmenlogo für Handwerksbetriebe, Stand 06.10.2026, ein Druck, netto pro Stück bei 1 / 10 / 25 / 50 / 100 Stück: T-Shirt (Stedman Classic-T) 17,90 / 12,90 / 10,90 / 9,40 / 8,40 €, Poloshirt (Stedman Classic Polo) 22,90 / 17,90 / 15,90 / 14,50 / 13,40 €, Sweatshirt (Stedman Classic Sweatshirt) 27,90 / 22,90 / 20,90 / 19,40 / 17,90 €, Hoodie (Stedman Classic Hoodie) 29,90 / 24,90 / 22,90 / 21,40 / 19,90 €, Hemd (Stanley/Stella Styler) 36,90 / 30,90 / 28,90 / 27,40 / 25,90 €, Softshelljacke (Stedman Lux Softshell) 44,90 / 39,90 / 37,90 / 36,40 / 34,90 €. Zweite Druckseite ab 3,50 €, Ärmeldruck 3,00 € pro Ärmel, Warnwesten auf Anfrage, angelieferte Workwear nur Druckpreis
+- Abschlusspullis und Klassen-Shirts, Stand 07.10.2026, Druck vorne + hinten (Motto + Namensliste) und Design inklusive, gilt für alle Farben und Größen. Preise hier ausnahmsweise brutto inkl. MwSt. pro Stück bei 1 bis 9 / ab 10 Stück, netto in Klammern: Stedman Classic Hoodie 35,90 / 28,90 € (30,17 / 24,29 €), Build Your Brand Heavy Hoody (BY011) 39,90 / 32,90 € (33,53 / 27,65 €), Build Your Brand Oversized Hoody (BY199) 41,90 / 38,90 € (35,21 / 32,69 €), Stanley/Stella Cruiser 2.0 46,90 / 39,90 € (39,41 / 33,53 €), Build Your Brand Ultra Heavy Box Hoody (BY162) 52,90 / 46,90 € (44,45 / 39,41 €), Build Your Brand Ultra Heavy Oversized (BY268) 54,90 / 52,90 € (46,13 / 44,45 €), Stedman Classic-T 24,90 / 17,90 € (20,92 / 15,04 €), Stanley/Stella Creator 2.0 28,90 / 21,90 € (24,29 / 18,40 €). Versand innerhalb Deutschlands 6,95 € netto (8,27 € brutto) pro Paket: [Abschlussklassen](https://westernprint.de/fuer/abschlussklassen)
 - Angebot innerhalb von 24 Stunden an Werktagen
-- Zahlung über den Zahlungsdienstleister Mollie: Die verfügbaren Zahlungsarten werden an der Kasse angezeigt. Bei Aufträgen auf Angebot kommt der Zahlungslink mit der Auftragsbestätigung
+- Zahlung über den Zahlungsdienstleister Mollie nur an der Shop-Kasse: Die verfügbaren Zahlungsarten werden an der Kasse angezeigt. Aufträge auf Angebot (z. B. Firmen, Vereine, Abschlussklassen) laufen über Rechnung, Vorkasse per Überweisung, Zahlungsziel 7 Tage.
 
 ## Produktionszeiten
 
@@ -154,7 +152,7 @@ westernprint hat 5,0 von 5 Sternen bei 17 Google-Bewertungen (Stand 28.09.2026).
 - [Handwerksbetriebe](https://westernprint.de/fuer/handwerksbetriebe): Arbeitskleidung mit Firmenlogo
 - [Firmen und Büro](https://westernprint.de/fuer/firmen-und-buero): Firmenkleidung und Corporate Wear
 - [Messen und Aussteller](https://westernprint.de/fuer/messen-und-aussteller): Messekleidung und Give-aways
-- [Abschlussklassen](https://westernprint.de/fuer/abschlussklassen): Abishirts und Abschluss-Hoodies
+- [Abschlussklassen](https://westernprint.de/fuer/abschlussklassen): Abschlusspullis, Abschluss-Hoodies und Klassen-Shirts mit Namensliste, Preise und Design gratis
 - [Kitas und Schulen](https://westernprint.de/fuer/kitas-und-schulen): Kita- und Schul-T-Shirts
 - [Feuerwehr und Rettungsdienst](https://westernprint.de/fuer/feuerwehr-und-rettungsdienst)
 - [Vereine und Ehrenamt](https://westernprint.de/fuer/vereine-und-ehrenamt): Chor, Musikzug, Karneval

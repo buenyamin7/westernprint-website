@@ -77,6 +77,8 @@ export function sourceFilesFor(pathname) {
   if (parts[0] === 'fuer' && parts.length === 2) {
     const own = `src/pages/fuer/${parts[1]}.astro`;
     // Auch Seiten mit eigener Datei (abschlussklassen, streetwear-brands) lesen ihre Texte aus zielgruppen.ts.
+    // /fuer/abschlussklassen holt Preise und Konditionen aus abschluss.ts: Preisänderungen bewegen das Datum dieser einen Seite.
+    if (parts[1] === 'abschlussklassen' && exists(own)) return [own, 'src/data/zielgruppen.ts', 'src/data/abschluss.ts'];
     return exists(own) ? [own, 'src/data/zielgruppen.ts'] : ['src/pages/fuer/[slug].astro', 'src/data/zielgruppen.ts'];
   }
 
