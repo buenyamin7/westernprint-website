@@ -1,32 +1,56 @@
 ---
-// Landingpage für Abschlussklassen. Zielseite der Google-Ads-Kampagne "Abschluss".
-// Aufbau nach dem Muster erfolgreicher Anbieter: Angebot oben, Kurzformular, Ablauf, Produkte mit Preis, Motiv-Ideen, Qualität, FAQ.
+// Landingpage für Abschlussklassen: Abschlusspullis, Abschluss-Hoodies und Klassen-Shirts.
+// Aufbau wie /fuer/handwerksbetriebe: Kurzantwort oben, Formular, Ablauf, Produkte, Preistabelle, Abschlussarten, Motiv-Ideen, Qualität, FAQ.
+// Entscheidungen des Inhabers vom 07.10.2026 (gelten nur für diese Seite):
+// - Design (Motto, Schriftzug, Namensliste setzen) ist für Abschlussklassen gratis. Nirgends sonst auf der Website Gratis-Grafik versprechen.
+// - Zur Freigabe nur: "Gedruckt wird erst, wenn ihr Motto und Namensliste schriftlich bestätigt habt."
+//   Keine Begriffe wie Korrekturabzug oder Vorschau, keine unbegrenzten Änderungsrunden.
+// - Zahlung per Rechnung der westernprint GmbH, Vorkasse per Überweisung, Zahlungsziel 7 Tage. Kein Mollie, kein Zahlungslink.
+// - Nur DTF nennen, keine Stickerei, kein Gratis-Muster, keine Anprobe, keine zusätzliche Werbung für Abholung.
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import Faq from '../../components/Faq.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { site } from '../../data/site';
 import { zielgruppen } from '../../data/zielgruppen';
+import { STAND, KLASSENPREIS_AB, modelle, modell, zusatz, VERSAND, PRODUKTION, ZAHLUNGSZIEL_TAGE, netto, euro, rechenbeispiel } from '../../data/abschluss';
 
+// Aus zielgruppen.ts nur noch das Bild. Texte und Preise dieser Seite stehen hier bzw. in src/data/abschluss.ts.
 const z = zielgruppen.find((x) => x.slug === 'abschlussklassen')!;
 const year = new Date().getMonth() >= 6 ? new Date().getFullYear() + 1 : new Date().getFullYear();
 
-// Klassenpreise: ab 20 Stück, inkl. Druck vorne + hinten (Namensliste), inkl. MwSt.
+// Klassenpreise ab 10 Stück, alle Preise aus src/data/abschluss.ts (brutto, inkl. Druck vorne + hinten, Design und MwSt., zzgl. Versand).
 // proof = Merkmal auf der Karte, nur belegbare Eigenschaften (Grammatur, Material, Verarbeitung laut products.json oder Herstellerangabe).
 // Keine Druckzahlen und keine fremden Marken, solange der Inhaber sie nicht mit Quelle und Stand bestätigt hat.
 // Build-Your-Brand-Modelle stehen nicht in products.json: keine Material- oder Verarbeitungsangaben über die spec-Zeile hinaus.
+// Alle Karten führen zum Formular (#anfrage), nicht in den Shop: Die Shopseiten rechnen mit anderen Preisen.
 const oversize = [
-  { handle: null, name: 'Oversized Hoody', brand: 'Build Your Brand', tag: 'Oversize-Favorit', spec: '300 g/m², Drop Shoulder, gekreuzte Kapuze, bis 5XL', price: '38,90', img: '/img/products/byb-by199-black.webp', proof: 'Neu im Sortiment' },
-  { handle: null, name: 'Ultra Heavy Box Hoody', brand: 'Build Your Brand', tag: 'Boxy Fit', spec: '460 g/m², 100 % Baumwolle, kastiger Schnitt', price: '46,90', img: '/img/products/byb-by162-black.webp', proof: 'Streetwear-Qualität' },
-  { handle: null, name: 'Ultra Heavy Oversized', brand: 'Build Your Brand', tag: 'Schwerster Hoodie', spec: '500 g/m², Oversize, 80 % Baumwolle', price: '52,90', img: '/img/products/byb-by268-black.webp', proof: 'Heavyweight 500 g/m²' },
-  { handle: 'cruiser-2-0', name: 'Cruiser 2.0', brand: 'Stanley/Stella', tag: 'Bio, Relaxed Fit', spec: '350 g/m², Bio-Baumwolle, 51 Farben', price: '39,90', img: '/img/products/cruiser-2-0-black-flat.webp', proof: 'Doppellagige Kapuze' },
-];
+  { id: 'by199', tag: 'Oversize-Favorit', spec: '300 g/m², Drop Shoulder, gekreuzte Kapuze, bis 5XL', img: '/img/products/byb-by199-black.webp', proof: 'Neu im Sortiment' },
+  { id: 'by162', tag: 'Boxy Fit', spec: '460 g/m², 100 % Baumwolle, kastiger Schnitt', img: '/img/products/byb-by162-black.webp', proof: 'Streetwear-Qualität' },
+  { id: 'by268', tag: 'Schwerster Hoodie', spec: '500 g/m², Oversize, 80 % Baumwolle', img: '/img/products/byb-by268-black.webp', proof: 'Heavyweight 500 g/m²' },
+  { id: 'cruiser-2-0', tag: 'Bio, Relaxed Fit', spec: '350 g/m², Bio-Baumwolle, 51 Farben', img: '/img/products/cruiser-2-0-black-flat.webp', proof: 'Doppellagige Kapuze' },
+].map((c) => ({ ...c, ...modell(c.id) }));
 const classic = [
-  { handle: 'classic-hoodie', name: 'Classic Hoodie', brand: 'Stedman', tag: 'Beliebteste Wahl', spec: '280 g/m², Kängurutasche, 11 Farben', price: '28,90', img: '/img/products/classic-hoodie-black-opal.webp', proof: 'Größen XS bis 5XL' },
-  { handle: null, name: 'Heavy Hoody', brand: 'Build Your Brand', tag: 'Regular Fit, schwer', spec: '300 g/m², Regular Fit, bis 5XL', price: '32,90', img: '/img/products/byb-by011-black.webp', proof: 'Neu im Sortiment' },
-  { handle: 'classic-t', name: 'Classic-T', brand: 'Stedman', tag: 'Günstigster Einstieg', spec: '155 g/m², 34 Farben, Damen und Unisex', price: '16,90', img: '/img/products/classic-t-black-opal.webp', proof: 'Ohne Seitennähte' },
-  { handle: 'creator-2-0', name: 'Creator 2.0', brand: 'Stanley/Stella', tag: 'Bio-Shirt', spec: '180 g/m², Bio-Baumwolle, 58 Farben', price: '20,90', img: '/img/products/creator-2-0-black-flat.webp', proof: 'GOTS-zertifiziert' },
-];
+  { id: 'classic-hoodie', tag: 'Beliebteste Wahl', spec: '280 g/m², Kängurutasche, 11 Farben', img: '/img/products/classic-hoodie-black-opal.webp', proof: 'Größen XS bis 5XL' },
+  { id: 'by011', tag: 'Regular Fit, schwer', spec: '300 g/m², Regular Fit, bis 5XL', img: '/img/products/byb-by011-black.webp', proof: 'Neu im Sortiment' },
+  { id: 'classic-t', tag: 'Günstigster Einstieg', spec: '155 g/m², 34 Farben, Damen und Unisex', img: '/img/products/classic-t-black-opal.webp', proof: 'Ohne Seitennähte' },
+  { id: 'creator-2-0', tag: 'Bio-Shirt', spec: '180 g/m², Bio-Baumwolle, 58 Farben', img: '/img/products/creator-2-0-black-flat.webp', proof: 'GOTS-zertifiziert' },
+].map((c) => ({ ...c, ...modell(c.id) }));
+
+// Werte für Kurzantwort, FAQ und Meta-Description, alle aus abschluss.ts.
+const hoodie = modell('classic-hoodie');
+const heavy = modell('by011');
+const oversizeAb = Math.min(...oversize.map((p) => p.preisAb10));
+const ultra = modell('by268');
+const shirt = modell('classic-t');
+const shirtAb = Math.min(...modelle.filter((m) => m.art === 'T-Shirt').map((m) => m.preisAb10));
+const versand = euro(VERSAND.brutto);
+const bsp = rechenbeispiel();
+const modellName = (m: { brand: string; name: string; artikel?: string }) => `${m.brand} ${m.name}${m.artikel ? ` (${m.artikel})` : ''}`;
+
+const kurz = `westernprint ist eine Textildruckerei mit eigener Produktion in Oberhausen. Wir bedrucken Abschlusspullis, Abschluss-Hoodies und Klassen-T-Shirts per DTF-Druck, mit Motto vorne und Namensliste hinten, ab 1 Stück ohne Mindestmenge. Der Klassenpreis gilt ab ${KLASSENPREIS_AB} Stück: Ein Stedman Classic Hoodie kostet ${euro(hoodie.preisAb10)} €, ein Oversize-Hoodie ab ${euro(oversizeAb)} €, ein T-Shirt (Stedman Classic-T) ${euro(shirt.preisAb10)} € pro Stück, jeweils inklusive Druck vorne und hinten, Design und MwSt. Das Design ist für Abschlussklassen gratis. Gedruckt wird erst, wenn ihr Motto und Namensliste schriftlich bestätigt habt und die Rechnung per Überweisung bezahlt ist. Danach dauert die Produktion ${PRODUKTION}. Der Versand kostet ${versand} € pro Paket. Stand ${STAND}.`;
+
+const abschluesse = ['Abitur und Mottowoche', '10. Klasse (ZP10)', 'Berufskolleg', 'Grundschule (4. Klasse)', 'Kita-Abschluss'];
 
 const styles = [
   { t: 'Namensliste', d: 'Alle Namen der Stufe untereinander auf dem Rücken. Der Klassiker.', kind: 'list' },
@@ -38,28 +62,34 @@ const styles = [
 ];
 
 const faqs = [
-  { q: 'Was kostet ein Abschluss-Hoodie bei euch?', a: `Ab 20 Stück liegt der Stedman Classic Hoodie bei 28,90 € pro Stück, inklusive Druck vorne und hinten, Namensliste und MwSt. Oversize-Hoodies von Build Your Brand ab 38,90 €, der Ultra Heavy mit 500 g/m² ab 52,90 €. Shirts ab 16,90 €. Ab 50 Stück wird es günstiger, das genaue Angebot bekommt ihr innerhalb von 24 Stunden.` },
-  { q: 'Gibt es eine Mindestmenge?', a: 'Nein. Ab 1 Stück ist alles möglich, die Klassenpreise gelten ab 20 Stück. Nachzügler können später zum gleichen Preis nachbestellen.' },
-  { q: 'Kostet das Design extra?', a: 'Nein. Schriftzug, Motto, Namensliste und Korrekturabzug sind inklusive. Ihr bekommt eine Vorschau als PDF und wir ändern so lange, bis alles passt. Erst dann wird gedruckt.' },
-  { q: 'Wie lange dauert die Lieferung?', a: 'Nach Freigabe des Korrekturabzugs in der Regel 5 bis 7 Werktage. Wenn die Stufe spät dran ist, ist Express auf Anfrage möglich, je nach Stückzahl, bitte früh anfragen. Abholung in Oberhausen ist kostenlos.' },
-  { q: 'Können wir Größen und Farben mischen?', a: 'Ja, ohne Aufpreis. Ein Ansprechpartner sammelt die Liste, wir liefern alles sortiert und beschriftet in einem Paket.' },
-  { q: 'Wie bezahlen wir als Klasse?', a: 'Eine Person zahlt gesammelt für die ganze Stufe, Einzelzahlungen braucht es nicht. Nach der Freigabe kommt ein Zahlungslink über den Zahlungsdienstleister Mollie. Die verfügbaren Zahlungsarten seht ihr beim Bezahlen.' },
+  { q: 'Was kostet ein Abschluss-Hoodie bei euch?', a: `Ab ${KLASSENPREIS_AB} Stück gilt der Klassenpreis: Der Stedman Classic Hoodie kostet ${euro(hoodie.preisAb10)} € pro Stück, der Heavy Hoody von Build Your Brand ${euro(heavy.preisAb10)} €, Oversize-Hoodies ab ${euro(oversizeAb)} € und der Ultra Heavy Oversized mit 500 g/m² ${euro(ultra.preisAb10)} €. Für 1 bis 9 Stück kostet der Classic Hoodie ${euro(hoodie.preis1bis9)} € pro Stück. T-Shirts gibt es ab ${euro(shirtAb)} €. Alle Preise gelten für alle Farben und Größen, inklusive Druck vorne und hinten, Design und MwSt., zzgl. Versand. Stand ${STAND}.` },
+  { q: 'Gibt es eine Mindestmenge?', a: `Nein. Ihr könnt ab 1 Stück bestellen. Der Klassenpreis gilt ab ${KLASSENPREIS_AB} Stück, für 1 bis 9 Stück gibt es einen eigenen Preis, beim Classic Hoodie zum Beispiel ${euro(hoodie.preis1bis9)} €. Nachbestellungen gehen ab 1 Stück, zum Preis für 1 bis 9 Stück. Eure Druckdaten bleiben dafür gespeichert.` },
+  { q: 'Was kosten Abschlusspullis für die ganze Stufe?', a: `Ein Beispiel: ${bsp.menge} Stedman Classic Hoodies kosten ${bsp.menge} × ${euro(bsp.modell.preisAb10)} € = ${euro(bsp.ware)} €. Dazu kommt der Versand mit ${versand} € pro Paket, zusammen ${euro(bsp.gesamt)} €. Das sind ${euro(bsp.proPerson)} € pro Person, Druck vorne und hinten, Design und MwSt. inklusive. Stand ${STAND}.` },
+  { q: 'Kostet das Design extra?', a: 'Nein. Für Abschlussklassen setzen wir Motto, Schriftzug und Namensliste kostenlos. Gedruckt wird erst, wenn ihr Motto und Namensliste schriftlich bestätigt habt.' },
+  { q: 'Können wir unseren Abschlusspulli selbst gestalten?', a: 'Ja. Schickt uns eure fertige Datei als PDF, PNG oder SVG, wir prüfen sie kostenlos. Oder ihr schickt uns eine Idee, eine Skizze oder einen Screenshot, dann setzen wir das Motiv gratis. Wir drucken nur Motive, an denen ihr die Rechte habt, also zum Beispiel keine fremden Logos, Marken oder Comicfiguren.' },
+  { q: 'Wie schicken wir die Namensliste?', a: 'Am einfachsten als Excel-, Word- oder Textdatei, per Mail oder WhatsApp. Schreibt jeden Namen genau so, wie er gedruckt werden soll, mit Umlauten, Bindestrichen und Spitznamen. Wir nutzen die Liste nur für euren Auftrag. Die Druckdaten speichern wir für Nachbestellungen und löschen sie auf Wunsch.' },
+  { q: 'Wann müssen wir bestellen und wie lange dauert es?', a: `Das Angebot kommt an Werktagen innerhalb von 24 Stunden. Danach bestätigt ihr Motto und Namensliste schriftlich und bezahlt die Rechnung, das Zahlungsziel ist ${ZAHLUNGSZIEL_TAGE} Tage. Nach Zahlungseingang dauert die Produktion ${PRODUKTION}, der Versand mit DHL 1 bis 3 Werktage. Fragt am besten etwa 4 Wochen vor eurem Termin an. Wenn es knapp wird, fragt trotzdem früh, wir sagen euch ehrlich, ob es klappt. Der Versand kostet ${versand} € pro Paket, die Abholung in Oberhausen ist kostenlos möglich.` },
+  { q: 'Wie bezahlen wir als Klasse?', a: `Ihr bekommt eine Rechnung der westernprint GmbH und zahlt vorab per Überweisung, das Zahlungsziel ist ${ZAHLUNGSZIEL_TAGE} Tage. Gedruckt wird nach Zahlungseingang. Eine Person zahlt für die ganze Stufe. Bestellen und zahlen muss eine volljährige Person, zum Beispiel ein Elternteil oder eine Lehrkraft, oder der Förderverein. Die Rechnung stellen wir auf Wunsch auf die Schule oder den Förderverein aus.` },
+  { q: 'Können wir Größen, Farben und Modelle mischen?', a: 'Ja, ohne Aufpreis. Ihr könnt auch Hoodies und Shirts in einer Bestellung kombinieren. Eine Person sammelt die Liste mit Namen, Modell, Farbe und Größe und schickt sie uns.' },
+  { q: 'Was ist, wenn eine Größe nicht passt?', a: 'Jedes Teil wird für eure Stufe individuell bedruckt. Für solche Ware besteht kein Widerrufsrecht, ein Umtausch ist deshalb nicht möglich. Prüft die Größen vorher anhand der Maßtabelle des Herstellers. Passt ein Teil trotzdem nicht, könnt ihr ab 1 Stück nachbestellen, zum Preis für 1 bis 9 Stück.' },
+  { q: 'Gibt es Abschlussshirts auch für die 10. Klasse, die Grundschule oder die Kita?', a: 'Ja. Wir drucken für Abitur, 10. Klasse, Berufskolleg, Grundschule und Kita. Kindergrößen findet ihr auf unserer Seite für Kitas und Schulen, den Preis für Kindergrößen nennen wir im Angebot.' },
   { q: 'Hält der Druck?', a: 'Wir drucken per DTF, deckend auf dunklen Stoffen, dehnbar und waschfest. Das Verfahren nutzen wir auch für Vereine und Firmen, die ihre Sachen täglich waschen.' },
 ];
 
 const ld = [
-  { '@context': 'https://schema.org', '@type': 'Service', name: 'Abschluss-Hoodies und Abishirts bedrucken', serviceType: 'Textildruck', description: z.description, provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: [{ '@type': 'City', name: 'Oberhausen' }, { '@type': 'AdministrativeArea', name: 'Ruhrgebiet' }, { '@type': 'Country', name: 'Deutschland' }], audience: { '@type': 'Audience', audienceType: 'Abschlussklassen, Abiturjahrgänge, Schulklassen' }, url: `${site.url}/fuer/abschlussklassen`, offers: { '@type': 'Offer', priceCurrency: 'EUR', price: '16.90', priceSpecification: { '@type': 'PriceSpecification', minPrice: '16.90', priceCurrency: 'EUR', valueAddedTaxIncluded: true }, description: 'Abschluss-Shirts ab 16,90 €, Hoodies ab 28,90 € inklusive Druck vorne und hinten und MwSt., ab 20 Stück' } },
+  { '@context': 'https://schema.org', '@type': 'Service', name: 'Abschlusspullis, Abschluss-Hoodies und Abishirts bedrucken', serviceType: 'Textildruck für Abschlussklassen', description: `Abschlusspullis, Abschluss-Hoodies und Klassen-T-Shirts mit Motto vorne und Namensliste hinten, per DTF-Druck in Oberhausen. Ab 1 Stück ohne Mindestmenge, Klassenpreis ab ${KLASSENPREIS_AB} Stück inklusive Druck vorne und hinten, Design und MwSt. Das Design ist für Abschlussklassen gratis, gedruckt wird nach schriftlicher Bestätigung von Motto und Namensliste.`, provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: [{ '@type': 'City', name: 'Oberhausen' }, { '@type': 'AdministrativeArea', name: 'Ruhrgebiet' }, { '@type': 'AdministrativeArea', name: 'Nordrhein-Westfalen' }, { '@type': 'Country', name: 'Deutschland' }], audience: { '@type': 'Audience', audienceType: 'Abschlussklassen, Abiturjahrgänge, Schulklassen' }, url: `${site.url}/fuer/abschlussklassen`,
+    hasOfferCatalog: { '@type': 'OfferCatalog', name: `Klassenpreise ab ${KLASSENPREIS_AB} Stück, Preis pro Stück inkl. Druck vorne und hinten, Design und MwSt., zzgl. Versand`, itemListElement: modelle.map((m) => ({ '@type': 'Offer', name: `${modellName(m)} mit Motto vorne und Namensliste hinten`, price: (m.preisAb10 / 100).toFixed(2), priceCurrency: 'EUR', eligibleQuantity: { '@type': 'QuantitativeValue', minValue: KLASSENPREIS_AB, unitCode: 'C62' }, priceSpecification: { '@type': 'UnitPriceSpecification', price: (m.preisAb10 / 100).toFixed(2), priceCurrency: 'EUR', valueAddedTaxIncluded: true } })) } },
   { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Startseite', item: site.url }, { '@type': 'ListItem', position: 2, name: 'Für wen wir drucken', item: `${site.url}/fuer` }, { '@type': 'ListItem', position: 3, name: 'Abschlussklassen', item: `${site.url}/fuer/abschlussklassen` }] },
 ];
 ---
-<Base title={`Abishirts und Abschluss-Hoodies ${year} bedrucken lassen in Oberhausen`} description={`Abschluss-Hoodies ab 28,90 € und Abishirts ab 16,90 € inklusive Druck vorne und hinten. Gratis Design, Korrekturabzug, Lieferung in 5 bis 7 Werktagen. Druckerei in Oberhausen, Angebot in 24 Stunden.`} jsonLd={ld} ogImage={z.image}>
+<Base title={`Abishirts und Abschluss-Hoodies ${year} bedrucken lassen in Oberhausen`} description={`Abschluss-Hoodies ${euro(hoodie.preisAb10)} €, Abishirts ${euro(shirt.preisAb10)} € pro Stück ab ${KLASSENPREIS_AB} Stück, inkl. Druck vorne + hinten. Design gratis, auch einzeln bestellbar. Druckerei in Oberhausen.`} jsonLd={ld} ogImage={z.image}>
 
   <div class="usp-bar" aria-label="Vorteile">
     <div class="container usp-track">
-      <span><Icon name="pen-nib" size={16} /> Gratis Design und Korrekturabzug</span>
+      <span><Icon name="pen-nib" size={16} /> Design gratis</span>
       <span><Icon name="t-shirt" size={16} /> Druck vorne und hinten inklusive</span>
-      <span><Icon name="truck" size={16} /> Lieferung in 5 bis 7 Werktagen</span>
+      <span><Icon name="clock" size={16} /> Produktion in 5 bis 7 Werktagen</span>
       <span><Icon name="map-pin" size={16} /> Abholung in Oberhausen gratis</span>
     </div>
   </div>
@@ -67,20 +97,20 @@ const ld = [
   <section class="ak-hero">
     <div class="container ak-hero-grid">
       <div class="ak-copy">
-        <span class="eyebrow">Für Abschluss, Abi und Klassenfahrt {year}</span>
+        <span class="eyebrow">Für Abi, 10. Klasse und Abschlussfeier {year}</span>
         <h1>Abishirts und Abschluss-Hoodies bedrucken lassen. <span class="hl">Ohne Stress, ohne Risiko.</span></h1>
         <p class="lede">Motto vorne, alle Namen hinten, Mischgrößen ohne Aufpreis. Ihr schickt uns die Idee, wir liefern Design, Druck und ein Paket für die ganze Stufe. Aus Oberhausen, nicht aus dem Callcenter.</p>
 
         <div class="offer-box">
           <img src="/img/products/byb-by268-black.webp" alt="Schwarzer Oversize-Hoodie" width="360" height="450" loading="eager" />
           <div>
-            <span class="offer-kicker">Bei jeder Bestellung ab 20 Stück</span>
+            <span class="offer-kicker">Klassenpreis ab {KLASSENPREIS_AB} Stück</span>
             <strong>Design und Druck vorne + hinten inklusive</strong>
-            <p>Motto, Namensliste, Korrekturabzug als PDF. Ihr zahlt nur die Textilien mit Druck, keine Grafikkosten, kein Aufpreis für Mischgrößen.</p>
+            <p>Motto und Namensliste setzen wir kostenlos. Für Mischgrößen zahlt ihr keinen Aufpreis.</p>
             <ul class="offer-facts">
               <li><Icon name="check" weight="bold" size={14} /> Oversize-Hoodies bis 500 g/m²</li>
               <li><Icon name="check" weight="bold" size={14} /> Angebot in 24 Stunden</li>
-              <li><Icon name="check" weight="bold" size={14} /> Eine Zahlung für die ganze Stufe</li>
+              <li><Icon name="check" weight="bold" size={14} /> Eine Rechnung für die ganze Stufe</li>
             </ul>
           </div>
         </div>
@@ -88,13 +118,13 @@ const ld = [
         <p class="trust-row"><span><strong>80.000+</strong> Endkunden beliefert</span><span><strong>seit 2021</strong> in Oberhausen</span><span><strong>1-3 Tage</strong> Produktion bei Einzelstücken</span></p>
 
         <div class="ak-cta">
-          <a href="#anfrage" class="btn btn-primary btn-lg">Jetzt gratis anfragen <Icon name="arrow-right" size={18} /></a>
+          <a href="#anfrage" class="btn btn-primary btn-lg">Angebot anfragen <Icon name="arrow-right" size={18} /></a>
           <a href={site.whatsapp + '?text=' + encodeURIComponent('Hallo westernprint, wir haben Interesse an Abschlussklamotten für unsere Stufe.')} class="btn btn-secondary btn-lg" target="_blank" rel="noopener"><Icon name="whatsapp-logo" size={18} /> Per WhatsApp</a>
         </div>
       </div>
 
       <form class="ak-form" id="anfrage" data-endpoint={site.formEndpoint} novalidate>
-        <h2>Kostenloses Angebot anfragen</h2>
+        <h2>Angebot für eure Stufe</h2>
         <p class="muted">Kurz die Eckdaten, wir melden uns werktags meist innerhalb weniger Stunden mit eurem Angebot.</p>
         <div class="field"><label for="ak-school">Schule / Klasse oder Stufe</label><input class="input" id="ak-school" name="school" type="text" required placeholder="z. B. Gymnasium Oberhausen, Q2" /><span class="error">Bitte Schule oder Klasse angeben.</span></div>
         <div class="row">
@@ -103,13 +133,16 @@ const ld = [
         </div>
         <div class="row">
           <div class="field"><label for="ak-phone">Telefon / WhatsApp <span class="optional">(optional)</span></label><input class="input" id="ak-phone" name="phone" type="tel" autocomplete="tel" /></div>
-          <div class="field"><label for="ak-qty">Wie viele seid ihr?</label><select class="select" id="ak-qty" name="qty" required><option value="" disabled selected>Bitte wählen</option><option>10 bis 19</option><option>20 bis 49</option><option>50 bis 99</option><option>100 und mehr</option></select><span class="error">Bitte Stückzahl wählen.</span></div>
+          <div class="field"><label for="ak-qty">Wie viele seid ihr?</label><select class="select" id="ak-qty" name="qty" required><option value="" disabled selected>Bitte wählen</option><option>1 bis 9</option><option>10 bis 19</option><option>20 bis 49</option><option>50 bis 99</option><option>100 und mehr</option></select><span class="error">Bitte Stückzahl wählen.</span></div>
         </div>
         <div class="row">
           <div class="field"><label for="ak-product">Was soll es werden?</label><select class="select" id="ak-product" name="product"><option>Hoodies</option><option>Shirts</option><option>Hoodies und Shirts</option><option>Noch offen</option></select></div>
           <div class="field"><label for="ak-when">Wann braucht ihr es?</label><input class="input" id="ak-when" name="when" type="text" placeholder="z. B. bis Ende Juni" /></div>
         </div>
-        <div class="field"><label for="ak-source">Wie habt ihr uns gefunden? <span class="optional">(optional)</span></label><select class="select" id="ak-source" name="source"><option value="">Bitte wählen</option><option>Google</option><option>Instagram</option><option>TikTok</option><option>Empfehlung</option><option>Lehrkraft / Schule</option><option>Sonstiges</option></select></div>
+        <div class="row">
+          <div class="field"><label for="ak-abschluss">Welcher Abschluss? <span class="optional">(optional)</span></label><select class="select" id="ak-abschluss" name="abschluss"><option value="">Bitte wählen</option><option>Abitur</option><option>10. Klasse</option><option>Berufskolleg</option><option>Grundschule</option><option>Kita</option><option>Sonstiges</option></select></div>
+          <div class="field"><label for="ak-source">Wie habt ihr uns gefunden? <span class="optional">(optional)</span></label><select class="select" id="ak-source" name="source"><option value="">Bitte wählen</option><option>Google</option><option>ChatGPT / KI-Suche</option><option>Instagram</option><option>TikTok</option><option>Empfehlung</option><option>Lehrkraft / Schule</option><option>Sonstiges</option></select></div>
+        </div>
         <div class="field"><label for="ak-msg">Motto, Ideen, Fragen <span class="optional">(optional)</span></label><textarea class="textarea" id="ak-msg" name="message" rows="3" placeholder="z. B. Motto ABIkalypse, Namensliste hinten, schwarz und bordeaux"></textarea></div>
         <div class="field"><label class="checkbox"><input type="checkbox" name="privacy" required /><span>Ich habe die <a href="/datenschutz" class="accent">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Daten zur Bearbeitung der Anfrage einverstanden.</span></label><span class="error">Bitte bestätige den Datenschutzhinweis.</span></div>
         <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="sr-only" aria-hidden="true" />
@@ -120,25 +153,32 @@ const ld = [
     </div>
   </section>
 
+  <section class="section-tight answer-section">
+    <div class="container answer reveal">
+      <h2>Kurz gesagt</h2>
+      <p>{kurz}</p>
+    </div>
+  </section>
+
   <section class="section-tight steps-section">
     <div class="container">
-      <div class="section-head reveal"><h2>So läuft es ab</h2><p class="muted">Vier Schritte, eine Person aus eurer Stufe kümmert sich, wir machen den Rest.</p></div>
+      <div class="section-head reveal"><h2>So läuft es ab</h2><p class="muted">Vier Schritte. Eine Person aus eurer Stufe kümmert sich, wir machen den Rest.</p></div>
       <ol class="steps">
         <li class="reveal"><span class="num">1</span><div><strong>Anfrage schicken</strong><span>Formular oder WhatsApp. Stückzahl grob, Motto grob, alles andere klären wir.</span></div></li>
-        <li class="reveal reveal-d1"><span class="num">2</span><div><strong>Design gratis</strong><span>Wir setzen Motto und Namensliste und schicken einen Korrekturabzug als PDF.</span></div></li>
+        <li class="reveal reveal-d1"><span class="num">2</span><div><strong>Design gratis</strong><span>Wir setzen Motto und Namensliste kostenlos. Gedruckt wird erst, wenn ihr beides schriftlich bestätigt habt.</span></div></li>
         <li class="reveal reveal-d2"><span class="num">3</span><div><strong>Größen sammeln</strong><span>Ihr schickt die Liste mit Größen und Farben. Mischen ist ohne Aufpreis möglich.</span></div></li>
-        <li class="reveal reveal-d3"><span class="num">4</span><div><strong>Druck und Lieferung</strong><span>5 bis 7 Werktage nach Freigabe. Ein Paket, sortiert und beschriftet, oder Abholung in Oberhausen.</span></div></li>
+        <li class="reveal reveal-d3"><span class="num">4</span><div><strong>Rechnung, Druck, Versand</strong><span>Ihr zahlt die Rechnung per Überweisung. Danach drucken wir in {PRODUKTION} und schicken alles in einem Paket per DHL.</span></div></li>
       </ol>
     </div>
   </section>
 
   <section class="section products-section" id="produkte">
     <div class="container">
-      <div class="section-head reveal"><h2>Hoodies und Shirts für eure Stufe</h2><p class="muted">Klassenpreise ab 20 Stück, inklusive Druck vorne und hinten, Namensliste und MwSt. Gedruckt wird in Oberhausen.</p></div>
+      <div class="section-head reveal"><h2>Abschlusspullis, Hoodies und Shirts für eure Stufe</h2><p class="muted">Klassenpreise ab {KLASSENPREIS_AB} Stück, inkl. Druck vorne und hinten, Design und MwSt., zzgl. Versand. Gedruckt wird in Oberhausen.</p></div>
       <h3 class="group-title"><span class="chip chip-good">Oversize</span> Schwer, weit, Streetwear-Schnitt</h3>
       <div class="pgrid">
         {oversize.map((p, i) => (
-          <a href={p.handle ? `/shop/${p.handle}` : '#anfrage'} class={`pcard reveal reveal-d${i}`}>
+          <a href="#anfrage" class={`pcard reveal reveal-d${i}`}>
             <span class="ptag">{p.tag}</span>
             <div class="pimg"><img src={p.img} alt={`${p.name} von ${p.brand}, schwarz`} width="720" height="900" loading="lazy" /></div>
             <div class="pbody">
@@ -146,7 +186,7 @@ const ld = [
               <strong>{p.name}</strong>
               <span class="pspec">{p.spec}</span>
               <span class="proof"><Icon name="seal-check" weight="fill" size={13} /> {p.proof}</span>
-              <span class="price">ab {p.price} € <small>inkl. Druck und MwSt.</small></span>
+              <span class="price">{euro(p.preisAb10)} € <small>ab {KLASSENPREIS_AB} Stück, inkl. Druck und MwSt.</small></span>
             </div>
           </a>
         ))}
@@ -154,7 +194,7 @@ const ld = [
       <h3 class="group-title"><span class="chip">Klassisch</span> Regular Fit, große Farbauswahl</h3>
       <div class="pgrid">
         {classic.map((p, i) => (
-          <a href={p.handle ? `/shop/${p.handle}` : '#anfrage'} class={`pcard reveal reveal-d${i}`}>
+          <a href="#anfrage" class={`pcard reveal reveal-d${i}`}>
             <span class="ptag">{p.tag}</span>
             <div class="pimg"><img src={p.img} alt={`${p.name} von ${p.brand}, schwarz`} width="720" height="900" loading="lazy" /></div>
             <div class="pbody">
@@ -162,18 +202,53 @@ const ld = [
               <strong>{p.name}</strong>
               <span class="pspec">{p.spec}</span>
               <span class="proof"><Icon name="seal-check" weight="fill" size={13} /> {p.proof}</span>
-              <span class="price">ab {p.price} € <small>inkl. Druck und MwSt.</small></span>
+              <span class="price">{euro(p.preisAb10)} € <small>ab {KLASSENPREIS_AB} Stück, inkl. Druck und MwSt.</small></span>
             </div>
           </a>
         ))}
       </div>
-      <p class="muted center small">Unter 20 Stück drucken wir auch, dann zum Einzelpreis. Ab 50 Stück gibt es weitere Staffelpreise im Angebot. Build-Your-Brand-Modelle gibt es in Schwarz, Weiß, Grau, Sand, Navy und weiteren Farben, Auswahl schicken wir mit dem Angebot.</p>
+      <p class="muted center small">Build-Your-Brand-Modelle gibt es in Schwarz, Weiß, Grau, Sand, Navy und weiteren Farben, die Auswahl schicken wir mit dem Angebot. Die Preise für 1 bis 9 Stück stehen in der <a href="#preise" class="accent">Preistabelle</a>.</p>
+    </div>
+  </section>
+
+  <section class="section prices-section" id="preise">
+    <div class="container">
+      <div class="section-head reveal"><h2>Preise für Abschlusspullis und Klassen-Shirts</h2><p class="muted">Preis pro Stück in Euro, brutto inkl. 19 % MwSt., netto darunter. Gilt für alle Farben und Größen, inkl. Druck vorne + hinten und Design, zzgl. Versand. Stand {STAND}.</p></div>
+      <div class="table-wrap reveal">
+        <table class="price-table">
+          <thead><tr><th scope="col">Modell</th><th scope="col">1 bis 9 Stück</th><th scope="col" class="klasse">ab {KLASSENPREIS_AB} Stück<span>Klassenpreis</span></th></tr></thead>
+          <tbody>
+            {modelle.map((m) => (
+              <tr>
+                <th scope="row"><strong>{m.name}</strong><span>{m.brand}{m.artikel ? ` ${m.artikel}` : ''}</span></th>
+                <td><strong>{euro(m.preis1bis9)} €</strong><span>{euro(netto(m.preis1bis9))} € netto</span></td>
+                <td class="klasse"><strong>{euro(m.preisAb10)} €</strong><span>{euro(netto(m.preisAb10))} € netto</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="beispiel reveal"><strong>Rechenbeispiel:</strong> {bsp.menge} {bsp.modell.name}s × {euro(bsp.modell.preisAb10)} € = {euro(bsp.ware)} €, dazu Versand {versand} € = {euro(bsp.gesamt)} €. Das sind {euro(bsp.proPerson)} € pro Person, Design inklusive.</p>
+      <div class="extras reveal">
+        {zusatz.map((x) => (
+          <div class="extra"><div class="extra-top"><strong>{x.t}</strong><span class="price">{euro(x.brutto)} €</span></div><p>{x.d}{x.brutto > 0 && <> {euro(netto(x.brutto))} € netto.</>}</p></div>
+        ))}
+        <div class="extra"><div class="extra-top"><strong>Versand</strong><span class="price">{versand} €</span></div><p>{VERSAND.d} {euro(netto(VERSAND.brutto))} € netto.</p></div>
+        <div class="extra"><div class="extra-top"><strong>Nachbestellung</strong><span class="price">ab 1 Stück</span></div><p>Nachbestellung ab 1 Stück zum Preis für 1 bis 9 Stück. Eure Druckdaten bleiben dafür gespeichert.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight abschluss-section">
+    <div class="container">
+      <div class="section-head reveal"><h2>Für jeden Abschluss</h2><p class="muted">Vom Abi bis zum Kita-Abschluss, gleicher Ablauf. Kindergrößen findet ihr auf unserer Seite für <a href="/fuer/kitas-und-schulen" class="accent">Kitas und Schulen</a>, den Preis für Kindergrößen nennen wir im Angebot.</p></div>
+      <ul class="chips reveal">{abschluesse.map((b) => <li>{b}</li>)}</ul>
     </div>
   </section>
 
   <section class="section-tight styles-section">
     <div class="container">
-      <div class="section-head reveal"><h2>Wir drucken jedes Motiv</h2><p class="muted">Screenshot von Pinterest, Skizze auf Papier oder fertige Datei: Wir machen es druckfertig und passen es an, bis die Stufe einverstanden ist. Beliebte Rückseiten:</p></div>
+      <div class="section-head reveal"><h2>Wir drucken jedes Motiv</h2><p class="muted">Screenshot von Pinterest, Skizze auf Papier oder fertige Datei: Wir machen es druckfertig, kostenlos. Gedruckt wird erst nach eurer schriftlichen Bestätigung. Beliebte Rückseiten:</p></div>
       <div class="styles">
         {styles.map((s, i) => (
           <div class={`style-card reveal reveal-d${i % 3}`}>
@@ -214,8 +289,8 @@ const ld = [
     </div>
   </section>
 
-  <Faq items={faqs} title="Fragen von Abschlussklassen" />
-  <CtaBand title={`Bereit für euren Abschluss ${year}?`} text="Schickt uns Stückzahl und Motto. Ihr bekommt innerhalb von 24 Stunden ein Angebot mit festem Liefertermin." />
+  <Faq items={faqs} title="Fragen von Abschlussklassen" href="#anfrage" />
+  <CtaBand title={`Bereit für euren Abschluss ${year}?`} text="Schickt uns Stückzahl und Motto. Ihr bekommt innerhalb von 24 Stunden ein Angebot." href="#anfrage" />
 </Base>
 
 <script>
@@ -234,13 +309,25 @@ const ld = [
       });
       return ok;
     };
+    // Woher kam die Anfrage? Nur aus der aktuellen Seite gelesen (utm_source im Link, Host des Verweises),
+    // ohne Cookies und ohne localStorage. Landet als Zeile in der Nachricht, der Worker bleibt unverändert.
+    const herkunft = () => {
+      const utm = (new URLSearchParams(location.search).get('utm_source') || '').trim().slice(0, 100);
+      let ref = '';
+      try {
+        const host = document.referrer ? new URL(document.referrer).hostname.replace(/^www\./, '') : '';
+        if (host && host !== 'westernprint.de' && !host.endsWith('.westernprint.de')) ref = host;
+      } catch { ref = ''; }
+      return { utm, ref };
+    };
     form.addEventListener('input', (e) => (e.target as HTMLElement).closest('.field')?.classList.remove('has-error'));
     form.addEventListener('submit', async (e) => {
       e.preventDefault(); setNote('', '');
       if (!validate()) { setNote('err', 'Bitte prüfe die markierten Felder.'); return; }
       const d = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
       if (d._gotcha) return;
-      const message = [`Anfrage Abschlussklassen über westernprint.de`, `Schule/Klasse: ${d.school}`, `Stückzahl: ${d.qty}`, `Produkt: ${d.product}`, d.when ? `Termin: ${d.when}` : '', '', d.message || ''].filter((l) => l !== '').join('\n');
+      const h = herkunft();
+      const message = [`Anfrage Abschlussklassen über westernprint.de`, d.abschluss ? `Abschluss: ${d.abschluss}` : '', `Schule/Klasse: ${d.school}`, `Stückzahl: ${d.qty}`, `Produkt: ${d.product}`, d.when ? `Termin: ${d.when}` : '', h.utm ? `Link-Quelle: ${h.utm}` : '', h.ref ? `Verweis von: ${h.ref}` : '', '', d.message || ''].filter((l) => l !== '').join('\n');
       submit.disabled = true; submit.textContent = 'Wird gesendet...';
       try {
         const res = await fetch(form.dataset.endpoint!, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: d.name, email: d.email, phone: d.phone, topic: 'Abschlussklassen', qty: d.qty, message, gclid: (window as any).wpGclid?.() || '', page: location.pathname, source: d.source }) });
@@ -277,7 +364,7 @@ const ld = [
   .trust-row strong { color: var(--text); font-weight: 700; }
   .ak-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
 
-  .ak-form { display: grid; gap: 14px; padding: clamp(22px, 3vw, 32px); border-radius: 22px; border: 1px solid var(--line-strong); background: linear-gradient(180deg, var(--surface-2), var(--surface)); box-shadow: 0 40px 80px -40px rgba(0,0,0,0.7); position: sticky; top: calc(var(--nav-h) + 16px); }
+  .ak-form { display: grid; gap: 14px; padding: clamp(22px, 3vw, 32px); border-radius: 22px; border: 1px solid var(--line-strong); background: linear-gradient(180deg, var(--surface-2), var(--surface)); box-shadow: 0 40px 80px -40px rgba(0,0,0,0.7); position: sticky; top: calc(var(--nav-h) + 16px); scroll-margin-top: calc(var(--nav-h) + 16px); }
   .ak-form h2 { font-size: 1.5rem; }
   .ak-form .muted { font-size: 14.5px; margin-top: -6px; }
   .ak-form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -286,6 +373,10 @@ const ld = [
   .form-trust span { display: inline-flex; gap: 5px; align-items: center; } .form-trust :global(.icon) { color: var(--accent); }
   @media (max-width: 900px) { .ak-hero-grid { grid-template-columns: 1fr; } .ak-form { position: static; } .ak-form .row { grid-template-columns: 1fr; } }
   @media (max-width: 520px) { .offer-box { grid-template-columns: 1fr; padding: 20px; } .offer-box img { max-width: 160px; margin: 0 auto; } }
+
+  .answer-section { border-top: 1px solid var(--line); }
+  .answer h2 { font-size: 1.1rem; letter-spacing: 0.02em; color: var(--accent); }
+  .answer p { margin-top: 10px; max-width: 75ch; font-size: 1.1rem; line-height: 1.65; color: var(--text); }
 
   .steps-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .section-head .muted { margin-top: 10px; max-width: 62ch; }
@@ -310,6 +401,34 @@ const ld = [
   .price { margin-top: 8px; font-weight: 700; color: var(--accent); font-size: 1.15rem; } .price small { font-weight: 400; color: var(--text-3); font-size: 13px; }
   .center { text-align: center; } .small { font-size: 13.5px; margin-top: 28px; }
   @media (max-width: 900px) { .pgrid { grid-template-columns: 1fr 1fr; } }
+
+  /* Preistabelle: drei Spalten, passt ohne Mindestbreite auch auf 375 px. Zur Sicherheit scrollt nur der eigene Container. */
+  .prices-section { border-top: 1px solid var(--line); scroll-margin-top: var(--nav-h); }
+  .table-wrap { max-width: 860px; overflow-x: auto; border-top: 1px solid var(--line-strong); }
+  .price-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .price-table th, .price-table td { padding: 14px 16px 14px 0; text-align: right; vertical-align: top; border-bottom: 1px solid var(--line); }
+  .price-table th:last-child, .price-table td:last-child { padding-right: 0; }
+  .price-table thead th { vertical-align: bottom; font-weight: 600; font-size: 13.5px; color: var(--text-3); }
+  .price-table thead th span { display: block; font-weight: 400; font-size: 12.5px; }
+  .price-table thead th:first-child, .price-table tbody th { text-align: left; }
+  .price-table tbody th strong { display: block; font-size: 15.5px; color: var(--text); }
+  .price-table tbody th span { display: block; margin-top: 2px; font-size: 13px; font-weight: 400; color: var(--text-3); }
+  .price-table td strong { display: block; font-size: 16px; color: var(--text); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .price-table td span { display: block; margin-top: 2px; font-size: 12.5px; color: var(--text-3); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .price-table thead th.klasse, .price-table td.klasse strong { color: var(--accent); }
+  .beispiel { max-width: 860px; margin-top: 24px; padding: 16px 20px; border-radius: 14px; border: 1px solid var(--accent-line); background: var(--accent-soft); font-size: 15px; line-height: 1.55; color: var(--text); }
+  .extras { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 28px; border-top: 1px solid var(--line-strong); }
+  .extra { padding: 20px 24px 20px 0; margin-right: 24px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .extra:nth-child(3n) { border-right: 0; margin-right: 0; }
+  .extra-top { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+  .extra-top strong { font-size: 15.5px; } .extra .price { margin-top: 0; font-size: 1rem; white-space: nowrap; }
+  .extra p { margin-top: 6px; font-size: 14px; line-height: 1.5; color: var(--text-2); }
+  @media (max-width: 900px) { .extras { grid-template-columns: 1fr; } .extra { border-right: 0; margin-right: 0; } }
+  @media (max-width: 520px) { .price-table { font-size: 14px; } .price-table th, .price-table td { padding: 12px 10px 12px 0; } .price-table td strong { font-size: 15px; } }
+
+  .abschluss-section { border-top: 1px solid var(--line); }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chips li { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line-strong); font-size: 14.5px; color: var(--text-2); }
 
   .styles-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .styles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 36px; }

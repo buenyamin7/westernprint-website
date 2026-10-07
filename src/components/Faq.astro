@@ -1,14 +1,15 @@
 ---
 import Icon from './Icon.astro';
-interface Props { items: { q: string; a: string }[]; title?: string; intro?: string }
-const { items, title = 'Häufige Fragen', intro } = Astro.props;
+// href: Ziel des Buttons "Frage stellen". Standard /kontakt; eine Seite mit eigenem Formular kann z. B. "#anfrage" übergeben.
+interface Props { items: { q: string; a: string }[]; title?: string; intro?: string; href?: string }
+const { items, title = 'Häufige Fragen', intro, href = '/kontakt' } = Astro.props;
 ---
 <section class="section" id="faq">
   <div class="container faq-wrap">
     <div class="faq-head reveal">
       <h2>{title}</h2>
       {intro && <p class="muted">{intro}</p>}
-      <a href="/kontakt" class="btn btn-secondary" style="margin-top:22px">Frage stellen</a>
+      <a href={href} class="btn btn-secondary" style="margin-top:22px">Frage stellen</a>
     </div>
     <div class="faq reveal reveal-d1">
       {items.map((f) => (

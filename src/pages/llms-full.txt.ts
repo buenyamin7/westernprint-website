@@ -2,9 +2,12 @@
 // Wird beim Build aus den Datendateien erzeugt, damit Preise, Fragen, Zielgruppen und Bewertungen
 // hier immer denselben Stand haben wie auf den Seiten:
 //   src/data/preise.ts (Preistabellen), src/data/site.ts (Kontakt, allgemeine FAQ),
-//   src/data/zielgruppen.ts (/fuer/<slug>), src/data/bewertungen.ts (/bewertungen).
-// Ausnahme: /fuer/abschlussklassen und /fuer/streetwear-brands haben eigene Seiten mit eigenen
-// Inhalten und FAQ. Für sie steht hier nur ein Verweis, damit keine abweichenden Aussagen entstehen.
+//   src/data/zielgruppen.ts (/fuer/<slug>), src/data/bewertungen.ts (/bewertungen),
+//   src/data/abschluss.ts (Preise und Konditionen für /fuer/abschlussklassen).
+// Ausnahme: /fuer/abschlussklassen und /fuer/streetwear-brands haben eigene Seiten mit eigenen Inhalten und FAQ.
+// Für streetwear-brands steht hier nur ein Verweis, damit keine abweichenden Aussagen entstehen.
+// Für abschlussklassen steht ein kurzer Faktenblock aus src/data/abschluss.ts (dieselben Fakten wie "Kurz gesagt"
+// auf der Seite: Preise brutto und netto, Design gratis, Bestätigung, Zahlung, Versand, Produktion, Stand).
 // Preise: netto aus preise.ts, brutto rechnet diese Datei daneben aus (netto x 1,19, kaufmännisch auf Cent).
 // Versand, Lieferzeit, Lieferländer und Zahlung: Entscheidungen des Inhabers vom 29.09.2026, Beträge und Länder
 // wie im Kassen-Worker (westernprint-checkout, src/catalog.js SHIPPING). Versandkosten sind dort schon brutto.
@@ -12,6 +15,7 @@ import type { APIRoute } from 'astro';
 import { site, faqs, oeffnungszeiten } from '../data/site';
 import { STAND, tabellen, zusatz } from '../data/preise';
 import { zielgruppen } from '../data/zielgruppen';
+import { STAND as ABSCHLUSS_STAND, KLASSENPREIS_AB, modelle as abschlussModelle, zusatz as abschlussZusatz, VERSAND as ABSCHLUSS_VERSAND, PRODUKTION as ABSCHLUSS_PRODUKTION, ZAHLUNGSZIEL_TAGE, netto as abschlussNetto, euro as abschlussEuro, rechenbeispiel as abschlussBeispiel } from '../data/abschluss';
 import { bewertungen, rezensionen } from '../data/bewertungen';
 import { gitDates, formatDateDe } from '../lib/lastmod.mjs';
 
@@ -23,6 +27,7 @@ const QUELLEN = [
   'src/data/preise.ts',
   'src/data/zielgruppen.ts',
   'src/data/bewertungen.ts',
+  'src/data/abschluss.ts',
 ];
 
 /** "21.09.2026" -> "2026-09-21" */
@@ -38,7 +43,7 @@ const STAND_TEXTE = '2026-09-29';
 // Ohne git der jüngste Datenstand (Bewertungen, Preise oder feste Texte), bewusst kein Builddatum.
 function letzteAktualisierung(): string {
   const git = gitDates(QUELLEN)?.modified;
-  const daten = [bewertungen.stand, isoAusDe(STAND), STAND_TEXTE].filter((d): d is string => Boolean(d)).sort().at(-1);
+  const daten = [bewertungen.stand, isoAusDe(STAND), isoAusDe(ABSCHLUSS_STAND), STAND_TEXTE].filter((d): d is string => Boolean(d)).sort().at(-1);
   return formatDateDe(git ?? daten) ?? '';
 }
 
@@ -68,7 +73,8 @@ const SEITEN: [string, string][] = [
 ];
 
 // Zielgruppen mit eigener Seite unter src/pages/fuer/ (wie der Filter in getStaticPaths von fuer/[slug].astro).
-// Ihre sichtbaren Angebote und FAQ stehen dort, nicht in zielgruppen.ts. Darum hier nur ein Verweis statt Intro und FAQ.
+// Ihre sichtbaren Angebote und FAQ stehen dort, nicht in zielgruppen.ts. Darum hier kein Intro und keine FAQ aus zielgruppen.ts:
+// für abschlussklassen der Faktenblock aus abschluss.ts (abschlussBlock), sonst nur ein Verweis.
 const EIGENE_SEITE = new Set(['abschlussklassen', 'streetwear-brands']);
 
 /** Reiner Text: HTML-Reste und doppelte Leerzeichen entfernen. */
@@ -115,6 +121,39 @@ function saetze(t: string): string[] {
 }
 const absatz = (t: string) => saetze(t).filter((satz) => !gesperrt(satz)).join(' ');
 const erlaubt = <T extends { q: string; a: string }>(liste: T[]) => liste.filter((f) => !gesperrt(`${f.q} ${f.a}`));
+
+// Abschlussklassen: dieselben Fakten wie "Kurz gesagt" und die Preistabelle auf /fuer/abschlussklassen.
+// Preise dort brutto (Privatkunden), netto daneben in Klammern. Versand ist hier ein Paketpreis für Aufträge auf Angebot,
+// nicht der Versand der Shop-Kasse.
+function abschlussBlock(): string[] {
+  const e = (cent: number) => `${abschlussEuro(cent)} €`;
+  const bn = (cent: number) => `${e(cent)} (${e(abschlussNetto(cent))})`;
+  const b = abschlussBeispiel();
+  const z: string[] = [
+    `URL: ${url('/fuer/abschlussklassen')}`,
+    '',
+    `westernprint bedruckt Abschlusspullis, Abschluss-Hoodies und Klassen-T-Shirts per DTF-Druck in der eigenen Produktion in Oberhausen, mit Motto vorne und Namensliste hinten. ` +
+      `Bestellung ab 1 Stück ohne Mindestmenge, Klassenpreis ab ${KLASSENPREIS_AB} Stück. Nachbestellungen ab 1 Stück zum Preis für 1 bis 9 Stück, die Druckdaten bleiben gespeichert.`,
+    '',
+    `Preise pro Stück, Stand ${ABSCHLUSS_STAND}, brutto inkl. 19 % MwSt., netto in Klammern. Sie gelten für alle Farben und Größen, inklusive Druck vorne (Motto) und hinten (Namensliste) und Design, zzgl. Versand.`,
+    '',
+    `| Modell | 1 bis 9 Stück brutto (netto) | ab ${KLASSENPREIS_AB} Stück brutto (netto) |`,
+    '| --- | --- | --- |',
+  ];
+  for (const m of abschlussModelle) z.push(`| ${zelle(`${m.brand} ${m.name}${m.artikel ? ` (${m.artikel})` : ''}`)} | ${bn(m.preis1bis9)} | ${bn(m.preisAb10)} |`);
+  z.push(
+    '',
+    '- Design: Motto, Schriftzug und Namensliste setzt westernprint für Abschlussklassen kostenlos.',
+    '- Gedruckt wird erst, wenn die Stufe Motto und Namensliste schriftlich bestätigt hat.',
+    `- Zahlung: Rechnung der westernprint GmbH, Vorkasse per Überweisung, Zahlungsziel ${ZAHLUNGSZIEL_TAGE} Tage, gedruckt wird nach Zahlungseingang. Eine Person zahlt für die ganze Stufe. Bestellen und zahlen muss eine volljährige Person (z. B. Elternteil oder Lehrkraft) oder der Förderverein, die Rechnung geht auf Wunsch an Schule oder Förderverein.`,
+    `- Produktion: ${ABSCHLUSS_PRODUKTION} nach schriftlicher Bestätigung und Zahlungseingang.`,
+    `- Versand innerhalb Deutschlands: ${e(abschlussNetto(ABSCHLUSS_VERSAND.brutto))} netto (${e(ABSCHLUSS_VERSAND.brutto)} brutto) pro Paket, per DHL mit Sendungsnummer.`,
+    `- Zusatzkosten: ${abschlussZusatz.map((x) => (x.brutto > 0 ? `${x.t} ${e(abschlussNetto(x.brutto))} netto (${e(x.brutto)} brutto)${x.einheit ? ` ${x.einheit}` : ''}` : `${x.t} ohne Aufpreis`)).join('; ')}.`,
+    `- Rechenbeispiel: ${b.menge} x ${b.modell.brand} ${b.modell.name} zu ${e(b.modell.preisAb10)} = ${e(b.ware)}, plus Versand ${e(ABSCHLUSS_VERSAND.brutto)} = ${e(b.gesamt)}, also ${e(b.proPerson)} pro Person, Design inklusive (brutto).`,
+    '',
+  );
+  return z;
+}
 
 function markdown(): string {
   const schnitt = bewertungen.schnitt.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -233,6 +272,10 @@ function markdown(): string {
   // Zielgruppen
   z.push('## Zielgruppen', '', `Jede Zielgruppe hat eine eigene Seite. Übersicht: [Für wen wir drucken](${url('/fuer')})`, '');
   for (const g of zielgruppen) {
+    if (g.slug === 'abschlussklassen') {
+      z.push(`### ${text(g.name)}`, '', ...abschlussBlock());
+      continue;
+    }
     if (EIGENE_SEITE.has(g.slug)) {
       z.push(`### ${text(g.name)}`, '', `Alle Angaben und häufigen Fragen stehen auf der eigenen Seite: ${url(`/fuer/${g.slug}`)}`, '');
       continue;
