@@ -6,7 +6,7 @@ Letzte Aktualisierung: 07.10.2026
 
 ## Kernkompetenz
 
-Keine Mindestbestellmenge. Wir drucken ab 1 Stück, Staffelpreise ab 10 Stück, Großauflagen ab 50 Stück. Keine Einrichtungskosten, keine Filmkosten, keine Grundgebühr. Ob ein Motiv oder fünf macht preislich keinen Unterschied. Produziert wird ausschließlich im eigenen Haus auf eigenen Maschinen, nichts geht an wechselnde Partnerdruckereien im Ausland.
+Keine Mindestbestellmenge. Wir drucken ab 1 Stück, Staffelpreise ab 10 Stück, Mengenrabatt für Großauflagen. Keine Einrichtungskosten, keine Filmkosten, keine Grundgebühr. Ob ein Motiv oder fünf macht preislich keinen Unterschied. Produziert wird ausschließlich im eigenen Haus auf eigenen Maschinen, nichts geht an wechselnde Partnerdruckereien im Ausland.
 
 ## Leistungen im Detail
 
@@ -62,7 +62,7 @@ Stanley/Stella (Bio-Baumwolle, GOTS-zertifiziert), Build Your Brand, Urban Class
 ## Produktionszeiten
 
 - **Einzelstücke und kleine Mengen**: 1 bis 3 Werktage
-- **Serien ab 50 Stück**: 5 bis 7 Werktage nach Freigabe des Korrekturabzugs
+- **Serien**: 5 bis 7 Werktage nach Freigabe des Korrekturabzugs
 - **Print-on-Demand-Bestellungen**: 1 bis 3 Werktage, dann verlässt das Paket das Haus
 - **Express**: auf Anfrage, je nach Stückzahl und Auslastung
 - Alle Angaben bis zum Versand, nicht bis zur Zustellung. Von der Bestellung bis zur Lieferung: siehe Versand und Lieferung
@@ -132,7 +132,7 @@ westernprint hat 5,0 von 5 Sternen bei 17 Google-Bewertungen (Stand 28.09.2026).
 - [Startseite](https://westernprint.de/)
 - [Print-on-Demand Fulfillment](https://westernprint.de/print-on-demand): für Shopify-Shops in ganz Deutschland, Österreich und der Schweiz
 - [Was kostet Textildruck](https://westernprint.de/was-kostet-textildruck): Preisbeispiele netto und brutto für 1, 10, 25, 50 und 100 Stück
-- [Großauflagen](https://westernprint.de/grossauflagen): ab 50 Stück mit Staffelpreisen
+- [Großauflagen](https://westernprint.de/grossauflagen): große Mengen mit Staffelpreisen
 - [Druckverfahren](https://westernprint.de/druckverfahren): DTF, DTG und Sublimation im Vergleich
 - [Textilien](https://westernprint.de/textilien): Sortiment und Marken
 - [Shop](https://westernprint.de/shop): Textilien mit eigenem Motiv bedrucken, ab 1 Stück
