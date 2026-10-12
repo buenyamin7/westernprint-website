@@ -52,7 +52,7 @@ export const nav: NavItem[] = [
       { title: 'Druckverfahren', items: [
         { label: 'DTF-Druck', href: '/druckverfahren', hint: 'Kräftige Farben, jede Stoffart, ab 1 Stück' },
         { label: 'DTG-Druck', href: '/druckverfahren', hint: 'Fotorealistisch auf Baumwolle' },
-        { label: 'Sublimation', href: '/druckverfahren', hint: 'Allover auf Polyester und Sportbekleidung' },
+        { label: 'Sublimation', href: '/druckverfahren', hint: 'Tassen und Accessoires' },
         { label: 'Verfahren vergleichen', href: '/druckverfahren#vergleich', hint: 'Welches Verfahren wofür?' },
       ] },
       { title: 'Auftragsarten', items: [
