@@ -22,11 +22,11 @@ const methods = [
     cons: ['Nur auf Baumwolle und Stoffen mit hohem Baumwollanteil', 'Auf dunklen Stoffen Vorbehandlung nötig', 'Für große Auflagen langsamer als DTF'],
     ideal: 'Weiße und helle Shirts, Fotodrucke, Kunstprints, Einzelstücke, Print-on-Demand' },
   { key: 'sublimation', icon: 'coffee', name: 'Sublimation', sub: 'Transfer in die Beschichtung', featured: false,
-    def: 'Sublimation ist ein Verfahren, bei dem die Farbe per Hitze gasförmig wird und in Polyester oder eine Polyester-Beschichtung eindringt.',
+    def: 'Sublimation ist ein Verfahren, bei dem die Farbe per Hitze gasförmig wird und in eine Polyester-Beschichtung eindringt. westernprint nutzt Sublimation nur für Tassen und Accessoires, nicht für Textilien.',
     desc: 'Der Druck sitzt im Material statt darauf.',
     pros: ['Nicht spürbar, nichts blättert ab', 'Spülmaschinen- und kratzfest', 'Brillante, leuchtende Farben', 'Vollflächiger Druck bis an den Rand'],
-    cons: ['Nur auf hellen Polyester- oder beschichteten Flächen', 'Keine dunklen Untergründe', 'Nicht für Baumwolle'],
-    ideal: 'Tassen, Trikots aus Polyester, Mousepads, Schlüsselanhänger, Flaggen, Accessoires' },
+    cons: ['Nur auf hellen, beschichteten Flächen', 'Keine dunklen Untergründe', 'Bei uns nicht für Textilien'],
+    ideal: 'Tassen, Mousepads, Schlüsselanhänger, Accessoires' },
 ];
 
 // Offizielle Seiten der Standards. Jede URL am 28.09.2026 per curl geprüft (HTTP 200).
@@ -43,7 +43,7 @@ const certs = [
 // Ändert sich dort etwas, hier mitziehen. Für Sublimation nennt die Seite keine Stückzahl, deshalb steht dort keine Zahl.
 // Keine maximale DTF-Druckfläche nennen, solange sie nicht bestätigt ist.
 const vergleich = [
-  { k: 'Geeignete Stoffe', dtf: 'Fast alle Stoffe, von Baumwolle bis Polyester', dtg: 'Nur Baumwolle und Stoffe mit hohem Baumwollanteil', sub: 'Nur helles Polyester und beschichtete Flächen, nicht für Baumwolle' },
+  { k: 'Geeignete Stoffe', dtf: 'Fast alle Stoffe, von Baumwolle bis Polyester', dtg: 'Nur Baumwolle und Stoffe mit hohem Baumwollanteil', sub: 'Bei westernprint nur Tassen und Accessoires, keine Textilien' },
   { k: 'Dunkle Textilien', dtf: 'Ja, deckend auch auf Schwarz', dtg: 'Ja, nach Vorbehandlung auf der Pretreat-Maschine und mit weißer Unterschicht', sub: 'Nein, keine dunklen Untergründe' },
   { k: 'Haptik', dtf: 'Leichter Film spürbar, sehr dehnbar, bei sehr großen Flächen etwas steifer', dtg: 'Weichstes Ergebnis, kein Film, nur Tinte', sub: 'Nicht spürbar, der Druck sitzt im Material' },
   { k: 'Stückzahl', dtf: 'Ab 1 Stück, keine Mindestmenge. Standard für Auflagen und Einzelstücke', dtg: 'Einzelstücke und Print-on-Demand. Bei großen Auflagen langsamer als DTF', sub: 'Auf Anfrage' },
@@ -64,7 +64,7 @@ const ausstattung = [
 
 const faqs = [
   { q: 'Was ist der Unterschied zwischen DTF und DTG?', a: 'Beim DTF-Druck wird das Motiv auf eine Folie gedruckt und mit der Heißpresse aufs Textil gepresst. Beim DTG-Druck geht die Tinte direkt in die Textilfaser. DTF funktioniert auf fast allen Stoffen und deckt auch auf dunklen und schwarzen Textilien. DTG fühlt sich weicher an, druckt aber nur auf Baumwolle und auf Stoffen mit hohem Baumwollanteil. westernprint nutzt beide Verfahren in der eigenen Produktion in Oberhausen.' },
-  { q: 'Welches Druckverfahren eignet sich für Polyester?', a: 'Für Polyester eignen sich DTF-Druck und Sublimation. DTF funktioniert auf fast allen Stoffen, auch auf Polyester, und ist sehr dehnbar. Deshalb passt DTF gut zu Sportkleidung. Sublimation geht nur auf hellem Polyester und beschichteten Flächen, zum Beispiel auf Trikots oder Tassen. DTG kommt für Polyester nicht infrage. Es druckt nur auf Baumwolle und auf Stoffen mit hohem Baumwollanteil.' },
+  { q: 'Welches Druckverfahren eignet sich für Polyester?', a: 'Polyester bedruckt westernprint per DTF. DTF funktioniert auf fast allen Stoffen, auch auf Polyester, und ist sehr dehnbar. Deshalb passt DTF gut zu Sportkleidung und Trikots. DTG kommt für Polyester nicht infrage. Es druckt nur auf Baumwolle und auf Stoffen mit hohem Baumwollanteil. Sublimation nutzen wir nur für Tassen und Accessoires, nicht für Textilien.' },
   { q: 'Kann man dunkle und schwarze Textilien bedrucken?', a: 'Ja. westernprint bedruckt dunkle und schwarze Textilien per DTF oder DTG. DTF druckt auch auf dunklen Stoffen deckend. Für DTG auf dunkler Baumwolle wird das Textil zuerst auf einer Pretreat-Maschine vorbehandelt und auf der Heißpresse fixiert. Danach legen wir eine weiße Unterschicht an. Sublimation eignet sich nicht für dunkle Untergründe.' },
   { q: 'Wie groß darf das Motiv sein?', a: 'Im DTG-Druck bedruckt westernprint eine Fläche von maximal 40 x 50 cm. Vor dem Druck bekommst du einen Korrekturabzug mit den genauen Maßen in Zentimetern. Für den Preis zählt vor allem die Zahl der Druckpositionen, weniger die Größe des Motivs.' },
   { q: 'Welche Dateiformate braucht ihr?', a: 'Am besten schickst du ein PNG mit transparentem Hintergrund in 300 dpi. Ein vektorisiertes PDF geht ebenfalls. westernprint prüft jede Datei vor dem Druck und meldet sich, wenn etwas nicht passt. Für eine Anfrage reicht auch eine Skizze.' },

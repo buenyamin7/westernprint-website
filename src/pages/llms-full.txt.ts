@@ -189,7 +189,7 @@ function markdown(): string {
   z.push(
     '## Produktion',
     '',
-    'westernprint druckt in der eigenen Produktion in Oberhausen. Die Verfahren sind DTF und DTG, dazu Sublimation. ' +
+    'westernprint druckt in der eigenen Produktion in Oberhausen. Die Verfahren sind DTF und DTG, dazu Sublimation nur für Tassen und Accessoires. Textilien wie Trikots werden nicht sublimiert, sondern per DTF bedruckt. ' +
       'Für DTG setzt westernprint die Epson SureColor F2100 und F2200 ein. Die maximale DTG-Druckfläche beträgt 40 x 50 cm. ' +
       'Dunkle Textilien werden für DTG auf einer Pretreat-Maschine vorbehandelt und auf der Heißpresse fixiert. ' +
       'DTF-Transfers kommen auf der Heißpresse auf das Textil. ' +
