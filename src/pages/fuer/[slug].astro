@@ -101,6 +101,7 @@ const ld = [
           <div class={`extra reveal reveal-d${i % 3}`}>
             <h2>{sec.h}</h2>
             <p>{sec.p}</p>
+            {sec.l && <a class="extra-link" href={sec.l.href}>{sec.l.t} <Icon name="arrow-right" size={14} weight="bold" /></a>}
           </div>
         ))}
       </div>
@@ -172,5 +173,7 @@ const ld = [
   .extra { display: grid; gap: 10px; align-content: start; padding-top: 20px; border-top: 1px solid var(--line-strong); }
   .extra h2 { font-size: clamp(1.15rem, 1.6vw, 1.35rem); text-wrap: balance; }
   .extra p { color: var(--text-2); font-size: 15.5px; max-width: 62ch; }
+  .extra-link { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); font-size: 14px; font-weight: 600; text-decoration: none; }
+  .extra-link:hover { text-decoration: underline; text-underline-offset: 3px; }
   @media (max-width: 900px) { .zg-intro, .zg-form { grid-template-columns: minmax(0, 1fr); } }
 </style>
