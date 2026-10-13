@@ -18,21 +18,23 @@ const bewStand = bewertungen.stand.split('-').reverse().join('.');
 // mit OpenStreetMap (Nominatim + OSRM), unter 25 km auf ganze km, darüber auf 5 km gerundet.
 // Mülheim 9,0 | Bottrop 9,7 | Duisburg 12,5 | Essen 15,7 | Dinslaken 17,9 | Gelsenkirchen 20,5 | Gladbeck 20,9 |
 // Moers 25,2 | Herne 29,5 | Bochum 30,3 | Castrop-Rauxel 37,0 | Düsseldorf 37,8 | Recklinghausen 38,3 | Krefeld 46,2 | Dortmund 51,3
-// Jede Stadt hat einen eigenen Abschnitt statt einer eigenen Stadtseite (keine Brückenseiten). Texte bitte nicht angleichen.
+// Für Mülheim an der Ruhr, Bottrop, Duisburg und Essen gibt es seit Oktober 2026 eigene Seiten mit eigenem Inhalt
+// (/textildruck-<stadt>, Texte in src/data/staedte.ts), ihr Abschnitt hier verlinkt darauf. Die übrigen Städte bleiben
+// Abschnitte auf dieser Seite, ohne eigene Stadtseite (keine Brückenseiten). Texte bitte nicht angleichen.
 type Stadt = { c: string; id: string; d: string; l?: { href: string; t: string } };
 const nah: Stadt[] = [
   { c: 'Mülheim an der Ruhr', id: 'muelheim-an-der-ruhr',
     d: 'Mülheim an der Ruhr ist direkt nebenan: Von der Mülheimer Innenstadt bis zu westernprint sind es rund 9 km. Abholung ist oft am selben Tag möglich. Einzelstücke für Geburtstag, Junggesellenabschied oder als Geschenk sind in der Regel in 1 bis 3 Werktagen fertig.',
-    l: { href: '/fuer/jga-und-feiern', t: 'Shirts für Feiern und Einzelstücke' } },
+    l: { href: '/textildruck-muelheim-an-der-ruhr', t: 'Textildruck in Mülheim an der Ruhr' } },
   { c: 'Bottrop', id: 'bottrop',
     d: 'Bottrop liegt rund 10 km entfernt, ein kurzer Weg über die A42. Für Vereine aus Bottrop druckt westernprint Trikots und Trainingsshirts mit Namen und Rückennummern, jedes Teil einzeln nach Liste. Abholung lohnt sich, Versand per DHL geht natürlich auch.',
-    l: { href: '/fuer/sportvereine', t: 'Vereinskleidung mit Namen und Nummern' } },
+    l: { href: '/textildruck-bottrop', t: 'Textildruck in Bottrop' } },
   { c: 'Duisburg', id: 'duisburg',
     d: 'Aus der Duisburger Innenstadt sind es rund 13 km bis zu westernprint, über die A40 rund 20 Minuten. Für Betriebe aus Duisburg druckt westernprint Polos, Hoodies und Workwear mit Logo, auch auf mitgebrachte Arbeitskleidung. Serien sind 5 bis 7 Werktage nach Freigabe fertig, Abholung oder Lieferung per DHL, wie es dir passt.',
-    l: { href: '/fuer/handwerksbetriebe', t: 'Arbeitskleidung mit Logo' } },
+    l: { href: '/textildruck-duisburg', t: 'Textildruck in Duisburg' } },
   { c: 'Essen', id: 'essen',
     d: 'Die Essener Innenstadt liegt rund 16 km von westernprint entfernt, über die A40 rund 20 Minuten. Viele Vereine und Betriebe aus Essen holen selbst ab. Für Aussteller der Messe Essen ist eine Serie 5 bis 7 Werktage nach Freigabe fertig, auf Wunsch geht sie per DHL an die Messeadresse.',
-    l: { href: '/fuer/messen-und-aussteller', t: 'Messekleidung für Aussteller' } },
+    l: { href: '/textildruck-essen', t: 'Textildruck in Essen' } },
   { c: 'Dinslaken', id: 'dinslaken',
     d: 'Nach Dinslaken sind es rund 18 km, mit dem Auto rund 20 Minuten. Serien ab 50 Stück sind 5 bis 7 Werktage nach deiner Freigabe des Korrekturabzugs fertig. Für Serien liefern wir direkt zu dir, per DHL mit Sendungsnummer.',
     l: { href: '/grossauflagen', t: 'Großauflagen ab 50 Stück' } },
