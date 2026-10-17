@@ -8,7 +8,11 @@ import Tiles from '../../components/Tiles.astro';
 import { site } from '../../data/site';
 import { zielgruppen } from '../../data/zielgruppen';
 
-export function getStaticPaths() { return zielgruppen.filter((z) => z.slug !== 'abschlussklassen' && z.slug !== 'streetwear-brands' && z.slug !== 'handwerksbetriebe').map((z) => ({ params: { slug: z.slug }, props: { z } })); }
+// Diese Gruppen haben eigene, ausgebaute Seiten in diesem Ordner und laufen nicht über die Vorlage.
+export function getStaticPaths() {
+  const eigeneSeiten = ['abschlussklassen', 'streetwear-brands', 'handwerksbetriebe', 'firmen-und-buero', 'restaurants-und-cafes', 'fitness-und-kampfsport'];
+  return zielgruppen.filter((z) => !eigeneSeiten.includes(z.slug)).map((z) => ({ params: { slug: z.slug }, props: { z } }));
+}
 const { z } = Astro.props;
 const related = zielgruppen.filter((o) => o.slug !== z.slug && o.group === z.group).slice(0, 3);
 const more = zielgruppen.filter((o) => o.slug !== z.slug && o.group !== z.group).slice(0, 3 - related.length);
