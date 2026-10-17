@@ -13,12 +13,12 @@ import { bewertungen } from '../data/bewertungen';
 const schnitt = bewertungen.schnitt.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 const appUrl = 'https://apps.shopify.com/pod-westerprint';
 
-// Versand: Pauschale pro Bestellung netto, Staffel +1,50 € je volle 3 Artikel (1–2 Artikel ohne Aufschlag, 3–5 Artikel +1,50 €, 6–8 Artikel +3,00 €).
+// Versandkosten stehen bewusst nicht auf der Seite (Inhaber 18.10.2026), nur in der App. Hier nur Zielländer und Lieferzeit.
 const versand = [
-  { land: 'Deutschland', netto: '5,00', brutto: '5,95' },
-  { land: 'Österreich', netto: '7,00', brutto: '8,33' },
-  { land: 'Übrige EU-Länder', netto: '7,50', brutto: '8,93' },
-  { land: 'Schweiz', netto: '9,00', brutto: '10,71', hinweis: 'Zollpapiere (CN23) erstellen wir, Einfuhrabgaben trägt der Empfänger' },
+  { land: 'Deutschland' },
+  { land: 'Österreich' },
+  { land: 'Übrige EU-Länder' },
+  { land: 'Schweiz', hinweis: 'Zollpapiere (CN23) erstellen wir, Einfuhrabgaben trägt der Empfänger' },
 ];
 
 // Onboarding-Schritte wie im Portal (app/portal/start). Zeiten sind die Richtwerte aus dem Portal.
@@ -67,7 +67,7 @@ const vergleich = [
   { k: 'Wo wird gedruckt?', wp: 'In unserer eigenen Werkstatt in Oberhausen, auf eigenen Maschinen', pl: 'In eigenen Werken, Standort meist nicht genannt', mp: 'Bei wechselnden Partnerdruckereien, Qualität je Partner' },
   { k: 'Ansprechpartner', wp: 'Eine feste Person, per WhatsApp, Telefon und E-Mail', pl: 'Ticket, Chat oder Formular', mp: 'Ticket oder Chat' },
   { k: 'Bezahlung', wp: 'Wöchentliche Sammelrechnung, SEPA-Lastschrift, 14 Tage Zahlungsziel', pl: 'Häufig Prepaid-Guthaben, das du vorher auflädst', mp: 'Kreditkarte je Bestellung, Rabatte oft nur im Abo' },
-  { k: 'Versandkosten', wp: 'Stehen hier auf der Seite, netto und brutto', pl: 'Meist nur im Hilfe-Center', mp: 'Je Partner und Land unterschiedlich' },
+  { k: 'Versandkosten', wp: 'Feste Pauschale pro Bestellung je Zielland, in der App einsehbar', pl: 'Meist nur im Hilfe-Center', mp: 'Je Partner und Land unterschiedlich' },
   { k: 'Textilien', wp: 'Stanley/Stella, Stedman, Build Your Brand, mit Zertifikaten am Produkt', pl: 'Großer Katalog, Herkunft je Artikel', mp: 'Sehr großer Katalog, je Partner anders' },
   { k: 'Branding', wp: 'Nackenprint, Ärmeldruck, dein eigenes Verpackungsmaterial, ab 1 Stück', pl: 'Häufig nur für bestimmte Linien oder mit Mindestmengen', mp: 'Je Partner, oft gar nicht' },
   { k: 'Lieferzeit DE', wp: 'Produktion 1 bis 3 Werktage, beim Kunden in 3 bis 5 Werktagen', pl: '2 bis 5 Werktage Produktion plus Versand', mp: 'Abhängig vom gewählten Partner' },
@@ -79,7 +79,7 @@ const faqs = [
   { q: 'Was kostet die App und was zahle ich pro Bestellung?', a: 'Die App ist kostenlos, es gibt keine Grundgebühr, kein Abo und keinen Mindestumsatz. Du zahlst nur Produktion und Versand der Artikel, die tatsächlich bestellt wurden. Den Produktionspreis jedes Produkts siehst du in der App, bevor du es veröffentlichst.' },
   { q: 'Gibt es eine Mindestbestellmenge?', a: 'Nein. Wir drucken ab 1 Stück. Jede Bestellung aus deinem Shop wird einzeln produziert, auch wenn sie nur aus einem T-Shirt besteht.' },
   { q: 'Wie lange dauern Produktion und Lieferung?', a: 'Die Produktion dauert 1 bis 3 Werktage, auch in der Black Week und im Weihnachtsgeschäft. Bei deinen Kunden kommt die Bestellung in der Regel 3 bis 5 Werktage nach der Bestellung an, in Deutschland genauso wie in Österreich, der Schweiz und den übrigen EU-Ländern.' },
-  { q: 'In welche Länder versendet ihr und was kostet der Versand?', a: 'Wir liefern nach Deutschland, Österreich, in die Schweiz und in alle übrigen EU-Länder. Pro Bestellung netto: Deutschland 5,00 €, Österreich 7,00 €, übrige EU-Länder 7,50 €, Schweiz 9,00 €. Je volle 3 Artikel in einer Bestellung kommen 1,50 € netto dazu. Versand per DHL mit Tracking. Für die Schweiz erstellen wir die Zollpapiere, Einfuhrabgaben trägt der Empfänger.' },
+  { q: 'In welche Länder versendet ihr und was kostet der Versand?', a: 'Wir liefern nach Deutschland, Österreich, in die Schweiz und in alle übrigen EU-Länder, per DHL mit Tracking. Der Versand ist eine feste Pauschale pro Bestellung je Zielland, du siehst sie in der App. Für die Schweiz erstellen wir die Zollpapiere, Einfuhrabgaben trägt der Empfänger. Länder außerhalb der EU beliefern wir nicht.' },
   { q: 'Welche Textilien kann ich anbieten?', a: 'Stanley/Stella mit über 150 Styles aus Bio-Baumwolle, elf Stedman-Klassiker bis 5XL und ausgewählte Modelle von Build Your Brand für Streetwear, zum Beispiel Ultra Heavy Box Hoody, Fluffy Hoody und Vintage Heavy Tee. Welche Zertifikate ein Artikel trägt, siehst du am Produkt in der App.' },
   { q: 'DTF oder DTG: Welches Druckverfahren bekomme ich?', a: 'Standard ist DTF: deckende, kräftige Farben auf hellen und dunklen Textilien, auch auf Mischgewebe und Polyester. Auf Wunsch drucken wir per DTG, also direkt in den Stoff, für einen besonders weichen Griff auf heller Baumwolle. Du wählst das Verfahren im Designer.' },
   { q: 'Welche Dateien brauche ich?', a: 'Am besten ein PNG mit transparentem Hintergrund in 300 dpi. Die App nimmt auch JPG, WEBP, SVG, PDF, AI und EPS bis 50 MB. Ist die Auflösung zu niedrig oder der Hintergrund weiß, warnt dich der Designer vor dem Veröffentlichen.' },
@@ -94,11 +94,11 @@ const faqs = [
 ];
 
 const appLd = { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'westernprint POD', applicationCategory: 'BusinessApplication', operatingSystem: 'Shopify', url: appUrl, applicationSubCategory: 'Print-on-Demand', offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR', description: 'Kostenlose Installation, keine App-Gebühr. Pro Bestellung fallen Produktion und Versand an.' }, publisher: { '@id': 'https://westernprint.de/#organization' }, description: 'Print-on-Demand und Fulfillment aus Deutschland: Textil wählen, Design per Live-Mockup platzieren, Produkte landen automatisch im Shopify-Shop. Bestellungen drucken und versenden wir per DHL, das Tracking geht zurück an Shopify.' };
-const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'Print-on-Demand Fulfillment für Shopify-Shops', serviceType: 'Print-on-Demand Fulfillment', provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: [{ '@type': 'Country', name: 'Deutschland' }, { '@type': 'Country', name: 'Österreich' }, { '@type': 'Country', name: 'Schweiz' }, { '@type': 'Place', name: 'Europäische Union' }], url: 'https://westernprint.de/print-on-demand', offers: { '@type': 'Offer', description: 'Keine Grundgebühr, keine Mindestmenge, Produktionspreis je Produkt in der App, Versand ab 5,00 € netto pro Bestellung' } };
+const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'Print-on-Demand Fulfillment für Shopify-Shops', serviceType: 'Print-on-Demand Fulfillment', provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: [{ '@type': 'Country', name: 'Deutschland' }, { '@type': 'Country', name: 'Österreich' }, { '@type': 'Country', name: 'Schweiz' }, { '@type': 'Place', name: 'Europäische Union' }], url: 'https://westernprint.de/print-on-demand', offers: { '@type': 'Offer', description: 'Keine Grundgebühr, keine Mindestmenge, Produktionspreis und Versandpauschale je Zielland in der App einsehbar' } };
 const howToLd = { '@context': 'https://schema.org', '@type': 'HowTo', name: 'Print-on-Demand mit westernprint für einen Shopify-Shop einrichten', totalTime: 'PT10M', step: schritte.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.t, text: s.d })) };
 const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 ---
-<Base title="Print-on-Demand aus Deutschland für Shopify: Druck und Versand ab 1 Stück" description="Print-on-Demand-Anbieter mit eigener Produktion in Oberhausen: kostenlose Shopify-App, DTF und DTG, Stanley/Stella, Stedman und Build Your Brand, Produktion in 1 bis 3 Werktagen, DHL-Versand neutral in deinem Namen ab 5,00 € netto, wöchentliche Sammelrechnung per SEPA." jsonLd={[svcLd, appLd, howToLd, faqLd]}>
+<Base title="Print-on-Demand aus Deutschland für Shopify: Druck und Versand ab 1 Stück" description="Print-on-Demand-Anbieter mit eigener Produktion in Oberhausen: kostenlose Shopify-App, DTF und DTG, Stanley/Stella, Stedman und Build Your Brand, Produktion in 1 bis 3 Werktagen, DHL-Versand neutral in deinem Namen nach DE, AT, CH und EU, wöchentliche Sammelrechnung per SEPA." jsonLd={[svcLd, appLd, howToLd, faqLd]}>
   <PageHero
     eyebrow="Print-on-Demand für Shopify"
     title="Print-on-Demand aus Deutschland für deinen Shopify-Shop. <span class='hl'>Ab 1 Stück.</span>"
@@ -126,7 +126,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
         <div><dt>Mindestmenge</dt><dd>Keine, ab 1 Stück</dd></div>
         <div><dt>Produktionszeit</dt><dd>1 bis 3 Werktage, auch im Q4</dd></div>
         <div><dt>Lieferzeit</dt><dd>3 bis 5 Werktage ab Bestellung</dd></div>
-        <div><dt>Versand</dt><dd>DHL mit Tracking, ab 5,00 € netto pro Bestellung, neutral in deinem Namen</dd></div>
+        <div><dt>Versand</dt><dd>DHL mit Tracking, feste Pauschale pro Bestellung, neutral in deinem Namen</dd></div>
         <div><dt>Liefergebiet</dt><dd>Deutschland, Österreich, Schweiz, alle EU-Länder</dd></div>
         <div><dt>App</dt><dd>Kostenlos, keine Grundgebühr, kein Abo</dd></div>
         <div><dt>Abrechnung</dt><dd>Wöchentliche Sammelrechnung, SEPA-Lastschrift</dd></div>
@@ -256,16 +256,16 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
   <section class="section">
     <div class="container">
       <div class="section-head reveal">
-        <h2>Versandkosten und Lieferzeiten</h2>
-        <p>Jede Bestellung geht per DHL mit Tracking direkt an deinen Kunden, neutral verpackt im Namen deines Shops. Pauschale pro Bestellung, netto zzgl. MwSt., in Klammern brutto.</p>
+        <h2>Versand und Lieferzeiten</h2>
+        <p>Jede Bestellung geht per DHL mit Tracking direkt an deinen Kunden, neutral verpackt im Namen deines Shops. Der Versand ist eine feste Pauschale pro Bestellung je Zielland, du siehst sie in der App.</p>
       </div>
       <div class="ship-table reveal">
-        <div class="ship-row ship-head"><span>Zielland</span><span>Lieferzeit ab Bestellung</span><span>Versand pro Bestellung</span></div>
+        <div class="ship-row ship-head"><span>Zielland</span><span>Lieferzeit ab Bestellung</span></div>
         {versand.map((v) => (
-          <div class="ship-row"><span>{v.land}{v.hinweis && <small class="ship-countries">{v.hinweis}</small>}</span><span>3 bis 5 Werktage</span><span>{v.netto} &euro; netto <small class="gross">({v.brutto} &euro; brutto)</small></span></div>
+          <div class="ship-row"><span>{v.land}{v.hinweis && <small class="ship-countries">{v.hinweis}</small>}</span><span>3 bis 5 Werktage</span></div>
         ))}
       </div>
-      <p class="muted small ship-note">Je volle 3 Artikel in einer Bestellung kommen 1,50 &euro; netto (1,79 &euro; brutto) dazu: 1 bis 2 Artikel ohne Aufschlag, 3 bis 5 Artikel plus 1,50 &euro;, 6 bis 8 Artikel plus 3,00 &euro;. Die Lieferzeit enthält die Produktion von 1 bis 3 Werktagen. Andere Länder außerhalb der EU beliefern wir nicht.</p>
+      <p class="muted small ship-note">Die Lieferzeit enthält die Produktion von 1 bis 3 Werktagen. Länder außerhalb der EU beliefern wir nicht.</p>
       <div class="grid grid-3 versand-extra">
         {[
           { icon: 'package', t: 'Neutral in deinem Namen', d: 'Kein westernprint-Logo, keine Rechnung von uns im Paket. Dein Kunde sieht nur deinen Shop.' },
@@ -335,7 +335,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
           </tbody>
         </table>
       </div>
-      <p class="compare-summary reveal">Große Plattformen haben den größeren Katalog und mehr Integrationen. Wir haben eine Werkstatt, in der du anrufen kannst, Versandkosten, die auf der Seite stehen, Branding ab dem ersten Teil und eine Rechnung pro Woche statt Guthaben. Wer das braucht, ist bei uns richtig.</p>
+      <p class="compare-summary reveal">Große Plattformen haben den größeren Katalog und mehr Integrationen. Wir haben eine Werkstatt, in der du anrufen kannst, feste Pauschalen statt Überraschungen, Branding ab dem ersten Teil und eine Rechnung pro Woche statt Guthaben. Wer das braucht, ist bei uns richtig.</p>
     </div>
   </section>
 
@@ -439,14 +439,13 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
   @media (max-width: 900px) { .druck-grid { grid-template-columns: 1fr; } .druck-grid h3:first-child { margin-top: 0; } }
 
   .ship-table { display: grid; border: 1px solid var(--line); border-radius: var(--radius-card); overflow: hidden; background: var(--surface); }
-  .ship-row { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 12px; padding: 14px 20px; border-top: 1px solid var(--line); font-size: 15px; }
+  .ship-row { display: grid; grid-template-columns: 1.6fr 1fr; gap: 12px; padding: 14px 20px; border-top: 1px solid var(--line); font-size: 15px; }
   .ship-row:first-child { border-top: 0; }
-  .ship-row span:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+  .ship-row span:last-child { text-align: right; }
   .ship-head { background: var(--bg-2); color: var(--text-3); font-size: 13px; font-weight: 600; }
   .ship-note { margin-top: 14px; max-width: 80ch; }
-  .ship-row .gross, .ship-row .ship-countries { display: block; font-size: 13px; color: var(--text-3); }
+  .ship-row .ship-countries { display: block; font-size: 13px; color: var(--text-3); }
   .versand-extra { margin-top: 32px; }
-  @media (max-width: 600px) { .ship-row { grid-template-columns: 1fr 1fr; } .ship-row span:nth-child(2) { order: 3; grid-column: 1 / -1; color: var(--text-3); font-size: 13.5px; } }
 
   .branding-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .branding-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(28px, 5vw, 72px); align-items: start; }
