@@ -56,7 +56,7 @@ export const nav: NavItem[] = [
         { label: 'Verfahren vergleichen', href: '/druckverfahren#vergleich', hint: 'Welches Verfahren wofür?' },
       ] },
       { title: 'Auftragsarten', items: [
-        { label: 'Großauflagen ab 50 Stück', href: '/grossauflagen', hint: 'Staffelpreise, Korrekturabzug, fester Liefertermin' },
+        { label: 'Großauflagen und Sammelbestellungen', href: '/grossauflagen', hint: 'Staffelpreise, Korrekturabzug, fester Liefertermin' },
         { label: 'Textildruck Oberhausen', href: '/textildruck-oberhausen', hint: 'Vor Ort im Ruhrgebiet, Abholung möglich' },
         { label: 'Textilien und Marken', href: '/textilien', hint: 'Stanley/Stella, Stedman, BYB, Urban Classics' },
         { label: 'Was kostet Textildruck?', href: '/was-kostet-textildruck', hint: 'Preisbeispiele für 1, 10, 25, 50 und 100 Stück' },
@@ -121,7 +121,7 @@ export const stats = [
 export const faqs = [
   {
     q: 'Gibt es eine Mindestbestellmenge?',
-    a: 'Nein. Wir produzieren ab 1 Stück. Staffelpreise gibt es ab 10 Stück, für Großauflagen ab 50 Stück ein individuelles Angebot.',
+    a: 'Nein. Wir produzieren ab 1 Stück. Staffelpreise gibt es ab 10 Stück, und je größer die Menge, desto günstiger. Für große Auflagen bekommt ihr ein individuelles Angebot.',
   },
   {
     q: 'Wie schnell bekomme ich ein Angebot?',

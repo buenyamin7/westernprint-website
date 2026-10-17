@@ -3,6 +3,8 @@ import { site } from '../data/site';
 import Icon from './Icon.astro';
 interface Props { topic?: string; compact?: boolean }
 const { topic = '', compact = false } = Astro.props;
+// Werte bleiben gleich, weil Airtable (Kontaktanfragen, Feld Thema) sie als Auswahl kennt. Angezeigt wird topicLabel.
+const topicLabel: Record<string, string> = { 'Großauflage ab 50 Stück': 'Großauflage oder Sammelbestellung' };
 const topics = ['Print-on-Demand Fulfillment', 'Großauflage ab 50 Stück', 'B2B-Partnerschaft (50+ Orders/Tag)', 'Einzelstück / Kleinserie', 'Druckverfahren-Beratung', 'Sonstiges'];
 ---
 <form class="cform" data-contact-form data-endpoint={site.formEndpoint} data-wa={site.whatsapp} novalidate>
@@ -27,7 +29,7 @@ const topics = ['Print-on-Demand Fulfillment', 'Großauflage ab 50 Stück', 'B2B
       <label for="cf-topic">Thema</label>
       <select class="select" id="cf-topic" name="topic" required>
         <option value="" disabled selected={!topic}>Bitte wählen</option>
-        {topics.map((t) => <option value={t} selected={t === topic}>{t}</option>)}
+        {topics.map((t) => <option value={t} selected={t === topic}>{topicLabel[t] ?? t}</option>)}
       </select>
       <span class="error" id="cf-topic-error">Bitte wähle ein Thema.</span>
     </div>

@@ -34,8 +34,8 @@ const nah: Stadt[] = [
     d: 'Die Essener Innenstadt liegt rund 16 km von westernprint entfernt, über die A40 rund 20 Minuten. Viele Vereine und Betriebe aus Essen holen selbst ab. Für Aussteller der Messe Essen ist eine Serie 5 bis 7 Werktage nach Freigabe fertig, auf Wunsch geht sie per DHL an die Messeadresse.',
     l: { href: '/fuer/messen-und-aussteller', t: 'Messekleidung für Aussteller' } },
   { c: 'Dinslaken', id: 'dinslaken',
-    d: 'Nach Dinslaken sind es rund 18 km, mit dem Auto rund 20 Minuten. Serien ab 50 Stück sind 5 bis 7 Werktage nach deiner Freigabe des Korrekturabzugs fertig. Für Serien liefern wir direkt zu dir, per DHL mit Sendungsnummer.',
-    l: { href: '/grossauflagen', t: 'Großauflagen ab 50 Stück' } },
+    d: 'Nach Dinslaken sind es rund 18 km, mit dem Auto rund 20 Minuten. Serien sind 5 bis 7 Werktage nach deiner Freigabe des Korrekturabzugs fertig. Für Serien liefern wir direkt zu dir, per DHL mit Sendungsnummer.',
+    l: { href: '/grossauflagen', t: 'Großauflagen mit Staffelpreisen' } },
 ];
 const weiter: Stadt[] = [
   { c: 'Gelsenkirchen', id: 'gelsenkirchen',
@@ -76,7 +76,7 @@ const faqs = [
   { q: 'Kann eine Firma aus Duisburg ihre Arbeitskleidung in Oberhausen abholen?', a: `Ja. Die Abholung in der Schenkendorfstraße 45 in Oberhausen ist kostenlos, ${oeffnungszeiten.text} nach kurzer Absprache. Aus der Duisburger Innenstadt sind es rund 13 km über die A40. Wer nicht abholen will, bekommt die Ware per DHL.` },
   { q: 'Liefert westernprint auch nach Dortmund, Düsseldorf und Krefeld?', a: 'Ja. westernprint druckt in Oberhausen und verschickt per DHL mit Sendungsnummer, deutschlandweit. Dortmund liegt rund 50 km entfernt, Düsseldorf rund 40 km und Krefeld rund 45 km. Von der Bestellung bis zur Lieferung vergehen bei Einzelstücken in der Regel 3 bis 5 Werktage.' },
   { q: 'Lohnt sich die Abholung oder soll ich liefern lassen?', a: 'Bei Einzelstücken und kleinen Mengen aus den Nachbarstädten lohnt sich die Abholung, du sparst die Versandkosten von 4,90 €. Bei größeren Serien liefern wir: Ab 500 € Warenwert (brutto) ist der Versand kostenlos, darunter kostet das Paket bei einer Sammelbestellung kaum mehr als die Fahrt.' },
-  { q: 'Wie schnell geht das?', a: 'Einzelstücke und kleine Mengen sind in der Regel in 1 bis 3 Werktagen fertig. Serien ab 50 Stück brauchen 5 bis 7 Werktage nach Freigabe des Korrekturabzugs. Wenn du einen festen Termin hast, sag ihn uns direkt, Express ist auf Anfrage möglich.' },
+  { q: 'Wie schnell geht das?', a: 'Einzelstücke und kleine Mengen sind in der Regel in 1 bis 3 Werktagen fertig. Serien brauchen 5 bis 7 Werktage nach Freigabe des Korrekturabzugs. Wenn du einen festen Termin hast, sag ihn uns direkt, Express ist auf Anfrage möglich.' },
   { q: 'Kann ich eigene Textilien vorbeibringen?', a: 'Ja. Angelieferte Ware bedrucken wir, egal ob Vereinstrikots, Arbeitskleidung oder etwas, das du schon im Schrank hast. Wir prüfen vorher, ob das Material für DTF geeignet ist. Bei Polyester und Funktionsstoffen drucken wir mit niedrigerer Temperatur, das klappt problemlos.' },
   { q: 'Was kostet eine Vereinsbestellung ungefähr?', a: `Ein T-Shirt Basic mit einem Druck kostet bei 100 Stück 8,40 € netto (10,00 € brutto). Bei 50 Stück kostet ein T-Shirt Basic mit einem Druck 9,40 € netto (11,19 € brutto) pro Stück (Stand ${PREIS_STAND}). Namen und Nummern kosten ab 5,90 € netto (7,02 € brutto) pro Teil. Genaue Beispiele stehen auf unserer Preisseite.` },
 ];
@@ -220,7 +220,7 @@ const ld = [
       <ol class="steps reveal">
         <li><span class="num">01</span><div><strong>Anfrage</strong><span>Sag uns Teil, Menge, Größen und schick das Motiv. Angebot innerhalb von 24 Stunden.</span></div></li>
         <li><span class="num">02</span><div><strong>Dateicheck und Korrekturabzug</strong><span>Wir prüfen Auflösung, Transparenz und Druckgröße und schicken dir eine Vorschau mit den genauen Maßen in Zentimetern.</span></div></li>
-        <li><span class="num">03</span><div><strong>Produktion</strong><span>Einzelstücke 1 bis 3 Werktage, Serien ab 50 Stück 5 bis 7 Werktage nach deiner Freigabe.</span></div></li>
+        <li><span class="num">03</span><div><strong>Produktion</strong><span>Einzelstücke 1 bis 3 Werktage, Serien 5 bis 7 Werktage nach deiner Freigabe.</span></div></li>
         <li><span class="num">04</span><div><strong>Abholung oder Versand</strong><span>Abholung in Oberhausen nach Absprache, {oeffnungszeiten.kurz}. Oder per DHL mit Sendungsnummer zu dir.</span></div></li>
       </ol>
     </div>

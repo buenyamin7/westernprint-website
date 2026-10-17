@@ -27,7 +27,7 @@ const iconFor = (t: string) => /hoodie|sweat|pullover/i.test(t) ? 'hoodie' : /ca
 const UNGEKLAERT = /wasch\w*[^.]*\b60\s*(°|grad)|\b60\s*(°|grad)[^.]*wasch|an den (messe)?stand\b/i;
 const schemaText = (t: string) => t.split(/(?<=\.)\s+/).filter((satz) => !UNGEKLAERT.test(satz)).join(' ');
 const ld = [
-  { '@context': 'https://schema.org', '@type': 'Service', name: z.title, serviceType: 'Textildruck', description: schemaText(z.description), provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: [{ '@type': 'City', name: 'Oberhausen' }, { '@type': 'AdministrativeArea', name: 'Ruhrgebiet' }, { '@type': 'AdministrativeArea', name: 'Nordrhein-Westfalen' }, { '@type': 'Country', name: 'Deutschland' }], audience: { '@type': 'Audience', audienceType: z.name }, url: `${site.url}/fuer/${z.slug}`, offers: { '@type': 'Offer', description: 'Angebot innerhalb von 24 Stunden, ab 1 Stück, Staffelpreise ab 10 Stück, Großauflagen ab 50 Stück' } },
+  { '@context': 'https://schema.org', '@type': 'Service', name: z.title, serviceType: 'Textildruck', description: schemaText(z.description), provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: [{ '@type': 'City', name: 'Oberhausen' }, { '@type': 'AdministrativeArea', name: 'Ruhrgebiet' }, { '@type': 'AdministrativeArea', name: 'Nordrhein-Westfalen' }, { '@type': 'Country', name: 'Deutschland' }], audience: { '@type': 'Audience', audienceType: z.name }, url: `${site.url}/fuer/${z.slug}`, offers: { '@type': 'Offer', description: 'Angebot innerhalb von 24 Stunden, ab 1 Stück, Staffelpreise ab 10 Stück, Mengenrabatt für Großauflagen' } },
   { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: z.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Startseite', item: site.url }, { '@type': 'ListItem', position: 2, name: 'Für wen wir drucken', item: `${site.url}/fuer` }, { '@type': 'ListItem', position: 3, name: z.name, item: `${site.url}/fuer/${z.slug}` }] },
 ];
@@ -101,6 +101,7 @@ const ld = [
           <div class={`extra reveal reveal-d${i % 3}`}>
             <h2>{sec.h}</h2>
             <p>{sec.p}</p>
+            {sec.l && <a class="extra-link" href={sec.l.href}>{sec.l.t} <Icon name="arrow-right" size={14} weight="bold" /></a>}
           </div>
         ))}
       </div>
@@ -172,5 +173,7 @@ const ld = [
   .extra { display: grid; gap: 10px; align-content: start; padding-top: 20px; border-top: 1px solid var(--line-strong); }
   .extra h2 { font-size: clamp(1.15rem, 1.6vw, 1.35rem); text-wrap: balance; }
   .extra p { color: var(--text-2); font-size: 15.5px; max-width: 62ch; }
+  .extra-link { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); font-size: 14px; font-weight: 600; text-decoration: none; }
+  .extra-link:hover { text-decoration: underline; text-underline-offset: 3px; }
   @media (max-width: 900px) { .zg-intro, .zg-form { grid-template-columns: minmax(0, 1fr); } }
 </style>
