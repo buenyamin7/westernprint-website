@@ -75,7 +75,7 @@ const istZahl = (s: string) => /^\d+,\d{2}$/.test(s);
     </div>
     <div class="extras reveal">
       {p.zusatz.map((z) => (
-        <div class="extra"><div class="extra-top"><strong>{z.t}</strong><span class="price">{z.p}</span></div><p>{z.d}</p></div>
+        <div class="extra"><div class="extra-top"><strong>{z.t}</strong>{z.p && <span class="price">{z.p}</span>}</div><p>{z.d}</p></div>
       ))}
     </div>
     <p class="muted small">{p.preisHinweis ?? 'Keine Einrichtungskosten, keine Filmkosten. Das genaue Angebot mit festem Stückpreis bekommt ihr an Werktagen innerhalb von 24 Stunden.'}</p>

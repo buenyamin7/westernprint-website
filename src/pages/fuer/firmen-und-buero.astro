@@ -18,16 +18,17 @@ const preise = [
   { t: 'Hoodie', m: 'Stedman Classic Hoodie, 280 g', p: ['29,90', '24,90', '22,90', '21,40', '19,90'] },
   { t: 'Hemd', m: 'Stanley/Stella Styler, Bio-Baumwolle', p: ['36,90', '30,90', '28,90', '27,40', '25,90'] },
   { t: 'Softshelljacke', m: 'Stedman Lux Softshell, 250 g', p: ['44,90', '39,90', '37,90', '36,40', '34,90'] },
-  { t: 'Fleeceweste', m: 'Stedman Classic Fleece Vest', p: ['im Angebot', 'im Angebot', 'im Angebot', 'im Angebot', 'im Angebot'] },
-  { t: 'Cap', m: 'Flexfit 110, Logo vorne', p: ['im Angebot', 'im Angebot', 'im Angebot', 'im Angebot', 'im Angebot'] },
+  // Fleeceweste und Cap nach der Staffel vom 14.10.2026 (EK + 12 / 12 / 8 / 6,50 / 5,50), EK günstigste Farbe aus der POD-DB, Stand 18.10.2026.
+  { t: 'Fleeceweste', m: 'Stedman Classic Fleece Vest', p: ['19,62', '19,62', '15,62', '14,12', '13,12'] },
+  { t: 'Cap', m: 'Flexfit 110, Logo vorne', p: ['19,50', '19,50', '15,50', '14,00', '13,00'] },
 ];
 const zusatz = [
-  { t: 'Zweite Druckseite', p: 'ab 3,50 €', d: 'Logo klein vorne, Firmenname oder Claim groß auf dem Rücken.' },
-  { t: 'Ärmeldruck', p: '3,00 €', d: 'Pro Ärmel, bis 8 x 8 cm. Zum Beispiel Webadresse oder Zertifikat.' },
-  { t: 'Name oder Abteilung', p: 'ab 5,90 €', d: 'Jedes Teil einzeln mit Vorname oder Funktion, eine Liste reicht.' },
-  { t: 'Nackenprint statt Etikett', p: '3,00 €', d: 'Euer Logo mit Größenangabe im Nacken, wirkt wie eine eigene Kollektion.' },
-  { t: 'Eigene Kleidung anliefern', p: 'nur Druck', d: 'Ihr habt schon Polos oder Jacken? Wir bedrucken sie, ihr zahlt nur den Druck.' },
-  { t: 'Logo-Datei prüfen', p: '0,00 €', d: 'Jede Datei prüfen wir kostenlos. Neu aufbauen oder freistellen kostet 19,90 € pro Datei.' },
+  { t: 'Zweite Druckseite', p: '', d: 'Logo klein vorne, Firmenname oder Claim groß auf dem Rücken.' },
+  { t: 'Ärmeldruck', p: '', d: 'Pro Ärmel, bis 8 x 8 cm. Zum Beispiel Webadresse oder Zertifikat.' },
+  { t: 'Name oder Abteilung', p: '', d: 'Jedes Teil einzeln mit Vorname oder Funktion, eine Liste reicht.' },
+  { t: 'Nackenprint statt Etikett', p: '', d: 'Euer Logo mit Größenangabe im Nacken, wirkt wie eine eigene Kollektion.' },
+  { t: 'Eigene Kleidung anliefern', p: '', d: 'Ihr habt schon Polos oder Jacken? Wir bedrucken sie, ihr zahlt nur den Druck.' },
+  { t: 'Logo-Datei prüfen', p: '', d: 'Jede Datei prüfen wir kostenlos. Neu aufbauen oder freistellen übernehmen wir, den Preis dafür nennen wir im Angebot.' },
 ];
 const branchen = ['Agenturen und Studios', 'Steuerberater und Kanzleien', 'Immobilien und Makler', 'IT und Software', 'Autohäuser und Kfz-Handel', 'Arztpraxen und Physiotherapie', 'Pflegedienste', 'Logistik und Spedition', 'Versicherungen und Finanzvertrieb', 'Einzelhandel und Filialen', 'Start-ups', 'Vereine mit Geschäftsstelle', 'Außendienst und Vertrieb', 'Empfang und Kundenservice'];
 const rollen = [
@@ -66,10 +67,10 @@ const faqs = [
   { q: 'Bekommen wir vorher ein Muster?', a: 'Ja. Ein Muster mit eurem Logo bestellt ihr über das Angebot oder direkt im Shop, ab 1 Stück. So seht ihr Stoff, Farbe und Druck, bevor das Team ausgestattet wird. Einzelne Muster sind etwas teurer als die Serie, weil jedes Teil einzeln eingerichtet wird.' },
   { q: 'Ist Firmenkleidung mit Logo steuerlich absetzbar?', a: 'Kleidung mit dauerhaft angebrachtem, sichtbarem Firmenlogo gilt in der Regel als Berufskleidung: Betriebsausgabe für die Firma, Vorsteuerabzug aus unserer Rechnung, normalerweise kein geldwerter Vorteil für Mitarbeitende. Das ist eine Orientierung und keine Steuerberatung, klärt es mit eurem Steuerberater.' },
   { q: 'Können wir unsere eigene Kleidung bedrucken lassen?', a: 'Ja. westernprint bedruckt angelieferte Polos, Hemden, Jacken oder Westen, ihr zahlt nur den Druck. Nennt vorher kurz das Material, wir prüfen die Eignung. Plant 2 bis 3 Prozent Reserve ein, für Materialfehler an angelieferter Ware haften wir nicht.' },
-  { q: 'Welche Datei braucht ihr von unserem Logo?', a: 'Am besten eine Vektordatei (PDF, AI, SVG) oder ein PNG mit transparentem Hintergrund. Wir prüfen jede Datei kostenlos. Habt ihr nur ein Bild von der Website oder einer Visitenkarte, bauen wir das Logo für 19,90 € netto pro Datei sauber neu auf.' },
-  { q: 'Können Name oder Abteilung auf das Shirt?', a: 'Ja. Jedes Teil bekommt auf Wunsch Vornamen, Funktion oder Abteilung, zum Beispiel auf der Brust oder am Ärmel. Das kostet ab 5,90 € netto pro Teil zusätzlich, eine Liste mit Name und Größe reicht.' },
+  { q: 'Welche Datei braucht ihr von unserem Logo?', a: 'Am besten eine Vektordatei (PDF, AI, SVG) oder ein PNG mit transparentem Hintergrund. Wir prüfen jede Datei kostenlos. Habt ihr nur ein Bild von der Website oder einer Visitenkarte, bauen wir das Logo sauber neu auf, den Preis dafür nennen wir im Angebot.' },
+  { q: 'Können Name oder Abteilung auf das Shirt?', a: 'Ja. Jedes Teil bekommt auf Wunsch Vornamen, Funktion oder Abteilung, zum Beispiel auf der Brust oder am Ärmel. Eine Liste mit Name und Größe reicht, den Aufpreis nennen wir im Angebot.' },
   { q: 'Druckt ihr auch Hemden und Softshelljacken mit Logo?', a: `Ja. Hemden (Stanley/Stella Styler, Bio-Baumwolle) kosten mit Logo 30,90 € netto (${brutto('30,90')} € brutto) bei 10 Stück, Softshelljacken (Stedman Lux Softshell) 39,90 € netto (${brutto('39,90')} € brutto) bei 10 Stück. Das Logo sitzt auf der Brust, auf Wunsch zusätzlich auf dem Rücken oder Ärmel. Stand ${STAND}.` },
-  { q: 'Kann der Nacken unser Logo statt des Herstelleretiketts zeigen?', a: 'Ja. Für 3,00 € netto pro Teil drucken wir euer Logo mit Größenangabe in den Nacken. Viele Textilien von Stanley/Stella haben ein Tearaway-Label, das wir entfernen, Build-Your-Brand-Modelle kommen ohne Etikett. Die Kleidung wirkt dann wie eine eigene Kollektion.' },
+  { q: 'Kann der Nacken unser Logo statt des Herstelleretiketts zeigen?', a: 'Ja. Wir drucken euer Logo mit Größenangabe in den Nacken, den Aufpreis nennen wir im Angebot. Viele Textilien von Stanley/Stella haben ein Tearaway-Label, das wir entfernen, Build-Your-Brand-Modelle kommen ohne Etikett. Die Kleidung wirkt dann wie eine eigene Kollektion.' },
   { q: 'Bekommen wir eine Rechnung mit ausgewiesener Umsatzsteuer?', a: 'Ja. Ihr bekommt eine Rechnung der westernprint GmbH mit ausgewiesener Umsatzsteuer. Neue Kunden zahlen vorab per Überweisung, für Stammkunden ist Zahlung auf Rechnung nach Absprache möglich.' },
 ];
 const ld = [
@@ -92,7 +93,7 @@ const ld = [
     answer={`westernprint in Oberhausen bedruckt Firmenkleidung mit Logo für Firmen, Büros, Agenturen, Kanzleien, Praxen und Dienstleister, ab 1 Stück ohne Mindestmenge. Ein Poloshirt mit Logo kostet bei 10 Stück 17,90 € netto, ein Bio-T-Shirt 14,90 € netto, ein Hoodie 24,90 € netto, eine Softshelljacke 39,90 € netto pro Stück, Stand ${STAND}. Ihr schickt Logo und Größenliste, wir packen pro Person beschriftet. Die Serie ist 5 bis 7 Werktage nach Freigabe fertig, einzelne Teile für neue Mitarbeitende bestellt ihr später nach, mit demselben Druck. Eigene Kleidung könnt ihr anliefern, dann zahlt ihr nur den Druck.`}
     stand={STAND} mengen={mengen} preise={preise} zusatz={zusatz}
     preisTitel="Preise für Firmenkleidung mit Logo"
-    preisText="Preis pro Stück in Euro, netto zzgl. 19 % MwSt., mit einem Druck (Brust oder Rücken), Textil inklusive. Größen, Farben und Damen-/Herrenschnitte könnt ihr mischen."
+    preisText="Preis pro Stück in Euro, netto zzgl. 19 % MwSt., mit einem Druck (Brust oder Rücken), Textil inklusive. Größen, Farben und Damen-/Herrenschnitte könnt ihr mischen. Fleeceweste und Cap Stand 18.10.2026, übrige"
     branchenTitel="Für diese Firmen drucken wir"
     branchenText="Vom Zwei-Personen-Büro bis zum Unternehmen mit mehreren Standorten. Das Logo sitzt dezent auf der Brust oder groß auf dem Rücken, auf Wunsch mit Name oder Abteilung."
     branchen={branchen}

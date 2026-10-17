@@ -19,15 +19,16 @@ const preise = [
   { t: 'Sweatshirt', m: 'Stedman Classic Sweatshirt, 280 g', p: ['27,90', '22,90', '20,90', '19,40', '17,90'] },
   { t: 'Bistroschürze', m: 'kurz oder lang, mit Logo', p: ['im Angebot', 'im Angebot', 'im Angebot', 'im Angebot', 'im Angebot'] },
   { t: 'Latzschürze', m: 'mit Tasche, Logo auf Brust oder Tasche', p: ['im Angebot', 'im Angebot', 'im Angebot', 'im Angebot', 'im Angebot'] },
-  { t: 'Cap', m: 'Flexfit 110, Logo vorne', p: ['im Angebot', 'im Angebot', 'im Angebot', 'im Angebot', 'im Angebot'] },
+  // Cap nach der Staffel vom 14.10.2026 (EK + 12 / 12 / 8 / 6,50 / 5,50), Stand 18.10.2026. Schürzen: kein EK im Katalog, Preis im Angebot.
+  { t: 'Cap', m: 'Flexfit 110, Logo vorne', p: ['19,50', '19,50', '15,50', '14,00', '13,00'] },
 ];
 const zusatz = [
-  { t: 'Zweite Druckseite', p: 'ab 3,50 €', d: 'Logo klein vorne, Name des Lokals oder Spruch groß auf dem Rücken.' },
-  { t: 'Ärmeldruck', p: '3,00 €', d: 'Pro Ärmel, bis 8 x 8 cm. Zum Beispiel Instagram-Name oder Webadresse.' },
-  { t: 'Name oder Rolle', p: 'ab 5,90 €', d: 'Vorname, „Service“ oder „Küche“ auf jedem Teil einzeln, eine Liste reicht.' },
-  { t: 'Eigene Kleidung anliefern', p: 'nur Druck', d: 'Eure vorhandenen Schürzen, Kochjacken oder Shirts bedrucken wir, ihr zahlt nur den Druck.' },
-  { t: 'Nachbestellung einzeln', p: 'ab 1 Stück', d: 'Neue Aushilfe am Wochenende? Ein Teil mit demselben Logo in 1 bis 3 Werktagen.' },
-  { t: 'Logo-Datei prüfen', p: '0,00 €', d: 'Jede Datei prüfen wir kostenlos. Neu aufbauen oder freistellen kostet 19,90 € pro Datei.' },
+  { t: 'Zweite Druckseite', p: '', d: 'Logo klein vorne, Name des Lokals oder Spruch groß auf dem Rücken.' },
+  { t: 'Ärmeldruck', p: '', d: 'Pro Ärmel, bis 8 x 8 cm. Zum Beispiel Instagram-Name oder Webadresse.' },
+  { t: 'Name oder Rolle', p: '', d: 'Vorname, „Service“ oder „Küche“ auf jedem Teil einzeln, eine Liste reicht.' },
+  { t: 'Eigene Kleidung anliefern', p: '', d: 'Eure vorhandenen Schürzen, Kochjacken oder Shirts bedrucken wir, ihr zahlt nur den Druck.' },
+  { t: 'Nachbestellung einzeln', p: '', d: 'Neue Aushilfe am Wochenende? Ein Teil mit demselben Logo in 1 bis 3 Werktagen.' },
+  { t: 'Logo-Datei prüfen', p: '', d: 'Jede Datei prüfen wir kostenlos. Neu aufbauen oder freistellen übernehmen wir, den Preis dafür nennen wir im Angebot.' },
 ];
 const branchen = ['Restaurant', 'Café und Rösterei', 'Bar und Cocktailbar', 'Imbiss und Dönerladen', 'Bäckerei und Konditorei', 'Eisdiele', 'Foodtruck und Street Food', 'Catering und Eventgastronomie', 'Kantine und Mensa', 'Hotel und Pension', 'Biergarten und Brauerei', 'Lieferdienst', 'Kiosk und Späti', 'Shisha-Bar und Lounge'];
 const rollen = [
@@ -64,11 +65,11 @@ const faqs = [
   { q: 'Hält der Druck die Wäsche in der Gastronomie aus?', a: 'Ja, wenn ihr bei 30 Grad auf links wascht, ohne Weichspüler und ohne Trockner. Der DTF-Druck bleibt dann deckend und elastisch. Fettflecken behandelt ihr vor der Wäsche vor, Bleiche schadet jedem Textildruck. Wäscht eure Wäscherei bei 60 Grad oder heißer, sagt es uns vor der Bestellung, dann klären wir vorher, was passt.' },
   { q: 'Können wir unsere eigenen Schürzen und Kochjacken bedrucken lassen?', a: 'Ja. westernprint bedruckt angelieferte Schürzen, Kochjacken, Shirts und Polos, ihr zahlt nur den Druck. Nennt vorher kurz das Material, wir prüfen, ob es sich für DTF eignet. Plant 2 bis 3 Prozent Reserve ein, für Materialfehler an angelieferter Ware haften wir nicht.' },
   { q: 'Wie schnell bekommen wir Nachschub, wenn jemand Neues anfängt?', a: 'Einzelne Teile druckt westernprint in 1 bis 3 Werktagen nach, mit demselben Logo in derselben Position. Mit Versand sind sie in der Regel 3 bis 5 Werktage nach der Bestellung bei euch, oder ihr holt sie in Oberhausen ab. Die Druckdaten bleiben gespeichert.' },
-  { q: 'Können Namen oder „Service“ und „Küche“ auf die Shirts?', a: 'Ja. Jedes Teil bekommt auf Wunsch den Vornamen oder die Rolle, zum Beispiel auf der Brust unter dem Logo oder am Ärmel. Das kostet ab 5,90 € netto pro Teil zusätzlich, eine Liste mit Name, Rolle und Größe reicht.' },
+  { q: 'Können Namen oder „Service“ und „Küche“ auf die Shirts?', a: 'Ja. Jedes Teil bekommt auf Wunsch den Vornamen oder die Rolle, zum Beispiel auf der Brust unter dem Logo oder am Ärmel. Eine Liste mit Name, Rolle und Größe reicht, den Aufpreis nennen wir im Angebot.' },
   { q: 'Wir haben mehrere Filialen. Wie läuft das?', a: 'Logo, Farbe und Position liegen einmal bei westernprint. Jede Filiale bestellt nach, was sie braucht, wir packen sortiert pro Standort und liefern per DHL dorthin. Die Rechnung geht an die Zentrale oder je Filiale getrennt, wie ihr es braucht.' },
   { q: 'Druckt ihr auch Hotel-Kleidung für Rezeption und Housekeeping?', a: 'Ja. Für Hotels und Pensionen bedruckt westernprint Hemden und Polos für die Rezeption, T-Shirts und Polos für Housekeeping, Schürzen fürs Frühstück und Hoodies für Animation oder Shuttle. Jede Abteilung in ihrer Farbe mit demselben Logo, in einem Auftrag. Mehr dazu auf der Seite für Hotels und Tourismus.' },
   { q: 'Lohnt sich das für einen Imbiss oder eine Eisdiele mit vier Leuten?', a: 'Ja. Vier Shirts und vier Schürzen mit Logo sind bei westernprint ein normaler Auftrag, keine Mindestmenge, keine Einrichtungskosten. Ab 10 Stück gelten Staffelpreise, und wenn jemand Neues anfängt, bestellt ihr ein Teil nach.' },
-  { q: 'Welche Datei braucht ihr von unserem Logo?', a: 'Am besten eine Vektordatei (PDF, AI, SVG) oder ein PNG mit transparentem Hintergrund. Wir prüfen jede Datei kostenlos. Habt ihr nur die Speisekarte oder ein Foto vom Schild, bauen wir das Logo für 19,90 € netto pro Datei sauber neu auf.' },
+  { q: 'Welche Datei braucht ihr von unserem Logo?', a: 'Am besten eine Vektordatei (PDF, AI, SVG) oder ein PNG mit transparentem Hintergrund. Wir prüfen jede Datei kostenlos. Habt ihr nur die Speisekarte oder ein Foto vom Schild, bauen wir das Logo sauber neu auf, den Preis dafür nennen wir im Angebot.' },
   { q: 'Bekommen wir vorher ein Muster?', a: 'Ja. Bestellt ein einzelnes Shirt oder eine Schürze mit eurem Logo, prüft Stoff, Farbe und Druck im Betrieb und bestellt dann für das Team. Ein einzelnes Muster ist etwas teurer als die Serie, weil jedes Teil einzeln eingerichtet wird.' },
   { q: 'Können wir die Kleidung in Oberhausen abholen?', a: `Ja, kostenlos in der Schenkendorfstraße 45 in Oberhausen, ${oeffnungszeiten.text}, nach kurzer Absprache. Alternativ schickt westernprint die Kleidung per DHL mit Sendungsnummer ins Lokal, deutschlandweit.` },
 ];
@@ -93,7 +94,7 @@ const ld = [
     stand={STAND} mengen={mengen} preise={preise} zusatz={zusatz}
     preisTitel="Preise für Gastro-Kleidung mit Logo"
     preisText="Preis pro Stück in Euro, netto zzgl. 19 % MwSt., mit einem Druck (Brust oder Rücken), Textil inklusive. Service, Küche und Theke mischt ihr frei."
-    preisHinweis="Schürzen, Caps und angelieferte Kochjacken stehen mit Preis im Angebot, an Werktagen innerhalb von 24 Stunden. Keine Einrichtungskosten."
+    preisHinweis="Cap Stand 18.10.2026, übrige Teile Stand 21.09.2026. Schürzen und angelieferte Kochjacken stehen mit Preis im Angebot, an Werktagen innerhalb von 24 Stunden. Keine Einrichtungskosten."
     branchenTitel="Für diese Betriebe drucken wir"
     branchenText="Vom Kiosk mit zwei Leuten bis zum Hotel mit vier Abteilungen. Das Logo sitzt klein auf der Brust, auf der Schürze oder groß auf dem Rücken."
     branchen={branchen}
