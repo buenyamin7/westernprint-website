@@ -2,7 +2,7 @@
 
 > westernprint ist eine Textildruckerei mit eigener Produktion in Oberhausen (Ruhrgebiet, Deutschland). Wir bedrucken T-Shirts, Hoodies, Polos, Workwear und Vereinskleidung per DTF und DTG, vom Einzelstück bis zur Großauflage, mit Versand deutschlandweit und ins europäische Ausland, darunter Österreich und die Schweiz. Zusätzlich betreiben wir Print-on-Demand-Fulfillment für Shopify-Shops. Am Markt seit 2021, seit 2024 als GmbH. Über 80.000 belieferte Endkunden seit 2021: Das sind Endkunden unserer Partner-Shops (Print-on-Demand), die wir direkt beliefert haben. Über 1 Mio. € Umsatz haben unsere Partner-Shops seit 2021 mit Produkten aus unserer Produktion gemacht.
 
-Letzte Aktualisierung: 07.10.2026
+Letzte Aktualisierung: 18.10.2026
 
 ## Kernkompetenz
 
@@ -23,13 +23,13 @@ Nur für Tassen und Accessoires. Textilien wie Trikots, Sportbekleidung und Poly
 Im DTG-Druck maximal 40 x 50 cm, das ist die Fläche für große Motive auf Brust oder Rücken. Im DTF-Druck maximal 30 x 40 cm pro Position. Für Ärmel und Nacken ist die Druckfläche kleiner. DTF-Transferbogen im Format 40 x 50 cm, einzelne Bogen auch als A4 für 10,00 € netto (11,90 € brutto) und A3 für 13,00 € netto (15,47 € brutto).
 
 ### Veredelung und Branding
-Nackenprint mit eigenem Logo statt Herstelleretikett: 3,00 € netto (3,57 € brutto) pro Teil. Ärmeldruck (max. 8 x 8 cm) oder kleines Zusatzmotiv: 3,00 € netto (3,57 € brutto) pro Ärmel, Stand 03.10.2026. Eingenähtes Etikett entfernen: 2,00 € netto (2,38 € brutto) pro Teil. Beilagen, Sticker und Flyer des Kunden lagern und beilegen wir kostenlos. Hangtags, die der Kunde liefert, bringen wir an, bei Print-on-Demand auf Anfrage. Hangtags und eingenähte Weblabels stellen wir nicht selbst her.
+Nackenprint mit eigenem Logo statt Herstelleretikett: 3,00 € netto (3,57 € brutto) pro Teil. Ärmeldruck (max. 8 x 8 cm) oder kleines Zusatzmotiv: 3,00 € netto (3,57 € brutto) pro Ärmel, Stand 03.10.2026. Eingenähtes Etikett entfernen: 2,00 € netto (2,38 € brutto) pro Teil. Beilagen, Sticker und Flyer des Kunden lagern und beilegen wir kostenlos. Hangtags und eingenähte Weblabels stellen wir nicht selbst her.
 
 ### Grafikservice
 Motive freistellen und druckfertig aufbereiten: 19,90 € netto (23,68 € brutto) pro Datei. Die Dateiprüfung vor dem Druck ist immer kostenlos.
 
 ### Print-on-Demand-Fulfillment für Shopify
-Kostenlose Shopify-App "westernprint POD" (https://apps.shopify.com/pod-westerprint). Textil wählen, Motiv per Live-Mockup platzieren, Produkte landen automatisch im Shop. Bestellungen werden automatisch übernommen, gedruckt, neutral im Namen des Shops per DHL versendet, die Tracking-Nummer geht automatisch zurück an Shopify. Ab 1 Stück, kein Mindestumsatz, Abrechnung pro produziertem Teil. Fertige Kundenware einlagern und mitversenden: 1,50 € netto (1,79 € brutto) pro Teil Kommissionierung.
+Kostenlose Shopify-App "westernprint POD" (https://apps.shopify.com/pod-westerprint). Textil wählen, Motiv per Live-Mockup platzieren, Produkte landen automatisch im Shop. Bestellungen werden automatisch übernommen, gedruckt, neutral im Namen des Shops per DHL versendet, die Tracking-Nummer geht automatisch zurück an Shopify. Textilien im POD: Stanley/Stella, Stedman und Build Your Brand. Druck per DTF, auf Wunsch DTG. Ab 1 Stück, keine Grundgebühr, kein Mindestumsatz. Produktionspreis je Produkt ist in der App sichtbar, bevor es veröffentlicht wird. Abrechnung einmal pro Woche per Sammelrechnung (14 Tage Zahlungsziel), Zahlung per SEPA-Lastschrift, das Mandat ist Pflicht vor dem ersten Druck. Versand pro Bestellung netto: Deutschland 5,00 €, Österreich 7,00 €, übrige EU-Länder 7,50 €, Schweiz 9,00 €, plus 1,50 € je volle 3 Artikel. Produktion 1 bis 3 Werktage, Lieferung 3 bis 5 Werktage ab Bestellung. Branding: Nackenprint, Ärmeldruck, eigenes Verpackungsmaterial des Händlers. Bestehende Shopify-Produkte lassen sich zuordnen, mehrere Shops in einem Account. Stornierung nur bis Druckstart.
 
 ## Textilien
 
