@@ -16,18 +16,20 @@ const preise = [
   { t: 'Hoodie', m: 'Stedman Classic Hoodie, 280 g', p: ['29,90', '24,90', '22,90', '21,40', '19,90'] },
   { t: 'Sweatshirt', m: 'Stedman Classic Sweatshirt, 280 g', p: ['27,90', '22,90', '20,90', '19,40', '17,90'] },
   { t: 'Poloshirt', m: 'Stedman Classic Polo, 170 g, für den Empfang', p: ['22,90', '17,90', '15,90', '14,50', '13,40'] },
-  { t: 'Tank Top', m: 'Stedman Comfort Tank Top oder Build Your Brand', p: ['im Angebot', 'im Angebot', 'im Angebot', 'im Angebot', 'im Angebot'] },
-  { t: 'Funktionsshirt', m: 'Stedman Sports-T, Polyester, DTF', p: ['im Angebot', 'im Angebot', 'im Angebot', 'im Angebot', 'im Angebot'] },
-  { t: 'Heavy Oversize Tee', m: 'Build Your Brand BY102, 240 g', p: ['im Angebot', 'im Angebot', 'im Angebot', 'im Angebot', 'im Angebot'] },
-  { t: 'Jogger und Cap', m: 'Build Your Brand Sweatpants, Flexfit 110', p: ['im Angebot', 'im Angebot', 'im Angebot', 'im Angebot', 'im Angebot'] },
+  // Die folgenden Teile nach der Staffel vom 14.10.2026 (EK + 12 / 12 / 8 / 6,50 / 5,50), EK günstigste Farbe aus der POD-DB, Stand 18.10.2026.
+  { t: 'Tank Top', m: 'Stedman Comfort Tank Top', p: ['14,13', '14,13', '10,13', '8,63', '7,63'] },
+  { t: 'Funktionsshirt', m: 'Stedman Sports-T, Polyester, DTF', p: ['15,56', '15,56', '11,56', '10,06', '9,06'] },
+  { t: 'Heavy Oversize Tee', m: 'Build Your Brand BY102, 240 g', p: ['17,95', '17,95', '13,95', '12,45', '11,45'] },
+  { t: 'Jogger', m: 'Build Your Brand Wideleg Sweatpants', p: ['26,95', '26,95', '22,95', '21,45', '20,45'] },
+  { t: 'Cap', m: 'Flexfit 110, Logo vorne', p: ['19,50', '19,50', '15,50', '14,00', '13,00'] },
 ];
 const zusatz = [
-  { t: 'Zweite Druckseite', p: 'ab 3,50 €', d: 'Logo klein vorne, großes Motiv oder Schriftzug auf dem Rücken, bis 40 x 50 cm im DTG.' },
-  { t: 'Ärmeldruck', p: '3,00 €', d: 'Pro Ärmel, bis 8 x 8 cm. Zum Beispiel Sponsor, Instagram-Name oder Gürtelgrad.' },
-  { t: 'Name, Funktion, Gürtelgrad', p: 'ab 5,90 €', d: '„Coach“, „Personal Trainer“, Vorname oder Graduierung auf jedem Teil einzeln, eine Liste reicht.' },
-  { t: 'Nackenprint statt Etikett', p: '3,00 €', d: 'Euer Studio-Logo mit Größenangabe im Nacken, dann ist das Merch eure Marke.' },
-  { t: 'Eigene Teile anliefern', p: 'nur Druck', d: 'Rashguards, Trikots oder Shirts, die ihr schon habt, bedrucken wir per DTF, ihr zahlt nur den Druck.' },
-  { t: 'Logo-Datei prüfen', p: '0,00 €', d: 'Jede Datei prüfen wir kostenlos. Neu aufbauen oder freistellen kostet 19,90 € pro Datei.' },
+  { t: 'Zweite Druckseite', p: '', d: 'Logo klein vorne, großes Motiv oder Schriftzug auf dem Rücken, bis 40 x 50 cm im DTG.' },
+  { t: 'Ärmeldruck', p: '', d: 'Pro Ärmel, bis 8 x 8 cm. Zum Beispiel Sponsor, Instagram-Name oder Gürtelgrad.' },
+  { t: 'Name, Funktion, Gürtelgrad', p: '', d: '„Coach“, „Personal Trainer“, Vorname oder Graduierung auf jedem Teil einzeln, eine Liste reicht.' },
+  { t: 'Nackenprint statt Etikett', p: '', d: 'Euer Studio-Logo mit Größenangabe im Nacken, dann ist das Merch eure Marke.' },
+  { t: 'Eigene Teile anliefern', p: '', d: 'Rashguards, Trikots oder Shirts, die ihr schon habt, bedrucken wir per DTF, ihr zahlt nur den Druck.' },
+  { t: 'Logo-Datei prüfen', p: '', d: 'Jede Datei prüfen wir kostenlos. Neu aufbauen oder freistellen übernehmen wir, den Preis dafür nennen wir im Angebot.' },
 ];
 const branchen = ['Fitnessstudio', 'Crossfit-Box', 'Boxclub und Boxschule', 'MMA-Gym', 'BJJ und Grappling', 'Kickboxen und Muay Thai', 'Karate, Judo, Taekwondo', 'Yoga- und Pilates-Studio', 'Personal Trainer', 'Tanzschule', 'Kletterhalle', 'Kampfsport-Abteilung im Verein', 'Calisthenics und Outdoor-Gym', 'Physio und Reha-Sport'];
 const rollen = [
@@ -58,14 +60,14 @@ const blocks = [
 ];
 const faqs = [
   { q: 'Wo bekommen Fitnessstudios und Kampfsportschulen Shirts mit Logo?', a: `Bei westernprint in Oberhausen: T-Shirts, Tank Tops, Funktionsshirts, Hoodies, Oversize Tees und Caps mit eurem Logo, ab 1 Stück ohne Mindestmenge, fürs Trainerteam oder zum Verkauf an Mitglieder. Ein T-Shirt mit Logo kostet bei 10 Stück 12,90 € netto (${brutto('12,90')} € brutto), ein Hoodie 24,90 € netto (${brutto('24,90')} € brutto) pro Stück, Stand ${STAND}. Die Serie ist 5 bis 7 Werktage nach Freigabe fertig, einzelne Teile in 1 bis 3 Werktagen.` },
-  { q: 'Was kostet ein bedrucktes Shirt oder ein Hoodie für unser Studio?', a: `Ein T-Shirt Basic (Stedman Classic-T) mit einem Druck kostet bei westernprint 12,90 € netto (${brutto('12,90')} € brutto) bei 10 Stück und 9,40 € netto (${brutto('9,40')} € brutto) bei 50 Stück. Ein Hoodie (Stedman Classic Hoodie, 280 g) kostet 24,90 € netto (${brutto('24,90')} € brutto) bei 10 Stück und 21,40 € netto (${brutto('21,40')} € brutto) bei 50 Stück. Eine zweite Druckseite, etwa Logo vorne und großes Motiv hinten, kostet ab 3,50 € netto zusätzlich. Preise pro Stück inklusive Textil, Stand ${STAND}. Tank Tops, Funktionsshirts und Heavy Oversize Tees stehen im Angebot.` },
+  { q: 'Was kostet ein bedrucktes Shirt oder ein Hoodie für unser Studio?', a: `Ein T-Shirt Basic (Stedman Classic-T) mit einem Druck kostet bei westernprint 12,90 € netto (${brutto('12,90')} € brutto) bei 10 Stück und 9,40 € netto (${brutto('9,40')} € brutto) bei 50 Stück. Ein Hoodie (Stedman Classic Hoodie, 280 g) kostet 24,90 € netto (${brutto('24,90')} € brutto) bei 10 Stück und 21,40 € netto (${brutto('21,40')} € brutto) bei 50 Stück. Preise pro Stück inklusive Textil, Stand ${STAND}. Ein Tank Top (Stedman Comfort) kostet 10,13 € netto bei 25 Stück, ein Heavy Oversize Tee (Build Your Brand BY102) 13,95 € netto bei 25 Stück, Stand 18.10.2026.` },
   { q: 'Können Funktionsshirts aus Polyester bedruckt werden?', a: 'Ja. westernprint bedruckt Funktionsshirts, Trikots und Rashguards aus Polyester per DTF. Der Druck wird mit niedrigerer Temperatur aufgepresst, bleibt dehnbar und hält Schweiß und Wäsche aus. Gewaschen wird bei 30 Grad auf links, ohne Weichspüler und Trockner.' },
-  { q: 'Druckt ihr auch Tank Tops und Oversize Tees?', a: 'Ja. Tank Tops von Stedman und Build Your Brand, Heavy Oversize Tees (Build Your Brand BY102, 240 g), Boxy Hoodies und Jogger. Das sind die Blanks, die im Gym getragen werden. Den Preis je Modell nennen wir im Angebot, an Werktagen innerhalb von 24 Stunden.' },
+  { q: 'Druckt ihr auch Tank Tops und Oversize Tees?', a: 'Ja. Tank Tops von Stedman und Build Your Brand, Heavy Oversize Tees (Build Your Brand BY102, 240 g), Boxy Hoodies und Jogger. Das sind die Blanks, die im Gym getragen werden. Ein Tank Top mit Logo kostet 14,13 € netto als Einzelstück und 10,13 € netto bei 25 Stück, ein Heavy Oversize Tee 17,95 € netto einzeln und 13,95 € netto bei 25 Stück, Stand 18.10.2026.' },
   { q: 'Gibt es eine Mindestmenge?', a: 'Nein. westernprint druckt ab 1 Stück. Staffelpreise gelten ab 10 Stück, ab 50 Stück wird es noch einmal günstiger. Trainer-Shirts, Tank Tops und Hoodies könnt ihr in einer Bestellung mischen, auch Größen und Farben, ohne Aufpreis.' },
   { q: 'Können wir Merch an unsere Mitglieder verkaufen, ohne ein Lager zu haben?', a: 'Ja, auf zwei Wegen. Entweder bestellt ihr eine kleine Auflage zum Staffelpreis, verkauft an der Theke und bestellt verkaufte Größen einzeln nach. Oder ihr verkauft online über einen Shopify-Shop mit der kostenlosen westernprint-App: Jede Bestellung drucken wir einzeln und versenden sie neutral in eurem Namen an das Mitglied. Kein Lager, keine Grundgebühr, keine Mindestmenge.' },
   { q: 'Macht ihr Shirts für Kampfabende und Turniere?', a: 'Ja. Event-Shirts mit Datum und Kampfpaarung, Team-Hoodies für die Ecke, Helfer-Shirts: westernprint druckt auch 20 Teile mit mehreren Motiven. Nennt uns den Termin, im Angebot steht ein Liefertermin davor. Serien brauchen 5 bis 7 Werktage nach Freigabe, Express auf Anfrage.' },
-  { q: 'Können Trainernamen oder der Gürtelgrad auf das Shirt?', a: 'Ja. „Coach“, „Personal Trainer“, Vorname oder Graduierung drucken wir einzeln je Teil, auf dem Rücken, der Brust oder am Ärmel. Das kostet ab 5,90 € netto pro Teil zusätzlich, eine Liste mit Name und Größe reicht.' },
-  { q: 'Wie groß darf das Rückenmotiv sein?', a: 'Im DTG-Druck bis 40 x 50 Zentimeter, im DTF-Druck bis 30 x 40 Zentimeter pro Position. Ein größerer Rückendruck kostet einen Aufpreis, den nennen wir im Angebot. Im Korrekturabzug stehen alle Maße in Zentimetern, gedruckt wird erst nach eurer Freigabe.' },
+  { q: 'Können Trainernamen oder der Gürtelgrad auf das Shirt?', a: 'Ja. „Coach“, „Personal Trainer“, Vorname oder Graduierung drucken wir einzeln je Teil, auf dem Rücken, der Brust oder am Ärmel. Eine Liste mit Name und Größe reicht, den Aufpreis nennen wir im Angebot.' },
+  { q: 'Wie groß darf das Rückenmotiv sein?', a: 'Im DTG-Druck bis 40 x 50 Zentimeter, im DTF-Druck bis 30 x 40 Zentimeter pro Position. Den Aufpreis für einen größeren Rückendruck nennen wir im Angebot. Im Korrekturabzug stehen alle Maße in Zentimetern, gedruckt wird erst nach eurer Freigabe.' },
   { q: 'Bedruckt ihr Shirts oder Rashguards, die wir schon haben?', a: 'Ja. westernprint bedruckt angelieferte Textilien per DTF, auch Rashguards und Trikots aus Polyester, ihr zahlt nur den Druck. Vorher prüfen wir das Material. Für Materialfehler an angelieferter Ware haften wir nicht, plant 2 bis 3 Prozent Reserve ein.' },
   { q: 'Macht ihr sublimierte All-over-Shirts?', a: 'Nein. Sublimierte All-over-Trikots bietet westernprint nicht an. Logo, Schriftzug und Motiv auf Funktionsshirts, Tank Tops und Hoodies drucken wir per DTF, auch auf Polyester. Das deckt Trainerteam, Mitglieder-Merch und Kampfabend ab.' },
   { q: 'Wie schnell kommt Nachschub, wenn eine Größe ausverkauft ist?', a: 'Einzelne Teile druckt westernprint in 1 bis 3 Werktagen nach, mit demselben Druck. Mit Versand sind sie in der Regel 3 bis 5 Werktage nach der Bestellung im Studio, oder ihr holt sie in Oberhausen ab. Die Druckdaten bleiben gespeichert.' },
@@ -93,7 +95,7 @@ const ld = [
     stand={STAND} mengen={mengen} preise={preise} zusatz={zusatz}
     preisTitel="Preise für Gym-Kleidung mit Logo"
     preisText="Preis pro Stück in Euro, netto zzgl. 19 % MwSt., mit einem Druck (Brust oder Rücken), Textil inklusive. Team-Shirts und Verkaufsware mischt ihr frei."
-    preisHinweis="Tank Tops, Funktionsshirts, Heavy Oversize Tees, Jogger und Caps stehen mit Preis im Angebot, an Werktagen innerhalb von 24 Stunden. Keine Einrichtungskosten."
+    preisHinweis="T-Shirts, Hoodie, Sweatshirt und Polo Stand 21.09.2026, Tank Top bis Cap Stand 18.10.2026. Keine Einrichtungskosten, keine Filmkosten. Das genaue Angebot mit festem Stückpreis bekommt ihr an Werktagen innerhalb von 24 Stunden."
     branchenTitel="Für diese Studios und Schulen drucken wir"
     branchenText="Vom Personal Trainer mit drei Shirts bis zur Kette mit fünf Studios. Logo klein auf der Brust, groß auf dem Rücken, Name oder Gürtelgrad einzeln."
     branchen={branchen}
