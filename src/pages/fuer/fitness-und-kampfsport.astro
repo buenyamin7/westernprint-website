@@ -1,0 +1,121 @@
+---
+// Landingpage Fitnessstudios, Crossfit-Boxen, Kampfsportschulen, Yoga-Studios, Personal Trainer. Vorlage: BranchenLanding.
+// Preise: veröffentlichte Preisliste (Stand 21.09.2026). Tank Tops, Funktionsshirts, Heavy Oversize Tees, Jogger und Caps
+// haben keinen veröffentlichten Preis und stehen mit „im Angebot“. Mitglieder-Merch ohne Lager läuft über Print-on-Demand.
+import Base from '../../layouts/Base.astro';
+import BranchenLanding from '../../components/BranchenLanding.astro';
+import { site, oeffnungszeiten } from '../../data/site';
+import { bewertungen } from '../../data/bewertungen';
+
+const STAND = '21.09.2026';
+const brutto = (n: string) => (Math.round(parseFloat(n.replace(',', '.')) * 119) / 100).toFixed(2).replace('.', ',');
+const mengen = ['1 Stück', '10 Stück', '25 Stück', '50 Stück', '100 Stück'];
+const preise = [
+  { t: 'T-Shirt Basic', m: 'Stedman Classic-T, 155 g', p: ['17,90', '12,90', '10,90', '9,40', '8,40'] },
+  { t: 'T-Shirt Bio', m: 'Stanley/Stella Creator 2.0, 180 g', p: ['19,90', '14,90', '12,90', '11,40', '10,40'] },
+  { t: 'Hoodie', m: 'Stedman Classic Hoodie, 280 g', p: ['29,90', '24,90', '22,90', '21,40', '19,90'] },
+  { t: 'Sweatshirt', m: 'Stedman Classic Sweatshirt, 280 g', p: ['27,90', '22,90', '20,90', '19,40', '17,90'] },
+  { t: 'Poloshirt', m: 'Stedman Classic Polo, 170 g, für den Empfang', p: ['22,90', '17,90', '15,90', '14,50', '13,40'] },
+  { t: 'Tank Top', m: 'Stedman Comfort Tank Top oder Build Your Brand', p: ['im Angebot', 'im Angebot', 'im Angebot', 'im Angebot', 'im Angebot'] },
+  { t: 'Funktionsshirt', m: 'Stedman Sports-T, Polyester, DTF', p: ['im Angebot', 'im Angebot', 'im Angebot', 'im Angebot', 'im Angebot'] },
+  { t: 'Heavy Oversize Tee', m: 'Build Your Brand BY102, 240 g', p: ['im Angebot', 'im Angebot', 'im Angebot', 'im Angebot', 'im Angebot'] },
+  { t: 'Jogger und Cap', m: 'Build Your Brand Sweatpants, Flexfit 110', p: ['im Angebot', 'im Angebot', 'im Angebot', 'im Angebot', 'im Angebot'] },
+];
+const zusatz = [
+  { t: 'Zweite Druckseite', p: 'ab 3,50 €', d: 'Logo klein vorne, großes Motiv oder Schriftzug auf dem Rücken, bis 40 x 50 cm im DTG.' },
+  { t: 'Ärmeldruck', p: '3,00 €', d: 'Pro Ärmel, bis 8 x 8 cm. Zum Beispiel Sponsor, Instagram-Name oder Gürtelgrad.' },
+  { t: 'Name, Funktion, Gürtelgrad', p: 'ab 5,90 €', d: '„Coach“, „Personal Trainer“, Vorname oder Graduierung auf jedem Teil einzeln, eine Liste reicht.' },
+  { t: 'Nackenprint statt Etikett', p: '3,00 €', d: 'Euer Studio-Logo mit Größenangabe im Nacken, dann ist das Merch eure Marke.' },
+  { t: 'Eigene Teile anliefern', p: 'nur Druck', d: 'Rashguards, Trikots oder Shirts, die ihr schon habt, bedrucken wir per DTF, ihr zahlt nur den Druck.' },
+  { t: 'Logo-Datei prüfen', p: '0,00 €', d: 'Jede Datei prüfen wir kostenlos. Neu aufbauen oder freistellen kostet 19,90 € pro Datei.' },
+];
+const branchen = ['Fitnessstudio', 'Crossfit-Box', 'Boxclub und Boxschule', 'MMA-Gym', 'BJJ und Grappling', 'Kickboxen und Muay Thai', 'Karate, Judo, Taekwondo', 'Yoga- und Pilates-Studio', 'Personal Trainer', 'Tanzschule', 'Kletterhalle', 'Kampfsport-Abteilung im Verein', 'Calisthenics und Outdoor-Gym', 'Physio und Reha-Sport'];
+const rollen = [
+  { r: 'Trainerteam', t: 'Funktionsshirt oder T-Shirt mit Logo vorne, „Coach“ auf dem Rücken', w: 'Auf der Fläche sofort erkennbar. Funktionsware aus Polyester bedrucken wir per DTF, das hält Schweiß und Wäsche.' },
+  { r: 'Personal Trainer', t: 'Tank Top oder Oversize Tee, dazu Hoodie und Cap für draußen', w: 'Du bist deine Marke. Nackenprint statt Herstelleretikett, Name am Ärmel, drei Teile reichen für den Start.' },
+  { r: 'Empfang und Theke', t: 'Poloshirt oder Bio-T-Shirt in der Studiofarbe', w: 'Gepflegt, bequem, Logo klein auf der Brust. Mitglieder sehen auf einen Blick, wen sie fragen können.' },
+  { r: 'Mitglieder-Merch', t: 'Heavy Oversize Tees, Hoodies, Tank Tops zum Verkauf an der Theke', w: 'Kleine Auflage zum Staffelpreis oder Print-on-Demand ohne Lager: Mitglieder bestellen online, wir drucken und versenden in eurem Namen.' },
+  { r: 'Wettkampfteam und Kampfabend', t: 'Team-Hoodies und Shirts mit Gym-Logo, Event-Shirts mit Datum', w: 'Das Team tritt geschlossen auf, Event-Shirts verkauft ihr am Einlass. Auch in kleinen Mengen, Namen einzeln.' },
+];
+const services = [
+  { icon: 'lightning', t: 'DTF hält auf Funktionsware', d: 'Polyester, Mischgewebe, Baumwolle: Der DTF-Druck ist dehnbar, deckend und waschfest, auch wenn das Shirt nass durchgeschwitzt in der Tasche liegt. Gewaschen wird bei 30 Grad auf links.' },
+  { icon: 'package', t: 'Merch ohne totes Lager', d: 'Verkauft an der Theke in kleinen Auflagen und bestellt verkaufte Größen einzeln nach. Oder ihr verkauft online und wir drucken jede Bestellung einzeln per Print-on-Demand, versendet in eurem Namen.' },
+  { icon: 't-shirt', t: 'Blanks, die Gym-Leute wirklich tragen', d: 'Heavy Oversize Tees und Boxy Hoodies von Build Your Brand, Tank Tops von Stedman, Bio-Basics von Stanley/Stella. Schwerer Stoff, tiefe Schulter, kein Vereinslook.' },
+  { icon: 'arrows-clockwise', t: 'Einzeln nachbestellen', d: 'Neuer Coach, ausverkaufte Größe L: Ihr bestellt ein Teil nach, mit demselben Druck. Die Druckdaten bleiben bei uns gespeichert, Einzelstücke sind in 1 bis 3 Werktagen fertig.' },
+  { icon: 'ruler', t: 'Großer Rücken, saubere Maße', d: 'Rückendrucke bis 40 x 50 cm im DTG, 30 x 40 cm im DTF. Im Korrekturabzug stehen alle Maße in Zentimetern, bevor gedruckt wird.' },
+  { icon: 'chat-circle-dots', t: 'WhatsApp aus der Werkstatt', d: 'Logo per WhatsApp, Antwort von Leuten, die selbst drucken. Angebot an Werktagen innerhalb von 24 Stunden, kein Ticketsystem.' },
+];
+const steps = [
+  { t: 'Logo und Plan schicken', d: 'Studio-Logo als PDF, SVG oder PNG, dazu: fürs Team oder zum Verkauf, welche Teile, welche Größen. Ein Screenshot vom Instagram-Logo reicht für den Anfang.' },
+  { t: 'Angebot und Korrekturabzug', d: 'An Werktagen innerhalb von 24 Stunden bekommt ihr einen festen Stückpreis je Teil. Vor dem Druck seht ihr Logo und Rückenmotiv auf dem Textil mit Maßen und gebt frei.' },
+  { t: 'Druck, Lieferung, Nachschub', d: 'Die Serie ist 5 bis 7 Werktage nach Freigabe fertig, Einzelstücke in 1 bis 3 Werktagen. Versand per DHL ins Studio oder Abholung in Oberhausen. Verkaufte Größen bestellt ihr einzeln nach.' },
+];
+const blocks = [
+  { h: 'Funktionsshirts aus Polyester bedrucken: geht das?', p: 'Ja, per DTF. Der Druck wird mit niedrigerer Temperatur aufgepresst, damit das Polyester nicht glänzt oder ausblutet, und bleibt dehnbar, wenn sich das Shirt beim Training dehnt. Er hält Schweiß, Waschen und die Sporttasche aus. Pflege: 30 Grad, auf links, kein Weichspüler, kein Trockner. Sublimierte All-over-Shirts machen wir nicht, Logo und Motiv per DTF auf Funktionsware schon.', items: ['DTF auf Polyester, Mischgewebe, Baumwolle', 'Dehnbar, deckend, waschfest', 'Auch auf eure vorhandenen Rashguards und Trikots'] },
+  { h: 'Mitglieder-Merch verkaufen, ohne Geld im Lager zu binden', p: 'Zwei Wege: Ihr bestellt eine kleine Auflage zum Staffelpreis, verkauft an der Theke und bestellt verkaufte Größen einzeln nach. Oder ihr verkauft online über einen Shopify-Shop mit unserer kostenlosen App: Jede Bestellung drucken wir einzeln in Oberhausen und versenden sie neutral in eurem Namen an das Mitglied, ohne Mindestmenge und ohne Vorkasse für Ware.', items: ['Kleine Auflage ab 10 Stück zum Staffelpreis', 'Print-on-Demand: 0 Lager, 0 Grundgebühr', 'Verkaufspreis legt ihr selbst fest'] },
+  { h: 'Kampfabend, Turnier, Sommercamp', p: 'Event-Shirts mit Datum und Gegner, Team-Hoodies für die Ecke, Shirts für Helfer und Ringrichter: Wir drucken auch 20 Teile mit vier Motiven. Verkauft am Einlass bringt ein Event-Shirt oft mehr als der Eintritt. Nennt uns den Termin, dann steht im Angebot ein Liefertermin davor.' },
+  { h: 'Wie groß und wo?', p: 'Studio-Logo links auf der Brust 8 bis 10 Zentimeter, auf dem Rücken 25 bis 30 Zentimeter für Schriftzug oder Motiv, am Ärmel 5 bis 7 Zentimeter für Sponsor oder Gürtelgrad. Bei Tank Tops sitzt das Motiv etwas höher, damit es nicht im Armausschnitt verschwindet. Alle Maße stehen im Korrekturabzug.' },
+];
+const faqs = [
+  { q: 'Wo bekommen Fitnessstudios und Kampfsportschulen Shirts mit Logo?', a: `Bei westernprint in Oberhausen: T-Shirts, Tank Tops, Funktionsshirts, Hoodies, Oversize Tees und Caps mit eurem Logo, ab 1 Stück ohne Mindestmenge, fürs Trainerteam oder zum Verkauf an Mitglieder. Ein T-Shirt mit Logo kostet bei 10 Stück 12,90 € netto (${brutto('12,90')} € brutto), ein Hoodie 24,90 € netto (${brutto('24,90')} € brutto) pro Stück, Stand ${STAND}. Die Serie ist 5 bis 7 Werktage nach Freigabe fertig, einzelne Teile in 1 bis 3 Werktagen.` },
+  { q: 'Was kostet ein bedrucktes Shirt oder ein Hoodie für unser Studio?', a: `Ein T-Shirt Basic (Stedman Classic-T) mit einem Druck kostet bei westernprint 12,90 € netto (${brutto('12,90')} € brutto) bei 10 Stück und 9,40 € netto (${brutto('9,40')} € brutto) bei 50 Stück. Ein Hoodie (Stedman Classic Hoodie, 280 g) kostet 24,90 € netto (${brutto('24,90')} € brutto) bei 10 Stück und 21,40 € netto (${brutto('21,40')} € brutto) bei 50 Stück. Eine zweite Druckseite, etwa Logo vorne und großes Motiv hinten, kostet ab 3,50 € netto zusätzlich. Preise pro Stück inklusive Textil, Stand ${STAND}. Tank Tops, Funktionsshirts und Heavy Oversize Tees stehen im Angebot.` },
+  { q: 'Können Funktionsshirts aus Polyester bedruckt werden?', a: 'Ja. westernprint bedruckt Funktionsshirts, Trikots und Rashguards aus Polyester per DTF. Der Druck wird mit niedrigerer Temperatur aufgepresst, bleibt dehnbar und hält Schweiß und Wäsche aus. Gewaschen wird bei 30 Grad auf links, ohne Weichspüler und Trockner.' },
+  { q: 'Druckt ihr auch Tank Tops und Oversize Tees?', a: 'Ja. Tank Tops von Stedman und Build Your Brand, Heavy Oversize Tees (Build Your Brand BY102, 240 g), Boxy Hoodies und Jogger. Das sind die Blanks, die im Gym getragen werden. Den Preis je Modell nennen wir im Angebot, an Werktagen innerhalb von 24 Stunden.' },
+  { q: 'Gibt es eine Mindestmenge?', a: 'Nein. westernprint druckt ab 1 Stück. Staffelpreise gelten ab 10 Stück, ab 50 Stück wird es noch einmal günstiger. Trainer-Shirts, Tank Tops und Hoodies könnt ihr in einer Bestellung mischen, auch Größen und Farben, ohne Aufpreis.' },
+  { q: 'Können wir Merch an unsere Mitglieder verkaufen, ohne ein Lager zu haben?', a: 'Ja, auf zwei Wegen. Entweder bestellt ihr eine kleine Auflage zum Staffelpreis, verkauft an der Theke und bestellt verkaufte Größen einzeln nach. Oder ihr verkauft online über einen Shopify-Shop mit der kostenlosen westernprint-App: Jede Bestellung drucken wir einzeln und versenden sie neutral in eurem Namen an das Mitglied. Kein Lager, keine Grundgebühr, keine Mindestmenge.' },
+  { q: 'Macht ihr Shirts für Kampfabende und Turniere?', a: 'Ja. Event-Shirts mit Datum und Kampfpaarung, Team-Hoodies für die Ecke, Helfer-Shirts: westernprint druckt auch 20 Teile mit mehreren Motiven. Nennt uns den Termin, im Angebot steht ein Liefertermin davor. Serien brauchen 5 bis 7 Werktage nach Freigabe, Express auf Anfrage.' },
+  { q: 'Können Trainernamen oder der Gürtelgrad auf das Shirt?', a: 'Ja. „Coach“, „Personal Trainer“, Vorname oder Graduierung drucken wir einzeln je Teil, auf dem Rücken, der Brust oder am Ärmel. Das kostet ab 5,90 € netto pro Teil zusätzlich, eine Liste mit Name und Größe reicht.' },
+  { q: 'Wie groß darf das Rückenmotiv sein?', a: 'Im DTG-Druck bis 40 x 50 Zentimeter, im DTF-Druck bis 30 x 40 Zentimeter pro Position. Ein größerer Rückendruck kostet einen Aufpreis, den nennen wir im Angebot. Im Korrekturabzug stehen alle Maße in Zentimetern, gedruckt wird erst nach eurer Freigabe.' },
+  { q: 'Bedruckt ihr Shirts oder Rashguards, die wir schon haben?', a: 'Ja. westernprint bedruckt angelieferte Textilien per DTF, auch Rashguards und Trikots aus Polyester, ihr zahlt nur den Druck. Vorher prüfen wir das Material. Für Materialfehler an angelieferter Ware haften wir nicht, plant 2 bis 3 Prozent Reserve ein.' },
+  { q: 'Macht ihr sublimierte All-over-Shirts?', a: 'Nein. Sublimierte All-over-Trikots bietet westernprint nicht an. Logo, Schriftzug und Motiv auf Funktionsshirts, Tank Tops und Hoodies drucken wir per DTF, auch auf Polyester. Das deckt Trainerteam, Mitglieder-Merch und Kampfabend ab.' },
+  { q: 'Wie schnell kommt Nachschub, wenn eine Größe ausverkauft ist?', a: 'Einzelne Teile druckt westernprint in 1 bis 3 Werktagen nach, mit demselben Druck. Mit Versand sind sie in der Regel 3 bis 5 Werktage nach der Bestellung im Studio, oder ihr holt sie in Oberhausen ab. Die Druckdaten bleiben gespeichert.' },
+  { q: 'Wie sollen Mitglieder die Shirts waschen?', a: 'Bei 30 Grad, auf links gedreht, ohne Weichspüler und nicht in den Trockner. Das gilt für Baumwolle und Funktionsware. Den Hinweis könnt ihr beim Verkauf an der Theke mitgeben, wir legen auf Wunsch eine Pflegekarte bei.' },
+  { q: 'Können wir die Teile in Oberhausen abholen?', a: `Ja, kostenlos in der Schenkendorfstraße 45 in Oberhausen, ${oeffnungszeiten.text}, nach kurzer Absprache. Alternativ schickt westernprint die Bestellung per DHL mit Sendungsnummer ins Studio, deutschlandweit.` },
+];
+const ld = [
+  { '@context': 'https://schema.org', '@type': 'Service', name: 'Gym- und Kampfsport-Kleidung mit Logo bedrucken', serviceType: 'Textildruck für Fitnessstudios und Kampfsportschulen', description: 'Trainer-Shirts, Tank Tops, Funktionsshirts, Hoodies, Heavy Oversize Tees und Caps mit Logo für Fitnessstudios, Crossfit-Boxen, Boxclubs, MMA- und Kampfsportschulen, Yoga-Studios und Personal Trainer, ab 1 Stück ohne Mindestmenge, Staffelpreise ab 10 Stück, Mitglieder-Merch auch per Print-on-Demand ohne Lager.', provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: [{ '@type': 'City', name: 'Oberhausen' }, { '@type': 'AdministrativeArea', name: 'Ruhrgebiet' }, { '@type': 'AdministrativeArea', name: 'Nordrhein-Westfalen' }, { '@type': 'Country', name: 'Deutschland' }], audience: { '@type': 'BusinessAudience', audienceType: 'Fitnessstudios, Crossfit-Boxen, Kampfsportschulen, Yoga-Studios, Personal Trainer' }, url: `${site.url}/fuer/fitness-und-kampfsport`,
+    hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Gym-Kleidung mit Logo, Preis pro Stück bei 10 Stück, ein Druck', itemListElement: preise.filter((r) => /^\d/.test(r.p[1])).map((r) => ({ '@type': 'Offer', name: `${r.t} mit Studio-Logo (${r.m})`, price: r.p[1].replace(',', '.'), priceCurrency: 'EUR', eligibleQuantity: { '@type': 'QuantitativeValue', minValue: 10 }, priceSpecification: { '@type': 'UnitPriceSpecification', price: r.p[1].replace(',', '.'), priceCurrency: 'EUR', valueAddedTaxIncluded: false } })) },
+    aggregateRating: { '@type': 'AggregateRating', ratingValue: bewertungen.schnitt, reviewCount: bewertungen.anzahl } },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Startseite', item: site.url }, { '@type': 'ListItem', position: 2, name: 'Für wen wir drucken', item: `${site.url}/fuer` }, { '@type': 'ListItem', position: 3, name: 'Fitness und Kampfsport', item: `${site.url}/fuer/fitness-und-kampfsport` }] },
+];
+---
+<Base title="Gym- und Kampfsport-Shirts mit Logo bedrucken, ab 1 Stück" description="Trainer-Shirts, Tank Tops, Funktionsshirts, Hoodies und Oversize Tees mit Logo für Fitnessstudios, Crossfit-Boxen, Boxclubs, MMA- und Kampfsportschulen, Yoga-Studios und Personal Trainer. Ab 1 Stück, T-Shirt mit Logo ab 9,40 € netto, DTF auf Polyester, Mitglieder-Merch ohne Lager. Druckerei in Oberhausen." jsonLd={ld} ogImage="/img/gym-shirts-studio.jpg">
+  <BranchenLanding
+    slug="fitness-und-kampfsport" name="Fitness und Kampfsport"
+    kicker="Fitnessstudios, Crossfit, Boxen, MMA, Yoga"
+    h1="Gym- und Kampfsport-Kleidung mit Logo, die Mitglieder <span class='hl'>kaufen wollen</span>."
+    lede="Trainer-Shirts, Tank Tops, Funktionsshirts, Hoodies und Heavy Oversize Tees mit eurem Logo, fürs Team und für den Verkauf an der Theke. DTF hält auf Polyester, Rückendrucke bis 40 x 50 cm, Merch auch ohne Lager per Print-on-Demand. Gedruckt in Oberhausen."
+    trust={[{ v: 'ab 1', l: 'Stück, keine Mindestmenge' }, { v: '24 h', l: 'bis zum Angebot an Werktagen' }, { v: '40 x 50', l: 'cm Rückendruck im DTG' }, { v: '0 Lager', l: 'Mitglieder-Merch per Print-on-Demand' }]}
+    image="/img/gym-shirts-studio.jpg" imageAlt="Schwarzes Tank Top, Oversize-Shirt, graues Funktionsshirt und Hoodie mit kleinem Logo auf einer Kleiderstange im Gym" imagePos="center 50%"
+    waText="Hallo westernprint, wir brauchen Shirts und Hoodies mit unserem Studio-Logo."
+    answer={`westernprint in Oberhausen bedruckt Gym- und Kampfsport-Kleidung mit Logo für Fitnessstudios, Crossfit-Boxen, Boxclubs, MMA- und Kampfsportschulen, Yoga-Studios und Personal Trainer, ab 1 Stück ohne Mindestmenge. Ein T-Shirt mit Logo kostet bei 10 Stück 12,90 € netto, ein Hoodie 24,90 € netto pro Stück, Stand ${STAND}. Funktionsshirts aus Polyester bedrucken wir per DTF, das hält Schweiß und Wäsche. Fürs Trainerteam gibt es Namen und Funktion einzeln, für Mitglieder-Merch kleine Auflagen zum Nachbestellen oder Print-on-Demand ohne Lager. Die Serie ist 5 bis 7 Werktage nach Freigabe fertig, einzelne Teile in 1 bis 3 Werktagen.`}
+    stand={STAND} mengen={mengen} preise={preise} zusatz={zusatz}
+    preisTitel="Preise für Gym-Kleidung mit Logo"
+    preisText="Preis pro Stück in Euro, netto zzgl. 19 % MwSt., mit einem Druck (Brust oder Rücken), Textil inklusive. Team-Shirts und Verkaufsware mischt ihr frei."
+    preisHinweis="Tank Tops, Funktionsshirts, Heavy Oversize Tees, Jogger und Caps stehen mit Preis im Angebot, an Werktagen innerhalb von 24 Stunden. Keine Einrichtungskosten."
+    branchenTitel="Für diese Studios und Schulen drucken wir"
+    branchenText="Vom Personal Trainer mit drei Shirts bis zur Kette mit fünf Studios. Logo klein auf der Brust, groß auf dem Rücken, Name oder Gürtelgrad einzeln."
+    branchen={branchen}
+    rollenTitel="Welches Teil für wen?"
+    rollenText="Trainerteam, Empfang, Mitglieder und Wettkampfteam brauchen nicht dasselbe. So stellen die meisten Studios ihr Set zusammen, alles in einem Auftrag."
+    rollen={rollen}
+    servicesTitel="Was Studios und Kampfsportschulen bei uns schätzen"
+    services={services}
+    steps={steps}
+    blocksTitel="Gut zu wissen, bevor ihr bestellt"
+    blocks={blocks}
+    formTitel="Angebot in 24 Stunden"
+    formText="Logo, Teile, fürs Team oder zum Verkauf. Ihr bekommt einen festen Stückpreis je Teil und einen Liefertermin, von jemandem aus der Werkstatt."
+    formFacts={['Ab 1 Stück, keine Mindestmenge', 'DTF auf Funktionsware aus Polyester', 'Mitglieder-Merch auch per Print-on-Demand', 'Lieferung ins Studio oder Abholung in Oberhausen']}
+    formImage="/img/druck-makro.jpg" formImageAlt="Nahaufnahme eines frischen DTF-Drucks auf dunklem Stoff"
+    formPlaceholder="z. B. 8 Trainer-Shirts schwarz mit Logo vorne und COACH hinten, 20 Oversize Tees zum Verkauf mit großem Rückenmotiv"
+    produkte={['T-Shirts und Oversize Tees', 'Tank Tops', 'Funktionsshirts (Polyester)', 'Hoodies und Sweatshirts', 'Jogger und Caps', 'Mehrere Teile', 'Mitglieder-Merch per Print-on-Demand', 'Eigene Teile bedrucken']}
+    brancheLabel="Studio oder Schule"
+    topic="Fitness und Kampfsport" subject="Anfrage Gym-Kleidung (Fitness und Kampfsport) über westernprint.de"
+    faqTitel="Fragen aus Gym und Kampfsportschule"
+    faqs={faqs}
+    ctaTitel="Shirts und Hoodies mit eurem Studio-Logo?"
+    ctaText="Schickt uns Logo und Plan. Ihr bekommt innerhalb von 24 Stunden ein Angebot mit festem Stückpreis, ab 1 Stück, auch für Funktionsware."
+  />
+</Base>
