@@ -1,0 +1,316 @@
+---
+// Gemeinsame Vorlage für ausgebaute Branchen-Landingpages (Firmen, Gastro und Hotels, Fitness und Kampfsport).
+// Aufbau wie /fuer/handwerksbetriebe: Antwort oben, Preistabelle, Branchen, optional Rollen-Tabelle, Leistungen,
+// Ablauf, Wissensblöcke, eigenes Formular, FAQ. Alle Texte kommen aus der jeweiligen Seite, hier steht nur Markup.
+import Icon from './Icon.astro';
+import Faq from './Faq.astro';
+import CtaBand from './CtaBand.astro';
+import { site } from '../data/site';
+
+export interface Preis { t: string; m: string; p: string[] }
+export interface Zusatz { t: string; p: string; d: string }
+export interface Service { icon: string; t: string; d: string }
+export interface Step { t: string; d: string }
+export interface FaqItem { q: string; a: string }
+export interface Block { h: string; p: string; items?: string[] }
+export interface Rolle { r: string; t: string; w: string }
+export interface Trust { v: string; l: string }
+
+interface Props {
+  slug: string; name: string;
+  kicker: string; h1: string; lede: string; trust: Trust[]; image: string; imageAlt: string; imagePos?: string; waText: string;
+  answer: string;
+  stand: string; mengen: string[]; preise: Preis[]; zusatz: Zusatz[]; preisTitel: string; preisText: string; preisHinweis?: string;
+  branchenTitel: string; branchenText: string; branchen: string[];
+  rollenTitel?: string; rollenText?: string; rollen?: Rolle[];
+  servicesTitel: string; services: Service[];
+  stepsTitel?: string; steps: Step[];
+  blocksTitel?: string; blocksText?: string; blocks?: Block[];
+  formTitel: string; formText: string; formFacts: string[]; formImage?: string; formImageAlt?: string; formPlaceholder: string;
+  produkte: string[]; brancheLabel?: string; topic: string; subject: string;
+  faqTitel: string; faqs: FaqItem[]; ctaTitel: string; ctaText: string;
+}
+const p = Astro.props;
+const istZahl = (s: string) => /^\d+,\d{2}$/.test(s);
+---
+<section class="bl-hero">
+  <div class="container bl-hero-grid">
+    <div class="bl-copy">
+      <p class="bl-kicker">{p.kicker}</p>
+      <h1 set:html={p.h1} />
+      <p class="lede">{p.lede}</p>
+      <div class="bl-cta">
+        <a href="#anfrage" class="btn btn-primary btn-lg">Angebot anfragen <Icon name="arrow-right" size={18} /></a>
+        <a href={site.whatsapp + '?text=' + encodeURIComponent(p.waText)} class="btn btn-secondary btn-lg" target="_blank" rel="noopener"><Icon name="whatsapp-logo" size={18} /> WhatsApp</a>
+      </div>
+      <ul class="trust" aria-label="Fakten">
+        {p.trust.map((t) => <li><strong>{t.v}</strong><span>{t.l}</span></li>)}
+      </ul>
+    </div>
+    <figure class="bl-visual">
+      <img src={p.image} alt={p.imageAlt} width="1672" height="941" loading="eager" fetchpriority="high" style={p.imagePos ? `object-position: ${p.imagePos}` : undefined} />
+    </figure>
+  </div>
+</section>
+
+<section class="section-tight answer-section">
+  <div class="container answer reveal">
+    <h2>Kurz gesagt</h2>
+    <p>{p.answer}</p>
+  </div>
+</section>
+
+<section class="section prices-section" id="preise">
+  <div class="container">
+    <div class="section-head reveal"><h2>{p.preisTitel}</h2><p>{p.preisText} Stand {p.stand}.</p></div>
+    <div class="table-wrap reveal">
+      <table class="price-table">
+        <thead><tr><th scope="col">Teil</th>{p.mengen.map((m) => <th scope="col">{m}</th>)}</tr></thead>
+        <tbody>
+          {p.preise.map((r) => (
+            <tr><th scope="row"><strong>{r.t}</strong><span>{r.m}</span></th>{r.p.map((x) => <td class={istZahl(x) ? '' : 'txt'}>{istZahl(x) ? `${x} €` : x}</td>)}</tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <div class="extras reveal">
+      {p.zusatz.map((z) => (
+        <div class="extra"><div class="extra-top"><strong>{z.t}</strong><span class="price">{z.p}</span></div><p>{z.d}</p></div>
+      ))}
+    </div>
+    <p class="muted small">{p.preisHinweis ?? 'Keine Einrichtungskosten, keine Filmkosten. Das genaue Angebot mit festem Stückpreis bekommt ihr an Werktagen innerhalb von 24 Stunden.'}</p>
+  </div>
+</section>
+
+<section class="section-tight branchen-section">
+  <div class="container">
+    <div class="section-head reveal"><h2>{p.branchenTitel}</h2><p>{p.branchenText}</p></div>
+    <ul class="chips reveal">{p.branchen.map((b) => <li>{b}</li>)}</ul>
+  </div>
+</section>
+
+{p.rollen && p.rollen.length > 0 && (
+  <section class="section-tight rollen-section">
+    <div class="container">
+      <div class="section-head reveal"><h2>{p.rollenTitel}</h2>{p.rollenText && <p>{p.rollenText}</p>}</div>
+      <div class="table-wrap reveal">
+        <table class="rollen-table">
+          <thead><tr><th scope="col">Wer</th><th scope="col">Was wir empfehlen</th><th scope="col">Warum</th></tr></thead>
+          <tbody>{p.rollen.map((r) => <tr><th scope="row">{r.r}</th><td class="hi">{r.t}</td><td>{r.w}</td></tr>)}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+)}
+
+<section class="section-tight services-section">
+  <div class="container">
+    <div class="section-head reveal"><h2>{p.servicesTitel}</h2></div>
+    <div class="services">
+      {p.services.map((s, i) => (
+        <div class={`service reveal reveal-d${i % 3}`}>
+          <Icon name={s.icon} size={22} />
+          <strong>{s.t}</strong>
+          <p>{s.d}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="section-tight steps-section">
+  <div class="container">
+    <div class="section-head reveal"><h2>{p.stepsTitel ?? 'So läuft es ab'}</h2></div>
+    <ol class="steps">
+      {p.steps.map((s, i) => (
+        <li class={`reveal reveal-d${i}`}><span class="num">0{i + 1}</span><div><strong>{s.t}</strong><span>{s.d}</span></div></li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+{p.blocks && p.blocks.length > 0 && (
+  <section class="section blocks-section">
+    <div class="container">
+      {(p.blocksTitel || p.blocksText) && <div class="section-head reveal">{p.blocksTitel && <h2>{p.blocksTitel}</h2>}{p.blocksText && <p>{p.blocksText}</p>}</div>}
+      <div class="blocks">
+        {p.blocks.map((b, i) => (
+          <article class={`block reveal reveal-d${i % 2}`}>
+            <h3>{b.h}</h3>
+            <p>{b.p}</p>
+            {b.items && b.items.length > 0 && <ul>{b.items.map((it) => <li><Icon name="check" weight="bold" size={14} /> {it}</li>)}</ul>}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
+<section class="section form-section" id="anfrage">
+  <div class="container form-grid">
+    <div class="form-copy reveal">
+      <h2>{p.formTitel}</h2>
+      <p>{p.formText}</p>
+      <ul class="form-facts">{p.formFacts.map((f) => <li><Icon name="check" weight="bold" size={14} /> {f}</li>)}</ul>
+      {p.formImage && <div class="form-detail"><img src={p.formImage} alt={p.formImageAlt ?? ''} width="1672" height="941" loading="lazy" /></div>}
+    </div>
+
+    <form class="bl-form reveal reveal-d1" data-endpoint={site.formEndpoint} data-topic={p.topic} data-subject={p.subject} novalidate>
+      <div class="row">
+        <div class="field"><label for="bl-firma">Firma oder Studio</label><input class="input" id="bl-firma" name="firma" type="text" autocomplete="organization" /></div>
+        <div class="field"><label for="bl-branche">{p.brancheLabel ?? 'Bereich'}</label><select class="select" id="bl-branche" name="branche"><option value="">Bitte wählen</option>{p.branchen.map((b) => <option>{b}</option>)}<option>Andere</option></select></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="bl-name">Ihr Name</label><input class="input" id="bl-name" name="name" type="text" autocomplete="name" required /><span class="error">Bitte Namen angeben.</span></div>
+        <div class="field"><label for="bl-email">E-Mail</label><input class="input" id="bl-email" name="email" type="email" autocomplete="email" required /><span class="error">Bitte gültige E-Mail angeben.</span></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="bl-phone">Telefon / WhatsApp <span class="optional">(optional)</span></label><input class="input" id="bl-phone" name="phone" type="tel" autocomplete="tel" /></div>
+        <div class="field"><label for="bl-qty">Stückzahl</label><select class="select" id="bl-qty" name="qty" required><option value="" disabled selected>Bitte wählen</option><option>1 bis 9</option><option>10 bis 49</option><option>50 bis 99</option><option>100 und mehr</option><option>Nachbestellung</option><option>Laufend / Print-on-Demand</option></select><span class="error">Bitte Stückzahl wählen.</span></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="bl-product">Welche Teile?</label><select class="select" id="bl-product" name="product">{p.produkte.map((x) => <option>{x}</option>)}</select></div>
+        <div class="field"><label for="bl-source">Wie haben Sie uns gefunden? <span class="optional">(optional)</span></label><select class="select" id="bl-source" name="source"><option value="">Bitte wählen</option><option>Google</option><option>ChatGPT / KI-Suche</option><option>Empfehlung</option><option>Instagram</option><option>TikTok</option><option>Sonstiges</option></select></div>
+      </div>
+      <div class="field"><label for="bl-msg">Logo, Positionen, Fragen <span class="optional">(optional)</span></label><textarea class="textarea" id="bl-msg" name="message" rows="3" placeholder={p.formPlaceholder}></textarea></div>
+      <div class="field"><label class="checkbox"><input type="checkbox" name="privacy" required /><span>Ich habe die <a href="/datenschutz" class="accent">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Daten zur Bearbeitung der Anfrage einverstanden.</span></label><span class="error">Bitte bestätigen Sie den Datenschutzhinweis.</span></div>
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="sr-only" aria-hidden="true" />
+      <button type="submit" class="btn btn-primary btn-lg" data-submit>Angebot anfragen <Icon name="arrow-right" size={18} /></button>
+      <p class="form-trust"><span><Icon name="check" weight="bold" size={13} /> Unverbindlich</span><span><Icon name="check" weight="bold" size={13} /> Antwort in 24 Stunden</span><span><Icon name="check" weight="bold" size={13} /> Aus der Werkstatt</span></p>
+      <p class="form-note" data-note role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<Faq items={p.faqs} title={p.faqTitel} href="#anfrage" />
+<CtaBand title={p.ctaTitel} text={p.ctaText} href="#anfrage" />
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('.bl-form');
+  if (form) {
+    const note = form.querySelector<HTMLElement>('[data-note]')!;
+    const submit = form.querySelector<HTMLButtonElement>('[data-submit]')!;
+    const setNote = (kind: string, text: string) => { note.className = 'form-note ' + kind; note.textContent = text; };
+    const validate = () => {
+      let ok = true;
+      form.querySelectorAll<HTMLElement>('.field').forEach((f) => {
+        const input = f.querySelector<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('input, select, textarea');
+        if (!input || !input.hasAttribute('required')) return;
+        const valid = input instanceof HTMLInputElement && input.type === 'checkbox' ? input.checked : input.checkValidity() && input.value.trim() !== '';
+        f.classList.toggle('has-error', !valid); if (!valid) ok = false;
+      });
+      return ok;
+    };
+    form.addEventListener('input', (e) => (e.target as HTMLElement).closest('.field')?.classList.remove('has-error'));
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault(); setNote('', '');
+      if (!validate()) { setNote('err', 'Bitte prüfen Sie die markierten Felder.'); return; }
+      const d = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+      if (d._gotcha) return;
+      const message = [form.dataset.subject!, d.firma ? `Firma: ${d.firma}` : '', d.branche ? `Bereich: ${d.branche}` : '', `Stückzahl: ${d.qty}`, `Teile: ${d.product}`, '', d.message || ''].filter((l) => l !== '').join('\n');
+      submit.disabled = true; submit.textContent = 'Wird gesendet...';
+      try {
+        const res = await fetch(form.dataset.endpoint!, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: d.name, email: d.email, phone: d.phone, topic: form.dataset.topic, qty: d.qty, message, gclid: (window as any).wpGclid?.() || '', page: location.pathname, source: d.source }) });
+        const j = await res.json().catch(() => ({}));
+        if (!res.ok || !j.ok) throw new Error(j.error || String(res.status));
+        form.reset();
+        (window as any).wpTrack?.('lead');
+        setNote('ok', 'Danke! Ihre Anfrage ist angekommen. Wir melden uns werktags meist innerhalb weniger Stunden per E-Mail oder WhatsApp.');
+      } catch (err) {
+        setNote('err', `Senden hat nicht geklappt (${(err as Error).message}). Schreiben Sie uns direkt per WhatsApp oder an info@westernprint.de.`);
+      } finally { submit.disabled = false; submit.innerHTML = 'Angebot anfragen'; }
+    });
+  }
+</script>
+
+<style>
+  .bl-hero { position: relative; padding: clamp(48px, 7vw, 104px) 0 clamp(32px, 5vw, 64px); overflow: hidden; }
+  .bl-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(1100px 600px at 85% 20%, rgba(255,255,255,0.05), transparent 65%); pointer-events: none; }
+  .bl-hero-grid { position: relative; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
+  .bl-kicker { font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+  .bl-copy h1 { margin-top: 18px; font-size: clamp(2.4rem, 5vw, 4.4rem); line-height: 1; letter-spacing: -0.03em; text-wrap: balance; }
+  .bl-copy .lede { margin-top: 24px; max-width: 54ch; font-size: 1.15rem; }
+  .bl-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+  .trust { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 44px; border-top: 1px solid var(--line-strong); }
+  .trust li { display: grid; gap: 4px; padding: 18px 18px 0 0; border-right: 1px solid var(--line); margin-right: 18px; }
+  .trust li:last-child { border-right: 0; margin-right: 0; }
+  .trust strong { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 2.3vw, 2rem); letter-spacing: -0.02em; line-height: 1; color: var(--text); }
+  .trust span { font-size: 13px; line-height: 1.35; color: var(--text-2); }
+  .bl-visual { margin: 0; border-radius: 16px; overflow: hidden; border: 1px solid var(--line-strong); aspect-ratio: 4 / 3; }
+  .bl-visual img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+  @media (max-width: 900px) { .bl-hero-grid { grid-template-columns: 1fr; } .bl-visual { order: -1; } .trust { grid-template-columns: 1fr 1fr; row-gap: 18px; } .trust li:nth-child(2) { border-right: 0; } }
+
+  .answer-section { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg-2); }
+  .answer h2 { font-size: 1.1rem; letter-spacing: 0.02em; color: var(--accent); }
+  .answer p { margin-top: 10px; max-width: 75ch; font-size: 1.1rem; line-height: 1.65; color: var(--text); }
+
+  .section-head p { margin-top: 12px; }
+  .table-wrap { overflow-x: auto; border-top: 1px solid var(--line-strong); }
+  .price-table { width: 100%; border-collapse: collapse; min-width: 640px; font-size: 15px; }
+  .price-table th, .price-table td { padding: 14px 16px 14px 0; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .price-table thead th { font-weight: 600; font-size: 13.5px; color: var(--text-3); }
+  .price-table thead th:first-child, .price-table tbody th { text-align: left; }
+  .price-table tbody th { display: grid; gap: 2px; white-space: normal; }
+  .price-table tbody th strong { font-size: 15.5px; color: var(--text); }
+  .price-table tbody th span { font-size: 13px; font-weight: 400; color: var(--text-3); }
+  .price-table td { font-variant-numeric: tabular-nums; color: var(--text); }
+  .price-table td.txt { color: var(--text-3); font-size: 13.5px; }
+  .extras { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 36px; border-top: 1px solid var(--line-strong); }
+  .extra { padding: 20px 24px 20px 0; margin-right: 24px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .extra:nth-child(3n) { border-right: 0; margin-right: 0; }
+  .extra-top { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+  .extra-top strong { font-size: 15.5px; } .extra .price { font-weight: 700; color: var(--accent); white-space: nowrap; }
+  .extra p { margin-top: 6px; font-size: 14px; line-height: 1.5; color: var(--text-2); }
+  .small { font-size: 13.5px; margin-top: 22px; }
+  @media (max-width: 900px) { .extras { grid-template-columns: 1fr; } .extra { border-right: 0; margin-right: 0; } }
+
+  .branchen-section { border-top: 1px solid var(--line); }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chips li { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line-strong); font-size: 14.5px; color: var(--text-2); }
+
+  .rollen-section { border-top: 1px solid var(--line); }
+  .rollen-table { width: 100%; border-collapse: collapse; min-width: 680px; font-size: 14.5px; }
+  .rollen-table th, .rollen-table td { padding: 14px 18px 14px 0; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .rollen-table thead th { font-weight: 600; font-size: 13.5px; color: var(--text-3); }
+  .rollen-table tbody th { font-weight: 600; color: var(--text); width: 22%; }
+  .rollen-table td { color: var(--text-2); } .rollen-table td.hi { color: var(--text); width: 36%; }
+
+  .services-section { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg-2); }
+  .services { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line-strong); }
+  .service { display: grid; gap: 12px; align-content: start; padding: 28px 28px 32px 0; margin-right: 28px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .service:nth-child(3n) { border-right: 0; margin-right: 0; } .service:nth-last-child(-n+3) { border-bottom: 0; }
+  .service :global(.icon) { color: var(--accent); }
+  .service strong { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; } .service p { color: var(--text-2); font-size: 14.5px; line-height: 1.55; }
+  @media (max-width: 900px) { .services { grid-template-columns: 1fr; } .service { border-right: 0 !important; margin-right: 0 !important; border-bottom: 1px solid var(--line) !important; } .service:last-child { border-bottom: 0 !important; } }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 8px; border-top: 1px solid var(--line-strong); }
+  .steps li { display: grid; gap: 14px; padding: 28px 24px 0 0; border-right: 1px solid var(--line); margin-right: 24px; }
+  .steps li:last-child { border-right: 0; margin-right: 0; }
+  .steps .num { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 13px; letter-spacing: 0.1em; color: var(--accent); }
+  .steps strong { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; } .steps div > span { display: block; margin-top: 6px; color: var(--text-2); font-size: 14.5px; line-height: 1.55; }
+  @media (max-width: 760px) { .steps { grid-template-columns: 1fr; row-gap: 24px; } .steps li { border-right: 0; margin-right: 0; } }
+
+  .blocks-section { border-top: 1px solid var(--line); }
+  .blocks { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 3vw, 40px); }
+  .block { padding: 26px 28px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); }
+  .block h3 { font-size: 1.15rem; }
+  .block p { margin-top: 10px; color: var(--text-2); font-size: 15px; line-height: 1.6; }
+  .block ul { display: grid; gap: 8px; margin-top: 14px; font-size: 14.5px; color: var(--text); }
+  .block li { display: flex; gap: 8px; align-items: flex-start; } .block li :global(.icon) { color: var(--accent); flex: none; margin-top: 4px; }
+  @media (max-width: 900px) { .blocks { grid-template-columns: 1fr; } }
+
+  .form-section { scroll-margin-top: calc(var(--nav-h) + 12px); border-top: 1px solid var(--line); }
+  .form-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .form-copy h2 { font-size: clamp(1.9rem, 3.2vw, 2.6rem); letter-spacing: -0.02em; }
+  .form-copy > p { margin-top: 14px; color: var(--text-2); font-size: 1.05rem; max-width: 46ch; }
+  .form-facts { display: grid; gap: 10px; margin-top: 24px; font-size: 14.5px; }
+  .form-facts li { display: flex; gap: 10px; align-items: center; } .form-facts :global(.icon) { color: var(--accent); flex: none; }
+  .form-detail { margin-top: 32px; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 4 / 3; max-width: 440px; }
+  .form-detail img { width: 100%; height: 100%; object-fit: cover; }
+  .bl-form { display: grid; gap: 14px; padding: clamp(22px, 3vw, 36px); border-radius: 16px; border: 1px solid var(--line-strong); background: var(--surface); }
+  .bl-form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .bl-form textarea { min-height: 84px; }
+  .form-trust { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--text-3); }
+  .form-trust span { display: inline-flex; gap: 5px; align-items: center; } .form-trust :global(.icon) { color: var(--accent); }
+  @media (max-width: 900px) { .form-grid { grid-template-columns: 1fr; } .bl-form .row { grid-template-columns: 1fr; } .form-detail { display: none; } }
+</style>

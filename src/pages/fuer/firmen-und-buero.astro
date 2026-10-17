@@ -1,0 +1,120 @@
+---
+// Landingpage Firmenkleidung mit Logo für Firmen, Büros und Dienstleister. Vorlage: BranchenLanding.
+// Preise: veröffentlichte Preisliste (Stand 21.09.2026, wie /was-kostet-textildruck und Handwerk-Seite). Teile ohne
+// veröffentlichten Preis stehen mit „im Angebot“. Nichts hier ist Steuerberatung, der Steuer-Block sagt das ausdrücklich.
+import Base from '../../layouts/Base.astro';
+import BranchenLanding from '../../components/BranchenLanding.astro';
+import { site, oeffnungszeiten } from '../../data/site';
+import { bewertungen } from '../../data/bewertungen';
+
+const STAND = '21.09.2026';
+const brutto = (n: string) => (Math.round(parseFloat(n.replace(',', '.')) * 119) / 100).toFixed(2).replace('.', ',');
+const mengen = ['1 Stück', '10 Stück', '25 Stück', '50 Stück', '100 Stück'];
+const preise = [
+  { t: 'Poloshirt', m: 'Stedman Classic Polo, 170 g', p: ['22,90', '17,90', '15,90', '14,50', '13,40'] },
+  { t: 'T-Shirt Bio', m: 'Stanley/Stella Creator 2.0, 180 g', p: ['19,90', '14,90', '12,90', '11,40', '10,40'] },
+  { t: 'T-Shirt Basic', m: 'Stedman Classic-T, 155 g', p: ['17,90', '12,90', '10,90', '9,40', '8,40'] },
+  { t: 'Sweatshirt', m: 'Stedman Classic Sweatshirt, 280 g', p: ['27,90', '22,90', '20,90', '19,40', '17,90'] },
+  { t: 'Hoodie', m: 'Stedman Classic Hoodie, 280 g', p: ['29,90', '24,90', '22,90', '21,40', '19,90'] },
+  { t: 'Hemd', m: 'Stanley/Stella Styler, Bio-Baumwolle', p: ['36,90', '30,90', '28,90', '27,40', '25,90'] },
+  { t: 'Softshelljacke', m: 'Stedman Lux Softshell, 250 g', p: ['44,90', '39,90', '37,90', '36,40', '34,90'] },
+  { t: 'Fleeceweste', m: 'Stedman Classic Fleece Vest', p: ['im Angebot', 'im Angebot', 'im Angebot', 'im Angebot', 'im Angebot'] },
+  { t: 'Cap', m: 'Flexfit 110, Logo vorne', p: ['im Angebot', 'im Angebot', 'im Angebot', 'im Angebot', 'im Angebot'] },
+];
+const zusatz = [
+  { t: 'Zweite Druckseite', p: 'ab 3,50 €', d: 'Logo klein vorne, Firmenname oder Claim groß auf dem Rücken.' },
+  { t: 'Ärmeldruck', p: '3,00 €', d: 'Pro Ärmel, bis 8 x 8 cm. Zum Beispiel Webadresse oder Zertifikat.' },
+  { t: 'Name oder Abteilung', p: 'ab 5,90 €', d: 'Jedes Teil einzeln mit Vorname oder Funktion, eine Liste reicht.' },
+  { t: 'Nackenprint statt Etikett', p: '3,00 €', d: 'Euer Logo mit Größenangabe im Nacken, wirkt wie eine eigene Kollektion.' },
+  { t: 'Eigene Kleidung anliefern', p: 'nur Druck', d: 'Ihr habt schon Polos oder Jacken? Wir bedrucken sie, ihr zahlt nur den Druck.' },
+  { t: 'Logo-Datei prüfen', p: '0,00 €', d: 'Jede Datei prüfen wir kostenlos. Neu aufbauen oder freistellen kostet 19,90 € pro Datei.' },
+];
+const branchen = ['Agenturen und Studios', 'Steuerberater und Kanzleien', 'Immobilien und Makler', 'IT und Software', 'Autohäuser und Kfz-Handel', 'Arztpraxen und Physiotherapie', 'Pflegedienste', 'Logistik und Spedition', 'Versicherungen und Finanzvertrieb', 'Einzelhandel und Filialen', 'Start-ups', 'Vereine mit Geschäftsstelle', 'Außendienst und Vertrieb', 'Empfang und Kundenservice'];
+const rollen = [
+  { r: 'Empfang, Beratung, Vertrieb', t: 'Poloshirt oder Hemd mit kleinem Brustlogo', w: 'Sieht gepflegt aus, bleibt bequem, passt zu Jeans und Stoffhose. Hemd für Kundentermine, Polo für den Alltag.' },
+  { r: 'Büro und Team', t: 'Hoodie, Sweatshirt oder Bio-T-Shirt', w: 'Wird auch nach Feierabend getragen, also läuft euer Logo mit. Bio-Baumwolle von Stanley/Stella für den weichen Griff.' },
+  { r: 'Außendienst, Lager, Fahrer', t: 'Softshelljacke oder Fleeceweste mit Logo, T-Shirt darunter', w: 'Warm, wind- und wasserabweisend, Logo bleibt sichtbar, wenn die Jacke zu ist.' },
+  { r: 'Messe und Events', t: 'Einheitliche Polos je Rolle, Caps für den Stand', w: 'Standpersonal ist auf einen Blick erkennbar. Mehr dazu auf der Seite für Messen und Aussteller.' },
+  { r: 'Onboarding und Geschenke', t: 'Set aus Hoodie, Cap und Beutel mit Namen', w: 'Neue Kolleginnen und Kollegen bekommen am ersten Tag etwas in die Hand, Jubiläen und Weihnachten laufen über dieselbe Datei.' },
+];
+const services = [
+  { icon: 'arrows-clockwise', t: 'Einzeln nachbestellen', d: 'Neue Kollegin, neuer Praktikant: Ihr bestellt ein einzelnes Teil nach, mit demselben Logo in derselben Position. Die Druckdaten bleiben bei uns gespeichert.' },
+  { icon: 'list-checks', t: 'Größenliste statt Rätselraten', d: 'Ihr schickt eine Excel-Liste mit Name, Teil und Größe, wir packen pro Person beschriftet. Damen- und Herrenschnitte lassen sich mischen, ohne Aufpreis.' },
+  { icon: 'palette', t: 'Firmenfarbe getroffen', d: 'Das Logo drucken wir nach Pantone- oder HEX-Wert. Beim Textil wählen wir aus über 500 Farben die passende, oft ist es die exakte.' },
+  { icon: 'leaf', t: 'Belegbar nachhaltig', d: 'Stanley/Stella ist GOTS- und OEKO-TEX-zertifiziert und Mitglied der Fair Wear Foundation. Das passt in jeden CSR-Bericht, ohne dass ihr etwas erfinden müsst.' },
+  { icon: 'file-text', t: 'Rechnung, die die Buchhaltung mag', d: 'Rechnung der westernprint GmbH mit ausgewiesener Umsatzsteuer. Für Stammkunden Zahlung auf Rechnung nach Absprache.' },
+  { icon: 'chat-circle-dots', t: 'Ein Ansprechpartner', d: 'WhatsApp, Telefon oder Mail, beantwortet von Leuten aus der Werkstatt in Oberhausen. Kein Ticketsystem, keine Warteschleife.' },
+];
+const steps = [
+  { t: 'Logo und Größenliste schicken', d: 'Logo als PDF, SVG oder PNG, dazu Teile, Farben und eine Liste mit Name und Größe. Wenn ihr noch unsicher seid, reicht ein Foto vom alten Shirt.' },
+  { t: 'Angebot und Korrekturabzug', d: 'An Werktagen innerhalb von 24 Stunden bekommt ihr einen festen Stückpreis je Teil. Vor dem Druck seht ihr euer Logo auf dem Textil mit Maßen in Zentimetern und gebt frei.' },
+  { t: 'Druck, Lieferung, Nachschub', d: 'Die Serie ist 5 bis 7 Werktage nach Freigabe fertig, per Person beschriftet. Versand per DHL an die Firma oder Abholung in Oberhausen. Später bestellt ihr einzeln nach.' },
+];
+const blocks = [
+  { h: 'Wie groß soll das Logo sein?', p: 'Auf der Brust wirkt ein Logo zwischen 8 und 12 Zentimetern Breite ruhig und erkennbar, links auf Herzhöhe. Auf dem Rücken sind 25 bis 30 Zentimeter üblich, zum Beispiel für den Firmennamen mit Webadresse. Am Ärmel passen 5 bis 7 Zentimeter. Im Korrekturabzug stehen die Maße in Zentimetern, bevor gedruckt wird.' },
+  { h: 'Ist Firmenkleidung mit Logo steuerlich absetzbar?', p: 'In der Regel ja: Kleidung mit dauerhaft angebrachtem, sichtbarem Firmenlogo gilt als typische Berufskleidung und kann als Betriebsausgabe gebucht werden, die Umsatzsteuer aus unserer Rechnung ist als Vorsteuer abziehbar. Für Mitarbeitende entsteht dadurch normalerweise kein geldwerter Vorteil. Das ist eine Orientierung, keine Steuerberatung, fragt im Zweifel euren Steuerberater.' },
+  { h: 'Wie hält der Druck im Alltag?', p: 'Wir drucken Firmenkleidung per DTF: deckend, dehnbar, waschfest, auch auf Polyester, Softshell und Mischgewebe. Gewaschen wird bei 30 Grad auf links, ohne Weichspüler, ohne Trockner, dann sieht das Logo auch nach vielen Wäschen aus wie am ersten Tag. Für Teile, die in die Industriewäsche gehen, sprecht uns vorher an.', items: ['30 Grad, auf links gedreht', 'Kein Weichspüler, kein Trockner', 'Gilt für Baumwolle, Polyester und Softshell'] },
+  { h: 'Größenliste: der typische Fehler', p: 'Teams bestellen zu viele M und zu wenige XL und XXL. Lasst jede Person ihre Größe selbst eintragen und bestellt für Neuzugänge nichts auf Vorrat: Einzelne Teile bestellt ihr bei uns in 1 bis 3 Werktagen nach, mit demselben Druck. Eine Vorlage für die Größenliste schicken wir euch mit dem Angebot.', items: ['Name, Abteilung, Teil, Größe, Schnitt (Damen/Herren)', 'Mischgrößen ohne Aufpreis', 'Nachbestellung einzeln statt Lager'] },
+];
+const faqs = [
+  { q: 'Wo bekommen Firmen Teamkleidung mit Logo in kleinen Mengen?', a: `Bei westernprint in Oberhausen bekommen Firmen, Büros und Dienstleister Poloshirts, T-Shirts, Hoodies, Hemden und Softshelljacken mit Firmenlogo ab 1 Stück, ohne Mindestmenge. Ein Poloshirt mit Logo kostet bei 10 Stück 17,90 € netto (${brutto('17,90')} € brutto) pro Stück. Die Serie ist 5 bis 7 Werktage nach Freigabe fertig, einzelne Teile für neue Mitarbeitende bestellt ihr später nach. Stand ${STAND}.` },
+  { q: 'Was kostet Firmenkleidung mit Logo?', a: `Ein Poloshirt (Stedman Classic Polo) mit einem Druck kostet bei westernprint 22,90 € netto (${brutto('22,90')} € brutto) als Einzelstück, 17,90 € netto (${brutto('17,90')} € brutto) bei 10 Stück und 14,50 € netto (${brutto('14,50')} € brutto) bei 50 Stück. Ein Hoodie (Stedman Classic Hoodie) kostet 24,90 € netto (${brutto('24,90')} € brutto) bei 10 Stück, ein Bio-T-Shirt (Stanley/Stella Creator 2.0) 14,90 € netto (${brutto('14,90')} € brutto) bei 10 Stück. Alle Preise pro Stück inklusive Textil und einem Druck, Stand ${STAND}. Einrichtungskosten fallen nicht an.` },
+  { q: 'Gibt es eine Mindestbestellmenge für Firmenkleidung?', a: 'Nein. westernprint bedruckt Firmenkleidung ab 1 Stück. Staffelpreise gelten ab 10 Stück, ab 50 Stück wird es noch einmal günstiger. Modelle, Farben, Damen- und Herrenschnitte und Größen könnt ihr in einer Bestellung mischen, ohne Aufpreis.' },
+  { q: 'Besticken oder bedrucken, was ist besser für Firmenkleidung?', a: 'Alles Gedruckte entsteht in unserer eigenen Produktion in Oberhausen per DTF: mehrfarbig, mit feinen Details und Verläufen, deckend auf dunklen Textilien, dehnbar und waschfest. Für kleine Auflagen und Nachbestellungen ab 1 Stück ist Druck der schnellere und günstigere Weg, weil keine Einrichtung anfällt. Stickerei bieten wir auf Anfrage über einen Partnerbetrieb an.' },
+  { q: 'Wie lange dauert eine Bestellung für das ganze Team?', a: `Das Angebot kommt an Werktagen innerhalb von 24 Stunden. Nach Freigabe des Korrekturabzugs ist die Serie in 5 bis 7 Werktagen fertig, Einzelstücke in 1 bis 3 Werktagen. Die Ware geht per DHL mit Sendungsnummer in die Firma, oder ihr holt sie kostenlos in der Schenkendorfstraße 45 in Oberhausen ab, ${oeffnungszeiten.text}.` },
+  { q: 'Können wir später einzelne Teile für neue Mitarbeitende nachbestellen?', a: 'Ja. westernprint speichert Logo, Farbe und Position. Eine neue Kollegin bekommt ihr Polo einzeln nachbestellt, mit demselben Druck wie das Team, in 1 bis 3 Werktagen. Ihr müsst nichts auf Vorrat kaufen.' },
+  { q: 'Bekommen wir vorher ein Muster?', a: 'Ja. Ein Muster mit eurem Logo bestellt ihr über das Angebot oder direkt im Shop, ab 1 Stück. So seht ihr Stoff, Farbe und Druck, bevor das Team ausgestattet wird. Einzelne Muster sind etwas teurer als die Serie, weil jedes Teil einzeln eingerichtet wird.' },
+  { q: 'Ist Firmenkleidung mit Logo steuerlich absetzbar?', a: 'Kleidung mit dauerhaft angebrachtem, sichtbarem Firmenlogo gilt in der Regel als Berufskleidung: Betriebsausgabe für die Firma, Vorsteuerabzug aus unserer Rechnung, normalerweise kein geldwerter Vorteil für Mitarbeitende. Das ist eine Orientierung und keine Steuerberatung, klärt es mit eurem Steuerberater.' },
+  { q: 'Können wir unsere eigene Kleidung bedrucken lassen?', a: 'Ja. westernprint bedruckt angelieferte Polos, Hemden, Jacken oder Westen, ihr zahlt nur den Druck. Nennt vorher kurz das Material, wir prüfen die Eignung. Plant 2 bis 3 Prozent Reserve ein, für Materialfehler an angelieferter Ware haften wir nicht.' },
+  { q: 'Welche Datei braucht ihr von unserem Logo?', a: 'Am besten eine Vektordatei (PDF, AI, SVG) oder ein PNG mit transparentem Hintergrund. Wir prüfen jede Datei kostenlos. Habt ihr nur ein Bild von der Website oder einer Visitenkarte, bauen wir das Logo für 19,90 € netto pro Datei sauber neu auf.' },
+  { q: 'Können Name oder Abteilung auf das Shirt?', a: 'Ja. Jedes Teil bekommt auf Wunsch Vornamen, Funktion oder Abteilung, zum Beispiel auf der Brust oder am Ärmel. Das kostet ab 5,90 € netto pro Teil zusätzlich, eine Liste mit Name und Größe reicht.' },
+  { q: 'Druckt ihr auch Hemden und Softshelljacken mit Logo?', a: `Ja. Hemden (Stanley/Stella Styler, Bio-Baumwolle) kosten mit Logo 30,90 € netto (${brutto('30,90')} € brutto) bei 10 Stück, Softshelljacken (Stedman Lux Softshell) 39,90 € netto (${brutto('39,90')} € brutto) bei 10 Stück. Das Logo sitzt auf der Brust, auf Wunsch zusätzlich auf dem Rücken oder Ärmel. Stand ${STAND}.` },
+  { q: 'Kann der Nacken unser Logo statt des Herstelleretiketts zeigen?', a: 'Ja. Für 3,00 € netto pro Teil drucken wir euer Logo mit Größenangabe in den Nacken. Viele Textilien von Stanley/Stella haben ein Tearaway-Label, das wir entfernen, Build-Your-Brand-Modelle kommen ohne Etikett. Die Kleidung wirkt dann wie eine eigene Kollektion.' },
+  { q: 'Bekommen wir eine Rechnung mit ausgewiesener Umsatzsteuer?', a: 'Ja. Ihr bekommt eine Rechnung der westernprint GmbH mit ausgewiesener Umsatzsteuer. Neue Kunden zahlen vorab per Überweisung, für Stammkunden ist Zahlung auf Rechnung nach Absprache möglich.' },
+];
+const ld = [
+  { '@context': 'https://schema.org', '@type': 'Service', name: 'Firmenkleidung mit Logo bedrucken', serviceType: 'Textildruck für Firmen und Büros', description: 'Firmenkleidung mit Logo für Firmen, Büros und Dienstleister: Poloshirts, T-Shirts, Hoodies, Hemden und Softshelljacken, ab 1 Stück ohne Mindestmenge, Staffelpreise ab 10 Stück, einzeln nachbestellbar. Eigene Kleidung kann angeliefert werden.', provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: [{ '@type': 'City', name: 'Oberhausen' }, { '@type': 'AdministrativeArea', name: 'Ruhrgebiet' }, { '@type': 'AdministrativeArea', name: 'Nordrhein-Westfalen' }, { '@type': 'Country', name: 'Deutschland' }], audience: { '@type': 'BusinessAudience', audienceType: 'Firmen, Büros, Agenturen, Kanzleien, Praxen und Dienstleister' }, url: `${site.url}/fuer/firmen-und-buero`,
+    hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Firmenkleidung mit Logo, Preis pro Stück bei 10 Stück, ein Druck', itemListElement: preise.filter((r) => /^\d/.test(r.p[1])).map((r) => ({ '@type': 'Offer', name: `${r.t} mit Firmenlogo (${r.m})`, price: r.p[1].replace(',', '.'), priceCurrency: 'EUR', eligibleQuantity: { '@type': 'QuantitativeValue', minValue: 10 }, priceSpecification: { '@type': 'UnitPriceSpecification', price: r.p[1].replace(',', '.'), priceCurrency: 'EUR', valueAddedTaxIncluded: false } })) },
+    aggregateRating: { '@type': 'AggregateRating', ratingValue: bewertungen.schnitt, reviewCount: bewertungen.anzahl } },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Startseite', item: site.url }, { '@type': 'ListItem', position: 2, name: 'Für wen wir drucken', item: `${site.url}/fuer` }, { '@type': 'ListItem', position: 3, name: 'Firmen und Büro', item: `${site.url}/fuer/firmen-und-buero` }] },
+];
+---
+<Base title="Firmenkleidung mit Logo bedrucken lassen, ab 1 Stück" description="Firmenkleidung mit Logo für Firmen, Büros, Agenturen, Kanzleien und Praxen: Poloshirts, Hemden, Hoodies, Softshelljacken ab 1 Stück ohne Mindestmenge. Polo mit Logo ab 14,50 € netto, Größenliste, einzeln nachbestellbar, Bio-Baumwolle. Druckerei in Oberhausen, Angebot in 24 Stunden." jsonLd={ld} ogImage="/img/firmen-polos-buero.jpg">
+  <BranchenLanding
+    slug="firmen-und-buero" name="Firmen und Büro"
+    kicker="Firmen, Büros und Dienstleister"
+    h1="Firmenkleidung mit Logo, die das Team <span class='hl'>gerne trägt</span>."
+    lede="Poloshirts, Hemden, Hoodies und Softshelljacken mit eurem Logo, für Empfang, Büro, Außendienst und Messe. Ab 1 Stück, Größenliste statt Rätselraten, neue Kolleginnen und Kollegen bestellt ihr einzeln nach. Gedruckt in unserer Werkstatt in Oberhausen."
+    trust={[{ v: 'ab 1', l: 'Stück, keine Mindestmenge' }, { v: '24 h', l: 'bis zum Angebot an Werktagen' }, { v: '5 bis 7', l: 'Werktage bis zur fertigen Serie' }, { v: 'einzeln', l: 'nachbestellen für neue Mitarbeitende' }]}
+    image="/img/firmen-polos-buero.jpg" imageAlt="Dunkelblaue und anthrazitfarbene Poloshirts, ein weißes Hemd und eine Softshellweste mit kleinem Brustlogo auf einer Kleiderstange im Büro" imagePos="center 50%"
+    waText="Hallo westernprint, wir brauchen Firmenkleidung mit unserem Logo für unser Team."
+    answer={`westernprint in Oberhausen bedruckt Firmenkleidung mit Logo für Firmen, Büros, Agenturen, Kanzleien, Praxen und Dienstleister, ab 1 Stück ohne Mindestmenge. Ein Poloshirt mit Logo kostet bei 10 Stück 17,90 € netto, ein Bio-T-Shirt 14,90 € netto, ein Hoodie 24,90 € netto, eine Softshelljacke 39,90 € netto pro Stück, Stand ${STAND}. Ihr schickt Logo und Größenliste, wir packen pro Person beschriftet. Die Serie ist 5 bis 7 Werktage nach Freigabe fertig, einzelne Teile für neue Mitarbeitende bestellt ihr später nach, mit demselben Druck. Eigene Kleidung könnt ihr anliefern, dann zahlt ihr nur den Druck.`}
+    stand={STAND} mengen={mengen} preise={preise} zusatz={zusatz}
+    preisTitel="Preise für Firmenkleidung mit Logo"
+    preisText="Preis pro Stück in Euro, netto zzgl. 19 % MwSt., mit einem Druck (Brust oder Rücken), Textil inklusive. Größen, Farben und Damen-/Herrenschnitte könnt ihr mischen."
+    branchenTitel="Für diese Firmen drucken wir"
+    branchenText="Vom Zwei-Personen-Büro bis zum Unternehmen mit mehreren Standorten. Das Logo sitzt dezent auf der Brust oder groß auf dem Rücken, auf Wunsch mit Name oder Abteilung."
+    branchen={branchen}
+    rollenTitel="Welches Teil für wen?"
+    rollenText="Nicht jede Rolle braucht dasselbe. So stellen die meisten Firmen ihr Set zusammen, alles in einem Auftrag mit einer Rechnung."
+    rollen={rollen}
+    servicesTitel="Was Firmen bei uns schätzen"
+    services={services}
+    steps={steps}
+    blocksTitel="Gut zu wissen, bevor ihr bestellt"
+    blocks={blocks}
+    formTitel="Angebot in 24 Stunden"
+    formText="Kurz die Eckdaten. Ihr bekommt einen festen Stückpreis je Teil und einen Liefertermin, von jemandem aus der Werkstatt."
+    formFacts={['Ab 1 Stück, keine Mindestmenge', 'Staffelpreise ab 10 Stück', 'Größenliste, pro Person beschriftet', 'Eigene Kleidung bedrucken möglich']}
+    formImage="/img/workwear-team-halle.jpg" formImageAlt="Team in Poloshirts mit Firmenlogo"
+    formPlaceholder="z. B. 12 Polos navy und 4 Softshelljacken, Logo links auf der Brust, Firmenname auf dem Rücken, Größenliste folgt"
+    produkte={['Poloshirts', 'Hemden', 'T-Shirts', 'Sweatshirts oder Hoodies', 'Softshelljacken oder Westen', 'Caps und Beutel', 'Mehrere Teile', 'Eigene Kleidung bedrucken']}
+    brancheLabel="Branche"
+    topic="Firmenkleidung" subject="Anfrage Firmenkleidung (Firmen und Büro) über westernprint.de"
+    faqTitel="Fragen von Firmen und Büros"
+    faqs={faqs}
+    ctaTitel="Firmenkleidung mit eurem Logo?"
+    ctaText="Schickt uns Logo, Teile und Größenliste. Ihr bekommt innerhalb von 24 Stunden ein Angebot mit festem Stückpreis, ab 1 Stück."
+  />
+</Base>

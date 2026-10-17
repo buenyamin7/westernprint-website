@@ -1,0 +1,121 @@
+---
+// Landingpage Gastro und Hotels: Restaurants, Cafés, Bars, Imbisse, Bäckereien, Foodtrucks, Catering, Hotels. Vorlage: BranchenLanding.
+// Preise: veröffentlichte Preisliste (Stand 21.09.2026). Schürzen besorgen wir laut Inhaber (18.10.2026), ein veröffentlichter
+// Preis dafür gibt es noch nicht, deshalb „im Angebot“. Kochjacken nur als angelieferte Ware. Waschhinweis bleibt bei 30 Grad.
+import Base from '../../layouts/Base.astro';
+import BranchenLanding from '../../components/BranchenLanding.astro';
+import { site, oeffnungszeiten } from '../../data/site';
+import { bewertungen } from '../../data/bewertungen';
+
+const STAND = '21.09.2026';
+const brutto = (n: string) => (Math.round(parseFloat(n.replace(',', '.')) * 119) / 100).toFixed(2).replace('.', ',');
+const mengen = ['1 Stück', '10 Stück', '25 Stück', '50 Stück', '100 Stück'];
+const preise = [
+  { t: 'Poloshirt', m: 'Stedman Classic Polo, 170 g', p: ['22,90', '17,90', '15,90', '14,50', '13,40'] },
+  { t: 'T-Shirt Basic', m: 'Stedman Classic-T, 155 g', p: ['17,90', '12,90', '10,90', '9,40', '8,40'] },
+  { t: 'T-Shirt Bio', m: 'Stanley/Stella Creator 2.0, 180 g', p: ['19,90', '14,90', '12,90', '11,40', '10,40'] },
+  { t: 'Hemd', m: 'Stanley/Stella Styler, Bio-Baumwolle', p: ['36,90', '30,90', '28,90', '27,40', '25,90'] },
+  { t: 'Hoodie', m: 'Stedman Classic Hoodie, 280 g', p: ['29,90', '24,90', '22,90', '21,40', '19,90'] },
+  { t: 'Sweatshirt', m: 'Stedman Classic Sweatshirt, 280 g', p: ['27,90', '22,90', '20,90', '19,40', '17,90'] },
+  { t: 'Bistroschürze', m: 'kurz oder lang, mit Logo', p: ['im Angebot', 'im Angebot', 'im Angebot', 'im Angebot', 'im Angebot'] },
+  { t: 'Latzschürze', m: 'mit Tasche, Logo auf Brust oder Tasche', p: ['im Angebot', 'im Angebot', 'im Angebot', 'im Angebot', 'im Angebot'] },
+  { t: 'Cap', m: 'Flexfit 110, Logo vorne', p: ['im Angebot', 'im Angebot', 'im Angebot', 'im Angebot', 'im Angebot'] },
+];
+const zusatz = [
+  { t: 'Zweite Druckseite', p: 'ab 3,50 €', d: 'Logo klein vorne, Name des Lokals oder Spruch groß auf dem Rücken.' },
+  { t: 'Ärmeldruck', p: '3,00 €', d: 'Pro Ärmel, bis 8 x 8 cm. Zum Beispiel Instagram-Name oder Webadresse.' },
+  { t: 'Name oder Rolle', p: 'ab 5,90 €', d: 'Vorname, „Service“ oder „Küche“ auf jedem Teil einzeln, eine Liste reicht.' },
+  { t: 'Eigene Kleidung anliefern', p: 'nur Druck', d: 'Eure vorhandenen Schürzen, Kochjacken oder Shirts bedrucken wir, ihr zahlt nur den Druck.' },
+  { t: 'Nachbestellung einzeln', p: 'ab 1 Stück', d: 'Neue Aushilfe am Wochenende? Ein Teil mit demselben Logo in 1 bis 3 Werktagen.' },
+  { t: 'Logo-Datei prüfen', p: '0,00 €', d: 'Jede Datei prüfen wir kostenlos. Neu aufbauen oder freistellen kostet 19,90 € pro Datei.' },
+];
+const branchen = ['Restaurant', 'Café und Rösterei', 'Bar und Cocktailbar', 'Imbiss und Dönerladen', 'Bäckerei und Konditorei', 'Eisdiele', 'Foodtruck und Street Food', 'Catering und Eventgastronomie', 'Kantine und Mensa', 'Hotel und Pension', 'Biergarten und Brauerei', 'Lieferdienst', 'Kiosk und Späti', 'Shisha-Bar und Lounge'];
+const rollen = [
+  { r: 'Service und Theke', t: 'Poloshirt oder T-Shirt in Schwarz, Navy oder Anthrazit mit kleinem Brustlogo, dazu Bistroschürze', w: 'Dunkle Farben verzeihen Flecken, das Logo bleibt lesbar, die Schürze schützt und trägt das Logo noch einmal auf Hüfthöhe.' },
+  { r: 'Küche', t: 'Latzschürze mit Tasche und Logo, eigene Kochjacke anliefern', w: 'Die Schürze bekommt das meiste ab und wird am häufigsten gewaschen. Logo auf der Brust oder auf der Tasche, wo es nicht am Herd anliegt.' },
+  { r: 'Barista und Café', t: 'Bio-T-Shirt oder Hoodie mit Logo, Schürze aus Canvas', w: 'Café-Teams tragen das Shirt auch nach der Schicht, ein weicher Stoff und ein sauber gedrucktes Logo wirken wie Merch, nicht wie Uniform.' },
+  { r: 'Lieferfahrer und Außer-Haus', t: 'Hoodie oder Sweatshirt mit großem Rückendruck, Cap', w: 'An der Haustür zählt der Rücken: Name des Lokals, Telefonnummer oder Webadresse groß und lesbar.' },
+  { r: 'Hotel: Rezeption, Housekeeping, Frühstück', t: 'Hemd oder Polo für die Rezeption, T-Shirt oder Polo für Housekeeping, Schürze fürs Frühstück', w: 'Jede Abteilung in einer Farbe, dasselbe Logo, eine Rechnung. Nachschub pro Abteilung einzeln.' },
+];
+const services = [
+  { icon: 'arrows-clockwise', t: 'Nachschub in 1 bis 3 Werktagen', d: 'Neue Aushilfe, kaputte Schürze, Soßenfleck, der nicht mehr rausgeht: Ihr bestellt ein einzelnes Teil nach, mit demselben Logo. Die Druckdaten bleiben bei uns gespeichert.' },
+  { icon: 'drop', t: 'Dunkle Farben, kleines Logo', d: 'Schwarz, Navy und Anthrazit sind die Gastro-Farben, weil sie Flecken verzeihen. Darauf drucken wir deckend, auch helle Logos auf dunklem Stoff.' },
+  { icon: 't-shirt', t: 'Eure Schürzen, unsere Drucke', d: 'Ihr habt schon Schürzen oder Kochjacken? Liefert sie an, wir bedrucken sie und ihr zahlt nur den Druck. Material vorher kurz nennen, wir prüfen die Eignung.' },
+  { icon: 'storefront', t: 'Mehrere Filialen, eine Datei', d: 'Logo, Farbe und Position liegen bei uns. Jede Filiale bestellt nach, was sie braucht, wir packen sortiert pro Standort und liefern per DHL dorthin.' },
+  { icon: 'file-text', t: 'Rechnung für die Buchhaltung', d: 'Rechnung der westernprint GmbH mit ausgewiesener Umsatzsteuer, auf Wunsch je Filiale getrennt. Für Stammkunden Zahlung auf Rechnung nach Absprache.' },
+  { icon: 'chat-circle-dots', t: 'WhatsApp statt Ticketsystem', d: 'Foto vom Logo per WhatsApp, Antwort aus der Werkstatt in Oberhausen. Angebot an Werktagen innerhalb von 24 Stunden.' },
+];
+const steps = [
+  { t: 'Logo und Teile schicken', d: 'Logo als PDF, SVG oder PNG, dazu Teile, Farben und die Größen für Service und Küche. Ein Foto der Speisekarte oder des Schilds reicht für den Anfang, wir prüfen die Datei kostenlos.' },
+  { t: 'Angebot und Korrekturabzug', d: 'An Werktagen innerhalb von 24 Stunden bekommt ihr einen festen Stückpreis je Teil. Vor dem Druck seht ihr euer Logo auf Shirt und Schürze mit Maßen in Zentimetern und gebt frei.' },
+  { t: 'Druck, Lieferung, Nachschub', d: 'Die Serie ist 5 bis 7 Werktage nach Freigabe fertig, Einzelstücke in 1 bis 3 Werktagen. Versand per DHL ins Lokal oder Abholung in Oberhausen. Später bestellt ihr einzeln nach.' },
+];
+const blocks = [
+  { h: 'Waschen, Fett und 60 Grad: ehrlich gesagt', p: 'Unser DTF-Druck ist deckend, dehnbar und hält viele Wäschen, wenn ihr bei 30 Grad auf links wascht, ohne Weichspüler und ohne Trockner. Fettflecken behandelt ihr vor der Wäsche mit Gallseife oder Spülmittel, Bleiche schadet jedem Textildruck. Wenn eure Wäscherei bei 60 Grad oder heißer wäscht, sagt es uns vor der Bestellung, dann klären wir vorher, was dafür passt, statt dass ihr es nach drei Wochen merkt.', items: ['30 Grad, auf links, kein Weichspüler, kein Trockner', 'Fettflecken vorbehandeln, keine Bleiche', 'Gewerbliche Wäsche vorher ansprechen'] },
+  { h: 'Wie viele Teile pro Person?', p: 'Als Richtwert für einen Betrieb mit täglicher Wäsche: pro Person drei bis fünf Shirts oder Polos, zwei bis drei Schürzen, in der Küche eher mehr. Aushilfen bekommen zwei Teile. Bestellt lieber knapp und einzeln nach, statt ein Regal voller XL zu haben, die niemand trägt.', items: ['Service: 3 bis 5 Shirts, 2 bis 3 Schürzen', 'Küche: 4 bis 5 Teile, Schürzen täglich', 'Nachbestellung einzeln in 1 bis 3 Werktagen'] },
+  { h: 'Wo sitzt das Logo auf Schürze und Shirt?', p: 'Auf dem Shirt links auf der Brust, 8 bis 10 Zentimeter breit, dort stört es nicht beim Tragen des Tabletts. Auf der Bistroschürze mittig oder auf der Tasche, 10 bis 15 Zentimeter. Auf der Latzschürze auf der Brust, wo es sichtbar bleibt, wenn die Person hinter der Theke steht. Auf dem Rücken darf es groß werden: Name des Lokals, Instagram oder Spruch, 25 bis 30 Zentimeter. Alle Maße stehen im Korrekturabzug.' },
+  { h: 'Imbiss, Eisdiele, Foodtruck: kleine Teams, kleine Mengen', p: 'Viele Gastro-Betriebe haben drei bis acht Leute. Dafür braucht es keine Mindestmenge: Wir drucken ab 1 Stück, Staffelpreise beginnen bei 10, Größen und Modelle mischt ihr frei. Ein Foodtruck mit vier Shirts und vier Schürzen ist bei uns ein normaler Auftrag, kein Sonderfall.' },
+];
+const faqs = [
+  { q: 'Wo bekommen Restaurants und Cafés Shirts und Schürzen mit Logo?', a: `Bei westernprint in Oberhausen: T-Shirts, Poloshirts, Hoodies, Hemden, Schürzen und Caps mit eurem Logo, ab 1 Stück ohne Mindestmenge. Ein Poloshirt mit Logo kostet bei 10 Stück 17,90 € netto (${brutto('17,90')} € brutto) pro Stück, Stand ${STAND}. Die Serie ist 5 bis 7 Werktage nach Freigabe fertig, einzelne Teile für neue Aushilfen bestellt ihr in 1 bis 3 Werktagen nach. Lieferung per DHL ins Lokal oder Abholung in Oberhausen.` },
+  { q: 'Bedruckt ihr Schürzen mit Logo?', a: 'Ja. westernprint bedruckt Bistroschürzen (kurz und lang), Latzschürzen mit Tasche und Vorbinder mit eurem Logo, auf der Brust, mittig oder auf der Tasche. Wir besorgen die Schürzen in Schwarz und weiteren Farben oder bedrucken eure vorhandenen. Den Preis je Modell nennen wir im Angebot, an Werktagen innerhalb von 24 Stunden.' },
+  { q: 'Was kostet Gastro-Kleidung mit Logo?', a: `Ein Poloshirt (Stedman Classic Polo) mit einem Druck kostet bei westernprint 22,90 € netto (${brutto('22,90')} € brutto) als Einzelstück, 17,90 € netto (${brutto('17,90')} € brutto) bei 10 Stück und 14,50 € netto (${brutto('14,50')} € brutto) bei 50 Stück. Ein T-Shirt Basic (Stedman Classic-T) kostet 12,90 € netto (${brutto('12,90')} € brutto) bei 10 Stück, ein Hoodie für Lieferfahrer 24,90 € netto (${brutto('24,90')} € brutto) bei 10 Stück. Alle Preise pro Stück inklusive Textil und einem Druck, Stand ${STAND}. Schürzen und Caps stehen im Angebot.` },
+  { q: 'Gibt es eine Mindestmenge für Gastro-Kleidung?', a: 'Nein. westernprint druckt ab 1 Stück. Staffelpreise gelten ab 10 Stück, ab 50 Stück wird es noch einmal günstiger. Service, Küche und Theke könnt ihr in einer Bestellung mischen, auch verschiedene Farben und Größen, ohne Aufpreis.' },
+  { q: 'Hält der Druck die Wäsche in der Gastronomie aus?', a: 'Ja, wenn ihr bei 30 Grad auf links wascht, ohne Weichspüler und ohne Trockner. Der DTF-Druck bleibt dann deckend und elastisch. Fettflecken behandelt ihr vor der Wäsche vor, Bleiche schadet jedem Textildruck. Wäscht eure Wäscherei bei 60 Grad oder heißer, sagt es uns vor der Bestellung, dann klären wir vorher, was passt.' },
+  { q: 'Können wir unsere eigenen Schürzen und Kochjacken bedrucken lassen?', a: 'Ja. westernprint bedruckt angelieferte Schürzen, Kochjacken, Shirts und Polos, ihr zahlt nur den Druck. Nennt vorher kurz das Material, wir prüfen, ob es sich für DTF eignet. Plant 2 bis 3 Prozent Reserve ein, für Materialfehler an angelieferter Ware haften wir nicht.' },
+  { q: 'Wie schnell bekommen wir Nachschub, wenn jemand Neues anfängt?', a: 'Einzelne Teile druckt westernprint in 1 bis 3 Werktagen nach, mit demselben Logo in derselben Position. Mit Versand sind sie in der Regel 3 bis 5 Werktage nach der Bestellung bei euch, oder ihr holt sie in Oberhausen ab. Die Druckdaten bleiben gespeichert.' },
+  { q: 'Können Namen oder „Service“ und „Küche“ auf die Shirts?', a: 'Ja. Jedes Teil bekommt auf Wunsch den Vornamen oder die Rolle, zum Beispiel auf der Brust unter dem Logo oder am Ärmel. Das kostet ab 5,90 € netto pro Teil zusätzlich, eine Liste mit Name, Rolle und Größe reicht.' },
+  { q: 'Wir haben mehrere Filialen. Wie läuft das?', a: 'Logo, Farbe und Position liegen einmal bei westernprint. Jede Filiale bestellt nach, was sie braucht, wir packen sortiert pro Standort und liefern per DHL dorthin. Die Rechnung geht an die Zentrale oder je Filiale getrennt, wie ihr es braucht.' },
+  { q: 'Druckt ihr auch Hotel-Kleidung für Rezeption und Housekeeping?', a: 'Ja. Für Hotels und Pensionen bedruckt westernprint Hemden und Polos für die Rezeption, T-Shirts und Polos für Housekeeping, Schürzen fürs Frühstück und Hoodies für Animation oder Shuttle. Jede Abteilung in ihrer Farbe mit demselben Logo, in einem Auftrag. Mehr dazu auf der Seite für Hotels und Tourismus.' },
+  { q: 'Lohnt sich das für einen Imbiss oder eine Eisdiele mit vier Leuten?', a: 'Ja. Vier Shirts und vier Schürzen mit Logo sind bei westernprint ein normaler Auftrag, keine Mindestmenge, keine Einrichtungskosten. Ab 10 Stück gelten Staffelpreise, und wenn jemand Neues anfängt, bestellt ihr ein Teil nach.' },
+  { q: 'Welche Datei braucht ihr von unserem Logo?', a: 'Am besten eine Vektordatei (PDF, AI, SVG) oder ein PNG mit transparentem Hintergrund. Wir prüfen jede Datei kostenlos. Habt ihr nur die Speisekarte oder ein Foto vom Schild, bauen wir das Logo für 19,90 € netto pro Datei sauber neu auf.' },
+  { q: 'Bekommen wir vorher ein Muster?', a: 'Ja. Bestellt ein einzelnes Shirt oder eine Schürze mit eurem Logo, prüft Stoff, Farbe und Druck im Betrieb und bestellt dann für das Team. Ein einzelnes Muster ist etwas teurer als die Serie, weil jedes Teil einzeln eingerichtet wird.' },
+  { q: 'Können wir die Kleidung in Oberhausen abholen?', a: `Ja, kostenlos in der Schenkendorfstraße 45 in Oberhausen, ${oeffnungszeiten.text}, nach kurzer Absprache. Alternativ schickt westernprint die Kleidung per DHL mit Sendungsnummer ins Lokal, deutschlandweit.` },
+];
+const ld = [
+  { '@context': 'https://schema.org', '@type': 'Service', name: 'Gastro-Kleidung und Hotelkleidung mit Logo bedrucken', serviceType: 'Textildruck für Gastronomie und Hotels', description: 'Shirts, Poloshirts, Hemden, Hoodies, Schürzen und Caps mit Logo für Restaurants, Cafés, Bars, Imbisse, Bäckereien, Foodtrucks, Catering und Hotels, ab 1 Stück ohne Mindestmenge, Staffelpreise ab 10 Stück, einzeln nachbestellbar. Eigene Schürzen und Kochjacken können angeliefert werden.', provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: [{ '@type': 'City', name: 'Oberhausen' }, { '@type': 'AdministrativeArea', name: 'Ruhrgebiet' }, { '@type': 'AdministrativeArea', name: 'Nordrhein-Westfalen' }, { '@type': 'Country', name: 'Deutschland' }], audience: { '@type': 'BusinessAudience', audienceType: 'Restaurants, Cafés, Bars, Imbisse, Bäckereien, Catering und Hotels' }, url: `${site.url}/fuer/restaurants-und-cafes`,
+    hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Gastro-Kleidung mit Logo, Preis pro Stück bei 10 Stück, ein Druck', itemListElement: preise.filter((r) => /^\d/.test(r.p[1])).map((r) => ({ '@type': 'Offer', name: `${r.t} mit Logo (${r.m})`, price: r.p[1].replace(',', '.'), priceCurrency: 'EUR', eligibleQuantity: { '@type': 'QuantitativeValue', minValue: 10 }, priceSpecification: { '@type': 'UnitPriceSpecification', price: r.p[1].replace(',', '.'), priceCurrency: 'EUR', valueAddedTaxIncluded: false } })) },
+    aggregateRating: { '@type': 'AggregateRating', ratingValue: bewertungen.schnitt, reviewCount: bewertungen.anzahl } },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Startseite', item: site.url }, { '@type': 'ListItem', position: 2, name: 'Für wen wir drucken', item: `${site.url}/fuer` }, { '@type': 'ListItem', position: 3, name: 'Gastro und Hotels', item: `${site.url}/fuer/restaurants-und-cafes` }] },
+];
+---
+<Base title="Gastro-Kleidung mit Logo bedrucken: Shirts, Polos, Schürzen ab 1 Stück" description="Gastro- und Hotelkleidung mit Logo für Restaurants, Cafés, Bars, Imbisse, Bäckereien, Foodtrucks und Hotels: T-Shirts, Polos, Hemden, Hoodies und Schürzen ab 1 Stück ohne Mindestmenge. Polo mit Logo ab 14,50 € netto, Nachschub in 1 bis 3 Werktagen, eigene Schürzen bedrucken möglich. Druckerei in Oberhausen." jsonLd={ld} ogImage="/img/gastro-schuerzen-cafe.jpg">
+  <BranchenLanding
+    slug="restaurants-und-cafes" name="Gastro und Hotels"
+    kicker="Restaurants, Cafés, Bars, Imbisse, Hotels"
+    h1="Gastro-Kleidung mit Logo, die den <span class='hl'>Schichtbetrieb</span> aushält."
+    lede="Shirts, Polos, Hemden, Hoodies und Schürzen mit eurem Logo für Service, Küche, Theke und Lieferung. Dunkle Farben, kleines Brustlogo, großer Rücken. Ab 1 Stück, Nachschub für neue Aushilfen in 1 bis 3 Werktagen. Gedruckt in Oberhausen."
+    trust={[{ v: 'ab 1', l: 'Stück, keine Mindestmenge' }, { v: '24 h', l: 'bis zum Angebot an Werktagen' }, { v: '1 bis 3', l: 'Werktage für Nachschub' }, { v: '30 °C', l: 'auf links, ohne Weichspüler' }]}
+    image="/img/gastro-schuerzen-cafe.jpg" imageAlt="Schwarze T-Shirts, ein Poloshirt, Bistroschürze und Latzschürze mit kleinem Logo auf einer Kleiderstange vor einer Café-Theke" imagePos="center 50%"
+    waText="Hallo westernprint, wir brauchen Shirts und Schürzen mit unserem Logo für unser Gastro-Team."
+    answer={`westernprint in Oberhausen bedruckt Gastro- und Hotelkleidung mit Logo für Restaurants, Cafés, Bars, Imbisse, Bäckereien, Foodtrucks, Catering und Hotels, ab 1 Stück ohne Mindestmenge. Ein Poloshirt mit Logo kostet bei 10 Stück 17,90 € netto, ein T-Shirt 12,90 € netto, ein Hoodie 24,90 € netto pro Stück, Stand ${STAND}. Schürzen besorgen wir oder bedrucken eure vorhandenen. Die Serie ist 5 bis 7 Werktage nach Freigabe fertig, Nachschub für neue Aushilfen in 1 bis 3 Werktagen, mit demselben Logo. Gewaschen wird bei 30 Grad auf links, dann hält der Druck.`}
+    stand={STAND} mengen={mengen} preise={preise} zusatz={zusatz}
+    preisTitel="Preise für Gastro-Kleidung mit Logo"
+    preisText="Preis pro Stück in Euro, netto zzgl. 19 % MwSt., mit einem Druck (Brust oder Rücken), Textil inklusive. Service, Küche und Theke mischt ihr frei."
+    preisHinweis="Schürzen, Caps und angelieferte Kochjacken stehen mit Preis im Angebot, an Werktagen innerhalb von 24 Stunden. Keine Einrichtungskosten."
+    branchenTitel="Für diese Betriebe drucken wir"
+    branchenText="Vom Kiosk mit zwei Leuten bis zum Hotel mit vier Abteilungen. Das Logo sitzt klein auf der Brust, auf der Schürze oder groß auf dem Rücken."
+    branchen={branchen}
+    rollenTitel="Welches Teil für wen?"
+    rollenText="Service, Küche, Theke, Lieferung und Hotel-Abteilungen brauchen nicht dasselbe. So stellen die meisten Betriebe ihr Set zusammen, alles in einem Auftrag."
+    rollen={rollen}
+    servicesTitel="Was Gastro-Betriebe bei uns schätzen"
+    services={services}
+    steps={steps}
+    blocksTitel="Gut zu wissen, bevor ihr bestellt"
+    blocks={blocks}
+    formTitel="Angebot in 24 Stunden"
+    formText="Logo, Teile, Größen. Ihr bekommt einen festen Stückpreis je Teil, auch für Schürzen, und einen Liefertermin."
+    formFacts={['Ab 1 Stück, keine Mindestmenge', 'Schürzen besorgen wir oder bedrucken eure', 'Nachschub einzeln in 1 bis 3 Werktagen', 'Lieferung ins Lokal oder Abholung in Oberhausen']}
+    formImage="/img/lager-regal-werkstatt.jpg" formImageAlt="Lager mit Rohware in der Werkstatt"
+    formPlaceholder="z. B. 6 Polos schwarz, 6 Bistroschürzen schwarz, Logo links auf der Brust und auf der Schürze mittig, Lokalname auf dem Rücken"
+    produkte={['Shirts und Polos', 'Schürzen', 'Hemden', 'Hoodies und Sweatshirts', 'Caps', 'Mehrere Teile', 'Eigene Schürzen oder Kochjacken bedrucken']}
+    brancheLabel="Betrieb"
+    topic="Gastro und Hotels" subject="Anfrage Gastro-Kleidung (Restaurants, Cafés, Hotels) über westernprint.de"
+    faqTitel="Fragen aus Gastronomie und Hotellerie"
+    faqs={faqs}
+    ctaTitel="Shirts und Schürzen mit eurem Logo?"
+    ctaText="Schickt uns Logo, Teile und Größen für Service und Küche. Ihr bekommt innerhalb von 24 Stunden ein Angebot mit festem Stückpreis, ab 1 Stück."
+  />
+</Base>
