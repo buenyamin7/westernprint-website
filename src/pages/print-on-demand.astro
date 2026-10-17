@@ -7,118 +7,174 @@ import Faq from '../components/Faq.astro';
 import { site, oeffnungszeiten } from '../data/site';
 import { bewertungen } from '../data/bewertungen';
 
+// Quelle für alle Fakten auf dieser Seite: der Code der POD-App (~/dev/westernprint-pod, Stand 17.10.2026) und die
+// Freigaben des Inhabers vom 17.10.2026. Produkt- und Branding-Preise bleiben bewusst draußen: Sie stehen nur in der App.
+// Versandpauschalen und die Staffel stammen aus lib/pricing/index.ts der App und müssen bei Änderungen dort mitgezogen werden.
 const schnitt = bewertungen.schnitt.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
-// Lieferländer außer Deutschland, Österreich und Schweiz (Liste wie auf /versand und in den AGB).
-// Für sie gilt im POD der Tarif "übrige Lieferländer".
-const uebrigeLaender = ['Niederlande', 'Belgien', 'Luxemburg', 'Frankreich', 'Italien', 'Spanien', 'Polen', 'Dänemark', 'Tschechien'];
+const appUrl = 'https://apps.shopify.com/pod-westerprint';
+
+// Versand: Pauschale pro Bestellung netto, Staffel +1,50 € je volle 3 Artikel (1–2 Artikel ohne Aufschlag, 3–5 Artikel +1,50 €, 6–8 Artikel +3,00 €).
+const versand = [
+  { land: 'Deutschland', netto: '5,00', brutto: '5,95' },
+  { land: 'Österreich', netto: '7,00', brutto: '8,33' },
+  { land: 'Übrige EU-Länder', netto: '7,50', brutto: '8,93' },
+  { land: 'Schweiz', netto: '9,00', brutto: '10,71', hinweis: 'Zollpapiere (CN23) erstellen wir, Einfuhrabgaben trägt der Empfänger' },
+];
+
+// Onboarding-Schritte wie im Portal (app/portal/start). Zeiten sind die Richtwerte aus dem Portal.
+const schritte = [
+  { t: 'App installieren', zeit: 'ca. 2 Minuten', d: 'Kostenlos aus dem Shopify App Store. Keine Grundgebühr, kein Abo, kein Mindestumsatz. Dein Shop ist danach mit unserer Produktion in Oberhausen verbunden.' },
+  { t: 'Textil wählen, Design hochladen', zeit: 'ca. 3 Minuten', d: 'Du suchst ein Textil von Stanley/Stella, Stedman oder Build Your Brand aus, lädst dein Motiv hoch und platzierst es im Live-Mockup. Produktionspreis und Margenvorschlag siehst du sofort. Das Produkt landet mit fertigen Mockups in deinem Shop.' },
+  { t: 'Bestehende Produkte zuordnen', zeit: 'ca. 1 Minute pro Produkt', d: 'Optional: Produkte, die schon in deinem Shop stehen, verknüpfst du mit einem Textil bei uns. Die Varianten erkennt die App über Farbe und Größe, du musst nichts neu anlegen.' },
+  { t: 'SEPA-Mandat erteilen', zeit: 'ca. 2 Minuten', d: 'Pflicht vor dem ersten Druck. Du zahlst die wöchentliche Sammelrechnung per Lastschrift, kein Guthaben, das du vorher aufladen musst.' },
+  { t: 'Verkaufen, wir liefern', zeit: 'läuft automatisch', d: 'Sobald jemand in deinem Shop bezahlt, kommt die Bestellung zu uns. Wir drucken, prüfen, verpacken und versenden per DHL. Die Sendungsnummer geht automatisch zurück an Shopify, dein Kunde wird benachrichtigt.' },
+];
+
+// Funktionen der App, die im Code vorhanden sind (components/product/ProductDesigner.tsx, app/portal/*, lib/fulfillment/*).
+const funktionen = [
+  { icon: 't-shirt', t: 'Live-Mockup-Designer', d: 'Vorne, hinten und Nacken, feste Druckzonen je Textil, Breite in Zentimetern. Hell/Dunkel-Variante des Motivs je Textilfarbe. Die App warnt bei zu kleiner Auflösung oder weißem Hintergrund.' },
+  { icon: 'calculator', t: 'Preis und Marge vor dem Veröffentlichen', d: 'Du siehst den Produktionspreis jedes Produkts in der App, bevor es online geht, und bekommst einen Verkaufspreis-Vorschlag. Die Warenkosten werden in Shopify hinterlegt.' },
+  { icon: 'magic-wand', t: 'Produktbeschreibung per KI', d: 'Titel und Beschreibung lässt du dir auf Knopfdruck erstellen und passt sie an. Mockups wählst du aus, der Rest wird automatisch angelegt.' },
+  { icon: 'plugs-connected', t: 'Bestehende Shopify-Produkte zuordnen', d: 'Produkte, die schon in deinem Shop verkaufen, laufen ohne Neuanlage über uns. Auch mehrere Shops kannst du in einem Account verbinden.' },
+  { icon: 'user-focus', t: 'Personalisierbare Produkte', d: 'Produkte mit Namen oder Wunschtext, zum Beispiel über Teeinblue, laufen mit. Die fertige Datei kannst du vor dem Druck im Portal freigeben.' },
+  { icon: 'package', t: 'Muster zum Produktionspreis', d: 'Muster und Eigenbedarf bestellst du direkt im Portal zum Produktionspreis, ohne Umweg über deinen Shop. Abgerechnet wird über die Sammelrechnung.' },
+  { icon: 'list-checks', t: 'Jeder Auftrag mit Status', d: 'Neu, Druckbereit, Im Druck, Gepresst, Verpackt, Versendet: Du siehst im Portal, wo jede Bestellung steht. Fehlt eine Datei, bekommst du Bescheid.' },
+  { icon: 'truck', t: 'DHL-Tracking automatisch', d: 'Die Sendungsnummer geht als Fulfillment an Shopify, dein Kunde bekommt die Versandbestätigung aus deinem Shop. Du musst nichts eintragen.' },
+  { icon: 'camera', t: 'Reklamation im Portal', d: 'Stimmt etwas nicht, meldest du es im Portal mit Fotos. Druckfehler, die bei uns passieren, drucken wir kostenlos nach.' },
+];
+
+// Textilmarken und ihre Nachweise. Nur was die Hersteller selbst veröffentlichen (stedman.eu/nachhaltigkeit, Stanley/Stella,
+// Build Your Brand über Fachhändler-Datenblätter). Welches Zertifikat ein Artikel trägt, steht am Produkt in der App.
+const marken = [
+  { t: 'Stanley/Stella', tag: 'Bio-Baumwolle, Premium', d: 'Über 150 Styles: Creator 2.0, Rocker, Crafter, Cruiser 2.0, Drummer 2.0, Sweatshirts, Zipper, Bodys, Taschen. Dichte Farbpaletten, weicher Griff, Passformen, die Marken tragen.', certs: ['GOTS (Bio-Baumwolle)', 'OEKO-TEX Standard 100', 'PETA-Approved Vegan', 'Fair Wear Foundation, Leader-Status'] },
+  { t: 'Stedman', tag: 'Preisstark bis 5XL', d: 'Elf Klassiker für kalkulierbare Produkte: Classic-T, Comfort-T, Lux-T, Tank Tops, Classic Polo, Classic Hoodie, Fleece Jacket, Sweatpants und das Seamless Sports-T. Große Größen bis 5XL.', certs: ['OEKO-TEX Standard 100', 'amfori BSCI', 'PETA-Approved Vegan', 'Recyceltes Polyester, Organic Line mit Bio-Baumwolle'] },
+  { t: 'Build Your Brand', tag: 'Streetwear, Heavy Oversize', d: 'Ausgewählte Modelle für Brands: Ultra Heavy Box Hoody, Fluffy Hoody, Vintage Heavy Hoodie und Tee, Loose Fit Tees, Oversized Polo, Wideleg Sweatpants. Schwerer Stoff, tiefe Schulter, viele Modelle ohne Nackenlabel.', certs: ['OEKO-TEX Standard 100', '100 % Baumwolle bei den Heavy-Modellen'] },
+];
+
+// Druckzonen mit maximaler Motivbreite am Beispiel Herren-T-Shirt (lib/catalog/stedmanAreas.ts). Je Textil kalibriert, der Designer zeigt die exakten Werte.
+const zonen = [
+  ['Brust mittig', '30 cm'],
+  ['Brust links oder rechts', '12 cm'],
+  ['Front groß', '35 cm'],
+  ['Rücken groß', '32 cm'],
+  ['Rücken ganz groß', '38 cm'],
+  ['Nacken (Innenlabel-Ersatz)', '10 cm'],
+];
+
+// Ehrlicher Vergleich. Spalten 2 und 3 beschreiben, was auf den Seiten der großen Anbieter steht (Recherche 17.10.2026),
+// bewusst ohne Namen und mit „häufig“, wo es nicht für alle gilt.
+const vergleich = [
+  { k: 'Wo wird gedruckt?', wp: 'In unserer eigenen Werkstatt in Oberhausen, auf eigenen Maschinen', pl: 'In eigenen Werken, Standort meist nicht genannt', mp: 'Bei wechselnden Partnerdruckereien, Qualität je Partner' },
+  { k: 'Ansprechpartner', wp: 'Eine feste Person, per WhatsApp, Telefon und E-Mail', pl: 'Ticket, Chat oder Formular', mp: 'Ticket oder Chat' },
+  { k: 'Bezahlung', wp: 'Wöchentliche Sammelrechnung, SEPA-Lastschrift, 14 Tage Zahlungsziel', pl: 'Häufig Prepaid-Guthaben, das du vorher auflädst', mp: 'Kreditkarte je Bestellung, Rabatte oft nur im Abo' },
+  { k: 'Versandkosten', wp: 'Stehen hier auf der Seite, netto und brutto', pl: 'Meist nur im Hilfe-Center', mp: 'Je Partner und Land unterschiedlich' },
+  { k: 'Textilien', wp: 'Stanley/Stella, Stedman, Build Your Brand, mit Zertifikaten am Produkt', pl: 'Großer Katalog, Herkunft je Artikel', mp: 'Sehr großer Katalog, je Partner anders' },
+  { k: 'Branding', wp: 'Nackenprint, Ärmeldruck, dein eigenes Verpackungsmaterial, ab 1 Stück', pl: 'Häufig nur für bestimmte Linien oder mit Mindestmengen', mp: 'Je Partner, oft gar nicht' },
+  { k: 'Lieferzeit DE', wp: 'Produktion 1 bis 3 Werktage, beim Kunden in 3 bis 5 Werktagen', pl: '2 bis 5 Werktage Produktion plus Versand', mp: 'Abhängig vom gewählten Partner' },
+];
 
 const faqs = [
-  { q: 'Wie funktioniert euer Print-on-Demand-Service genau?', a: 'Du verbindest deinen Shop mit unserem System. Sobald eine Bestellung eingeht, übernehmen wir Druck, Verpackung und Versand, komplett automatisiert und in deinem Namen.' },
-  { q: 'Gibt es Mindestbestellmengen?', a: 'Nein. Wir produzieren ab 1 Stück, perfekt für Einzelbestellungen oder personalisierte Produkte.' },
-  { q: 'Liefert ihr an Kunden in ganz Deutschland?', a: 'Ja. Wir drucken für Shops aus ganz Deutschland, Österreich und der Schweiz und versenden per DHL direkt an deine Kunden, egal ob in Hamburg, München, Wien oder Zürich. Wo dein Shop sitzt, spielt keine Rolle.' },
-  { q: 'Wie schnell sind die Lieferzeiten?', a: 'Jede Bestellung wird in 1 bis 3 Werktagen produziert und versendet, auch im Q4. Bei deinen Kunden kommt sie in der Regel 3 bis 5 Werktage nach der Bestellung an, in Deutschland genauso wie in Österreich, der Schweiz und den übrigen Lieferländern.' },
-  { q: 'Was kostet der Versand an meine Kunden?', a: `Pro Bestellung: Deutschland 5,00 € netto (5,95 € brutto), Österreich 7,00 € netto (8,33 € brutto), übrige Lieferländer (${uebrigeLaender.join(', ')}) 7,50 € netto (8,93 € brutto), Schweiz 9,00 € netto (10,71 € brutto). Je 3 Produkte in einer Bestellung kommen 1,50 € netto (1,79 € brutto) dazu. Versand per DHL mit Tracking, neutral in deinem Namen.` },
-  { q: 'Wo wird produziert und wohin versendet ihr?', a: `Produziert wird ausschließlich in unserer eigenen Werkstatt in Oberhausen, also in Deutschland, auf eigenen Epson-Maschinen und Heißpressen. Keine Weitergabe an wechselnde Partnerdruckereien im Ausland. Versendet wird deutschlandweit per DHL, neutral im Namen deines Shops. Außerdem liefern wir nach Österreich, in die Schweiz, in die Niederlande, nach Belgien, Luxemburg, Frankreich, Italien, Spanien, Polen, Dänemark und Tschechien.` },
-  { q: 'Wie läuft die Anbindung meines Shops?', a: 'Du bekommst Zugang zu deinem Kundenportal. Dort verbindest du deinen Shopify-Store per App oder Bestellimport. Auf Wunsch richten wir alles gemeinsam ein.' },
-  { q: 'Was kostet die Shopify-App westernprint POD?', a: 'Die Installation der App „westernprint POD“ ist kostenlos, eine App-Gebühr gibt es nicht. Pro Bestellung zahlst du Produktion und Versand.' },
-  { q: 'Wie läuft die Abrechnung?', a: 'Wöchentliche Abrechnung über alle produzierten Artikel zu festen Preisen pro Produkt. Transparent und planbar, ohne Einrichtungsgebühr.' },
-  { q: 'Kann ich eigene Verpackung oder Beilagen nutzen?', a: 'Ja. Neutraler Versand ist Standard, eigene Flyer, Hangtags oder Innenlabel setzen wir auf Anfrage um.' },
+  { q: 'Was ist Print-on-Demand?', a: 'Print-on-Demand heißt: Ein Produkt wird erst gedruckt, wenn ein Kunde es in deinem Shop gekauft und bezahlt hat. Du brauchst kein Lager und keine Vorkasse für Ware. Du legst Design und Verkaufspreis fest, wir drucken, verpacken und versenden jede Bestellung einzeln direkt an deinen Kunden.' },
+  { q: 'Wie funktioniert Print-on-Demand mit westernprint?', a: 'Du installierst die kostenlose Shopify-App „westernprint POD“, wählst ein Textil, lädst dein Design hoch und platzierst es im Live-Mockup. Das Produkt landet automatisch in deinem Shop. Sobald eine Bestellung bezahlt ist, kommt sie zu uns nach Oberhausen. Wir drucken per DTF oder DTG, prüfen jedes Teil, verpacken neutral und versenden per DHL. Die Sendungsnummer geht automatisch zurück an Shopify.' },
+  { q: 'Was kostet die App und was zahle ich pro Bestellung?', a: 'Die App ist kostenlos, es gibt keine Grundgebühr, kein Abo und keinen Mindestumsatz. Du zahlst nur Produktion und Versand der Artikel, die tatsächlich bestellt wurden. Den Produktionspreis jedes Produkts siehst du in der App, bevor du es veröffentlichst.' },
+  { q: 'Gibt es eine Mindestbestellmenge?', a: 'Nein. Wir drucken ab 1 Stück. Jede Bestellung aus deinem Shop wird einzeln produziert, auch wenn sie nur aus einem T-Shirt besteht.' },
+  { q: 'Wie lange dauern Produktion und Lieferung?', a: 'Die Produktion dauert 1 bis 3 Werktage, auch in der Black Week und im Weihnachtsgeschäft. Bei deinen Kunden kommt die Bestellung in der Regel 3 bis 5 Werktage nach der Bestellung an, in Deutschland genauso wie in Österreich, der Schweiz und den übrigen EU-Ländern.' },
+  { q: 'In welche Länder versendet ihr und was kostet der Versand?', a: 'Wir liefern nach Deutschland, Österreich, in die Schweiz und in alle übrigen EU-Länder. Pro Bestellung netto: Deutschland 5,00 €, Österreich 7,00 €, übrige EU-Länder 7,50 €, Schweiz 9,00 €. Je volle 3 Artikel in einer Bestellung kommen 1,50 € netto dazu. Versand per DHL mit Tracking. Für die Schweiz erstellen wir die Zollpapiere, Einfuhrabgaben trägt der Empfänger.' },
+  { q: 'Welche Textilien kann ich anbieten?', a: 'Stanley/Stella mit über 150 Styles aus Bio-Baumwolle, elf Stedman-Klassiker bis 5XL und ausgewählte Modelle von Build Your Brand für Streetwear, zum Beispiel Ultra Heavy Box Hoody, Fluffy Hoody und Vintage Heavy Tee. Welche Zertifikate ein Artikel trägt, siehst du am Produkt in der App.' },
+  { q: 'DTF oder DTG: Welches Druckverfahren bekomme ich?', a: 'Standard ist DTF: deckende, kräftige Farben auf hellen und dunklen Textilien, auch auf Mischgewebe und Polyester. Auf Wunsch drucken wir per DTG, also direkt in den Stoff, für einen besonders weichen Griff auf heller Baumwolle. Du wählst das Verfahren im Designer.' },
+  { q: 'Welche Dateien brauche ich?', a: 'Am besten ein PNG mit transparentem Hintergrund in 300 dpi. Die App nimmt auch JPG, WEBP, SVG, PDF, AI und EPS bis 50 MB. Ist die Auflösung zu niedrig oder der Hintergrund weiß, warnt dich der Designer vor dem Veröffentlichen.' },
+  { q: 'Kann ich bestehende Shopify-Produkte verknüpfen?', a: 'Ja. Im Portal ordnest du Produkte, die schon in deinem Shop stehen, einem Textil bei uns zu. Die Varianten erkennt die App über Farbe und Größe. Nichts muss neu angelegt werden, deine Bewertungen und Rankings bleiben.' },
+  { q: 'Kann ich mehrere Shops verbinden?', a: 'Ja. Mehrere Shopify-Shops laufen in einem Account mit einer Abrechnung.' },
+  { q: 'Sieht mein Kunde, dass westernprint gedruckt hat?', a: 'Nein. Der Versand ist neutral: kein westernprint-Logo, keine Rechnung von uns im Paket. Als Absender steht standardmäßig unsere Versandhalle auf dem Label. Hast du eine Adresse in Deutschland, kannst du sie in den Einstellungen als Absender wählen.' },
+  { q: 'Welches Branding ist möglich?', a: 'Nackenprint mit deinem Logo anstelle des Herstelleretiketts, Ärmeldruck und dein eigenes gebrandetes Verpackungsmaterial, das du uns anlieferst. Alles ab 1 Stück, ohne Vorproduktion. Die Preise für Nacken- und Ärmeldruck siehst du im Designer.' },
+  { q: 'Wie läuft die Abrechnung?', a: 'Einmal pro Woche bekommst du eine Sammelrechnung über alle produzierten Artikel von Montag bis Sonntag, mit 14 Tagen Zahlungsziel. Bezahlt wird per SEPA-Lastschrift. Das Mandat erteilst du in der App, es ist Pflicht vor dem ersten Druck. Guthaben musst du nicht aufladen.' },
+  { q: 'Kann ich eine Bestellung stornieren?', a: 'Bis zum Druckstart ja, schreib uns kurz per WhatsApp oder E-Mail. Sobald ein Auftrag im Druck ist, ist eine Stornierung nicht mehr möglich. Eine Stornierung in Shopify allein genügt nicht, weil die Produktion bei uns schon laufen kann.' },
+  { q: 'Was passiert bei einer Reklamation?', a: 'Du meldest sie im Portal mit Fotos, innerhalb von 7 Tagen nach Zustellung. Druckfehler, die bei uns passieren, drucken wir kostenlos nach. Vor dem Verpacken prüfen wir jedes Teil, deshalb kommt das selten vor.' },
+  { q: 'Muss ich mich beim Verpackungsregister LUCID anmelden?', a: 'westernprint ist im Verpackungsregister LUCID registriert. Ob dein Shop zusätzlich registriert sein muss, hängt von deinem Fall ab, zum Beispiel davon, ob du auch selbst Ware versendest. Das klärst du am besten mit deinem Steuerberater. Wenn du dazu Fragen hast, sprich uns an.' },
 ];
-const appLd = { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'westernprint POD', applicationCategory: 'BusinessApplication', operatingSystem: 'Shopify', url: 'https://apps.shopify.com/pod-westerprint', applicationSubCategory: 'Print-on-Demand', offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR', description: 'Kostenlose Installation, keine App-Gebühr. Pro Bestellung fallen Produktion und Versand an.' }, publisher: { '@id': 'https://westernprint.de/#organization' }, description: 'Print-on-Demand und Fulfillment made in Germany: Textil wählen, Design per Live-Mockup platzieren, Produkte landen automatisch im Shop. Bestellungen drucken und versenden wir per DHL mit Tracking zurück in Shopify.' };
-const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'Print-on-Demand Fulfillment für Shopify-Shops in Deutschland, Österreich und der Schweiz', serviceType: 'Print-on-Demand Fulfillment', provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: ['Deutschland', 'Österreich', 'Schweiz', ...uebrigeLaender].map((name) => ({ '@type': 'Country', name })), url: 'https://westernprint.de/print-on-demand', offers: { '@type': 'Offer', description: 'Feste Preise pro Produkt inklusive Druck, keine Einrichtungsgebühr, keine Mindestmenge' } };
+
+const appLd = { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'westernprint POD', applicationCategory: 'BusinessApplication', operatingSystem: 'Shopify', url: appUrl, applicationSubCategory: 'Print-on-Demand', offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR', description: 'Kostenlose Installation, keine App-Gebühr. Pro Bestellung fallen Produktion und Versand an.' }, publisher: { '@id': 'https://westernprint.de/#organization' }, description: 'Print-on-Demand und Fulfillment aus Deutschland: Textil wählen, Design per Live-Mockup platzieren, Produkte landen automatisch im Shopify-Shop. Bestellungen drucken und versenden wir per DHL, das Tracking geht zurück an Shopify.' };
+const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'Print-on-Demand Fulfillment für Shopify-Shops', serviceType: 'Print-on-Demand Fulfillment', provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: [{ '@type': 'Country', name: 'Deutschland' }, { '@type': 'Country', name: 'Österreich' }, { '@type': 'Country', name: 'Schweiz' }, { '@type': 'Place', name: 'Europäische Union' }], url: 'https://westernprint.de/print-on-demand', offers: { '@type': 'Offer', description: 'Keine Grundgebühr, keine Mindestmenge, Produktionspreis je Produkt in der App, Versand ab 5,00 € netto pro Bestellung' } };
+const howToLd = { '@context': 'https://schema.org', '@type': 'HowTo', name: 'Print-on-Demand mit westernprint für einen Shopify-Shop einrichten', totalTime: 'PT10M', step: schritte.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.t, text: s.d })) };
 const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 ---
-<Base title="Print-on-Demand Anbieter aus Deutschland: Fulfillment für Shopify" description="Print-on-Demand für Shopify-Shops in ganz Deutschland, Österreich und der Schweiz. Wir drucken in eigener Produktion in Oberhausen und versenden neutral in deinem Namen. Ab 1 Stück, Produktion in 1-3 Werktagen, kostenlose App, feste Preise." jsonLd={[svcLd, appLd, faqLd]}>
+<Base title="Print-on-Demand aus Deutschland für Shopify: Druck und Versand ab 1 Stück" description="Print-on-Demand-Anbieter mit eigener Produktion in Oberhausen: kostenlose Shopify-App, DTF und DTG, Stanley/Stella, Stedman und Build Your Brand, Produktion in 1 bis 3 Werktagen, DHL-Versand neutral in deinem Namen ab 5,00 € netto, wöchentliche Sammelrechnung per SEPA." jsonLd={[svcLd, appLd, howToLd, faqLd]}>
   <PageHero
-    eyebrow="Print-on-Demand"
+    eyebrow="Print-on-Demand für Shopify"
     title="Print-on-Demand aus Deutschland für deinen Shopify-Shop. <span class='hl'>Ab 1 Stück.</span>"
-    lede="Print-on-Demand bedeutet: Ein Produkt wird erst gedruckt, wenn ein Kunde es in deinem Shop bestellt hat. westernprint druckt diese Bestellungen in Oberhausen und versendet sie deutschlandweit direkt an deine Kunden, neutral in deinem Namen."
+    lede="Du verkaufst, wir drucken jede bezahlte Bestellung in unserer Werkstatt in Oberhausen und versenden sie per DHL neutral in deinem Namen. Kostenlose Shopify-App, keine Grundgebühr, keine Mindestmenge, Produktion in 1 bis 3 Werktagen, Abrechnung einmal pro Woche per SEPA."
     image="/img/pod-versand.jpg"
     imageAlt="Packtisch bei westernprint: Reihen fertig verpackter Kraftpapier-Versandtaschen mit Etikett, vorne ein schwarzes Shirt in der offenen Tasche"
-    cta={{ label: 'App im Shopify App Store', href: 'https://apps.shopify.com/pod-westerprint' }}
-    cta2={{ label: 'Angebot in 24h', href: '/kontakt' }}
+    cta={{ label: 'App im Shopify App Store', href: appUrl }}
+    cta2={{ label: 'Fragen? Schreib uns', href: '/kontakt' }}
   />
 
   <section class="section-tight pod-answer-section">
     <div class="container pod-answer">
-      <h2 class="reveal">Wie arbeitet westernprint als Print-on-Demand-Partner?</h2>
-      <div class="reveal reveal-d1">
-        <p class="lede pod-answer-text">westernprint produziert Print-on-Demand-Bestellungen in Oberhausen auf eigenen Maschinen, per DTF und DTG. Für DTG setzt westernprint die Epson SureColor F2100 und F2200 ein. Als Textilien stehen Stanley/Stella und Stedman zur Wahl. Die Produktion dauert 1 bis 3 Werktage. Jedes Teil wird vor dem Verpacken geprüft. Danach versendet westernprint die Bestellung per DHL mit Tracking deutschlandweit an deine Kunden. Bei ihnen kommt sie in der Regel 3 bis 5 Werktage nach der Bestellung an. Der Versand läuft neutral in deinem Namen, ohne westernprint-Logo im Paket. Deinen Shopify-Shop verbindest du über die eigene App „westernprint POD“ aus dem Shopify App Store. Die Installation ist kostenlos, pro Bestellung zahlst du Produktion und Versand. Eine Mindestmenge gibt es nicht, westernprint druckt ab 1 Stück. Dein fester Ansprechpartner ist {oeffnungszeiten.text} erreichbar, per WhatsApp, Telefon und E-Mail. Seit 2021 hat westernprint über 80.000 Endkunden von Partner-Shops direkt beliefert. Über 1 Mio. € Umsatz haben unsere Partner-Shops seit 2021 mit Produkten aus unserer Produktion gemacht.</p>
+      <div class="reveal">
+        <h2>Wie arbeitet westernprint als Print-on-Demand-Partner?</h2>
+        <p class="lede pod-answer-text">westernprint produziert Print-on-Demand-Bestellungen für Shopify-Shops in der eigenen Werkstatt in Oberhausen, per DTF und auf Wunsch per DTG auf Epson SureColor F2100 und F2200. Als Textilien stehen Stanley/Stella, Stedman und Build Your Brand zur Wahl. Die Produktion dauert 1 bis 3 Werktage, jedes Teil wird vor dem Verpacken geprüft. Versendet wird per DHL mit Tracking nach Deutschland, Österreich, in die Schweiz und in alle übrigen EU-Länder, neutral im Namen deines Shops. Angebunden wird der Shop über die eigene App „westernprint POD“ aus dem Shopify App Store. Die Installation ist kostenlos, du zahlst Produktion und Versand der bestellten Artikel, einmal pro Woche per Sammelrechnung und SEPA-Lastschrift. Dein fester Ansprechpartner ist {oeffnungszeiten.text} erreichbar, per WhatsApp, Telefon und E-Mail. Seit 2021 hat westernprint über 80.000 Endkunden von Partner-Shops direkt beliefert. Über 1 Mio. € Umsatz haben unsere Partner-Shops seit 2021 mit Produkten aus unserer Produktion gemacht.</p>
         <a class="rating-line" href="/bewertungen">
           <span class="stars" aria-hidden="true">{Array.from({ length: 5 }).map(() => <Icon name="star" weight="fill" size={16} />)}</span>
           <span>{schnitt} von 5 Sternen bei {bewertungen.anzahl} Google-Bewertungen</span>
         </a>
       </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="section-head reveal">
-        <h2>Shop läuft, aber der Druck nervt?</h2>
-        <p>Zu lange Lieferzeiten, Drucke die nicht halten, kein Ansprechpartner. Genau die Probleme, wegen denen wir westernprint gegründet haben.</p>
-      </div>
-      <div class="grid grid-3">
-        {[
-          { icon: 'factory', t: 'Produktion in Oberhausen', d: 'Alle Drucke entstehen auf unseren eigenen Epson-Maschinen, nicht bei wechselnden Partnerdruckereien. Versand deutschlandweit per DHL.' },
-          { icon: 'package', t: 'Neutraler Versand', d: 'Kein westernprint-Logo, keine Rechnung von uns im Paket. Dein Kunde sieht nur dich.' },
-          { icon: 'clock', t: 'Produktion in 1 bis 3 Werktagen', d: 'Auch in der Black Week und im Weihnachtsgeschäft. Deine Kunden haben ihre Bestellung in 3 bis 5 Werktagen.' },
-          { icon: 'plugs-connected', t: 'Shopify-Anbindung', d: 'Bestellungen laufen automatisch zu uns. Tracking geht automatisch zurück in deinen Shop.' },
-          { icon: 'shield-check', t: 'Qualitätskontrolle', d: 'Jedes Teil wird vor dem Verpacken geprüft. Reklamationen kosten dich sonst Zeit und Werbebudget.' },
-          { icon: 'chat-circle-dots', t: 'Persönlicher Support', d: 'WhatsApp, Telefon, E-Mail. Ein fester Ansprechpartner, kein Ticketsystem.' },
-        ].map((b, i) => (
-          <div class={`feat reveal reveal-d${i % 3}`}>
-            <div class="icon-box"><Icon name={b.icon} size={22} /></div>
-            <h3>{b.t}</h3>
-            <p>{b.d}</p>
-          </div>
-        ))}
-      </div>
+      <dl class="facts reveal reveal-d1" aria-label="Print-on-Demand bei westernprint auf einen Blick">
+        <div><dt>Produktion</dt><dd>Eigene Werkstatt in Oberhausen, Deutschland</dd></div>
+        <div><dt>Druck</dt><dd>DTF, auf Wunsch DTG</dd></div>
+        <div><dt>Textilien</dt><dd>Stanley/Stella, Stedman, Build Your Brand</dd></div>
+        <div><dt>Mindestmenge</dt><dd>Keine, ab 1 Stück</dd></div>
+        <div><dt>Produktionszeit</dt><dd>1 bis 3 Werktage, auch im Q4</dd></div>
+        <div><dt>Lieferzeit</dt><dd>3 bis 5 Werktage ab Bestellung</dd></div>
+        <div><dt>Versand</dt><dd>DHL mit Tracking, ab 5,00 € netto pro Bestellung, neutral in deinem Namen</dd></div>
+        <div><dt>Liefergebiet</dt><dd>Deutschland, Österreich, Schweiz, alle EU-Länder</dd></div>
+        <div><dt>App</dt><dd>Kostenlos, keine Grundgebühr, kein Abo</dd></div>
+        <div><dt>Abrechnung</dt><dd>Wöchentliche Sammelrechnung, SEPA-Lastschrift</dd></div>
+        <div><dt>Ansprechpartner</dt><dd>Eine feste Person, WhatsApp, Telefon, E-Mail</dd></div>
+      </dl>
     </div>
   </section>
 
   <section class="section app-section" id="app">
     <div class="container app-grid">
       <div class="app-copy reveal">
-        <a class="shopify-badge" href="https://apps.shopify.com/pod-westerprint" target="_blank" rel="noopener">
+        <a class="shopify-badge" href={appUrl} target="_blank" rel="noopener">
           <img src="/img/shopify-bag.svg" alt="" width="18" height="20" />
           <span>Verfügbar im <strong>Shopify App Store</strong></span>
         </a>
-        <h2>Unsere eigene Shopify-App. <span class="hl">Installieren, designen, verkaufen.</span></h2>
-        <p class="muted">Kein Excel, kein E-Mail-Pingpong. Mit der westernprint POD App verbindest du deinen Shop in zwei Minuten mit unserer Produktion in Oberhausen. Alles Weitere läuft automatisch.</p>
-        <p class="muted">„westernprint POD“ ist die eigene Shopify-App von westernprint. Die Installation ist kostenlos, eine App-Gebühr gibt es nicht. Pro Bestellung zahlst du Produktion und Versand.</p>
+        <h2>In fünf Schritten startklar. <span class="hl">Dauert keine zehn Minuten.</span></h2>
+        <p class="muted">„westernprint POD“ ist unsere eigene Shopify-App. Sie verbindet deinen Shop mit unserer Produktion in Oberhausen. Kein Excel, kein E-Mail-Pingpong, kein Guthaben aufladen.</p>
         <ol class="app-steps">
-          <li><span class="num">1</span><div><strong>App installieren</strong><span>Kostenlos aus dem Shopify App Store, keine Grundgebühr.</span></div></li>
-          <li><span class="num">2</span><div><strong>Textil wählen</strong><span>Stanley/Stella und Stedman Blanks mit Farben und Größen.</span></div></li>
-          <li><span class="num">3</span><div><strong>Design hochladen</strong><span>Per Live-Mockup platzieren. Produkt und Mockups landen automatisch in deinem Shop.</span></div></li>
-          <li><span class="num">4</span><div><strong>Verkaufen, wir liefern</strong><span>Bestellungen kommen automatisch zu uns. Druck, Verpackung, DHL-Versand, Tracking zurück in Shopify.</span></div></li>
+          {schritte.map((s, i) => (
+            <li><span class="num">{i + 1}</span><div><strong>{s.t} <small>{s.zeit}</small></strong><span>{s.d}</span></div></li>
+          ))}
         </ol>
         <div class="app-cta">
-          <a href="https://apps.shopify.com/pod-westerprint" class="btn btn-primary btn-lg" target="_blank" rel="noopener">App installieren <Icon name="arrow-square-out" size={18} /></a>
+          <a href={appUrl} class="btn btn-primary btn-lg" target="_blank" rel="noopener">App installieren <Icon name="arrow-square-out" size={18} /></a>
           <span class="app-note">Kostenlos. Pro Bestellung zahlst du Produktion und Versand.</span>
         </div>
       </div>
-      <a class="app-card reveal reveal-d1" href="https://apps.shopify.com/pod-westerprint" target="_blank" rel="noopener" aria-label="westernprint POD im Shopify App Store öffnen">
+      <a class="app-card reveal reveal-d1" href={appUrl} target="_blank" rel="noopener" aria-label="westernprint POD im Shopify App Store öffnen">
         <div class="app-card-head">
           <img src="/img/pod-app-icon.png" alt="westernprint POD App-Icon" width="72" height="72" />
           <div>
             <strong>westernprint POD</strong>
-            <span>Print-on-Demand &amp; Fulfillment made in Germany, DHL-Versand</span>
+            <span>Print-on-Demand aus Deutschland: Design hoch, wir drucken, verpacken und versenden per DHL.</span>
           </div>
         </div>
         <ul class="app-facts">
-          <li><Icon name="check" weight="bold" size={14} /> Kostenlos installieren</li>
+          <li><Icon name="check" weight="bold" size={14} /> Kostenlos installieren, keine App-Gebühr</li>
+          <li><Icon name="check" weight="bold" size={14} /> Live-Mockup-Designer mit Produktionspreis</li>
           <li><Icon name="check" weight="bold" size={14} /> Automatischer Bestellimport</li>
-          <li><Icon name="check" weight="bold" size={14} /> Live-Mockup im Editor</li>
           <li><Icon name="check" weight="bold" size={14} /> DHL-Tracking zurück in den Shop</li>
-          <li><Icon name="check" weight="bold" size={14} /> Bio-Textilien, Druck in Oberhausen</li>
+          <li><Icon name="check" weight="bold" size={14} /> Bestehende Produkte zuordnen</li>
         </ul>
         <dl class="app-meta">
           <div><dt>Preis</dt><dd>Kostenlose Installation</dd></div>
-          <div><dt>App-Gebühr</dt><dd>Keine</dd></div>
           <div><dt>Pro Bestellung</dt><dd>Produktion und Versand</dd></div>
-          <div><dt>Kategorie</dt><dd>Print-on-Demand</dd></div>
-          <div><dt>Textilien</dt><dd>Stanley/Stella, Stedman</dd></div>
+          <div><dt>Plattform</dt><dd>Shopify</dd></div>
+          <div><dt>Textilien</dt><dd>Stanley/Stella, Stedman, Build Your Brand</dd></div>
+          <div><dt>Im App Store seit</dt><dd>August 2026</dd></div>
         </dl>
         <div class="app-card-foot">
           <img src="/img/shopify-bag.svg" alt="" width="16" height="18" />
@@ -129,34 +185,157 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
     </div>
   </section>
 
-  <section class="section-tight compare-section">
+  <section class="section">
     <div class="container">
       <div class="section-head reveal">
-        <h2>Worauf es bei einem POD-Partner ankommt</h2>
+        <h2>Was die App für dich erledigt</h2>
+        <p>Alles, was zwischen Design und Paket passiert, läuft in der App und im Portal. Du kümmerst dich um Shop und Marketing.</p>
       </div>
-      <div class="compare reveal">
-        <div class="col them">
-          <h3>Das solltest du fragen</h3>
-          <ul>
-            <li>Wie erreiche ich meinen Ansprechpartner?</li>
-            <li>Wird jedes Teil vor dem Versand geprüft?</li>
-            <li>Welche Druckverfahren stehen zur Wahl?</li>
-            <li>Wie lange dauert die Produktion im Weihnachtsgeschäft?</li>
-            <li>Sind Labels, Beilagen und Sonderformate möglich?</li>
-          </ul>
-        </div>
-        <div class="col us">
-          <h3>westernprint</h3>
-          <ul>
-            <li><Icon name="check" weight="bold" size={16} /> Direkter Ansprechpartner, schnelle Entscheidungen</li>
-            <li><Icon name="check" weight="bold" size={16} /> Qualitätskontrolle vor jedem Versand</li>
-            <li><Icon name="check" weight="bold" size={16} /> DTF und DTG, deckend und waschbeständig</li>
-            <li><Icon name="check" weight="bold" size={16} /> Produktion in 1 bis 3 Werktagen, auch im Weihnachtsgeschäft</li>
-            <li><Icon name="check" weight="bold" size={16} /> Individuelle Umsetzung: Labels, Beilagen, Sonderformate</li>
-          </ul>
-        </div>
+      <div class="grid grid-3">
+        {funktionen.map((b, i) => (
+          <div class={`feat reveal reveal-d${i % 3}`}>
+            <div class="icon-box"><Icon name={b.icon} size={22} /></div>
+            <h3>{b.t}</h3>
+            <p>{b.d}</p>
+          </div>
+        ))}
       </div>
-      <p class="compare-summary reveal">westernprint gibt dir einen direkten Ansprechpartner per WhatsApp, Telefon und E-Mail. Jedes Teil wird vor dem Versand geprüft. westernprint druckt per DTF und DTG in Oberhausen und versendet deutschlandweit. Die Produktion dauert 1 bis 3 Werktage, auch im Weihnachtsgeschäft. Eigene Labels, Beilagen und Sonderformate setzt westernprint auf Anfrage um.</p>
+    </div>
+  </section>
+
+  <section class="section marken-section" id="textilien">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Textilien von drei Herstellern, mit Nachweis</h2>
+        <p>Du wählst in der App aus dem Katalog. Welche Zertifikate ein Artikel trägt, steht direkt am Produkt. Hier die drei Marken und das, was die Hersteller selbst nachweisen.</p>
+      </div>
+      <div class="grid grid-3">
+        {marken.map((m, i) => (
+          <div class={`marke reveal reveal-d${i % 3}`}>
+            <span class="eyebrow">{m.tag}</span>
+            <h3>{m.t}</h3>
+            <p>{m.d}</p>
+            <ul class="certs">
+              {m.certs.map((c) => <li><Icon name="seal-check" size={16} /> {c}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <p class="muted small marken-note reveal">Fair Wear ist eine Mitgliedschaft der Marke Stanley/Stella, kein Siegel auf dem Textil. Mehr zu den Standards auf <a href="/druckverfahren" class="accent">Druckverfahren und Zertifikate</a> und <a href="/textilien" class="accent">Textilien</a>.</p>
+    </div>
+  </section>
+
+  <section class="section druck-section" id="druck">
+    <div class="container druck-grid">
+      <div class="reveal">
+        <h2>Druck: DTF als Standard, DTG auf Wunsch</h2>
+        <p class="muted">DTF deckt kräftig auf hellen und dunklen Textilien, auch auf Mischgewebe und Polyester, und bleibt dehnbar und waschfest. DTG druckt direkt in die Baumwollfaser, für einen besonders weichen Griff auf hellen Baumwollshirts. Du wählst das Verfahren im Designer, je Produkt.</p>
+        <p class="muted">Vor dem Verpacken prüfen wir jedes Teil: Druckbild, Position, Textil. Druckfehler, die bei uns passieren, drucken wir kostenlos nach.</p>
+        <h3>Dateien</h3>
+        <ul class="plain">
+          <li><Icon name="check" weight="bold" size={14} /> Empfohlen: PNG mit transparentem Hintergrund, 300 dpi in Druckgröße</li>
+          <li><Icon name="check" weight="bold" size={14} /> Außerdem möglich: JPG, WEBP, SVG, PDF, AI, EPS, bis 50 MB</li>
+          <li><Icon name="check" weight="bold" size={14} /> Der Designer warnt bei zu niedriger Auflösung, weißem Hintergrund und sehr hellen oder sehr dunklen Motiven</li>
+          <li><Icon name="check" weight="bold" size={14} /> Je Textilfarbe kannst du eine helle und eine dunkle Motivvariante hinterlegen</li>
+        </ul>
+      </div>
+      <div class="reveal reveal-d1">
+        <h3>Druckzonen und maximale Motivbreite</h3>
+        <p class="muted small">Beispiel Herren-T-Shirt. Die Zonen sind je Textil kalibriert, die exakten Werte zeigt der Designer. Die Breite stellst du in Zentimetern ein.</p>
+        <table class="ptab">
+          <thead><tr><th scope="col">Zone</th><th scope="col">Motivbreite bis</th></tr></thead>
+          <tbody>
+            {zonen.map(([z, b]) => (<tr><th scope="row">{z}</th><td>{b}</td></tr>))}
+          </tbody>
+        </table>
+        <p class="muted small">Zweite Seite und Nackenprint sind Zusatzpositionen, der Ärmeldruck läuft als Zusatzposition über uns. Die Preise dafür siehst du im Designer.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Versandkosten und Lieferzeiten</h2>
+        <p>Jede Bestellung geht per DHL mit Tracking direkt an deinen Kunden, neutral verpackt im Namen deines Shops. Pauschale pro Bestellung, netto zzgl. MwSt., in Klammern brutto.</p>
+      </div>
+      <div class="ship-table reveal">
+        <div class="ship-row ship-head"><span>Zielland</span><span>Lieferzeit ab Bestellung</span><span>Versand pro Bestellung</span></div>
+        {versand.map((v) => (
+          <div class="ship-row"><span>{v.land}{v.hinweis && <small class="ship-countries">{v.hinweis}</small>}</span><span>3 bis 5 Werktage</span><span>{v.netto} &euro; netto <small class="gross">({v.brutto} &euro; brutto)</small></span></div>
+        ))}
+      </div>
+      <p class="muted small ship-note">Je volle 3 Artikel in einer Bestellung kommen 1,50 &euro; netto (1,79 &euro; brutto) dazu: 1 bis 2 Artikel ohne Aufschlag, 3 bis 5 Artikel plus 1,50 &euro;, 6 bis 8 Artikel plus 3,00 &euro;. Die Lieferzeit enthält die Produktion von 1 bis 3 Werktagen. Andere Länder außerhalb der EU beliefern wir nicht.</p>
+      <div class="grid grid-3 versand-extra">
+        {[
+          { icon: 'package', t: 'Neutral in deinem Namen', d: 'Kein westernprint-Logo, keine Rechnung von uns im Paket. Dein Kunde sieht nur deinen Shop.' },
+          { icon: 'map-pin', t: 'Absender nach Wahl', d: 'Standard ist unsere Versandhalle in Oberhausen. Mit einer Adresse in Deutschland kannst du deine eigene als Absender eintragen.' },
+          { icon: 'truck', t: 'Tracking automatisch', d: 'Die DHL-Sendungsnummer geht als Fulfillment an Shopify. Dein Kunde bekommt die Versandbestätigung aus deinem Shop.' },
+        ].map((b, i) => (
+          <div class={`feat reveal reveal-d${i}`}>
+            <div class="icon-box"><Icon name={b.icon} size={22} /></div>
+            <h3>{b.t}</h3>
+            <p>{b.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight branding-section" id="branding">
+    <div class="container branding-grid">
+      <div class="reveal">
+        <span class="eyebrow">Branding</span>
+        <h2>Dein Label, ab dem ersten Teil</h2>
+        <p class="muted">Bei vielen Anbietern gibt es Branding nur für bestimmte Produktlinien oder mit Mindestmengen und Wochen Vorlauf. Bei uns ab 1 Stück, ohne Vorproduktion.</p>
+      </div>
+      <ul class="branding-list reveal reveal-d1">
+        <li><Icon name="tag" size={20} /><div><strong>Nackenprint statt Herstelleretikett</strong><span>Dein Logo oder Größenlabel im Nacken, per DTF gedruckt, waschfest. Viele Build-Your-Brand-Modelle kommen ohne Etikett, Stanley/Stella mit Tearaway-Label.</span></div></li>
+        <li><Icon name="t-shirt" size={20} /><div><strong>Ärmeldruck</strong><span>Kleines Logo oder Schriftzug auf dem Ärmel als Zusatzposition.</span></div></li>
+        <li><Icon name="package" size={20} /><div><strong>Dein eigenes Verpackungsmaterial</strong><span>Gebrandete Versandtaschen oder Kartons lieferst du an uns, wir verpacken deine Bestellungen damit.</span></div></li>
+        <li><Icon name="eye-slash" size={20} /><div><strong>Neutraler Versand ist Standard</strong><span>Kein westernprint-Branding im oder am Paket, auf Wunsch deine Adresse als Absender.</span></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section-tight abrechnung-section" id="abrechnung">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Kosten und Abrechnung</h2>
+        <p>Keine Grundgebühr, kein Abo, kein Mindestumsatz, kein Guthaben. Du zahlst, was produziert wurde.</p>
+      </div>
+      <div class="grid grid-3">
+        {[
+          { icon: 'eye', t: 'Produktionspreis vor dem Veröffentlichen', d: 'Jedes Produkt zeigt dir in der App den Produktionspreis inklusive Druck, bevor es in deinen Shop geht. Dazu ein Vorschlag für den Verkaufspreis. Deine Marge legst du selbst fest.' },
+          { icon: 'receipt', t: 'Eine Sammelrechnung pro Woche', d: 'Montags bekommst du die Rechnung über alle Artikel der Vorwoche, mit 14 Tagen Zahlungsziel. Eine Rechnung statt vieler Einzelabbuchungen.' },
+          { icon: 'bank', t: 'SEPA-Lastschrift', d: 'Das Mandat erteilst du in der App, es ist Pflicht vor dem ersten Druck. Die Rechnung wird per Lastschrift eingezogen, du musst nichts vorab aufladen.' },
+        ].map((b, i) => (
+          <div class={`feat reveal reveal-d${i}`}>
+            <div class="icon-box"><Icon name={b.icon} size={22} /></div>
+            <h3>{b.t}</h3>
+            <p>{b.d}</p>
+          </div>
+        ))}
+      </div>
+      <p class="muted small abrechnung-note reveal">Produziert wird, sobald die Bestellung in deinem Shop bezahlt ist. Stornieren kannst du bis zum Druckstart, kurz per WhatsApp oder E-Mail.</p>
+    </div>
+  </section>
+
+  <section class="section compare-section">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Werkstatt statt Plattform</h2>
+        <p>Was auf den Seiten der großen Print-on-Demand-Anbieter steht, und was bei uns anders läuft. Ohne Namen, aber ehrlich.</p>
+      </div>
+      <div class="table-wrap reveal">
+        <table class="cmp-table">
+          <thead><tr><th></th><th class="hi">westernprint</th><th>Große POD-Plattform</th><th>POD-Marktplatz</th></tr></thead>
+          <tbody>
+            {vergleich.map((r) => (<tr><th scope="row">{r.k}</th><td class="hi">{r.wp}</td><td>{r.pl}</td><td>{r.mp}</td></tr>))}
+          </tbody>
+        </table>
+      </div>
+      <p class="compare-summary reveal">Große Plattformen haben den größeren Katalog und mehr Integrationen. Wir haben eine Werkstatt, in der du anrufen kannst, Versandkosten, die auf der Seite stehen, Branding ab dem ersten Teil und eine Rechnung pro Woche statt Guthaben. Wer das braucht, ist bei uns richtig.</p>
     </div>
   </section>
 
@@ -180,48 +359,24 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="section-head reveal">
-        <h2>Versandkosten und Lieferzeiten</h2>
-        <p>Jede Bestellung geht per DHL mit Tracking direkt an deinen Kunden, neutral verpackt im Namen deines Shops. Alle Preise netto zzgl. MwSt., in Klammern brutto.</p>
-      </div>
-      <div class="ship-table reveal">
-        <div class="ship-row ship-head"><span>Zielland</span><span>Lieferzeit</span><span>Versand pro Bestellung</span></div>
-        <div class="ship-row"><span>Deutschland</span><span>3 bis 5 Werktage</span><span>5,00 &euro; netto <small class="gross">(5,95 &euro; brutto)</small></span></div>
-        <div class="ship-row"><span>&Ouml;sterreich</span><span>3 bis 5 Werktage</span><span>7,00 &euro; netto <small class="gross">(8,33 &euro; brutto)</small></span></div>
-        <div class="ship-row"><span>&Uuml;brige Lieferl&auml;nder <small class="ship-countries">{uebrigeLaender.join(', ')}</small></span><span>3 bis 5 Werktage</span><span>7,50 &euro; netto <small class="gross">(8,93 &euro; brutto)</small></span></div>
-        <div class="ship-row"><span>Schweiz</span><span>3 bis 5 Werktage</span><span>9,00 &euro; netto <small class="gross">(10,71 &euro; brutto)</small></span></div>
-      </div>
-      <p class="muted small ship-note">Je 3 Produkte in einer Bestellung kommen 1,50 &euro; netto (1,79 &euro; brutto) dazu. Die Lieferzeit gilt ab Bestellung und enthält die Produktion von 1 bis 3 Werktagen.</p>
-    </div>
-  </section>
-
-  <Faq items={faqs} title="Fragen zum POD-Fulfillment" />
-  <CtaBand title="Bereit für ein echtes Upgrade?" text="Wechsel zu einer Druckerei mit Verstand. Wir schauen uns deinen Shop an und sagen dir ehrlich, was wir besser machen können." />
+  <Faq items={faqs} title="Fragen zum Print-on-Demand" intro="Die Fragen, die uns Shopify-Händler vor dem Start stellen." />
+  <CtaBand title="Shop verbinden oder erst mal reden?" text="Installiere die App und leg los, oder schreib uns per WhatsApp, was du verkaufst. Wir sagen dir ehrlich, ob und wie wir dein Sortiment produzieren." />
 </Base>
 
 <style>
-  .pod-answer { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
-  .pod-answer-text { max-width: 64ch; }
+  .pod-answer { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
+  .pod-answer-text { max-width: 64ch; margin-top: 16px; }
   .rating-line { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 22px; font-size: 15px; font-weight: 600; color: var(--text); text-decoration: none; }
   .rating-line .stars { display: inline-flex; gap: 2px; color: var(--accent); }
   .rating-line:hover span:last-child { text-decoration: underline; text-underline-offset: 3px; }
-  @media (max-width: 900px) { .pod-answer { grid-template-columns: 1fr; } }
-  .app-meta { display: grid; gap: 0; margin: 20px 0 0; padding-top: 6px; border-top: 1px solid var(--line); font-size: 14px; }
-  .app-meta div { display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-bottom: 1px solid var(--line); }
-  .app-meta div:last-child { border-bottom: 0; }
-  .app-meta dt { color: var(--text-3); }
-  .app-meta dd { margin: 0; color: var(--text); text-align: right; }
-  .compare-summary { margin-top: 28px; max-width: 72ch; color: var(--text-2); font-size: 1.05rem; }
-  .ship-table { display: grid; border: 1px solid var(--line); border-radius: var(--radius-card); overflow: hidden; background: var(--surface); }
-  .ship-row { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 12px; padding: 14px 20px; border-top: 1px solid var(--line); font-size: 15px; }
-  .ship-row:first-child { border-top: 0; }
-  .ship-row span:last-child { text-align: right; font-variant-numeric: tabular-nums; }
-  .ship-head { background: var(--bg-2); color: var(--text-3); font-size: 13px; font-weight: 600; }
-  .ship-note { margin-top: 14px; }
-  .ship-row .gross, .ship-row .ship-countries { display: block; font-size: 13px; color: var(--text-3); }
-  @media (max-width: 600px) { .ship-row { grid-template-columns: 1fr 1fr; } .ship-row span:nth-child(2) { order: 3; grid-column: 1 / -1; color: var(--text-3); font-size: 13.5px; } }
+  .facts { display: grid; gap: 0; margin: 0; padding: 6px 24px; border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); font-size: 14.5px; position: sticky; top: calc(var(--nav-h) + 24px); }
+  .facts div { display: grid; grid-template-columns: 120px 1fr; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--line); }
+  .facts div:last-child { border-bottom: 0; }
+  .facts dt { color: var(--text-3); }
+  .facts dd { margin: 0; color: var(--text); }
+  @media (max-width: 900px) { .pod-answer { grid-template-columns: 1fr; } .facts { position: static; } }
+  @media (max-width: 480px) { .facts div { grid-template-columns: 1fr; gap: 2px; } }
+
   .app-section { position: relative; overflow: hidden; }
   .app-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(60% 80% at 85% 50%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%); pointer-events: none; }
   .app-grid { position: relative; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(32px, 5vw, 80px); align-items: center; }
@@ -230,12 +385,13 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
   .shopify-badge strong { color: var(--text); font-weight: 700; }
   .app-copy h2 { margin-top: 20px; }
   .app-copy .muted { margin-top: 14px; max-width: 56ch; font-size: 1.05rem; }
-  .app-steps { display: grid; gap: 14px; margin: 30px 0 0; counter-reset: none; }
+  .app-steps { display: grid; gap: 16px; margin: 30px 0 0; }
   .app-steps li { display: flex; gap: 16px; align-items: flex-start; }
   .app-steps .num { flex: none; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; font-family: var(--font-display); font-weight: 800; font-size: 15px; color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line); }
-  .app-steps div { display: grid; gap: 2px; padding-top: 5px; }
-  .app-steps strong { font-size: 16px; }
-  .app-steps div > span { color: var(--text-2); font-size: 14.5px; line-height: 1.5; }
+  .app-steps div { display: grid; gap: 3px; padding-top: 5px; }
+  .app-steps strong { font-size: 16px; display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline; }
+  .app-steps strong small { font-size: 12.5px; font-weight: 500; color: var(--text-3); }
+  .app-steps div > span { color: var(--text-2); font-size: 14.5px; line-height: 1.5; max-width: 60ch; }
   .app-cta { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-top: 32px; }
   .app-note { font-size: 13.5px; color: var(--text-3); }
   .app-card { display: block; text-decoration: none; color: inherit; padding: clamp(24px, 3vw, 32px); border-radius: 22px; border: 1px solid var(--accent-line); background: linear-gradient(180deg, var(--surface-2), var(--surface)); box-shadow: 0 0 0 1px var(--accent-line), 0 40px 80px -40px rgba(0,0,0,0.7), 0 0 80px -30px color-mix(in srgb, var(--accent) 60%, transparent); transition: transform 0.5s var(--ease); }
@@ -248,21 +404,74 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
   .app-facts { display: grid; gap: 10px; margin: 24px 0 0; padding-top: 22px; border-top: 1px solid var(--line); font-size: 15px; }
   .app-facts li { display: flex; gap: 10px; align-items: center; }
   .app-facts :global(.icon) { color: var(--accent); flex: none; }
+  .app-meta { display: grid; gap: 0; margin: 20px 0 0; padding-top: 6px; border-top: 1px solid var(--line); font-size: 14px; }
+  .app-meta div { display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+  .app-meta div:last-child { border-bottom: 0; }
+  .app-meta dt { color: var(--text-3); }
+  .app-meta dd { margin: 0; color: var(--text); text-align: right; }
   .app-card-foot { display: flex; gap: 10px; align-items: center; margin-top: 24px; padding: 12px 14px; border-radius: 12px; background: var(--bg-2); border: 1px solid var(--line); font-size: 13.5px; color: var(--text-2); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
   .app-card-foot :global(.icon) { margin-left: auto; color: var(--accent); }
   @media (max-width: 900px) { .app-grid { grid-template-columns: 1fr; } }
+
   .feat { display: grid; gap: 12px; padding: 26px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); }
   .feat p { color: var(--text-2); font-size: 15px; }
+
+  .marken-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .marke { display: grid; gap: 12px; align-content: start; padding: 26px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); }
+  .marke p { color: var(--text-2); font-size: 15px; }
+  .certs { display: grid; gap: 8px; margin: 6px 0 0; padding-top: 16px; border-top: 1px solid var(--line); font-size: 14px; color: var(--text); }
+  .certs li { display: flex; gap: 8px; align-items: flex-start; }
+  .certs :global(.icon) { color: var(--accent); flex: none; margin-top: 2px; }
+  .marken-note { margin-top: 18px; max-width: 72ch; }
+
+  .druck-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(28px, 5vw, 72px); align-items: start; }
+  .druck-grid h3 { margin-top: 26px; font-size: 1.15rem; }
+  .druck-grid .muted { margin-top: 14px; max-width: 58ch; }
+  .plain { display: grid; gap: 10px; margin: 14px 0 0; font-size: 15px; color: var(--text-2); }
+  .plain li { display: flex; gap: 10px; align-items: flex-start; }
+  .plain :global(.icon) { color: var(--accent); flex: none; margin-top: 4px; }
+  .ptab { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 15px; border: 1px solid var(--line); border-radius: var(--radius-card); overflow: hidden; background: var(--surface); }
+  .ptab th, .ptab td { padding: 12px 18px; text-align: left; border-top: 1px solid var(--line); }
+  .ptab thead th { border-top: 0; background: var(--bg-2); color: var(--text-3); font-size: 13px; font-weight: 600; }
+  .ptab tbody th { font-weight: 500; color: var(--text); }
+  .ptab td { color: var(--text); font-variant-numeric: tabular-nums; text-align: right; }
+  .ptab thead th:last-child { text-align: right; }
+  @media (max-width: 900px) { .druck-grid { grid-template-columns: 1fr; } .druck-grid h3:first-child { margin-top: 0; } }
+
+  .ship-table { display: grid; border: 1px solid var(--line); border-radius: var(--radius-card); overflow: hidden; background: var(--surface); }
+  .ship-row { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 12px; padding: 14px 20px; border-top: 1px solid var(--line); font-size: 15px; }
+  .ship-row:first-child { border-top: 0; }
+  .ship-row span:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+  .ship-head { background: var(--bg-2); color: var(--text-3); font-size: 13px; font-weight: 600; }
+  .ship-note { margin-top: 14px; max-width: 80ch; }
+  .ship-row .gross, .ship-row .ship-countries { display: block; font-size: 13px; color: var(--text-3); }
+  .versand-extra { margin-top: 32px; }
+  @media (max-width: 600px) { .ship-row { grid-template-columns: 1fr 1fr; } .ship-row span:nth-child(2) { order: 3; grid-column: 1 / -1; color: var(--text-3); font-size: 13.5px; } }
+
+  .branding-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .branding-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(28px, 5vw, 72px); align-items: start; }
+  .branding-grid .muted { margin-top: 14px; max-width: 46ch; }
+  .branding-list { display: grid; gap: 14px; margin: 0; }
+  .branding-list li { display: flex; gap: 16px; align-items: flex-start; padding: 20px 22px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); }
+  .branding-list :global(.icon) { color: var(--accent); flex: none; margin-top: 2px; }
+  .branding-list div { display: grid; gap: 4px; }
+  .branding-list strong { font-size: 16px; }
+  .branding-list span { color: var(--text-2); font-size: 14.5px; line-height: 1.5; }
+  @media (max-width: 900px) { .branding-grid { grid-template-columns: 1fr; } }
+
+  .abrechnung-note { margin-top: 20px; max-width: 72ch; }
+
   .compare-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .col { padding: 28px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); }
-  .col h3 { margin-bottom: 16px; }
-  .col ul { display: grid; gap: 12px; color: var(--text-2); font-size: 15px; }
-  .col li { display: flex; gap: 10px; align-items: flex-start; }
-  .them li::before { content: '×'; color: var(--text-3); font-weight: 700; width: 16px; flex: none; text-align: center; }
-  .us { border-color: var(--accent-line); background: linear-gradient(160deg, var(--accent-soft), transparent 55%), var(--surface); }
-  .us .icon { color: var(--accent); flex: none; margin-top: 4px; }
-  .us li { color: var(--text); }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .cmp-table { width: 100%; border-collapse: collapse; min-width: 760px; font-size: 14.5px; }
+  .cmp-table th, .cmp-table td { padding: 16px 18px 16px 0; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .cmp-table thead th { font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--text-3); }
+  .cmp-table tbody th { font-weight: 600; color: var(--text); width: 20%; }
+  .cmp-table td { color: var(--text-2); }
+  .cmp-table .hi { color: var(--text); font-weight: 600; }
+  .cmp-table thead .hi { color: var(--accent); }
+  .compare-summary { margin-top: 28px; max-width: 72ch; color: var(--text-2); font-size: 1.05rem; }
+
   .case-grid { display: grid; grid-template-columns: 1.3fr 0.9fr; gap: 48px; align-items: center; }
   .case-grid p { margin-top: 14px; max-width: 60ch; }
   .case-grid blockquote { margin: 22px 0 0; padding: 0; font-size: 1.15rem; font-weight: 500; line-height: 1.45; position: relative; }
@@ -272,13 +481,5 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
   .results li { display: grid; gap: 4px; padding: 20px 22px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); }
   .results strong { font-size: 1.7rem; letter-spacing: -0.03em; color: var(--accent); line-height: 1; }
   .results span { color: var(--text-2); font-size: 14px; }
-  @media (max-width: 900px) { .compare, .case-grid { grid-template-columns: 1fr; } }
-  .compare .col { padding: clamp(24px, 3vw, 36px); border-radius: 20px; }
-  .compare .col.them { background: var(--surface); border: 1px solid var(--line); color: var(--text-2); }
-  .compare .col.us { background: linear-gradient(160deg, color-mix(in srgb, var(--accent) 16%, var(--surface)), var(--surface) 60%); border: 1px solid var(--accent-line); box-shadow: 0 0 70px -28px color-mix(in srgb, var(--accent) 70%, transparent); }
-  .compare .col h3 { font-size: 1.3rem; margin-bottom: 14px; }
-  .compare .col.us h3 { color: var(--accent); }
-  .compare .col ul { display: grid; gap: 10px; } .compare .col li { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; }
-  .compare .col.us li :global(svg) { color: var(--accent); flex: none; margin-top: 3px; }
-  .compare .col.them li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--text-3); flex: none; margin-top: 9px; }
+  @media (max-width: 900px) { .case-grid { grid-template-columns: 1fr; } }
 </style>
