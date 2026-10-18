@@ -98,7 +98,7 @@ const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'Pri
 const howToLd = { '@context': 'https://schema.org', '@type': 'HowTo', name: 'Print-on-Demand mit westernprint für einen Shopify-Shop einrichten', totalTime: 'PT10M', step: schritte.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.t, text: s.d })) };
 const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 ---
-<Base title="Print-on-Demand aus Deutschland für Shopify: Druck und Versand ab 1 Stück" description="Print-on-Demand-Anbieter mit eigener Produktion in Oberhausen: kostenlose Shopify-App, DTF und DTG, Stanley/Stella, Stedman und Build Your Brand, Produktion in 1 bis 3 Werktagen, DHL-Versand neutral in deinem Namen ab 5,00 € netto, wöchentliche Sammelrechnung per SEPA." jsonLd={[svcLd, appLd, howToLd, faqLd]}>
+<Base title="Print-on-Demand aus Deutschland für Shopify" description="Print-on-Demand mit eigener Produktion in Oberhausen: kostenlose Shopify-App, DTF und DTG, Produktion in 1 bis 3 Werktagen, DHL-Versand neutral in deinem Namen." jsonLd={[svcLd, appLd, howToLd, faqLd]}>
   <PageHero
     eyebrow="Print-on-Demand für Shopify"
     title="Print-on-Demand aus Deutschland für deinen Shopify-Shop. <span class='hl'>Ab 1 Stück.</span>"
