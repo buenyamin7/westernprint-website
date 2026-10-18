@@ -5,6 +5,7 @@
 import Icon from './Icon.astro';
 import Faq from './Faq.astro';
 import CtaBand from './CtaBand.astro';
+import PageHero from './PageHero.astro';
 import { site } from '../data/site';
 
 export interface Preis { t: string; m: string; p: string[] }
@@ -32,24 +33,16 @@ interface Props {
 }
 const p = Astro.props;
 const istZahl = (s: string) => /^\d+,\d{2}$/.test(s);
+const waHref = site.whatsapp + '?text=' + encodeURIComponent(p.waText);
 ---
-<section class="bl-hero">
-  <div class="container bl-hero-grid">
-    <div class="bl-copy">
-      <p class="bl-kicker">{p.kicker}</p>
-      <h1 set:html={p.h1} />
-      <p class="lede">{p.lede}</p>
-      <div class="bl-cta">
-        <a href="#anfrage" class="btn btn-primary btn-lg">Angebot anfragen <Icon name="arrow-right" size={18} /></a>
-        <a href={site.whatsapp + '?text=' + encodeURIComponent(p.waText)} class="btn btn-secondary btn-lg" target="_blank" rel="noopener"><Icon name="whatsapp-logo" size={18} /> WhatsApp</a>
-      </div>
-      <ul class="trust" aria-label="Fakten">
-        {p.trust.map((t) => <li><strong>{t.v}</strong><span>{t.l}</span></li>)}
-      </ul>
-    </div>
-    <figure class="bl-visual">
-      <img src={p.image} alt={p.imageAlt} width="1672" height="941" loading="eager" fetchpriority="high" style={p.imagePos ? `object-position: ${p.imagePos}` : undefined} />
-    </figure>
+{/* Seitenkopf wie auf allen anderen Zielgruppen-Seiten (randloses Bild rechts), darunter die vier Fakten. */}
+<PageHero eyebrow={p.kicker} title={p.h1} lede={p.lede} image={p.image} imageAlt={p.imageAlt} cta={{ label: 'Angebot anfragen', href: '#anfrage' }} cta2={{ label: 'Per WhatsApp', href: waHref }} />
+
+<section class="trust-section">
+  <div class="container">
+    <ul class="trust" aria-label="Fakten">
+      {p.trust.map((t) => <li><strong>{t.v}</strong><span>{t.l}</span></li>)}
+    </ul>
   </div>
 </section>
 
@@ -224,21 +217,13 @@ const istZahl = (s: string) => /^\d+,\d{2}$/.test(s);
 </script>
 
 <style>
-  .bl-hero { position: relative; padding: clamp(48px, 7vw, 104px) 0 clamp(32px, 5vw, 64px); overflow: hidden; }
-  .bl-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(1100px 600px at 85% 20%, rgba(255,255,255,0.05), transparent 65%); pointer-events: none; }
-  .bl-hero-grid { position: relative; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
-  .bl-kicker { font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
-  .bl-copy h1 { margin-top: 18px; font-size: clamp(2.4rem, 5vw, 4.4rem); line-height: 1; letter-spacing: -0.03em; text-wrap: balance; }
-  .bl-copy .lede { margin-top: 24px; max-width: 54ch; font-size: 1.15rem; }
-  .bl-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
-  .trust { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 44px; border-top: 1px solid var(--line-strong); }
-  .trust li { display: grid; gap: 4px; padding: 18px 18px 0 0; border-right: 1px solid var(--line); margin-right: 18px; }
+  .trust-section { padding: clamp(28px, 4vw, 44px) 0 clamp(32px, 4vw, 48px); border-top: 1px solid var(--line); }
+  .trust { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .trust li { display: grid; gap: 4px; padding: 0 18px 0 0; border-right: 1px solid var(--line); margin-right: 18px; }
   .trust li:last-child { border-right: 0; margin-right: 0; }
   .trust strong { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 2.3vw, 2rem); letter-spacing: -0.02em; line-height: 1; color: var(--text); }
   .trust span { font-size: 13px; line-height: 1.35; color: var(--text-2); }
-  .bl-visual { margin: 0; border-radius: 16px; overflow: hidden; border: 1px solid var(--line-strong); aspect-ratio: 4 / 3; }
-  .bl-visual img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
-  @media (max-width: 900px) { .bl-hero-grid { grid-template-columns: 1fr; } .bl-visual { order: -1; } .trust { grid-template-columns: 1fr 1fr; row-gap: 18px; } .trust li:nth-child(2) { border-right: 0; } }
+  @media (max-width: 900px) { .trust { grid-template-columns: 1fr 1fr; row-gap: 18px; } .trust li:nth-child(2) { border-right: 0; } }
 
   .answer-section { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg-2); }
   .answer h2 { font-size: 1.1rem; letter-spacing: 0.02em; color: var(--accent); }
