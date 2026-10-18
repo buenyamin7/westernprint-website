@@ -103,7 +103,8 @@ const orgLd = {
     { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Print-on-Demand Fulfillment für Shopify-Shops', url: `${site.url}/print-on-demand` } },
     { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Textildruck Großauflagen ab 50 Stück', url: `${site.url}/grossauflagen` } },
     { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'DTF-, DTG- und Sublimationsdruck', url: `${site.url}/druckverfahren` } },
-    { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'T-Shirts und Hoodies mit eigenem Motiv bedrucken', url: `${site.url}/shop` } },
+    // Als Service, nicht Product: Ein Product ohne Preis/Angebot meldet die Search Console auf jeder Seite als ungültiges Produkt-Snippet (gesehen 18.10.2026).
+    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'T-Shirts und Hoodies mit eigenem Motiv bedrucken, ab 1 Stück', url: `${site.url}/shop` } },
   ],
 };
 const webLd = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': `${site.url}/#website`, url: site.url, name: 'westernprint', inLanguage: 'de-DE', publisher: { '@id': `${site.url}/#organization` } };
