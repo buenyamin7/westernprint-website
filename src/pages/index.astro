@@ -64,8 +64,9 @@ const aboutSizes = '(max-width: 900px) 100vw, (max-width: 1210px) 545px, 45vw';
         <p class="lede">T-Shirts, Hoodies, Polos und Workwear mit deinem Motiv. DTF und DTG auf Stanley/Stella und Stedman, gedruckt auf eigenen Maschinen. Angebot in 24 Stunden, Einzelstücke fertig in 1 bis 3 Werktagen.</p>
         <div class="hero-cta">
           <a href="/kontakt" class="btn btn-primary btn-lg">Angebot in 24h <Icon name="arrow-right" size={18} /></a>
-          <a href="/print-on-demand" class="btn btn-secondary btn-lg">Print-on-Demand für Shops</a>
+          <a href="/shop" class="btn btn-secondary btn-lg"><Icon name="shopping-bag" size={18} /> Einzelstück direkt bestellen</a>
         </div>
+        <p class="hero-sub">Shop-Betreiber? <a href="/print-on-demand">Print-on-Demand für Shopify <Icon name="arrow-right" size={14} /></a></p>
       </div>
       <div class="hero-visual">
         <figure class="review card">
@@ -256,10 +257,10 @@ const aboutSizes = '(max-width: 900px) 100vw, (max-width: 1210px) 545px, 45vw';
   .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; z-index: 0; animation: hero-bg 1.6s var(--ease) both; }
   @keyframes hero-bg { from { transform: scale(1.06); opacity: 0.6; } to { transform: none; opacity: 1; } }
   @keyframes hero-up { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
-  .hero .badge, .hero h1, .hero .lede, .hero-cta, .hero .review, .hero-stats .stat { animation: hero-up 0.9s var(--ease) both; }
-  .hero .badge { animation-delay: 0.05s; } .hero h1 { animation-delay: 0.15s; } .hero .lede { animation-delay: 0.3s; } .hero-cta { animation-delay: 0.4s; } .hero .review { animation-delay: 0.55s; }
+  .hero .badge, .hero h1, .hero .lede, .hero-cta, .hero-sub, .hero .review, .hero-stats .stat { animation: hero-up 0.9s var(--ease) both; }
+  .hero .badge { animation-delay: 0.05s; } .hero h1 { animation-delay: 0.15s; } .hero .lede { animation-delay: 0.3s; } .hero-cta { animation-delay: 0.4s; } .hero-sub { animation-delay: 0.48s; } .hero .review { animation-delay: 0.55s; }
   .hero-stats .stat:nth-child(1) { animation-delay: 0.6s; } .hero-stats .stat:nth-child(2) { animation-delay: 0.68s; } .hero-stats .stat:nth-child(3) { animation-delay: 0.76s; } .hero-stats .stat:nth-child(4) { animation-delay: 0.84s; }
-  @media (prefers-reduced-motion: reduce) { .hero-bg, .hero .badge, .hero h1, .hero .lede, .hero-cta, .hero .review, .hero-stats .stat { animation: none; } }
+  @media (prefers-reduced-motion: reduce) { .hero-bg, .hero .badge, .hero h1, .hero .lede, .hero-cta, .hero-sub, .hero .review, .hero-stats .stat { animation: none; } }
   .hero::before { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
     background: linear-gradient(90deg, rgba(17,19,18,.94) 0%, rgba(17,19,18,.84) 36%, rgba(17,19,18,.5) 68%, rgba(17,19,18,.3) 100%), linear-gradient(180deg, rgba(17,19,18,.3) 0%, rgba(17,19,18,0) 30%, rgba(17,19,18,.55) 75%, rgba(17,19,18,.96) 100%); }
   .hero-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: clamp(32px, 5vw, 72px); align-items: center; position: relative; z-index: 2; padding-bottom: clamp(32px, 5vh, 56px); }
@@ -270,6 +271,9 @@ const aboutSizes = '(max-width: 900px) 100vw, (max-width: 1210px) 545px, 45vw';
   .hero-text .lede { margin-top: 22px; color: rgba(255,255,255,.78); max-width: 560px; }
   .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
   .hero-cta .btn-secondary { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2); color: #fff; }
+  .hero-sub { margin-top: 16px; font-size: 14.5px; color: rgba(255,255,255,.7); }
+  .hero-sub a { display: inline-flex; align-items: center; gap: 5px; color: #fff; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: rgba(255,255,255,.35); }
+  .hero-sub a:hover { text-decoration-color: #fff; }
   .hero-visual { display: flex; justify-content: flex-end; }
   .review { max-width: 360px; padding: 22px 24px; margin: 0; display: grid; gap: 10px; background: rgba(20,24,22,.55); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
   .review .stars { display: flex; gap: 2px; color: var(--accent-on-dark, #8fd3a0); }
