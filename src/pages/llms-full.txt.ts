@@ -55,7 +55,7 @@ const SEITEN: [string, string][] = [
   ['/', 'Startseite'],
   ['/was-kostet-textildruck', 'Was kostet Textildruck: Preisbeispiele netto und brutto für 1, 10, 25, 50 und 100 Stück'],
   ['/druckverfahren', 'Druckverfahren: DTF, DTG und Sublimation im Vergleich, Ausstattung der Produktion'],
-  ['/grossauflagen', 'Großauflagen: Textildruck ab 50 Stück'],
+  ['/grossauflagen', 'Großauflagen: Textildruck in großen Mengen mit Staffelpreisen'],
   ['/textilien', 'Textilien: Sortiment und Marken'],
   ['/print-on-demand', 'Print-on-Demand: Fulfillment für Shopify-Shops'],
   ['/b2b-partner', 'B2B-Partner: White-Label-Fulfillment für Shops ab 50 Bestellungen am Tag'],
@@ -209,7 +209,7 @@ function markdown(): string {
   z.push(
     '## Ablauf und Lieferzeiten',
     '',
-    '- Druck ab 1 Stück, Staffelpreise ab 10 Stück, Großauflagen ab 50 Stück.',
+    '- Druck ab 1 Stück, Staffelpreise ab 10 Stück, Mengenrabatt für Großauflagen.',
     '- Keine Einrichtungskosten. Mischgrößen ohne Aufpreis.',
     '- Angebot innerhalb von 24 Stunden an Werktagen.',
     '- Vor dem Druck kommt ein Korrekturabzug zur Freigabe.',
