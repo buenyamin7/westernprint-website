@@ -106,6 +106,7 @@ export const nav: NavItem[] = [
       ] },
     ],
   },
+  { label: 'Shop', href: '/shop' },
   { label: 'Über uns', href: '/ueber-uns' },
 ];
 
