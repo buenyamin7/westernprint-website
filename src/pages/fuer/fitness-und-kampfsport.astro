@@ -1,27 +1,39 @@
 ---
 // Landingpage Fitnessstudios, Crossfit-Boxen, Kampfsportschulen, Yoga-Studios, Personal Trainer. Vorlage: BranchenLanding.
-// Preise: veröffentlichte Preisliste (Stand 21.09.2026). Tank Tops, Funktionsshirts, Heavy Oversize Tees, Jogger und Caps
+// Preise: veröffentlichte Preisliste (Stand 22.10.2026). Tank Tops, Funktionsshirts, Heavy Oversize Tees, Jogger und Caps
 // haben keinen veröffentlichten Preis und stehen mit „im Angebot“. Mitglieder-Merch ohne Lager läuft über Print-on-Demand.
 import Base from '../../layouts/Base.astro';
 import BranchenLanding from '../../components/BranchenLanding.astro';
 import { site, oeffnungszeiten } from '../../data/site';
 
-const STAND = '21.09.2026';
+import { STAND, tabellen } from '../../data/preise';
+
 const brutto = (n: string) => (Math.round(parseFloat(n.replace(',', '.')) * 119) / 100).toFixed(2).replace('.', ',');
-const mengen = ['1 Stück', '10 Stück', '25 Stück', '50 Stück', '100 Stück'];
+const mengen = ['1 Stück', '10 Stück', '50 Stück', '100 Stück', '200 Stück'];
+// Zeile der Preistabelle aus src/data/preise.ts: Nettopreise ohne Euro-Zeichen in der Reihenfolge von mengen. Fehlt eine Staffel, bricht der Build ab.
+const zeile = (anfang: string, t: string, m?: string) => {
+  const tb = tabellen.find((x) => x.t.startsWith(anfang));
+  if (!tb) throw new Error(`${anfang} fehlt in preise.ts`);
+  return { t, m: m ?? (tb.t.match(/\((.+)\)/)?.[1] ?? ''), p: mengen.map((x) => { const z = tb.zeilen.find(([mm]) => mm === x); if (!z) throw new Error(`Keine Staffel ${x} für ${tb.t}`); return z[1].replace(' €', ''); }) };
+};
 const preise = [
-  { t: 'T-Shirt Basic', m: 'Stedman Classic-T, 155 g', p: ['17,90', '12,90', '10,90', '9,40', '8,40'] },
-  { t: 'T-Shirt Bio', m: 'Stanley/Stella Creator 2.0, 180 g', p: ['19,90', '14,90', '12,90', '11,40', '10,40'] },
-  { t: 'Hoodie', m: 'Stedman Classic Hoodie, 280 g', p: ['29,90', '24,90', '22,90', '21,40', '19,90'] },
-  { t: 'Sweatshirt', m: 'Stedman Classic Sweatshirt, 280 g', p: ['27,90', '22,90', '20,90', '19,40', '17,90'] },
-  { t: 'Poloshirt', m: 'Stedman Classic Polo, 170 g, für den Empfang', p: ['22,90', '17,90', '15,90', '14,50', '13,40'] },
-  // Die folgenden Teile nach der Staffel vom 14.10.2026 (EK + 12 / 12 / 8 / 6,50 / 5,50), EK günstigste Farbe aus der POD-DB, Stand 18.10.2026.
-  { t: 'Tank Top', m: 'Stedman Comfort Tank Top', p: ['14,13', '14,13', '10,13', '8,63', '7,63'] },
-  { t: 'Funktionsshirt', m: 'Stedman Sports-T, Polyester, DTF', p: ['15,56', '15,56', '11,56', '10,06', '9,06'] },
-  { t: 'Heavy Oversize Tee', m: 'Build Your Brand BY102, 240 g', p: ['17,95', '17,95', '13,95', '12,45', '11,45'] },
-  { t: 'Jogger', m: 'Build Your Brand Wideleg Sweatpants', p: ['26,95', '26,95', '22,95', '21,45', '20,45'] },
-  { t: 'Cap', m: 'Flexfit 110, Logo vorne', p: ['19,50', '19,50', '15,50', '14,00', '13,00'] },
+  zeile('T-Shirt Basic', 'T-Shirt Basic'),
+  zeile('T-Shirt Bio', 'T-Shirt Bio'),
+  zeile('Hoodie', 'Hoodie'),
+  zeile('Sweatshirt', 'Sweatshirt'),
+  zeile('Poloshirt', 'Poloshirt', 'Stedman Classic Polo, 170 g, für den Empfang'),
+  // Tank Top (EK 2,13), Funktionsshirt (EK 3,56) und Jogger (EK 14,95) mit dem Aufschlag aus preise.ts (1 Stück +12, ab 10 +8, 50 +7,50, 100 +7,00, 200 +6,50).
+  // Cap (EK 7,50) mit dem Aufschlag für einen Druck vorne (+12 / +8 / +6,50 / +5,50 / +5,00). EK aus der POD-DB, Staffel vom 14.10.2026.
+  { t: 'Tank Top', m: 'Stedman Comfort Tank Top', p: ['14,13', '10,13', '9,63', '9,13', '8,63'] },
+  { t: 'Funktionsshirt', m: 'Stedman Sports-T, Polyester, DTF', p: ['15,56', '11,56', '11,06', '10,56', '10,06'] },
+  zeile('T-Shirt Heavy Oversize', 'Heavy Oversize Tee', 'Build Your Brand BY102, 240 g'),
+  { t: 'Jogger', m: 'Build Your Brand Wideleg Sweatpants', p: ['26,95', '22,95', '22,45', '21,95', '21,45'] },
+  { t: 'Cap', m: 'Flexfit 110, Logo vorne', p: ['19,50', '15,50', '14,00', '13,00', '12,50'] },
 ];
+/** Nettopreis als Text aus der Tabelle oben: netto('Poloshirt', 10) -> '13,22' */
+const netto = (t: string, menge: number) => preise.find((r) => r.t === t)!.p[mengen.indexOf(`${menge} Stück`)];
+/** nb('Poloshirt', 10) -> '13,22 € netto (15,73 € brutto)' */
+const nb = (t: string, menge: number) => `${netto(t, menge)} € netto (${brutto(netto(t, menge))} € brutto)`;
 const zusatz = [
   { t: 'Zweite Druckseite', p: '', d: 'Logo klein vorne, großes Motiv oder Schriftzug auf dem Rücken, bis 40 x 50 cm im DTG.' },
   { t: 'Ärmeldruck', p: '', d: 'Pro Ärmel, bis 8 x 8 cm. Zum Beispiel Sponsor, Instagram-Name oder Gürtelgrad.' },
@@ -58,10 +70,10 @@ const blocks = [
   { h: 'Wie groß und wo?', p: 'Studio-Logo links auf der Brust 8 bis 10 Zentimeter, auf dem Rücken 25 bis 30 Zentimeter für Schriftzug oder Motiv, am Ärmel 5 bis 7 Zentimeter für Sponsor oder Gürtelgrad. Bei Tank Tops sitzt das Motiv etwas höher, damit es nicht im Armausschnitt verschwindet. Alle Maße stehen im Korrekturabzug.' },
 ];
 const faqs = [
-  { q: 'Wo bekommen Fitnessstudios und Kampfsportschulen Shirts mit Logo?', a: `Bei westernprint in Oberhausen: T-Shirts, Tank Tops, Funktionsshirts, Hoodies, Oversize Tees und Caps mit eurem Logo, ab 1 Stück ohne Mindestmenge, fürs Trainerteam oder zum Verkauf an Mitglieder. Ein T-Shirt mit Logo kostet bei 10 Stück 12,90 € netto (${brutto('12,90')} € brutto), ein Hoodie 24,90 € netto (${brutto('24,90')} € brutto) pro Stück, Stand ${STAND}. Die Serie ist 5 bis 7 Werktage nach Freigabe fertig, einzelne Teile in 1 bis 3 Werktagen.` },
-  { q: 'Was kostet ein bedrucktes Shirt oder ein Hoodie für unser Studio?', a: `Ein T-Shirt Basic (Stedman Classic-T) mit einem Druck kostet bei westernprint 12,90 € netto (${brutto('12,90')} € brutto) bei 10 Stück und 9,40 € netto (${brutto('9,40')} € brutto) bei 50 Stück. Ein Hoodie (Stedman Classic Hoodie, 280 g) kostet 24,90 € netto (${brutto('24,90')} € brutto) bei 10 Stück und 21,40 € netto (${brutto('21,40')} € brutto) bei 50 Stück. Preise pro Stück inklusive Textil, Stand ${STAND}. Ein Tank Top (Stedman Comfort) kostet 10,13 € netto bei 25 Stück, ein Heavy Oversize Tee (Build Your Brand BY102) 13,95 € netto bei 25 Stück, Stand 18.10.2026.` },
+  { q: 'Wo bekommen Fitnessstudios und Kampfsportschulen Shirts mit Logo?', a: `Bei westernprint in Oberhausen: T-Shirts, Tank Tops, Funktionsshirts, Hoodies, Oversize Tees und Caps mit eurem Logo, ab 1 Stück ohne Mindestmenge, fürs Trainerteam oder zum Verkauf an Mitglieder. Ein T-Shirt mit Logo kostet bei 10 Stück ${nb('T-Shirt Basic', 10)}, ein Hoodie ${nb('Hoodie', 10)} pro Stück, Stand ${STAND}. Die Serie ist 5 bis 7 Werktage nach Freigabe fertig, einzelne Teile in 1 bis 3 Werktagen.` },
+  { q: 'Was kostet ein bedrucktes Shirt oder ein Hoodie für unser Studio?', a: `Ein T-Shirt Basic (Stedman Classic-T) mit einem Druck kostet bei westernprint ${nb('T-Shirt Basic', 10)} bei 10 Stück und ${nb('T-Shirt Basic', 50)} bei 50 Stück. Ein Hoodie (Stedman Classic Hoodie, 280 g) kostet ${nb('Hoodie', 10)} bei 10 Stück und ${nb('Hoodie', 50)} bei 50 Stück. Preise pro Stück inklusive Textil, Stand ${STAND}. Ein Tank Top (Stedman Comfort) kostet ${nb('Tank Top', 10)} bei 10 Stück, ein Heavy Oversize Tee (Build Your Brand BY102) ${nb('Heavy Oversize Tee', 10)} bei 10 Stück.` },
   { q: 'Können Funktionsshirts aus Polyester bedruckt werden?', a: 'Ja. westernprint bedruckt Funktionsshirts, Trikots und Rashguards aus Polyester per DTF. Der Druck wird mit niedrigerer Temperatur aufgepresst, bleibt dehnbar und hält Schweiß und Wäsche aus. Gewaschen wird bei 30 Grad auf links, ohne Weichspüler und Trockner.' },
-  { q: 'Druckt ihr auch Tank Tops und Oversize Tees?', a: 'Ja. Tank Tops von Stedman und Build Your Brand, Heavy Oversize Tees (Build Your Brand BY102, 240 g), Boxy Hoodies und Jogger. Das sind die Blanks, die im Gym getragen werden. Ein Tank Top mit Logo kostet 14,13 € netto als Einzelstück und 10,13 € netto bei 25 Stück, ein Heavy Oversize Tee 17,95 € netto einzeln und 13,95 € netto bei 25 Stück, Stand 18.10.2026.' },
+  { q: 'Druckt ihr auch Tank Tops und Oversize Tees?', a: `Ja. Tank Tops von Stedman und Build Your Brand, Heavy Oversize Tees (Build Your Brand BY102, 240 g), Boxy Hoodies und Jogger. Das sind die Blanks, die im Gym getragen werden. Ein Tank Top mit Logo kostet ${nb('Tank Top', 1)} als Einzelstück und ${nb('Tank Top', 10)} ab 10 Stück, ein Heavy Oversize Tee ${nb('Heavy Oversize Tee', 1)} einzeln und ${nb('Heavy Oversize Tee', 10)} ab 10 Stück, Stand ${STAND}.10.2026.` },
   { q: 'Gibt es eine Mindestmenge?', a: 'Nein. westernprint druckt ab 1 Stück. Staffelpreise gelten ab 10 Stück, ab 50 Stück wird es noch einmal günstiger. Trainer-Shirts, Tank Tops und Hoodies könnt ihr in einer Bestellung mischen, auch Größen und Farben, ohne Aufpreis.' },
   { q: 'Können wir Merch an unsere Mitglieder verkaufen, ohne ein Lager zu haben?', a: 'Ja, auf zwei Wegen. Entweder bestellt ihr eine kleine Auflage zum Staffelpreis, verkauft an der Theke und bestellt verkaufte Größen einzeln nach. Oder ihr verkauft online über einen Shopify-Shop mit der kostenlosen westernprint-App: Jede Bestellung drucken wir einzeln und versenden sie neutral in eurem Namen an das Mitglied. Kein Lager, keine Grundgebühr, keine Mindestmenge.' },
   { q: 'Macht ihr Shirts für Kampfabende und Turniere?', a: 'Ja. Event-Shirts mit Datum und Kampfpaarung, Team-Hoodies für die Ecke, Helfer-Shirts: westernprint druckt auch 20 Teile mit mehreren Motiven. Nennt uns den Termin, im Angebot steht ein Liefertermin davor. Serien brauchen 5 bis 7 Werktage nach Freigabe, Express auf Anfrage.' },
@@ -81,7 +93,7 @@ const ld = [
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Startseite', item: site.url }, { '@type': 'ListItem', position: 2, name: 'Für wen wir drucken', item: `${site.url}/fuer` }, { '@type': 'ListItem', position: 3, name: 'Fitness und Kampfsport', item: `${site.url}/fuer/fitness-und-kampfsport` }] },
 ];
 ---
-<Base title="Gym- und Kampfsport-Shirts mit Logo, ab 1 Stück" description="Trainer-Shirts, Tank Tops, Funktionsshirts und Hoodies mit Logo für Fitnessstudio, Boxclub, MMA, Crossfit und Yoga. Ab 1 Stück, Shirt ab 9,40 € netto, Mitglieder-Merch ohne Lager." jsonLd={ld} ogImage="/img/gym-shirts-studio.jpg">
+<Base title="Gym- und Kampfsport-Shirts mit Logo, ab 1 Stück" description={`Trainer-Shirts, Tank Tops, Funktionsshirts und Hoodies mit Logo für Fitnessstudio, Boxclub, MMA, Crossfit und Yoga. Ab 1 Stück, Shirt ab ${netto('T-Shirt Basic', 200)} € netto, Mitglieder-Merch ohne Lager.`} jsonLd={ld} ogImage="/img/gym-shirts-studio.jpg">
   <BranchenLanding
     slug="fitness-und-kampfsport" name="Fitness und Kampfsport"
     kicker="Fitnessstudios, Crossfit, Boxen, MMA, Yoga"
@@ -90,11 +102,11 @@ const ld = [
     trust={[{ v: 'ab 1', l: 'Stück, keine Mindestmenge' }, { v: '24 h', l: 'bis zum Angebot an Werktagen' }, { v: '40 x 50', l: 'cm Rückendruck im DTG' }, { v: '0 Lager', l: 'Mitglieder-Merch per Print-on-Demand' }]}
     image="/img/gym-shirts-studio.jpg" imageAlt="Schwarzes Tank Top, Oversize-Shirt, graues Funktionsshirt und Hoodie mit kleinem Logo auf einer Kleiderstange im Gym" imagePos="center 50%"
     waText="Hallo westernprint, wir brauchen Shirts und Hoodies mit unserem Studio-Logo."
-    answer={`westernprint in Oberhausen bedruckt Gym- und Kampfsport-Kleidung mit Logo für Fitnessstudios, Crossfit-Boxen, Boxclubs, MMA- und Kampfsportschulen, Yoga-Studios und Personal Trainer, ab 1 Stück ohne Mindestmenge. Ein T-Shirt mit Logo kostet bei 10 Stück 12,90 € netto, ein Hoodie 24,90 € netto pro Stück, Stand ${STAND}. Funktionsshirts aus Polyester bedrucken wir per DTF, das hält Schweiß und Wäsche. Fürs Trainerteam gibt es Namen und Funktion einzeln, für Mitglieder-Merch kleine Auflagen zum Nachbestellen oder Print-on-Demand ohne Lager. Die Serie ist 5 bis 7 Werktage nach Freigabe fertig, einzelne Teile in 1 bis 3 Werktagen.`}
+    answer={`westernprint in Oberhausen bedruckt Gym- und Kampfsport-Kleidung mit Logo für Fitnessstudios, Crossfit-Boxen, Boxclubs, MMA- und Kampfsportschulen, Yoga-Studios und Personal Trainer, ab 1 Stück ohne Mindestmenge. Ein T-Shirt mit Logo kostet bei 10 Stück ${netto('T-Shirt Basic', 10)} € netto, ein Hoodie ${netto('Hoodie', 10)} € netto pro Stück, Stand ${STAND}. Funktionsshirts aus Polyester bedrucken wir per DTF, das hält Schweiß und Wäsche. Fürs Trainerteam gibt es Namen und Funktion einzeln, für Mitglieder-Merch kleine Auflagen zum Nachbestellen oder Print-on-Demand ohne Lager. Die Serie ist 5 bis 7 Werktage nach Freigabe fertig, einzelne Teile in 1 bis 3 Werktagen.`}
     stand={STAND} mengen={mengen} preise={preise} zusatz={zusatz}
     preisTitel="Preise für Gym-Kleidung mit Logo"
     preisText="Preis pro Stück in Euro, netto zzgl. 19 % MwSt., mit einem Druck (Brust oder Rücken), Textil inklusive. Team-Shirts und Verkaufsware mischt ihr frei."
-    preisHinweis="T-Shirts, Hoodie, Sweatshirt und Polo Stand 21.09.2026, Tank Top bis Cap Stand 18.10.2026. Keine Einrichtungskosten, keine Filmkosten. Das genaue Angebot mit festem Stückpreis bekommt ihr an Werktagen innerhalb von 24 Stunden."
+    preisHinweis="T-Shirts, Hoodie, Sweatshirt und Polo Stand 22.10.2026, Tank Top bis Cap Stand 18.10.2026. Keine Einrichtungskosten, keine Filmkosten. Das genaue Angebot mit festem Stückpreis bekommt ihr an Werktagen innerhalb von 24 Stunden."
     branchenTitel="Für diese Studios und Schulen drucken wir"
     branchenText="Vom Personal Trainer mit drei Shirts bis zur Kette mit fünf Studios. Logo klein auf der Brust, groß auf dem Rücken, Name oder Gürtelgrad einzeln."
     branchen={branchen}

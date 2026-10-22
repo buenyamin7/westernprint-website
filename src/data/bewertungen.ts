@@ -1,5 +1,5 @@
 // Echte Google-Bewertungen des westernprint-Unternehmensprofils.
-// Stand 28.09.2026, abgelesen im Google-Unternehmensprofil (Geschäftscode 10833066176156066406).
+// Stand 22.10.2026, abgelesen im Google-Unternehmensprofil (Geschäftscode 10833066176156066406): 5,0 bei 18 Rezensionen.
 //
 // WICHTIG: Hier gehören ausschließlich Rezensionen hinein, die tatsächlich
 // öffentlich auf Google stehen. Nichts erfinden, nichts umformulieren.
@@ -9,10 +9,10 @@
 export const bewertungen = {
   /** Durchschnitt und Anzahl, wie sie im Google-Profil stehen. */
   schnitt: 5,
-  anzahl: 17,
+  anzahl: 18,
   quelle: 'Google',
   profilUrl: 'https://www.google.com/maps?cid=475747385609305411', // eindeutige Profil-ID (cid), vom Inhaber am 29.09.2026 geliefert
-  stand: '2026-09-28',
+  stand: '2026-10-22',
 };
 
 export interface Rezension {

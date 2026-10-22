@@ -1,25 +1,27 @@
 ---
 // Landingpage für Handwerksbetriebe und Service-Firmen (Arbeitskleidung mit Firmenlogo).
 // Aufbau wie /fuer/streetwear-brands: klare Antwort oben, Preistabelle mit Staffeln, Branchen, Ablauf, FAQ.
-// Preise netto, ein Druck (Brust ODER Rücken), Textil inklusive. Quelle: EK aus der POD-App + feste Marge, abgestimmt am 06.10.2026.
+// Preise netto, ein Druck (Brust oder Rücken), Textil inklusive. Quelle: src/data/preise.ts (EK aus der POD-App + feste Marge).
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import Faq from '../../components/Faq.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { site, oeffnungszeiten } from '../../data/site';
+import { STAND, tabellen } from '../../data/preise';
 
-const STAND = '06.10.2026';
 const brutto = (n: string) => (Math.round(parseFloat(n.replace(',', '.')) * 119) / 100).toFixed(2).replace('.', ',');
-
-const mengen = ['1 Stück', '10 Stück', '25 Stück', '50 Stück', '100 Stück'];
-const preise = [
-  { t: 'T-Shirt', m: 'Stedman Classic-T, 155 g', p: ['17,90', '12,90', '10,90', '9,40', '8,40'] },
-  { t: 'Poloshirt', m: 'Stedman Classic Polo, 170 g', p: ['22,90', '17,90', '15,90', '14,50', '13,40'] },
-  { t: 'Sweatshirt', m: 'Stedman Classic Sweatshirt, 280 g', p: ['27,90', '22,90', '20,90', '19,40', '17,90'] },
-  { t: 'Hoodie', m: 'Stedman Classic Hoodie, 280 g', p: ['29,90', '24,90', '22,90', '21,40', '19,90'] },
-  { t: 'Hemd', m: 'Stanley/Stella Styler, Bio-Baumwolle', p: ['36,90', '30,90', '28,90', '27,40', '25,90'] },
-  { t: 'Softshelljacke', m: 'Stedman Lux Softshell, 250 g', p: ['44,90', '39,90', '37,90', '36,40', '34,90'] },
-];
+const mengen = ['1 Stück', '10 Stück', '50 Stück', '100 Stück', '200 Stück'];
+// Zeile der Preistabelle aus preise.ts: Nettopreise ohne Euro-Zeichen, in der Reihenfolge von mengen. Fehlt eine Staffel, bricht der Build ab.
+const zeile = (anfang: string, t: string) => {
+  const tb = tabellen.find((x) => x.t.startsWith(anfang));
+  if (!tb) throw new Error(`${anfang} fehlt in preise.ts`);
+  return { t, m: tb.t.match(/\((.+)\)/)?.[1] ?? '', p: mengen.map((m) => { const z = tb.zeilen.find(([x]) => x === m); if (!z) throw new Error(`Keine Staffel ${m} für ${tb.t}`); return z[1].replace(' €', ''); }) };
+};
+const preise = [zeile('T-Shirt Basic', 'T-Shirt'), zeile('Poloshirt', 'Poloshirt'), zeile('Sweatshirt', 'Sweatshirt'), zeile('Hoodie', 'Hoodie'), zeile('Hemd', 'Hemd'), zeile('Softshelljacke', 'Softshelljacke')];
+/** Nettopreis als Text: netto('Poloshirt', 10) -> '13,22' */
+const netto = (t: string, menge: number) => preise.find((r) => r.t === t)!.p[mengen.indexOf(`${menge} Stück`)];
+/** nb('Poloshirt', 10) -> '13,22 € netto (15,73 € brutto)' */
+const nb = (t: string, menge: number) => `${netto(t, menge)} € netto (${brutto(netto(t, menge))} € brutto)`;
 
 const zusatz = [
   { t: 'Zweite Druckseite', p: 'ab 3,50 €', d: 'Logo vorne und groß hinten, zum Beispiel Firmenname mit Telefonnummer auf dem Rücken.' },
@@ -42,11 +44,11 @@ const services = [
 ];
 
 const faqs = [
-  { q: 'Wo bekommen Handwerksbetriebe Arbeitskleidung mit Firmenlogo?', a: `Bei westernprint in Oberhausen bekommen Handwerksbetriebe T-Shirts, Poloshirts, Sweatshirts, Hoodies, Hemden und Softshelljacken mit Firmenlogo, ab 1 Stück ohne Mindestmenge. Ein Poloshirt mit Logo kostet bei 10 Stück 17,90 € netto pro Stück. Die Serie ist 5 bis 7 Werktage nach Freigabe fertig, einzelne Teile könnt ihr jederzeit nachbestellen. Stand ${STAND}.` },
+  { q: 'Wo bekommen Handwerksbetriebe Arbeitskleidung mit Firmenlogo?', a: `Bei westernprint in Oberhausen bekommen Handwerksbetriebe T-Shirts, Poloshirts, Sweatshirts, Hoodies, Hemden und Softshelljacken mit Firmenlogo, ab 1 Stück ohne Mindestmenge. Ein Poloshirt mit Logo kostet bei 10 Stück ${nb('Poloshirt', 10)} pro Stück. Die Serie ist 5 bis 7 Werktage nach Freigabe fertig, einzelne Teile könnt ihr jederzeit nachbestellen. Stand ${STAND}.` },
   { q: 'Gibt es eine Mindestmenge?', a: 'Nein. westernprint bedruckt Arbeitskleidung ab 1 Stück. Ab 10 Stück gelten Staffelpreise, ab 50 Stück wird es noch einmal günstiger. Ihr könnt Modelle, Farben und Größen in einer Bestellung mischen.' },
-  { q: 'Was kostet ein Poloshirt mit Firmenlogo?', a: `Ein Poloshirt (Stedman Classic Polo) mit einem Druck kostet bei westernprint 22,90 € netto (${brutto('22,90')} € brutto) als Einzelstück, 17,90 € netto (${brutto('17,90')} € brutto) bei 10 Stück und 14,50 € netto (${brutto('14,50')} € brutto) bei 50 Stück, jeweils pro Stück. Stand ${STAND}.` },
-  { q: 'Was kostet ein T-Shirt mit Firmenlogo für den Betrieb?', a: `Ein T-Shirt (Stedman Classic-T, 155 g) mit einem Druck kostet 17,90 € netto als Einzelstück, 12,90 € netto (${brutto('12,90')} € brutto) bei 10 Stück, 10,90 € netto bei 25 Stück und 9,40 € netto bei 50 Stück, jeweils pro Stück. Ein Ärmeldruck kostet 3,00 € netto pro Ärmel zusätzlich. Stand ${STAND}.` },
-  { q: 'Was kostet eine Softshelljacke mit Logo?', a: `Eine Softshelljacke (Stedman Lux Softshell) mit einem Druck kostet 44,90 € netto als Einzelstück und 39,90 € netto (${brutto('39,90')} € brutto) pro Stück bei 10 Stück. Logo vorne und hinten kostet ab 3,50 € pro Teil zusätzlich. Stand ${STAND}.` },
+  { q: 'Was kostet ein Poloshirt mit Firmenlogo?', a: `Ein Poloshirt (Stedman Classic Polo) mit einem Druck kostet bei westernprint ${nb('Poloshirt', 1)} als Einzelstück, ${nb('Poloshirt', 10)} bei 10 Stück und ${nb('Poloshirt', 50)} bei 50 Stück, jeweils pro Stück. Stand ${STAND}.` },
+  { q: 'Was kostet ein T-Shirt mit Firmenlogo für den Betrieb?', a: `Ein T-Shirt (Stedman Classic-T, 155 g) mit einem Druck kostet ${nb('T-Shirt', 1)} als Einzelstück, ${nb('T-Shirt', 10)} bei 10 Stück und ${nb('T-Shirt', 50)} bei 50 Stück, jeweils pro Stück. Ein Ärmeldruck kostet 3,00 € netto pro Ärmel zusätzlich. Stand ${STAND}.` },
+  { q: 'Was kostet eine Softshelljacke mit Logo?', a: `Eine Softshelljacke (Stedman Lux Softshell) mit einem Druck kostet ${nb('Softshelljacke', 1)} als Einzelstück und ${nb('Softshelljacke', 10)} pro Stück bei 10 Stück. Logo vorne und hinten kostet ab 3,50 € pro Teil zusätzlich. Stand ${STAND}.` },
   { q: 'Können wir unsere eigene Arbeitskleidung bedrucken lassen?', a: 'Ja. westernprint bedruckt angelieferte Workwear, zum Beispiel von Engelbert Strauss oder Kübler. Ihr zahlt dann nur den Druck. Nennt vorher kurz das Material, wir prüfen, ob es sich eignet. Plant 2 bis 3 Prozent Reserve ein, für Materialfehler an angelieferter Ware haften wir nicht.' },
   { q: 'Können wir einzelne Teile für neue Mitarbeiter nachbestellen?', a: 'Ja. westernprint speichert eure Druckdaten. Ein neuer Mitarbeiter bekommt sein Shirt oder seine Jacke einzeln nachbestellt, mit dem gleichen Druck wie das übrige Team. Einzelteile sind in der Regel in 1 bis 3 Werktagen fertig.' },
   { q: 'Hält der Druck auf Arbeitskleidung?', a: 'Ja. DTF-Druck ist dehnbar, reißt nicht und ist waschfest. Er hält auch auf Polyester, Softshell und Mischgewebe. Für eine lange Haltbarkeit wascht ihr die Teile am besten auf links gedreht und ohne Weichspüler.' },
@@ -63,7 +65,7 @@ const ld = [
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Startseite', item: site.url }, { '@type': 'ListItem', position: 2, name: 'Für wen wir drucken', item: `${site.url}/fuer` }, { '@type': 'ListItem', position: 3, name: 'Handwerksbetriebe', item: `${site.url}/fuer/handwerksbetriebe` }] },
 ];
 ---
-<Base title="Arbeitskleidung mit Firmenlogo bedrucken lassen, ab 1 Stück" description="Arbeitskleidung mit Firmenlogo für Handwerksbetriebe: T-Shirts, Polos, Hoodies, Hemden und Softshelljacken ab 1 Stück ohne Mindestmenge. Polo mit Logo ab 14,50 € netto, einzeln nachbestellbar, eigene Workwear möglich. Druckerei in Oberhausen, Angebot in 24 Stunden." jsonLd={ld} ogImage="/img/workwear-team-halle.jpg">
+<Base title="Arbeitskleidung mit Firmenlogo bedrucken lassen, ab 1 Stück" description={`Arbeitskleidung mit Firmenlogo für Handwerksbetriebe: T-Shirts, Polos, Hoodies, Hemden und Softshelljacken ab 1 Stück ohne Mindestmenge. Polo mit Logo ab ${netto('Poloshirt', 200)} € netto, einzeln nachbestellbar, eigene Workwear möglich. Druckerei in Oberhausen, Angebot in 24 Stunden.`} jsonLd={ld} ogImage="/img/workwear-team-halle.jpg">
 
   <section class="hw-hero">
     <div class="container hw-hero-grid">

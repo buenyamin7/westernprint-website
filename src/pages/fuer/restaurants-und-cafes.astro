@@ -1,26 +1,37 @@
 ---
 // Landingpage Gastro und Hotels: Restaurants, Cafés, Bars, Imbisse, Bäckereien, Foodtrucks, Catering, Hotels. Vorlage: BranchenLanding.
-// Preise: veröffentlichte Preisliste (Stand 21.09.2026). Schürzen besorgen wir laut Inhaber (18.10.2026), ein veröffentlichter
+// Preise: veröffentlichte Preisliste (Stand 22.10.2026). Schürzen besorgen wir laut Inhaber (18.10.2026), ein veröffentlichter
 // Preis dafür gibt es noch nicht, deshalb „im Angebot“. Kochjacken nur als angelieferte Ware. Waschhinweis bleibt bei 30 Grad.
 import Base from '../../layouts/Base.astro';
 import BranchenLanding from '../../components/BranchenLanding.astro';
 import { site, oeffnungszeiten } from '../../data/site';
 
-const STAND = '21.09.2026';
+import { STAND, tabellen } from '../../data/preise';
+
 const brutto = (n: string) => (Math.round(parseFloat(n.replace(',', '.')) * 119) / 100).toFixed(2).replace('.', ',');
-const mengen = ['1 Stück', '10 Stück', '25 Stück', '50 Stück', '100 Stück'];
+const mengen = ['1 Stück', '10 Stück', '50 Stück', '100 Stück', '200 Stück'];
+// Zeile der Preistabelle aus src/data/preise.ts: Nettopreise ohne Euro-Zeichen in der Reihenfolge von mengen. Fehlt eine Staffel, bricht der Build ab.
+const zeile = (anfang: string, t: string, m?: string) => {
+  const tb = tabellen.find((x) => x.t.startsWith(anfang));
+  if (!tb) throw new Error(`${anfang} fehlt in preise.ts`);
+  return { t, m: m ?? (tb.t.match(/\((.+)\)/)?.[1] ?? ''), p: mengen.map((x) => { const z = tb.zeilen.find(([mm]) => mm === x); if (!z) throw new Error(`Keine Staffel ${x} für ${tb.t}`); return z[1].replace(' €', ''); }) };
+};
 const preise = [
-  { t: 'Poloshirt', m: 'Stedman Classic Polo, 170 g', p: ['22,90', '17,90', '15,90', '14,50', '13,40'] },
-  { t: 'T-Shirt Basic', m: 'Stedman Classic-T, 155 g', p: ['17,90', '12,90', '10,90', '9,40', '8,40'] },
-  { t: 'T-Shirt Bio', m: 'Stanley/Stella Creator 2.0, 180 g', p: ['19,90', '14,90', '12,90', '11,40', '10,40'] },
-  { t: 'Hemd', m: 'Stanley/Stella Styler, Bio-Baumwolle', p: ['36,90', '30,90', '28,90', '27,40', '25,90'] },
-  { t: 'Hoodie', m: 'Stedman Classic Hoodie, 280 g', p: ['29,90', '24,90', '22,90', '21,40', '19,90'] },
-  { t: 'Sweatshirt', m: 'Stedman Classic Sweatshirt, 280 g', p: ['27,90', '22,90', '20,90', '19,40', '17,90'] },
+  zeile('Poloshirt', 'Poloshirt'),
+  zeile('T-Shirt Basic', 'T-Shirt Basic'),
+  zeile('T-Shirt Bio', 'T-Shirt Bio'),
+  zeile('Hemd', 'Hemd'),
+  zeile('Hoodie', 'Hoodie'),
+  zeile('Sweatshirt', 'Sweatshirt'),
   { t: 'Bistroschürze', m: 'kurz oder lang, mit Logo', p: ['im Angebot', 'im Angebot', 'im Angebot', 'im Angebot', 'im Angebot'] },
   { t: 'Latzschürze', m: 'mit Tasche, Logo auf Brust oder Tasche', p: ['im Angebot', 'im Angebot', 'im Angebot', 'im Angebot', 'im Angebot'] },
-  // Cap nach der Staffel vom 14.10.2026 (EK + 12 / 12 / 8 / 6,50 / 5,50), Stand 18.10.2026. Schürzen: kein EK im Katalog, Preis im Angebot.
-  { t: 'Cap', m: 'Flexfit 110, Logo vorne', p: ['19,50', '19,50', '15,50', '14,00', '13,00'] },
+  // Cap: EK 7,50 (Flexfit 110, POD-DB) plus Aufschlag für einen Druck vorne: 1 Stück +12, ab 10 +8, 50 +6,50, 100 +5,50, 200 +5,00 (Staffel vom 14.10.2026). Schürzen: kein EK im Katalog, Preis im Angebot.
+  { t: 'Cap', m: 'Flexfit 110, Logo vorne', p: ['19,50', '15,50', '14,00', '13,00', '12,50'] },
 ];
+/** Nettopreis als Text aus der Tabelle oben: netto('Poloshirt', 10) -> '13,22' */
+const netto = (t: string, menge: number) => preise.find((r) => r.t === t)!.p[mengen.indexOf(`${menge} Stück`)];
+/** nb('Poloshirt', 10) -> '13,22 € netto (15,73 € brutto)' */
+const nb = (t: string, menge: number) => `${netto(t, menge)} € netto (${brutto(netto(t, menge))} € brutto)`;
 const zusatz = [
   { t: 'Zweite Druckseite', p: '', d: 'Logo klein vorne, Name des Lokals oder Spruch groß auf dem Rücken.' },
   { t: 'Ärmeldruck', p: '', d: 'Pro Ärmel, bis 8 x 8 cm. Zum Beispiel Instagram-Name oder Webadresse.' },
@@ -57,9 +68,9 @@ const blocks = [
   { h: 'Imbiss, Eisdiele, Foodtruck: kleine Teams, kleine Mengen', p: 'Viele Gastro-Betriebe haben drei bis acht Leute. Dafür braucht es keine Mindestmenge: Wir drucken ab 1 Stück, Staffelpreise beginnen bei 10, Größen und Modelle mischt ihr frei. Ein Foodtruck mit vier Shirts und vier Schürzen ist bei uns ein normaler Auftrag, kein Sonderfall.' },
 ];
 const faqs = [
-  { q: 'Wo bekommen Restaurants und Cafés Shirts und Schürzen mit Logo?', a: `Bei westernprint in Oberhausen: T-Shirts, Poloshirts, Hoodies, Hemden, Schürzen und Caps mit eurem Logo, ab 1 Stück ohne Mindestmenge. Ein Poloshirt mit Logo kostet bei 10 Stück 17,90 € netto (${brutto('17,90')} € brutto) pro Stück, Stand ${STAND}. Die Serie ist 5 bis 7 Werktage nach Freigabe fertig, einzelne Teile für neue Aushilfen bestellt ihr in 1 bis 3 Werktagen nach. Lieferung per DHL ins Lokal oder Abholung in Oberhausen.` },
+  { q: 'Wo bekommen Restaurants und Cafés Shirts und Schürzen mit Logo?', a: `Bei westernprint in Oberhausen: T-Shirts, Poloshirts, Hoodies, Hemden, Schürzen und Caps mit eurem Logo, ab 1 Stück ohne Mindestmenge. Ein Poloshirt mit Logo kostet bei 10 Stück ${nb('Poloshirt', 10)} pro Stück, Stand ${STAND}. Die Serie ist 5 bis 7 Werktage nach Freigabe fertig, einzelne Teile für neue Aushilfen bestellt ihr in 1 bis 3 Werktagen nach. Lieferung per DHL ins Lokal oder Abholung in Oberhausen.` },
   { q: 'Bedruckt ihr Schürzen mit Logo?', a: 'Ja. westernprint bedruckt Bistroschürzen (kurz und lang), Latzschürzen mit Tasche und Vorbinder mit eurem Logo, auf der Brust, mittig oder auf der Tasche. Wir besorgen die Schürzen in Schwarz und weiteren Farben oder bedrucken eure vorhandenen. Den Preis je Modell nennen wir im Angebot, an Werktagen innerhalb von 24 Stunden.' },
-  { q: 'Was kostet Gastro-Kleidung mit Logo?', a: `Ein Poloshirt (Stedman Classic Polo) mit einem Druck kostet bei westernprint 22,90 € netto (${brutto('22,90')} € brutto) als Einzelstück, 17,90 € netto (${brutto('17,90')} € brutto) bei 10 Stück und 14,50 € netto (${brutto('14,50')} € brutto) bei 50 Stück. Ein T-Shirt Basic (Stedman Classic-T) kostet 12,90 € netto (${brutto('12,90')} € brutto) bei 10 Stück, ein Hoodie für Lieferfahrer 24,90 € netto (${brutto('24,90')} € brutto) bei 10 Stück. Alle Preise pro Stück inklusive Textil und einem Druck, Stand ${STAND}. Schürzen und Caps stehen im Angebot.` },
+  { q: 'Was kostet Gastro-Kleidung mit Logo?', a: `Ein Poloshirt (Stedman Classic Polo) mit einem Druck kostet bei westernprint ${nb('Poloshirt', 1)} als Einzelstück, ${nb('Poloshirt', 10)} bei 10 Stück und ${nb('Poloshirt', 50)} bei 50 Stück. Ein T-Shirt Basic (Stedman Classic-T) kostet ${nb('T-Shirt Basic', 10)} bei 10 Stück, ein Hoodie für Lieferfahrer ${nb('Hoodie', 10)} bei 10 Stück. Alle Preise pro Stück inklusive Textil und einem Druck, Stand ${STAND}. Schürzen und Caps stehen im Angebot.` },
   { q: 'Gibt es eine Mindestmenge für Gastro-Kleidung?', a: 'Nein. westernprint druckt ab 1 Stück. Staffelpreise gelten ab 10 Stück, ab 50 Stück wird es noch einmal günstiger. Service, Küche und Theke könnt ihr in einer Bestellung mischen, auch verschiedene Farben und Größen, ohne Aufpreis.' },
   { q: 'Hält der Druck die Wäsche in der Gastronomie aus?', a: 'Ja, wenn ihr bei 30 Grad auf links wascht, ohne Weichspüler und ohne Trockner. Der DTF-Druck bleibt dann deckend und elastisch. Fettflecken behandelt ihr vor der Wäsche vor, Bleiche schadet jedem Textildruck. Wäscht eure Wäscherei bei 60 Grad oder heißer, sagt es uns vor der Bestellung, dann klären wir vorher, was passt.' },
   { q: 'Können wir unsere eigenen Schürzen und Kochjacken bedrucken lassen?', a: 'Ja. westernprint bedruckt angelieferte Schürzen, Kochjacken, Shirts und Polos, ihr zahlt nur den Druck. Nennt vorher kurz das Material, wir prüfen, ob es sich für DTF eignet. Plant 2 bis 3 Prozent Reserve ein, für Materialfehler an angelieferter Ware haften wir nicht.' },
@@ -80,7 +91,7 @@ const ld = [
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Startseite', item: site.url }, { '@type': 'ListItem', position: 2, name: 'Für wen wir drucken', item: `${site.url}/fuer` }, { '@type': 'ListItem', position: 3, name: 'Gastro und Hotels', item: `${site.url}/fuer/restaurants-und-cafes` }] },
 ];
 ---
-<Base title="Gastro-Kleidung mit Logo: Shirts, Polos, Schürzen ab 1 Stück" description="Shirts, Polos, Hemden und Schürzen mit Logo für Restaurant, Café, Bar, Imbiss und Hotel. Ab 1 Stück, Polo ab 14,50 € netto, Nachschub in 1 bis 3 Werktagen. Druckerei Oberhausen." jsonLd={ld} ogImage="/img/gastro-schuerzen-cafe.jpg">
+<Base title="Gastro-Kleidung mit Logo: Shirts, Polos, Schürzen ab 1 Stück" description={`Shirts, Polos, Hemden und Schürzen mit Logo für Restaurant, Café, Bar, Imbiss und Hotel. Ab 1 Stück, Polo ab ${netto('Poloshirt', 200)} € netto, Nachschub in 1 bis 3 Werktagen. Druckerei Oberhausen.`} jsonLd={ld} ogImage="/img/gastro-schuerzen-cafe.jpg">
   <BranchenLanding
     slug="restaurants-und-cafes" name="Gastro und Hotels"
     kicker="Restaurants, Cafés, Bars, Imbisse, Hotels"
@@ -89,11 +100,11 @@ const ld = [
     trust={[{ v: 'ab 1', l: 'Stück, keine Mindestmenge' }, { v: '24 h', l: 'bis zum Angebot an Werktagen' }, { v: '1 bis 3', l: 'Werktage für Nachschub' }, { v: '30 °C', l: 'auf links, ohne Weichspüler' }]}
     image="/img/gastro-schuerzen-cafe.jpg" imageAlt="Schwarze T-Shirts, ein Poloshirt, Bistroschürze und Latzschürze mit kleinem Logo auf einer Kleiderstange vor einer Café-Theke" imagePos="center 50%"
     waText="Hallo westernprint, wir brauchen Shirts und Schürzen mit unserem Logo für unser Gastro-Team."
-    answer={`westernprint in Oberhausen bedruckt Gastro- und Hotelkleidung mit Logo für Restaurants, Cafés, Bars, Imbisse, Bäckereien, Foodtrucks, Catering und Hotels, ab 1 Stück ohne Mindestmenge. Ein Poloshirt mit Logo kostet bei 10 Stück 17,90 € netto, ein T-Shirt 12,90 € netto, ein Hoodie 24,90 € netto pro Stück, Stand ${STAND}. Schürzen besorgen wir oder bedrucken eure vorhandenen. Die Serie ist 5 bis 7 Werktage nach Freigabe fertig, Nachschub für neue Aushilfen in 1 bis 3 Werktagen, mit demselben Logo. Gewaschen wird bei 30 Grad auf links, dann hält der Druck.`}
+    answer={`westernprint in Oberhausen bedruckt Gastro- und Hotelkleidung mit Logo für Restaurants, Cafés, Bars, Imbisse, Bäckereien, Foodtrucks, Catering und Hotels, ab 1 Stück ohne Mindestmenge. Ein Poloshirt mit Logo kostet bei 10 Stück ${netto('Poloshirt', 10)} € netto, ein T-Shirt ${netto('T-Shirt Basic', 10)} € netto, ein Hoodie ${netto('Hoodie', 10)} € netto pro Stück, Stand ${STAND}. Schürzen besorgen wir oder bedrucken eure vorhandenen. Die Serie ist 5 bis 7 Werktage nach Freigabe fertig, Nachschub für neue Aushilfen in 1 bis 3 Werktagen, mit demselben Logo. Gewaschen wird bei 30 Grad auf links, dann hält der Druck.`}
     stand={STAND} mengen={mengen} preise={preise} zusatz={zusatz}
     preisTitel="Preise für Gastro-Kleidung mit Logo"
     preisText="Preis pro Stück in Euro, netto zzgl. 19 % MwSt., mit einem Druck (Brust oder Rücken), Textil inklusive. Service, Küche und Theke mischt ihr frei."
-    preisHinweis="Cap Stand 18.10.2026, übrige Teile Stand 21.09.2026. Schürzen und angelieferte Kochjacken stehen mit Preis im Angebot, an Werktagen innerhalb von 24 Stunden. Keine Einrichtungskosten."
+    preisHinweis="Cap Stand 18.10.2026, übrige Teile Stand 22.10.2026. Schürzen und angelieferte Kochjacken stehen mit Preis im Angebot, an Werktagen innerhalb von 24 Stunden. Keine Einrichtungskosten."
     branchenTitel="Für diese Betriebe drucken wir"
     branchenText="Vom Kiosk mit zwei Leuten bis zum Hotel mit vier Abteilungen. Das Logo sitzt klein auf der Brust, auf der Schürze oder groß auf dem Rücken."
     branchen={branchen}

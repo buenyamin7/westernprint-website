@@ -1,0 +1,210 @@
+---
+// Stadtseiten für die direkten Nachbarstädte: /textildruck-muelheim-an-der-ruhr, -bottrop, -duisburg, -essen.
+// Texte, Fragen und Preisauswahl je Stadt in src/data/staedte.ts (dort auch die Regeln für die Texte).
+// Die festen Seiten /textildruck-oberhausen und /textildruck-ruhrgebiet haben eigene Dateien und gehen vor.
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Faq from '../components/Faq.astro';
+import { site } from '../data/site';
+import { bewertungen } from '../data/bewertungen';
+import { staedte, preisZeilen, PREIS_STAND, type Stadt } from '../data/staedte';
+
+export function getStaticPaths() {
+  return staedte.map((s) => ({ params: { stadt: s.slug }, props: { s } }));
+}
+const { s } = Astro.props as { s: Stadt };
+const url = `${site.url}/textildruck-${s.slug}`;
+const preise = preisZeilen(s);
+const andere = staedte.filter((o) => o.slug !== s.slug);
+// Google-Bewertungen aus src/data/bewertungen.ts: 5 -> "5,0", "2026-09-28" -> "28.09.2026"
+const sterne = bewertungen.schnitt.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const bewStand = bewertungen.stand.split('-').reverse().join('.');
+
+// Nur Service, FAQPage und BreadcrumbList. Kein LocalBusiness mit Adresse in der Stadt:
+// Anbieter ist die Organisation in Oberhausen (Base.astro), die Stadt steht nur in areaServed.
+const ld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: `Textildruck für ${s.name}`,
+    serviceType: s.serviceType,
+    description: s.description,
+    provider: { '@id': 'https://westernprint.de/#organization' },
+    areaServed: { '@type': 'City', name: s.name, containedInPlace: { '@type': 'State', name: 'Nordrhein-Westfalen' } },
+    url,
+  },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: s.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Startseite', item: site.url },
+      { '@type': 'ListItem', position: 2, name: 'Textildruck Ruhrgebiet', item: `${site.url}/textildruck-ruhrgebiet` },
+      { '@type': 'ListItem', position: 3, name: `Textildruck für ${s.name}`, item: url },
+    ],
+  },
+];
+---
+<Base title={s.title} description={s.description} jsonLd={ld} ogImage={s.image}>
+  <PageHero
+    eyebrow={s.eyebrow}
+    title={s.h1}
+    lede={s.lede}
+    image={s.image}
+    imageAlt={s.imageAlt}
+    cta={{ label: 'Angebot in 24 Stunden', href: '#anfrage' }}
+    cta2={{ label: 'Preisbeispiele', href: '#preise' }}
+  />
+
+  <section class="section-tight">
+    <div class="container">
+      <h2 class="intro-title reveal">{s.introFrage}</h2>
+      <div class="intro">
+        <p class="answer reveal">{s.intro}</p>
+        <ul class="facts reveal reveal-d1">
+          <li><Icon name="map-pin" size={18} /> Werkstatt in Oberhausen, rund {s.km} km von {s.name}</li>
+          <li><Icon name="clock" size={18} /> Angebot an Werktagen innerhalb von 24 Stunden</li>
+          <li><Icon name="storefront" size={18} /> Abholung in Oberhausen möglich</li>
+          <li><Icon name="truck" size={18} /> Versand per DHL</li>
+          <li><Icon name="star" size={18} /> <a href="/bewertungen">{sterne} von 5 bei {bewertungen.anzahl} Google-Bewertungen</a> (Stand {bewStand})</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>{s.schwerpunkteTitel}</h2>
+        <p>{s.schwerpunkteText}</p>
+      </div>
+      <div class="grid grid-3">
+        {s.schwerpunkte.map((b, i) => (
+          <article class={`feat reveal reveal-d${i}`}>
+            <div class="icon-box"><Icon name={b.icon} size={22} /></div>
+            <h3>{b.t}</h3>
+            <p>{b.d}</p>
+            <a class="feat-more" href={b.href}>{b.cta} <Icon name="arrow-right" size={14} weight="bold" /></a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight alt" id="preise">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>{s.preiseTitel}</h2>
+        <p>{s.preiseText}</p>
+      </div>
+      <div class="honest reveal">
+        <div class="hcol">
+          <ul class="plist">
+            {preise.map((p) => (
+              <li><span>{p.t}<span class="qty">{p.menge}</span></span><strong>{p.netto} netto <span class="gross">({p.brutto} brutto)</span></strong></li>
+            ))}
+          </ul>
+          <p class="muted small">Preise pro Stück, ein Druck (Brust oder Rücken), Textil inklusive. Netto zzgl. 19 % MwSt., in Klammern brutto. Stand {PREIS_STAND}. <a class="accent" href="/was-kostet-textildruck">Alle Staffeln und Beispiele</a></p>
+        </div>
+        <div class="hcol">
+          <h3>So rechnet westernprint</h3>
+          <ul class="ylist">
+            <li><Icon name="check" size={14} weight="bold" /> ab 1 Stück, ohne Mindestmenge</li>
+            <li><Icon name="check" size={14} weight="bold" /> Staffelpreise ab 10 Stück, je mehr Teile, desto günstiger</li>
+            <li><Icon name="check" size={14} weight="bold" /> große Mengen ebenfalls, mit eigenem Angebot</li>
+            <li><Icon name="check" size={14} weight="bold" /> keine Einrichtungskosten, Mischgrößen ohne Aufpreis</li>
+            <li><Icon name="check" size={14} weight="bold" /> Korrekturabzug zur Freigabe vor dem Druck</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container weg">
+      <div class="reveal">
+        <h2>{s.wegTitel}</h2>
+        <p class="muted">{s.weg}</p>
+        <div class="weg-cta">
+          <a href={bewertungen.profilUrl} target="_blank" rel="noopener" class="btn btn-secondary"><Icon name="map-pin" size={18} /> Route planen</a>
+          <a href={site.whatsapp} target="_blank" rel="noopener" class="btn btn-secondary"><Icon name="whatsapp-logo" size={18} /> WhatsApp</a>
+        </div>
+      </div>
+      <address class="reveal reveal-d1">
+        <strong>{site.legalName}</strong><br />
+        {site.address.street}<br />
+        {site.address.zip} {site.address.city}
+      </address>
+    </div>
+  </section>
+
+  <Faq items={s.faqs} title={s.faqTitel} href="#anfrage" />
+
+  <section class="section" id="anfrage">
+    <div class="container form-grid">
+      <div class="reveal">
+        <h2>Anfrage aus {s.name}</h2>
+        <p class="muted">Schreib uns Textil, Stückzahl, Motiv und Wunschtermin. Das Angebot kommt an Werktagen innerhalb von 24 Stunden, meist schneller.</p>
+      </div>
+      <div class="card card-pad reveal reveal-d1">
+        <ContactForm topic={s.topic} />
+      </div>
+    </div>
+  </section>
+
+  <nav class="section-tight nachbarn" aria-label="Textildruck in den Nachbarstädten">
+    <div class="container">
+      <h2>Textildruck in der Nachbarschaft</h2>
+      <ul class="cities">
+        <li><a href="/textildruck-oberhausen">Oberhausen</a></li>
+        {andere.map((o) => <li><a href={`/textildruck-${o.slug}`}>{o.name}</a></li>)}
+        <li><a href="/textildruck-ruhrgebiet">Weitere Städte im Ruhrgebiet</a></li>
+      </ul>
+    </div>
+  </nav>
+</Base>
+
+<style>
+  .intro-title { max-width: 30ch; margin-bottom: clamp(20px, 3vw, 32px); }
+  .intro { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: center; }
+  .answer { max-width: 68ch; font-size: 1.12rem; color: var(--text); }
+  .facts { display: grid; gap: 10px; }
+  .facts li { display: flex; gap: 10px; align-items: center; color: var(--text-2); font-size: 15px; }
+  .facts a { color: inherit; }
+  .facts :global(svg) { color: var(--accent); flex: none; }
+  .feat { display: grid; gap: 12px; padding: 26px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); align-content: start; }
+  .feat p { color: var(--text-2); font-size: 15px; }
+  .feat-more { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); font-size: 14px; font-weight: 600; text-decoration: none; }
+  .feat-more:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .alt { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .honest { display: grid; grid-template-columns: 1.15fr 1fr; gap: 28px; }
+  .hcol { padding: clamp(22px, 2.6vw, 32px); border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); }
+  .hcol h3 { margin-bottom: 14px; }
+  .plist { display: grid; gap: 10px; padding: 0; list-style: none; }
+  .plist li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--line); font-size: 15px; }
+  .plist li:last-child { border-bottom: 0; }
+  .plist > li > span { color: var(--text-2); }
+  .plist .qty { display: block; font-size: 13.5px; }
+  .plist strong { font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right; }
+  .plist .gross { display: block; font-size: 13.5px; font-weight: 400; color: var(--text-2); }
+  .small { font-size: 13px; margin-top: 14px; }
+  .ylist { display: grid; gap: 9px; padding: 0; list-style: none; color: var(--text-2); font-size: 15px; }
+  .ylist li { display: flex; gap: 9px; align-items: flex-start; }
+  .ylist :global(.icon) { color: var(--accent); flex: none; margin-top: 4px; }
+  .weg { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center; }
+  .weg .muted { margin-top: 14px; max-width: 64ch; }
+  .weg-cta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+  address { font-style: normal; line-height: 1.6; padding: 20px 22px; border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); }
+  .form-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 48px; align-items: start; }
+  .form-grid .muted { margin-top: 14px; max-width: 44ch; }
+  .nachbarn { border-top: 1px solid var(--line); }
+  .nachbarn h2 { font-size: clamp(1.15rem, 1.6vw, 1.35rem); margin-bottom: 16px; }
+  .cities { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; list-style: none; }
+  .cities li { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); font-size: 14px; }
+  .cities a { color: inherit; text-decoration: none; }
+  .cities li:hover { border-color: var(--accent-line); }
+  @media (max-width: 900px) { .intro, .weg, .form-grid, .honest { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) { .plist li { flex-direction: column; gap: 4px; } .plist strong { text-align: left; white-space: normal; } }
+</style>
