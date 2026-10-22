@@ -61,7 +61,7 @@ const extra = (anfang: string) => {
 /** Zusatzposten als Satzbaustein mit netto und brutto */
 const extraNb = (anfang: string) => nb(extra(anfang));
 /** Unbestimmter Artikel für generierte Sätze: "ein T-Shirt", "ein Hoodie", "eine Jacke" */
-const ein = (n: string) => (/^(Jacke|Sweatjacke|Weste|Tasche)/.test(n) ? 'eine' : 'ein');
+const ein = (n: string) => (/^(Jacke|Sweatjacke|Softshelljacke|Weste|Tasche)/.test(n) ? 'eine' : 'ein');
 /** 'Stanley/Stella Creator 2.0, 180 g' -> 'Stanley/Stella' */
 const marke = (tb: Tabelle) => modell(tb).split(' ')[0];
 
@@ -122,9 +122,9 @@ const fragen = [
     ].join(' '),
   },
   {
-    q: 'Was kostet es, 25 Poloshirts bedrucken zu lassen?',
+    q: 'Was kostet es, 50 Poloshirts bedrucken zu lassen?',
     a: [
-      `Ein Poloshirt (${modell(polo)}) mit einem Druck kostet bei westernprint in Oberhausen ${nb(preis(polo, 25))} pro Stück, wenn du 25 Stück bestellst.`,
+      `Ein Poloshirt (${modell(polo)}) mit einem Druck kostet bei westernprint in Oberhausen ${nb(preis(polo, 50))} pro Stück, wenn du 50 Stück bestellst.`,
       `Bei 50 Stück sind es ${nb(preis(polo, 50))}, bei 100 Stück ${nb(preis(polo, 100))} pro Stück.`,
       `Ein Ärmeldruck oder ein kleines Zusatzmotiv kostet ${extraNb('Ärmeldruck')} zusätzlich.`,
       'Einrichtungskosten fallen nicht an.',
@@ -158,13 +158,13 @@ const faktorText = [
 ].join(' ');
 
 const faqs = [
-  { q: 'Was kostet es, 50 T-Shirts bedrucken zu lassen?', a: `Bei 50 Basic-Shirts mit einem Druck liegt der Stückpreis bei etwa ${nb('9,40 €')}, also rund ${nb('470 €')} für die ganze Serie. Mit Bio-Baumwolle sind es etwa ${nb('11,40 €')} pro Stück. Ein zweiter Druck auf dem Rücken kostet ${nb('ab 3,50 €')} zusätzlich pro Teil (Stand ${STAND}).` },
-  { q: 'Was kostet ein einzelnes T-Shirt?', a: `Ein einzelnes bedrucktes Shirt liegt bei etwa ${nb('17,90 €')}, ein Hoodie bei etwa ${nb('29,90 €')}. Wir drucken ab 1 Stück, ohne Mindestmenge und ohne Einrichtungsgebühr.` },
+  { q: 'Was kostet es, 50 T-Shirts bedrucken zu lassen?', a: `Bei 50 Basic-Shirts mit einem Druck liegt der Stückpreis bei ${nb(preis(basic, 50))}, also ${nb(`${(cent(preis(basic, 50)) * 50 / 100).toLocaleString('de-DE', { minimumFractionDigits: 2 })} €`)} für die ganze Serie. Mit Bio-Baumwolle sind es ${nb(preis(bio, 50))} pro Stück. Ein zweiter Druck auf dem Rücken kostet ${nb('ab 3,50 €')} zusätzlich pro Teil (Stand ${STAND}).` },
+  { q: 'Was kostet ein einzelnes T-Shirt?', a: `Ein einzelnes bedrucktes Shirt kostet ${nb(preis(basic, 1))}, ein Hoodie ${nb(preis(hoodie, 1))}. Wir drucken ab 1 Stück, ohne Mindestmenge und ohne Einrichtungsgebühr.` },
   { q: 'Warum ist ein einzelnes Teil so viel teurer als 100?', a: 'Weil der Aufwand fast derselbe ist: Datei prüfen, Druckdatei anlegen, Maschine einrichten, drucken, pressen, kontrollieren, verpacken. Bei 100 Teilen verteilt sich diese Arbeit, bei einem Teil nicht.' },
   { q: 'Fallen Einrichtungskosten oder Kosten für die Druckdatei an?', a: 'Nein. Wir berechnen keine Einrichtung, keine Siebkosten und keinen Datencheck. Du zahlst Textil, Druck und Versand, sonst nichts.' },
-  { q: 'Was kostet der Druck auf mitgebrachter Ware?', a: `Wenn du deine eigenen Textilien anlieferst, berechnen wir nur den Druck: kleines Logo auf der Brust ${nb('ab 3,90 €')}, großes Motiv auf dem Rücken ${nb('ab 6,90 €')} pro Teil. Bitte vorher kurz das Material nennen, damit wir prüfen, ob der Druck darauf hält.` },
+  { q: 'Was kostet der Druck auf mitgebrachter Ware?', a: `Wenn du deine eigenen Textilien anlieferst, berechnen wir nur den Druck: kleines Logo auf der Brust ${nb('ab 3,20 €')}, großes Motiv auf dem Rücken ${nb('ab 5,50 €')} pro Teil, je nach Stückzahl. Bitte vorher kurz das Material nennen, damit wir prüfen, ob der Druck darauf hält.` },
   { q: 'Ist DTG teurer als DTF?', a: 'Im Preis liegen beide Verfahren nah beieinander. Wir wählen nach Textil und Motiv: DTF hält auf Baumwolle und Polyester und ist bei Auflagen schneller, DTG geht direkt ins Gewebe und fühlt sich weicher an, funktioniert aber nur auf Baumwolle.' },
-  { q: 'Sind die Preise brutto oder netto?', a: `Beides: Die Druckpreise auf dieser Seite sind Nettopreise zzgl. 19 % Mehrwertsteuer, der Bruttopreis steht jeweils in Klammern daneben, zum Beispiel ${nb('9,40 €')}. Die Versandkosten sind Endpreise inkl. MwSt.` },
+  { q: 'Sind die Preise brutto oder netto?', a: `Beides: Die Druckpreise auf dieser Seite sind Nettopreise zzgl. 19 % Mehrwertsteuer, der Bruttopreis steht jeweils in Klammern daneben, zum Beispiel ${nb(preis(basic, 50))}. Die Versandkosten sind Endpreise inkl. MwSt.` },
   { q: 'Wie schnell geht es?', a: 'Einzelstücke und kleine Mengen sind in 1 bis 3 Werktagen fertig, Serien ab 50 Stück 5 bis 7 Werktage nach Freigabe. Von der Bestellung bis zur Lieferung sind es bei Einzelstücken 3 bis 5 Werktage. Express ist auf Anfrage möglich, sag uns einfach deinen Termin.' },
 ];
 
@@ -239,11 +239,11 @@ const ld = [
   },
 ];
 ---
-<Base title="Was kostet Textildruck? Preisbeispiele für 1 bis 100 Stück" description="Was kostet es, T-Shirts oder Hoodies bedrucken zu lassen? Echte Preisbeispiele für 1, 10, 25, 50 und 100 Stück, netto und brutto, ohne Einrichtungskosten. Druckerei in Oberhausen." jsonLd={ld}>
+<Base title="Was kostet Textildruck? Preisbeispiele für 1 bis 200 Stück" description="Was kostet es, T-Shirts oder Hoodies bedrucken zu lassen? Echte Preisbeispiele für 1, 10, 50, 100 und 200 Stück, netto und brutto, ohne Einrichtungskosten. Druckerei in Oberhausen." jsonLd={ld}>
   <PageHero
     eyebrow="Preise"
     title="Was kostet Textildruck? <span class='hl'>Hier stehen Zahlen.</span>"
-    lede={`Keine Preisliste auf Anfrage, sondern echte Beispiele: T-Shirt, Polo und Hoodie für 1, 10, 25, 50 und 100 Stück. Alle Preise netto zzgl. MwSt., daneben brutto, Stand ${STAND}.`}
+    lede={`Keine Preisliste auf Anfrage, sondern echte Beispiele: T-Shirt, Polo und Hoodie für 1, 10, 50, 100 und 200 Stück. Alle Preise netto zzgl. MwSt., daneben brutto, Stand ${STAND}.`}
     image="/img/packtisch.jpg"
     imageAlt="Frisch bedruckte Shirts auf dem Packtisch"
     cta={{ label: 'Angebot in 24h', href: '/kontakt' }}

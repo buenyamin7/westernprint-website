@@ -62,7 +62,7 @@ const styles = [
 ];
 
 const faqs = [
-  { q: 'Was kostet ein Abschluss-Hoodie bei euch?', a: `Ab ${KLASSENPREIS_AB} Stück gilt der Klassenpreis: Der Stedman Classic Hoodie kostet ${euro(hoodie.preisAb10)} € pro Stück, der Heavy Hoody von Build Your Brand ${euro(heavy.preisAb10)} €, Oversize-Hoodies ab ${euro(oversizeAb)} € und der Ultra Heavy Oversized mit 500 g/m² ${euro(ultra.preisAb10)} €. Für 1 bis 9 Stück kostet der Classic Hoodie ${euro(hoodie.preis1bis9)} € pro Stück. T-Shirts gibt es ab ${euro(shirtAb)} €. Alle Preise gelten für alle Farben und Größen, inklusive Druck vorne und hinten, Design und MwSt., zzgl. Versand. Stand ${STAND}.` },
+  { q: 'Was kostet ein Abschluss-Hoodie bei euch?', a: `Ab ${KLASSENPREIS_AB} Stück gilt der Klassenpreis: Der Stedman Classic Hoodie kostet ${euro(hoodie.preisAb10)} € pro Stück, der Heavy Hoody von Build Your Brand ${euro(heavy.preisAb10)} €, Oversize-Hoodies ab ${euro(oversizeAb)} € und der Ultra Heavy Oversized mit 500 g/m² ${euro(ultra.preisAb10)} €. Für 1 bis 9 Stück kostet der Classic Hoodie ${euro(hoodie.preis1bis9)} € pro Stück. T-Shirts gibt es ab ${euro(shirtAb)} €. Alle Preise gelten für alle Farben in XS bis XXL, inklusive Druck vorne und hinten, Design und MwSt., zzgl. Versand. Größen ab 3XL kosten etwas mehr, der Aufpreis steht im Angebot. Stand ${STAND}.` },
   { q: 'Gibt es eine Mindestmenge?', a: `Nein. Ihr könnt ab 1 Stück bestellen. Der Klassenpreis gilt ab ${KLASSENPREIS_AB} Stück, für 1 bis 9 Stück gibt es einen eigenen Preis, beim Classic Hoodie zum Beispiel ${euro(hoodie.preis1bis9)} €. Nachbestellungen gehen ab 1 Stück, zum Preis für 1 bis 9 Stück. Eure Druckdaten bleiben dafür gespeichert.` },
   { q: 'Was kosten Abschlusspullis für die ganze Stufe?', a: `Ein Beispiel: ${bsp.menge} Stedman Classic Hoodies kosten ${bsp.menge} × ${euro(bsp.modell.preisAb10)} € = ${euro(bsp.ware)} €. Dazu kommt der Versand mit ${versand} € pro Paket, zusammen ${euro(bsp.gesamt)} €. Das sind ${euro(bsp.proPerson)} € pro Person, Druck vorne und hinten, Design und MwSt. inklusive. Stand ${STAND}.` },
   { q: 'Kostet das Design extra?', a: 'Nein. Für Abschlussklassen setzen wir Motto, Schriftzug und Namensliste kostenlos. Gedruckt wird erst, wenn ihr Motto und Namensliste schriftlich bestätigt habt.' },
@@ -213,7 +213,7 @@ const ld = [
 
   <section class="section prices-section" id="preise">
     <div class="container">
-      <div class="section-head reveal"><h2>Preise für Abschlusspullis und Klassen-Shirts</h2><p class="muted">Preis pro Stück in Euro, brutto inkl. 19 % MwSt., netto darunter. Gilt für alle Farben und Größen, inkl. Druck vorne + hinten und Design, zzgl. Versand. Stand {STAND}.</p></div>
+      <div class="section-head reveal"><h2>Preise für Abschlusspullis und Klassen-Shirts</h2><p class="muted">Preis pro Stück in Euro, brutto inkl. 19 % MwSt., netto darunter. Gilt für alle Farben in XS bis XXL, inkl. Druck vorne + hinten und Design, zzgl. Versand. Größen ab 3XL und melierte Stanley/Stella-Farben kosten etwas mehr, der Aufpreis steht im Angebot. Stand {STAND}.</p></div>
       <div class="table-wrap reveal">
         <table class="price-table">
           <thead><tr><th scope="col">Modell</th><th scope="col">1 bis 9 Stück</th><th scope="col" class="klasse">ab {KLASSENPREIS_AB} Stück<span>Klassenpreis</span></th></tr></thead>

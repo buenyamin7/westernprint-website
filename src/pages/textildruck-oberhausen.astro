@@ -31,14 +31,14 @@ const nb = (menge: number) => `${nettoPreis(menge)} netto (${bruttoPreis(nettoPr
 const sterne = bewertungen.schnitt.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 const bewStand = bewertungen.stand.split('-').reverse().join('.');
 
-// Städte-Pills verlinken auf die Abschnitte der Ruhrgebiet-Seite (IDs dort in der Städteliste).
+// Städte-Pills: Nachbarstädte mit eigener Seite (/textildruck-<stadt>), die übrigen auf ihren Abschnitt der Ruhrgebiet-Seite.
 const staedte = [
   { c: 'Oberhausen' },
-  { c: 'Essen', id: 'essen' },
-  { c: 'Duisburg', id: 'duisburg' },
-  { c: 'Mülheim an der Ruhr', id: 'muelheim-an-der-ruhr' },
-  { c: 'Bottrop', id: 'bottrop' },
-  { c: 'Gelsenkirchen', id: 'gelsenkirchen' },
+  { c: 'Essen', href: '/textildruck-essen' },
+  { c: 'Duisburg', href: '/textildruck-duisburg' },
+  { c: 'Mülheim an der Ruhr', href: '/textildruck-muelheim-an-der-ruhr' },
+  { c: 'Bottrop', href: '/textildruck-bottrop' },
+  { c: 'Gelsenkirchen', href: '/textildruck-gelsenkirchen' },
   { c: 'Dinslaken', id: 'dinslaken' },
   { c: 'Moers', id: 'moers' },
   { c: 'Düsseldorf', id: 'duesseldorf' },
@@ -122,7 +122,7 @@ const ld = [
           </a>
         ))}
       </div>
-      <p class="more muted reveal">Du kommst aus einer der Nachbarstädte? Auf <a class="accent" href="/textildruck-ruhrgebiet">Textildruck im Ruhrgebiet</a> stehen Entfernung, Abholung und Lieferzeiten für Essen, Duisburg, Mülheim, Bottrop und das übrige Revier. Alle Zielgruppen findest du unter <a class="accent" href="/fuer">Für wen wir drucken</a>.</p>
+      <p class="more muted reveal">Du kommst aus einer der Nachbarstädte? Für <a class="accent" href="/textildruck-essen">Essen</a>, <a class="accent" href="/textildruck-duisburg">Duisburg</a>, <a class="accent" href="/textildruck-muelheim-an-der-ruhr">Mülheim</a>, <a class="accent" href="/textildruck-bottrop">Bottrop</a> und <a class="accent" href="/textildruck-gelsenkirchen">Gelsenkirchen</a> gibt es eigene Seiten, auf <a class="accent" href="/textildruck-ruhrgebiet">Textildruck im Ruhrgebiet</a> stehen Entfernung, Abholung und Lieferzeiten für das übrige Revier. Alle Zielgruppen findest du unter <a class="accent" href="/fuer">Für wen wir drucken</a>.</p>
     </div>
   </section>
 
@@ -142,7 +142,7 @@ const ld = [
         </div>
       </div>
       <ul class="cities reveal reveal-d1">
-        {staedte.map((s) => <li>{s.id ? <a href={`/textildruck-ruhrgebiet#${s.id}`}>{s.c}</a> : s.c}</li>)}
+        {staedte.map((s) => <li>{s.href || s.id ? <a href={s.href ?? `/textildruck-ruhrgebiet#${s.id}`}>{s.c}</a> : s.c}</li>)}
       </ul>
     </div>
   </section>

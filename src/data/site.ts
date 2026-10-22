@@ -58,8 +58,9 @@ export const nav: NavItem[] = [
       { title: 'Auftragsarten', items: [
         { label: 'Großauflagen ab 50 Stück', href: '/grossauflagen', hint: 'Staffelpreise, Korrekturabzug, fester Liefertermin' },
         { label: 'Textildruck Oberhausen', href: '/textildruck-oberhausen', hint: 'Vor Ort im Ruhrgebiet, Abholung möglich' },
+        { label: 'Textildruck Ruhrgebiet', href: '/textildruck-ruhrgebiet', hint: 'Essen, Duisburg, Mülheim, Bottrop, Gelsenkirchen' },
         { label: 'Textilien und Marken', href: '/textilien', hint: 'Stanley/Stella, Stedman, BYB, Urban Classics' },
-        { label: 'Was kostet Textildruck?', href: '/was-kostet-textildruck', hint: 'Preisbeispiele für 1, 10, 25, 50 und 100 Stück' },
+        { label: 'Was kostet Textildruck?', href: '/was-kostet-textildruck', hint: 'Preisbeispiele für 1, 10, 50, 100 und 200 Stück' },
         { label: 'Muster anfragen', href: '/kontakt', hint: 'Ein Stück mit deinem Motiv testen, ab 1 Stück' },
       ] },
     ],
@@ -71,6 +72,7 @@ export const nav: NavItem[] = [
       { title: 'Für Shop-Betreiber', items: [
         { label: 'Fulfillment für Shopify', href: '/print-on-demand', hint: 'Drucken, verpacken, versenden in 1-3 Tagen' },
         { label: 'Unsere Shopify-App', href: '/print-on-demand#app', hint: 'Installieren, designen, verkaufen' },
+        { label: 'Print-on-Demand für Etsy', href: '/etsy-print-on-demand', hint: 'Etsy-Bestellungen drucken und neutral an deine Käufer schicken' },
         { label: 'B2B-Partner werden', href: '/b2b-partner', hint: 'Konditionen für Agenturen und Wiederverkäufer' },
         { label: 'Eigene Brand gründen', href: '/textilien#brand-gruenden', hint: 'Ohne Lager, ohne Mindestmenge' },
       ] },
@@ -154,7 +156,7 @@ export const faqs = [
   },
   {
     q: 'Macht ihr auch Print-on-Demand für Shops?',
-    a: 'Ja, als eigenes Angebot für Shop-Betreiber: Wir drucken und versenden deine Bestellungen neutral in deinem Namen. Alle Infos auf der Seite Print-on-Demand.',
+    a: 'Ja, als eigenes Angebot für Shop-Betreiber: Wir drucken und versenden deine Bestellungen neutral in deinem Namen. Shopify-Shops verbinden sich über unsere kostenlose App, Etsy-Shops schicken uns ihre Bestellungen als Liste oder bestellen über unseren Shop. Alle Infos auf den Seiten Print-on-Demand und Print-on-Demand für Etsy.',
   },
 ];
 

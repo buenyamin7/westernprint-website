@@ -58,11 +58,12 @@ const SEITEN: [string, string][] = [
   // Eigene Stadtseiten der Nachbarstädte (src/pages/textildruck-[stadt].astro, Texte in src/data/staedte.ts).
   ...staedte.map((st): [string, string] => [`/textildruck-${st.slug}`, `Textildruck für ${st.name}: ${st.llms}`]),
   ['/', 'Startseite'],
-  ['/was-kostet-textildruck', 'Was kostet Textildruck: Preisbeispiele netto und brutto für 1, 10, 25, 50 und 100 Stück'],
+  ['/was-kostet-textildruck', 'Was kostet Textildruck: Preisbeispiele netto und brutto für 1, 10, 50, 100 und 200 Stück'],
   ['/druckverfahren', 'Druckverfahren: DTF, DTG und Sublimation im Vergleich, Ausstattung der Produktion'],
   ['/grossauflagen', 'Großauflagen: Textildruck ab 50 Stück'],
   ['/textilien', 'Textilien: Sortiment und Marken'],
   ['/print-on-demand', 'Print-on-Demand: Fulfillment für Shopify-Shops'],
+  ['/etsy-print-on-demand', 'Print-on-Demand für Etsy: Bestellungen aus Etsy-Shops drucken und neutral an die Käufer versenden, Etsy-Anbindung in Arbeit'],
   ['/b2b-partner', 'B2B-Partner: White-Label-Fulfillment für Shops ab 50 Bestellungen am Tag'],
   ['/shop', 'Shop: Textilien mit eigenem Motiv bedrucken, ab 1 Stück'],
   ['/bewertungen', 'Bewertungen: Google-Rezensionen von westernprint'],
@@ -140,7 +141,7 @@ function abschlussBlock(): string[] {
     `westernprint bedruckt Abschlusspullis, Abschluss-Hoodies und Klassen-T-Shirts per DTF-Druck in der eigenen Produktion in Oberhausen, mit Motto vorne und Namensliste hinten. ` +
       `Bestellung ab 1 Stück ohne Mindestmenge, Klassenpreis ab ${KLASSENPREIS_AB} Stück. Nachbestellungen ab 1 Stück zum Preis für 1 bis 9 Stück, die Druckdaten bleiben gespeichert.`,
     '',
-    `Preise pro Stück, Stand ${ABSCHLUSS_STAND}, brutto inkl. 19 % MwSt., netto in Klammern. Sie gelten für alle Farben und Größen, inklusive Druck vorne (Motto) und hinten (Namensliste) und Design, zzgl. Versand.`,
+    `Preise pro Stück, Stand ${ABSCHLUSS_STAND}, brutto inkl. 19 % MwSt., netto in Klammern. Sie gelten für alle Farben in XS bis XXL, inklusive Druck vorne (Motto) und hinten (Namensliste) und Design, zzgl. Versand. Größen ab 3XL und melierte Stanley/Stella-Farben (Heather) kosten etwas mehr, der Aufpreis steht im Angebot.`,
     '',
     `| Modell | 1 bis 9 Stück brutto (netto) | ab ${KLASSENPREIS_AB} Stück brutto (netto) |`,
     '| --- | --- | --- |',

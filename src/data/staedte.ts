@@ -2,7 +2,7 @@ import { oeffnungszeiten } from './site';
 import { STAND, tabellen, zusatz } from './preise';
 import { KLASSENPREIS_AB } from './abschluss';
 
-// Eigene Stadtseiten /textildruck-<slug> für die direkten Nachbarstädte (seit Oktober 2026).
+// Eigene Stadtseiten /textildruck-<slug> für die direkten Nachbarstädte (seit Oktober 2026, Gelsenkirchen seit 22.10.2026).
 // Seite: src/pages/textildruck-[stadt].astro. Die übrigen Städte bleiben Abschnitte auf /textildruck-ruhrgebiet.
 //
 // Regeln für die Texte (Inhaber, 13.10.2026):
@@ -10,7 +10,7 @@ import { KLASSENPREIS_AB } from './abschluss';
 //   Stadtnamen, Google wertet fast gleiche Stadtseiten als Füllseiten ab. Texte bitte nicht angleichen.
 // - westernprint sitzt nur in Oberhausen. Keine Adresse, keine Filiale und kein Laden in der Stadt erfinden.
 // - Entfernungen wie auf /textildruck-ruhrgebiet: Straßenkilometer von der Schenkendorfstraße 45 bis zur Stadtmitte,
-//   berechnet am 28.09.2026 mit OpenStreetMap (Mülheim 9,0 | Bottrop 9,7 | Duisburg 12,5 | Essen 15,7).
+//   berechnet am 28.09.2026 mit OpenStreetMap (Mülheim 9,0 | Bottrop 9,7 | Duisburg 12,5 | Essen 15,7 | Gelsenkirchen 20,5).
 //   Fahrzeiten und Autobahnen ebenfalls von dort. Messe Essen rund 15 km wie auf /fuer/messen-und-aussteller.
 // - Preise nur über nb() und zusatzNb() aus src/data/preise.ts, netto und brutto, mit Stand. Bevorzugt 1 und 10 Stück.
 //   Keine Mengenschwelle bei 50 Stück nennen: ab 1 Stück, Staffelpreise ab 10, je mehr, desto günstiger.
@@ -142,7 +142,7 @@ export const staedte: Stadt[] = [
       { q: 'Druckt ihr auch nur ein einziges Shirt?', a: `Ja. westernprint druckt ab 1 Stück und ohne Einrichtungskosten. Ein ${modell('basic')} mit einem Druck kostet einzeln ${nb('basic', 1)}, ein ${modell('bio')} ${nb('bio', 1)}, Stand ${S}. Dein Motiv schickst du per WhatsApp oder Formular, einzelne Shirts kannst du auch direkt im Shop gestalten.` },
       { q: 'Wie schnell ist ein Einzelstück für Mülheim fertig?', a: 'Einzelstücke sind in der Regel in 1 bis 3 Werktagen fertig. Danach holst du das Shirt in Oberhausen ab, rund 9 km von der Mülheimer Innenstadt, oder es geht per DHL zu dir. Hast du einen festen Termin, etwa einen Geburtstag, schreib ihn gleich in die Anfrage.' },
       { q: 'Was kosten JGA-Shirts mit Namen?', a: `Ein ${modell('basic')} mit einem Druck kostet bei 10 Stück ${nb('basic', 10)} pro Stück, Stand ${S}. Ein eigener Name pro Shirt kostet ${zusatzNb('Namen und Rückennummern')} zusätzlich. Gemischte Größen kosten keinen Aufpreis.` },
-      { q: 'Ab wie vielen Shirts wird es günstiger?', a: `Ab 10 Stück gelten Staffelpreise, und je mehr Shirts ihr bestellt, desto günstiger wird das einzelne Shirt. Ein ${modell('basic')} mit einem Druck kostet bei 10 Stück ${nb('basic', 10)}, bei 25 Stück ${nb('basic', 25)} pro Stück, Stand ${S}. Große Mengen druckt westernprint ebenfalls.` },
+      { q: 'Ab wie vielen Shirts wird es günstiger?', a: `Ab 10 Stück gelten Staffelpreise, und je mehr Shirts ihr bestellt, desto günstiger wird das einzelne Shirt. Ein ${modell('basic')} mit einem Druck kostet bei 10 Stück ${nb('basic', 10)}, bei 50 Stück ${nb('basic', 50)} pro Stück, Stand ${S}. Große Mengen druckt westernprint ebenfalls.` },
       { q: 'Kann ein neues Teammitglied einzeln ein Shirt nachbestellen?', a: 'Ja. Vereinslogo, Schrift und Positionen bleiben bei westernprint gespeichert. Das neue Teammitglied bekommt sein Shirt einzeln, mit Name und Nummer im gleichen Stil wie der Rest der Mannschaft. Eigene Trikots könnt ihr mitbringen, vorher prüfen wir das Material. Einzelstücke sind in der Regel in 1 bis 3 Werktagen fertig.' },
       { q: 'Kann ich ein Foto auf ein Shirt drucken lassen?', a: `Ja. Fotos und Motive mit vielen Farben druckt westernprint per DTG direkt auf Baumwolle, zum Beispiel auf das ${modell('bio')}. Schick das Foto in möglichst hoher Auflösung. Jede Datei wird vor dem Druck geprüft, und du bekommst Bescheid, wenn etwas nicht passt.` },
     ],
@@ -275,6 +275,48 @@ export const staedte: Stadt[] = [
     ],
     serviceType: 'Textildruck, Messekleidung, Firmenkleidung, Vereinskleidung',
     llms: 'Messekleidung für Aussteller der Messe Essen, Firmenkleidung und Vereinsshirts, gedruckt in Oberhausen, rund 16 km von Essen',
+  },
+  {
+    slug: 'gelsenkirchen', name: 'Gelsenkirchen', km: 20,
+    title: 'Abschluss-Hoodies und Vereinsshirts bedrucken in Gelsenkirchen',
+    description: 'Abschluss-Hoodies mit Namensliste, Vereinsshirts und Kita-Shirts für Gelsenkirchen. Gedruckt in Oberhausen, rund 20 km über die A42. Ab 1 Stück, Klassenpreis ab 10 Stück, Design für Abschlussklassen gratis.',
+    eyebrow: 'Textildruck für Gelsenkirchen',
+    h1: "Abschluss-Hoodies und Vereinsshirts für Gelsenkirchen. <span class='hl'>Eine Liste, ein Paket, ein Termin.</span>",
+    lede: 'Für Schulen, Kitas und Vereine aus Gelsenkirchen druckt westernprint Hoodies und Shirts mit Motto, Namensliste oder Vereinslogo. Die Werkstatt in Oberhausen liegt rund 20 km entfernt, die Sammelbestellung kommt in einem Paket.',
+    image: '/img/streetwear-group.jpg',
+    imageAlt: 'Vier junge Leute in Oversize-Hoodies, wie eine Abschlussstufe',
+    introFrage: 'Wer druckt in Gelsenkirchen Abschluss-Hoodies mit Namensliste?',
+    intro: `Für Gelsenkirchen druckt westernprint in Oberhausen, Schenkendorfstraße 45, rund 20 km über die A42. Eine Filiale in Gelsenkirchen gibt es nicht, gedruckt wird in der eigenen Werkstatt. Abschlussstufen bekommen Hoodies und Shirts mit Motto vorne und allen Namen hinten, ab ${KLASSENPREIS_AB} Stück zum Klassenpreis, das Design ist für Abschlussklassen kostenlos. Vereine bekommen Trikots und Vereinsshirts mit Logo, Namen und Nummern. Ein ${modell('hoodie')} mit einem Druck kostet bei 10 Stück ${nb('hoodie', 10)} pro Stück, ein ${modell('basic')} ${nb('basic', 10)}, Stand ${S}. Die Sammelbestellung kommt per DHL in einem Paket, Abholung in Oberhausen ist möglich.`,
+    schwerpunkteTitel: 'Schulen, Kitas und Vereine aus Gelsenkirchen',
+    schwerpunkteText: 'Alles, was als Sammelbestellung kommt: eine Liste mit Namen und Größen, eine Freigabe, ein Paket. Für jede Gruppe gibt es eine eigene Seite mit Ablauf, Preisen und Antworten.',
+    schwerpunkte: [
+      { icon: 'graduation-cap', t: 'Abschluss-Hoodies und Abi-Shirts',
+        d: `Motto vorne, alle Namen der Stufe hinten, Mischgrößen ohne Aufpreis. Ab ${KLASSENPREIS_AB} Stück gilt der Klassenpreis, Nachzügler bestellen einzeln nach. Motto und Namensliste setzt westernprint für Abschlussklassen kostenlos, gedruckt wird erst, wenn ihr beides schriftlich bestätigt habt. Eine Rechnung für die ganze Stufe, auf Wunsch an Schule oder Förderverein.`,
+        href: '/fuer/abschlussklassen', cta: 'Abschluss-Hoodies mit Preisen' },
+      { icon: 'backpack', t: 'Kita-Shirts und Schul-Shirts',
+        d: 'Kita-Abschluss, Klassenfahrt, Sportfest oder Hoodies fürs Kollegium: Kindergrößen ab 0 Monaten bis 5XL für Erwachsene, auf Wunsch mit dem Namen jedes Kindes. Eine Liste pro Klasse reicht, geliefert wird sortiert nach Klasse. Die Rechnung geht nach Absprache an Schule, Förderverein oder Elternvertretung.',
+        href: '/fuer/kitas-und-schulen', cta: 'Kita- und Schul-Shirts' },
+      { icon: 'soccer-ball', t: 'Vereinsshirts, Trikots und Fan-Shirts',
+        d: `Vereinslogo, Sponsor, Rückennummer und Name, jedes Teil einzeln nach eurer Liste. Namen und Nummern kosten ${zusatzNb('Namen und Rückennummern')} pro Teil. Der DTF-Druck hält auch auf Funktionsware aus Polyester, eigene Trikots könnt ihr anliefern. Kommt jemand Neues dazu, wird ein einzelnes Teil nachgedruckt.`,
+        href: '/fuer/sportvereine', cta: 'Trikots und Vereinskleidung' },
+    ],
+    preiseTitel: 'Was kosten Hoodies und Shirts für die Stufe oder den Verein?',
+    preiseText: 'Preisbeispiele pro Stück mit einem Druck, Textil inklusive. Abschluss-Hoodies mit Motto vorne und Namensliste hinten stehen mit eigenen Preisen auf der Seite für Abschlussklassen.',
+    preise: [{ m: 'hoodie', menge: 1 }, { m: 'hoodie', menge: 10 }, { m: 'basic', menge: 10 }, { m: 'basic', menge: 50 }, { m: 'bio', menge: 10 }],
+    zusatz: ['Zweite Druckseite', 'Namen und Rückennummern'],
+    wegTitel: 'Von Gelsenkirchen nach Oberhausen',
+    weg: `Von der Gelsenkirchener Innenstadt sind es rund 20 km bis zur Werkstatt in der Schenkendorfstraße 45, über die A42 etwa 25 Minuten. Abholung in Oberhausen ist möglich, ${oeffnungszeiten.text}, nach kurzer Absprache per WhatsApp oder Telefon. Die meisten Stufen und Vereine lassen sich das Paket per DHL mit Sendungsnummer schicken, an die Schule, den Verein oder nach Hause.`,
+    faqTitel: 'Fragen aus Gelsenkirchen',
+    faqs: [
+      { q: 'Wann sollte unsere Stufe aus Gelsenkirchen die Abschluss-Hoodies bestellen?', a: 'Etwa vier Wochen vor dem Termin ist entspannt. Das Angebot kommt an Werktagen innerhalb von 24 Stunden, danach bestätigt ihr Motto und Namensliste schriftlich und bezahlt die Rechnung. Nach Zahlungseingang dauert die Produktion 5 bis 7 Werktage, der Versand per DHL 1 bis 3 Werktage. Wenn es knapp wird, fragt trotzdem früh, wir sagen euch ehrlich, ob es klappt.' },
+      { q: 'Gibt es eine Mindestmenge für Abschluss-Hoodies?', a: `Nein. Bestellen könnt ihr ab 1 Stück, ab ${KLASSENPREIS_AB} Stück gilt der Klassenpreis. Wer später dazukommt, bestellt einzeln nach, zum Preis für 1 bis ${KLASSENPREIS_AB - 1} Stück. Die Druckdaten bleiben dafür gespeichert. Alle Preise stehen auf der Seite für Abschlussklassen.` },
+      { q: 'Druckt ihr auch Kita-Shirts in kleinen Größen?', a: 'Ja. Kindergrößen gibt es ab 0 Monaten, dazu Baby-Bodys und Erwachsenengrößen bis 5XL fürs Kollegium. Jedes Shirt bekommt auf Wunsch den Namen eines Kindes. Schickt eine Liste mit Name und Größe pro Klasse, geliefert wird sortiert nach Klasse.' },
+      { q: 'Was kosten Vereinsshirts mit Namen und Nummern?', a: `Ein ${modell('basic')} mit einem Druck kostet bei 10 Stück ${nb('basic', 10)} und bei 50 Stück ${nb('basic', 50)} pro Stück, Stand ${S}. Namen und Rückennummern kosten ${zusatzNb('Namen und Rückennummern')} pro Teil zusätzlich. Einrichtungskosten fallen nicht an, Mischgrößen kosten keinen Aufpreis.` },
+      { q: 'Kommt die Bestellung nach Gelsenkirchen oder holen wir ab?', a: `Beides geht. Die Sammelbestellung kommt per DHL mit Sendungsnummer an die Schule, den Verein oder eine Privatadresse in Gelsenkirchen. Abholung in der Schenkendorfstraße 45 in Oberhausen ist möglich, ${oeffnungszeiten.text}, nach kurzer Absprache. Von Gelsenkirchen sind es rund 20 km über die A42.` },
+      { q: 'Wer bekommt die Rechnung?', a: 'Bei Abschlussklassen bestellt eine volljährige Person oder der Förderverein, die Rechnung der westernprint GmbH geht auf Wunsch an die Schule oder den Förderverein. Vereine bekommen die Rechnung mit allen Angaben für die Vereinskasse. Bezahlt wird vorab per Überweisung, gedruckt wird nach Zahlungseingang.' },
+    ],
+    serviceType: 'Textildruck, Abschluss-Hoodies mit Namensliste, Vereinskleidung, Kita- und Schul-Shirts',
+    llms: 'Abschluss-Hoodies mit Namensliste, Vereinsshirts und Kita-Shirts, gedruckt in Oberhausen, rund 20 km von Gelsenkirchen',
   },
 ];
 

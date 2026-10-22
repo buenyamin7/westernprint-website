@@ -1,0 +1,241 @@
+---
+// Print-on-Demand für Etsy-Verkäufer. Fakten nach dem Stand vom 22.10.2026:
+// - Eine automatische Etsy-Anbindung gibt es noch nicht, sie ist in Arbeit (Entscheidung des Inhabers vom 02.10.2026), ohne Termin.
+// - Bis dahin bestellen Etsy-Verkäufer per Liste (Mail oder WhatsApp) oder über unseren Shop mit der Lieferadresse ihres Käufers
+//   (Inhaber, 11.10.2026). Versand neutral, auf Wunsch mit dem Shop des Verkäufers als Absender.
+// - Produktpreise stehen bewusst nicht auf der Seite (wie auf /print-on-demand): Der Verkäufer bekommt die Preisliste für seine
+//   Produkte mit dem Angebot. Versandpauschalen wie in der POD-App (lib/pricing/index.ts).
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import ContactForm from '../components/ContactForm.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import { site, oeffnungszeiten } from '../data/site';
+import { bewertungen } from '../data/bewertungen';
+
+const schnitt = bewertungen.schnitt.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const url = `${site.url}/etsy-print-on-demand`;
+
+// Versand pro Bestellung netto, wie in der POD-App: plus 1,50 € je volle 3 Artikel.
+const versand = [
+  { land: 'Deutschland', netto: '5,00', brutto: '5,95' },
+  { land: 'Österreich', netto: '7,00', brutto: '8,33' },
+  { land: 'Übrige EU-Länder', netto: '7,50', brutto: '8,93' },
+  { land: 'Schweiz', netto: '9,00', brutto: '10,71', hinweis: 'Zollpapiere (CN23) erstellen wir, Einfuhrabgaben trägt der Empfänger' },
+];
+
+const schritte = [
+  { t: 'Produkte anfragen', zeit: 'einmalig', d: 'Du schickst uns, was du auf Etsy verkaufst: Textil, Farben, Motive, Druckpositionen. Du bekommst die Preisliste für genau diese Produkte und auf Wunsch ein Muster zum Produktionspreis.' },
+  { t: 'Bestellung weitergeben', zeit: 'pro Bestellung 1 Minute', d: 'Kommt auf Etsy eine Bestellung rein, schickst du uns Name und Adresse des Käufers, Produkt, Farbe, Größe und bei personalisierten Artikeln die Druckdatei, per Mail oder WhatsApp. Oder du bestellst direkt in unserem Shop und trägst die Adresse deines Käufers als Lieferadresse ein.' },
+  { t: 'Druck und Kontrolle', zeit: '1 bis 3 Werktage', d: 'Wir drucken per DTF oder DTG in Oberhausen, prüfen jedes Teil und verpacken neutral. Kein westernprint-Logo, keine Rechnung von uns im Paket.' },
+  { t: 'Versand in deinem Namen', zeit: 'DHL mit Sendungsnummer', d: 'Das Paket geht per DHL direkt an deinen Käufer, auf Wunsch mit deinem Shop als Absender. Die Sendungsnummer bekommst du von uns und trägst sie bei Etsy ein, dein Käufer sieht nur dich.' },
+];
+
+const produkte = [
+  { icon: 'users-three', t: 'Familien- und Partnerlook-Sets', d: 'Mama, Papa, Mini: Sweatshirts und Shirts in Erwachsenen-, Kinder- und Babygrößen aus einer Serie, zum Beispiel Changer 2.0, Mini Changer und Baby Changer von Stanley/Stella, in Natural Raw, Eco Heather und über 50 weiteren Farben.' },
+  { icon: 'gift', t: 'Personalisierte Geschenke', d: 'Namen, Daten, Koordinaten, Fotos. Du schickst uns je Bestellung die fertige Druckdatei, wir drucken sie ab 1 Stück. Fotos und feine Verläufe laufen per DTG auf Baumwolle.' },
+  { icon: 'hoodie', t: 'Hoodies und Sweater mit Spruch', d: 'Statement-Hoodies, Sprüche, Illustrationen: auf Stedman Classic Hoodie, Stanley/Stella Cruiser 2.0 oder Heavy Oversize von Build Your Brand, mit Nackenprint statt Etikett, wenn du willst.' },
+  { icon: 'baby', t: 'Baby-Bodys und Kinder-Shirts', d: 'Bodys ab 0 Monaten, Kinder-Shirts und Kinder-Hoodies in Bio-Baumwolle. Beliebt als Geschenk zur Geburt und für Geschwister-Sets.' },
+];
+
+const vorteile = [
+  { icon: 'factory', t: 'Eigene Werkstatt in Oberhausen', d: 'Gedruckt wird bei uns, nicht bei wechselnden Partnerdruckereien. Du weißt, wer deine Bestellungen in der Hand hat.' },
+  { icon: 'chat-circle-dots', t: 'Ein Ansprechpartner', d: `Per WhatsApp, Telefon und E-Mail, ${oeffnungszeiten.text}. Wer anruft, spricht mit jemandem aus der Werkstatt.` },
+  { icon: 'eye-slash', t: 'Neutral, in deinem Namen', d: 'Kein westernprint-Branding am oder im Paket. Auf Wunsch dein Shop als Absender und deine eigenen Beilagen, Karten oder Versandtaschen.' },
+  { icon: 'clock', t: 'Auch im Weihnachtsgeschäft', d: 'Produktion in 1 bis 3 Werktagen, auch in der Black Week und vor Weihnachten. Beim Käufer in der Regel 3 bis 5 Werktage nach der Bestellung.' },
+  { icon: 'receipt', t: 'Keine Grundgebühr, kein Abo', d: 'Du zahlst Produktion und Versand der Artikel, die bestellt wurden. Keine Mindestmenge, kein Mindestumsatz, kein Guthaben.' },
+  { icon: 'seal-check', t: 'Textilien mit Nachweis', d: 'Stanley/Stella (GOTS, Fair Wear), Stedman (OEKO-TEX) und Build Your Brand. Welche Zertifikate ein Artikel trägt, nennen wir dir mit der Preisliste.' },
+];
+
+const faqs = [
+  { q: 'Habt ihr eine Etsy-Integration?', a: 'Noch nicht. Eine automatische Etsy-Anbindung bauen wir gerade, so wie unsere Shopify-App. Einen Termin nennen wir erst, wenn sie läuft. Bis dahin gibst du uns deine Bestellungen per Mail oder WhatsApp weiter oder bestellst in unserem Shop mit der Adresse deines Käufers. So arbeiten schon mehrere Etsy-Shops mit uns.' },
+  { q: 'Wie gebe ich eine Etsy-Bestellung an euch weiter?', a: 'Schick uns Name und Lieferadresse des Käufers, Produkt, Farbe, Größe und bei personalisierten Artikeln die Druckdatei. Eine Mail oder WhatsApp-Nachricht pro Bestellung reicht, mehrere Bestellungen gehen als Liste. Alternativ bestellst du direkt in unserem Shop und trägst die Adresse deines Käufers als Lieferadresse ein.' },
+  { q: 'Was kostet Print-on-Demand für meinen Etsy-Shop?', a: 'Es gibt keine Grundgebühr, kein Abo und keine Mindestmenge. Du zahlst pro bestelltem Artikel den Produktionspreis, also Textil plus Druck, und den Versand. Die Produktionspreise sind dieselben wie in unserer Shopify-App, wir schicken dir die Preisliste für deine Produkte mit dem Angebot. Versand pro Bestellung: Deutschland 5,00 € netto, Österreich 7,00 €, übrige EU-Länder 7,50 €, Schweiz 9,00 €, je volle 3 Artikel 1,50 € dazu.' },
+  { q: 'Wie schnell ist eine Bestellung beim Käufer?', a: 'Die Produktion dauert 1 bis 3 Werktage, auch in der Black Week und im Weihnachtsgeschäft. Mit dem DHL-Versand ist das Paket in der Regel 3 bis 5 Werktage nach der Bestellung beim Käufer, in Deutschland wie in Österreich, der Schweiz und der übrigen EU.' },
+  { q: 'Sieht mein Käufer, dass westernprint gedruckt hat?', a: 'Nein. Der Versand ist neutral: kein westernprint-Logo, keine Rechnung von uns im Paket. Als Absender steht auf Wunsch dein Shop auf dem Label. Eigene Karten, Sticker oder Versandtaschen lieferst du uns an, wir legen sie bei oder verpacken damit.' },
+  { q: 'Wie bekomme ich die Sendungsnummer für Etsy?', a: 'Sobald das Paket raus ist, schicken wir dir die DHL-Sendungsnummer per Mail oder WhatsApp. Du trägst sie bei Etsy als Versandbestätigung ein, dein Käufer bekommt die Nachricht von Etsy.' },
+  { q: 'Druckt ihr personalisierte Produkte mit Namen oder Foto?', a: 'Ja, ab 1 Stück. Du schickst uns je Bestellung die fertige Druckdatei, am besten als PNG mit transparentem Hintergrund in 300 dpi. Wir prüfen jede Datei vor dem Druck und melden uns, wenn etwas nicht passt. Fotos und feine Verläufe drucken wir per DTG auf Baumwolle, kräftige Motive per DTF.' },
+  { q: 'In welche Länder versendet ihr?', a: 'Nach Deutschland, Österreich, in die Schweiz und in alle übrigen EU-Länder, per DHL mit Sendungsnummer. Für die Schweiz erstellen wir die Zollpapiere, Einfuhrabgaben trägt der Empfänger. Länder außerhalb der EU und der Schweiz beliefern wir nicht.' },
+  { q: 'Welche Textilien kann ich auf Etsy anbieten?', a: 'Stanley/Stella mit über 150 Styles aus Bio-Baumwolle, zum Beispiel Creator 2.0, Changer 2.0, Cruiser 2.0 sowie Kinder- und Babygrößen, dazu die Stedman-Klassiker bis 5XL und Heavy Oversize von Build Your Brand. Für Familien-Sets passen Erwachsenen-, Kinder- und Babygrößen in derselben Farbe zusammen.' },
+  { q: 'Kann ich vorher ein Muster bekommen?', a: 'Ja. Muster bestellst du zum Produktionspreis, mit deinem Motiv auf dem Textil deiner Wahl. So siehst du Farbe, Stoff und Druck, bevor du das Produkt auf Etsy einstellst.' },
+  { q: 'Wie läuft die Abrechnung?', a: 'Du bekommst pro Bestellung oder gesammelt eine Rechnung der westernprint GmbH per Mail, mit ausgewiesener Umsatzsteuer, und zahlst per Überweisung. Bestellst du über unseren Shop, zahlst du direkt an der Kasse.' },
+  { q: 'Was passiert bei einer Reklamation?', a: 'Schick uns Fotos innerhalb von 7 Tagen nach Zustellung. Druckfehler, die bei uns passieren, drucken wir kostenlos nach. Vor dem Verpacken prüfen wir jedes Teil, deshalb kommt das selten vor.' },
+];
+
+const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'Print-on-Demand Fulfillment für Etsy-Shops', serviceType: 'Print-on-Demand Fulfillment', description: 'Bestellungen aus Etsy-Shops per DTF und DTG in Oberhausen drucken und neutral per DHL an die Käufer versenden. Ab 1 Stück, keine Grundgebühr, Produktion in 1 bis 3 Werktagen.', provider: { '@id': `${site.url}/#organization` }, audience: { '@type': 'Audience', audienceType: 'Etsy-Verkäufer' }, areaServed: [{ '@type': 'Country', name: 'Deutschland' }, { '@type': 'Country', name: 'Österreich' }, { '@type': 'Country', name: 'Schweiz' }, { '@type': 'Place', name: 'Europäische Union' }], url, offers: { '@type': 'Offer', description: 'Keine Grundgebühr, keine Mindestmenge, Produktionspreis je Produkt laut Preisliste, Versand ab 5,00 € netto pro Bestellung' } };
+const howToLd = { '@context': 'https://schema.org', '@type': 'HowTo', name: 'Etsy-Bestellungen über westernprint drucken und versenden lassen', step: schritte.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.t, text: s.d })) };
+const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
+const crumbLd = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Startseite', item: site.url }, { '@type': 'ListItem', position: 2, name: 'Print-on-Demand', item: `${site.url}/print-on-demand` }, { '@type': 'ListItem', position: 3, name: 'Print-on-Demand für Etsy', item: url }] };
+---
+<Base title="Print-on-Demand für Etsy-Shops aus Deutschland" description="Print-on-Demand für deinen Etsy-Shop: Wir drucken deine Bestellungen in Oberhausen per DTF und DTG und schicken sie neutral per DHL an deine Käufer. Ab 1 Stück, keine Grundgebühr, Produktion in 1 bis 3 Werktagen." jsonLd={[svcLd, howToLd, faqLd, crumbLd]} ogImage="/img/pod-versand.jpg">
+  <PageHero
+    eyebrow="Print-on-Demand für Etsy"
+    title="Print-on-Demand für deinen Etsy-Shop. <span class='hl'>Gedruckt in Deutschland, verschickt in deinem Namen.</span>"
+    lede="Du verkaufst auf Etsy, wir drucken jede Bestellung in unserer Werkstatt in Oberhausen und schicken sie neutral per DHL an deine Käufer. Ab 1 Stück, ohne Grundgebühr, Produktion in 1 bis 3 Werktagen, auch im Weihnachtsgeschäft."
+    image="/img/pod-versand.jpg"
+    imageAlt="Packtisch bei westernprint: Reihen fertig verpackter Kraftpapier-Versandtaschen mit Etikett, vorne ein schwarzes Shirt in der offenen Tasche"
+    cta={{ label: 'Preisliste anfragen', href: '#anfrage' }}
+    cta2={{ label: 'So läuft es ab', href: '#ablauf' }}
+  />
+
+  <section class="section-tight">
+    <div class="container etsy-answer">
+      <div class="reveal">
+        <h2>Wie funktioniert Print-on-Demand für Etsy mit westernprint?</h2>
+        <p class="lede etsy-answer-text">westernprint ist eine Textildruckerei mit eigener Produktion in Oberhausen und druckt Bestellungen für Etsy-Shops per DTF und DTG. Du gibst uns jede Etsy-Bestellung per Mail oder WhatsApp weiter oder bestellst in unserem Shop mit der Adresse deines Käufers. Wir drucken in 1 bis 3 Werktagen, prüfen jedes Teil, verpacken neutral und versenden per DHL mit Sendungsnummer nach Deutschland, Österreich, in die Schweiz und in alle übrigen EU-Länder, auf Wunsch mit deinem Shop als Absender. Die Sendungsnummer trägst du bei Etsy ein. Textilien: Stanley/Stella, Stedman und Build Your Brand, von der Babygröße bis 5XL. Es gibt keine Grundgebühr und keine Mindestmenge, du zahlst Produktion und Versand pro Artikel, zu denselben Produktionspreisen wie in unserer Shopify-App. Eine automatische Etsy-Anbindung ist in Arbeit.</p>
+        <a class="rating-line" href="/bewertungen">
+          <span class="stars" aria-hidden="true">{Array.from({ length: 5 }).map(() => <Icon name="star" weight="fill" size={16} />)}</span>
+          <span>{schnitt} von 5 Sternen bei {bewertungen.anzahl} Google-Bewertungen</span>
+        </a>
+      </div>
+      <dl class="facts reveal reveal-d1" aria-label="Print-on-Demand für Etsy auf einen Blick">
+        <div><dt>Produktion</dt><dd>Eigene Werkstatt in Oberhausen, Deutschland</dd></div>
+        <div><dt>Bestellung</dt><dd>Per Mail, WhatsApp oder über unseren Shop</dd></div>
+        <div><dt>Druck</dt><dd>DTF, auf Wunsch DTG</dd></div>
+        <div><dt>Mindestmenge</dt><dd>Keine, ab 1 Stück</dd></div>
+        <div><dt>Produktionszeit</dt><dd>1 bis 3 Werktage, auch im Q4</dd></div>
+        <div><dt>Lieferzeit</dt><dd>3 bis 5 Werktage ab Bestellung</dd></div>
+        <div><dt>Versand</dt><dd>DHL mit Sendungsnummer, neutral, ab 5,00 € netto pro Bestellung</dd></div>
+        <div><dt>Liefergebiet</dt><dd>Deutschland, Österreich, Schweiz, alle EU-Länder</dd></div>
+        <div><dt>Kosten</dt><dd>Keine Grundgebühr, Produktion und Versand pro Artikel</dd></div>
+        <div><dt>Etsy-Anbindung</dt><dd>In Arbeit, bis dahin per Liste oder Shop</dd></div>
+        <div><dt>Ansprechpartner</dt><dd>Eine feste Person, WhatsApp, Telefon, E-Mail</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section alt" id="ablauf">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>So läuft es ab, <span class="hl">vom Etsy-Verkauf bis zum Paket</span></h2>
+        <p>Einmal die Produkte abstimmen, danach kostet dich jede Bestellung eine Nachricht. Den Rest machen wir in Oberhausen.</p>
+      </div>
+      <ol class="steps">
+        {schritte.map((s, i) => (
+          <li class={`reveal reveal-d${i}`}><span class="num">{i + 1}</span><div><strong>{s.t} <small>{s.zeit}</small></strong><span>{s.d}</span></div></li>
+        ))}
+      </ol>
+      <p class="muted small steps-note reveal">Eine automatische Etsy-Anbindung, die Bestellungen von selbst abholt und die Sendungsnummer zurückmeldet, bauen wir gerade. Einen Termin nennen wir erst, wenn sie läuft. Bis dahin ist der Weg über Liste oder Shop bewährt, mehrere Etsy-Shops arbeiten so mit uns.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Was Etsy-Shops bei uns drucken lassen</h2>
+        <p>Vom Familien-Set bis zum personalisierten Geschenk: alles ab 1 Stück, jedes Teil einzeln gedruckt, nachdem es verkauft wurde.</p>
+      </div>
+      <div class="grid grid-2">
+        {produkte.map((b, i) => (
+          <div class={`feat reveal reveal-d${i % 2}`}>
+            <div class="icon-box"><Icon name={b.icon} size={22} /></div>
+            <h3>{b.t}</h3>
+            <p>{b.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Werkstatt statt Plattform</h2>
+        <p>Die großen Print-on-Demand-Plattformen haben die Etsy-Schnittstelle. Wir haben die Werkstatt, in der du anrufen kannst, und drucken in Deutschland. Das ist der Unterschied, ehrlich gesagt.</p>
+      </div>
+      <div class="grid grid-3">
+        {vorteile.map((b, i) => (
+          <div class={`feat reveal reveal-d${i % 3}`}>
+            <div class="icon-box"><Icon name={b.icon} size={22} /></div>
+            <h3>{b.t}</h3>
+            <p>{b.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="preise">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Kosten und Versand</h2>
+        <p>Keine Grundgebühr, kein Abo, keine Mindestmenge. Du zahlst pro bestelltem Artikel den Produktionspreis, also Textil plus Druck, und den Versand pro Bestellung. Die Produktionspreise sind dieselben wie in unserer Shopify-App. Welche Textilien und Drucke du brauchst, ist bei jedem Shop anders, deshalb bekommst du die Preisliste für deine Produkte mit dem Angebot, an Werktagen innerhalb von 24 Stunden.</p>
+      </div>
+      <div class="ship-table reveal">
+        <div class="ship-row ship-head"><span>Zielland</span><span>Lieferzeit ab Bestellung</span><span>Versand pro Bestellung</span></div>
+        {versand.map((v) => (
+          <div class="ship-row"><span>{v.land}{v.hinweis && <small class="ship-countries">{v.hinweis}</small>}</span><span>3 bis 5 Werktage</span><span>{v.netto} &euro; netto <small class="gross">({v.brutto} &euro; brutto)</small></span></div>
+        ))}
+      </div>
+      <p class="muted small ship-note">Je volle 3 Artikel in einer Bestellung kommen 1,50 &euro; netto (1,79 &euro; brutto) dazu: 1 bis 2 Artikel ohne Aufschlag, 3 bis 5 Artikel plus 1,50 &euro;, 6 bis 8 Artikel plus 3,00 &euro;. Die Lieferzeit enthält die Produktion von 1 bis 3 Werktagen. Nackenprint statt Herstelleretikett und Ärmeldruck gibt es als Zusatzposition, die Preise stehen in deiner Preisliste.</p>
+    </div>
+  </section>
+
+  <Faq items={faqs} title="Fragen von Etsy-Verkäufern" intro="Was Etsy-Shops uns vor dem Start fragen, kurz beantwortet." href="#anfrage" />
+
+  <section class="section alt" id="anfrage">
+    <div class="container form-grid">
+      <div class="reveal">
+        <h2>Preisliste für deinen Etsy-Shop</h2>
+        <p class="muted">Schreib uns, was du verkaufst: Textil, Farben, Motive, Druckpositionen und ungefähr, wie viele Bestellungen im Monat kommen. Du bekommst an Werktagen innerhalb von 24 Stunden die Preisliste für deine Produkte und eine ehrliche Einschätzung.</p>
+        <ul class="plain">
+          <li><Icon name="check" weight="bold" size={14} /> Link zu deinem Etsy-Shop reicht als Start</li>
+          <li><Icon name="check" weight="bold" size={14} /> Muster zum Produktionspreis möglich</li>
+          <li><Icon name="check" weight="bold" size={14} /> Kein Vertrag, keine Grundgebühr</li>
+        </ul>
+      </div>
+      <div class="card card-pad reveal reveal-d1">
+        <ContactForm topic="Print-on-Demand Fulfillment" />
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Lieber erst mal reden?" text="Schick uns per WhatsApp den Link zu deinem Etsy-Shop. Wir sagen dir ehrlich, ob und wie wir dein Sortiment produzieren." href="#anfrage" />
+</Base>
+
+<style>
+  .etsy-answer { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
+  .etsy-answer-text { max-width: 64ch; margin-top: 16px; }
+  .rating-line { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 22px; font-size: 15px; font-weight: 600; color: var(--text); text-decoration: none; }
+  .rating-line .stars { display: inline-flex; gap: 2px; color: var(--accent); }
+  .rating-line:hover span:last-child { text-decoration: underline; text-underline-offset: 3px; }
+  .facts { display: grid; gap: 0; margin: 0; padding: 6px 24px; border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); font-size: 14.5px; position: sticky; top: calc(var(--nav-h) + 24px); }
+  .facts div { display: grid; grid-template-columns: 120px 1fr; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--line); }
+  .facts div:last-child { border-bottom: 0; }
+  .facts dt { color: var(--text-3); }
+  .facts dd { margin: 0; color: var(--text); }
+  @media (max-width: 900px) { .etsy-answer { grid-template-columns: 1fr; } .facts { position: static; } }
+  @media (max-width: 480px) { .facts div { grid-template-columns: 1fr; gap: 2px; } }
+
+  .alt { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .steps li { display: grid; gap: 12px; align-content: start; padding: 24px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); }
+  .steps .num { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 12px; font-family: var(--font-display); font-weight: 800; font-size: 17px; color: var(--accent-ink); background: var(--accent); }
+  .steps strong { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; font-size: 16.5px; }
+  .steps strong small { font-size: 12.5px; font-weight: 500; color: var(--text-3); }
+  .steps div > span { color: var(--text-2); font-size: 14.5px; line-height: 1.5; }
+  .steps-note { margin-top: 22px; max-width: 80ch; }
+  @media (max-width: 1000px) { .steps { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .steps { grid-template-columns: 1fr; } }
+
+  .feat { display: grid; gap: 12px; align-content: start; padding: 26px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); }
+  .feat p { color: var(--text-2); font-size: 15px; }
+
+  .ship-table { display: grid; border: 1px solid var(--line); border-radius: var(--radius-card); overflow: hidden; background: var(--surface); }
+  .ship-row { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 12px; padding: 14px 20px; border-top: 1px solid var(--line); font-size: 15px; }
+  .ship-row:first-child { border-top: 0; }
+  .ship-row span:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+  .ship-head { background: var(--bg-2); color: var(--text-3); font-size: 13px; font-weight: 600; }
+  .ship-note { margin-top: 14px; max-width: 80ch; }
+  .ship-row .gross, .ship-row .ship-countries { display: block; font-size: 13px; color: var(--text-3); }
+  @media (max-width: 600px) { .ship-row { grid-template-columns: 1fr 1fr; } .ship-row span:nth-child(2) { order: 3; grid-column: 1 / -1; color: var(--text-3); font-size: 13.5px; } }
+
+  .form-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 48px; align-items: start; }
+  .form-grid .muted { margin-top: 14px; max-width: 48ch; }
+  .plain { display: grid; gap: 10px; margin: 18px 0 0; font-size: 15px; color: var(--text-2); }
+  .plain li { display: flex; gap: 10px; align-items: flex-start; }
+  .plain :global(.icon) { color: var(--accent); flex: none; margin-top: 4px; }
+  .small { font-size: 13.5px; }
+  @media (max-width: 900px) { .form-grid { grid-template-columns: 1fr; } }
+</style>

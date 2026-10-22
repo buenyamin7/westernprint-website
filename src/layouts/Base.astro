@@ -98,9 +98,10 @@ const orgLd = {
       reviewBody: r.text,
     })),
   } : {}),
-  knowsAbout: ['Print-on-Demand', 'DTF-Druck', 'DTG-Druck', 'Textildruck', 'Sublimationsdruck', 'Shopify Fulfillment', 'Dropshipping', 'Stanley/Stella', 'Merchandise'],
+  knowsAbout: ['Print-on-Demand', 'DTF-Druck', 'DTG-Druck', 'Textildruck', 'Sublimationsdruck', 'Shopify Fulfillment', 'Etsy Fulfillment', 'Dropshipping', 'Stanley/Stella', 'Stedman', 'Build Your Brand', 'Merchandise'],
   makesOffer: [
     { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Print-on-Demand Fulfillment für Shopify-Shops', url: `${site.url}/print-on-demand` } },
+    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Print-on-Demand Fulfillment für Etsy-Shops', url: `${site.url}/etsy-print-on-demand` } },
     { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Textildruck Großauflagen ab 50 Stück', url: `${site.url}/grossauflagen` } },
     { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'DTF-, DTG- und Sublimationsdruck', url: `${site.url}/druckverfahren` } },
     // Als Service, nicht Product: Ein Product ohne Preis/Angebot meldet die Search Console auf jeder Seite als ungültiges Produkt-Snippet (gesehen 18.10.2026).
@@ -153,7 +154,7 @@ const pageLd = (Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : []).map((ld
 });
 const pageHasCrumbs = pageLd.some((ld) => ld?.['@type'] === 'BreadcrumbList');
 const pathParts = cleanPath.split('/').filter(Boolean);
-const crumbNames: Record<string, string> = { fuer: 'Für wen wir drucken', 'print-on-demand': 'Print-on-Demand', 'b2b-partner': 'B2B-Partner', grossauflagen: 'Großauflagen', druckverfahren: 'Druckverfahren', textilien: 'Textilien', 'ueber-uns': 'Über uns', kontakt: 'Kontakt', shop: 'Shop', warenkorb: 'Warenkorb', 'textildruck-oberhausen': 'Textildruck Oberhausen', 'textildruck-ruhrgebiet': 'Textildruck Ruhrgebiet', 'was-kostet-textildruck': 'Preise und Beispiele', bewertungen: 'Bewertungen', sample: 'Muster bestellen', 'pflege-bedruckter-textilien': 'Pflegehinweise', impressum: 'Impressum', datenschutz: 'Datenschutz', agb: 'AGB', widerruf: 'Widerruf', versand: 'Versand' };
+const crumbNames: Record<string, string> = { fuer: 'Für wen wir drucken', 'print-on-demand': 'Print-on-Demand', 'etsy-print-on-demand': 'Print-on-Demand für Etsy', 'b2b-partner': 'B2B-Partner', grossauflagen: 'Großauflagen', druckverfahren: 'Druckverfahren', textilien: 'Textilien', 'ueber-uns': 'Über uns', kontakt: 'Kontakt', shop: 'Shop', warenkorb: 'Warenkorb', 'textildruck-oberhausen': 'Textildruck Oberhausen', 'textildruck-ruhrgebiet': 'Textildruck Ruhrgebiet', 'was-kostet-textildruck': 'Preise und Beispiele', bewertungen: 'Bewertungen', sample: 'Muster bestellen', 'pflege-bedruckter-textilien': 'Pflegehinweise', impressum: 'Impressum', datenschutz: 'Datenschutz', agb: 'AGB', widerruf: 'Widerruf', versand: 'Versand' };
 // Liefert die Seite selbst eine BreadcrumbList, gibt Base keine zweite aus. Seiten mit noindex bekommen keine.
 const crumbLd = pathParts.length && !pageHasCrumbs && !noindex ? { '@context': 'https://schema.org', '@type': 'BreadcrumbList', '@id': crumbId, itemListElement: [
   { '@type': 'ListItem', position: 1, name: 'Startseite', item: site.url },

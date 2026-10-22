@@ -6,10 +6,24 @@ import ContactForm from '../components/ContactForm.astro';
 import Faq from '../components/Faq.astro';
 import { site, oeffnungszeiten } from '../data/site';
 import { bewertungen } from '../data/bewertungen';
+import { STAND as PREIS_STAND, tabellen } from '../data/preise';
 
-// Preisbeispiele stammen von /was-kostet-textildruck (netto zzgl. MwSt.). Bei Preisänderungen dort mit anpassen.
+// Preisbeispiele kommen aus src/data/preise.ts (netto zzgl. MwSt.), wie auf /was-kostet-textildruck. Fehlt eine Staffel, bricht der Build ab.
 // Brutto daneben = netto x 1,19, kaufmännisch auf Cent gerundet.
-const PREIS_STAND = '21.09.2026';
+const nettoPreis = (anfang: string, menge: number) => {
+  const tb = tabellen.find((t) => t.t.startsWith(anfang));
+  const z = tb?.zeilen.find(([m]) => parseInt(m, 10) === menge);
+  if (!z) throw new Error(`Keine Staffel ${menge} Stück für ${anfang} in preise.ts`);
+  return z[1];
+};
+const bruttoPreis = (p: string) => {
+  const m = p.match(/(\d+),(\d{2})/);
+  if (!m) throw new Error(`Preis nicht lesbar: ${p}`);
+  const c = Math.round(((parseInt(m[1], 10) * 100 + parseInt(m[2], 10)) * 119) / 100);
+  return `${Math.floor(c / 100)},${String(c % 100).padStart(2, '0')} €`;
+};
+/** nb('T-Shirt Basic', 1) -> '14,10 € netto (16,78 € brutto)' */
+const nb = (anfang: string, menge: number) => `${nettoPreis(anfang, menge)} netto (${bruttoPreis(nettoPreis(anfang, menge))} brutto)`;
 // Google-Bewertungen aus src/data/bewertungen.ts: 5 -> "5,0", "2026-09-28" -> "28.09.2026"
 const sterne = bewertungen.schnitt.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 const bewStand = bewertungen.stand.split('-').reverse().join('.');
@@ -18,7 +32,7 @@ const bewStand = bewertungen.stand.split('-').reverse().join('.');
 // mit OpenStreetMap (Nominatim + OSRM), unter 25 km auf ganze km, darüber auf 5 km gerundet.
 // Mülheim 9,0 | Bottrop 9,7 | Duisburg 12,5 | Essen 15,7 | Dinslaken 17,9 | Gelsenkirchen 20,5 | Gladbeck 20,9 |
 // Moers 25,2 | Herne 29,5 | Bochum 30,3 | Castrop-Rauxel 37,0 | Düsseldorf 37,8 | Recklinghausen 38,3 | Krefeld 46,2 | Dortmund 51,3
-// Für Mülheim an der Ruhr, Bottrop, Duisburg und Essen gibt es seit Oktober 2026 eigene Seiten mit eigenem Inhalt
+// Für Mülheim an der Ruhr, Bottrop, Duisburg, Essen und Gelsenkirchen gibt es seit Oktober 2026 eigene Seiten mit eigenem Inhalt
 // (/textildruck-<stadt>, Texte in src/data/staedte.ts), ihr Abschnitt hier verlinkt darauf. Die übrigen Städte bleiben
 // Abschnitte auf dieser Seite, ohne eigene Stadtseite (keine Brückenseiten). Texte bitte nicht angleichen.
 type Stadt = { c: string; id: string; d: string; l?: { href: string; t: string } };
@@ -42,9 +56,9 @@ const nah: Stadt[] = [
 const weiter: Stadt[] = [
   { c: 'Gelsenkirchen', id: 'gelsenkirchen',
     d: 'Gelsenkirchen liegt rund 20 km entfernt, der Weg führt über die A42. Für Schulen aus Gelsenkirchen druckt westernprint Abi-Shirts und Abschluss-Hoodies mit allen Namen, als Sammelbestellung mit einem Liefertermin. Die Serie ist 5 bis 7 Werktage nach Freigabe fertig und kommt per DHL, Abholung in Oberhausen geht auch.',
-    l: { href: '/fuer/abschlussklassen', t: 'Abi-Shirts mit allen Namen' } },
+    l: { href: '/textildruck-gelsenkirchen', t: 'Textildruck in Gelsenkirchen' } },
   { c: 'Gladbeck', id: 'gladbeck',
-    d: `Bis Gladbeck sind es rund 21 km. Ein einzelnes T-Shirt Basic mit einem Druck kostet 17,90 € netto (21,30 € brutto, Stand ${PREIS_STAND}) und ist in der Regel in 1 bis 3 Werktagen fertig. Die Abholung in Oberhausen ist kostenlos, Versand per DHL ist ebenso möglich.`,
+    d: `Bis Gladbeck sind es rund 21 km. Ein einzelnes T-Shirt Basic mit einem Druck kostet ${nb('T-Shirt Basic', 1)}, Stand ${PREIS_STAND}, und ist in der Regel in 1 bis 3 Werktagen fertig. Die Abholung in Oberhausen ist kostenlos, Versand per DHL ist ebenso möglich.`,
     l: { href: '/was-kostet-textildruck', t: 'Alle Preisbeispiele' } },
   { c: 'Moers', id: 'moers',
     d: 'Moers liegt rund 25 km westlich von Oberhausen, verbunden über die A42. Für Vereine aus Moers druckt westernprint Shirts, Polos und Hoodies auch in kleinen Mengen, die Rechnung geht auf Wunsch an den Verein. Staffelpreise gibt es ab 10 Stück, die Serie ist 5 bis 7 Werktage nach Freigabe fertig und kommt per DHL.',
@@ -59,7 +73,7 @@ const weiter: Stadt[] = [
     d: 'Castrop-Rauxel liegt rund 35 km entfernt, der Weg führt über die A42. Für Feuerwehr, THW und Rettungsdienst druckt westernprint Shirts und Hoodies mit Ortsname, Wappen und Funktion. Einzelstücke sind in 1 bis 3 Werktagen fertig, Serien 5 bis 7 Werktage nach Freigabe.',
     l: { href: '/fuer/feuerwehr-und-rettungsdienst', t: 'Shirts für Feuerwehr und THW' } },
   { c: 'Düsseldorf', id: 'duesseldorf',
-    d: `Die Düsseldorfer Innenstadt liegt rund 40 km entfernt, über die A3 und die A52. Aussteller der Messe Düsseldorf bekommen Polos fürs Standpersonal 5 bis 7 Werktage nach Freigabe per DHL an die Messeadresse, ins Hotel oder in die Firma. Ein Poloshirt mit einem Druck kostet bei 25 Stück 15,90 € netto (18,92 € brutto, Stand ${PREIS_STAND}).`,
+    d: `Die Düsseldorfer Innenstadt liegt rund 40 km entfernt, über die A3 und die A52. Aussteller der Messe Düsseldorf bekommen Polos fürs Standpersonal 5 bis 7 Werktage nach Freigabe per DHL an die Messeadresse, ins Hotel oder in die Firma. Ein Poloshirt mit einem Druck kostet bei 10 Stück ${nb('Poloshirt', 10)} pro Stück, bei 50 Stück ${nb('Poloshirt', 50)}, Stand ${PREIS_STAND}.`,
     l: { href: '/fuer/messen-und-aussteller', t: 'Polos für den Messestand' } },
   { c: 'Recklinghausen', id: 'recklinghausen',
     d: 'Nach Recklinghausen sind es rund 40 km. Für Kitas und Schulen aus Recklinghausen druckt westernprint Schul-T-Shirts, Kita-Abschluss-Shirts und Klassenfahrt-Shirts mit Logo. Serien sind 5 bis 7 Werktage nach der Freigabe fertig, danach geht die Ware per DHL mit Sendungsnummer raus.',
@@ -80,7 +94,7 @@ const faqs = [
   { q: 'Lohnt sich die Abholung oder soll ich liefern lassen?', a: 'Bei Einzelstücken und kleinen Mengen aus den Nachbarstädten lohnt sich die Abholung, du sparst die Versandkosten von 4,90 €. Bei größeren Serien liefern wir: Ab 500 € Warenwert (brutto) ist der Versand kostenlos, darunter kostet das Paket bei einer Sammelbestellung kaum mehr als die Fahrt.' },
   { q: 'Wie schnell geht das?', a: 'Einzelstücke und kleine Mengen sind in der Regel in 1 bis 3 Werktagen fertig. Serien ab 50 Stück brauchen 5 bis 7 Werktage nach Freigabe des Korrekturabzugs. Wenn du einen festen Termin hast, sag ihn uns direkt, Express ist auf Anfrage möglich.' },
   { q: 'Kann ich eigene Textilien vorbeibringen?', a: 'Ja. Angelieferte Ware bedrucken wir, egal ob Vereinstrikots, Arbeitskleidung oder etwas, das du schon im Schrank hast. Wir prüfen vorher, ob das Material für DTF geeignet ist. Bei Polyester und Funktionsstoffen drucken wir mit niedrigerer Temperatur, das klappt problemlos.' },
-  { q: 'Was kostet eine Vereinsbestellung ungefähr?', a: `Ein T-Shirt Basic mit einem Druck kostet bei 100 Stück 8,40 € netto (10,00 € brutto). Bei 50 Stück kostet ein T-Shirt Basic mit einem Druck 9,40 € netto (11,19 € brutto) pro Stück (Stand ${PREIS_STAND}). Namen und Nummern kosten ab 5,90 € netto (7,02 € brutto) pro Teil. Genaue Beispiele stehen auf unserer Preisseite.` },
+  { q: 'Was kostet eine Vereinsbestellung ungefähr?', a: `Ein T-Shirt Basic mit einem Druck kostet bei 100 Stück ${nb('T-Shirt Basic', 100)}. Bei 50 Stück kostet ein T-Shirt Basic mit einem Druck ${nb('T-Shirt Basic', 50)} pro Stück (Stand ${PREIS_STAND}). Namen und Nummern kosten ab 5,90 € netto (7,02 € brutto) pro Teil. Genaue Beispiele stehen auf unserer Preisseite.` },
 ];
 
 const ld = [
@@ -192,12 +206,12 @@ const ld = [
         <div class="hcol">
           <h3>Preisanker</h3>
           <ul class="plist">
-            <li><span>Einzelnes bedrucktes Shirt</span><strong>ab 17,90 € netto <span class="gross">(21,30 € brutto)</span></strong></li>
-            <li><span>50 Basic-Shirts, ein Druck</span><strong>ca. 9,40 € netto <span class="gross">(11,19 € brutto) pro Stück</span></strong></li>
-            <li><span>Vereinsshirt bei 100 Stück</span><strong>8,40 € netto <span class="gross">(10,00 € brutto)</span></strong></li>
-            <li><span>Hoodie mit Druck</span><strong>ab 29,90 € netto <span class="gross">(35,58 € brutto)</span></strong></li>
+            <li><span>Einzelnes bedrucktes Shirt</span><strong>ab {nettoPreis('T-Shirt Basic', 1)} netto <span class="gross">({bruttoPreis(nettoPreis('T-Shirt Basic', 1))} brutto)</span></strong></li>
+            <li><span>50 Basic-Shirts, ein Druck</span><strong>{nettoPreis('T-Shirt Basic', 50)} netto <span class="gross">({bruttoPreis(nettoPreis('T-Shirt Basic', 50))} brutto) pro Stück</span></strong></li>
+            <li><span>Vereinsshirt bei 100 Stück</span><strong>{nettoPreis('T-Shirt Basic', 100)} netto <span class="gross">({bruttoPreis(nettoPreis('T-Shirt Basic', 100))} brutto)</span></strong></li>
+            <li><span>Hoodie mit Druck</span><strong>ab {nettoPreis('Hoodie', 1)} netto <span class="gross">({bruttoPreis(nettoPreis('Hoodie', 1))} brutto)</span></strong></li>
           </ul>
-          <p class="muted small">Alle Preise netto zzgl. 19 % MwSt., in Klammern brutto, ohne Einrichtungskosten. <a class="accent" href="/was-kostet-textildruck">Alle Staffeln und Beispiele</a></p>
+          <p class="muted small">Alle Preise netto zzgl. 19 % MwSt., in Klammern brutto, ein Druck, ohne Einrichtungskosten, Stand {PREIS_STAND}. <a class="accent" href="/was-kostet-textildruck">Alle Staffeln und Beispiele</a></p>
         </div>
         <div class="hcol">
           <h3>Wofür DTF und DTG gemacht sind</h3>
