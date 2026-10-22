@@ -4,6 +4,7 @@
 //   src/data/preise.ts (Preistabellen), src/data/site.ts (Kontakt, allgemeine FAQ),
 //   src/data/zielgruppen.ts (/fuer/<slug>), src/data/bewertungen.ts (/bewertungen),
 //   src/data/abschluss.ts (Preise und Konditionen für /fuer/abschlussklassen).
+//   src/data/staedte.ts liefert nur die Einträge der Stadtseiten /textildruck-<stadt> in der Seitenliste.
 // Ausnahme: /fuer/abschlussklassen und /fuer/streetwear-brands haben eigene Seiten mit eigenen Inhalten und FAQ.
 // Für streetwear-brands steht hier nur ein Verweis, damit keine abweichenden Aussagen entstehen.
 // Für abschlussklassen steht ein kurzer Faktenblock aus src/data/abschluss.ts (dieselben Fakten wie "Kurz gesagt"
@@ -15,6 +16,7 @@ import type { APIRoute } from 'astro';
 import { site, faqs, oeffnungszeiten } from '../data/site';
 import { STAND, tabellen, zusatz } from '../data/preise';
 import { zielgruppen } from '../data/zielgruppen';
+import { staedte } from '../data/staedte';
 import { STAND as ABSCHLUSS_STAND, KLASSENPREIS_AB, modelle as abschlussModelle, zusatz as abschlussZusatz, VERSAND as ABSCHLUSS_VERSAND, PRODUKTION as ABSCHLUSS_PRODUKTION, ZAHLUNGSZIEL_TAGE, netto as abschlussNetto, euro as abschlussEuro, rechenbeispiel as abschlussBeispiel } from '../data/abschluss';
 import { bewertungen, rezensionen } from '../data/bewertungen';
 import { gitDates, formatDateDe } from '../lib/lastmod.mjs';
@@ -26,6 +28,7 @@ const QUELLEN = [
   'src/data/site.ts',
   'src/data/preise.ts',
   'src/data/zielgruppen.ts',
+  'src/data/staedte.ts',
   'src/data/bewertungen.ts',
   'src/data/abschluss.ts',
 ];
@@ -52,6 +55,8 @@ function letzteAktualisierung(): string {
 const SEITEN: [string, string][] = [
   ['/textildruck-oberhausen', 'Textildruck in Oberhausen: Adresse, Abholung und Ablauf vor Ort'],
   ['/textildruck-ruhrgebiet', 'Textildruck im Ruhrgebiet: Entfernung und Lieferung für Essen, Duisburg, Mülheim, Bottrop und weitere Städte'],
+  // Eigene Stadtseiten der Nachbarstädte (src/pages/textildruck-[stadt].astro, Texte in src/data/staedte.ts).
+  ...staedte.map((st): [string, string] => [`/textildruck-${st.slug}`, `Textildruck für ${st.name}: ${st.llms}`]),
   ['/', 'Startseite'],
   ['/was-kostet-textildruck', 'Was kostet Textildruck: Preisbeispiele netto und brutto für 1, 10, 25, 50 und 100 Stück'],
   ['/druckverfahren', 'Druckverfahren: DTF, DTG und Sublimation im Vergleich, Ausstattung der Produktion'],
