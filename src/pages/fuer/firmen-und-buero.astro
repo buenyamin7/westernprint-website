@@ -24,9 +24,9 @@ const preise = [
   zeile('Hoodie', 'Hoodie'),
   zeile('Hemd', 'Hemd'),
   zeile('Softshelljacke', 'Softshelljacke'),
-  // Fleeceweste: EK 7,62 (POD-DB) plus Aufschlag wie in preise.ts (1 Stück +12, ab 10 +8, 50 +7,50, 100 +7,00, 200 +6,50).
+  // Fleeceweste: EK 7,62 (POD-DB) plus Aufschlag wie in preise.ts (ein Druck vorne: 1 Stück +12, ab 10 +8, 50 +6,50, 100 +5,50, 200 +5,00).
   // Cap: EK 7,50 plus Aufschlag für einen Druck vorne (+12 / +8 / +6,50 / +5,50 / +5,00), Staffel vom 14.10.2026.
-  { t: 'Fleeceweste', m: 'Stedman Classic Fleece Vest', p: ['19,62', '15,62', '15,12', '14,62', '14,12'] },
+  { t: 'Fleeceweste', m: 'Stedman Classic Fleece Vest', p: ['19,62', '15,62', '14,12', '13,12', '12,62'] },
   { t: 'Cap', m: 'Flexfit 110, Logo vorne', p: ['19,50', '15,50', '14,00', '13,00', '12,50'] },
 ];
 /** Nettopreis als Text aus der Tabelle oben: netto('Poloshirt', 10) -> '13,22' */
@@ -104,7 +104,7 @@ const ld = [
     answer={`westernprint in Oberhausen bedruckt Firmenkleidung mit Logo für Firmen, Büros, Agenturen, Kanzleien, Praxen und Dienstleister, ab 1 Stück ohne Mindestmenge. Ein Poloshirt mit Logo kostet bei 10 Stück ${netto('Poloshirt', 10)} € netto, ein Bio-T-Shirt ${netto('T-Shirt Bio', 10)} € netto, ein Hoodie ${netto('Hoodie', 10)} € netto, eine Softshelljacke ${netto('Softshelljacke', 10)} € netto pro Stück, Stand ${STAND}. Ihr schickt Logo und Größenliste, wir packen pro Person beschriftet. Die Serie ist 5 bis 7 Werktage nach Freigabe fertig, einzelne Teile für neue Mitarbeitende bestellt ihr später nach, mit demselben Druck. Eigene Kleidung könnt ihr anliefern, dann zahlt ihr nur den Druck.`}
     stand={STAND} mengen={mengen} preise={preise} zusatz={zusatz}
     preisTitel="Preise für Firmenkleidung mit Logo"
-    preisText="Preis pro Stück in Euro, netto zzgl. 19 % MwSt., mit einem Druck (Brust oder Rücken), Textil inklusive. Größen, Farben und Damen-/Herrenschnitte könnt ihr mischen. Fleeceweste und Cap Stand 18.10.2026, übrige"
+    preisText="Preis pro Stück in Euro, netto zzgl. 19 % MwSt., mit einem Druck vorne, Textil inklusive. Großer Rückendruck statt vorne ab 50 Stück 1,00 €, ab 100 Stück 1,50 € mehr. Größen, Farben und Damen-/Herrenschnitte könnt ihr mischen. Fleeceweste und Cap Stand 18.10.2026, übrige"
     branchenTitel="Für diese Firmen drucken wir"
     branchenText="Vom Zwei-Personen-Büro bis zum Unternehmen mit mehreren Standorten. Das Logo sitzt dezent auf der Brust oder groß auf dem Rücken, auf Wunsch mit Name oder Abteilung."
     branchen={branchen}

@@ -1,7 +1,7 @@
 ---
 // Landingpage für Handwerksbetriebe und Service-Firmen (Arbeitskleidung mit Firmenlogo).
 // Aufbau wie /fuer/streetwear-brands: klare Antwort oben, Preistabelle mit Staffeln, Branchen, Ablauf, FAQ.
-// Preise netto, ein Druck (Brust oder Rücken), Textil inklusive. Quelle: src/data/preise.ts (EK aus der POD-App + feste Marge).
+// Preise netto, ein Druck vorne, Textil inklusive. Quelle: src/data/preise.ts (EK aus der POD-App + feste Marge).
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import Faq from '../../components/Faq.astro';
@@ -24,7 +24,7 @@ const netto = (t: string, menge: number) => preise.find((r) => r.t === t)!.p[men
 const nb = (t: string, menge: number) => `${netto(t, menge)} € netto (${brutto(netto(t, menge))} € brutto)`;
 
 const zusatz = [
-  { t: 'Zweite Druckseite', p: 'ab 3,50 €', d: 'Logo vorne und groß hinten, zum Beispiel Firmenname mit Telefonnummer auf dem Rücken.' },
+  { t: 'Zweite Druckseite', p: 'ab 4,00 €', d: 'Logo vorne und groß hinten, zum Beispiel Firmenname mit Telefonnummer auf dem Rücken. Nur großer Rückendruck statt Brustlogo: ab 50 Stück 1,00 €, ab 100 Stück 1,50 € mehr.' },
   { t: 'Ärmeldruck', p: '3,00 €', d: 'Pro Ärmel, bis 8 x 8 cm. Zum Beispiel Webadresse oder Innungslogo.' },
   { t: 'Namen der Mitarbeiter', p: 'ab 5,90 €', d: 'Jedes Teil einzeln, eine Liste mit Name und Größe reicht.' },
   { t: 'Eigene Arbeitskleidung', p: 'nur Druck', d: 'Ihr liefert Engelbert Strauss, Kübler oder andere Workwear an und zahlt nur den Druck.' },
@@ -48,7 +48,7 @@ const faqs = [
   { q: 'Gibt es eine Mindestmenge?', a: 'Nein. westernprint bedruckt Arbeitskleidung ab 1 Stück. Ab 10 Stück gelten Staffelpreise, ab 50 Stück wird es noch einmal günstiger. Ihr könnt Modelle, Farben und Größen in einer Bestellung mischen.' },
   { q: 'Was kostet ein Poloshirt mit Firmenlogo?', a: `Ein Poloshirt (Stedman Classic Polo) mit einem Druck kostet bei westernprint ${nb('Poloshirt', 1)} als Einzelstück, ${nb('Poloshirt', 10)} bei 10 Stück und ${nb('Poloshirt', 50)} bei 50 Stück, jeweils pro Stück. Stand ${STAND}.` },
   { q: 'Was kostet ein T-Shirt mit Firmenlogo für den Betrieb?', a: `Ein T-Shirt (Stedman Classic-T, 155 g) mit einem Druck kostet ${nb('T-Shirt', 1)} als Einzelstück, ${nb('T-Shirt', 10)} bei 10 Stück und ${nb('T-Shirt', 50)} bei 50 Stück, jeweils pro Stück. Ein Ärmeldruck kostet 3,00 € netto pro Ärmel zusätzlich. Stand ${STAND}.` },
-  { q: 'Was kostet eine Softshelljacke mit Logo?', a: `Eine Softshelljacke (Stedman Lux Softshell) mit einem Druck kostet ${nb('Softshelljacke', 1)} als Einzelstück und ${nb('Softshelljacke', 10)} pro Stück bei 10 Stück. Logo vorne und hinten kostet ab 3,50 € pro Teil zusätzlich. Stand ${STAND}.` },
+  { q: 'Was kostet eine Softshelljacke mit Logo?', a: `Eine Softshelljacke (Stedman Lux Softshell) mit einem Druck kostet ${nb('Softshelljacke', 1)} als Einzelstück und ${nb('Softshelljacke', 10)} pro Stück bei 10 Stück. Logo vorne und hinten kostet ab 4,00 € pro Teil zusätzlich. Stand ${STAND}.` },
   { q: 'Können wir unsere eigene Arbeitskleidung bedrucken lassen?', a: 'Ja. westernprint bedruckt angelieferte Workwear, zum Beispiel von Engelbert Strauss oder Kübler. Ihr zahlt dann nur den Druck. Nennt vorher kurz das Material, wir prüfen, ob es sich eignet. Plant 2 bis 3 Prozent Reserve ein, für Materialfehler an angelieferter Ware haften wir nicht.' },
   { q: 'Können wir einzelne Teile für neue Mitarbeiter nachbestellen?', a: 'Ja. westernprint speichert eure Druckdaten. Ein neuer Mitarbeiter bekommt sein Shirt oder seine Jacke einzeln nachbestellt, mit dem gleichen Druck wie das übrige Team. Einzelteile sind in der Regel in 1 bis 3 Werktagen fertig.' },
   { q: 'Hält der Druck auf Arbeitskleidung?', a: 'Ja. DTF-Druck ist dehnbar, reißt nicht und ist waschfest. Er hält auch auf Polyester, Softshell und Mischgewebe. Für eine lange Haltbarkeit wascht ihr die Teile am besten auf links gedreht und ohne Weichspüler.' },
@@ -99,7 +99,7 @@ const ld = [
 
   <section class="section prices-section" id="preise">
     <div class="container">
-      <div class="section-head reveal"><h2>Preise für Arbeitskleidung mit Logo</h2><p>Preis pro Stück in Euro, netto zzgl. 19 % MwSt., mit einem Druck (Brust oder Rücken), Textil inklusive. Größen und Farben könnt ihr mischen. Stand {STAND}.</p></div>
+      <div class="section-head reveal"><h2>Preise für Arbeitskleidung mit Logo</h2><p>Preis pro Stück in Euro, netto zzgl. 19 % MwSt., mit einem Druck vorne, Textil inklusive. Großer Rückendruck statt vorne ab 50 Stück 1,00 €, ab 100 Stück 1,50 € mehr. Größen und Farben könnt ihr mischen. Stand {STAND}.</p></div>
       <div class="table-wrap reveal">
         <table class="price-table">
           <thead><tr><th scope="col">Teil</th>{mengen.map((m) => <th scope="col">{m}</th>)}</tr></thead>

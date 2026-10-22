@@ -93,6 +93,10 @@ export function sourceFilesFor(pathname) {
   if (!page && parts.length === 1 && /^textildruck-[a-z-]+$/.test(rel) && exists('src/pages/textildruck-[stadt].astro')) {
     return ['src/pages/textildruck-[stadt].astro', 'src/data/staedte.ts'];
   }
+  // Produktseiten /<produkt>-bedrucken-lassen: dynamische Seite plus Texte aus produktseiten.ts und Preise aus preise.ts.
+  if (!page && parts.length === 1 && /^[a-z-]+-bedrucken-lassen$/.test(rel) && exists('src/pages/[produkt]-bedrucken-lassen.astro')) {
+    return ['src/pages/[produkt]-bedrucken-lassen.astro', 'src/data/produktseiten.ts', 'src/data/preise.ts'];
+  }
   const files = page ? [page, ...contentImports(page)] : [];
   if (clean === '/bewertungen') files.push('src/data/bewertungen.ts');
   // Datendateien, aus denen die Seite ihren Inhalt zieht: Preisänderungen und neue Zielgruppen bewegen das Datum.

@@ -49,6 +49,11 @@ export const nav: NavItem[] = [
   {
     label: 'Leistungen', href: '/druckverfahren',
     groups: [
+      { title: 'Produkte mit Staffelpreisen', items: [
+        { label: 'T-Shirts bedrucken lassen', href: '/t-shirts-bedrucken-lassen', hint: 'Basic, Bio und Heavy Oversize, Preise für 1 bis 200 Stück' },
+        { label: 'Hoodies bedrucken lassen', href: '/hoodies-bedrucken-lassen', hint: 'Classic Hoodie, Heavy Hoody, Cruiser 2.0' },
+        { label: 'Pullover bedrucken lassen', href: '/pullover-bedrucken-lassen', hint: 'Sweatshirts ohne Kapuze, Abschlusspullis' },
+      ] },
       { title: 'Druckverfahren', items: [
         { label: 'DTF-Druck', href: '/druckverfahren', hint: 'Kräftige Farben, jede Stoffart, ab 1 Stück' },
         { label: 'DTG-Druck', href: '/druckverfahren', hint: 'Fotorealistisch auf Baumwolle' },
