@@ -1,0 +1,269 @@
+---
+// Produktseiten: /hoodies-bedrucken-lassen, /t-shirts-bedrucken-lassen, /pullover-bedrucken-lassen.
+// Texte, Modelle und Fragen je Produkt in src/data/produktseiten.ts, Preise aus src/data/preise.ts.
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../data/site';
+import { bewertungen } from '../data/bewertungen';
+import { produktseiten, MENGEN, nettoPreis, brutto, modellText, zusatzZeile, PREIS_STAND, type Produktseite } from '../data/produktseiten';
+
+export function getStaticPaths() {
+  return produktseiten.map((p) => ({ params: { produkt: p.slug }, props: { p } }));
+}
+const { p } = Astro.props as { p: Produktseite };
+const url = `${site.url}/${p.slug}-bedrucken-lassen`;
+const andere = produktseiten.filter((o) => o.slug !== p.slug);
+const sterne = bewertungen.schnitt.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const extras = p.zusatz.map(zusatzZeile);
+const empfehlung = p.modelle.find((m) => m.empfehlung) ?? p.modelle[0];
+
+// Service mit Angebotskatalog: ein Angebot je Modell zum Staffelpreis ab 10 Stück, netto, wie auf /fuer/handwerksbetriebe.
+const ld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: `${p.name} bedrucken lassen`,
+    serviceType: p.serviceType,
+    description: p.description,
+    provider: { '@id': `${site.url}/#organization` },
+    areaServed: [{ '@type': 'Country', name: 'Deutschland' }, { '@type': 'Country', name: 'Österreich' }, { '@type': 'Country', name: 'Schweiz' }],
+    audience: { '@type': 'Audience', audienceType: 'Firmen, Schulen, Vereine, Teams' },
+    url,
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: `${p.name} mit einem Druck, Preis pro Stück ab 10 Stück, netto zzgl. MwSt., Stand ${PREIS_STAND}`,
+      itemListElement: p.modelle.map((m) => ({
+        '@type': 'Offer',
+        name: `${m.marke} ${m.name} mit einem Druck`,
+        price: nettoPreis(m.tabelle, 10).replace(' €', '').replace(',', '.'),
+        priceCurrency: 'EUR',
+        eligibleQuantity: { '@type': 'QuantitativeValue', minValue: 10, unitCode: 'C62' },
+        priceSpecification: { '@type': 'UnitPriceSpecification', price: nettoPreis(m.tabelle, 10).replace(' €', '').replace(',', '.'), priceCurrency: 'EUR', valueAddedTaxIncluded: false, referenceQuantity: { '@type': 'QuantitativeValue', value: 1, unitCode: 'C62' } },
+      })),
+    },
+  },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: p.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Startseite', item: site.url }, { '@type': 'ListItem', position: 2, name: 'Preise und Beispiele', item: `${site.url}/was-kostet-textildruck` }, { '@type': 'ListItem', position: 3, name: `${p.name} bedrucken lassen`, item: url }] },
+];
+---
+<Base title={p.title} description={p.description} jsonLd={ld} ogImage={p.image}>
+  <PageHero
+    eyebrow={p.eyebrow}
+    title={p.h1}
+    lede={p.lede}
+    image={p.image}
+    imageAlt={p.imageAlt}
+    cta={{ label: 'Angebot in 24 Stunden', href: '#anfrage' }}
+    cta2={{ label: 'Staffelpreise', href: '#preise' }}
+  />
+
+  <section class="section-tight">
+    <div class="container">
+      <h2 class="intro-title reveal">{p.introFrage}</h2>
+      <div class="intro">
+        <p class="answer reveal">{p.intro}</p>
+        <ul class="facts reveal reveal-d1">
+          <li><Icon name="stack" size={18} /> Ab 1 Stück, Staffelpreise ab 10, 50, 100 und 200 Stück</li>
+          <li><Icon name="clock" size={18} /> Angebot an Werktagen innerhalb von 24 Stunden</li>
+          <li><Icon name="seal-check" size={18} /> Korrekturabzug vor dem Druck, Serie in 5 bis 7 Werktagen</li>
+          <li><Icon name="truck" size={18} /> Versand per DHL, deutschlandweit</li>
+          <li><Icon name="receipt" size={18} /> Rechnung mit Umsatzsteuer an Firma, Schule oder Verein</li>
+          <li><Icon name="star" size={18} /> <a href="/bewertungen">{sterne} von 5 bei {bewertungen.anzahl} Google-Bewertungen</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="preise">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Staffelpreise: {p.name} mit einem Druck</h2>
+        <p>Preis pro Stück, Textil und ein Druck vorne inklusive, netto zzgl. 19 % MwSt., darunter brutto. Keine Einrichtungskosten, Mischgrößen ohne Aufpreis. Großer Rückendruck statt vorne und zweite Seite stehen unter der Tabelle. Stand {PREIS_STAND}.</p>
+      </div>
+      <div class="table-wrap reveal">
+        <table class="ptable">
+          <thead>
+            <tr>
+              <th scope="col">Modell</th>
+              {MENGEN.map((m) => <th scope="col">{m === 1 ? '1 Stück' : `ab ${m} Stück`}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {p.modelle.map((m) => (
+              <tr class={m.empfehlung ? 'top' : ''}>
+                <th scope="row"><strong>{m.name}</strong><span>{m.marke}{m.empfehlung ? ', unsere Empfehlung' : ''}</span></th>
+                {MENGEN.map((menge) => (
+                  <td><strong>{nettoPreis(m.tabelle, menge)}</strong><span>{brutto(nettoPreis(m.tabelle, menge))}</span></td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="muted small reveal">Genau 10 Stück bekommen schon den Preis ab 10 Stück. Größen ab 3XL und melierte Stanley/Stella-Farben kosten etwas mehr, der Aufpreis steht im Angebot. Alle Tabellen auch für Polos, Hemden und Softshelljacken: <a class="accent" href="/was-kostet-textildruck">Was kostet Textildruck?</a></p>
+      <div class="extras reveal">
+        {extras.map((x) => (
+          <div class="extra"><div class="extra-top"><strong>{x.t}</strong><span class="price">{x.p} <small>({x.brutto} brutto)</small></span></div><p>{x.d}</p></div>
+        ))}
+        <div class="extra"><div class="extra-top"><strong>Versand</strong><span class="price">DHL</span></div><p>Deutschlandweit mit Sendungsnummer, bei Aufträgen auf Angebot 6,95 € netto (8,27 € brutto) pro Paket, ab 500 € Warenwert kostenlos.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Drei Modelle, von günstig bis Bio</h2>
+        <p>Wir drucken auf Textilien ab Lager, über 500 Farben. Für {p.name} nehmen die meisten eines dieser drei Modelle, alle drei lassen sich in einer Bestellung mischen.</p>
+      </div>
+      <div class="models">
+        {p.modelle.map((m, i) => (
+          <article class={`model reveal reveal-d${i}`}>
+            <span class={`mtag${m.empfehlung ? ' mtag-top' : ''}`}>{m.tag}</span>
+            <div class="mimg"><img src={m.img} alt={`${m.name} von ${m.marke}, schwarz`} width="720" height="900" loading="lazy" /></div>
+            <div class="mbody">
+              <span class="mbrand">{m.marke}</span>
+              <strong>{m.name}</strong>
+              <span class="mspec">{m.spec}</span>
+              <span class="mprice">{nettoPreis(m.tabelle, 10)} netto <small>pro Stück ab 10 Stück, {brutto(nettoPreis(m.tabelle, 10))} brutto</small></span>
+              <span class="mprice2">ab 100 Stück {nettoPreis(m.tabelle, 100)} netto</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>{p.zielgruppenTitel}</h2>
+        <p>{p.zielgruppenText}</p>
+      </div>
+      <div class="grid grid-4">
+        {p.zielgruppen.map((z, i) => (
+          <a class={`feat reveal reveal-d${i}`} href={z.href}>
+            <div class="icon-box"><Icon name={z.icon} size={22} /></div>
+            <h3>{z.t}</h3>
+            <p>{z.d}</p>
+            <span class="feat-more">{z.cta} <Icon name="arrow-right" size={14} weight="bold" /></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>So läuft eine Sammelbestellung ab</h2>
+      </div>
+      <ol class="steps reveal">
+        <li><span class="num">1</span><div><strong>Anfrage</strong><span>Motiv oder Logo, Stückzahl grob, Wunschtermin. Per Formular, WhatsApp oder Mail, auch als Skizze.</span></div></li>
+        <li><span class="num">2</span><div><strong>Angebot in 24 Stunden</strong><span>Fester Stückpreis mit Staffel, Korrekturabzug mit eurem Motiv in Zentimetern auf dem Textil, Liefertermin.</span></div></li>
+        <li><span class="num">3</span><div><strong>Größenliste und Freigabe</strong><span>Ihr schickt die Liste mit Größen und Farben, gebt den Abzug frei und bekommt die Rechnung.</span></div></li>
+        <li><span class="num">4</span><div><strong>Druck und Versand</strong><span>Serie in 5 bis 7 Werktagen nach Freigabe, jedes Teil geprüft, per DHL mit Sendungsnummer an Firma, Schule oder Verein.</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <Faq items={p.faqs} title={`Fragen zu ${p.name} mit Druck`} href="#anfrage" />
+
+  <section class="section alt" id="anfrage">
+    <div class="container form-grid">
+      <div class="reveal">
+        <h2>Angebot für eure {p.name}</h2>
+        <p class="muted">Schreib uns Modell, Stückzahl, Motiv und Wunschtermin. Unsere Empfehlung ist der {empfehlung.marke} {empfehlung.name}. Das Angebot kommt an Werktagen innerhalb von 24 Stunden, meist schneller.</p>
+      </div>
+      <div class="card card-pad reveal reveal-d1">
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title={`${p.name} mit eurem Logo, ab 1 Stück`} text="Schick uns Stückzahl und Motiv per WhatsApp oder Formular. Du bekommst einen festen Preis und einen Liefertermin, ohne Einrichtungskosten." href="#anfrage" />
+
+  <nav class="section-tight weitere" aria-label="Weitere Produkte">
+    <div class="container">
+      <h2>Weitere Produkte mit Staffelpreisen</h2>
+      <ul class="pills">
+        {andere.map((o) => <li><a href={`/${o.slug}-bedrucken-lassen`}>{o.name} bedrucken lassen</a></li>)}
+        <li><a href="/was-kostet-textildruck">Polos, Hemden, Softshell</a></li>
+        <li><a href="/fuer/abschlussklassen">Abschlusspullis mit Klassenpreis</a></li>
+      </ul>
+    </div>
+  </nav>
+</Base>
+
+<style>
+  .intro-title { max-width: 30ch; margin-bottom: clamp(20px, 3vw, 32px); }
+  .intro { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: center; }
+  .answer { max-width: 68ch; font-size: 1.12rem; color: var(--text); }
+  .facts { display: grid; gap: 10px; }
+  .facts li { display: flex; gap: 10px; align-items: center; color: var(--text-2); font-size: 15px; }
+  .facts a { color: inherit; }
+  .facts :global(svg) { color: var(--accent); flex: none; }
+  .alt { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); }
+  .ptable { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 15px; }
+  .ptable th, .ptable td { padding: 14px 16px; text-align: right; vertical-align: top; border-top: 1px solid var(--line); }
+  .ptable thead th { border-top: 0; background: var(--bg-2); color: var(--text-3); font-size: 13px; font-weight: 600; white-space: nowrap; }
+  .ptable thead th:first-child, .ptable tbody th { text-align: left; }
+  .ptable tbody th strong { display: block; font-size: 15.5px; color: var(--text); }
+  .ptable tbody th span { display: block; margin-top: 2px; font-size: 13px; font-weight: 400; color: var(--text-3); }
+  .ptable td strong { display: block; font-size: 16px; color: var(--text); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .ptable td span { display: block; margin-top: 2px; font-size: 12.5px; color: var(--text-3); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .ptable tr.top td strong { color: var(--accent); }
+  .small { font-size: 13.5px; margin-top: 14px; max-width: 80ch; }
+  .extras { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 24px; margin-top: 28px; border-top: 1px solid var(--line-strong); }
+  .extra { padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .extra-top { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+  .extra-top strong { font-size: 15px; }
+  .extra .price { font-weight: 700; color: var(--accent); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .extra .price small { font-weight: 400; color: var(--text-3); }
+  .extra p { margin-top: 6px; font-size: 14px; line-height: 1.5; color: var(--text-2); }
+  @media (max-width: 900px) { .extras { grid-template-columns: 1fr; } }
+
+  .models { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px 22px; }
+  .model { position: relative; display: flex; flex-direction: column; }
+  .mtag { position: absolute; top: 8px; left: 8px; z-index: 1; padding: 4px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700; color: var(--text); background: var(--surface-2); border: 1px solid var(--line-strong); }
+  .mtag-top { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+  .mimg img { aspect-ratio: 4 / 5; object-fit: contain; width: 100%; padding: 4%; box-sizing: border-box; filter: drop-shadow(0 18px 24px rgba(0,0,0,0.35)); }
+  .mbody { display: grid; gap: 3px; padding: 12px 4px 0; }
+  .mbrand { font-size: 12.5px; color: var(--text-3); }
+  .mbody strong { font-size: 17px; }
+  .mspec { font-size: 13.5px; color: var(--text-2); }
+  .mprice { margin-top: 8px; font-weight: 700; color: var(--accent); font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+  .mprice small { display: block; font-weight: 400; color: var(--text-3); font-size: 13px; }
+  .mprice2 { font-size: 13.5px; color: var(--text-2); font-variant-numeric: tabular-nums; }
+  @media (max-width: 900px) { .models { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .models { grid-template-columns: 1fr; } }
+
+  .feat { display: grid; gap: 12px; align-content: start; padding: 26px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); text-decoration: none; color: inherit; transition: border-color 160ms ease, transform 160ms ease; }
+  .feat:hover { border-color: var(--accent-line); transform: translateY(-2px); }
+  .feat p { color: var(--text-2); font-size: 14.5px; }
+  .feat-more { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); font-size: 14px; font-weight: 600; }
+
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 0; list-style: none; }
+  .steps li { display: grid; gap: 10px; align-content: start; padding: 22px; border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); }
+  .steps .num { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 11px; font-family: var(--font-display); font-weight: 800; font-size: 16px; color: var(--accent-ink); background: var(--accent); }
+  .steps strong { display: block; font-size: 15.5px; }
+  .steps div > span { display: block; margin-top: 4px; color: var(--text-2); font-size: 14.5px; line-height: 1.5; }
+  @media (max-width: 900px) { .steps { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .steps { grid-template-columns: 1fr; } }
+
+  .form-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 48px; align-items: start; }
+  .form-grid .muted { margin-top: 14px; max-width: 46ch; }
+  .weitere { border-top: 1px solid var(--line); }
+  .weitere h2 { font-size: clamp(1.15rem, 1.6vw, 1.35rem); margin-bottom: 16px; }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; list-style: none; }
+  .pills li { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); font-size: 14px; }
+  .pills a { color: inherit; text-decoration: none; }
+  .pills li:hover { border-color: var(--accent-line); }
+  @media (max-width: 900px) { .intro, .form-grid { grid-template-columns: 1fr; } }
+</style>

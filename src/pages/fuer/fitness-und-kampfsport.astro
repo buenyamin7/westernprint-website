@@ -22,12 +22,12 @@ const preise = [
   zeile('Hoodie', 'Hoodie'),
   zeile('Sweatshirt', 'Sweatshirt'),
   zeile('Poloshirt', 'Poloshirt', 'Stedman Classic Polo, 170 g, für den Empfang'),
-  // Tank Top (EK 2,13), Funktionsshirt (EK 3,56) und Jogger (EK 14,95) mit dem Aufschlag aus preise.ts (1 Stück +12, ab 10 +8, 50 +7,50, 100 +7,00, 200 +6,50).
+  // Tank Top (EK 2,13), Funktionsshirt (EK 3,56) und Jogger (EK 14,95) mit dem Aufschlag aus preise.ts (ein Druck vorne: 1 Stück +12, ab 10 +8, 50 +6,50, 100 +5,50, 200 +5,00).
   // Cap (EK 7,50) mit dem Aufschlag für einen Druck vorne (+12 / +8 / +6,50 / +5,50 / +5,00). EK aus der POD-DB, Staffel vom 14.10.2026.
-  { t: 'Tank Top', m: 'Stedman Comfort Tank Top', p: ['14,13', '10,13', '9,63', '9,13', '8,63'] },
-  { t: 'Funktionsshirt', m: 'Stedman Sports-T, Polyester, DTF', p: ['15,56', '11,56', '11,06', '10,56', '10,06'] },
+  { t: 'Tank Top', m: 'Stedman Comfort Tank Top', p: ['14,13', '10,13', '8,63', '7,63', '7,13'] },
+  { t: 'Funktionsshirt', m: 'Stedman Sports-T, Polyester, DTF', p: ['15,56', '11,56', '10,06', '9,06', '8,56'] },
   zeile('T-Shirt Heavy Oversize', 'Heavy Oversize Tee', 'Build Your Brand BY102, 240 g'),
-  { t: 'Jogger', m: 'Build Your Brand Wideleg Sweatpants', p: ['26,95', '22,95', '22,45', '21,95', '21,45'] },
+  { t: 'Jogger', m: 'Build Your Brand Wideleg Sweatpants', p: ['26,95', '22,95', '21,45', '20,45', '19,95'] },
   { t: 'Cap', m: 'Flexfit 110, Logo vorne', p: ['19,50', '15,50', '14,00', '13,00', '12,50'] },
 ];
 /** Nettopreis als Text aus der Tabelle oben: netto('Poloshirt', 10) -> '13,22' */
@@ -105,7 +105,7 @@ const ld = [
     answer={`westernprint in Oberhausen bedruckt Gym- und Kampfsport-Kleidung mit Logo für Fitnessstudios, Crossfit-Boxen, Boxclubs, MMA- und Kampfsportschulen, Yoga-Studios und Personal Trainer, ab 1 Stück ohne Mindestmenge. Ein T-Shirt mit Logo kostet bei 10 Stück ${netto('T-Shirt Basic', 10)} € netto, ein Hoodie ${netto('Hoodie', 10)} € netto pro Stück, Stand ${STAND}. Funktionsshirts aus Polyester bedrucken wir per DTF, das hält Schweiß und Wäsche. Fürs Trainerteam gibt es Namen und Funktion einzeln, für Mitglieder-Merch kleine Auflagen zum Nachbestellen oder Print-on-Demand ohne Lager. Die Serie ist 5 bis 7 Werktage nach Freigabe fertig, einzelne Teile in 1 bis 3 Werktagen.`}
     stand={STAND} mengen={mengen} preise={preise} zusatz={zusatz}
     preisTitel="Preise für Gym-Kleidung mit Logo"
-    preisText="Preis pro Stück in Euro, netto zzgl. 19 % MwSt., mit einem Druck (Brust oder Rücken), Textil inklusive. Team-Shirts und Verkaufsware mischt ihr frei."
+    preisText="Preis pro Stück in Euro, netto zzgl. 19 % MwSt., mit einem Druck vorne, Textil inklusive. Großer Rückendruck statt vorne ab 50 Stück 1,00 €, ab 100 Stück 1,50 € mehr. Team-Shirts und Verkaufsware mischt ihr frei."
     preisHinweis="T-Shirts, Hoodie, Sweatshirt und Polo Stand 22.10.2026, Tank Top bis Cap Stand 18.10.2026. Keine Einrichtungskosten, keine Filmkosten. Das genaue Angebot mit festem Stückpreis bekommt ihr an Werktagen innerhalb von 24 Stunden."
     branchenTitel="Für diese Studios und Schulen drucken wir"
     branchenText="Vom Personal Trainer mit drei Shirts bis zur Kette mit fünf Studios. Logo klein auf der Brust, groß auf dem Rücken, Name oder Gürtelgrad einzeln."

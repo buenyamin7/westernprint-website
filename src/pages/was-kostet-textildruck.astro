@@ -6,7 +6,7 @@ import Faq from '../components/Faq.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { site } from '../data/site';
 import { bewertungen } from '../data/bewertungen';
-// Preisbeispiele: netto zzgl. MwSt., ein Druck (Brust ODER Rücken). Daten und Stand stehen in src/data/preise.ts.
+// Preisbeispiele: netto zzgl. MwSt., ein Druck vorne. Daten und Stand stehen in src/data/preise.ts.
 // Kurzfassung, Antwortsätze, Fragen-Antworten und JSON-LD werden daraus generiert.
 // Sichtbar steht neben jedem Nettopreis der Bruttopreis (Helfer brutto/nb), im JSON-LD bleiben die Beträge netto.
 // Die FAQ-Antworten weiter unten sind Fließtext: bei Preisänderungen dort und in public/llms.txt mitprüfen.
@@ -184,7 +184,7 @@ const offerCatalog = {
       itemListElement: tb.zeilen.map(([m, p]) => ({
         '@type': 'Offer',
         name: `${tb.t} mit einem Druck, ${m}`,
-        itemOffered: { '@type': 'Service', name: `Textildruck auf ${name(tb)} (${modell(tb)}), ein Druck auf Brust oder Rücken`, serviceType: 'Textildruck' },
+        itemOffered: { '@type': 'Service', name: `Textildruck auf ${name(tb)} (${modell(tb)}), ein Druck vorne`, serviceType: 'Textildruck' },
         price: euroZahl(p),
         priceCurrency: 'EUR',
         priceSpecification: {
@@ -227,7 +227,7 @@ const ld = [
     provider: { '@id': `${site.url}/#organization` },
     areaServed: [{ '@type': 'City', name: 'Oberhausen' }, { '@type': 'Country', name: 'Deutschland' }],
     url: `${site.url}/was-kostet-textildruck`,
-    termsOfService: `Alle Preise netto zzgl. 19 % MwSt., Stand ${STAND}. Preis pro Stück mit einem Druck (Brust oder Rücken), Textil inklusive. Keine Einrichtungskosten, keine Mindestmenge.`,
+    termsOfService: `Alle Preise netto zzgl. 19 % MwSt., Stand ${STAND}. Preis pro Stück mit einem Druck vorne, Textil inklusive. Keine Einrichtungskosten, keine Mindestmenge.`,
     offers: {
       '@type': 'Offer',
       priceCurrency: 'EUR',
@@ -270,7 +270,7 @@ const ld = [
     <div class="container">
       <div class="section-head reveal">
         <h2>Preisbeispiele mit einem Druck</h2>
-        <p>Ein Motiv auf Brust oder Rücken, Textil inklusive. Mischgrößen kosten keinen Aufpreis, Mehrfarbigkeit auch nicht.</p>
+        <p>Ein Druck vorne, Textil inklusive. Großer Rückendruck bis 30 x 40 cm statt vorne: bis 25 Stück gleich, ab 50 Stück 1,00 €, ab 100 Stück 1,50 € mehr. Mischgrößen kosten keinen Aufpreis, Mehrfarbigkeit auch nicht.</p>
       </div>
       <div class="grid grid-2">
         {tabellen.map((tb, i) => (

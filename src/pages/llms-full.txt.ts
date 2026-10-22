@@ -17,6 +17,7 @@ import { site, faqs, oeffnungszeiten } from '../data/site';
 import { STAND, tabellen, zusatz } from '../data/preise';
 import { zielgruppen } from '../data/zielgruppen';
 import { staedte } from '../data/staedte';
+import { produktseiten } from '../data/produktseiten';
 import { STAND as ABSCHLUSS_STAND, KLASSENPREIS_AB, modelle as abschlussModelle, zusatz as abschlussZusatz, VERSAND as ABSCHLUSS_VERSAND, PRODUKTION as ABSCHLUSS_PRODUKTION, ZAHLUNGSZIEL_TAGE, netto as abschlussNetto, euro as abschlussEuro, rechenbeispiel as abschlussBeispiel } from '../data/abschluss';
 import { bewertungen, rezensionen } from '../data/bewertungen';
 import { gitDates, formatDateDe } from '../lib/lastmod.mjs';
@@ -29,6 +30,7 @@ const QUELLEN = [
   'src/data/preise.ts',
   'src/data/zielgruppen.ts',
   'src/data/staedte.ts',
+  'src/data/produktseiten.ts',
   'src/data/bewertungen.ts',
   'src/data/abschluss.ts',
 ];
@@ -59,6 +61,8 @@ const SEITEN: [string, string][] = [
   ...staedte.map((st): [string, string] => [`/textildruck-${st.slug}`, `Textildruck für ${st.name}: ${st.llms}`]),
   ['/', 'Startseite'],
   ['/was-kostet-textildruck', 'Was kostet Textildruck: Preisbeispiele netto und brutto für 1, 10, 50, 100 und 200 Stück'],
+  // Produktseiten mit Staffelpreisen (src/pages/[produkt]-bedrucken-lassen.astro, Texte in src/data/produktseiten.ts).
+  ...produktseiten.map((pr): [string, string] => [`/${pr.slug}-bedrucken-lassen`, `${pr.name} bedrucken lassen: ${pr.llms}`]),
   ['/druckverfahren', 'Druckverfahren: DTF, DTG und Sublimation im Vergleich, Ausstattung der Produktion'],
   ['/grossauflagen', 'Großauflagen: Textildruck ab 50 Stück'],
   ['/textilien', 'Textilien: Sortiment und Marken'],
@@ -243,7 +247,7 @@ function markdown(): string {
   z.push(
     '## Preise',
     '',
-    `Alle Preise netto zzgl. 19 % MwSt. und daneben brutto inkl. 19 % MwSt., Stand ${STAND}. Ein Druck (Brust oder Rücken), Textil inklusive. ` +
+    `Alle Preise netto zzgl. 19 % MwSt. und daneben brutto inkl. 19 % MwSt., Stand ${STAND}. Ein Druck vorne, Textil inklusive. Großer Rückendruck bis 30 x 40 cm statt vorne: bis 25 Stück gleich, ab 50 Stück 1,00 €, ab 100 Stück 1,50 € mehr. ` +
       `Quelle: [Was kostet Textildruck](${url('/was-kostet-textildruck')})`,
     '',
   );
