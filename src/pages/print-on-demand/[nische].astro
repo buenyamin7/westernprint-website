@@ -1,0 +1,266 @@
+---
+// Nischenseiten für Print-on-Demand, Daten in src/data/podNischen.ts, Vergleich in src/data/podVergleich.ts.
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Icon from '../../components/Icon.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Faq from '../../components/Faq.astro';
+import { site } from '../../data/site';
+import { nischen, ZEIGE_PREISE, PREIS_STAND, type PodNische } from '../../data/podNischen';
+import { vergleichZeilen, vergleichStand, vergleichQuellen } from '../../data/podVergleich';
+
+export function getStaticPaths() {
+  return nischen.map((n) => ({ params: { nische: n.slug }, props: { n } }));
+}
+
+const { n } = Astro.props as { n: PodNische };
+const appUrl = 'https://apps.shopify.com/pod-westerprint';
+const url = `${site.url}/print-on-demand/${n.slug}`;
+const eur = (v: number) => v.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+const andere = nischen.filter((x) => x.slug !== n.slug);
+
+// Fragen, die auf jeder Nischenseite gleich sind. Fakten wie /print-on-demand (POD-App, Stand 17.10.2026).
+const gemeinsameFaqs = [
+  { q: 'Gibt es eine Grundgebühr oder eine Mindestmenge?', a: 'Nein. Die Shopify-App „westernprint POD“ ist kostenlos, es gibt kein Abo und keinen Mindestumsatz. Wir drucken ab 1 Stück. Du zahlst Produktion und Versand der Artikel, die bestellt wurden, einmal pro Woche per Sammelrechnung und SEPA-Lastschrift.' },
+  { q: 'Sieht mein Kunde, dass westernprint gedruckt hat?', a: 'Nein. Der Versand ist neutral, ohne westernprint-Logo und ohne Rechnung von uns im Paket. Mit einer Adresse in Deutschland kannst du deine eigene als Absender eintragen. Dein eigenes Verpackungsmaterial verwenden wir kostenlos.' },
+  { q: 'Funktioniert das auch mit Etsy?', a: 'Eine automatische Etsy-Anbindung bauen wir gerade. Bis sie läuft, gibst du uns Etsy-Bestellungen per Mail oder WhatsApp weiter oder bestellst in unserem Shop mit der Adresse deines Käufers, zu denselben Produktionspreisen wie in der App.' },
+];
+const faqs = [...n.faqs, ...gemeinsameFaqs];
+
+const fakten = [
+  ['Produktion', 'Eigene Werkstatt in Oberhausen'],
+  ['Druck', 'DTF, auf Wunsch DTG'],
+  ['Mindestmenge', 'Keine, ab 1 Stück'],
+  ['Produktionszeit', '1 bis 3 Werktage, auch im Q4'],
+  ['Versand', 'DHL, ab 5,00 € netto pro Bestellung, neutral'],
+  ['Liefergebiet', 'Deutschland, Österreich, Schweiz, EU'],
+  ['Shop', 'Shopify-App kostenlos, Etsy per Liste'],
+  ['Abrechnung', 'Wöchentlich, SEPA-Lastschrift'],
+];
+
+const svcLd = {
+  '@context': 'https://schema.org', '@type': 'Service',
+  name: n.title, serviceType: 'Print-on-Demand Fulfillment', description: n.description,
+  provider: { '@id': `${site.url}/#organization` },
+  audience: { '@type': 'BusinessAudience', audienceType: n.zielgruppe },
+  areaServed: [{ '@type': 'Country', name: 'Deutschland' }, { '@type': 'Country', name: 'Österreich' }, { '@type': 'Country', name: 'Schweiz' }, { '@type': 'Place', name: 'Europäische Union' }],
+  url,
+  offers: { '@type': 'Offer', description: 'Keine Grundgebühr, keine Mindestmenge, Produktionspreis je Artikel, Versand ab 5,00 € netto pro Bestellung' },
+};
+const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
+const crumbLd = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Startseite', item: site.url }, { '@type': 'ListItem', position: 2, name: 'Print-on-Demand', item: `${site.url}/print-on-demand` }, { '@type': 'ListItem', position: 3, name: n.kurz, item: url }] };
+---
+<Base title={n.title} description={n.description} jsonLd={[svcLd, faqLd, crumbLd]} ogImage={n.bild}>
+  <PageHero
+    eyebrow={n.eyebrow}
+    title={n.h1}
+    lede={n.lede}
+    image={n.bild}
+    imageAlt={n.bildAlt}
+    cta={{ label: 'App im Shopify App Store', href: appUrl }}
+    cta2={{ label: 'Fragen? Schreib uns', href: '/kontakt' }}
+  />
+
+  <section class="section-tight">
+    <div class="container answer">
+      <div class="reveal">
+        <h2>Print-on-Demand für {n.kurz}: so arbeiten wir</h2>
+        <p class="lede answer-text">{n.antwort}</p>
+        <p class="muted crumbs"><a href="/print-on-demand" class="accent">Alles zu Print-on-Demand mit westernprint</a> · <a href="/etsy-print-on-demand" class="accent">Print-on-Demand für Etsy</a></p>
+      </div>
+      <dl class="facts reveal reveal-d1" aria-label="Auf einen Blick">
+        {fakten.map(([k, v]) => (<div><dt>{k}</dt><dd>{v}</dd></div>))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Was in dieser Nische verkauft wird</h2>
+        <p>Produkte, die unsere Händler in dieser Nische anbieten. Alles ab 1 Stück, jede Bestellung einzeln gedruckt.</p>
+      </div>
+      <div class="grid grid-2 ideen">
+        {n.ideen.map((b, i) => (
+          <div class={`feat reveal reveal-d${i % 2}`}>
+            <div class="icon-box"><Icon name={b.icon} size={22} /></div>
+            <h3>{b.t}</h3>
+            <p>{b.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section produkte-section" id="produkte">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>{ZEIGE_PREISE ? 'Textilien und Produktionspreise' : 'Passende Textilien'}</h2>
+        <p>{n.produkteIntro}</p>
+      </div>
+      <div class="table-wrap reveal">
+        <table class="prod-table">
+          <thead>
+            <tr>
+              <th scope="col">Textil</th>
+              <th scope="col">Größen</th>
+              {ZEIGE_PREISE && <th scope="col" class="num">Ein Druck</th>}
+              {ZEIGE_PREISE && <th scope="col" class="num">Vorne + hinten</th>}
+            </tr>
+          </thead>
+          <tbody>
+            {n.produkte.map((p) => (
+              <tr>
+                <th scope="row">
+                  <span class="prod">
+                    {p.bild ? <img src={p.bild} alt="" width="48" height="60" loading="lazy" decoding="async" /> : <span class="prod-ph" aria-hidden="true"><Icon name="t-shirt" size={20} /></span>}
+                    <span><strong>{p.name}</strong><small>{p.marke} · {p.art}</small></span>
+                  </span>
+                </th>
+                <td class="sizes" data-label="Größen">{p.groessen}</td>
+                {ZEIGE_PREISE && <td class="num" data-label="Ein Druck">{eur(p.einSeite)}</td>}
+                {ZEIGE_PREISE && <td class="num" data-label="Vorne + hinten">{eur(p.zweiSeiten)}</td>}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {ZEIGE_PREISE && (
+        <p class="muted small note reveal">Produktionspreis pro Stück, netto zzgl. MwSt., Textil und Druck inklusive, so wie ihn die App berechnet (Stand {PREIS_STAND}, Referenzfarbe Schwarz). Nacken- oder Ärmeldruck +3,00 €. Größen ab 3XL und melierte Farben können etwas mehr kosten, den genauen Preis zeigt der Designer vor dem Veröffentlichen. Versand pro Bestellung: Deutschland 5,00 €, Österreich 7,00 €, übrige EU 7,50 €, Schweiz 9,00 € netto, je volle 3 Artikel +1,50 €.</p>
+      )}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-3">
+        {n.besonderheiten.map((b, i) => (
+          <div class={`feat reveal reveal-d${i % 3}`}>
+            <div class="icon-box"><Icon name={b.icon} size={22} /></div>
+            <h3>{b.t}</h3>
+            <p>{b.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight start-section">
+    <div class="container start-grid">
+      <div class="reveal">
+        <h2>So startest du</h2>
+        <ol class="steps">
+          <li><span class="num">1</span><div><strong>App installieren</strong><span>„westernprint POD“ aus dem Shopify App Store, kostenlos, keine Grundgebühr.</span></div></li>
+          <li><span class="num">2</span><div><strong>Textil wählen, Motiv platzieren</strong><span>Im Live-Mockup, mit Produktionspreis und Verkaufspreis-Vorschlag. Das Produkt landet mit Mockups in deinem Shop.</span></div></li>
+          <li><span class="num">3</span><div><strong>SEPA-Mandat erteilen</strong><span>Pflicht vor dem ersten Druck, abgerechnet wird einmal pro Woche.</span></div></li>
+          <li><span class="num">4</span><div><strong>Verkaufen</strong><span>Jede bezahlte Bestellung kommt automatisch zu uns, die DHL-Sendungsnummer geht zurück an Shopify.</span></div></li>
+        </ol>
+        <div class="start-cta">
+          <a href={appUrl} class="btn btn-primary btn-lg" target="_blank" rel="noopener">App installieren <Icon name="arrow-square-out" size={18} /></a>
+          <a href="/etsy-print-on-demand" class="btn btn-secondary btn-lg">Ich verkaufe auf Etsy</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {vergleichZeilen.length > 0 && (
+    <section class="section compare-section">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>westernprint, Printful, Printify und Spreadconnect im Vergleich</h2>
+          <p>Was die Anbieter auf ihren eigenen Seiten angeben, für Bestellungen nach Deutschland. Stand {vergleichStand}.</p>
+        </div>
+        <div class="table-wrap reveal">
+          <table class="cmp-table">
+            <thead><tr><th></th><th class="hi">westernprint</th><th>Printful</th><th>Printify</th><th>Spreadconnect</th></tr></thead>
+            <tbody>
+              {vergleichZeilen.map((r) => (<tr><th scope="row">{r.k}</th><td class="hi">{r.wp}</td><td>{r.printful}</td><td>{r.printify}</td><td>{r.spreadconnect}</td></tr>))}
+            </tbody>
+          </table>
+        </div>
+        <p class="muted small note">Quellen: {vergleichQuellen.map((q, i) => (<>{i > 0 && ', '}<a href={q.url} rel="nofollow noopener" target="_blank" class="accent">{q.name}</a></>))}. Angaben ohne Gewähr, maßgeblich sind die aktuellen Bedingungen der Anbieter.</p>
+      </div>
+    </section>
+  )}
+
+  <section class="section-tight andere-section">
+    <div class="container">
+      <h2 class="reveal">Print-on-Demand für weitere Nischen</h2>
+      <ul class="andere reveal">
+        {andere.map((x) => (<li><a href={`/print-on-demand/${x.slug}`}><span>{x.kurz}</span><Icon name="arrow-right" size={16} /></a></li>))}
+      </ul>
+    </div>
+  </section>
+
+  <Faq items={faqs} title={`Fragen zu Print-on-Demand für ${n.kurz}`} />
+  <CtaBand title="Shop verbinden oder erst mal reden?" text="Installiere die App und leg los, oder schreib uns per WhatsApp, was du verkaufst. Wir sagen dir ehrlich, welche Textilien für deine Nische passen." />
+</Base>
+
+<style>
+  /* Lange deutsche Wörter in der Überschrift (z. B. Sammelbestellung) dürfen auf dem Handy trennen statt die Seite zu verbreitern. */
+  :global(.phero h1) { hyphens: auto; -webkit-hyphens: auto; overflow-wrap: break-word; }
+  .answer { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
+  .answer-text { max-width: 64ch; margin-top: 16px; }
+  .crumbs { margin-top: 18px; font-size: 14.5px; }
+  .facts { display: grid; margin: 0; padding: 6px 24px; border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); font-size: 14.5px; }
+  .facts div { display: grid; grid-template-columns: 120px 1fr; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--line); }
+  .facts div:last-child { border-bottom: 0; }
+  .facts dt { color: var(--text-3); }
+  .facts dd { margin: 0; color: var(--text); }
+  @media (max-width: 900px) { .answer { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) { .facts div { grid-template-columns: 1fr; gap: 2px; } }
+
+  .feat { display: grid; gap: 12px; align-content: start; padding: 26px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); }
+  .feat p { color: var(--text-2); font-size: 15px; }
+  .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  @media (max-width: 700px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  .produkte-section, .compare-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .prod-table { width: 100%; border-collapse: collapse; min-width: 640px; font-size: 15px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-card); overflow: hidden; }
+  .prod-table th, .prod-table td { padding: 12px 18px; text-align: left; border-top: 1px solid var(--line); vertical-align: middle; }
+  .prod-table thead th { border-top: 0; background: var(--bg-2); color: var(--text-3); font-size: 13px; font-weight: 600; }
+  .prod-table tbody th { font-weight: 500; }
+  .prod-table td { color: var(--text-2); }
+  .prod-table .num { text-align: right; font-variant-numeric: tabular-nums; color: var(--text); white-space: nowrap; }
+  .prod { display: flex; gap: 14px; align-items: center; }
+  .prod img, .prod-ph { width: 48px; height: 60px; flex: none; border-radius: 8px; object-fit: cover; background: var(--bg-2); border: 1px solid var(--line); }
+  .prod-ph { display: grid; place-items: center; color: var(--text-3); }
+  .prod > span { display: grid; gap: 2px; }
+  .prod strong { color: var(--text); font-weight: 600; }
+  .prod small { color: var(--text-3); font-size: 13px; }
+  .note { margin-top: 16px; max-width: 86ch; }
+  @media (max-width: 700px) {
+    .prod-table { min-width: 0; border: 0; background: none; }
+    .prod-table thead { display: none; }
+    .prod-table, .prod-table tbody { display: block; }
+    .prod-table tr { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px; padding: 16px; margin-bottom: 10px; border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); }
+    .prod-table th, .prod-table td { padding: 0; border: 0; }
+    .prod-table tbody th, .prod-table .sizes { grid-column: 1 / -1; }
+    .prod-table .sizes { font-size: 14px; }
+    .prod-table .num, .prod-table .sizes { text-align: left; display: grid; gap: 2px; }
+    .prod-table td[data-label]::before { content: attr(data-label); font-size: 12px; color: var(--text-3); font-weight: 400; }
+  }
+
+  .start-grid { display: grid; }
+  .steps { display: grid; gap: 16px; margin: 24px 0 0; padding: 0; list-style: none; }
+  .steps li { display: flex; gap: 16px; align-items: flex-start; }
+  .steps .num { flex: none; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; font-family: var(--font-display); font-weight: 800; font-size: 15px; color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line); }
+  .steps div { display: grid; gap: 3px; padding-top: 5px; }
+  .steps strong { font-size: 16px; }
+  .steps div > span { color: var(--text-2); font-size: 14.5px; line-height: 1.5; max-width: 62ch; }
+  .start-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
+
+  .cmp-table { width: 100%; border-collapse: collapse; min-width: 820px; font-size: 14.5px; }
+  .cmp-table th, .cmp-table td { padding: 16px 18px 16px 0; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .cmp-table thead th { font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--text-3); }
+  .cmp-table tbody th { font-weight: 600; color: var(--text); width: 18%; }
+  .cmp-table td { color: var(--text-2); }
+  .cmp-table .hi { color: var(--text); font-weight: 600; }
+  .cmp-table thead .hi { color: var(--accent); }
+
+  .andere { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 20px 0 0; padding: 0; list-style: none; }
+  .andere a { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 18px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--text); text-decoration: none; font-weight: 600; transition: border-color 0.3s var(--ease); }
+  .andere a:hover { border-color: var(--accent-line); }
+  .andere :global(.icon) { color: var(--accent); flex: none; }
+</style>
