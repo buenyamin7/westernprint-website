@@ -1,21 +1,28 @@
 ---
 // Landingpage für Streetwear-Brands und Label-Gründer. Zielseite der Google-Ads-Kampagne "Streetwear Brands"
-// und Antwortseite für KI-Suche (ChatGPT, Perplexity): klare Fakten, Mengen, Ablauf, FAQ. Keine Preise, Angebot in 24h.
+// und Antwortseite für KI-Suche (ChatGPT, Perplexity): klare Fakten, Mengen, Ablauf, FAQ.
+// 23.10.2026: Print-on-Demand ab 1 Stück steht vorne (Inhaber). Vorher stand "Kleinserie ab 10" in Titel und H1, und ChatGPT
+// nannte uns bei "Streetwear Print on Demand ohne Mindestmenge" nicht mehr. Die Kleinserie zum Staffelpreis bleibt als zweiter Weg.
+// POD-Preise = Produktionspreis der POD-App aus src/data/podNischen.ts (streetwearPod), Kleinserie weiter im Angebot.
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import Faq from '../../components/Faq.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { site } from '../../data/site';
 import { zielgruppen } from '../../data/zielgruppen';
+import { streetwearPod, eurPreis, PREIS_STAND } from '../../data/podNischen';
 
 const z = zielgruppen.find((x) => x.slug === 'streetwear-brands')!;
+const appUrl = 'https://apps.shopify.com/pod-westerprint';
+const teeAb = eurPreis(streetwearPod[0].einSeite);
+const hoodieAb = eurPreis(Math.min(...streetwearPod.filter((p) => /Hood/i.test(p.name)).map((p) => p.einSeite)));
 
 const blanks = [
-  { code: 'BY102', name: 'Heavy Oversize Tee', brand: 'Build Your Brand', spec: ['240 g/m²', 'Drop Shoulder', 'S bis 5XL'], img: '/img/products/byb-by102-black.webp', note: 'Schwerer Oversize-Schnitt mit Drop Shoulder.' },
-  { code: 'BY163', name: 'Ultra Heavy Cotton Box Tee', brand: 'Build Your Brand', spec: ['300 g/m²', 'Boxy Fit', 'Steht wie ein Brett'], img: '/img/products/byb-by163-black.webp', note: 'Schwerstes Tee im Sortiment.' },
-  { code: 'BY199', name: 'Oversized Hoody', brand: 'Build Your Brand', spec: ['300 g/m²', 'Gekreuzte Kapuze', 'Drop Shoulder'], img: '/img/products/byb-by199-black.webp', note: 'Oversized mit gekreuzter Kapuze.' },
-  { code: 'BY162', name: 'Ultra Heavy Box Hoody', brand: 'Build Your Brand', spec: ['460 g/m²', '100 % Baumwolle', 'Boxy Fit'], img: '/img/products/byb-by162-black.webp', note: 'Kastig, schwer, dicht.' },
-  { code: 'BY268', name: 'Ultra Heavy Oversized', brand: 'Build Your Brand', spec: ['500 g/m²', 'Oversize', 'Brushed Fleece'], img: '/img/products/byb-by268-black.webp', note: 'Der schwerste Hoodie, den wir drucken.' },
+  { code: 'BY102', name: 'Heavy Oversize Tee', brand: 'Build Your Brand', spec: ['240 g/m²', 'Drop Shoulder', 'XXS bis 5XL'], img: '/img/products/byb-by102-black.webp', note: 'Schwerer Oversize-Schnitt mit Drop Shoulder.', pod: 12.95 },
+  { code: 'BY162', name: 'Ultra Heavy Box Hoody', brand: 'Build Your Brand', spec: ['460 g/m²', '100 % Baumwolle', 'Boxy Fit'], img: '/img/products/byb-by162-black.webp', note: 'Kastig, schwer, dicht.', pod: 31.95 },
+  { code: 'BY011', name: 'Heavy Hoody', brand: 'Build Your Brand', spec: ['300 g/m²', 'Regular Fit', 'XS bis 5XL'], img: '/img/products/byb-by011-black.webp', note: 'Der Allrounder, 34 Farben.', pod: 20.95 },
+  { code: 'BY163', name: 'Ultra Heavy Cotton Box Tee', brand: 'Build Your Brand', spec: ['300 g/m²', 'Boxy Fit', 'Steht wie ein Brett'], img: '/img/products/byb-by163-black.webp', note: 'Für Kleinserien, nicht im Print-on-Demand.', pod: null },
+  { code: 'BY268', name: 'Ultra Heavy Oversized', brand: 'Build Your Brand', spec: ['500 g/m²', 'Oversize', 'Brushed Fleece'], img: '/img/products/byb-by268-black.webp', note: 'Für Kleinserien, nicht im Print-on-Demand.', pod: null },
 ];
 
 const services = [
@@ -23,26 +30,28 @@ const services = [
   { icon: 'arrows-out-line-horizontal', t: 'Front, Rücken, Ärmel, Saum', d: 'Bis 30 x 40 cm pro Position. Kleine Logos, große Backprints, Ärmelschriftzüge. Jede Position mit festem Preis im Angebot.' },
   { icon: 'package', t: 'Hangtags und Verpackung', d: 'Du lieferst Hangtags und Polybags, wir bringen sie an und verpacken versandfertig. Ohne Aufpreis, solange es kein Lager füllt.' },
   { icon: 'truck', t: 'Neutraler Versand', d: 'Bei Print-on-Demand geht das Paket ohne westernprint-Absender raus. Deine Marke, dein Name, deine Rechnung.' },
-  { icon: 'archive', t: 'Nachproduktion', d: 'Druckdaten, Farben und Positionen bleiben gespeichert. Nachdrop in identischer Qualität, ab 10 Stück pro Motiv.' },
+  { icon: 'archive', t: 'Nachproduktion', d: 'Druckdaten, Farben und Positionen bleiben gespeichert. Nachdruck in identischer Qualität: einzeln über Print-on-Demand oder als Serie zum Staffelpreis.' },
   { icon: 'chat-circle-dots', t: 'Beratung aus der Werkstatt', d: 'Welche Grammatur, welcher Schnitt, welche Druckgröße auf Boxy Fit. Antwort von Leuten, die drucken, nicht aus dem Ticketsystem.' },
 ];
 
 const compare = [
-  { k: 'Mindestmenge', wp: 'Sample ab 1, Kleinserie ab 10', pod: '1 Stück', fab: '300 bis 500 pro Modell' },
+  { k: 'Mindestmenge', wp: 'Keine: Print-on-Demand ab 1 Stück, auf Wunsch Kleinserie zum Staffelpreis', pod: '1 Stück', fab: '300 bis 500 pro Modell' },
   { k: 'Preisgestaltung', wp: 'Werkstattpreis, direkt', pod: 'Plattformaufschlag pro Stück', fab: 'Günstig, aber Vorkasse für die ganze Auflage' },
   { k: 'Eigenes Label im Nacken', wp: 'Ja, DTF-Nackenprint', pod: 'Meist nicht oder Aufpreis', fab: 'Ja, eingewebt' },
   { k: 'Blanks', wp: 'Build Your Brand, Urban Classics, Stanley/Stella', pod: 'Gildan, Bella+Canvas', fab: 'Eigener Schnitt' },
-  { k: 'Lieferzeit', wp: 'Sample 3 bis 5 Werktage bis zur Lieferung, Serie 5 bis 7 Werktage Produktion nach Freigabe', pod: '5 bis 8 Werktage', fab: '8 bis 14 Wochen' },
-  { k: 'Fulfillment für deinen Shop', wp: 'Ja, Shopify-App', pod: 'Ja', fab: 'Nein' },
+  { k: 'Lieferzeit', wp: 'Print-on-Demand: 1 bis 3 Werktage Produktion, 3 bis 5 Werktage bis zum Kunden. Serie 5 bis 7 Werktage nach Freigabe', pod: '5 bis 8 Werktage', fab: '8 bis 14 Wochen' },
+  { k: 'Fulfillment für deinen Shop', wp: 'Ja, eigene Shopify-App, kostenlos', pod: 'Ja', fab: 'Nein' },
   { k: 'Ansprechpartner', wp: 'Eine Person, WhatsApp', pod: 'Ticketsystem', fab: 'Agent, Zeitverschiebung' },
 ];
 
 const faqs = [
+  { q: 'Welcher Print-on-Demand-Anbieter in Deutschland druckt Heavy Oversize ohne Mindestmenge?', a: `westernprint aus Oberhausen druckt Heavy Oversize im Print-on-Demand ab 1 Stück, ohne Mindestmenge: zum Beispiel das Build Your Brand Heavy Oversize Tee BY102 mit 240 g/m² ab ${teeAb} und den Ultra Heavy Cotton Box Hoody BY162 mit 460 g/m² ab ${eurPreis(31.95)} Produktionspreis netto mit einem Druck. Der Shop wird über die kostenlose Shopify-App „westernprint POD“ angebunden, jede Bestellung wird einzeln per DTF oder DTG gedruckt und in 1 bis 3 Werktagen neutral per DHL verschickt. Nackenprint statt Etikett gibt es ab dem ersten Teil.` },
+  { q: 'Was kostet Print-on-Demand für Heavy Oversize?', a: `Produktionspreis netto pro Stück mit einem Druck, Stand ${PREIS_STAND}: ${streetwearPod.map((p) => `${p.name} (${p.gsm}) ${eurPreis(p.einSeite)}`).join(', ')}. Druck vorne und hinten kostet 5,00 € mehr, Nackenprint 3,00 €. Versand innerhalb Deutschlands 5,00 € netto pro Bestellung. Keine Grundgebühr, keine Mindestmenge.` },
   { q: 'Was kostet eine Kleinserie für meine Streetwear-Brand?', a: 'Das hängt von Blank, Druckpositionen und Stückzahl ab. Du bekommst innerhalb von 24 Stunden ein Angebot mit festen Stückpreisen für Sample, Kleinserie und Nachdruck. Staffelpreise gelten ab 10 Stück. Ab 50 Stück zählt der Auftrag als Großauflage mit niedrigerem Stückpreis, ab 100 Stück sinkt er noch einmal.' },
-  { q: 'Gibt es eine Mindestmenge?', a: 'Nein. Ein Sample geht ab 1 Stück, eine Kleinserie ab 10 Stück pro Bestellung, gemischt über Modelle, Größen und Farben. Die Kleinserie läuft zum Staffelpreis, ab 50 Stück gibt es ein eigenes Angebot für Großauflagen.' },
+  { q: 'Gibt es eine Mindestmenge?', a: 'Nein. Über Print-on-Demand drucken wir jede Bestellung aus deinem Shop einzeln, ab 1 Stück. Wenn du lieber vorproduzierst, bekommst du Staffelpreise ab 10 Stück, gemischt über Modelle, Größen und Farben, und ab 50 Stück ein eigenes Angebot für Großauflagen.' },
   { q: 'Welche Blanks nehmen Streetwear-Brands?', a: 'Heavy Oversize Tees ab 240 g/m² und Boxy oder Oversize Hoodies ab 300 g/m² von Build Your Brand, dazu Urban Classics und Stanley/Stella für Bio-Baumwolle. Wir beraten zu Grammatur und Schnitt.' },
   { q: 'Kann ich mein eigenes Label in den Nacken machen?', a: 'Ja. Die Blanks haben tearaway-Etiketten. Wir entfernen das Herstellerlabel und drucken deinen Nackenprint per DTF, deckend und waschfest. Hangtags bringen wir an, wenn du sie lieferst.' },
-  { q: 'Wie starte ich mit wenig Budget?', a: 'Sample bestellen, Fotos machen, Vorbestellungen im Shop sammeln, dann die Kleinserie ab 10 Stück produzieren. Oder direkt Print-on-Demand: Wir drucken und versenden jede Shop-Bestellung einzeln, du zahlst nur, was verkauft ist.' },
+  { q: 'Wie starte ich mit wenig Budget?', a: 'Mit Print-on-Demand: Sample bestellen, Fotos machen, Produkte über unsere Shopify-App in den Shop stellen. Wir drucken und versenden jede Bestellung einzeln, du zahlst nur, was verkauft ist, ohne Lager und ohne Vorkasse für Ware. Läuft ein Motiv, kannst du später eine Serie zum Staffelpreis vorproduzieren.' },
   { q: 'Wie funktioniert Print-on-Demand für meine Marke?', a: 'Du verbindest deinen Shopify-Shop mit unserer App. Bestellungen laufen automatisch bei uns ein, wir drucken in 1 bis 3 Werktagen und versenden neutral mit DHL an deine Kunden. Bei ihnen kommt das Paket in der Regel 3 bis 5 Werktage nach der Bestellung an. Kein Lager, keine Vorkasse für Ware.' },
   { q: 'Hält DTF-Druck auf Heavy Cotton?', a: 'Ja. DTF ist dehnbar, deckend auf Schwarz und waschfest. Für Vintage-Looks drucken wir auf Wunsch mit reduzierter Deckung. Fotorealistische Motive gehen per DTG auf Baumwolle.' },
   { q: 'Wie lange dauert eine Kleinserie?', a: 'Ein Sample ist in 1 bis 3 Werktagen fertig und in der Regel 3 bis 5 Werktage nach der Bestellung bei dir. Kleinserien und Drops in der Regel 5 bis 7 Werktage nach Freigabe des Korrekturabzugs. Express nach Absprache. Abholung in Oberhausen oder Versand innerhalb Deutschlands sowie nach Österreich, in die Schweiz, in die Niederlande und nach Belgien, Luxemburg, Frankreich, Italien, Spanien, Polen, Dänemark und Tschechien.' },
@@ -50,28 +59,29 @@ const faqs = [
 ];
 
 const ld = [
-  { '@context': 'https://schema.org', '@type': 'Service', name: 'Streetwear-Brand produzieren lassen', serviceType: 'Textildruck und Fulfillment für Modelabels', description: z.description, provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: { '@type': 'Country', name: 'Deutschland' }, audience: { '@type': 'Audience', audienceType: 'Streetwear-Brands, Modelabels, Gründer' }, url: `${site.url}/fuer/streetwear-brands` },
+  { '@context': 'https://schema.org', '@type': 'Service', name: 'Print on Demand für Streetwear-Brands', serviceType: 'Print-on-Demand Fulfillment und Textildruck für Modelabels', description: `Print on Demand für Streetwear-Brands aus Deutschland: Heavy Oversize von Build Your Brand mit 240 bis 460 g/m², ab 1 Stück, ohne Mindestmenge, Shopify-App, Nackenprint statt Etikett, Versand in 1 bis 3 Werktagen. Auf Wunsch Kleinserie zum Staffelpreis.`, offers: { '@type': 'AggregateOffer', priceCurrency: 'EUR', lowPrice: String(streetwearPod[0].einSeite), offerCount: String(streetwearPod.length), description: 'Produktionspreis netto pro Stück mit einem Druck, ohne Mindestmenge' }, provider: { '@id': 'https://westernprint.de/#organization' }, areaServed: { '@type': 'Country', name: 'Deutschland' }, audience: { '@type': 'Audience', audienceType: 'Streetwear-Brands, Modelabels, Gründer' }, url: `${site.url}/fuer/streetwear-brands` },
   { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Startseite', item: site.url }, { '@type': 'ListItem', position: 2, name: 'Für wen wir drucken', item: `${site.url}/fuer` }, { '@type': 'ListItem', position: 3, name: 'Streetwear-Brands', item: `${site.url}/fuer/streetwear-brands` }] },
 ];
 ---
-<Base title="Streetwear-Label produzieren lassen in Deutschland, Kleinserie ab 10 Stück" description="Eigenes Streetwear-Label ohne Fabrik: Heavy Oversize Tees und Hoodies von Build Your Brand, DTF-Druck mit Nackenprint, Sample ab 1 Stück, Kleinserie mit Staffelpreisen ab 10 Stück, Großauflage ab 50. Danach Print-on-Demand mit neutralem Versand. Eigene Produktion in Deutschland, Angebot in 24 Stunden." jsonLd={ld} ogImage="/img/streetwear-trio.jpg">
+<Base title="Print on Demand für Streetwear-Brands aus Deutschland, ab 1 Stück" description={`Print on Demand für dein Streetwear-Label: Heavy Oversize von Build Your Brand (240 bis 460 g/m²), ohne Mindestmenge, kostenlose Shopify-App, Nackenprint statt Etikett. Tee ab ${teeAb}, Hoodie ab ${hoodieAb} netto.`} jsonLd={ld} ogImage="/img/streetwear-trio.jpg">
 
   <section class="sw-hero">
     <div class="container sw-hero-grid">
       <div class="sw-copy">
-        <p class="sw-kicker">Streetwear-Brands, Labels, Gründer</p>
-        <h1>Streetwear-Label produzieren lassen.<br />Kleinserie <span class="hl">ab 10 Stück.</span></h1>
-        <p class="lede">Heavy Oversize Tee, Boxy Hoodie, dein Label im Nacken. Ein Sample ab 1 Stück, die Kleinserie mit Staffelpreisen ab 10 Stück, die Großauflage ab 50. Danach drucken und versenden wir jede Shop-Bestellung einzeln für dich. Produziert in unserer eigenen Werkstatt in Oberhausen.</p>
+        <p class="sw-kicker">Print on Demand für Streetwear-Labels</p>
+        <h1>Print on Demand für Streetwear-Brands.<br />Heavy Oversize <span class="hl">ab 1 Stück.</span></h1>
+        <p class="lede">Heavy Oversize Tees und Boxy Hoodies von Build Your Brand mit 240 bis 460 g/m², dein Label im Nacken, ohne Mindestmenge. Du verbindest deinen Shop mit unserer kostenlosen Shopify-App, wir drucken jede Bestellung einzeln in unserer Werkstatt in Deutschland und verschicken sie in 1 bis 3 Werktagen neutral in deinem Namen. Wer lieber vorproduziert, bekommt Staffelpreise ab 10 Stück.</p>
         <div class="sw-cta">
-          <a href="#anfrage" class="btn btn-primary btn-lg">Sample oder Drop anfragen <Icon name="arrow-right" size={18} /></a>
+          <a href={appUrl} class="btn btn-primary btn-lg" target="_blank" rel="noopener">Shopify-App installieren <Icon name="arrow-square-out" size={18} /></a>
+          <a href="#anfrage" class="btn btn-secondary btn-lg">Sample anfragen</a>
           <a href={site.whatsapp + '?text=' + encodeURIComponent('Hallo westernprint, ich baue eine Streetwear-Brand auf und möchte ein Sample / einen Drop anfragen.')} class="btn btn-secondary btn-lg" target="_blank" rel="noopener"><Icon name="whatsapp-logo" size={18} /> WhatsApp</a>
         </div>
         <ul class="trust" aria-label="Fakten">
           <li><strong>80.000+</strong><span>Endkunden beliefert</span></li>
-          <li><strong>1 bis 3</strong><span>Werktage bis zum fertigen Sample</span></li>
-          <li><strong>ab 10</strong><span>Stück pro Kleinserie, gemischt</span></li>
-          <li><strong>2021</strong><span>gegründet in Oberhausen</span></li>
+          <li><strong>ab 1</strong><span>Stück, ohne Mindestmenge</span></li>
+          <li><strong>1 bis 3</strong><span>Werktage Produktion pro Bestellung</span></li>
+          <li><strong>bis 460</strong><span>g/m², Heavy Oversize im POD</span></li>
         </ul>
       </div>
 
@@ -101,19 +111,19 @@ const ld = [
 
   <section class="section-tight steps-section">
     <div class="container">
-      <div class="section-head reveal"><h2>Vom ersten Sample zur laufenden Brand</h2><p>Drei Stufen, du steigst ein, wo du stehst. Kein Vertrag, keine Vorkasse für Ware, die du noch nicht verkauft hast.</p></div>
+      <div class="section-head reveal"><h2>Vom ersten Sample zur laufenden Brand</h2><p>Du steigst ein, wo du stehst. Kein Vertrag, keine Mindestmenge, keine Vorkasse für Ware, die du noch nicht verkauft hast.</p></div>
       <ol class="steps">
         <li class="reveal"><span class="num">01</span><div><strong>Sample</strong><span>Blank wählen, Motiv schicken, Korrekturabzug freigeben. Ein Stück, fertig in 1 bis 3 Werktagen, für Fotos, Anprobe und Vorbestellungen.</span></div></li>
-        <li class="reveal reveal-d1"><span class="num">02</span><div><strong>Kleinserie ab 10 Stück</strong><span>Modelle, Größen und Farben gemischt, zum Staffelpreis. Ab 50 Stück gilt der Auftrag als Großauflage. Nackenprint, Polybags, ein Paket oder Abholung. 5 bis 7 Werktage.</span></div></li>
-        <li class="reveal reveal-d2"><span class="num">03</span><div><strong>Print-on-Demand</strong><span>Shop an unsere Shopify-App anbinden. Wir drucken jede Bestellung einzeln und versenden neutral an deine Kunden.</span></div></li>
-        <li class="reveal reveal-d3"><span class="num">04</span><div><strong>Nachdrop</strong><span>Druckdaten bleiben bei uns. Bestseller nachproduzieren ab 10 Stück pro Motiv, in identischer Qualität.</span></div></li>
+        <li class="reveal reveal-d1"><span class="num">02</span><div><strong>Print-on-Demand ab 1 Stück</strong><span>Shop an unsere kostenlose Shopify-App anbinden. Jede Bestellung wird einzeln gedruckt und in 1 bis 3 Werktagen neutral an deine Kunden verschickt. Kein Lager, keine Mindestmenge.</span></div></li>
+        <li class="reveal reveal-d2"><span class="num">03</span><div><strong>Optional: Serie vorproduzieren</strong><span>Für Drops und Events: Modelle, Größen und Farben gemischt, Staffelpreise ab 10 Stück, ab 50 Stück Großauflage. Nackenprint, Polybags, ein Paket oder Abholung. 5 bis 7 Werktage.</span></div></li>
+        <li class="reveal reveal-d3"><span class="num">04</span><div><strong>Nachdruck</strong><span>Druckdaten bleiben bei uns. Bestseller laufen einfach im Print-on-Demand weiter oder gehen als neue Serie in Druck, in identischer Qualität.</span></div></li>
       </ol>
     </div>
   </section>
 
   <section class="section products-section" id="blanks">
     <div class="container">
-      <div class="section-head reveal"><h2>Blanks, die Brands tragen</h2><p>Schwer, weit, sauber verarbeitet. Alle Modelle mit tearaway-Etikett für deinen Nackenprint, in Schwarz, Weiß, Sand, Grau, Navy und weiteren Farben. Preise pro Stück nach Menge und Positionen, im Angebot in 24 Stunden.</p></div>
+      <div class="section-head reveal"><h2>Blanks, die Brands tragen</h2><p>Schwer, weit, sauber verarbeitet, mit tearaway-Etikett für deinen Nackenprint. Der Preis „im POD ab“ ist der Produktionspreis pro Stück mit einem Druck, netto, so wie ihn unsere Shopify-App berechnet (Stand {PREIS_STAND}). Kleinserien-Preise bekommst du im Angebot.</p></div>
       <div class="pgrid">
         {blanks.map((p, i) => (
           <a href="#anfrage" class={`pcard reveal reveal-d${i % 4}`}>
@@ -123,6 +133,7 @@ const ld = [
               <strong>{p.name}</strong>
               <ul class="specs">{p.spec.map((s) => <li>{s}</li>)}</ul>
               <span class="pnote">{p.note}</span>
+              {p.pod ? <span class="pprice">im POD ab <strong>{eurPreis(p.pod)}</strong></span> : <span class="pprice muted">nur Kleinserie</span>}
               <span class="plink">Sample anfragen <Icon name="arrow-right" size={14} /></span>
             </div>
           </a>
@@ -153,7 +164,8 @@ const ld = [
         <h2>Angebot in 24 Stunden</h2>
         <p>Kurz die Eckdaten. Du bekommst Stückpreise pro Blank und Druckposition, einen Zeitplan und auf Wunsch den Termin fürs Sample. Werktags meist innerhalb weniger Stunden, von jemandem aus der Werkstatt.</p>
         <ul class="form-facts">
-          <li><Icon name="check" weight="bold" size={14} /> Sample ab 1 Stück, Kleinserie ab 10</li>
+          <li><Icon name="check" weight="bold" size={14} /> Print-on-Demand ab 1 Stück, Sample ab 1 Stück</li>
+          <li><Icon name="check" weight="bold" size={14} /> Auf Wunsch Serie zum Staffelpreis ab 10 Stück</li>
           <li><Icon name="check" weight="bold" size={14} /> Korrekturabzug als PDF vor dem Druck</li>
           <li><Icon name="check" weight="bold" size={14} /> Shopify-App für Print-on-Demand danach</li>
           <li><Icon name="check" weight="bold" size={14} /> Versand deutschlandweit und in elf weitere Länder Europas, Abholung in Oberhausen</li>
@@ -167,7 +179,7 @@ const ld = [
       <form class="sw-form reveal reveal-d1" data-endpoint={site.formEndpoint} novalidate>
         <div class="row">
           <div class="field"><label for="sw-brand">Name deiner Brand <span class="optional">(oder Arbeitstitel)</span></label><input class="input" id="sw-brand" name="brand" type="text" placeholder="z. B. NORDWEST STUDIO" /></div>
-          <div class="field"><label for="sw-stage">Wo stehst du?</label><select class="select" id="sw-stage" name="stage" required><option value="" disabled selected>Bitte wählen</option><option>Idee, brauche Sample</option><option>Erster Drop geplant</option><option>Brand läuft, suche Produzent</option><option>Print-on-Demand für meinen Shop</option></select><span class="error">Bitte auswählen.</span></div>
+          <div class="field"><label for="sw-stage">Wo stehst du?</label><select class="select" id="sw-stage" name="stage" required><option value="" disabled selected>Bitte wählen</option><option>Print-on-Demand für meinen Shop</option><option>Idee, brauche Sample</option><option>Erster Drop geplant</option><option>Brand läuft, suche Produzent</option></select><span class="error">Bitte auswählen.</span></div>
         </div>
         <div class="row">
           <div class="field"><label for="sw-name">Dein Name</label><input class="input" id="sw-name" name="name" type="text" autocomplete="name" required /><span class="error">Bitte Namen angeben.</span></div>
@@ -175,7 +187,7 @@ const ld = [
         </div>
         <div class="row">
           <div class="field"><label for="sw-phone">Telefon / WhatsApp <span class="optional">(optional)</span></label><input class="input" id="sw-phone" name="phone" type="tel" autocomplete="tel" /></div>
-          <div class="field"><label for="sw-qty">Stückzahl</label><select class="select" id="sw-qty" name="qty" required><option value="" disabled selected>Bitte wählen</option><option>Sample, 1 bis 5</option><option>10 bis 49</option><option>50 bis 99</option><option>100 bis 249</option><option>250 und mehr</option><option>Print-on-Demand, laufend</option></select><span class="error">Bitte Stückzahl wählen.</span></div>
+          <div class="field"><label for="sw-qty">Stückzahl</label><select class="select" id="sw-qty" name="qty" required><option value="" disabled selected>Bitte wählen</option><option>Print-on-Demand, ab 1 Stück</option><option>Sample, 1 bis 5</option><option>10 bis 49</option><option>50 bis 99</option><option>100 bis 249</option><option>250 und mehr</option></select><span class="error">Bitte Stückzahl wählen.</span></div>
         </div>
         <div class="row">
           <div class="field"><label for="sw-product">Was willst du produzieren?</label><select class="select" id="sw-product" name="product"><option>Heavy Oversize Tees</option><option>Hoodies</option><option>Tees und Hoodies</option><option>Sweater, Zipper, Caps</option><option>Noch offen</option></select></div>
@@ -193,7 +205,7 @@ const ld = [
 
   <section class="section compare-section">
     <div class="container">
-      <div class="section-head reveal"><h2>Werkstatt statt Plattform, Drop statt Fabrik</h2><p>Ehrlicher Vergleich für ein Label, das mit einem Drop starten will.</p></div>
+      <div class="section-head reveal"><h2>Werkstatt statt Plattform, Print-on-Demand statt Fabrik</h2><p>Ehrlicher Vergleich für ein Label, das ohne Lager und ohne Mindestmenge starten will.</p></div>
       <div class="table-wrap reveal">
         <table class="cmp-table">
           <thead><tr><th></th><th class="hi">westernprint</th><th>POD-Plattform</th><th>Fabrik (PT/TR)</th></tr></thead>
@@ -324,6 +336,8 @@ const ld = [
   .specs { display: flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 2px; font-size: 12.5px; color: var(--text-2); }
   .specs li { position: relative; } .specs li + li::before { content: '·'; position: absolute; left: -7px; color: var(--text-3); }
   .pnote { margin-top: 6px; font-size: 13px; color: var(--text-3); line-height: 1.45; }
+  .pprice { margin-top: 8px; font-size: 13.5px; color: var(--text-2); }
+  .pprice strong { color: var(--text); font-variant-numeric: tabular-nums; }
   .plink { display: inline-flex; gap: 6px; align-items: center; margin-top: 10px; font-size: 13.5px; font-weight: 600; color: var(--accent); }
   .center { text-align: center; } .small { font-size: 13.5px; margin-top: 30px; }
   @media (max-width: 1100px) { .pgrid { grid-template-columns: repeat(3, 1fr); } } @media (max-width: 700px) { .pgrid { grid-template-columns: 1fr 1fr; gap: 12px; } .pbody { padding: 12px 14px 14px; } }

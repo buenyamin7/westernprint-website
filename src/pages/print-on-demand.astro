@@ -6,13 +6,26 @@ import CtaBand from '../components/CtaBand.astro';
 import Faq from '../components/Faq.astro';
 import { site, oeffnungszeiten } from '../data/site';
 import { bewertungen } from '../data/bewertungen';
-import { nischen } from '../data/podNischen';
+import { nischen, podProdukte, streetwearPod, eurPreis, PREIS_STAND } from '../data/podNischen';
 
 // Quelle für alle Fakten auf dieser Seite: der Code der POD-App (~/dev/westernprint-pod, Stand 17.10.2026) und die
-// Freigaben des Inhabers vom 17.10.2026. Produkt- und Branding-Preise bleiben bewusst draußen: Sie stehen nur in der App.
+// Freigaben des Inhabers vom 17.10.2026. Seit 23.10.2026 (Inhaber) stehen „ab“-Preise und ein Streetwear-Block mit
+// Grammatur und App-Produktionspreis auf der Seite. Daten aus src/data/podNischen.ts (podProdukte, streetwearPod).
 // Versandpauschalen und die Staffel stammen aus lib/pricing/index.ts der App und müssen bei Änderungen dort mitgezogen werden.
 const schnitt = bewertungen.schnitt.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 const appUrl = 'https://apps.shopify.com/pod-westerprint';
+const P = podProdukte;
+// „Ab“-Preise: Produktionspreis netto pro Stück mit einem Druck, wie die App ihn berechnet (Referenzfarbe Schwarz).
+const abPreise = [
+  { t: 'T-Shirt', p: P.classicT, z: 'Stedman Classic-T' },
+  { t: 'T-Shirt Bio', p: P.creator, z: 'Stanley/Stella Creator 2.0' },
+  { t: 'Heavy Oversize Tee', p: P.by102, z: 'Build Your Brand BY102, 240 g/m²' },
+  { t: 'Poloshirt', p: P.classicPolo, z: 'Stedman Classic Polo' },
+  { t: 'Hoodie', p: P.classicHoodie, z: 'Stedman Classic Hoodie' },
+  { t: 'Sweatshirt Bio', p: P.changer, z: 'Stanley/Stella Changer 2.0' },
+  { t: 'Baby-Body', p: P.babyBody, z: 'Stanley/Stella Baby Body' },
+  { t: 'Tote Bag', p: P.tote, z: 'Stanley/Stella Tote Bag' },
+];
 
 // Versand: Pauschale pro Bestellung netto, Staffel +1,50 € je volle 3 Artikel (1–2 Artikel ohne Aufschlag, 3–5 Artikel +1,50 €, 6–8 Artikel +3,00 €).
 const versand = [
@@ -75,13 +88,15 @@ const vergleich = [
 ];
 
 const faqs = [
+  { q: 'Welcher Print-on-Demand-Anbieter in Deutschland druckt Heavy Oversize ohne Mindestmenge?', a: `westernprint aus Oberhausen druckt Heavy Oversize im Print-on-Demand ab 1 Stück, ohne Mindestmenge: Build Your Brand Heavy Oversize Tee BY102 mit 240 g/m² ab ${eurPreis(P.by102.einSeite)}, Heavy Hoody BY011 mit 300 g/m² ab ${eurPreis(P.by011.einSeite)} und Ultra Heavy Cotton Box Hoody BY162 mit 460 g/m² ab ${eurPreis(P.by162.einSeite)} Produktionspreis netto mit einem Druck. Angebunden wird der Shopify-Shop über die kostenlose App „westernprint POD“. Jede Bestellung wird einzeln per DTF oder DTG gedruckt und in 1 bis 3 Werktagen neutral per DHL verschickt, Nackenprint statt Etikett gibt es ab dem ersten Teil.` },
+  { q: 'Was kostet ein T-Shirt im Print-on-Demand?', a: `Bei westernprint kostet ein T-Shirt mit einem Druck im Print-on-Demand ab ${eurPreis(P.classicT.einSeite)} netto (Stedman Classic-T), ein Bio-Shirt ab ${eurPreis(P.creator.einSeite)} (Stanley/Stella Creator 2.0) und ein Heavy Oversize Tee ab ${eurPreis(P.by102.einSeite)} (Build Your Brand BY102, 240 g/m²). Ein Hoodie startet bei ${eurPreis(P.classicHoodie.einSeite)}. Dazu kommt der Versand, in Deutschland 5,00 € netto pro Bestellung. Keine Grundgebühr, kein Abo.` },
   { q: 'Was ist Print-on-Demand?', a: 'Print-on-Demand heißt: Ein Produkt wird erst gedruckt, wenn ein Kunde es in deinem Shop gekauft und bezahlt hat. Du brauchst kein Lager und keine Vorkasse für Ware. Du legst Design und Verkaufspreis fest, wir drucken, verpacken und versenden jede Bestellung einzeln direkt an deinen Kunden.' },
   { q: 'Wie funktioniert Print-on-Demand mit westernprint?', a: 'Du installierst die kostenlose Shopify-App „westernprint POD“, wählst ein Textil, lädst dein Design hoch und platzierst es im Live-Mockup. Das Produkt landet automatisch in deinem Shop. Sobald eine Bestellung bezahlt ist, kommt sie zu uns nach Oberhausen. Wir drucken per DTF oder DTG, prüfen jedes Teil, verpacken neutral und versenden per DHL. Die Sendungsnummer geht automatisch zurück an Shopify.' },
-  { q: 'Was kostet die App und was zahle ich pro Bestellung?', a: 'Die App ist kostenlos, es gibt keine Grundgebühr, kein Abo und keinen Mindestumsatz. Du zahlst nur Produktion und Versand der Artikel, die tatsächlich bestellt wurden. Den Produktionspreis jedes Produkts siehst du in der App, bevor du es veröffentlichst.' },
+  { q: 'Was kostet die App und was zahle ich pro Bestellung?', a: `Die App ist kostenlos, es gibt keine Grundgebühr, kein Abo und keinen Mindestumsatz. Du zahlst nur Produktion und Versand der Artikel, die tatsächlich bestellt wurden, zum Beispiel ab ${eurPreis(P.classicT.einSeite)} netto für ein T-Shirt mit einem Druck. Den genauen Produktionspreis jedes Produkts siehst du in der App, bevor du es veröffentlichst.` },
   { q: 'Gibt es eine Mindestbestellmenge?', a: 'Nein. Wir drucken ab 1 Stück. Jede Bestellung aus deinem Shop wird einzeln produziert, auch wenn sie nur aus einem T-Shirt besteht.' },
   { q: 'Wie lange dauern Produktion und Lieferung?', a: 'Die Produktion dauert 1 bis 3 Werktage, auch in der Black Week und im Weihnachtsgeschäft. Bei deinen Kunden kommt die Bestellung in der Regel 3 bis 5 Werktage nach der Bestellung an, in Deutschland genauso wie in Österreich, der Schweiz und den übrigen EU-Ländern.' },
   { q: 'In welche Länder versendet ihr und was kostet der Versand?', a: 'Wir liefern nach Deutschland, Österreich, in die Schweiz und in alle übrigen EU-Länder. Pro Bestellung netto: Deutschland 5,00 €, Österreich 7,00 €, übrige EU-Länder 7,50 €, Schweiz 9,00 €. Je volle 3 Artikel in einer Bestellung kommen 1,50 € netto dazu. Versand per DHL mit Tracking. Für die Schweiz erstellen wir die Zollpapiere, Einfuhrabgaben trägt der Empfänger.' },
-  { q: 'Welche Textilien kann ich anbieten?', a: 'Stanley/Stella mit über 150 Styles aus Bio-Baumwolle, elf Stedman-Klassiker bis 5XL und ausgewählte Modelle von Build Your Brand für Streetwear, zum Beispiel Ultra Heavy Box Hoody, Fluffy Hoody und Vintage Heavy Tee. Welche Zertifikate ein Artikel trägt, siehst du am Produkt in der App.' },
+  { q: 'Welche Textilien kann ich anbieten?', a: 'Stanley/Stella mit über 150 Styles aus Bio-Baumwolle, elf Stedman-Klassiker bis 5XL und ausgewählte Modelle von Build Your Brand für Streetwear mit 240 bis 460 g/m², zum Beispiel Heavy Oversize Tee BY102, Ultra Heavy Box Hoody BY162, Fluffy Hoody und Vintage Heavy Loose Tee. Welche Zertifikate ein Artikel trägt, siehst du am Produkt in der App.' },
   { q: 'DTF oder DTG: Welches Druckverfahren bekomme ich?', a: 'Standard ist DTF: deckende, kräftige Farben auf hellen und dunklen Textilien, auch auf Mischgewebe und Polyester. Auf Wunsch drucken wir per DTG, also direkt in den Stoff, für einen besonders weichen Griff auf heller Baumwolle. Du wählst das Verfahren im Designer.' },
   { q: 'Welche Dateien brauche ich?', a: 'Am besten ein PNG mit transparentem Hintergrund in 300 dpi. Die App nimmt auch JPG, WEBP, SVG, PDF, AI und EPS bis 50 MB. Ist die Auflösung zu niedrig oder der Hintergrund weiß, warnt dich der Designer vor dem Veröffentlichen.' },
   { q: 'Kann ich bestehende Shopify-Produkte verknüpfen?', a: 'Ja. Im Portal ordnest du Produkte, die schon in deinem Shop stehen, einem Textil bei uns zu. Die Varianten erkennt die App über Farbe und Größe. Nichts muss neu angelegt werden, deine Bewertungen und Rankings bleiben.' },
@@ -100,7 +115,7 @@ const svcLd = { '@context': 'https://schema.org', '@type': 'Service', name: 'Pri
 const howToLd = { '@context': 'https://schema.org', '@type': 'HowTo', name: 'Print-on-Demand mit westernprint für einen Shopify-Shop einrichten', totalTime: 'PT10M', step: schritte.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.t, text: s.d })) };
 const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 ---
-<Base title="Print-on-Demand aus Deutschland für Shopify" description="Print-on-Demand mit eigener Produktion in Oberhausen: kostenlose Shopify-App, DTF und DTG, Produktion in 1 bis 3 Werktagen, DHL-Versand neutral in deinem Namen." jsonLd={[svcLd, appLd, howToLd, faqLd]}>
+<Base title="Print-on-Demand aus Deutschland für Shopify" description={`Print-on-Demand aus Deutschland ab 1 Stück: kostenlose Shopify-App, T-Shirt ab ${eurPreis(P.classicT.einSeite)}, Heavy Oversize bis 460 g/m², Produktion in 1 bis 3 Werktagen, DHL-Versand neutral in deinem Namen.`} jsonLd={[svcLd, appLd, howToLd, faqLd]}>
   <PageHero
     eyebrow="Print-on-Demand für Shopify"
     title="Print-on-Demand aus Deutschland für deinen Shopify-Shop. <span class='hl'>Ab 1 Stück.</span>"
@@ -126,6 +141,8 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
         <div><dt>Druck</dt><dd>DTF, auf Wunsch DTG</dd></div>
         <div><dt>Textilien</dt><dd>Stanley/Stella, Stedman, Build Your Brand</dd></div>
         <div><dt>Mindestmenge</dt><dd>Keine, ab 1 Stück</dd></div>
+        <div><dt>Preise ab</dt><dd>T-Shirt {eurPreis(P.classicT.einSeite)}, Hoodie {eurPreis(P.classicHoodie.einSeite)} netto mit Druck</dd></div>
+        <div><dt>Streetwear</dt><dd>Heavy Oversize von Build Your Brand, 240 bis 460 g/m²</dd></div>
         <div><dt>Produktionszeit</dt><dd>1 bis 3 Werktage, auch im Q4</dd></div>
         <div><dt>Lieferzeit</dt><dd>3 bis 5 Werktage ab Bestellung</dd></div>
         <div><dt>Versand</dt><dd>DHL mit Tracking, ab 5,00 € netto pro Bestellung, neutral in deinem Namen</dd></div>
@@ -202,6 +219,37 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
           </div>
         ))}
       </div>
+    </div>
+  </section>
+
+  <section class="section preise-section" id="preise">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Was kostet Print-on-Demand bei westernprint?</h2>
+        <p>Produktionspreis pro Stück mit einem Druck, Textil inklusive, netto zzgl. MwSt. So berechnet ihn die App, bevor dein Produkt online geht (Stand {PREIS_STAND}, Referenzfarbe Schwarz). Zweite Druckseite +5,00 €, Nacken oder Ärmel +3,00 €.</p>
+      </div>
+      <ul class="abpreise reveal">
+        {abPreise.map((a) => (<li><span class="ab-t">{a.t}</span><span class="ab-p">ab {eurPreis(a.p.einSeite)}</span><span class="ab-z">{a.z}</span></li>))}
+      </ul>
+      <p class="muted small preise-note reveal">Versand pro Bestellung: Deutschland 5,00 €, Österreich 7,00 €, übrige EU 7,50 €, Schweiz 9,00 € netto. Größen ab 3XL und melierte Farben können etwas mehr kosten, den genauen Preis zeigt der Designer. Keine Grundgebühr, keine Mindestmenge. Passende Textilien und Preise je Nische findest du unten bei <a href="#nischen" class="accent">Print-on-Demand für deine Nische</a>.</p>
+    </div>
+  </section>
+
+  <section class="section-tight streetwear-section" id="streetwear">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Streetwear im Print-on-Demand: Heavy Oversize ab 1 Stück</h2>
+        <p>Schwere Oversize-Blanks von Build Your Brand, ohne Mindestmenge, mit Nackenprint statt Herstelleretikett ab dem ersten Teil. Mehr für Labels auf <a href="/fuer/streetwear-brands" class="accent">Print on Demand für Streetwear-Brands</a>.</p>
+      </div>
+      <div class="table-wrap reveal">
+        <table class="sw-table">
+          <thead><tr><th scope="col">Modell</th><th scope="col">Grammatur</th><th scope="col">Größen</th><th scope="col" class="num">Ein Druck</th><th scope="col" class="num">Vorne + hinten</th></tr></thead>
+          <tbody>
+            {streetwearPod.map((p) => (<tr><th scope="row">{p.name}</th><td data-label="Grammatur">{p.gsm}</td><td data-label="Größen">{p.groessen}</td><td class="num" data-label="Ein Druck">{eurPreis(p.einSeite)}</td><td class="num" data-label="Vorne + hinten">{eurPreis(p.zweiSeiten)}</td></tr>))}
+          </tbody>
+        </table>
+      </div>
+      <p class="muted small preise-note reveal">Produktionspreis netto pro Stück, Stand {PREIS_STAND}. Grammatur laut Hersteller. Nackenprint +3,00 €. Weitere Heavy-Blanks wie das BY163 Ultra Heavy Box Tee oder den BY268 mit 500 g/m² drucken wir als Serie zum Staffelpreis.</p>
     </div>
   </section>
 
@@ -429,6 +477,30 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
 
   .feat { display: grid; gap: 12px; padding: 26px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); }
   .feat p { color: var(--text-2); font-size: 15px; }
+
+  .abpreise { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
+  .abpreise li { display: grid; gap: 4px; padding: 18px 20px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); }
+  .ab-t { font-weight: 600; color: var(--text); }
+  .ab-p { font-family: var(--font-display); font-size: 1.45rem; font-weight: 800; color: var(--accent); font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+  .ab-z { font-size: 13px; color: var(--text-3); }
+  .preise-note { margin-top: 16px; max-width: 86ch; }
+  .streetwear-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .sw-table { width: 100%; border-collapse: collapse; min-width: 640px; font-size: 15px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-card); overflow: hidden; }
+  .sw-table th, .sw-table td { padding: 12px 18px; text-align: left; border-top: 1px solid var(--line); }
+  .sw-table thead th { border-top: 0; background: var(--bg-2); color: var(--text-3); font-size: 13px; font-weight: 600; }
+  .sw-table tbody th { font-weight: 600; color: var(--text); }
+  .sw-table td { color: var(--text-2); }
+  .sw-table .num { text-align: right; color: var(--text); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  @media (max-width: 700px) {
+    .sw-table { min-width: 0; border: 0; background: none; }
+    .sw-table thead { display: none; }
+    .sw-table, .sw-table tbody { display: block; }
+    .sw-table tr { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px; padding: 16px; margin-bottom: 10px; border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); }
+    .sw-table th, .sw-table td { padding: 0; border: 0; }
+    .sw-table tbody th { grid-column: 1 / -1; }
+    .sw-table td, .sw-table .num { display: grid; gap: 2px; text-align: left; }
+    .sw-table td[data-label]::before { content: attr(data-label); font-size: 12px; color: var(--text-3); }
+  }
 
   .nischen { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
   .nischen a { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center; padding: 18px 20px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--text); text-decoration: none; transition: border-color 0.3s var(--ease); }

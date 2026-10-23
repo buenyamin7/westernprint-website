@@ -25,8 +25,9 @@ export type PodProdukt = {
   bild?: string;
 };
 
-// Produkte einmal definieren, die Nischen wählen daraus.
-const P = {
+// Produkte einmal definieren, die Nischen, /print-on-demand und /fuer/streetwear-brands wählen daraus.
+// gsm = Grammatur laut Herstellerangabe (Build Your Brand: Feld composition im TB-Katalog der POD-App).
+export const podProdukte = {
   changer: { name: 'Changer 2.0', marke: 'Stanley/Stella', art: 'Sweatshirt, Bio-Baumwolle', groessen: 'XXS bis 4XL', einSeite: 19.86, zweiSeiten: 24.86, bild: '/img/products/changer-2-0-natural-raw.jpg' },
   miniChanger: { name: 'Mini Changer 2.0', marke: 'Stanley/Stella', art: 'Kinder-Sweatshirt, Bio-Baumwolle', groessen: '3–4 bis 12–13 Jahre (98/104 bis 152/158)', einSeite: 14.17, zweiSeiten: 19.17, bild: '/img/products/mini-changer-2-0-eco-heather.jpg' },
   babyChanger: { name: 'Baby Changer', marke: 'Stanley/Stella', art: 'Baby-Sweatshirt, Bio-Baumwolle', groessen: '6–12 bis 24–36 Monate', einSeite: 14.14, zweiSeiten: 19.14, bild: '/img/products/baby-changer-natural-raw.jpg' },
@@ -46,7 +47,30 @@ const P = {
   by102: { name: 'Heavy Oversize Tee BY102', marke: 'Build Your Brand', art: 'Oversize-T-Shirt, schwer', groessen: 'XXS bis 5XL', einSeite: 12.95, zweiSeiten: 17.95, bild: '/img/products/byb-by102-black.webp' },
   by391: { name: 'Loose Fit Tee BY391', marke: 'Build Your Brand', art: 'Loose-Fit-T-Shirt', groessen: 'S bis 5XL', einSeite: 11.95, zweiSeiten: 16.95 },
   by011: { name: 'Heavy Hoody BY011', marke: 'Build Your Brand', art: 'Hoodie, schwer', groessen: 'XS bis 5XL', einSeite: 20.95, zweiSeiten: 25.95, bild: '/img/products/byb-by011-black.webp' },
+  // Heavy Oversize und Streetwear aus der POD-App (tb_products.enabled, Stand 23.10.2026).
+  by435: { name: 'Vintage Cropped Heavy Oversize Tee BY435', marke: 'Build Your Brand', art: 'Cropped Oversize-T-Shirt, 240 g/m², 100 % Baumwolle', groessen: 'S bis 5XL', einSeite: 14.95, zweiSeiten: 19.95 },
+  by307: { name: 'Vintage Heavy Loose Tee BY307', marke: 'Build Your Brand', art: 'Loose-Fit-T-Shirt, 240 g/m², 100 % Baumwolle', groessen: 'S bis 5XL', einSeite: 14.75, zweiSeiten: 19.75 },
+  by162: { name: 'Ultra Heavy Cotton Box Hoody BY162', marke: 'Build Your Brand', art: 'Boxy Hoodie, 460 g/m², 100 % Baumwolle', groessen: 'XS bis 5XL', einSeite: 31.95, zweiSeiten: 36.95, bild: '/img/products/byb-by162-black.webp' },
+  by205: { name: 'Ultra Heavy Cotton Crewneck BY205', marke: 'Build Your Brand', art: 'Sweatshirt, 460 g/m², 100 % Baumwolle', groessen: 'XS bis 5XL', einSeite: 26.95, zweiSeiten: 31.95 },
+  by294: { name: 'Vintage Heavy Hoodie BY294', marke: 'Build Your Brand', art: 'Hoodie, 330 g/m²', groessen: 'S bis 5XL', einSeite: 24.95, zweiSeiten: 29.95 },
+  by284: { name: 'Fluffy Hoody BY284', marke: 'Build Your Brand', art: 'Hoodie, 330 g/m²', groessen: 'XS bis 5XL', einSeite: 21.90, zweiSeiten: 26.90 },
 } satisfies Record<string, PodProdukt>;
+const P = podProdukte;
+
+// Heavy Oversize und Streetwear im Print-on-Demand, in dieser Reihenfolge auf /print-on-demand und /fuer/streetwear-brands.
+export const streetwearPod: (PodProdukt & { gsm: string })[] = [
+  { ...podProdukte.by102, gsm: '240 g/m²' },
+  { ...podProdukte.by435, gsm: '240 g/m²' },
+  { ...podProdukte.by307, gsm: '240 g/m²' },
+  { ...podProdukte.by391, gsm: '200 g/m²' },
+  { ...podProdukte.by011, gsm: '300 g/m²' },
+  { ...podProdukte.by284, gsm: '330 g/m²' },
+  { ...podProdukte.by294, gsm: '330 g/m²' },
+  { ...podProdukte.by205, gsm: '460 g/m²' },
+  { ...podProdukte.by162, gsm: '460 g/m²' },
+];
+
+export const eurPreis = (v: number) => v.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
 
 export type PodNische = {
   slug: string;
