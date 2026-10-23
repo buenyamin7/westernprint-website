@@ -6,6 +6,7 @@ import CtaBand from '../components/CtaBand.astro';
 import Faq from '../components/Faq.astro';
 import { site, oeffnungszeiten } from '../data/site';
 import { bewertungen } from '../data/bewertungen';
+import { nischen } from '../data/podNischen';
 
 // Quelle für alle Fakten auf dieser Seite: der Code der POD-App (~/dev/westernprint-pod, Stand 17.10.2026) und die
 // Freigaben des Inhabers vom 17.10.2026. Produkt- und Branding-Preise bleiben bewusst draußen: Sie stehen nur in der App.
@@ -201,6 +202,18 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
           </div>
         ))}
       </div>
+    </div>
+  </section>
+
+  <section class="section-tight nischen-section" id="nischen">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Print-on-Demand für deine Nische</h2>
+        <p>Passende Textilien, Produktionspreise und Ideen für die Nischen, in denen unsere Händler verkaufen.</p>
+      </div>
+      <ul class="nischen reveal">
+        {nischen.map((x) => (<li><a href={`/print-on-demand/${x.slug}`}><strong>{x.kurz}</strong><span>{x.eyebrow}</span><Icon name="arrow-right" size={16} /></a></li>))}
+      </ul>
     </div>
   </section>
 
@@ -416,6 +429,13 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
 
   .feat { display: grid; gap: 12px; padding: 26px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); }
   .feat p { color: var(--text-2); font-size: 15px; }
+
+  .nischen { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
+  .nischen a { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center; padding: 18px 20px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--text); text-decoration: none; transition: border-color 0.3s var(--ease); }
+  .nischen a:hover { border-color: var(--accent-line); }
+  .nischen strong { font-size: 16px; }
+  .nischen span { grid-column: 1; color: var(--text-3); font-size: 13.5px; }
+  .nischen :global(.icon) { grid-column: 2; grid-row: 1 / span 2; color: var(--accent); }
 
   .marken-section { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .marke { display: grid; gap: 12px; align-content: start; padding: 26px; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--surface); }
