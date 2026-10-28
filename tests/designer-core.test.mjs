@@ -121,3 +121,20 @@ test('Serverprüfung rechnet nach und lehnt Manipulation ab', () => {
   assert.equal(bigAck.ok, true);
   assert.equal(bigAck.tariff, 'A4');
 });
+
+test('Kinder- und Babygrößen: gleiche Stufen und Preise, Maße schrumpfen mit dem Textil', async () => {
+  const { tariffsFor, tariffScaleFor, reachableTariffs } = await import('../src/lib/designer-core/core.mjs');
+  assert.equal(tariffScaleFor(53.5, true), 1, 'Erwachsene immer 1');
+  assert.equal(tariffScaleFor(60, false), 1, 'nie größer als Erwachsene');
+  const s = tariffScaleFor(29.5, false); // Baby Changer 6-12 M
+  assert.equal(s, 0.57);
+  const a4 = tariffsFor(s).find((t) => t.key === 'A4').maxU;
+  assert.deepEqual(a4, [1200, 1700]);
+  const k = (w, h) => classifyPrint({ widthU: toU(w), heightU: toU(h), side: 'front', allowBrust: true, surcharges: SUR, scale: s }).key;
+  assert.equal(k(12, 17), 'A4');
+  assert.equal(k(12.1, 17), 'A3+');
+  assert.equal(k(6, 8.5), 'A6');
+  assert.equal(SUR[k(12, 17)], SUR.A4, 'Preis wie Erwachsenen-A4');
+  assert.ok('error' in classifyPrint({ widthU: 2000, heightU: 2800, side: 'front', allowBrust: true, surcharges: SUR, scale: s }), 'größer als Baby-A3+');
+  assert.deepEqual(reachableTariffs({ xMinU: -800, xMaxU: 800, yMinU: 150, yMaxU: 950 }, 'back', true, 1).map((t) => t.key), ['A6', 'A5'], 'kleiner Bereich: nur erreichbare Stufen');
+});

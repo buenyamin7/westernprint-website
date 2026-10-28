@@ -2,7 +2,7 @@
 // Geometrie und Preisstufen kommen aus dem gemeinsamen Kern (auch in der Kasse), damit beide dasselbe prüfen.
 import {
   toU, fmtCm, parseCm, classifyPrint, heightFor, widthForHeight, sourceDpi, qualityFor, checkPlacement,
-  constrainMove, maxWidthAt, fitSuggestion, cmToPx, TARIFFS, CORE_VERSION, TARIFF_VERSION,
+  constrainMove, maxWidthAt, fitSuggestion, cmToPx, tariffsFor, reachableTariffs, CORE_VERSION, TARIFF_VERSION,
 } from '../lib/designer-core/core.mjs';
 import { addItem, euro } from './cart';
 
@@ -79,7 +79,7 @@ function validity(side: Side) {
 function tariffFor(side: Side): { key?: string; error?: string } {
   const m = state.motif[side], p = state.place[side];
   if (!m || !p) return { key: state.planned[side] };
-  return classifyPrint({ widthU: p.widthU, heightU: visH(m, p.widthU).checkU, side, allowBrust: ALLOW_BRUST, surcharges: SUR });
+  return classifyPrint({ widthU: p.widthU, heightU: visH(m, p.widthU).checkU, side, allowBrust: ALLOW_BRUST, surcharges: SUR, scale: area(side)?.tariffScale || 1 });
 }
 function startPlace(side: Side, m: Motif, presetName?: string): Place | null {
   const a = area(side); if (!a?.zone) return null;
@@ -169,7 +169,7 @@ function renderPanel() {
   el.topLabel.textContent = frameLabel(a?.frame || 'collar');
   // Vorschläge für die geplante Größe ohne Motiv: nur Stufen, die in den Druckbereich passen
   if (!m) {
-    const fits = TARIFFS.filter((t) => (!t.frontOnly || (side === 'front' && ALLOW_BRUST)) && a?.zone && fitsZone(a.zone, t.maxU));
+    const fits = a?.zone ? reachableTariffs(a.zone, side, ALLOW_BRUST, a.tariffScale || 1) : [];
     if (!fits.find((t) => t.key === state.planned[side])) state.planned[side] = fits.length ? fits[Math.min(fits.length - 1, 3)].key : '';
     el.plannedChips.innerHTML = fits.map((t) => `<label class="chip"><input type="radio" name="dz_planned" value="${t.key}" ${t.key === state.planned[side] ? 'checked' : ''}> <span>${t.key} <small>bis ${fmtCm(t.maxU[0])} × ${fmtCm(t.maxU[1])} cm${POD ? '' : `, +${euro(SUR[t.key] / 100)}`}</small></span></label>`).join('') || '<p class="muted">Für diese Größe gibt es noch keinen freigegebenen Druckbereich.</p>';
   }
@@ -186,13 +186,6 @@ function renderPanel() {
   el.undo.disabled = !history.past.length; el.redo.disabled = !history.future.length;
   renderMessages();
 }
-// Eine Preisstufe ist wählbar, wenn mindestens ein Motiv knapp über der vorigen Stufe in den Druckbereich passt
-const fitsZone = (z: Zone, max: number[]) => {
-  const i = TARIFFS.findIndex((t) => t.maxU === max); const prev = TARIFFS.slice(0, i).filter((t) => !t.frontOnly).pop();
-  if (!prev) return true;
-  const w = z.xMaxU - z.xMinU, h = z.yMaxU - z.yMinU, [a, b] = prev.maxU;
-  return (w > a && h >= Math.min(b, 1)) || (h > b && w >= 1) || (w > b && h >= 1) || (h > a && w >= 1);
-};
 
 function renderMessages() {
   const side = state.view, m = state.motif[side], p = state.place[side];
@@ -211,7 +204,8 @@ function renderMessages() {
   if (qi && qi.level !== 'ok') { el.qualityText.textContent = `Dein Motiv hat bei dieser Größe nur ca. ${Math.round(qi.dpi)} dpi und kann unscharf wirken. Verkleinere es oder lade eine Datei mit mehr Pixeln hoch.`; el.ack.checked = state.ack[side] === qi.key; }
   // Preisstufe
   const t = tariffFor(side);
-  el.tariff.innerHTML = m && p ? (t.key ? `Preisstufe <b>${t.key}</b> (bis ${fmtCm(TARIFFS.find((x) => x.key === t.key)!.maxU[0])} × ${fmtCm(TARIFFS.find((x) => x.key === t.key)!.maxU[1])} cm)${POD ? '' : `, +${euro(SUR[t.key] / 100)}`} · ca. ${Math.round(qi?.dpi || 0)} dpi` : `<span class="error">${t.error}</span>`) : '';
+  const tb = t.key ? tariffsFor(area(side)?.tariffScale || 1).find((x) => x.key === t.key)!.maxU : null;
+  el.tariff.innerHTML = m && p ? (t.key ? `Preisstufe <b>${t.key}</b>${(area(side)?.tariffScale || 1) < 1 ? ' für diese Kindergröße' : ''} (bis ${fmtCm(tb![0])} × ${fmtCm(tb![1])} cm)${POD ? '' : `, +${euro(SUR[t.key] / 100)}`} · ca. ${Math.round(qi?.dpi || 0)} dpi` : `<span class="error">${t.error}</span>`) : '';
   el.status.textContent = m?.status === 'error' ? 'Das Hochladen hat nicht geklappt. Dein Entwurf bleibt erhalten. Wähle die Datei erneut.' : '';
 }
 

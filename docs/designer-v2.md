@@ -33,6 +33,8 @@ Unverändert. Die Preisstufe ergibt sich aus dem sichtbaren Motiv, hoch oder que
 | A4 | 21 × 29,7 |
 | A3+ | 33 × 48 |
 
+**Kinder- und Babygrößen (28.10.):** gleiche Stufen und gleiche Preise wie bei Erwachsenen, die Maße schrumpfen mit dem Textil: Faktor = halbe Brustweite / 52 cm (Erwachsene M), höchstens 1, auf 0,5 cm gerundet. Beispiel Baby Changer 6–12 Monate (Faktor 0,57): A6 6 × 8,5, Brust 7 × 7, A5 8,5 × 12, A4 12 × 17, A3+ 19 × 27,5 cm. Der Faktor steht je Größe als `tariffScale` in print-areas.json, Shop und Kasse rechnen damit.
+
 Toleranz 0,5 mm, damit eine echte A4-Datei (2480 × 3508 px, bei 21 cm Breite 29,704 cm hoch) A4 bleibt. Die Aufschläge selbst stehen wie bisher in `PRINT_SIZES` (Shop) bzw. `catalog.js` (Kasse). V2 setzt nur `sizeFront`/`sizeBack` aus den cm. Die Kasse rechnet die Stufe nach und lehnt Abweichungen ab.
 
 ## Dateien

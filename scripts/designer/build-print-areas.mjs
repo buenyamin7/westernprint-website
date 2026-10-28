@@ -12,6 +12,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { tariffScaleFor } from '../../src/lib/designer-core/core.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../..');
 const read = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, p), 'utf8'));
@@ -124,7 +125,7 @@ function viewGeometry(p, view, m, ov, size, chart) {
     // Bei Knopfleiste/Reißverschluss nur seitliche Brustplatzierungen und unterhalb der Knopfleiste mittig
     if (ov.placket) presets.center = { centerXU: 0, topYU: U(cmY(ov.exclY - ov.originY) + RULES.marginCm), widthU: U(fitW(20 * scale, 0, cmY(ov.exclY - ov.originY) + RULES.marginCm)) };
   }
-  return { frame, pxPerCm: r2(pxPerCm), heightScale: r2(k), originPx, zone: ok ? zone : null, presets, dropCm: r2(drop) };
+  return { frame, pxPerCm: r2(pxPerCm), heightScale: r2(k), tariffScale: tariffScaleFor(chart.halfChestCm, group(p) === 'adult'), originPx, zone: ok ? zone : null, presets, dropCm: r2(drop) };
 }
 
 const out = { version: RULES.version, rules: RULES, generatedFrom: { sizeCharts: read('src/data/designer/size-charts.json').fetchedAt }, products: {} };

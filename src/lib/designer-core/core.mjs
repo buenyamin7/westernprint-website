@@ -40,6 +40,20 @@ export const TARIFFS = [
 /** Ärmel: max. 8 x 8 cm (wie SLEEVE im Shop und in der Kasse) */
 export const SLEEVE_MAX_U = [800, 800];
 
+/**
+ * Formate für Kinder- und Babygrößen: gleiche Stufen und gleiche Preise wie bei Erwachsenen, aber die Maße schrumpfen
+ * mit dem Textil. Faktor = halbe Brustweite / 52 cm (Erwachsene M), höchstens 1. Maße auf 0,5 cm gerundet.
+ * Freigegeben 28.10.2026 („gleiche Preise wie bei Erwachsenen“).
+ */
+export const ADULT_REF_HALF_CHEST_CM = 52;
+export const tariffScaleFor = (halfChestCm, isAdult) => (isAdult || !(halfChestCm > 0) ? 1 : Math.min(1, Math.round((halfChestCm / ADULT_REF_HALF_CHEST_CM) * 100) / 100));
+/** Formate für einen Größenfaktor (1 = Erwachsene) */
+export function tariffsFor(scale = 1) {
+  if (!(scale > 0) || scale >= 1) return TARIFFS;
+  const r = (u) => Math.max(100, Math.round((u * scale) / 50) * 50);
+  return TARIFFS.map((t) => ({ ...t, maxU: [r(t.maxU[0]), r(t.maxU[1])] }));
+}
+
 /** Toleranz der Preisstufen: 0,5 mm. Eine echte A4-Datei (2480 x 3508 px) ist bei 21 cm Breite 29,704 cm hoch und bleibt A4. */
 export const TARIFF_TOLERANCE_U = 5;
 const fitsBox = (w, h, [a, b]) => { const t = TARIFF_TOLERANCE_U; return (w <= a + t && h <= b + t) || (w <= b + t && h <= a + t); };
@@ -49,13 +63,22 @@ const fitsBox = (w, h, [a, b]) => { const t = TARIFF_TOLERANCE_U; return (w <= a
  * @param {{widthU:number,heightU:number,side:'front'|'back',allowBrust:boolean,surcharges:Record<string,number>}} p
  * @returns {{key:string}|{error:string}}
  */
-export function classifyPrint({ widthU, heightU, side, allowBrust, surcharges }) {
+export function classifyPrint({ widthU, heightU, side, allowBrust, surcharges, scale = 1 }) {
   if (!(widthU > 0 && heightU > 0)) return { error: 'Motivmaße fehlen' };
-  const options = TARIFFS.filter((t) => fitsBox(widthU, heightU, t.maxU) && (!t.frontOnly || (side === 'front' && allowBrust)));
-  if (!options.length) return { error: 'Das Motiv ist größer als die größte Druckgröße (33 x 48 cm).' };
+  const list = tariffsFor(scale);
+  const options = list.filter((t) => fitsBox(widthU, heightU, t.maxU) && (!t.frontOnly || (side === 'front' && allowBrust)));
+  if (!options.length) { const big = list[list.length - 1].maxU; return { error: `Das Motiv ist größer als die größte Druckgröße (${fmtCm(big[0])} x ${fmtCm(big[1])} cm).` }; }
   // Günstigste Stufe; bei gleichem Preis die Reihenfolge in TARIFFS (A6 vor Brust).
-  options.sort((a, b) => (surcharges[a.key] ?? 0) - (surcharges[b.key] ?? 0) || TARIFFS.indexOf(a) - TARIFFS.indexOf(b));
-  return { key: options[0].key };
+  options.sort((a, b) => (surcharges[a.key] ?? 0) - (surcharges[b.key] ?? 0) || list.indexOf(a) - list.indexOf(b));
+  return { key: options[0].key, maxU: options[0].maxU };
+}
+
+/** Wählbare Stufen für „Motiv später schicken“: eine Stufe zählt, wenn ein Motiv größer als die vorige Stufe in die Zone passt. */
+export function reachableTariffs(zone, side, allowBrust, scale = 1) {
+  const list = tariffsFor(scale).filter((t) => !t.frontOnly || (side === 'front' && allowBrust));
+  const w = zone.xMaxU - zone.xMinU, h = zone.yMaxU - zone.yMinU;
+  // Erreichbar, solange der Druckbereich nicht vollständig in die vorige Stufe passt
+  return list.filter((t, i) => { const prev = list.slice(0, i).filter((x) => !x.frontOnly).pop(); return !prev || !fitsBox(w, h, prev.maxU); });
 }
 
 // ── Motivmaße ────────────────────────────────────────────────────────────────
@@ -187,7 +210,7 @@ export function verifyPlacement(pl, area, opts) {
   if (Math.abs(toU(num(pl.heightCm)) - h.exact) > 1.01) return { ok: false, error: 'Motivhöhe passt nicht zur Breite' };
   const chk = checkPlacement(area.zone, { centerXU, topYU, widthU, heightU: h.checkU });
   if (!chk.ok) return { ok: false, error: chk.message };
-  const t = classifyPrint({ widthU, heightU: h.checkU, side: pl.side, allowBrust: opts.allowBrust, surcharges: opts.surcharges });
+  const t = classifyPrint({ widthU, heightU: h.checkU, side: pl.side, allowBrust: opts.allowBrust, surcharges: opts.surcharges, scale: area.tariffScale || 1 });
   if ('error' in t) return { ok: false, error: t.error };
   const dpi = sourceDpi(bw, bh, widthU, h.exact).min;
   const quality = qualityFor(dpi);
