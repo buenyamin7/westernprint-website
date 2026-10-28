@@ -22,11 +22,14 @@ test('Preisstufen: knapp darunter, genau darauf, knapp darüber, hoch und quer',
     assert.equal(cls(w - 0.01, h - 0.01).key, key);
     assert.equal(cls(w, h).key, key, `${key} genau`);
     assert.equal(cls(h, w).key, key, `${key} quer`);
-    assert.equal(cls(w + 0.01, h).key, next, `${key} knapp drüber`);
+    assert.equal(cls(w + 0.05, h).key, key, `${key} innerhalb 0,5 mm Toleranz`);
+    assert.equal(cls(w + 0.06, h).key, next, `${key} knapp drüber`);
   }
   assert.equal(cls(33, 48).key, 'A3+');
   assert.equal(cls(48, 33).key, 'A3+');
-  assert.ok('error' in cls(33.01, 48));
+  assert.ok('error' in cls(33.06, 48));
+  // Echte A4-Datei 2480 x 3508 px auf 21 cm Breite
+  assert.equal(classifyPrint({ widthU: 2100, heightU: heightFor(2100, 2480, 3508).checkU, side: 'front', allowBrust: true, surcharges: SUR }).key, 'A4');
   assert.ok('error' in cls(34, 34));
 });
 
@@ -35,7 +38,7 @@ test('Brust 12 x 12 nur vorne und nur bei Textilien mit Brust', () => {
   assert.equal(cls(10, 10).key, 'A6', 'gleicher Preis: A6 hat Vorrang');
   assert.equal(cls(12, 12, 'back').key, 'A5');
   assert.equal(cls(12, 12, 'front', false).key, 'A5');
-  assert.equal(cls(12.01, 12).key, 'A5');
+  assert.equal(cls(12.06, 12).key, 'A5');
 });
 
 test('Höhe proportional, gespeichert max. 0,005 cm daneben, Prüfhöhe aufgerundet', () => {

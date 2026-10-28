@@ -33,7 +33,7 @@ Unverändert. Die Preisstufe ergibt sich aus dem sichtbaren Motiv, hoch oder que
 | A4 | 21 × 29,7 |
 | A3+ | 33 × 48 |
 
-Die Aufschläge selbst stehen wie bisher in `PRINT_SIZES` (Shop) bzw. `catalog.js` (Kasse). V2 setzt nur `sizeFront`/`sizeBack` aus den cm. Die Kasse rechnet die Stufe nach und lehnt Abweichungen ab.
+Toleranz 0,5 mm, damit eine echte A4-Datei (2480 × 3508 px, bei 21 cm Breite 29,704 cm hoch) A4 bleibt. Die Aufschläge selbst stehen wie bisher in `PRINT_SIZES` (Shop) bzw. `catalog.js` (Kasse). V2 setzt nur `sizeFront`/`sizeBack` aus den cm. Die Kasse rechnet die Stufe nach und lehnt Abweichungen ab.
 
 ## Dateien
 
@@ -59,7 +59,7 @@ Daten neu bauen: `python3 scripts/designer/measure-packshots.py && node scripts/
 - **Knopfleiste und Reißverschluss:** gesperrt, plus 1,5 cm Abstand.
 - **Startplatzierung:** mittig, Oberkante 7 cm unter der Kragennaht (Hoodie 4 cm), 25 cm breit (vorne) bzw. 28 cm (hinten). Brust links 10 cm breit, 5 cm unter der Kragennaht. Kinder und Baby anteilig kleiner.
 
-**Annahme:** Die Produktfotos zeigen die Textilien schmaler, als die Maßtabellen sagen (Seiten eingeschlagen; Verhältnis Breite zu Länge im Foto ca. 0,6 statt 0,73). Die Vorschau ist deshalb in der Breite maßstäblich, Höhenlagen wirken etwas gestaucht. Für den Druck gilt das nicht: Die Bestellung enthält cm, nicht Bildprozente.
+**Maßstab der Vorschau:** Die Produktfotos zeigen das Textil wie getragen (räumlich). Zur Seite hin wird der Stoff deshalb verkürzt abgebildet: Breite zu Länge im Foto ca. 0,6 statt 0,73 laut Maßtabelle. Der Maßstab kommt daher aus der Länge (Breitenmaßstab × k, k je Produkt aus Rundhals-Ansichten, sonst Median der Marke) und gilt einheitlich für Foto, Druckbereich und Motiv. In der Mitte, wo gedruckt wird, stimmen die cm. Für den Druck gelten ohnehin die cm aus der Bestellung, nicht das Foto.
 
 ## Bestellung
 

@@ -54,12 +54,34 @@ function hemCmFor(p) {
   return rib ? RULES.hemCm.rib[group(p)] : RULES.hemCm.tee;
 }
 
+// Höhenmaßstab k = (Pixel je cm aus der Länge) / (Pixel je cm aus der Breite).
+// k je Produkt aus Rundhals-Ansichten (oberster Punkt ~ Schulter), sonst Median der Marke und Gruppe.
+const kOwn = {};
+for (const p of products) {
+  const ov = overrides[p.handle], sh = shots[p.handle], ch = charts[p.style];
+  if (!ov || !sh || !ch || isHoodie(p) || ov.front?.zip) continue;
+  const ks = [];
+  for (const s of p.sizes) { const c = ch.sizes[s]; const m = sh.views.front; if (!c?.halfChestCm || !c.bodyLengthCm || !m?.bodyR) continue; ks.push(((m.hemY - m.topY) / c.bodyLengthCm) / ((m.bodyR - m.bodyL + 1) / c.halfChestCm)); }
+  if (ks.length) kOwn[p.handle] = ks.sort((a, b) => a - b)[Math.floor(ks.length / 2)];
+}
+const median = (a) => { const b = [...a].sort((x, y) => x - y); return b[Math.floor(b.length / 2)]; };
+function kFor(p) {
+  if (kOwn[p.handle]) return kOwn[p.handle];
+  const same = products.filter((q) => kOwn[q.handle] && q.brand === p.brand && group(q) === group(p)).map((q) => kOwn[q.handle]);
+  const brand = products.filter((q) => kOwn[q.handle] && q.brand === p.brand).map((q) => kOwn[q.handle]);
+  return median(same.length ? same : brand);
+}
+
 /** Kalibrierung einer Ansicht für eine Größe: Pixel je cm aus Körperbreite im Foto und halber Brustweite */
 function viewGeometry(p, view, m, ov, size, chart) {
   const bodyW = ov.bodyFrom ? null : m.bodyR - m.bodyL + 1;
-  const pxPerCm = bodyW / chart.halfChestCm;
+  // Die Fotos zeigen das Textil wie getragen (räumlich): zur Seite hin wird der Stoff verkürzt abgebildet, in der Mitte nicht.
+  // Maßstab deshalb aus der Länge (Breitenmaßstab x k), einheitlich für Bühne, Zone und Motiv.
+  const k = kFor(p);
+  const pxPerCm = (bodyW / chart.halfChestCm) * k;
   const originPx = [m.centerX, ov.originY];
   const cm = (px) => px / pxPerCm;
+  const cmY = cm;
   const g = group(p);
   const scale = g === 'adult' ? 1 : Math.min(1, chart.halfChestCm / 52);
   const frame = ov.frame || (view === 'front' && isHoodie(p) ? 'hood-v' : 'collar');
@@ -67,20 +89,21 @@ function viewGeometry(p, view, m, ov, size, chart) {
   // Breite: Regel aus der Maßtabelle, oben zusätzlich durch Armausschnitt begrenzt (Tanktops)
   const side = Math.max(RULES.sideMinCm, RULES.sideShare * chart.halfChestCm);
   let half = chart.halfChestCm / 2 - side;
-  if (m.topBodyW) half = Math.min(half, cm(m.topBodyW) / 2 - RULES.marginCm);
+  if (m.topBodyW && (p.productType === 'Tank Top' || p.category === 'Tank Tops' || p.handle === 'stanley-stancer')) half = Math.min(half, cm(m.topBodyW) / 2 - RULES.marginCm);
   half = Math.min(half, RULES.pressMaxCm[0] / 2);
 
   // Länge: aus der Maßtabelle (Rückenlänge ab Schulter minus Abstand Schulter -> Kragennaht im Foto) und aus dem Foto
-  const drop = cm(ov.originY - m.topY);
+  const drop = cmY(ov.originY - m.topY);
   const limits = [];
+  // Bei Kapuzen liegt der oberste Bildpunkt über der Schulter: der Abstand wird dadurch größer geschätzt, die Grenze also vorsichtiger
   if (chart.bodyLengthCm) limits.push(chart.bodyLengthCm - drop - hemCmFor(p) - RULES.marginCm);
-  limits.push(cm(m.hemY - ov.originY) - hemCmFor(p) - RULES.marginCm);
-  if (ov.bottomY) limits.push(cm(ov.bottomY - ov.originY) - RULES.marginCm);
+  limits.push(cmY(m.hemY - ov.originY) - hemCmFor(p) - RULES.marginCm);
+  if (ov.bottomY) limits.push(cmY(ov.bottomY - ov.originY) - RULES.marginCm);
   limits.push(RULES.pressMaxCm[1] + RULES.marginCm);
   const yMax = Math.min(...limits);
 
   const exclude = [];
-  if (ov.placket) exclude.push({ x0U: U(-cm(ov.placket) - RULES.marginCm), x1U: U(cm(ov.placket) + RULES.marginCm), y0U: 0, y1U: U(cm(ov.exclY - ov.originY) + RULES.marginCm), label: 'der Knopfleiste' });
+  if (ov.placket) exclude.push({ x0U: U(-cm(ov.placket) - RULES.marginCm), x1U: U(cm(ov.placket) + RULES.marginCm), y0U: 0, y1U: U(cmY(ov.exclY - ov.originY) + RULES.marginCm), label: 'der Knopfleiste' });
   if (ov.zip) exclude.push({ x0U: U(-cm(ov.zip) - RULES.marginCm), x1U: U(cm(ov.zip) + RULES.marginCm), y0U: 0, y1U: U(yMax + 1), label: 'dem Reißverschluss' });
 
   const zone = { xMinU: U(-half), xMaxU: U(half), yMinU: U(RULES.marginCm), yMaxU: U(yMax), exclude };
@@ -91,7 +114,7 @@ function viewGeometry(p, view, m, ov, size, chart) {
   const presets = {};
   const fitW = (w, cx, t) => Math.max(0, Math.min(w, 2 * (half - Math.abs(cx)), (yMax - t)));
   if (!ov.zip && !ov.placket) presets.center = { centerXU: 0, topYU: U(top), widthU: U(fitW(RULES.startWidthCm[view] * scale, 0, top)) };
-  if (view === 'front' && p.productType !== 'Tank Top') {
+  if (view === 'front' && p.productType !== 'Tank Top' && p.handle !== 'stanley-stancer') {
     // Brust links aus Sicht der tragenden Person = im Bild rechts (x positiv)
     const cx = Math.min(half - RULES.startWidthCm.chest * scale / 2, chart.halfChestCm * 0.22);
     const t = Math.max(RULES.marginCm, 5 * scale);
@@ -99,9 +122,9 @@ function viewGeometry(p, view, m, ov, size, chart) {
   }
   if (view === 'front' && (ov.zip || ov.placket)) {
     // Bei Knopfleiste/Reißverschluss nur seitliche Brustplatzierungen und unterhalb der Knopfleiste mittig
-    if (ov.placket) presets.center = { centerXU: 0, topYU: U(cm(ov.exclY - ov.originY) + RULES.marginCm), widthU: U(fitW(20 * scale, 0, cm(ov.exclY - ov.originY) + RULES.marginCm)) };
+    if (ov.placket) presets.center = { centerXU: 0, topYU: U(cmY(ov.exclY - ov.originY) + RULES.marginCm), widthU: U(fitW(20 * scale, 0, cmY(ov.exclY - ov.originY) + RULES.marginCm)) };
   }
-  return { frame, pxPerCm: r2(pxPerCm), originPx, zone: ok ? zone : null, presets, dropCm: r2(drop) };
+  return { frame, pxPerCm: r2(pxPerCm), heightScale: r2(k), originPx, zone: ok ? zone : null, presets, dropCm: r2(drop) };
 }
 
 const out = { version: RULES.version, rules: RULES, generatedFrom: { sizeCharts: read('src/data/designer/size-charts.json').fetchedAt }, products: {} };
@@ -120,7 +143,8 @@ for (const p of products) {
     if (!m) continue;
     // Ohne eigenes Rückenfoto: schematische Rückansicht aus der Silhouette der Vorderseite, Rückseiten-Kragennaht geschätzt
     const schematic = view === 'back' && !shot.views.back;
-    const ovView = ov || (schematic ? { originY: shot.views.front.topY + Math.round((ovAll.front.originY - shot.views.front.topY) * 0.3), frame: ovAll.front.frame === 'hood-v' ? 'hood-tip' : undefined } : null);
+    // Hoodie: Kapuzenspitze hinten etwa auf Höhe des Kapuzenansatzes vorne; sonst hintere Kragennaht knapp unter dem obersten Punkt
+    const ovView = ov || (schematic ? (isHoodie(p) ? { originY: ovAll.front.originY, frame: 'hood-tip' } : { originY: shot.views.front.topY + Math.round((ovAll.front.originY - shot.views.front.topY) * 0.3) }) : null);
     if (!ovView) continue;
     const mm = ovView.bodyFrom ? { ...m, bodyL: shot.views[ovView.bodyFrom].bodyL, bodyR: shot.views[ovView.bodyFrom].bodyR } : m;
     entry.views[view] = { image: m.image, schematic, imageSize: [m.w, m.h], centerX: m.centerX };

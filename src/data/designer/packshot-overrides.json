@@ -1,6 +1,6 @@
 {
   "_info": "Von Hand am Foto gesetzte Bildpunkte (720 x 900 px), Stand 28.10.2026. originY = Kragennaht mittig (vorne: vordere Kragennaht bzw. Kapuzenansatz vorne; Hoodie hinten: Kapuzenspitze, weil die Kapuze den Rücken verdeckt). bottomY = Unterkante des bedruckbaren Bereichs im Foto (Kängurutasche, Bündchen), wird mit 1,5 cm Abstand angewendet. placket/zip = Aussparung um die Mittellinie (halbe Breite in px) bis exclY. bodyY = andere Messzeile für die Körperbreite (taillierte Schnitte: knapp unter der Achsel). bodyFactor = Körperbreite als Anteil der Silhouette (Jacken, bei denen die Ärmel auf dem Körper liegen).",
-  "baby-body": { "front": { "originY": 147 }, "back": { "originY": 91 } },
+  "baby-body": { "front": { "originY": 147, "bottomY": 640 }, "back": { "originY": 91, "bottomY": 640 } },
   "baby-cruiser": { "front": { "originY": 352 }, "back": { "originY": 403, "frame": "hood-tip" } },
   "classic-hoodie": { "front": { "originY": 136, "bottomY": 530 } },
   "classic-hoodie-kinder": { "front": { "originY": 147, "bottomY": 490 } },

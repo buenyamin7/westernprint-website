@@ -40,7 +40,9 @@ export const TARIFFS = [
 /** Ärmel: max. 8 x 8 cm (wie SLEEVE im Shop und in der Kasse) */
 export const SLEEVE_MAX_U = [800, 800];
 
-const fitsBox = (w, h, [a, b]) => (w <= a && h <= b) || (w <= b && h <= a);
+/** Toleranz der Preisstufen: 0,5 mm. Eine echte A4-Datei (2480 x 3508 px) ist bei 21 cm Breite 29,704 cm hoch und bleibt A4. */
+export const TARIFF_TOLERANCE_U = 5;
+const fitsBox = (w, h, [a, b]) => { const t = TARIFF_TOLERANCE_U; return (w <= a + t && h <= b + t) || (w <= b + t && h <= a + t); };
 
 /**
  * Kleinste passende Preisstufe für ein sichtbares Motiv.
