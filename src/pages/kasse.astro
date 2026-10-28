@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
-import { site } from '../data/site';
+import { site, oeffnungszeiten } from '../data/site';
 const countries = [['DE', 'Deutschland'], ['AT', 'Österreich'], ['CH', 'Schweiz'], ['NL', 'Niederlande'], ['BE', 'Belgien'], ['LU', 'Luxemburg'], ['FR', 'Frankreich'], ['IT', 'Italien'], ['ES', 'Spanien'], ['PL', 'Polen'], ['DK', 'Dänemark'], ['CZ', 'Tschechien']];
 ---
 <Base title="Kasse" description="Lieferadresse und Bezahlung." noindex={true} hideCta={true}>
@@ -11,7 +11,13 @@ const countries = [['DE', 'Deutschland'], ['AT', 'Österreich'], ['CH', 'Schweiz
       <p class="form-note err" data-cancelled hidden>Die Zahlung wurde abgebrochen. Dein Warenkorb ist noch da, du kannst es erneut versuchen.</p>
       <div class="kgrid">
         <form class="kform card card-pad" data-kform novalidate>
-          <h2>Lieferadresse</h2>
+          <h2>Lieferung</h2>
+          <div class="deliv" role="radiogroup" aria-label="Lieferart">
+            <label class="deliv-opt"><input type="radio" name="delivery" value="ship" checked /><span><strong>Versand mit DHL</strong><small>3 bis 5 Werktage, Deutschland 4,90 €, Ausland 9,90 €</small></span></label>
+            <label class="deliv-opt"><input type="radio" name="delivery" value="pickup" /><span><strong>Abholung in Oberhausen</strong><small>kostenlos, {site.address.street}, {oeffnungszeiten.kurz}. Wir melden uns, sobald alles fertig ist.</small></span></label>
+          </div>
+          <div class="field"><label for="k-wish">Wunschtermin <span class="optional">(optional: bis wann brauchst du die Ware?)</span></label><input class="input" id="k-wish" name="wishDate" type="date" /><span class="hint" data-wish-hint hidden></span></div>
+          <h2 data-addr-title>Lieferadresse</h2>
           <div class="row">
             <div class="field"><label for="k-name">Vor- und Nachname</label><input class="input" id="k-name" name="name" autocomplete="name" required /><span class="error">Bitte Namen angeben.</span></div>
             <div class="field"><label for="k-email">E-Mail</label><input class="input" id="k-email" name="email" type="email" autocomplete="email" required /><span class="error">Bitte gültige E-Mail angeben.</span></div>
@@ -59,16 +65,32 @@ const countries = [['DE', 'Deutschland'], ['AT', 'Österreich'], ['CH', 'Schweiz
   if (new URLSearchParams(location.search).get('abgebrochen')) $('[data-cancelled]').hidden = false;
   if (!items.length) { location.replace('/warenkorb'); }
 
+  const val = () => root.querySelector<HTMLInputElement>('input[name=delivery]:checked')?.value || 'ship';
   function render() {
-    const country = $<HTMLSelectElement>('#k-country').value; const sub = subtotal(items);
+    const country = $<HTMLSelectElement>('#k-country').value; const sub = subtotal(items); const pickup = val() === 'pickup';
     const free = Math.round(sub * 100) >= FREE_SHIPPING_FROM * 100;
-    const ship = { amount: free ? 0 : SHIP[country === 'DE' ? 'DE' : 'AUSLAND'], label: free ? '(versandkostenfrei ab 500 €, 3-5 Werktage)' : '(3-5 Werktage)' };
+    const ship = pickup ? { amount: 0, label: '(Abholung in Oberhausen)' } : { amount: free ? 0 : SHIP[country === 'DE' ? 'DE' : 'AUSLAND'], label: free ? '(versandkostenfrei ab 500 €, 3-5 Werktage)' : '(3-5 Werktage)' };
+    $('[data-addr-title]').textContent = pickup ? 'Rechnungsadresse' : 'Lieferadresse';
     $('[data-items]').innerHTML = items.map((i) => `<li><span>${i.quantity} x ${esc(i.title)} ${esc(i.color)} / ${esc(i.size)}<small>${esc(i.side)}${i.sizeFront ? `, vorne ${esc(i.sizeFront)}` : ''}${i.sizeBack ? `, hinten ${esc(i.sizeBack)}` : ''}${i.sleeveLeft ? ', Ärmel links' : ''}${i.sleeveRight ? ', Ärmel rechts' : ''}</small></span><strong>${euro(lineTotal(i))}</strong></li>`).join('');
     $('[data-sub]').textContent = euro(sub); $('[data-ship]').textContent = euro(ship.amount); $('[data-ship-label]').textContent = ship.label;
     $('[data-total]').textContent = euro(sub + ship.amount);
-    $('[data-ch-note]').hidden = country !== 'CH';
+    $('[data-ch-note]').hidden = pickup || country !== 'CH';
   }
-  $('#k-country').addEventListener('change', render); render();
+  $('#k-country').addEventListener('change', render);
+  root.querySelectorAll<HTMLInputElement>('input[name=delivery]').forEach((r) => r.addEventListener('change', render));
+  // Wunschtermin: frühestens heute; unter 3 Werktagen Hinweis, dass wir es prüfen
+  const wish = $<HTMLInputElement>('#k-wish');
+  const iso = (d: Date) => new Date(d.getTime() - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10);
+  wish.min = iso(new Date()); wish.max = iso(new Date(Date.now() + 365 * 864e5));
+  const workdaysUntil = (s: string) => { let n = 0; const d = new Date(); d.setHours(12, 0, 0, 0); const end = new Date(`${s}T12:00:00`); while (d < end) { d.setDate(d.getDate() + 1); if (d.getDay() % 6 !== 0) n++; } return n; };
+  wish.addEventListener('change', () => {
+    const h = $('[data-wish-hint]'); const v = wish.value;
+    if (!v) { h.hidden = true; return; }
+    const n = workdaysUntil(v); const pickup = val() === 'pickup';
+    h.hidden = false;
+    h.textContent = n < (pickup ? 2 : 3) ? 'Das ist knapp. Wir prüfen den Termin direkt nach der Bestellung und melden uns, falls er nicht klappt.' : `Notiert. Normal sind es ${pickup ? '1 bis 3 Werktage bis zur Abholung' : '3 bis 5 Werktage bis zur Lieferung'}.`;
+  });
+  render();
 
   const form = $<HTMLFormElement>('[data-kform]');
   form.addEventListener('input', (e) => (e.target as HTMLElement).closest('.field')?.classList.remove('has-error'));
@@ -99,6 +121,14 @@ const countries = [['DE', 'Deutschland'], ['AT', 'Österreich'], ['CH', 'Schweiz
   .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .row-3 { grid-template-columns: 0.6fr 1.2fr 1fr; }
   .small { font-size: 13px; }
+  .deliv { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .deliv-opt { position: relative; display: block; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line-strong); cursor: pointer; }
+  .deliv-opt input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+  .deliv-opt span { display: grid; gap: 3px; font-size: 14px; }
+  .deliv-opt small { color: var(--text-3); font-size: 12.5px; line-height: 1.4; }
+  .deliv-opt:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+  .deliv-opt:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .hint { font-size: 13px; color: var(--text-2); }
   .error[data-agb-error] { color: var(--danger); font-size: 13px; }
   .summary { display: grid; gap: 14px; position: sticky; top: calc(var(--nav-h) + 24px); }
   .items { display: grid; gap: 10px; font-size: 14px; }
@@ -109,5 +139,5 @@ const countries = [['DE', 'Deutschland'], ['AT', 'Österreich'], ['CH', 'Schweiz
   .summary dd { margin: 0; font-variant-numeric: tabular-nums; white-space: nowrap; }
   .summary .total { font-weight: 700; font-size: 17px; padding-top: 6px; }
   .summary .total dd { color: var(--accent); }
-  @media (max-width: 800px) { .kgrid { grid-template-columns: 1fr; } .summary { position: static; order: -1; } .row, .row-3 { grid-template-columns: 1fr; } }
+  @media (max-width: 800px) { .kgrid { grid-template-columns: 1fr; } .summary { position: static; order: -1; } .row, .row-3, .deliv { grid-template-columns: 1fr; } }
 </style>
