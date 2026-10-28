@@ -26,6 +26,10 @@ const { image, title } = Astro.props;
       <line class="dz-snap" data-dz-snap-line x1="0" y1="0" x2="0" y2="900" visibility="hidden" />
       <rect class="dz-zone-bg" data-dz-zone-bg />
       <rect class="dz-zone" data-dz-zone />
+      <g data-dz-plan-g visibility="hidden" aria-hidden="true">
+        <rect class="dz-plan" data-dz-plan />
+        <text class="dz-plan-t" data-dz-plan-t text-anchor="middle" dominant-baseline="middle"></text>
+      </g>
       <g data-dz-motif-g visibility="hidden">
         <image data-dz-motif preserveAspectRatio="none" />
         <rect class="dz-sel" data-dz-sel tabindex="0" role="application" aria-roledescription="verschiebbares Motiv" aria-label="Motiv. Mit den Pfeiltasten verschieben, mit Umschalt in Zentimeterschritten." />

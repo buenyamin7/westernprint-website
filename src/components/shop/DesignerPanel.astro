@@ -106,6 +106,8 @@ const { pod, sleeves, podSecond } = Astro.props;
   .dz-zone { fill: none; stroke: var(--dz-zone); stroke-width: 1.6; stroke-dasharray: 7 5; vector-effect: non-scaling-stroke; pointer-events: none; }
   .dz-zone.is-bad { stroke: var(--danger); }
   .dz-guide { stroke: rgba(255, 255, 255, 0.5); stroke-width: 1; stroke-dasharray: 2 4; vector-effect: non-scaling-stroke; pointer-events: none; }
+  .dz-plan { fill: color-mix(in srgb, var(--accent) 22%, transparent); stroke: var(--accent); stroke-width: 2; vector-effect: non-scaling-stroke; pointer-events: none; }
+  .dz-plan-t { fill: #fff; font-weight: 700; paint-order: stroke; stroke: rgba(0, 0, 0, 0.55); stroke-width: 3px; pointer-events: none; font-family: var(--font-body); }
   .dz-snap { stroke: var(--accent); stroke-width: 1.5; vector-effect: non-scaling-stroke; pointer-events: none; }
   [data-dz-motif] { cursor: grab; touch-action: none; }
   .dz-sel { fill: transparent; stroke: var(--accent); stroke-width: 1.5; vector-effect: non-scaling-stroke; cursor: grab; touch-action: none; outline: none; }

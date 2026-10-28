@@ -125,6 +125,7 @@ function renderStage() {
   el.center.setAttribute('x1', String(a.originPx[0])); el.center.setAttribute('x2', String(a.originPx[0])); el.center.setAttribute('y1', String(y0)); el.center.setAttribute('y2', String(y1));
   el.excl.innerHTML = z.exclude.map((e) => { const [ex0, ey0] = cmToPx(a, e.x0U, Math.max(e.y0U, z.yMinU)), [ex1, ey1] = cmToPx(a, e.x1U, Math.min(e.y1U, z.yMaxU)); return ey1 > ey0 ? `<rect x="${ex0}" y="${ey0}" width="${ex1 - ex0}" height="${ey1 - ey0}" fill="url(#dz-hatch)"><title>Nicht bedruckbar: ${e.label}</title></rect>` : ''; }).join('');
   const m = state.motif[side], p = state.place[side];
+  renderPlan(side, a);
   if (!m || !p) { el.motifG.setAttribute('visibility', 'hidden'); el.measure.hidden = true; setViewBox(); return; }
   const h = visH(m, p.widthU);
   const [vx, vy] = cmToPx(a, p.centerXU - p.widthU / 2, p.topYU);
@@ -143,6 +144,27 @@ function renderStage() {
   el.motifG.setAttribute('visibility', 'visible');
   el.measure.hidden = false; el.measure.textContent = `${fmtCm(p.widthU)} × ${fmtCm(Math.round(h.exact))} cm`;
   setViewBox();
+}
+
+// Ohne Motiv: die gewählte Druckgröße als Fläche zeigen (hochkant, wenn sie passt, sonst quer; nie größer als der Druckbereich)
+const planG = q<SVGGElement>('[data-dz-plan-g]'), planR = q<SVGRectElement>('[data-dz-plan]'), planT = q<SVGTextElement>('[data-dz-plan-t]');
+function renderPlan(side: Side, a: Area) {
+  const key = state.planned[side];
+  const t = !state.motif[side] && key && a.zone ? tariffsFor(a.tariffScale || 1).find((x) => x.key === key) : null;
+  if (!t || !a.zone) { planG.setAttribute('visibility', 'hidden'); return; }
+  const z = a.zone, zw = z.xMaxU - z.xMinU;
+  const pr = key === 'Brust' && a.presets.chest_left ? a.presets.chest_left : a.presets.center || { centerXU: 0, topYU: z.yMinU, widthU: 0 };
+  const zh = z.yMaxU - pr.topYU;
+  let [w, h] = t.maxU;
+  if (h > zh && w <= zh && h <= zw) [w, h] = [h, w];
+  w = Math.min(w, zw); h = Math.min(h, zh);
+  const cx = Math.min(Math.max(pr.centerXU, z.xMinU + w / 2), z.xMaxU - w / 2);
+  const [x0, y0] = cmToPx(a, cx - w / 2, pr.topYU), [x1, y1] = cmToPx(a, cx + w / 2, pr.topYU + h);
+  planR.setAttribute('x', String(x0)); planR.setAttribute('y', String(y0)); planR.setAttribute('width', String(x1 - x0)); planR.setAttribute('height', String(y1 - y0));
+  const fs = Math.max(11, Math.min(26, (x1 - x0) / 5)), cxp = (x0 + x1) / 2, cyp = (y0 + y1) / 2;
+  planT.setAttribute('x', String(cxp)); planT.setAttribute('y', String(cyp)); planT.setAttribute('font-size', String(fs));
+  planT.innerHTML = `<tspan x="${cxp}" dy="-0.5em">${key}</tspan><tspan x="${cxp}" dy="1.2em" font-size="${fs * 0.6}">${fmtCm(w)} × ${fmtCm(h)} cm</tspan>`;
+  planG.setAttribute('visibility', 'visible');
 }
 
 function setViewBox() {
