@@ -8,6 +8,8 @@ export interface CartItem {
   sleeveLeft?: boolean; sleeveRight?: boolean; uploadSleeveLeft?: string; uploadSleeveRight?: string;
   pricing?: 'pod'; // Changer-Familie: base enthält eine Druckseite, surcharge = zweite Seite + Ärmel
   surcharge: number; // je Stück (Druckaufschläge inkl. Ärmel)
+  /** Designer V2: Druckpositionen in cm (wird von der Kasse nachgeprüft) */
+  designV2?: Record<string, unknown>;
 }
 
 export function getCart(): CartItem[] { try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch { return []; } }
@@ -54,7 +56,7 @@ export const euro = (n: number | string) => Number(n).toFixed(2).replace('.', ',
 
 /** Position im Format, das der Kassen-Worker (priceLine) erwartet. */
 export const checkoutLine = (i: CartItem) => ({ variantId: i.variantId, quantity: i.quantity, side: i.side, sizeFront: i.sizeFront, sizeBack: i.sizeBack, uploadFront: i.uploadFront, uploadBack: i.uploadBack, posFront: i.posFront, posBack: i.posBack, mockupFront: i.mockupFront, mockupBack: i.mockupBack,
-  sleeveLeft: !!i.sleeveLeft, sleeveRight: !!i.sleeveRight, uploadSleeveLeft: i.uploadSleeveLeft, uploadSleeveRight: i.uploadSleeveRight });
+  sleeveLeft: !!i.sleeveLeft, sleeveRight: !!i.sleeveRight, uploadSleeveLeft: i.uploadSleeveLeft, uploadSleeveRight: i.uploadSleeveRight, ...(i.designV2 ? { v2: i.designV2 } : {}) });
 
 /** Kasse: Warenkorb an den Worker schicken, Mollie-URL zurück. */
 export async function startCheckout(endpoint: string): Promise<string> {

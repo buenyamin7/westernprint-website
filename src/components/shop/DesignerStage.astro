@@ -1,0 +1,48 @@
+---
+// Designer V2: Bühne mit Produktfoto, Druckbereich (cm-genau) und Motiv. Gesteuert von DesignerPanel.astro.
+// SVG im Koordinatensystem des Produktfotos (720 x 900 px), damit Foto, Zone und Motiv dieselbe Abbildung nutzen.
+import Icon from '../Icon.astro';
+interface Props { image: string; title: string }
+const { image, title } = Astro.props;
+---
+<div class="dz-stage" data-dz-stage>
+  <svg class="dz-svg" data-dz-svg viewBox="0 0 720 900" role="img" aria-labelledby="dz-stage-label" preserveAspectRatio="xMidYMid meet">
+    <title id="dz-stage-label">{title}: Vorschau mit Druckbereich</title>
+    <defs>
+      <filter id="dz-flat" color-interpolation-filters="sRGB">
+        <feFlood data-dz-flat-color flood-color="#666" result="c" />
+        <feComposite in="c" in2="SourceAlpha" operator="in" />
+      </filter>
+      <pattern id="dz-hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <rect width="10" height="10" fill="rgba(0,0,0,0.35)" /><line x1="0" y1="0" x2="0" y2="10" stroke="rgba(255,255,255,0.55)" stroke-width="3" />
+      </pattern>
+      <mask id="dz-outside"><rect width="720" height="900" fill="white" /><rect data-dz-mask-hole fill="black" /></mask>
+    </defs>
+    <g data-dz-view>
+      <image data-dz-photo href={image} x="0" y="0" width="720" height="900" preserveAspectRatio="xMidYMid meet" />
+      <rect class="dz-dim" width="720" height="900" mask="url(#dz-outside)" data-dz-dim />
+      <g data-dz-excl></g>
+      <line class="dz-guide" data-dz-center x1="0" y1="0" x2="0" y2="900" />
+      <line class="dz-snap" data-dz-snap-line x1="0" y1="0" x2="0" y2="900" visibility="hidden" />
+      <rect class="dz-zone-bg" data-dz-zone-bg />
+      <rect class="dz-zone" data-dz-zone />
+      <g data-dz-motif-g visibility="hidden">
+        <image data-dz-motif preserveAspectRatio="none" />
+        <rect class="dz-sel" data-dz-sel tabindex="0" role="application" aria-roledescription="verschiebbares Motiv" aria-label="Motiv. Mit den Pfeiltasten verschieben, mit Umschalt in Zentimeterschritten." />
+        <circle class="dz-handle" data-dz-handle="nw" /><circle class="dz-handle" data-dz-handle="ne" />
+        <circle class="dz-handle" data-dz-handle="sw" /><circle class="dz-handle" data-dz-handle="se" />
+      </g>
+    </g>
+  </svg>
+  <div class="dz-tabs" role="tablist" aria-label="Ansicht" data-dz-tabs>
+    <button type="button" role="tab" data-dz-tab="front" aria-selected="true">Vorne <i data-dz-dot hidden></i></button>
+    <button type="button" role="tab" data-dz-tab="back" aria-selected="false">Hinten <i data-dz-dot hidden></i></button>
+  </div>
+  <div class="dz-zoom">
+    <button type="button" data-dz-zoom="in" aria-label="Druckbereich vergrößert zeigen"><Icon name="magnifying-glass-plus" size={18} /></button>
+    <button type="button" data-dz-zoom="out" aria-label="Ganzes Produkt zeigen" hidden><Icon name="magnifying-glass-minus" size={18} /></button>
+  </div>
+  <p class="dz-badge" data-dz-badge hidden></p>
+  <p class="dz-measure" data-dz-measure aria-hidden="true" hidden></p>
+</div>
+<p class="dz-note" data-dz-note>Die Vorschau dient zur Orientierung. Maßgeblich sind die Zentimeter rechts. Stoff, Bildschirm und Druck können Farben verändern.</p>

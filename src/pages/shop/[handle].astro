@@ -4,6 +4,9 @@ import Icon from '../../components/Icon.astro';
 import { getProducts, euro, PRINT_SIZES, DEFAULT_PRINT_SIZE, SLEEVE, POD_SECOND_SIDE, hasChest, hasSleeves } from '../../lib/shopify';
 import { site } from '../../data/site';
 import { swatchSrc } from '../../lib/imgsize.mjs';
+import DesignerStage from '../../components/shop/DesignerStage.astro';
+import DesignerPanel from '../../components/shop/DesignerPanel.astro';
+import printAreas from '../../data/designer/print-areas.json';
 
 export async function getStaticPaths() {
   const products = await getProducts();
@@ -21,7 +24,12 @@ const pod = p.pricing === 'pod';
 const chest = hasChest(p), sleeves = hasSleeves(p);
 const sizesFor = (k: string) => PRINT_SIZES.filter((s) => (k === 'front' ? chest || !s.frontOnly : !s.frontOnly));
 const startPrice = pod ? p.price : p.price + 5;
-const clientData = { product: { id: p.id, handle: p.handle, title: p.title, price: p.price, pricing: p.pricing ?? null, image: p.image, colors: p.colors, sizes: p.sizes, variants: p.variants }, sizes: PRINT_SIZES, sleeve: SLEEVE, podSecond: POD_SECOND_SIDE, cloud: site.cloudinary };
+// Designer V2 (Motiv in echten cm) nur mit Schalter beim Build: PUBLIC_DESIGNER_V2=1. Bis zur Freigabe sind nur Produkte aus approvals.json bestellbar,
+// lokal zum Testen zusätzlich PUBLIC_DESIGNER_V2_ALLOW_ESTIMATED=1.
+const dzEntry = import.meta.env.PUBLIC_DESIGNER_V2 === '1' ? (printAreas as any).products[p.handle] : null;
+const dz = dzEntry ? { ...dzEntry, version: (printAreas as any).version, refSize: p.sizes[Math.floor(p.sizes.length / 2)], allowEstimated: import.meta.env.PUBLIC_DESIGNER_V2_ALLOW_ESTIMATED === '1' } : null;
+const ageOf = (s: string) => dz?.sizes?.[s]?.ageLabel ?? null;
+const clientData = { product: { id: p.id, handle: p.handle, title: p.title, price: p.price, pricing: p.pricing ?? null, image: p.image, colors: p.colors, sizes: p.sizes, variants: p.variants }, sizes: PRINT_SIZES, sleeve: SLEEVE, podSecond: POD_SECOND_SIDE, cloud: site.cloudinary, chest, dz };
 // Shop-Preise sind Bruttopreise inkl. 19 % MwSt.: der Kassen-Worker übergibt sie an Mollie mit vatRate 19 % (westernprint-checkout, src/index.js).
 const ld = { '@context': 'https://schema.org', '@type': 'Product', name: `${p.title} bedrucken`, image: gallery.map((g) => `${site.url}${g}`), description: `${p.title} von ${p.brand} mit eigenem Motiv bedrucken. ${p.colors.length} Farben, Größen ${p.sizes[0]} bis ${p.sizes[p.sizes.length - 1]}.`, brand: { '@type': 'Brand', name: p.brand }, offers: { '@type': 'Offer', priceCurrency: 'EUR', price: startPrice.toFixed(2), priceSpecification: { '@type': 'PriceSpecification', price: startPrice.toFixed(2), priceCurrency: 'EUR', valueAddedTaxIncluded: true }, availability: 'https://schema.org/InStock', url: `${site.url}/shop/${p.handle}` } };
 const details = [
@@ -36,6 +44,7 @@ const details = [
       <div class="pgrid">
         <!-- Vorschau -->
         <div class="pvisual">
+          {dz ? <DesignerStage image={p.image!} title={p.title} /> : (
           <div class="stage" data-stage>
             <img src={p.image} alt={`${p.title} ${p.colors[0]?.name ?? ''}`} width="900" height="1125" fetchpriority="high" data-stage-img />
             <img class="motif" data-motif hidden alt="" draggable="false" />
@@ -45,6 +54,7 @@ const details = [
             </div>
             <span class="stage-hint" data-stage-hint hidden><Icon name="arrows-out-cardinal" size={14} /> Motiv verschieben</span>
           </div>
+          )}
           <div class="thumbs">
             {/* data-thumb = volles Bild für die Bühne, img = 128 x 160 px Vorschau (scripts/make-swatches.mjs) */}
             {gallery.map((g, i) => <button type="button" class={i === 0 ? 'is-on' : ''} data-thumb={g} aria-label={thumbLabel(g, i)}><img src={swatchSrc(g)} alt="" width="128" height="160" loading="lazy" /></button>)}
@@ -75,11 +85,12 @@ const details = [
           <div class="step">
             <div class="step-h"><span class="num">2</span><h2>Größe</h2><a href="#groessen" class="muted small">Passform und Details</a></div>
             <div class="chips" data-sizes>
-              {p.sizes.map((s) => <label class="chip"><input type="radio" name="size" value={s} /> <span>{s}</span></label>)}
+              {p.sizes.map((s) => <label class="chip"><input type="radio" name="size" value={s} /> <span>{s}{ageOf(s) && <small class="age">{ageOf(s)}</small>}</span></label>)}
             </div>
             <span class="error" data-size-error hidden>Bitte eine Größe wählen.</span>
           </div>
 
+          {dz ? <DesignerPanel pod={pod} sleeves={sleeves} podSecond={euro(POD_SECOND_SIDE)} /> : (
           <div class="step">
             <div class="step-h"><span class="num">3</span><h2>Druck</h2></div>
             <div class="sides">
@@ -126,6 +137,7 @@ const details = [
             )}
             <p class="print-info"><Icon name="info" size={16} /> <span>Die Druckgröße ist in allen Kleidergrößen gleich (z. B. A6 = ca. 10 x 15 cm), sie wird nicht an die Kleidergröße angepasst.{chest && <> Standardplatzierung: Vorderseite und Rücken mittig, Oberkante ca. 7 cm unter der Kragennaht; Brustdruck links, Oberkante ca. 10 cm unter der Schulternaht{sleeves && '; Ärmel mittig auf dem Oberarm'}.</>} Das Motiv lässt sich in der Vorschau verschieben.</span></p>
           </div>
+          )}
 
           <div class="buy">
             <div class="qty-row">
@@ -172,6 +184,11 @@ const details = [
 
 <script>
   import { addItem, euro } from '../../scripts/cart';
+  // Designer V2 (cm-genau) lädt sein eigenes Skript nach; der bisherige Designer läuft nur ohne V2.
+  if (document.querySelector('[data-designer-v2]')) import('../../scripts/designer-v2');
+  else legacyDesigner();
+
+  function legacyDesigner() {
   const data = JSON.parse(document.getElementById('pdata')!.textContent!);
   const { product, sizes: SIZES, sleeve: SLEEVE, podSecond: POD_SECOND, cloud } = data;
   const POD = product.pricing === 'pod';
@@ -359,9 +376,10 @@ const details = [
 
   lastFrontSize = val('size_front');
   updateAvailability(); updateSides(); updateUI();
+  }
 </script>
 
-<style>
+<style is:global>
   .pp { padding: 24px 0 clamp(40px, 5vw, 64px); }
   .crumbs { font-size: 14px; margin-bottom: 18px; display: flex; gap: 8px; flex-wrap: wrap; } .crumbs a:hover { color: var(--text); }
   .pgrid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
@@ -439,7 +457,7 @@ const details = [
   .qty input { width: 44px; text-align: center; border: 0; background: transparent; color: var(--text); font: inherit; font-weight: 600; -moz-appearance: textfield; }
   .qty input::-webkit-inner-spin-button { display: none; }
   .calc { display: grid; gap: 4px; font-size: 13.5px; color: var(--text-2); }
-  .calc :global(li) { display: flex; justify-content: space-between; gap: 12px; } .calc :global(b) { color: var(--text); font-weight: 500; font-variant-numeric: tabular-nums; }
+  .calc li { display: flex; justify-content: space-between; gap: 12px; } .calc b { color: var(--text); font-weight: 500; font-variant-numeric: tabular-nums; }
   .buy .btn { width: 100%; }
   .trust { display: grid; gap: 6px; font-size: 13px; color: var(--text-2); } .trust li { display: flex; gap: 8px; align-items: center; } .trust .icon { color: var(--accent); flex: none; }
 

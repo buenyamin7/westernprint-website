@@ -1,0 +1,3486 @@
+{
+  "fetchedAt": "2026-10-28",
+  "products": {
+    "STAU029": {
+      "handle": "baby-bib",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STAU029.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STAU029.pdf",
+      "definition": "Labels as published: 'A - Height' (diagram: total height, top edge to bottom edge), 'B - Length' (diagram: from the lower edge of the neck opening down to the bottom edge), 'C - Width' (diagram: widest horizontal width, flat).",
+      "sizes": {
+        "OS": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "heightCm": 31.5,
+            "lengthCm": 18,
+            "widthCm": 23,
+            "manufacturerSizeLabel": "OS"
+          }
+        }
+      },
+      "notes": "One-size accessory: garment fields not applicable; dimensions in other."
+    },
+    "STAU771": {
+      "handle": "fisherman-beanie",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STAU771.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STAU771.pdf",
+      "definition": "Labels as published: 'A - Height' (diagram: flat, from crown to bottom edge of the folded-up cuff, i.e. worn height with cuff folded), 'C - Width' (diagram: flat width measured across the cuff). Cuff height itself is NOT published.",
+      "sizes": {
+        "OS": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "heightCm": 27,
+            "widthCm": 20.5,
+            "manufacturerSizeLabel": "OS"
+          }
+        }
+      },
+      "notes": "One-size accessory: garment fields not applicable; dimensions in other."
+    },
+    "STAU764": {
+      "handle": "pencil-case",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STAU764.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STAU764.pdf",
+      "definition": "Labels as published: 'A - Height' (diagram: vertical, zip edge to bottom edge), 'C - Width' (diagram: horizontal width; the drawing labels this line 'B' but the table calls it 'C - Width').",
+      "sizes": {
+        "OS": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "heightCm": 16,
+            "widthCm": 21.5,
+            "manufacturerSizeLabel": "OS"
+          }
+        }
+      },
+      "notes": "One-size accessory: garment fields not applicable; dimensions in other."
+    },
+    "STAU892": {
+      "handle": "duffle-bag",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STAU892.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STAU892.pdf",
+      "definition": "Labels as published: 'A - Height' (diagram: height of the round end panel), 'B - Length' (diagram: bag length end to end), 'D - Strap Length' (diagram: carry handle).",
+      "sizes": {
+        "OS": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "heightCm": 27,
+            "lengthCm": 51,
+            "strapLengthCm": 61,
+            "manufacturerSizeLabel": "OS"
+          }
+        }
+      },
+      "notes": "One-size accessory: garment fields not applicable; dimensions in other."
+    },
+    "STAU760": {
+      "handle": "tote-bag",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STAU760.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STAU760.pdf",
+      "definition": "Labels as published: 'A - Height' (diagram: bag body from top opening edge to bottom), 'C - Width' (diagram: horizontal width of bag body), 'D - Strap Length' (diagram: handle). No 'B' row is published.",
+      "sizes": {
+        "OS": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "heightCm": 39,
+            "widthCm": 37,
+            "strapLengthCm": 65,
+            "manufacturerSizeLabel": "OS"
+          }
+        }
+      },
+      "notes": "One-size accessory: garment fields not applicable; dimensions in other."
+    },
+    "STUB103": {
+      "handle": "baby-body",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STUB103.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STUB103.pdf",
+      "definition": "Stanley/Stella product sheet 'Size Guide', 'Measurement in cm'. Labels exactly as published: 'A - Half Chest', 'B - Body Length', 'C - Sleeve Length'. No written measuring instruction is published; per the technical drawing on the same page: A = flat width straight across the front, side seam to side seam directly below the armholes; B = vertical from the high point of the shoulder (where shoulder meets neckline/collar/hood) down to the bottom hem; C = along the sleeve from the shoulder seam to the sleeve hem. No tolerance stated on the sheet.",
+      "sizes": {
+        "0-3 M": {
+          "halfChestCm": 19,
+          "bodyLengthCm": 35,
+          "sleeveLengthCm": 6,
+          "ageLabel": "0–3 Monate",
+          "other": {
+            "bodyHeightCm": "56–62",
+            "manufacturerSizeLabel": "0-3 m/56-62cm"
+          }
+        },
+        "3-6 M": {
+          "halfChestCm": 20,
+          "bodyLengthCm": 38,
+          "sleeveLengthCm": 6.5,
+          "ageLabel": "3–6 Monate",
+          "other": {
+            "bodyHeightCm": "62–68",
+            "manufacturerSizeLabel": "3-6 m/62-68cm"
+          }
+        },
+        "6-9 M": {
+          "halfChestCm": 21,
+          "bodyLengthCm": 41,
+          "sleeveLengthCm": 7,
+          "ageLabel": "6–9 Monate",
+          "other": {
+            "bodyHeightCm": "68–74",
+            "manufacturerSizeLabel": "6-9 m/68-74cm"
+          }
+        },
+        "9-12 M": {
+          "halfChestCm": 22,
+          "bodyLengthCm": 43,
+          "sleeveLengthCm": 7.5,
+          "ageLabel": "9–12 Monate",
+          "other": {
+            "bodyHeightCm": "74–80",
+            "manufacturerSizeLabel": "9-12 m/74-80cm"
+          }
+        },
+        "12-18 M": {
+          "halfChestCm": 23,
+          "bodyLengthCm": 45,
+          "sleeveLengthCm": 8,
+          "ageLabel": "12–18 Monate",
+          "other": {
+            "bodyHeightCm": "80–86",
+            "manufacturerSizeLabel": "12-18 m/80-86cm"
+          }
+        },
+        "18-24 M": {
+          "halfChestCm": 24.5,
+          "bodyLengthCm": 48,
+          "sleeveLengthCm": 8.5,
+          "ageLabel": "18–24 Monate",
+          "other": {
+            "bodyHeightCm": "86–92",
+            "manufacturerSizeLabel": "18-24 m/86-92cm"
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: 0-3 M -> \"0-3 m/56-62cm\"; 3-6 M -> \"3-6 m/62-68cm\"; 6-9 M -> \"6-9 m/68-74cm\"; 9-12 M -> \"9-12 m/74-80cm\"; 12-18 M -> \"12-18 m/80-86cm\"; 18-24 M -> \"18-24 m/86-92cm\"."
+    },
+    "STSB919": {
+      "handle": "baby-cruiser",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STSB919.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STSB919.pdf",
+      "definition": "Stanley/Stella product sheet 'Size Guide', 'Measurement in cm'. Labels exactly as published: 'A - Half Chest', 'B - Body Length', 'C - Sleeve Length'. No written measuring instruction is published; per the technical drawing on the same page: A = flat width straight across the front, side seam to side seam directly below the armholes; B = vertical from the high point of the shoulder (where shoulder meets neckline/collar/hood) down to the bottom hem; C = along the sleeve from the shoulder seam to the sleeve hem. No tolerance stated on the sheet.",
+      "sizes": {
+        "6-12 M": {
+          "halfChestCm": 29.5,
+          "bodyLengthCm": 30.5,
+          "sleeveLengthCm": 22,
+          "ageLabel": "6–12 Monate",
+          "other": {
+            "bodyHeightCm": "68–80",
+            "manufacturerSizeLabel": "6-12 m/68-80cm"
+          }
+        },
+        "12-18 M": {
+          "halfChestCm": 31,
+          "bodyLengthCm": 32,
+          "sleeveLengthCm": 22.5,
+          "ageLabel": "12–18 Monate",
+          "other": {
+            "bodyHeightCm": "80–86",
+            "manufacturerSizeLabel": "12-18 m/80-86cm"
+          }
+        },
+        "18-24 M": {
+          "halfChestCm": 32.5,
+          "bodyLengthCm": 34,
+          "sleeveLengthCm": 24.5,
+          "ageLabel": "18–24 Monate",
+          "other": {
+            "bodyHeightCm": "86–92",
+            "manufacturerSizeLabel": "18-24 m/86-92cm"
+          }
+        },
+        "24-36 M": {
+          "halfChestCm": 33.5,
+          "bodyLengthCm": 36.5,
+          "sleeveLengthCm": 27,
+          "ageLabel": "24–36 Monate",
+          "other": {
+            "bodyHeightCm": "92–98",
+            "manufacturerSizeLabel": "24-36 m/92-98cm"
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: 6-12 M -> \"6-12 m/68-80cm\"; 12-18 M -> \"12-18 m/80-86cm\"; 18-24 M -> \"18-24 m/86-92cm\"; 24-36 M -> \"24-36 m/92-98cm\"."
+    },
+    "ST4400": {
+      "handle": "classic-hoodie",
+      "source": "https://www.stedman.eu/en/classic-hoodie (accordion \"Garment Sizes\"); https://www.stedman.eu/public/customise/product-sheets/default/Stedman-ST4400-en.pdf; 2026_Stedman_Garment_Sizes.pdf in https://www.stedman.eu/public/archives/Stedman_Garment_Sizes.zip (linked from https://www.stedman.eu/en/resources)",
+      "definition": "Stedman 'Garment Sizes' table on the product page (identical to the product-sheet PDF and to the 2026 'Stedman Garment Sizes' PDF): rows 'Width (cm)' and 'Length (cm)'. Stedman states: 'Garment sizes are in cm. Subject to the tolerance of ± 2,5 cm. Might be subject to change without further notice.' No written measuring-point definition or technical drawing is published; the Stedman resources page illustrates 'Garment Sizes' with a photo of a tape measured flat across the front just below the armholes, so Width is stored as halfChestCm (flat chest width). Length is stored as bodyLengthCm; Stedman does not state the start point (HPS assumed industry convention, not confirmed by Stedman).",
+      "sizes": {
+        "XS": {
+          "halfChestCm": 49,
+          "bodyLengthCm": 68,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XS"
+          }
+        },
+        "S": {
+          "halfChestCm": 52,
+          "bodyLengthCm": 70,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 55,
+          "bodyLengthCm": 72,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 58,
+          "bodyLengthCm": 74,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 61,
+          "bodyLengthCm": 76,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 64,
+          "bodyLengthCm": 78,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "2XL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 67,
+          "bodyLengthCm": 80,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        },
+        "4XL": {
+          "halfChestCm": 72,
+          "bodyLengthCm": 82,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "4XL"
+          }
+        },
+        "5XL": {
+          "halfChestCm": 77,
+          "bodyLengthCm": 84,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "5XL"
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: XXL -> \"2XL\". Sleeve length not published by Stedman (null). Product page, product-sheet PDF and 2026 garment sizes PDF agree."
+    },
+    "ST4470": {
+      "handle": "classic-hoodie-kinder",
+      "source": "https://www.stedman.eu/en/classic-hoodie-kids (accordion \"Garment Sizes\"); https://www.stedman.eu/public/customise/product-sheets/default/Stedman-ST4470-en.pdf; 2026_Stedman_Garment_Sizes.pdf in https://www.stedman.eu/public/archives/Stedman_Garment_Sizes.zip (linked from https://www.stedman.eu/en/resources)",
+      "definition": "Stedman 'Garment Sizes' table on the product page (identical to the product-sheet PDF and to the 2026 'Stedman Garment Sizes' PDF): rows 'Width (cm)' and 'Length (cm)'. Stedman states: 'Garment sizes are in cm. Subject to the tolerance of ± 2,5 cm. Might be subject to change without further notice.' No written measuring-point definition or technical drawing is published; the Stedman resources page illustrates 'Garment Sizes' with a photo of a tape measured flat across the front just below the armholes, so Width is stored as halfChestCm (flat chest width). Length is stored as bodyLengthCm; Stedman does not state the start point (HPS assumed industry convention, not confirmed by Stedman).",
+      "sizes": {
+        "XS": {
+          "halfChestCm": 38,
+          "bodyLengthCm": 45,
+          "sleeveLengthCm": null,
+          "ageLabel": "5–6 Jahre",
+          "other": {
+            "manufacturerSizeLabel": "XS",
+            "manufacturerAge": "5-6",
+            "bodyHeightCm": "110/116"
+          }
+        },
+        "S": {
+          "halfChestCm": 41,
+          "bodyLengthCm": 51,
+          "sleeveLengthCm": null,
+          "ageLabel": "7–8 Jahre",
+          "other": {
+            "manufacturerSizeLabel": "S",
+            "manufacturerAge": "7-8",
+            "bodyHeightCm": "122/128"
+          }
+        },
+        "M": {
+          "halfChestCm": 44,
+          "bodyLengthCm": 55,
+          "sleeveLengthCm": null,
+          "ageLabel": "9–10 Jahre",
+          "other": {
+            "manufacturerSizeLabel": "M",
+            "manufacturerAge": "9-10",
+            "bodyHeightCm": "134/140"
+          }
+        },
+        "L": {
+          "halfChestCm": 47,
+          "bodyLengthCm": 61,
+          "sleeveLengthCm": null,
+          "ageLabel": "11–12 Jahre",
+          "other": {
+            "manufacturerSizeLabel": "L",
+            "manufacturerAge": "11-12",
+            "bodyHeightCm": "146/152"
+          }
+        },
+        "XL": {
+          "halfChestCm": 50,
+          "bodyLengthCm": 65,
+          "sleeveLengthCm": null,
+          "ageLabel": "12–13 Jahre",
+          "other": {
+            "manufacturerSizeLabel": "XL",
+            "manufacturerAge": "12-13",
+            "bodyHeightCm": "158/164"
+          }
+        }
+      },
+      "notes": "Sleeve length not published by Stedman (null). Product page, product-sheet PDF and 2026 garment sizes PDF agree. Age/height labels published by Stedman per size ('Age' and 'Height' rows); ageLabel = Age + ' Jahre', bodyHeightCm = Height."
+    },
+    "STSU177": {
+      "handle": "cruiser-2-0",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STSU177.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STSU177.pdf",
+      "definition": "Stanley/Stella product sheet 'Size Guide', 'Measurement in cm'. Labels exactly as published: 'A - Half Chest', 'B - Body Length', 'C - Sleeve Length'. No written measuring instruction is published; per the technical drawing on the same page: A = flat width straight across the front, side seam to side seam directly below the armholes; B = vertical from the high point of the shoulder (where shoulder meets neckline/collar/hood) down to the bottom hem; C = along the sleeve from the shoulder seam to the sleeve hem. No tolerance stated on the sheet.",
+      "sizes": {
+        "XXS": {
+          "halfChestCm": 51,
+          "bodyLengthCm": 64,
+          "sleeveLengthCm": 58.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XXS"
+          }
+        },
+        "XS": {
+          "halfChestCm": 53,
+          "bodyLengthCm": 67,
+          "sleeveLengthCm": 60.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XS"
+          }
+        },
+        "S": {
+          "halfChestCm": 55,
+          "bodyLengthCm": 71,
+          "sleeveLengthCm": 64.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 59,
+          "bodyLengthCm": 74,
+          "sleeveLengthCm": 66.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 62,
+          "bodyLengthCm": 76,
+          "sleeveLengthCm": 68.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 65,
+          "bodyLengthCm": 78,
+          "sleeveLengthCm": 69,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 69,
+          "bodyLengthCm": 80,
+          "sleeveLengthCm": 69.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XXL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 73,
+          "bodyLengthCm": 82,
+          "sleeveLengthCm": 69.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        },
+        "4XL": {
+          "halfChestCm": 78,
+          "bodyLengthCm": 84,
+          "sleeveLengthCm": 69.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "4XL"
+          }
+        },
+        "5XL": {
+          "halfChestCm": 83,
+          "bodyLengthCm": 85,
+          "sleeveLengthCm": 69.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "5XL"
+          }
+        }
+      },
+      "notes": ""
+    },
+    "STSU168": {
+      "handle": "drummer-2-0",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STSU168.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STSU168.pdf",
+      "definition": "Stanley/Stella product sheet 'Size Guide', 'Measurement in cm'. Labels exactly as published: 'A - Half Chest', 'B - Body Length', 'C - Sleeve Length'. No written measuring instruction is published; per the technical drawing on the same page: A = flat width straight across the front, side seam to side seam directly below the armholes; B = vertical from the high point of the shoulder (where shoulder meets neckline/collar/hood) down to the bottom hem; C = along the sleeve from the shoulder seam to the sleeve hem. No tolerance stated on the sheet.",
+      "sizes": {
+        "XXS": {
+          "halfChestCm": 46,
+          "bodyLengthCm": 59,
+          "sleeveLengthCm": 56.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XXS"
+          }
+        },
+        "XS": {
+          "halfChestCm": 48,
+          "bodyLengthCm": 62,
+          "sleeveLengthCm": 58.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XS"
+          }
+        },
+        "S": {
+          "halfChestCm": 50,
+          "bodyLengthCm": 66,
+          "sleeveLengthCm": 63,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 54,
+          "bodyLengthCm": 70,
+          "sleeveLengthCm": 65.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 57,
+          "bodyLengthCm": 72,
+          "sleeveLengthCm": 67.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 60,
+          "bodyLengthCm": 74,
+          "sleeveLengthCm": 68,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 64,
+          "bodyLengthCm": 76,
+          "sleeveLengthCm": 68.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XXL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 68,
+          "bodyLengthCm": 78,
+          "sleeveLengthCm": 68.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        },
+        "4XL": {
+          "halfChestCm": 73,
+          "bodyLengthCm": 80,
+          "sleeveLengthCm": 68.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "4XL"
+          }
+        },
+        "5XL": {
+          "halfChestCm": 78,
+          "bodyLengthCm": 81,
+          "sleeveLengthCm": 68.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "5XL"
+          }
+        }
+      },
+      "notes": ""
+    },
+    "STSK180": {
+      "handle": "mini-cruiser-2-0",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STSK180.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STSK180.pdf",
+      "definition": "Stanley/Stella product sheet 'Size Guide', 'Measurement in cm'. Labels exactly as published: 'A - Half Chest', 'B - Body Length', 'C - Sleeve Length'. No written measuring instruction is published; per the technical drawing on the same page: A = flat width straight across the front, side seam to side seam directly below the armholes; B = vertical from the high point of the shoulder (where shoulder meets neckline/collar/hood) down to the bottom hem; C = along the sleeve from the shoulder seam to the sleeve hem. No tolerance stated on the sheet.",
+      "sizes": {
+        "3-4Y": {
+          "halfChestCm": 38,
+          "bodyLengthCm": 43,
+          "sleeveLengthCm": 32,
+          "ageLabel": "3–4 Jahre",
+          "other": {
+            "bodyHeightCm": "98–104",
+            "manufacturerSizeLabel": "3-4/98-104cm"
+          }
+        },
+        "5-6Y": {
+          "halfChestCm": 40,
+          "bodyLengthCm": 46,
+          "sleeveLengthCm": 37.5,
+          "ageLabel": "5–6 Jahre",
+          "other": {
+            "bodyHeightCm": "110–116",
+            "manufacturerSizeLabel": "5-6/110-116cm"
+          }
+        },
+        "7-8Y": {
+          "halfChestCm": 42,
+          "bodyLengthCm": 52,
+          "sleeveLengthCm": 43.5,
+          "ageLabel": "7–8 Jahre",
+          "other": {
+            "bodyHeightCm": "122–128",
+            "manufacturerSizeLabel": "7-8/122-128cm"
+          }
+        },
+        "9-11Y": {
+          "halfChestCm": 46,
+          "bodyLengthCm": 59,
+          "sleeveLengthCm": 50.5,
+          "ageLabel": "9–11 Jahre",
+          "other": {
+            "bodyHeightCm": "134–146",
+            "manufacturerSizeLabel": "9-11/134-146cm"
+          }
+        },
+        "12-13Y": {
+          "halfChestCm": 50,
+          "bodyLengthCm": 66,
+          "sleeveLengthCm": 57.5,
+          "ageLabel": "12–13 Jahre",
+          "other": {
+            "bodyHeightCm": "152–158",
+            "manufacturerSizeLabel": "12-13/152-158cm"
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: 3-4Y -> \"3-4/98-104cm\"; 5-6Y -> \"5-6/110-116cm\"; 7-8Y -> \"7-8/122-128cm\"; 9-11Y -> \"9-11/134-146cm\"; 12-13Y -> \"12-13/152-158cm\". Mini Cruiser 2.0 and Mini Changer 2.0 publish identical values (as do Cruiser 2.0/Changer 2.0 adult); checked in both sheet versions."
+    },
+    "ST5630": {
+      "handle": "side-pocket-hoodie-select",
+      "source": "https://www.stedman.eu/en/side-pocket-hoodie-select (accordion \"Garment Sizes\"); https://www.stedman.eu/public/customise/product-sheets/default/Stedman-ST5630-en.pdf; 2026_Stedman_Garment_Sizes.pdf in https://www.stedman.eu/public/archives/Stedman_Garment_Sizes.zip (linked from https://www.stedman.eu/en/resources)",
+      "definition": "Stedman 'Garment Sizes' table on the product page (identical to the product-sheet PDF and to the 2026 'Stedman Garment Sizes' PDF): rows 'Width (cm)' and 'Length (cm)'. Stedman states: 'Garment sizes are in cm. Subject to the tolerance of ± 2,5 cm. Might be subject to change without further notice.' No written measuring-point definition or technical drawing is published; the Stedman resources page illustrates 'Garment Sizes' with a photo of a tape measured flat across the front just below the armholes, so Width is stored as halfChestCm (flat chest width). Length is stored as bodyLengthCm; Stedman does not state the start point (HPS assumed industry convention, not confirmed by Stedman).",
+      "sizes": {
+        "XS": {
+          "halfChestCm": 51,
+          "bodyLengthCm": 66,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XS"
+          }
+        },
+        "S": {
+          "halfChestCm": 54,
+          "bodyLengthCm": 69,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 57,
+          "bodyLengthCm": 73,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 60,
+          "bodyLengthCm": 75,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 63,
+          "bodyLengthCm": 77,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 66,
+          "bodyLengthCm": 79,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "2XL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 69,
+          "bodyLengthCm": 81,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: XXL -> \"2XL\". Sleeve length not published by Stedman (null). Product page, product-sheet PDF and 2026 garment sizes PDF agree."
+    },
+    "STBB187": {
+      "handle": "baby-tumbler",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STBB187.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STBB187.pdf",
+      "definition": "Labels as published: 'A - Waist' (diagram: flat waistband width, edge to edge = half waist), 'B - Total Leg Length' (diagram: outside leg from top of waistband to bottom of cuff; website copy of the sheet labels it 'B - Leg Length'), 'C - Thigh' (diagram: flat width of one leg at the thigh, below the crotch).",
+      "sizes": {
+        "6-12 M": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": "6–12 Monate",
+          "other": {
+            "halfWaistFlatCm": 21,
+            "totalLegLengthCm": 40,
+            "halfThighFlatCm": 15.8,
+            "bodyHeightCm": "68–80",
+            "manufacturerSizeLabel": "6-12 m/68-80cm"
+          }
+        },
+        "12-18 M": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": "12–18 Monate",
+          "other": {
+            "halfWaistFlatCm": 22,
+            "totalLegLengthCm": 46,
+            "halfThighFlatCm": 16.5,
+            "bodyHeightCm": "80–86",
+            "manufacturerSizeLabel": "12-18 m/80-86cm"
+          }
+        },
+        "18-24 M": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": "18–24 Monate",
+          "other": {
+            "halfWaistFlatCm": 23,
+            "totalLegLengthCm": 50,
+            "halfThighFlatCm": 17.2,
+            "bodyHeightCm": "86–92",
+            "manufacturerSizeLabel": "18-24 m/86-92cm"
+          }
+        },
+        "24-36 M": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": "24–36 Monate",
+          "other": {
+            "halfWaistFlatCm": 24,
+            "totalLegLengthCm": 54,
+            "halfThighFlatCm": 18,
+            "bodyHeightCm": "92–98",
+            "manufacturerSizeLabel": "24-36 m/92-98cm"
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: 6-12 M -> \"6-12 m/68-80cm\"; 12-18 M -> \"12-18 m/80-86cm\"; 18-24 M -> \"18-24 m/86-92cm\"; 24-36 M -> \"24-36 m/92-98cm\". Trousers: halfChestCm/bodyLengthCm/sleeveLengthCm not applicable; leg measures in other."
+    },
+    "STBK102": {
+      "handle": "mini-bolter",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STBK102.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STBK102.pdf",
+      "definition": "Labels as published: 'A - Waist' (diagram: flat waistband width, edge to edge = half waist), 'B - Total Leg Length' (diagram: outside leg from top of waistband to bottom of cuff; website copy of the sheet labels it 'B - Leg Length'), 'C - Thigh' (diagram: flat width of one leg at the thigh, below the crotch).",
+      "sizes": {
+        "3-4Y": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": "3–4 Jahre",
+          "other": {
+            "halfWaistFlatCm": 24,
+            "totalLegLengthCm": 25.5,
+            "halfThighFlatCm": 23,
+            "bodyHeightCm": "98–104",
+            "manufacturerSizeLabel": "3-4/98-104cm"
+          }
+        },
+        "5-6Y": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": "5–6 Jahre",
+          "other": {
+            "halfWaistFlatCm": 25.5,
+            "totalLegLengthCm": 30.5,
+            "halfThighFlatCm": 24.5,
+            "bodyHeightCm": "110–116",
+            "manufacturerSizeLabel": "5-6/110-116cm"
+          }
+        },
+        "7-8Y": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": "7–8 Jahre",
+          "other": {
+            "halfWaistFlatCm": 28,
+            "totalLegLengthCm": 35.5,
+            "halfThighFlatCm": 25.5,
+            "bodyHeightCm": "122–128",
+            "manufacturerSizeLabel": "7-8/122-128cm"
+          }
+        },
+        "9-11Y": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": "9–11 Jahre",
+          "other": {
+            "halfWaistFlatCm": 31,
+            "totalLegLengthCm": 42.5,
+            "halfThighFlatCm": 28,
+            "bodyHeightCm": "134–146",
+            "manufacturerSizeLabel": "9-11/134-146cm"
+          }
+        },
+        "12-13Y": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": "12–13 Jahre",
+          "other": {
+            "halfWaistFlatCm": 34,
+            "totalLegLengthCm": 47.5,
+            "halfThighFlatCm": 31,
+            "bodyHeightCm": "152–158",
+            "manufacturerSizeLabel": "12-13/152-158cm"
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: 3-4Y -> \"3-4/98-104cm\"; 5-6Y -> \"5-6/110-116cm\"; 7-8Y -> \"7-8/122-128cm\"; 9-11Y -> \"9-11/134-146cm\"; 12-13Y -> \"12-13/152-158cm\". Trousers: halfChestCm/bodyLengthCm/sleeveLengthCm not applicable; leg measures in other."
+    },
+    "STSK181": {
+      "handle": "mini-changer-2-0",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STSK181.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STSK181.pdf",
+      "definition": "Stanley/Stella product sheet 'Size Guide', 'Measurement in cm'. Labels exactly as published: 'A - Half Chest', 'B - Body Length', 'C - Sleeve Length'. No written measuring instruction is published; per the technical drawing on the same page: A = flat width straight across the front, side seam to side seam directly below the armholes; B = vertical from the high point of the shoulder (where shoulder meets neckline/collar/hood) down to the bottom hem; C = along the sleeve from the shoulder seam to the sleeve hem. No tolerance stated on the sheet.",
+      "sizes": {
+        "98/104": {
+          "halfChestCm": 38,
+          "bodyLengthCm": 43,
+          "sleeveLengthCm": 32,
+          "ageLabel": "3–4 Jahre",
+          "other": {
+            "bodyHeightCm": "98–104",
+            "manufacturerSizeLabel": "3-4/98-104cm"
+          }
+        },
+        "110/116": {
+          "halfChestCm": 40,
+          "bodyLengthCm": 46,
+          "sleeveLengthCm": 37.5,
+          "ageLabel": "5–6 Jahre",
+          "other": {
+            "bodyHeightCm": "110–116",
+            "manufacturerSizeLabel": "5-6/110-116cm"
+          }
+        },
+        "122/128": {
+          "halfChestCm": 42,
+          "bodyLengthCm": 52,
+          "sleeveLengthCm": 43.5,
+          "ageLabel": "7–8 Jahre",
+          "other": {
+            "bodyHeightCm": "122–128",
+            "manufacturerSizeLabel": "7-8/122-128cm"
+          }
+        },
+        "134/146": {
+          "halfChestCm": 46,
+          "bodyLengthCm": 59,
+          "sleeveLengthCm": 50.5,
+          "ageLabel": "9–11 Jahre",
+          "other": {
+            "bodyHeightCm": "134–146",
+            "manufacturerSizeLabel": "9-11/134-146cm"
+          }
+        },
+        "152/158": {
+          "halfChestCm": 50,
+          "bodyLengthCm": 66,
+          "sleeveLengthCm": 57.5,
+          "ageLabel": "12–13 Jahre",
+          "other": {
+            "bodyHeightCm": "152–158",
+            "manufacturerSizeLabel": "12-13/152-158cm"
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: 98/104 -> \"3-4/98-104cm\"; 110/116 -> \"5-6/110-116cm\"; 122/128 -> \"7-8/122-128cm\"; 134/146 -> \"9-11/134-146cm\"; 152/158 -> \"12-13/152-158cm\". Mini Cruiser 2.0 and Mini Changer 2.0 publish identical values (as do Cruiser 2.0/Changer 2.0 adult); checked in both sheet versions."
+    },
+    "STBU185": {
+      "handle": "mover-2-0",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STBU185.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STBU185.pdf",
+      "definition": "Labels as published: 'A - Waist' (diagram: flat waistband width, edge to edge = half waist), 'B - Total Leg Length' (diagram: outside leg from top of waistband to bottom of cuff; website copy of the sheet labels it 'B - Leg Length'), 'C - Thigh' (diagram: flat width of one leg at the thigh, below the crotch).",
+      "sizes": {
+        "XXS": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "halfWaistFlatCm": 33,
+            "totalLegLengthCm": 99,
+            "halfThighFlatCm": 29,
+            "manufacturerSizeLabel": "XXS"
+          }
+        },
+        "XS": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "halfWaistFlatCm": 35,
+            "totalLegLengthCm": 101,
+            "halfThighFlatCm": 30,
+            "manufacturerSizeLabel": "XS"
+          }
+        },
+        "S": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "halfWaistFlatCm": 37,
+            "totalLegLengthCm": 103,
+            "halfThighFlatCm": 31,
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "halfWaistFlatCm": 39,
+            "totalLegLengthCm": 105,
+            "halfThighFlatCm": 32,
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "halfWaistFlatCm": 42,
+            "totalLegLengthCm": 107,
+            "halfThighFlatCm": 33.5,
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "halfWaistFlatCm": 45,
+            "totalLegLengthCm": 109,
+            "halfThighFlatCm": 35,
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "halfWaistFlatCm": 48,
+            "totalLegLengthCm": 111,
+            "halfThighFlatCm": 36.5,
+            "manufacturerSizeLabel": "XXL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "halfWaistFlatCm": 51,
+            "totalLegLengthCm": 111,
+            "halfThighFlatCm": 38,
+            "manufacturerSizeLabel": "3XL"
+          }
+        }
+      },
+      "notes": "Trousers: halfChestCm/bodyLengthCm/sleeveLengthCm not applicable; leg measures in other."
+    },
+    "ST5030": {
+      "handle": "classic-fleece-jacket",
+      "source": "https://www.stedman.eu/en/classic-fleece-jacket (accordion \"Garment Sizes\"); https://www.stedman.eu/public/customise/product-sheets/default/Stedman-ST5030-en.pdf; 2026_Stedman_Garment_Sizes.pdf in https://www.stedman.eu/public/archives/Stedman_Garment_Sizes.zip (linked from https://www.stedman.eu/en/resources)",
+      "definition": "Stedman 'Garment Sizes' table on the product page (identical to the product-sheet PDF and to the 2026 'Stedman Garment Sizes' PDF): rows 'Width (cm)' and 'Length (cm)'. Stedman states: 'Garment sizes are in cm. Subject to the tolerance of ± 2,5 cm. Might be subject to change without further notice.' No written measuring-point definition or technical drawing is published; the Stedman resources page illustrates 'Garment Sizes' with a photo of a tape measured flat across the front just below the armholes, so Width is stored as halfChestCm (flat chest width). Length is stored as bodyLengthCm; Stedman does not state the start point (HPS assumed industry convention, not confirmed by Stedman).",
+      "sizes": {
+        "S": {
+          "halfChestCm": 54,
+          "bodyLengthCm": 71,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 57,
+          "bodyLengthCm": 73,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 60,
+          "bodyLengthCm": 75,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 64,
+          "bodyLengthCm": 77,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 68,
+          "bodyLengthCm": 79,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "2XL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 71,
+          "bodyLengthCm": 80,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: XXL -> \"2XL\". Sleeve length not published by Stedman (null). Product page, product-sheet PDF and 2026 garment sizes PDF agree."
+    },
+    "ST5100": {
+      "handle": "classic-fleece-jacket-damen",
+      "source": "https://www.stedman.eu/en/classic-fleece-jacket-women (accordion \"Garment Sizes\"); https://www.stedman.eu/public/customise/product-sheets/default/Stedman-ST5100-en.pdf; 2026_Stedman_Garment_Sizes.pdf in https://www.stedman.eu/public/archives/Stedman_Garment_Sizes.zip (linked from https://www.stedman.eu/en/resources)",
+      "definition": "Stedman 'Garment Sizes' table on the product page (identical to the product-sheet PDF and to the 2026 'Stedman Garment Sizes' PDF): rows 'Width (cm)' and 'Length (cm)'. Stedman states: 'Garment sizes are in cm. Subject to the tolerance of ± 2,5 cm. Might be subject to change without further notice.' No written measuring-point definition or technical drawing is published; the Stedman resources page illustrates 'Garment Sizes' with a photo of a tape measured flat across the front just below the armholes, so Width is stored as halfChestCm (flat chest width). Length is stored as bodyLengthCm; Stedman does not state the start point (HPS assumed industry convention, not confirmed by Stedman).",
+      "sizes": {
+        "XS": {
+          "halfChestCm": 46,
+          "bodyLengthCm": 65,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XS"
+          }
+        },
+        "S": {
+          "halfChestCm": 48,
+          "bodyLengthCm": 66,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 51,
+          "bodyLengthCm": 67.5,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 54,
+          "bodyLengthCm": 69,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 58,
+          "bodyLengthCm": 71.5,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 60,
+          "bodyLengthCm": 73,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "2XL"
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: XXL -> \"2XL\". Sleeve length not published by Stedman (null). Product page, product-sheet PDF and 2026 garment sizes PDF agree."
+    },
+    "ST3000": {
+      "handle": "classic-polo",
+      "source": "https://www.stedman.eu/en/classic-polo (accordion \"Garment Sizes\"); https://www.stedman.eu/public/customise/product-sheets/default/Stedman-ST3000-en.pdf; 2026_Stedman_Garment_Sizes.pdf in https://www.stedman.eu/public/archives/Stedman_Garment_Sizes.zip (linked from https://www.stedman.eu/en/resources)",
+      "definition": "Stedman 'Garment Sizes' table on the product page (identical to the product-sheet PDF and to the 2026 'Stedman Garment Sizes' PDF): rows 'Width (cm)' and 'Length (cm)'. Stedman states: 'Garment sizes are in cm. Subject to the tolerance of ± 2,5 cm. Might be subject to change without further notice.' No written measuring-point definition or technical drawing is published; the Stedman resources page illustrates 'Garment Sizes' with a photo of a tape measured flat across the front just below the armholes, so Width is stored as halfChestCm (flat chest width). Length is stored as bodyLengthCm; Stedman does not state the start point (HPS assumed industry convention, not confirmed by Stedman).",
+      "sizes": {
+        "S": {
+          "halfChestCm": 50,
+          "bodyLengthCm": 72,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 53,
+          "bodyLengthCm": 74,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 56,
+          "bodyLengthCm": 76,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 59,
+          "bodyLengthCm": 78,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 62,
+          "bodyLengthCm": 80,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "2XL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 67,
+          "bodyLengthCm": 82,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        },
+        "4XL": {
+          "halfChestCm": 70,
+          "bodyLengthCm": 84,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "4XL"
+          }
+        },
+        "5XL": {
+          "halfChestCm": 75,
+          "bodyLengthCm": 86,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "5XL"
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: XXL -> \"2XL\". Sleeve length not published by Stedman (null). Product page, product-sheet PDF and 2026 garment sizes PDF agree."
+    },
+    "ST3100": {
+      "handle": "classic-polo-damen",
+      "source": "https://www.stedman.eu/en/classic-polo-women (accordion \"Garment Sizes\"); https://www.stedman.eu/public/customise/product-sheets/default/Stedman-ST3100-en.pdf; 2026_Stedman_Garment_Sizes.pdf in https://www.stedman.eu/public/archives/Stedman_Garment_Sizes.zip (linked from https://www.stedman.eu/en/resources)",
+      "definition": "Stedman 'Garment Sizes' table on the product page (identical to the product-sheet PDF and to the 2026 'Stedman Garment Sizes' PDF): rows 'Width (cm)' and 'Length (cm)'. Stedman states: 'Garment sizes are in cm. Subject to the tolerance of ± 2,5 cm. Might be subject to change without further notice.' No written measuring-point definition or technical drawing is published; the Stedman resources page illustrates 'Garment Sizes' with a photo of a tape measured flat across the front just below the armholes, so Width is stored as halfChestCm (flat chest width). Length is stored as bodyLengthCm; Stedman does not state the start point (HPS assumed industry convention, not confirmed by Stedman).",
+      "sizes": {
+        "XS": {
+          "halfChestCm": 42,
+          "bodyLengthCm": 62,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XS"
+          }
+        },
+        "S": {
+          "halfChestCm": 45,
+          "bodyLengthCm": 64,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 48,
+          "bodyLengthCm": 66,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 51,
+          "bodyLengthCm": 68,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 55,
+          "bodyLengthCm": 70,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 59,
+          "bodyLengthCm": 71,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "2XL"
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: XXL -> \"2XL\". Sleeve length not published by Stedman (null). Product page, product-sheet PDF and 2026 garment sizes PDF agree."
+    },
+    "ST3200": {
+      "handle": "classic-polo-kinder",
+      "source": "https://www.stedman.eu/en/classic-polo-kids (accordion \"Garment Sizes\"); https://www.stedman.eu/public/customise/product-sheets/default/Stedman-ST3200-en.pdf; 2026_Stedman_Garment_Sizes.pdf in https://www.stedman.eu/public/archives/Stedman_Garment_Sizes.zip (linked from https://www.stedman.eu/en/resources)",
+      "definition": "Stedman 'Garment Sizes' table on the product page (identical to the product-sheet PDF and to the 2026 'Stedman Garment Sizes' PDF): rows 'Width (cm)' and 'Length (cm)'. Stedman states: 'Garment sizes are in cm. Subject to the tolerance of ± 2,5 cm. Might be subject to change without further notice.' No written measuring-point definition or technical drawing is published; the Stedman resources page illustrates 'Garment Sizes' with a photo of a tape measured flat across the front just below the armholes, so Width is stored as halfChestCm (flat chest width). Length is stored as bodyLengthCm; Stedman does not state the start point (HPS assumed industry convention, not confirmed by Stedman).",
+      "sizes": {
+        "XS": {
+          "halfChestCm": 36,
+          "bodyLengthCm": 44,
+          "sleeveLengthCm": null,
+          "ageLabel": "5–6 Jahre",
+          "other": {
+            "manufacturerSizeLabel": "XS",
+            "manufacturerAge": "5-6",
+            "bodyHeightCm": "110/116"
+          }
+        },
+        "S": {
+          "halfChestCm": 39,
+          "bodyLengthCm": 50,
+          "sleeveLengthCm": null,
+          "ageLabel": "7–8 Jahre",
+          "other": {
+            "manufacturerSizeLabel": "S",
+            "manufacturerAge": "7-8",
+            "bodyHeightCm": "122/128"
+          }
+        },
+        "M": {
+          "halfChestCm": 42,
+          "bodyLengthCm": 54,
+          "sleeveLengthCm": null,
+          "ageLabel": "9–10 Jahre",
+          "other": {
+            "manufacturerSizeLabel": "M",
+            "manufacturerAge": "9-10",
+            "bodyHeightCm": "134/140"
+          }
+        },
+        "L": {
+          "halfChestCm": 45,
+          "bodyLengthCm": 60,
+          "sleeveLengthCm": null,
+          "ageLabel": "11–12 Jahre",
+          "other": {
+            "manufacturerSizeLabel": "L",
+            "manufacturerAge": "11-12",
+            "bodyHeightCm": "146/152"
+          }
+        },
+        "XL": {
+          "halfChestCm": 48,
+          "bodyLengthCm": 64,
+          "sleeveLengthCm": null,
+          "ageLabel": "12–13 Jahre",
+          "other": {
+            "manufacturerSizeLabel": "XL",
+            "manufacturerAge": "12-13",
+            "bodyHeightCm": "158/164"
+          }
+        }
+      },
+      "notes": "Sleeve length not published by Stedman (null). Product page, product-sheet PDF and 2026 garment sizes PDF agree. Age/height labels published by Stedman per size ('Age' and 'Height' rows); ageLabel = Age + ' Jahre', bodyHeightCm = Height."
+    },
+    "STPU252": {
+      "handle": "coaster-vintage",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STPU252.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STPU252.pdf",
+      "definition": "Stanley/Stella product sheet 'Size Guide', 'Measurement in cm'. Labels exactly as published: 'A - Half Chest', 'B - Body Length', 'C - Sleeve Length'. No written measuring instruction is published; per the technical drawing on the same page: A = flat width straight across the front, side seam to side seam directly below the armholes; B = vertical from the high point of the shoulder (where shoulder meets neckline/collar/hood) down to the bottom hem; C = along the sleeve from the shoulder seam to the sleeve hem. No tolerance stated on the sheet.",
+      "sizes": {
+        "XXS": {
+          "halfChestCm": 43,
+          "bodyLengthCm": 61,
+          "sleeveLengthCm": 17.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XXS"
+          }
+        },
+        "XS": {
+          "halfChestCm": 45,
+          "bodyLengthCm": 64,
+          "sleeveLengthCm": 18.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XS"
+          }
+        },
+        "S": {
+          "halfChestCm": 48,
+          "bodyLengthCm": 68,
+          "sleeveLengthCm": 20,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 51,
+          "bodyLengthCm": 72,
+          "sleeveLengthCm": 21.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 54,
+          "bodyLengthCm": 74,
+          "sleeveLengthCm": 22,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 57,
+          "bodyLengthCm": 76,
+          "sleeveLengthCm": 22.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 61,
+          "bodyLengthCm": 78,
+          "sleeveLengthCm": 23,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XXL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 65,
+          "bodyLengthCm": 80,
+          "sleeveLengthCm": 23.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        }
+      },
+      "notes": ""
+    },
+    "STPU222": {
+      "handle": "prepster-2-0",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STPU222.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STPU222.pdf",
+      "definition": "Stanley/Stella product sheet 'Size Guide', 'Measurement in cm'. Labels exactly as published: 'A - Half Chest', 'B - Body Length', 'C - Sleeve Length'. No written measuring instruction is published; per the technical drawing on the same page: A = flat width straight across the front, side seam to side seam directly below the armholes; B = vertical from the high point of the shoulder (where shoulder meets neckline/collar/hood) down to the bottom hem; C = along the sleeve from the shoulder seam to the sleeve hem. No tolerance stated on the sheet.",
+      "sizes": {
+        "XXS": {
+          "halfChestCm": 45.5,
+          "bodyLengthCm": 61,
+          "sleeveLengthCm": 22,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XXS"
+          }
+        },
+        "XS": {
+          "halfChestCm": 47.5,
+          "bodyLengthCm": 64,
+          "sleeveLengthCm": 22.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XS"
+          }
+        },
+        "S": {
+          "halfChestCm": 50.5,
+          "bodyLengthCm": 68,
+          "sleeveLengthCm": 23,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 53.5,
+          "bodyLengthCm": 72,
+          "sleeveLengthCm": 23.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 56.5,
+          "bodyLengthCm": 74,
+          "sleeveLengthCm": 24,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 59.5,
+          "bodyLengthCm": 76,
+          "sleeveLengthCm": 24.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 63.5,
+          "bodyLengthCm": 78,
+          "sleeveLengthCm": 25,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XXL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 67.5,
+          "bodyLengthCm": 80,
+          "sleeveLengthCm": 25.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        },
+        "4XL": {
+          "halfChestCm": 72.5,
+          "bodyLengthCm": 82,
+          "sleeveLengthCm": 25.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "4XL"
+          }
+        },
+        "5XL": {
+          "halfChestCm": 77.5,
+          "bodyLengthCm": 83,
+          "sleeveLengthCm": 25.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "5XL"
+          }
+        }
+      },
+      "notes": ""
+    },
+    "STPM224": {
+      "handle": "stanley-coaster",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STPM224.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STPM224.pdf",
+      "definition": "Stanley/Stella product sheet 'Size Guide', 'Measurement in cm'. Labels exactly as published: 'A - Half Chest', 'B - Body Length', 'C - Sleeve Length'. No written measuring instruction is published; per the technical drawing on the same page: A = flat width straight across the front, side seam to side seam directly below the armholes; B = vertical from the high point of the shoulder (where shoulder meets neckline/collar/hood) down to the bottom hem; C = along the sleeve from the shoulder seam to the sleeve hem. No tolerance stated on the sheet.",
+      "sizes": {
+        "S": {
+          "halfChestCm": 48,
+          "bodyLengthCm": 70,
+          "sleeveLengthCm": 21,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 51,
+          "bodyLengthCm": 72,
+          "sleeveLengthCm": 21.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 54,
+          "bodyLengthCm": 74,
+          "sleeveLengthCm": 22,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 57,
+          "bodyLengthCm": 76,
+          "sleeveLengthCm": 22.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 61,
+          "bodyLengthCm": 78,
+          "sleeveLengthCm": 23,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XXL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 65,
+          "bodyLengthCm": 80,
+          "sleeveLengthCm": 23.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        },
+        "4XL": {
+          "halfChestCm": 70,
+          "bodyLengthCm": 82,
+          "sleeveLengthCm": 23.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "4XL"
+          }
+        },
+        "5XL": {
+          "halfChestCm": 75,
+          "bodyLengthCm": 83,
+          "sleeveLengthCm": 23.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "5XL"
+          }
+        }
+      },
+      "notes": ""
+    },
+    "STJM238": {
+      "handle": "stanley-guider",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STJM238.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STJM238.pdf",
+      "definition": "Stanley/Stella product sheet 'Size Guide', 'Measurement in cm'. Labels exactly as published: 'A - Half Chest', 'B - Body Length', 'C - Sleeve Length'. No written measuring instruction is published; per the technical drawing on the same page: A = flat width straight across the front, side seam to side seam directly below the armholes; B = vertical from the high point of the shoulder (where shoulder meets neckline/collar/hood) down to the bottom hem; C = along the sleeve from the shoulder seam to the sleeve hem. No tolerance stated on the sheet. For this style the length row is labelled 'I - Length' (API sheet) / 'B - Length' (website sheet).",
+      "sizes": {
+        "S": {
+          "halfChestCm": 53,
+          "bodyLengthCm": 70,
+          "sleeveLengthCm": 63.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 56,
+          "bodyLengthCm": 72,
+          "sleeveLengthCm": 65,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 59,
+          "bodyLengthCm": 74,
+          "sleeveLengthCm": 66.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 62,
+          "bodyLengthCm": 76.5,
+          "sleeveLengthCm": 68,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 66,
+          "bodyLengthCm": 78.5,
+          "sleeveLengthCm": 69.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XXL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 70,
+          "bodyLengthCm": 81,
+          "sleeveLengthCm": 69.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        },
+        "4XL": {
+          "halfChestCm": 75,
+          "bodyLengthCm": 82,
+          "sleeveLengthCm": 69.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "4XL"
+          }
+        },
+        "5XL": {
+          "halfChestCm": 80,
+          "bodyLengthCm": 83,
+          "sleeveLengthCm": 69.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "5XL"
+          }
+        }
+      },
+      "notes": "Length row is labelled 'I - Length' in the API sheet and 'B - Length' in the website (Cloudinary) sheet; same numbers. Drawing shows it as the HPS-to-hem line, so it is stored as bodyLengthCm."
+    },
+    "STSB920": {
+      "handle": "baby-changer",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STSB920.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STSB920.pdf",
+      "definition": "Stanley/Stella product sheet 'Size Guide', 'Measurement in cm'. Labels exactly as published: 'A - Half Chest', 'B - Body Length', 'C - Sleeve Length'. No written measuring instruction is published; per the technical drawing on the same page: A = flat width straight across the front, side seam to side seam directly below the armholes; B = vertical from the high point of the shoulder (where shoulder meets neckline/collar/hood) down to the bottom hem; C = along the sleeve from the shoulder seam to the sleeve hem. No tolerance stated on the sheet.",
+      "sizes": {
+        "6-12 M": {
+          "halfChestCm": 29.5,
+          "bodyLengthCm": 32,
+          "sleeveLengthCm": 22,
+          "ageLabel": "6–12 Monate",
+          "other": {
+            "bodyHeightCm": "68–80",
+            "manufacturerSizeLabel": "6-12 m/68-80cm"
+          }
+        },
+        "12-18 M": {
+          "halfChestCm": 31,
+          "bodyLengthCm": 33.5,
+          "sleeveLengthCm": 22.5,
+          "ageLabel": "12–18 Monate",
+          "other": {
+            "bodyHeightCm": "80–86",
+            "manufacturerSizeLabel": "12-18 m/80-86cm"
+          }
+        },
+        "18-24 M": {
+          "halfChestCm": 32.5,
+          "bodyLengthCm": 35.5,
+          "sleeveLengthCm": 24.5,
+          "ageLabel": "18–24 Monate",
+          "other": {
+            "bodyHeightCm": "86–92",
+            "manufacturerSizeLabel": "18-24 m/86-92cm"
+          }
+        },
+        "24-36 M": {
+          "halfChestCm": 33.5,
+          "bodyLengthCm": 38,
+          "sleeveLengthCm": 27,
+          "ageLabel": "24–36 Monate",
+          "other": {
+            "bodyHeightCm": "92–98",
+            "manufacturerSizeLabel": "24-36 m/92-98cm"
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: 6-12 M -> \"6-12 m/68-80cm\"; 12-18 M -> \"12-18 m/80-86cm\"; 18-24 M -> \"18-24 m/86-92cm\"; 24-36 M -> \"24-36 m/92-98cm\"."
+    },
+    "STJU251": {
+      "handle": "bomber-2-0",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STJU251.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STJU251.pdf",
+      "definition": "Stanley/Stella product sheet 'Size Guide', 'Measurement in cm'. Labels exactly as published: 'A - Half Chest', 'B - Body Length', 'C - Sleeve Length'. No written measuring instruction is published; per the technical drawing on the same page: A = flat width straight across the front, side seam to side seam directly below the armholes; B = vertical from the high point of the shoulder (where shoulder meets neckline/collar/hood) down to the bottom hem; C = along the sleeve from the shoulder seam to the sleeve hem. No tolerance stated on the sheet.",
+      "sizes": {
+        "XXS": {
+          "halfChestCm": 56,
+          "bodyLengthCm": 61.5,
+          "sleeveLengthCm": 63.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XXS"
+          }
+        },
+        "XS": {
+          "halfChestCm": 58,
+          "bodyLengthCm": 64.5,
+          "sleeveLengthCm": 65,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XS"
+          }
+        },
+        "S": {
+          "halfChestCm": 60,
+          "bodyLengthCm": 67.5,
+          "sleeveLengthCm": 66.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 64,
+          "bodyLengthCm": 69.5,
+          "sleeveLengthCm": 68,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 67,
+          "bodyLengthCm": 71.5,
+          "sleeveLengthCm": 70,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 70,
+          "bodyLengthCm": 73.5,
+          "sleeveLengthCm": 71.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 74,
+          "bodyLengthCm": 76,
+          "sleeveLengthCm": 72.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XXL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 78,
+          "bodyLengthCm": 78,
+          "sleeveLengthCm": 72.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        }
+      },
+      "notes": ""
+    },
+    "STJU248": {
+      "handle": "brooker",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STJU248.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STJU248.pdf",
+      "definition": "Stanley/Stella product sheet 'Size Guide', 'Measurement in cm'. Labels exactly as published: 'A - Half Chest', 'B - Body Length', 'C - Sleeve Length'. No written measuring instruction is published; per the technical drawing on the same page: A = flat width straight across the front, side seam to side seam directly below the armholes; B = vertical from the high point of the shoulder (where shoulder meets neckline/collar/hood) down to the bottom hem; C = along the sleeve from the shoulder seam to the sleeve hem. No tolerance stated on the sheet.",
+      "sizes": {
+        "XXS": {
+          "halfChestCm": 51,
+          "bodyLengthCm": 61,
+          "sleeveLengthCm": 55.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XXS"
+          }
+        },
+        "XS": {
+          "halfChestCm": 53,
+          "bodyLengthCm": 64,
+          "sleeveLengthCm": 57.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XS"
+          }
+        },
+        "S": {
+          "halfChestCm": 55,
+          "bodyLengthCm": 68,
+          "sleeveLengthCm": 62,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 59,
+          "bodyLengthCm": 72,
+          "sleeveLengthCm": 64.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 62,
+          "bodyLengthCm": 74,
+          "sleeveLengthCm": 66.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 65,
+          "bodyLengthCm": 76.5,
+          "sleeveLengthCm": 67,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 69,
+          "bodyLengthCm": 78.5,
+          "sleeveLengthCm": 67.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XXL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 73,
+          "bodyLengthCm": 81,
+          "sleeveLengthCm": 67.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        }
+      },
+      "notes": ""
+    },
+    "STSU178": {
+      "handle": "changer-2-0",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STSU178.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STSU178.pdf",
+      "definition": "Stanley/Stella product sheet 'Size Guide', 'Measurement in cm'. Labels exactly as published: 'A - Half Chest', 'B - Body Length', 'C - Sleeve Length'. No written measuring instruction is published; per the technical drawing on the same page: A = flat width straight across the front, side seam to side seam directly below the armholes; B = vertical from the high point of the shoulder (where shoulder meets neckline/collar/hood) down to the bottom hem; C = along the sleeve from the shoulder seam to the sleeve hem. No tolerance stated on the sheet.",
+      "sizes": {
+        "XXS": {
+          "halfChestCm": 51,
+          "bodyLengthCm": 64,
+          "sleeveLengthCm": 58.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XXS"
+          }
+        },
+        "XS": {
+          "halfChestCm": 53,
+          "bodyLengthCm": 67,
+          "sleeveLengthCm": 60.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XS"
+          }
+        },
+        "S": {
+          "halfChestCm": 55,
+          "bodyLengthCm": 71,
+          "sleeveLengthCm": 64.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 59,
+          "bodyLengthCm": 74,
+          "sleeveLengthCm": 66.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 62,
+          "bodyLengthCm": 76,
+          "sleeveLengthCm": 68.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 65,
+          "bodyLengthCm": 78,
+          "sleeveLengthCm": 69,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 69,
+          "bodyLengthCm": 80,
+          "sleeveLengthCm": 69.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XXL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 73,
+          "bodyLengthCm": 82,
+          "sleeveLengthCm": 69.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        },
+        "4XL": {
+          "halfChestCm": 78,
+          "bodyLengthCm": 84,
+          "sleeveLengthCm": 69.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "4XL"
+          }
+        }
+      },
+      "notes": "Manufacturer chart also lists sizes not in the shop: 5XL."
+    },
+    "STSU868": {
+      "handle": "roller",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STSU868.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STSU868.pdf",
+      "definition": "Stanley/Stella product sheet 'Size Guide', 'Measurement in cm'. Labels exactly as published: 'A - Half Chest', 'B - Body Length', 'C - Sleeve Length'. No written measuring instruction is published; per the technical drawing on the same page: A = flat width straight across the front, side seam to side seam directly below the armholes; B = vertical from the high point of the shoulder (where shoulder meets neckline/collar/hood) down to the bottom hem; C = along the sleeve from the shoulder seam to the sleeve hem. No tolerance stated on the sheet.",
+      "sizes": {
+        "XS": {
+          "halfChestCm": 49,
+          "bodyLengthCm": 62,
+          "sleeveLengthCm": 61.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XS"
+          }
+        },
+        "S": {
+          "halfChestCm": 51.5,
+          "bodyLengthCm": 67,
+          "sleeveLengthCm": 64,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 54,
+          "bodyLengthCm": 71,
+          "sleeveLengthCm": 65.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 57,
+          "bodyLengthCm": 73,
+          "sleeveLengthCm": 67,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 60,
+          "bodyLengthCm": 75,
+          "sleeveLengthCm": 68.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 63,
+          "bodyLengthCm": 77,
+          "sleeveLengthCm": 70,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XXL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 66,
+          "bodyLengthCm": 79,
+          "sleeveLengthCm": 70,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        }
+      },
+      "notes": "Manufacturer chart also lists sizes not in the shop: XXS, 4XL, 5XL."
+    },
+    "ST5650": {
+      "handle": "sweatpants-select",
+      "source": "https://www.stedman.eu/en/sweatpants-select (accordion \"Garment Sizes\"); https://www.stedman.eu/public/customise/product-sheets/default/Stedman-ST5650-en.pdf; 2026_Stedman_Garment_Sizes.pdf in https://www.stedman.eu/public/archives/Stedman_Garment_Sizes.zip (linked from https://www.stedman.eu/en/resources)",
+      "definition": "Stedman 'Garment Sizes' table: rows 'Width (cm)' and 'Length (cm)' (tolerance ± 2,5 cm). For these sweatpants Stedman does not define what Width/Length measure (likely flat waist and outside leg length, but NOT confirmed), so the values are kept only in other.widthCm_undefined / other.lengthCm_undefined; halfChestCm/bodyLengthCm null.",
+      "sizes": {
+        "XS": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XS",
+            "widthCm_undefined": 30.5,
+            "lengthCm_undefined": 106
+          }
+        },
+        "S": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S",
+            "widthCm_undefined": 35,
+            "lengthCm_undefined": 108
+          }
+        },
+        "M": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M",
+            "widthCm_undefined": 39,
+            "lengthCm_undefined": 112
+          }
+        },
+        "L": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L",
+            "widthCm_undefined": 41,
+            "lengthCm_undefined": 114
+          }
+        },
+        "XL": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL",
+            "widthCm_undefined": 43,
+            "lengthCm_undefined": 116
+          }
+        },
+        "XXL": {
+          "halfChestCm": null,
+          "bodyLengthCm": null,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "2XL",
+            "widthCm_undefined": 45,
+            "lengthCm_undefined": 116
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: XXL -> \"2XL\". Sleeve length not published by Stedman (null). Product page, product-sheet PDF and 2026 garment sizes PDF agree. Shop lists this as category Sweatshirts / productType Sweatshirt, but it is a pair of sweatpants."
+    },
+    "STTB918": {
+      "handle": "baby-creator",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STTB918.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STTB918.pdf",
+      "definition": "Stanley/Stella product sheet 'Size Guide', 'Measurement in cm'. Labels exactly as published: 'A - Half Chest', 'B - Body Length', 'C - Sleeve Length'. No written measuring instruction is published; per the technical drawing on the same page: A = flat width straight across the front, side seam to side seam directly below the armholes; B = vertical from the high point of the shoulder (where shoulder meets neckline/collar/hood) down to the bottom hem; C = along the sleeve from the shoulder seam to the sleeve hem. No tolerance stated on the sheet.",
+      "sizes": {
+        "0-6 M": {
+          "halfChestCm": 24.5,
+          "bodyLengthCm": 30,
+          "sleeveLengthCm": 9,
+          "ageLabel": "0–6 Monate",
+          "other": {
+            "bodyHeightCm": "56–68",
+            "manufacturerSizeLabel": "0-6 m/56-68cm"
+          }
+        },
+        "6-12 M": {
+          "halfChestCm": 27,
+          "bodyLengthCm": 33,
+          "sleeveLengthCm": 9.5,
+          "ageLabel": "6–12 Monate",
+          "other": {
+            "bodyHeightCm": "68–80",
+            "manufacturerSizeLabel": "6-12 m/68-80cm"
+          }
+        },
+        "12-18 M": {
+          "halfChestCm": 28.5,
+          "bodyLengthCm": 34.5,
+          "sleeveLengthCm": 10,
+          "ageLabel": "12–18 Monate",
+          "other": {
+            "bodyHeightCm": "80–86",
+            "manufacturerSizeLabel": "12-18 m/80-86cm"
+          }
+        },
+        "18-24 M": {
+          "halfChestCm": 30,
+          "bodyLengthCm": 36.5,
+          "sleeveLengthCm": 10.5,
+          "ageLabel": "18–24 Monate",
+          "other": {
+            "bodyHeightCm": "86–92",
+            "manufacturerSizeLabel": "18-24 m/86-92cm"
+          }
+        },
+        "24-36 M": {
+          "halfChestCm": 31.5,
+          "bodyLengthCm": 39,
+          "sleeveLengthCm": 11,
+          "ageLabel": "24–36 Monate",
+          "other": {
+            "bodyHeightCm": "92–98",
+            "manufacturerSizeLabel": "24-36 m/92-98cm"
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: 0-6 M -> \"0-6 m/56-68cm\"; 6-12 M -> \"6-12 m/68-80cm\"; 12-18 M -> \"12-18 m/80-86cm\"; 18-24 M -> \"18-24 m/86-92cm\"; 24-36 M -> \"24-36 m/92-98cm\"."
+    },
+    "ST2000": {
+      "handle": "classic-t",
+      "source": "https://www.stedman.eu/en/classic-t (accordion \"Garment Sizes\"); https://www.stedman.eu/public/customise/product-sheets/default/Stedman-ST2000-en.pdf; 2026_Stedman_Garment_Sizes.pdf in https://www.stedman.eu/public/archives/Stedman_Garment_Sizes.zip (linked from https://www.stedman.eu/en/resources)",
+      "definition": "Stedman 'Garment Sizes' table on the product page (identical to the product-sheet PDF and to the 2026 'Stedman Garment Sizes' PDF): rows 'Width (cm)' and 'Length (cm)'. Stedman states: 'Garment sizes are in cm. Subject to the tolerance of ± 2,5 cm. Might be subject to change without further notice.' No written measuring-point definition or technical drawing is published; the Stedman resources page illustrates 'Garment Sizes' with a photo of a tape measured flat across the front just below the armholes, so Width is stored as halfChestCm (flat chest width). Length is stored as bodyLengthCm; Stedman does not state the start point (HPS assumed industry convention, not confirmed by Stedman).",
+      "sizes": {
+        "2XS": {
+          "halfChestCm": 43,
+          "bodyLengthCm": 66,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "2XS"
+          }
+        },
+        "XS": {
+          "halfChestCm": 46,
+          "bodyLengthCm": 68,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XS"
+          }
+        },
+        "S": {
+          "halfChestCm": 49,
+          "bodyLengthCm": 70,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 52,
+          "bodyLengthCm": 72,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 55,
+          "bodyLengthCm": 74,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 58,
+          "bodyLengthCm": 76,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 61,
+          "bodyLengthCm": 78,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "2XL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 64,
+          "bodyLengthCm": 80,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        },
+        "4XL": {
+          "halfChestCm": 70,
+          "bodyLengthCm": 82,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "4XL"
+          }
+        },
+        "5XL": {
+          "halfChestCm": 75,
+          "bodyLengthCm": 84,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "5XL"
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: XXL -> \"2XL\". Sleeve length not published by Stedman (null). Product page, product-sheet PDF and 2026 garment sizes PDF agree."
+    },
+    "ST2200": {
+      "handle": "classic-t-kinder",
+      "source": "https://www.stedman.eu/en/classic-t-kids (accordion \"Garment Sizes\"); https://www.stedman.eu/public/customise/product-sheets/default/Stedman-ST2200-en.pdf; 2026_Stedman_Garment_Sizes.pdf in https://www.stedman.eu/public/archives/Stedman_Garment_Sizes.zip (linked from https://www.stedman.eu/en/resources)",
+      "definition": "Stedman 'Garment Sizes' table on the product page (identical to the product-sheet PDF and to the 2026 'Stedman Garment Sizes' PDF): rows 'Width (cm)' and 'Length (cm)'. Stedman states: 'Garment sizes are in cm. Subject to the tolerance of ± 2,5 cm. Might be subject to change without further notice.' No written measuring-point definition or technical drawing is published; the Stedman resources page illustrates 'Garment Sizes' with a photo of a tape measured flat across the front just below the armholes, so Width is stored as halfChestCm (flat chest width). Length is stored as bodyLengthCm; Stedman does not state the start point (HPS assumed industry convention, not confirmed by Stedman).",
+      "sizes": {
+        "3XS": {
+          "halfChestCm": 30,
+          "bodyLengthCm": 38,
+          "sleeveLengthCm": null,
+          "ageLabel": "1–2 Jahre",
+          "other": {
+            "manufacturerSizeLabel": "3XS",
+            "manufacturerAge": "1-2",
+            "bodyHeightCm": "86/92"
+          }
+        },
+        "2XS": {
+          "halfChestCm": 33,
+          "bodyLengthCm": 42,
+          "sleeveLengthCm": null,
+          "ageLabel": "3–4 Jahre",
+          "other": {
+            "manufacturerSizeLabel": "2XS",
+            "manufacturerAge": "3-4",
+            "bodyHeightCm": "98/104"
+          }
+        },
+        "XS": {
+          "halfChestCm": 36,
+          "bodyLengthCm": 44,
+          "sleeveLengthCm": null,
+          "ageLabel": "5–6 Jahre",
+          "other": {
+            "manufacturerSizeLabel": "XS",
+            "manufacturerAge": "5-6",
+            "bodyHeightCm": "110/116"
+          }
+        },
+        "S": {
+          "halfChestCm": 39,
+          "bodyLengthCm": 50,
+          "sleeveLengthCm": null,
+          "ageLabel": "7–8 Jahre",
+          "other": {
+            "manufacturerSizeLabel": "S",
+            "manufacturerAge": "7-8",
+            "bodyHeightCm": "122/128"
+          }
+        },
+        "M": {
+          "halfChestCm": 42,
+          "bodyLengthCm": 54,
+          "sleeveLengthCm": null,
+          "ageLabel": "9–10 Jahre",
+          "other": {
+            "manufacturerSizeLabel": "M",
+            "manufacturerAge": "9-10",
+            "bodyHeightCm": "134/140"
+          }
+        },
+        "L": {
+          "halfChestCm": 45,
+          "bodyLengthCm": 60,
+          "sleeveLengthCm": null,
+          "ageLabel": "11–12 Jahre",
+          "other": {
+            "manufacturerSizeLabel": "L",
+            "manufacturerAge": "11-12",
+            "bodyHeightCm": "146/152"
+          }
+        },
+        "XL": {
+          "halfChestCm": 48,
+          "bodyLengthCm": 64,
+          "sleeveLengthCm": null,
+          "ageLabel": "12–13 Jahre",
+          "other": {
+            "manufacturerSizeLabel": "XL",
+            "manufacturerAge": "12-13",
+            "bodyHeightCm": "158/164"
+          }
+        }
+      },
+      "notes": "Sleeve length not published by Stedman (null). Product page, product-sheet PDF and 2026 garment sizes PDF agree. Age/height labels published by Stedman per size ('Age' and 'Height' rows); ageLabel = Age + ' Jahre', bodyHeightCm = Height."
+    },
+    "ST2600": {
+      "handle": "classic-t-damen",
+      "source": "https://www.stedman.eu/en/classic-t-women (accordion \"Garment Sizes\"); https://www.stedman.eu/public/customise/product-sheets/default/Stedman-ST2600-en.pdf; 2026_Stedman_Garment_Sizes.pdf in https://www.stedman.eu/public/archives/Stedman_Garment_Sizes.zip (linked from https://www.stedman.eu/en/resources)",
+      "definition": "Stedman 'Garment Sizes' table on the product page (identical to the product-sheet PDF and to the 2026 'Stedman Garment Sizes' PDF): rows 'Width (cm)' and 'Length (cm)'. Stedman states: 'Garment sizes are in cm. Subject to the tolerance of ± 2,5 cm. Might be subject to change without further notice.' No written measuring-point definition or technical drawing is published; the Stedman resources page illustrates 'Garment Sizes' with a photo of a tape measured flat across the front just below the armholes, so Width is stored as halfChestCm (flat chest width). Length is stored as bodyLengthCm; Stedman does not state the start point (HPS assumed industry convention, not confirmed by Stedman).",
+      "sizes": {
+        "XS": {
+          "halfChestCm": 42,
+          "bodyLengthCm": 62,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XS"
+          }
+        },
+        "S": {
+          "halfChestCm": 45,
+          "bodyLengthCm": 64,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 48,
+          "bodyLengthCm": 66,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 51,
+          "bodyLengthCm": 68,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 55,
+          "bodyLengthCm": 70,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 59,
+          "bodyLengthCm": 71,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "2XL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 62,
+          "bodyLengthCm": 71,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: XXL -> \"2XL\". Sleeve length not published by Stedman (null). Product page, product-sheet PDF and 2026 garment sizes PDF agree."
+    },
+    "ST2100": {
+      "handle": "comfort-t",
+      "source": "https://www.stedman.eu/en/comfort-t (accordion \"Garment Sizes\"); https://www.stedman.eu/public/customise/product-sheets/default/Stedman-ST2100-en.pdf; 2026_Stedman_Garment_Sizes.pdf in https://www.stedman.eu/public/archives/Stedman_Garment_Sizes.zip (linked from https://www.stedman.eu/en/resources)",
+      "definition": "Stedman 'Garment Sizes' table on the product page (identical to the product-sheet PDF and to the 2026 'Stedman Garment Sizes' PDF): rows 'Width (cm)' and 'Length (cm)'. Stedman states: 'Garment sizes are in cm. Subject to the tolerance of ± 2,5 cm. Might be subject to change without further notice.' No written measuring-point definition or technical drawing is published; the Stedman resources page illustrates 'Garment Sizes' with a photo of a tape measured flat across the front just below the armholes, so Width is stored as halfChestCm (flat chest width). Length is stored as bodyLengthCm; Stedman does not state the start point (HPS assumed industry convention, not confirmed by Stedman).",
+      "sizes": {
+        "XS": {
+          "halfChestCm": 46,
+          "bodyLengthCm": 68,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XS"
+          }
+        },
+        "S": {
+          "halfChestCm": 49,
+          "bodyLengthCm": 70,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 52,
+          "bodyLengthCm": 72,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 55,
+          "bodyLengthCm": 74,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 58,
+          "bodyLengthCm": 76,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 61,
+          "bodyLengthCm": 78,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "2XL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 64,
+          "bodyLengthCm": 80,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        },
+        "4XL": {
+          "halfChestCm": 70,
+          "bodyLengthCm": 82,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "4XL"
+          }
+        },
+        "5XL": {
+          "halfChestCm": 75,
+          "bodyLengthCm": 84,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "5XL"
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: XXL -> \"2XL\". Sleeve length not published by Stedman (null). Product page, product-sheet PDF and 2026 garment sizes PDF agree."
+    },
+    "ST2160": {
+      "handle": "comfort-t-damen",
+      "source": "https://www.stedman.eu/en/comfort-t-women (accordion \"Garment Sizes\"); https://www.stedman.eu/public/customise/product-sheets/default/Stedman-ST2160-en.pdf; 2026_Stedman_Garment_Sizes.pdf in https://www.stedman.eu/public/archives/Stedman_Garment_Sizes.zip (linked from https://www.stedman.eu/en/resources)",
+      "definition": "Stedman 'Garment Sizes' table on the product page (identical to the product-sheet PDF and to the 2026 'Stedman Garment Sizes' PDF): rows 'Width (cm)' and 'Length (cm)'. Stedman states: 'Garment sizes are in cm. Subject to the tolerance of ± 2,5 cm. Might be subject to change without further notice.' No written measuring-point definition or technical drawing is published; the Stedman resources page illustrates 'Garment Sizes' with a photo of a tape measured flat across the front just below the armholes, so Width is stored as halfChestCm (flat chest width). Length is stored as bodyLengthCm; Stedman does not state the start point (HPS assumed industry convention, not confirmed by Stedman).",
+      "sizes": {
+        "XS": {
+          "halfChestCm": 42,
+          "bodyLengthCm": 62,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XS"
+          }
+        },
+        "S": {
+          "halfChestCm": 45,
+          "bodyLengthCm": 64,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 48,
+          "bodyLengthCm": 66,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 51,
+          "bodyLengthCm": 68,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 55,
+          "bodyLengthCm": 70,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 59,
+          "bodyLengthCm": 71,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "2XL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 62,
+          "bodyLengthCm": 71,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: XXL -> \"2XL\". Sleeve length not published by Stedman (null). Product page, product-sheet PDF and 2026 garment sizes PDF agree."
+    },
+    "STTU170": {
+      "handle": "crafter",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STTU170.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STTU170.pdf",
+      "definition": "Stanley/Stella product sheet 'Size Guide', 'Measurement in cm'. Labels exactly as published: 'A - Half Chest', 'B - Body Length', 'C - Sleeve Length'. No written measuring instruction is published; per the technical drawing on the same page: A = flat width straight across the front, side seam to side seam directly below the armholes; B = vertical from the high point of the shoulder (where shoulder meets neckline/collar/hood) down to the bottom hem; C = along the sleeve from the shoulder seam to the sleeve hem. No tolerance stated on the sheet.",
+      "sizes": {
+        "XXS": {
+          "halfChestCm": 44,
+          "bodyLengthCm": 61,
+          "sleeveLengthCm": 17.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XXS"
+          }
+        },
+        "XS": {
+          "halfChestCm": 46,
+          "bodyLengthCm": 64,
+          "sleeveLengthCm": 18.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XS"
+          }
+        },
+        "S": {
+          "halfChestCm": 48,
+          "bodyLengthCm": 68,
+          "sleeveLengthCm": 20,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 52,
+          "bodyLengthCm": 72,
+          "sleeveLengthCm": 21.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 55,
+          "bodyLengthCm": 74,
+          "sleeveLengthCm": 22,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 58,
+          "bodyLengthCm": 76,
+          "sleeveLengthCm": 22.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 62,
+          "bodyLengthCm": 78,
+          "sleeveLengthCm": 23,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XXL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 66,
+          "bodyLengthCm": 80,
+          "sleeveLengthCm": 23.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        },
+        "4XL": {
+          "halfChestCm": 71,
+          "bodyLengthCm": 82,
+          "sleeveLengthCm": 23.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "4XL"
+          }
+        },
+        "5XL": {
+          "halfChestCm": 76,
+          "bodyLengthCm": 83,
+          "sleeveLengthCm": 23.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "5XL"
+          }
+        }
+      },
+      "notes": ""
+    },
+    "STTU169": {
+      "handle": "creator-2-0",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STTU169.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STTU169.pdf",
+      "definition": "Stanley/Stella product sheet 'Size Guide', 'Measurement in cm'. Labels exactly as published: 'A - Half Chest', 'B - Body Length', 'C - Sleeve Length'. No written measuring instruction is published; per the technical drawing on the same page: A = flat width straight across the front, side seam to side seam directly below the armholes; B = vertical from the high point of the shoulder (where shoulder meets neckline/collar/hood) down to the bottom hem; C = along the sleeve from the shoulder seam to the sleeve hem. No tolerance stated on the sheet.",
+      "sizes": {
+        "XXS": {
+          "halfChestCm": 45.5,
+          "bodyLengthCm": 62,
+          "sleeveLengthCm": 20,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XXS"
+          }
+        },
+        "XS": {
+          "halfChestCm": 47.5,
+          "bodyLengthCm": 65,
+          "sleeveLengthCm": 21,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XS"
+          }
+        },
+        "S": {
+          "halfChestCm": 49.5,
+          "bodyLengthCm": 69,
+          "sleeveLengthCm": 22.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 53.5,
+          "bodyLengthCm": 73,
+          "sleeveLengthCm": 24,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 56.5,
+          "bodyLengthCm": 75,
+          "sleeveLengthCm": 24.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 59.5,
+          "bodyLengthCm": 77,
+          "sleeveLengthCm": 25,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 63.5,
+          "bodyLengthCm": 79,
+          "sleeveLengthCm": 25.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XXL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 67.5,
+          "bodyLengthCm": 81,
+          "sleeveLengthCm": 26,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        },
+        "4XL": {
+          "halfChestCm": 72.5,
+          "bodyLengthCm": 83,
+          "sleeveLengthCm": 26,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "4XL"
+          }
+        },
+        "5XL": {
+          "halfChestCm": 77.5,
+          "bodyLengthCm": 84,
+          "sleeveLengthCm": 26,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "5XL"
+          }
+        }
+      },
+      "notes": ""
+    },
+    "STTU788": {
+      "handle": "freestyler",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STTU788.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STTU788.pdf",
+      "definition": "Stanley/Stella product sheet 'Size Guide', 'Measurement in cm'. Labels exactly as published: 'A - Half Chest', 'B - Body Length', 'C - Sleeve Length'. No written measuring instruction is published; per the technical drawing on the same page: A = flat width straight across the front, side seam to side seam directly below the armholes; B = vertical from the high point of the shoulder (where shoulder meets neckline/collar/hood) down to the bottom hem; C = along the sleeve from the shoulder seam to the sleeve hem. No tolerance stated on the sheet.",
+      "sizes": {
+        "XXS": {
+          "halfChestCm": 49.5,
+          "bodyLengthCm": 68,
+          "sleeveLengthCm": 22.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XXS"
+          }
+        },
+        "XS": {
+          "halfChestCm": 52,
+          "bodyLengthCm": 70,
+          "sleeveLengthCm": 23,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XS"
+          }
+        },
+        "S": {
+          "halfChestCm": 55,
+          "bodyLengthCm": 73,
+          "sleeveLengthCm": 24,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 58,
+          "bodyLengthCm": 76,
+          "sleeveLengthCm": 25,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 61,
+          "bodyLengthCm": 78,
+          "sleeveLengthCm": 26,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 64,
+          "bodyLengthCm": 80,
+          "sleeveLengthCm": 26,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 67,
+          "bodyLengthCm": 82,
+          "sleeveLengthCm": 27,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XXL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 70,
+          "bodyLengthCm": 84,
+          "sleeveLengthCm": 28,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        }
+      },
+      "notes": ""
+    },
+    "ST7000": {
+      "handle": "lux-t",
+      "source": "https://www.stedman.eu/en/lux-t (accordion \"Garment Sizes\"); https://www.stedman.eu/public/customise/product-sheets/default/Stedman-ST7000-en.pdf; 2026_Stedman_Garment_Sizes.pdf in https://www.stedman.eu/public/archives/Stedman_Garment_Sizes.zip (linked from https://www.stedman.eu/en/resources)",
+      "definition": "Stedman 'Garment Sizes' table on the product page (identical to the product-sheet PDF and to the 2026 'Stedman Garment Sizes' PDF): rows 'Width (cm)' and 'Length (cm)'. Stedman states: 'Garment sizes are in cm. Subject to the tolerance of ± 2,5 cm. Might be subject to change without further notice.' No written measuring-point definition or technical drawing is published; the Stedman resources page illustrates 'Garment Sizes' with a photo of a tape measured flat across the front just below the armholes, so Width is stored as halfChestCm (flat chest width). Length is stored as bodyLengthCm; Stedman does not state the start point (HPS assumed industry convention, not confirmed by Stedman).",
+      "sizes": {
+        "XS": {
+          "halfChestCm": 47,
+          "bodyLengthCm": 68,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XS"
+          }
+        },
+        "S": {
+          "halfChestCm": 50,
+          "bodyLengthCm": 70,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 53,
+          "bodyLengthCm": 72,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 56,
+          "bodyLengthCm": 74,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 59,
+          "bodyLengthCm": 76,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 62,
+          "bodyLengthCm": 78,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "2XL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 65,
+          "bodyLengthCm": 80,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        },
+        "4XL": {
+          "halfChestCm": 70,
+          "bodyLengthCm": 82,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "4XL"
+          }
+        },
+        "5XL": {
+          "halfChestCm": 75,
+          "bodyLengthCm": 84,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "5XL"
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: XXL -> \"2XL\". Sleeve length not published by Stedman (null). Product page, product-sheet PDF and 2026 garment sizes PDF agree."
+    },
+    "ST7600": {
+      "handle": "lux-t-damen",
+      "source": "https://www.stedman.eu/en/lux-t-women (accordion \"Garment Sizes\"); https://www.stedman.eu/public/customise/product-sheets/default/Stedman-ST7600-en.pdf; 2026_Stedman_Garment_Sizes.pdf in https://www.stedman.eu/public/archives/Stedman_Garment_Sizes.zip (linked from https://www.stedman.eu/en/resources)",
+      "definition": "Stedman 'Garment Sizes' table on the product page (identical to the product-sheet PDF and to the 2026 'Stedman Garment Sizes' PDF): rows 'Width (cm)' and 'Length (cm)'. Stedman states: 'Garment sizes are in cm. Subject to the tolerance of ± 2,5 cm. Might be subject to change without further notice.' No written measuring-point definition or technical drawing is published; the Stedman resources page illustrates 'Garment Sizes' with a photo of a tape measured flat across the front just below the armholes, so Width is stored as halfChestCm (flat chest width). Length is stored as bodyLengthCm; Stedman does not state the start point (HPS assumed industry convention, not confirmed by Stedman).",
+      "sizes": {
+        "XS": {
+          "halfChestCm": 42,
+          "bodyLengthCm": 62,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XS"
+          }
+        },
+        "S": {
+          "halfChestCm": 45,
+          "bodyLengthCm": 64,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 48,
+          "bodyLengthCm": 66,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 51,
+          "bodyLengthCm": 68,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 54,
+          "bodyLengthCm": 70,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 58,
+          "bodyLengthCm": 71,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "2XL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 62,
+          "bodyLengthCm": 71,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: XXL -> \"2XL\". Sleeve length not published by Stedman (null). Product page, product-sheet PDF and 2026 garment sizes PDF agree."
+    },
+    "STTK184": {
+      "handle": "mini-creator-2-0",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STTK184.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STTK184.pdf",
+      "definition": "Stanley/Stella product sheet 'Size Guide', 'Measurement in cm'. Labels exactly as published: 'A - Half Chest', 'B - Body Length', 'C - Sleeve Length'. No written measuring instruction is published; per the technical drawing on the same page: A = flat width straight across the front, side seam to side seam directly below the armholes; B = vertical from the high point of the shoulder (where shoulder meets neckline/collar/hood) down to the bottom hem; C = along the sleeve from the shoulder seam to the sleeve hem. No tolerance stated on the sheet.",
+      "sizes": {
+        "3-4Y": {
+          "halfChestCm": 34,
+          "bodyLengthCm": 43,
+          "sleeveLengthCm": 12,
+          "ageLabel": "3–4 Jahre",
+          "other": {
+            "bodyHeightCm": "98–104",
+            "manufacturerSizeLabel": "3-4/98-104cm"
+          }
+        },
+        "5-6Y": {
+          "halfChestCm": 36,
+          "bodyLengthCm": 47,
+          "sleeveLengthCm": 13,
+          "ageLabel": "5–6 Jahre",
+          "other": {
+            "bodyHeightCm": "110–116",
+            "manufacturerSizeLabel": "5-6/110-116cm"
+          }
+        },
+        "7-8Y": {
+          "halfChestCm": 38,
+          "bodyLengthCm": 52,
+          "sleeveLengthCm": 15,
+          "ageLabel": "7–8 Jahre",
+          "other": {
+            "bodyHeightCm": "122–128",
+            "manufacturerSizeLabel": "7-8/122-128cm"
+          }
+        },
+        "9-11Y": {
+          "halfChestCm": 42,
+          "bodyLengthCm": 59,
+          "sleeveLengthCm": 17,
+          "ageLabel": "9–11 Jahre",
+          "other": {
+            "bodyHeightCm": "134–146",
+            "manufacturerSizeLabel": "9-11/134-146cm"
+          }
+        },
+        "12-13Y": {
+          "halfChestCm": 46,
+          "bodyLengthCm": 66,
+          "sleeveLengthCm": 19,
+          "ageLabel": "12–13 Jahre",
+          "other": {
+            "bodyHeightCm": "152–158",
+            "manufacturerSizeLabel": "12-13/152-158cm"
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: 3-4Y -> \"3-4/98-104cm\"; 5-6Y -> \"5-6/110-116cm\"; 7-8Y -> \"7-8/122-128cm\"; 9-11Y -> \"9-11/134-146cm\"; 12-13Y -> \"12-13/152-158cm\"."
+    },
+    "ST8860": {
+      "handle": "seamless-sports-t",
+      "source": "https://www.stedman.eu/en/seamless-sports-t (accordion \"Garment Sizes\"); https://www.stedman.eu/public/customise/product-sheets/default/Stedman-ST8860-en.pdf; 2026_Stedman_Garment_Sizes.pdf in https://www.stedman.eu/public/archives/Stedman_Garment_Sizes.zip (linked from https://www.stedman.eu/en/resources)",
+      "definition": "Stedman 'Garment Sizes' table on the product page (identical to the product-sheet PDF and to the 2026 'Stedman Garment Sizes' PDF): rows 'Width (cm)' and 'Length (cm)'. Stedman states: 'Garment sizes are in cm. Subject to the tolerance of ± 2,5 cm. Might be subject to change without further notice.' No written measuring-point definition or technical drawing is published; the Stedman resources page illustrates 'Garment Sizes' with a photo of a tape measured flat across the front just below the armholes, so Width is stored as halfChestCm (flat chest width). Length is stored as bodyLengthCm; Stedman does not state the start point (HPS assumed industry convention, not confirmed by Stedman).",
+      "sizes": {
+        "S": {
+          "halfChestCm": 44,
+          "bodyLengthCm": 68,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 47,
+          "bodyLengthCm": 70,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 50,
+          "bodyLengthCm": 72,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 53,
+          "bodyLengthCm": 74,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 56,
+          "bodyLengthCm": 76,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "2XL"
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: XXL -> \"2XL\". Sleeve length not published by Stedman (null). Product page, product-sheet PDF and 2026 garment sizes PDF agree."
+    },
+    "ST8960": {
+      "handle": "seamless-sports-t-damen",
+      "source": "https://www.stedman.eu/en/seamless-sports-t-women (accordion \"Garment Sizes\"); https://www.stedman.eu/public/customise/product-sheets/default/Stedman-ST8960-en.pdf; 2026_Stedman_Garment_Sizes.pdf in https://www.stedman.eu/public/archives/Stedman_Garment_Sizes.zip (linked from https://www.stedman.eu/en/resources)",
+      "definition": "Stedman 'Garment Sizes' table on the product page (identical to the product-sheet PDF and to the 2026 'Stedman Garment Sizes' PDF): rows 'Width (cm)' and 'Length (cm)'. Stedman states: 'Garment sizes are in cm. Subject to the tolerance of ± 2,5 cm. Might be subject to change without further notice.' No written measuring-point definition or technical drawing is published; the Stedman resources page illustrates 'Garment Sizes' with a photo of a tape measured flat across the front just below the armholes, so Width is stored as halfChestCm (flat chest width). Length is stored as bodyLengthCm; Stedman does not state the start point (HPS assumed industry convention, not confirmed by Stedman).",
+      "sizes": {
+        "XS": {
+          "halfChestCm": 36,
+          "bodyLengthCm": 62,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XS"
+          }
+        },
+        "S": {
+          "halfChestCm": 38,
+          "bodyLengthCm": 64,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 41,
+          "bodyLengthCm": 66,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 44,
+          "bodyLengthCm": 68,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 47,
+          "bodyLengthCm": 70,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        }
+      },
+      "notes": "Sleeve length not published by Stedman (null). Product page, product-sheet PDF and 2026 garment sizes PDF agree."
+    },
+    "STTM961": {
+      "handle": "stanley-stancer",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STTM961.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STTM961.pdf",
+      "definition": "Stanley/Stella product sheet 'Size Guide', 'Measurement in cm'. Labels exactly as published: 'A - Half Chest', 'B - Body Length', 'C - Sleeve Length'. No written measuring instruction is published; per the technical drawing on the same page: A = flat width straight across the front, side seam to side seam directly below the armholes; B = vertical from the high point of the shoulder (where shoulder meets neckline/collar/hood) down to the bottom hem; C = along the sleeve from the shoulder seam to the sleeve hem. No tolerance stated on the sheet.",
+      "sizes": {
+        "S": {
+          "halfChestCm": 51,
+          "bodyLengthCm": 71,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 54,
+          "bodyLengthCm": 73,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 57,
+          "bodyLengthCm": 75,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 60,
+          "bodyLengthCm": 77,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 64,
+          "bodyLengthCm": 79,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XXL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 68,
+          "bodyLengthCm": 81,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        }
+      },
+      "notes": "Tank top: no sleeve row published (sleeveLengthCm null by design)."
+    },
+    "STTW172": {
+      "handle": "stella-muser",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STTW172.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STTW172.pdf",
+      "definition": "Stanley/Stella product sheet 'Size Guide', 'Measurement in cm'. Labels exactly as published: 'A - Half Chest', 'B - Body Length', 'C - Sleeve Length'. No written measuring instruction is published; per the technical drawing on the same page: A = flat width straight across the front, side seam to side seam directly below the armholes; B = vertical from the high point of the shoulder (where shoulder meets neckline/collar/hood) down to the bottom hem; C = along the sleeve from the shoulder seam to the sleeve hem. No tolerance stated on the sheet.",
+      "sizes": {
+        "XS": {
+          "halfChestCm": 45,
+          "bodyLengthCm": 56.5,
+          "sleeveLengthCm": 18,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XS"
+          }
+        },
+        "S": {
+          "halfChestCm": 48,
+          "bodyLengthCm": 59.5,
+          "sleeveLengthCm": 18.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 51,
+          "bodyLengthCm": 61.5,
+          "sleeveLengthCm": 19,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 54,
+          "bodyLengthCm": 63.5,
+          "sleeveLengthCm": 19.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 57,
+          "bodyLengthCm": 65.5,
+          "sleeveLengthCm": 20,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 61,
+          "bodyLengthCm": 67.5,
+          "sleeveLengthCm": 20.5,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XXL"
+          }
+        }
+      },
+      "notes": "Manufacturer chart also lists sizes not in the shop: 3XL."
+    },
+    "ST2800": {
+      "handle": "classic-tank-top",
+      "source": "https://www.stedman.eu/en/classic-tank-top (accordion \"Garment Sizes\"); https://www.stedman.eu/public/customise/product-sheets/default/Stedman-ST2800-en.pdf; 2026_Stedman_Garment_Sizes.pdf in https://www.stedman.eu/public/archives/Stedman_Garment_Sizes.zip (linked from https://www.stedman.eu/en/resources)",
+      "definition": "Stedman 'Garment Sizes' table on the product page (identical to the product-sheet PDF and to the 2026 'Stedman Garment Sizes' PDF): rows 'Width (cm)' and 'Length (cm)'. Stedman states: 'Garment sizes are in cm. Subject to the tolerance of ± 2,5 cm. Might be subject to change without further notice.' No written measuring-point definition or technical drawing is published; the Stedman resources page illustrates 'Garment Sizes' with a photo of a tape measured flat across the front just below the armholes, so Width is stored as halfChestCm (flat chest width). Length is stored as bodyLengthCm; Stedman does not state the start point (HPS assumed industry convention, not confirmed by Stedman).",
+      "sizes": {
+        "S": {
+          "halfChestCm": 44,
+          "bodyLengthCm": 67.5,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 47,
+          "bodyLengthCm": 69.5,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 50,
+          "bodyLengthCm": 71.5,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 53,
+          "bodyLengthCm": 73.5,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 56,
+          "bodyLengthCm": 75.5,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "2XL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 59,
+          "bodyLengthCm": 78,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: XXL -> \"2XL\". Sleeve length not published by Stedman (null). Product page, product-sheet PDF and 2026 garment sizes PDF agree."
+    },
+    "ST2900": {
+      "handle": "classic-tank-top-damen",
+      "source": "https://www.stedman.eu/en/classic-tank-top-women (accordion \"Garment Sizes\"); https://www.stedman.eu/public/customise/product-sheets/default/Stedman-ST2900-en.pdf; 2026_Stedman_Garment_Sizes.pdf in https://www.stedman.eu/public/archives/Stedman_Garment_Sizes.zip (linked from https://www.stedman.eu/en/resources)",
+      "definition": "Stedman 'Garment Sizes' table on the product page (identical to the product-sheet PDF and to the 2026 'Stedman Garment Sizes' PDF): rows 'Width (cm)' and 'Length (cm)'. Stedman states: 'Garment sizes are in cm. Subject to the tolerance of ± 2,5 cm. Might be subject to change without further notice.' No written measuring-point definition or technical drawing is published; the Stedman resources page illustrates 'Garment Sizes' with a photo of a tape measured flat across the front just below the armholes, so Width is stored as halfChestCm (flat chest width). Length is stored as bodyLengthCm; Stedman does not state the start point (HPS assumed industry convention, not confirmed by Stedman).",
+      "sizes": {
+        "XS": {
+          "halfChestCm": null,
+          "bodyLengthCm": 62,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XS",
+            "conflict_width": {
+              "productPageAndProductSheet": 42,
+              "garmentSizesPdf2026": 40
+            }
+          }
+        },
+        "S": {
+          "halfChestCm": 43,
+          "bodyLengthCm": 64,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 46,
+          "bodyLengthCm": 66,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 49,
+          "bodyLengthCm": 68,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 53,
+          "bodyLengthCm": 70,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 57,
+          "bodyLengthCm": 70,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "2XL"
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: XXL -> \"2XL\". Sleeve length not published by Stedman (null). CONFLICT between sources: [[\"XS\", \"width\", 42, 40]] -> affected value set to null, both values kept in other."
+    },
+    "ST2810": {
+      "handle": "comfort-tank-top",
+      "source": "https://www.stedman.eu/en/comfort-tank-top (accordion \"Garment Sizes\"); https://www.stedman.eu/public/customise/product-sheets/default/Stedman-ST2810-en.pdf; 2026_Stedman_Garment_Sizes.pdf in https://www.stedman.eu/public/archives/Stedman_Garment_Sizes.zip (linked from https://www.stedman.eu/en/resources)",
+      "definition": "Stedman 'Garment Sizes' table on the product page (identical to the product-sheet PDF and to the 2026 'Stedman Garment Sizes' PDF): rows 'Width (cm)' and 'Length (cm)'. Stedman states: 'Garment sizes are in cm. Subject to the tolerance of ± 2,5 cm. Might be subject to change without further notice.' No written measuring-point definition or technical drawing is published; the Stedman resources page illustrates 'Garment Sizes' with a photo of a tape measured flat across the front just below the armholes, so Width is stored as halfChestCm (flat chest width). Length is stored as bodyLengthCm; Stedman does not state the start point (HPS assumed industry convention, not confirmed by Stedman).",
+      "sizes": {
+        "S": {
+          "halfChestCm": 46,
+          "bodyLengthCm": 73,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "S"
+          }
+        },
+        "M": {
+          "halfChestCm": 49,
+          "bodyLengthCm": 75,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "M"
+          }
+        },
+        "L": {
+          "halfChestCm": 52,
+          "bodyLengthCm": 77,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "L"
+          }
+        },
+        "XL": {
+          "halfChestCm": 55,
+          "bodyLengthCm": 79,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "XL"
+          }
+        },
+        "XXL": {
+          "halfChestCm": 58,
+          "bodyLengthCm": 80,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "2XL"
+          }
+        },
+        "3XL": {
+          "halfChestCm": 61,
+          "bodyLengthCm": 80,
+          "sleeveLengthCm": null,
+          "ageLabel": null,
+          "other": {
+            "manufacturerSizeLabel": "3XL"
+          }
+        }
+      },
+      "notes": "Size label mapping shop -> manufacturer: XXL -> \"2XL\". Sleeve length not published by Stedman (null). Product page, product-sheet PDF and 2026 garment sizes PDF agree."
+    }
+  }
+}
