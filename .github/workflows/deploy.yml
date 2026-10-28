@@ -35,6 +35,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+        env:
+          # Designer V2 (Motiv in echten cm, docs/designer-v2.md). Zum Abschalten auf '0' setzen.
+          PUBLIC_DESIGNER_V2: '1'
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

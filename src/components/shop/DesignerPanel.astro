@@ -1,0 +1,181 @@
+---
+// Designer V2: Druckschritt im Konfigurator. Motiv hochladen, in echten cm platzieren, Preisstufe aus den Motivmaßen.
+// Rechenkern: src/lib/designer-core/core.mjs (identisch in der Kasse). Daten: src/data/designer/print-areas.json.
+import Icon from '../Icon.astro';
+import { SLEEVE } from '../../lib/shopify';
+interface Props { pod: boolean; sleeves: boolean; podSecond: string }
+const { pod, sleeves, podSecond } = Astro.props;
+---
+<div class="step dz-panel" data-designer-v2>
+  <div class="step-h"><span class="num">3</span><h2>Druck</h2></div>
+  <div class="sides">
+    {[['Vorderseite', 'Nur vorne'], ['Rückseite', 'Nur hinten'], ['Beide Seiten', 'Vorne und hinten']].map(([v, l], i) => (
+      <label class="side-opt"><input type="radio" name="side" value={v} checked={i === 0} /><span>{l}</span></label>
+    ))}
+  </div>
+  {pod && <p class="print-note">Eine Druckseite in beliebiger Druckgröße ist im Preis enthalten. Die zweite Seite kostet {podSecond}.</p>}
+
+  <section class="dz-side" data-dz-side aria-labelledby="dz-side-title">
+    <h3 id="dz-side-title" data-dz-side-title>Vorderseite</h3>
+    <label class="upload" data-dz-upload>
+      <input type="file" accept=".png,.jpg,.jpeg,image/png,image/jpeg" data-dz-file />
+      <span class="upload-box">
+        <span class="upload-thumb" data-dz-thumb><Icon name="upload-simple" size={22} /></span>
+        <span class="upload-text"><strong data-dz-upload-label>Motiv hochladen</strong><small data-dz-upload-sub>PNG mit transparentem Hintergrund oder JPG, max. 25 MB.</small></span>
+      </span>
+    </label>
+    <p class="dz-status" role="status" aria-live="polite" data-dz-status></p>
+
+    <div class="dz-edit" data-dz-edit hidden>
+      <div class="dz-row" role="radiogroup" aria-label="Position" data-dz-presets>
+        <label class="chip" data-dz-preset-wrap="center"><input type="radio" name="dz_preset" value="center" /> <span>Mittig</span></label>
+        <label class="chip" data-dz-preset-wrap="chest_left"><input type="radio" name="dz_preset" value="chest_left" /> <span>Brust links</span></label>
+      </div>
+
+      <div class="dz-fields">
+        <label class="dz-field"><span>Breite</span><span class="dz-input"><input inputmode="decimal" autocomplete="off" data-dz-w aria-describedby="dz-w-hint dz-w-err" /><em>cm</em></span></label>
+        <label class="dz-field"><span>Höhe</span><span class="dz-input"><input inputmode="decimal" autocomplete="off" data-dz-h aria-describedby="dz-w-hint dz-w-err" /><em>cm</em></span></label>
+        <input type="range" class="dz-range" min="300" max="3000" step="10" data-dz-range aria-label="Motivbreite" />
+        <small class="dz-hint" id="dz-w-hint" data-dz-w-hint></small>
+        <span class="error" id="dz-w-err" data-dz-w-err hidden></span>
+      </div>
+      <div class="dz-fields">
+        <label class="dz-field"><span data-dz-top-label>Abstand zur Kragennaht</span><span class="dz-input"><input inputmode="decimal" autocomplete="off" data-dz-top aria-describedby="dz-pos-err" /><em>cm</em></span></label>
+        <label class="dz-field"><span>Versatz zur Mitte <small>(+ = im Bild rechts)</small></span><span class="dz-input"><input inputmode="decimal" autocomplete="off" data-dz-x aria-describedby="dz-pos-err" /><em>cm</em></span></label>
+        <span class="error" id="dz-pos-err" data-dz-pos-err hidden></span>
+      </div>
+      <div class="dz-tools">
+        <button type="button" class="dz-btn" data-dz-nudge="0,-50" aria-label="0,5 cm nach oben"><Icon name="arrow-up" size={18} /></button>
+        <button type="button" class="dz-btn" data-dz-nudge="0,50" aria-label="0,5 cm nach unten"><Icon name="arrow-down" size={18} /></button>
+        <button type="button" class="dz-btn" data-dz-nudge="-50,0" aria-label="0,5 cm nach links"><Icon name="arrow-left" size={18} /></button>
+        <button type="button" class="dz-btn" data-dz-nudge="50,0" aria-label="0,5 cm nach rechts"><Icon name="arrow-right" size={18} /></button>
+        <button type="button" class="dz-btn dz-btn-text" data-dz-hcenter><Icon name="align-center-horizontal" size={18} /> Waagerecht mittig</button>
+        <button type="button" class="dz-btn dz-btn-text" data-dz-reset><Icon name="crosshair" size={18} /> Zurücksetzen</button>
+        <button type="button" class="dz-btn" data-dz-undo aria-label="Rückgängig"><Icon name="arrow-counter-clockwise" size={18} /></button>
+        <button type="button" class="dz-btn" data-dz-redo aria-label="Wiederholen"><Icon name="arrow-clockwise" size={18} /></button>
+        <button type="button" class="dz-btn dz-btn-text" data-dz-remove><Icon name="trash" size={18} /> Entfernen</button>
+      </div>
+      <label class="dz-snapopt"><input type="checkbox" data-dz-nosnap /> <span>Nicht einrasten (an der Mitte)</span></label>
+      <div class="dz-msg dz-msg-warn" data-dz-conflict hidden role="alert">
+        <p data-dz-conflict-text></p>
+        <button type="button" class="btn btn-ghost" data-dz-fit></button>
+      </div>
+      <div class="dz-msg dz-msg-warn" data-dz-quality hidden>
+        <p><Icon name="warning" size={16} /> <span data-dz-quality-text></span></p>
+        <label class="dz-ack"><input type="checkbox" data-dz-ack /> <span>Verstanden, so drucken</span></label>
+      </div>
+      <p class="dz-tariff" data-dz-tariff></p>
+    </div>
+
+    <fieldset class="dz-planned" data-dz-planned hidden>
+      <legend>Motiv später schicken? Dann wähle die geplante Druckgröße:</legend>
+      <div class="chips chips-size" data-dz-planned-chips></div>
+    </fieldset>
+  </section>
+
+  {sleeves && (
+    <fieldset class="print-side" data-sleeves>
+      <legend>Ärmel, optional</legend>
+      <div class="chips chips-size">
+        {[['left', 'Ärmel links'], ['right', 'Ärmel rechts']].map(([k, l]) => <label class="chip"><input type="checkbox" name={`sleeve_${k}`} value="1" /> <span>{l} <small><span data-sleeve-hint>{SLEEVE.hint}</span>, +{SLEEVE.surcharge.toFixed(2).replace('.', ',')} €</small></span></label>)}
+      </div>
+      {[['left', 'links'], ['right', 'rechts']].map(([k, l]) => (
+        <div class="sleeve-up" data-sleeve-up={k} hidden>
+          <label class="upload">
+            <input type="file" name={`file_sleeve_${k}`} accept=".png,image/png" data-sleeve-file={k} />
+            <span class="upload-box">
+              <span class="upload-thumb" data-sleeve-thumb={k}><Icon name="upload-simple" size={22} /></span>
+              <span class="upload-text"><strong data-sleeve-label={k}>Motiv Ärmel {l} hochladen</strong><small>PNG mit transparentem Hintergrund. Mittig auf dem Oberarm, <span data-sleeve-hint>{SLEEVE.hint}</span>.</small></span>
+            </span>
+          </label>
+        </div>
+      ))}
+    </fieldset>
+  )}
+  <p class="print-info"><Icon name="info" size={16} /> <span>Du legst Größe und Lage in echten Zentimetern fest. Der gestrichelte Rahmen ist der Druckbereich für die gewählte Kleidergröße, mit mindestens 1,5 cm Abstand zu Kragen und Bündchen. Die Preisstufe ergibt sich aus der Motivgröße.</span></p>
+</div>
+
+<style is:global>
+  /* Designer V2. Farben aus den Seiten-Tokens, eigene Zustände: Auswahl (Akzent), Fehler (--danger), Warnung (--dz-warn). */
+  :root { --dz-warn: #e8c37a; --dz-zone: #ffffff; --dz-zone-ink: #111312; }
+  [data-theme="light"] { --dz-warn: #8a5a00; }
+  .dz-stage { position: relative; border-radius: 22px; overflow: hidden; background: radial-gradient(80% 70% at 50% 40%, #a9afab 0%, #858b87 55%, #6b716d 100%); touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+  .dz-svg { display: block; width: 100%; aspect-ratio: 4 / 5; margin: 0 auto; }
+  .dz-dim { fill: rgba(0, 0, 0, 0.18); pointer-events: none; }
+  .dz-zone-bg { fill: none; stroke: var(--dz-zone-ink); stroke-width: 3.5; vector-effect: non-scaling-stroke; pointer-events: none; opacity: 0.55; }
+  .dz-zone { fill: none; stroke: var(--dz-zone); stroke-width: 1.6; stroke-dasharray: 7 5; vector-effect: non-scaling-stroke; pointer-events: none; }
+  .dz-zone.is-bad { stroke: var(--danger); }
+  .dz-guide { stroke: rgba(255, 255, 255, 0.5); stroke-width: 1; stroke-dasharray: 2 4; vector-effect: non-scaling-stroke; pointer-events: none; }
+  .dz-plan { fill: color-mix(in srgb, var(--accent) 22%, transparent); stroke: var(--accent); stroke-width: 2; vector-effect: non-scaling-stroke; pointer-events: none; }
+  .dz-plan-t { fill: #fff; font-weight: 700; paint-order: stroke; stroke: rgba(0, 0, 0, 0.55); stroke-width: 3px; pointer-events: none; font-family: var(--font-body); }
+  .dz-snap { stroke: var(--accent); stroke-width: 1.5; vector-effect: non-scaling-stroke; pointer-events: none; }
+  [data-dz-motif] { cursor: grab; touch-action: none; }
+  .dz-sel { fill: transparent; stroke: var(--accent); stroke-width: 1.5; vector-effect: non-scaling-stroke; cursor: grab; touch-action: none; outline: none; }
+  .dz-sel:focus-visible { stroke-width: 3; stroke-dasharray: 4 3; }
+  .dz-sel.is-bad { stroke: var(--danger); }
+  .dz-handle { fill: #fff; stroke: var(--accent-strong, #5fae77); stroke-width: 2; vector-effect: non-scaling-stroke; cursor: nwse-resize; touch-action: none; }
+  [data-dz-handle="ne"], [data-dz-handle="sw"] { cursor: nesw-resize; }
+  /* Unsichtbar größere Trefferfläche für Finger: 44 px */
+  @media (pointer: coarse) { .dz-handle { stroke-width: 2; paint-order: stroke; } }
+  .dz-tabs { position: absolute; top: 12px; right: 12px; display: flex; background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: 3px; }
+  .dz-tabs button { border: 0; background: transparent; min-height: 40px; padding: 6px 14px; border-radius: 999px; font: inherit; font-size: 13px; font-weight: 600; color: var(--text-2); cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }
+  .dz-tabs button.is-on { background: var(--accent); color: var(--accent-ink); }
+  .dz-tabs i { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+  .dz-zoom { position: absolute; left: 12px; top: 12px; display: flex; gap: 6px; }
+  .dz-zoom button { width: 44px; height: 44px; border-radius: 999px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--text); display: grid; place-items: center; cursor: pointer; }
+  .dz-badge, .dz-measure { position: absolute; left: 12px; bottom: 12px; margin: 0; font-size: 12px; padding: 5px 10px; border-radius: 999px; background: rgba(0, 0, 0, 0.7); color: #fff; }
+  .dz-measure { left: auto; right: 12px; font-variant-numeric: tabular-nums; font-weight: 600; }
+  .dz-note { font-size: 12.5px; color: var(--text-3); margin-top: 8px; }
+
+  .dz-panel .chip small.age, .chip small.age { display: block; font-size: 11px; color: var(--text-3); }
+  .dz-side { display: grid; gap: 12px; border: 1px solid var(--line); border-radius: 12px; padding: 14px; background: var(--surface); }
+  .dz-side h3 { font-size: 0.95rem; margin: 0; }
+  .dz-status { margin: 0; font-size: 13px; color: var(--text-2); min-height: 0; }
+  .dz-status:empty { display: none; }
+  .dz-edit { display: grid; gap: 14px; }
+  .dz-edit[hidden], .dz-planned[hidden] { display: none; }
+  .dz-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .dz-row .chip[hidden] { display: none; }
+  .dz-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; align-items: end; }
+  .dz-field { display: grid; gap: 4px; font-size: 13px; color: var(--text-2); }
+  .dz-field small { color: var(--text-3); }
+  .dz-input { display: flex; align-items: center; border: 1px solid var(--line-strong); border-radius: var(--radius-input); background: var(--bg-2); }
+  .dz-input:focus-within { border-color: var(--accent); outline: 2px solid var(--accent-soft); }
+  .dz-input input { width: 100%; min-width: 0; border: 0; background: transparent; color: var(--text); font: inherit; font-size: 16px; font-weight: 600; padding: 10px 4px 10px 12px; font-variant-numeric: tabular-nums; }
+  .dz-input input:focus { outline: none; }
+  .dz-input em { font-style: normal; color: var(--text-3); padding-right: 12px; font-size: 14px; }
+  .dz-range { grid-column: 1 / -1; width: 100%; accent-color: var(--accent); height: 32px; }
+  .dz-hint { grid-column: 1 / -1; color: var(--text-3); font-size: 12.5px; }
+  .dz-fields .error { grid-column: 1 / -1; }
+  .dz-tools { display: flex; flex-wrap: wrap; gap: 6px; }
+  .dz-btn { min-width: 44px; min-height: 44px; border-radius: 10px; border: 1px solid var(--line-strong); background: transparent; color: var(--text); display: inline-flex; align-items: center; justify-content: center; gap: 6px; font: inherit; font-size: 13px; cursor: pointer; padding: 0 10px; transition: border-color 0.15s, background 0.15s; }
+  .dz-btn:hover { border-color: var(--accent-line); background: var(--accent-soft); }
+  .dz-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .dz-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .dz-snapopt, .dz-ack { display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--text-2); min-height: 32px; }
+  .dz-snapopt input, .dz-ack input { width: 18px; height: 18px; accent-color: var(--accent); }
+  .dz-msg { border-radius: 10px; padding: 12px; display: grid; gap: 8px; font-size: 13.5px; }
+  .dz-msg[hidden] { display: none; }
+  .dz-msg p { margin: 0; display: flex; gap: 6px; align-items: flex-start; }
+  .dz-msg-warn { border: 1px solid var(--dz-warn); background: color-mix(in srgb, var(--dz-warn) 10%, transparent); color: var(--text); }
+  .dz-msg .icon { color: var(--dz-warn); flex: none; margin-top: 2px; }
+  .dz-tariff { margin: 0; font-size: 13.5px; color: var(--text-2); }
+  .dz-planned { border: 0; padding: 0; margin: 0; display: grid; gap: 8px; }
+  .dz-planned legend { font-size: 13px; color: var(--text-2); margin-bottom: 8px; }
+  [data-add].is-blocked { opacity: 0.7; }
+  .dz-dialog { border: 0; border-radius: 16px; padding: 12px; background: var(--surface); max-width: min(92vw, 640px); display: grid; gap: 10px; }
+  .dz-dialog:not([open]) { display: none; }
+  .dz-dialog::backdrop { background: rgba(0, 0, 0, 0.6); }
+  .dz-dialog img { width: 100%; max-height: 78svh; object-fit: contain; border-radius: 10px; }
+  .form-note.error { color: var(--danger); }
+  @media (max-width: 900px) {
+    .dz-stage { border-radius: 16px; }
+    .dz-tabs button { padding: 6px 12px; }
+    /* Handy: Vorschau bleibt beim Scrollen durch Farbe, Größe und Druck oben sichtbar (kompakt, max. 42 % der Höhe) */
+    .pvisual:has(.dz-stage) { position: sticky; top: var(--nav-h); z-index: 5; background: var(--bg); padding-bottom: 6px; }
+    .pvisual:has(.dz-stage) .dz-svg { max-height: 42svh; }
+    .pvisual:has(.dz-stage) .dz-note, .pvisual:has(.dz-stage) .thumbs { display: none; }
+  }
+  @media (max-width: 300px) { .dz-fields { grid-template-columns: 1fr; } }
+  @media (prefers-reduced-motion: reduce) { .dz-btn { transition: none; } }
+</style>

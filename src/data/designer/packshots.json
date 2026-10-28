@@ -1,0 +1,1428 @@
+{
+ "baby-bib": {
+  "style": "STAU029",
+  "handle": "baby-bib",
+  "views": {
+   "front": {
+    "image": "/img/products/baby-bib-white.jpg",
+    "topBodyW": null,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 0,
+    "hemY": 899,
+    "bboxTop": 0,
+    "bboxBottom": 899,
+    "bodyY": 642,
+    "bodyL": 0,
+    "bodyR": 719
+   },
+   "back": {
+    "image": "/img/products/baby-bib-white-flat-back.webp",
+    "topBodyW": null,
+    "w": 720,
+    "h": 900,
+    "centerX": 354.5,
+    "topY": 35,
+    "hemY": 863,
+    "bboxTop": 35,
+    "bboxBottom": 864,
+    "bodyY": 704,
+    "bodyL": 72,
+    "bodyR": 638
+   }
+  }
+ },
+ "fisherman-beanie": {
+  "style": "STAU771",
+  "handle": "fisherman-beanie",
+  "views": {
+   "front": {
+    "image": "/img/products/fisherman-beanie-black-flat.webp",
+    "topBodyW": null,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.0,
+    "topY": 144,
+    "hemY": 756,
+    "bboxTop": 143,
+    "bboxBottom": 756,
+    "bodyY": 524,
+    "bodyL": 55,
+    "bodyR": 665
+   }
+  }
+ },
+ "pencil-case": {
+  "style": "STAU764",
+  "handle": "pencil-case",
+  "views": {
+   "front": {
+    "image": "/img/products/pencil-case-black-flat.webp",
+    "topBodyW": null,
+    "w": 720,
+    "h": 900,
+    "centerX": 317.5,
+    "topY": 243,
+    "hemY": 668,
+    "bboxTop": 229,
+    "bboxBottom": 670,
+    "bodyY": 544,
+    "bodyL": 31,
+    "bodyR": 604
+   },
+   "back": {
+    "image": "/img/products/pencil-case-black-flat-back.webp",
+    "topBodyW": null,
+    "w": 720,
+    "h": 900,
+    "centerX": 401.0,
+    "topY": 247,
+    "hemY": 669,
+    "bboxTop": 230,
+    "bboxBottom": 669,
+    "bodyY": 543,
+    "bodyL": 117,
+    "bodyR": 686
+   }
+  }
+ },
+ "duffle-bag": {
+  "style": "STAU892",
+  "handle": "duffle-bag",
+  "views": {
+   "front": {
+    "image": "/img/products/duffle-bag-black-flat.webp",
+    "topBodyW": null,
+    "w": 720,
+    "h": 900,
+    "centerX": 360.0,
+    "topY": 134,
+    "hemY": 765,
+    "bboxTop": 133,
+    "bboxBottom": 765,
+    "bodyY": 584,
+    "bodyL": 29,
+    "bodyR": 691
+   },
+   "back": {
+    "image": "/img/products/duffle-bag-black-flat-back.webp",
+    "topBodyW": null,
+    "w": 720,
+    "h": 900,
+    "centerX": 360.5,
+    "topY": 123,
+    "hemY": 760,
+    "bboxTop": 122,
+    "bboxBottom": 777,
+    "bodyY": 590,
+    "bodyL": 29,
+    "bodyR": 691
+   }
+  }
+ },
+ "tote-bag": {
+  "style": "STAU760",
+  "handle": "tote-bag",
+  "views": {
+   "front": {
+    "image": "/img/products/tote-bag-black-flat.webp",
+    "topBodyW": null,
+    "w": 720,
+    "h": 900,
+    "centerX": 360.5,
+    "topY": 34,
+    "hemY": 864,
+    "bboxTop": 34,
+    "bboxBottom": 865,
+    "bodyY": 628,
+    "bodyL": 121,
+    "bodyR": 597
+   },
+   "back": {
+    "image": "/img/products/tote-bag-black-flat-back.webp",
+    "topBodyW": null,
+    "w": 720,
+    "h": 900,
+    "centerX": 360.5,
+    "topY": 35,
+    "hemY": 864,
+    "bboxTop": 34,
+    "bboxBottom": 865,
+    "bodyY": 628,
+    "bodyL": 121,
+    "bodyR": 598
+   }
+  }
+ },
+ "baby-body": {
+  "style": "STUB103",
+  "handle": "baby-body",
+  "views": {
+   "front": {
+    "image": "/img/products/baby-body-black-flat.webp",
+    "topBodyW": 607,
+    "w": 720,
+    "h": 900,
+    "centerX": 366.5,
+    "topY": 73,
+    "hemY": 862,
+    "bboxTop": 34,
+    "bboxBottom": 865,
+    "bodyY": 554,
+    "bodyL": 175,
+    "bodyR": 555
+   },
+   "back": {
+    "image": "/img/products/baby-body-black-flat-back.webp",
+    "topBodyW": 445,
+    "w": 720,
+    "h": 900,
+    "centerX": 362.5,
+    "topY": 73,
+    "hemY": 856,
+    "bboxTop": 35,
+    "bboxBottom": 865,
+    "bodyY": 590,
+    "bodyL": 171,
+    "bodyR": 555
+   }
+  }
+ },
+ "baby-cruiser": {
+  "style": "STSB919",
+  "handle": "baby-cruiser",
+  "views": {
+   "front": {
+    "image": "/img/products/baby-cruiser-french-navy-flat.webp",
+    "topBodyW": 494,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 161,
+    "hemY": 737,
+    "bboxTop": 161,
+    "bboxBottom": 737,
+    "bodyY": 626,
+    "bodyL": 172,
+    "bodyR": 547
+   },
+   "back": {
+    "image": "/img/products/baby-cruiser-french-navy-flat-back.webp",
+    "topBodyW": 529,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.0,
+    "topY": 164,
+    "hemY": 737,
+    "bboxTop": 162,
+    "bboxBottom": 737,
+    "bodyY": 626,
+    "bodyL": 171,
+    "bodyR": 547
+   }
+  }
+ },
+ "classic-hoodie": {
+  "style": "ST4400",
+  "handle": "classic-hoodie",
+  "views": {
+   "front": {
+    "image": "/img/products/classic-hoodie-blue-midnight.webp",
+    "topBodyW": 486,
+    "w": 720,
+    "h": 900,
+    "centerX": 360.0,
+    "topY": 38,
+    "hemY": 840,
+    "bboxTop": 35,
+    "bboxBottom": 865,
+    "bodyY": 637,
+    "bodyL": 156,
+    "bodyR": 563
+   }
+  }
+ },
+ "classic-hoodie-kinder": {
+  "style": "ST4470",
+  "handle": "classic-hoodie-kinder",
+  "views": {
+   "front": {
+    "image": "/img/products/classic-hoodie-kinder-black-opal.webp",
+    "topBodyW": 517,
+    "w": 720,
+    "h": 900,
+    "centerX": 304.0,
+    "topY": 71,
+    "hemY": 837,
+    "bboxTop": 46,
+    "bboxBottom": 852,
+    "bodyY": 723,
+    "bodyL": 175,
+    "bodyR": 548
+   }
+  }
+ },
+ "cruiser-2-0": {
+  "style": "STSU177",
+  "handle": "cruiser-2-0",
+  "views": {
+   "front": {
+    "image": "/img/products/cruiser-2-0-black-flat.webp",
+    "topBodyW": 446,
+    "w": 720,
+    "h": 900,
+    "centerX": 358.5,
+    "topY": 55,
+    "hemY": 807,
+    "bboxTop": 55,
+    "bboxBottom": 843,
+    "bodyY": 721,
+    "bodyL": 176,
+    "bodyR": 541
+   },
+   "back": {
+    "image": "/img/products/cruiser-2-0-black-flat-back.webp",
+    "topBodyW": 488,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 39,
+    "hemY": 803,
+    "bboxTop": 39,
+    "bboxBottom": 860,
+    "bodyY": 589,
+    "bodyL": 56,
+    "bodyR": 663
+   }
+  }
+ },
+ "drummer-2-0": {
+  "style": "STSU168",
+  "handle": "drummer-2-0",
+  "views": {
+   "front": {
+    "image": "/img/products/drummer-2-0-black-flat.webp",
+    "topBodyW": 423,
+    "w": 720,
+    "h": 900,
+    "centerX": 363.0,
+    "topY": 62,
+    "hemY": 801,
+    "bboxTop": 62,
+    "bboxBottom": 838,
+    "bodyY": 703,
+    "bodyL": 185,
+    "bodyR": 542
+   },
+   "back": {
+    "image": "/img/products/drummer-2-0-black-flat-back.webp",
+    "topBodyW": 466,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 66,
+    "hemY": 786,
+    "bboxTop": 65,
+    "bboxBottom": 833,
+    "bodyY": 699,
+    "bodyL": 182,
+    "bodyR": 538
+   }
+  }
+ },
+ "mini-cruiser-2-0": {
+  "style": "STSK180",
+  "handle": "mini-cruiser-2-0",
+  "views": {
+   "front": {
+    "image": "/img/products/mini-cruiser-2-0-black-flat.webp",
+    "topBodyW": 467,
+    "w": 720,
+    "h": 900,
+    "centerX": 357.0,
+    "topY": 94,
+    "hemY": 804,
+    "bboxTop": 94,
+    "bboxBottom": 805,
+    "bodyY": 675,
+    "bodyL": 172,
+    "bodyR": 540
+   },
+   "back": {
+    "image": "/img/products/mini-cruiser-2-0-black-flat-back.webp",
+    "topBodyW": 517,
+    "w": 720,
+    "h": 900,
+    "centerX": 357.5,
+    "topY": 101,
+    "hemY": 797,
+    "bboxTop": 100,
+    "bboxBottom": 798,
+    "bodyY": 670,
+    "bodyL": 166,
+    "bodyR": 550
+   }
+  }
+ },
+ "side-pocket-hoodie-select": {
+  "style": "ST5630",
+  "handle": "side-pocket-hoodie-select",
+  "views": {
+   "front": {
+    "image": "/img/products/side-pocket-hoodie-select-blue-midnight.webp",
+    "topBodyW": 490,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 34,
+    "hemY": 809,
+    "bboxTop": 34,
+    "bboxBottom": 865,
+    "bodyY": 628,
+    "bodyL": 178,
+    "bodyR": 540
+   }
+  }
+ },
+ "baby-tumbler": {
+  "style": "STBB187",
+  "handle": "baby-tumbler",
+  "views": {
+   "front": {
+    "image": "/img/products/baby-tumbler-french-navy-flat.webp",
+    "topBodyW": null,
+    "w": 720,
+    "h": 900,
+    "centerX": 496.0,
+    "topY": 36,
+    "hemY": 865,
+    "bboxTop": 35,
+    "bboxBottom": 865,
+    "bodyY": 700,
+    "bodyL": 413,
+    "bodyR": 579
+   },
+   "back": {
+    "image": "/img/products/baby-tumbler-french-navy-flat-back.webp",
+    "topBodyW": null,
+    "w": 720,
+    "h": 900,
+    "centerX": 225.0,
+    "topY": 35,
+    "hemY": 864,
+    "bboxTop": 34,
+    "bboxBottom": 865,
+    "bodyY": 703,
+    "bodyL": 141,
+    "bodyR": 308
+   }
+  }
+ },
+ "mini-bolter": {
+  "style": "STBK102",
+  "handle": "mini-bolter",
+  "views": {
+   "front": {
+    "image": "/img/products/mini-bolter-black-flat.webp",
+    "topBodyW": null,
+    "w": 720,
+    "h": 900,
+    "centerX": 199.5,
+    "topY": 148,
+    "hemY": 736,
+    "bboxTop": 146,
+    "bboxBottom": 753,
+    "bodyY": 646,
+    "bodyL": 38,
+    "bodyR": 358
+   },
+   "back": {
+    "image": "/img/products/mini-bolter-black-flat-back.webp",
+    "topBodyW": null,
+    "w": 720,
+    "h": 900,
+    "centerX": 196.5,
+    "topY": 150,
+    "hemY": 726,
+    "bboxTop": 150,
+    "bboxBottom": 747,
+    "bodyY": 635,
+    "bodyL": 39,
+    "bodyR": 349
+   }
+  }
+ },
+ "mini-changer-2-0": {
+  "style": "STSK181",
+  "handle": "mini-changer-2-0",
+  "views": {
+   "front": {
+    "image": "/img/products/mini-changer-2-0-black-flat.webp",
+    "topBodyW": 452,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 111,
+    "hemY": 809,
+    "bboxTop": 89,
+    "bboxBottom": 809,
+    "bodyY": 668,
+    "bodyL": 179,
+    "bodyR": 540
+   },
+   "back": {
+    "image": "/img/products/mini-changer-2-0-black-flat-back.webp",
+    "topBodyW": 375,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.0,
+    "topY": 132,
+    "hemY": 785,
+    "bboxTop": 112,
+    "bboxBottom": 786,
+    "bodyY": 659,
+    "bodyL": 183,
+    "bodyR": 535
+   }
+  }
+ },
+ "mover-2-0": {
+  "style": "STBU185",
+  "handle": "mover-2-0",
+  "views": {
+   "front": {
+    "image": "/img/products/mover-2-0-black-flat.webp",
+    "topBodyW": null,
+    "w": 720,
+    "h": 900,
+    "centerX": 257.0,
+    "topY": 35,
+    "hemY": 865,
+    "bboxTop": 34,
+    "bboxBottom": 865,
+    "bodyY": 707,
+    "bodyL": 192,
+    "bodyR": 321
+   },
+   "back": {
+    "image": "/img/products/mover-2-0-black-flat-back.webp",
+    "topBodyW": null,
+    "w": 720,
+    "h": 900,
+    "centerX": 259.5,
+    "topY": 35,
+    "hemY": 864,
+    "bboxTop": 34,
+    "bboxBottom": 865,
+    "bodyY": 708,
+    "bodyL": 193,
+    "bodyR": 326
+   }
+  }
+ },
+ "classic-fleece-jacket": {
+  "style": "ST5030",
+  "handle": "classic-fleece-jacket",
+  "views": {
+   "front": {
+    "image": "/img/products/classic-fleece-jacket-blue-midnight.webp",
+    "topBodyW": 455,
+    "w": 720,
+    "h": 900,
+    "centerX": 356.0,
+    "topY": 36,
+    "hemY": 851,
+    "bboxTop": 35,
+    "bboxBottom": 864,
+    "bodyY": 627,
+    "bodyL": 168,
+    "bodyR": 545
+   }
+  }
+ },
+ "classic-fleece-jacket-damen": {
+  "style": "ST5100",
+  "handle": "classic-fleece-jacket-damen",
+  "views": {
+   "front": {
+    "image": "/img/products/classic-fleece-jacket-damen-blue-midnight.webp",
+    "topBodyW": 454,
+    "w": 720,
+    "h": 900,
+    "centerX": 357.5,
+    "topY": 34,
+    "hemY": 809,
+    "bboxTop": 34,
+    "bboxBottom": 865,
+    "bodyY": 405,
+    "bodyL": 195,
+    "bodyR": 524
+   }
+  }
+ },
+ "classic-polo": {
+  "style": "ST3000",
+  "handle": "classic-polo",
+  "views": {
+   "front": {
+    "image": "/img/products/classic-polo-blue-midnight.webp",
+    "topBodyW": 487,
+    "w": 720,
+    "h": 900,
+    "centerX": 354.0,
+    "topY": 35,
+    "hemY": 855,
+    "bboxTop": 34,
+    "bboxBottom": 865,
+    "bodyY": 628,
+    "bodyL": 167,
+    "bodyR": 543
+   }
+  }
+ },
+ "classic-polo-damen": {
+  "style": "ST3100",
+  "handle": "classic-polo-damen",
+  "views": {
+   "front": {
+    "image": "/img/products/classic-polo-damen-blue-midnight.webp",
+    "topBodyW": 454,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 36,
+    "hemY": 865,
+    "bboxTop": 34,
+    "bboxBottom": 865,
+    "bodyY": 405,
+    "bodyL": 189,
+    "bodyR": 536
+   }
+  }
+ },
+ "classic-polo-kinder": {
+  "style": "ST3200",
+  "handle": "classic-polo-kinder",
+  "views": {
+   "front": {
+    "image": "/img/products/classic-polo-kinder-black-opal.webp",
+    "topBodyW": 474,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.0,
+    "topY": 65,
+    "hemY": 826,
+    "bboxTop": 63,
+    "bboxBottom": 836,
+    "bodyY": 615,
+    "bodyL": 169,
+    "bodyR": 550
+   }
+  }
+ },
+ "coaster-vintage": {
+  "style": "STPU252",
+  "handle": "coaster-vintage",
+  "views": {
+   "front": {
+    "image": "/img/products/coaster-vintage-g-dyed-hydro-flat.webp",
+    "topBodyW": 472,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 104,
+    "hemY": 804,
+    "bboxTop": 94,
+    "bboxBottom": 804,
+    "bodyY": 601,
+    "bodyL": 182,
+    "bodyR": 537
+   },
+   "back": {
+    "image": "/img/products/coaster-vintage-g-dyed-hydro-flat-back.webp",
+    "topBodyW": 262,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 108,
+    "hemY": 807,
+    "bboxTop": 90,
+    "bboxBottom": 809,
+    "bodyY": 603,
+    "bodyL": 177,
+    "bodyR": 542
+   }
+  }
+ },
+ "prepster-2-0": {
+  "style": "STPU222",
+  "handle": "prepster-2-0",
+  "views": {
+   "front": {
+    "image": "/img/products/prepster-2-0-black-flat.webp",
+    "topBodyW": 441,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 122,
+    "hemY": 784,
+    "bboxTop": 115,
+    "bboxBottom": 784,
+    "bodyY": 592,
+    "bodyL": 182,
+    "bodyR": 537
+   },
+   "back": {
+    "image": "/img/products/prepster-2-0-black-flat-back.webp",
+    "topBodyW": 176,
+    "w": 720,
+    "h": 900,
+    "centerX": 360.0,
+    "topY": 115,
+    "hemY": 793,
+    "bboxTop": 105,
+    "bboxBottom": 793,
+    "bodyY": 596,
+    "bodyL": 182,
+    "bodyR": 537
+   }
+  }
+ },
+ "stanley-coaster": {
+  "style": "STPM224",
+  "handle": "stanley-coaster",
+  "views": {
+   "front": {
+    "image": "/img/products/stanley-coaster-black-flat.webp",
+    "topBodyW": 500,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 97,
+    "hemY": 814,
+    "bboxTop": 85,
+    "bboxBottom": 814,
+    "bodyY": 605,
+    "bodyL": 183,
+    "bodyR": 536
+   },
+   "back": {
+    "image": "/img/products/stanley-coaster-black-flat-back.webp",
+    "topBodyW": 241,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 109,
+    "hemY": 802,
+    "bboxTop": 97,
+    "bboxBottom": 802,
+    "bodyY": 600,
+    "bodyL": 179,
+    "bodyR": 540
+   }
+  }
+ },
+ "stanley-guider": {
+  "style": "STJM238",
+  "handle": "stanley-guider",
+  "views": {
+   "front": {
+    "image": "/img/products/stanley-guider-black-flat.webp",
+    "topBodyW": 472,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.0,
+    "topY": 79,
+    "hemY": 803,
+    "bboxTop": 74,
+    "bboxBottom": 824,
+    "bodyY": 604,
+    "bodyL": 163,
+    "bodyR": 555
+   },
+   "back": {
+    "image": "/img/products/stanley-guider-black-flat-back.webp",
+    "topBodyW": 257,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 96,
+    "hemY": 808,
+    "bboxTop": 81,
+    "bboxBottom": 817,
+    "bodyY": 579,
+    "bodyL": 170,
+    "bodyR": 549
+   }
+  }
+ },
+ "baby-changer": {
+  "style": "STSB920",
+  "handle": "baby-changer",
+  "views": {
+   "front": {
+    "image": "/img/products/baby-changer-french-navy-flat.webp",
+    "topBodyW": 487,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 207,
+    "hemY": 710,
+    "bboxTop": 188,
+    "bboxBottom": 710,
+    "bodyY": 580,
+    "bodyL": 180,
+    "bodyR": 539
+   },
+   "back": {
+    "image": "/img/products/baby-changer-french-navy-flat-back.webp",
+    "topBodyW": 316,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 208,
+    "hemY": 709,
+    "bboxTop": 189,
+    "bboxBottom": 710,
+    "bodyY": 580,
+    "bodyL": 181,
+    "bodyR": 538
+   }
+  }
+ },
+ "bomber-2-0": {
+  "style": "STJU251",
+  "handle": "bomber-2-0",
+  "views": {
+   "front": {
+    "image": "/img/products/bomber-2-0-black-flat.webp",
+    "topBodyW": 461,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.0,
+    "topY": 82,
+    "hemY": 764,
+    "bboxTop": 82,
+    "bboxBottom": 817,
+    "bodyY": 565,
+    "bodyL": 166,
+    "bodyR": 552
+   },
+   "back": {
+    "image": "/img/products/bomber-2-0-black-flat-back.webp",
+    "topBodyW": 268,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.0,
+    "topY": 66,
+    "hemY": 779,
+    "bboxTop": 65,
+    "bboxBottom": 834,
+    "bodyY": 599,
+    "bodyL": 163,
+    "bodyR": 555
+   }
+  }
+ },
+ "brooker": {
+  "style": "STJU248",
+  "handle": "brooker",
+  "views": {
+   "front": {
+    "image": "/img/products/brooker-black-flat.webp",
+    "topBodyW": 377,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.0,
+    "topY": 126,
+    "hemY": 749,
+    "bboxTop": 121,
+    "bboxBottom": 778,
+    "bodyY": 570,
+    "bodyL": 164,
+    "bodyR": 554
+   },
+   "back": {
+    "image": "/img/products/brooker-black-flat-back.webp",
+    "topBodyW": 303,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 119,
+    "hemY": 778,
+    "bboxTop": 97,
+    "bboxBottom": 801,
+    "bodyY": 580,
+    "bodyL": 164,
+    "bodyR": 555
+   }
+  }
+ },
+ "changer-2-0": {
+  "style": "STSU178",
+  "handle": "changer-2-0",
+  "views": {
+   "front": {
+    "image": "/img/products/changer-2-0-black-flat.webp",
+    "topBodyW": 447,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 107,
+    "hemY": 780,
+    "bboxTop": 89,
+    "bboxBottom": 809,
+    "bodyY": 697,
+    "bodyL": 169,
+    "bodyR": 548
+   },
+   "back": {
+    "image": "/img/products/changer-2-0-black-flat-back.webp",
+    "topBodyW": 343,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.0,
+    "topY": 100,
+    "hemY": 781,
+    "bboxTop": 82,
+    "bboxBottom": 818,
+    "bodyY": 554,
+    "bodyL": 54,
+    "bodyR": 663
+   }
+  }
+ },
+ "roller": {
+  "style": "STSU868",
+  "handle": "roller",
+  "views": {
+   "front": {
+    "image": "/img/products/roller-black-flat.webp",
+    "topBodyW": 446,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 130,
+    "hemY": 756,
+    "bboxTop": 117,
+    "bboxBottom": 781,
+    "bodyY": 628,
+    "bodyL": 190,
+    "bodyR": 529
+   },
+   "back": {
+    "image": "/img/products/roller-black-flat-back.webp",
+    "topBodyW": 349,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 136,
+    "hemY": 758,
+    "bboxTop": 120,
+    "bboxBottom": 777,
+    "bodyY": 628,
+    "bodyL": 194,
+    "bodyR": 525
+   }
+  }
+ },
+ "sweatpants-select": {
+  "style": "ST5650",
+  "handle": "sweatpants-select",
+  "views": {
+   "front": {
+    "image": "/img/products/sweatpants-select-blue-midnight.webp",
+    "topBodyW": null,
+    "w": 720,
+    "h": 900,
+    "centerX": 266.0,
+    "topY": 34,
+    "hemY": 865,
+    "bboxTop": 34,
+    "bboxBottom": 865,
+    "bodyY": 714,
+    "bodyL": 225,
+    "bodyR": 307
+   }
+  }
+ },
+ "baby-creator": {
+  "style": "STTB918",
+  "handle": "baby-creator",
+  "views": {
+   "front": {
+    "image": "/img/products/baby-creator-black-flat.webp",
+    "topBodyW": 606,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 142,
+    "hemY": 767,
+    "bboxTop": 131,
+    "bboxBottom": 768,
+    "bodyY": 586,
+    "bodyL": 174,
+    "bodyR": 545
+   },
+   "back": {
+    "image": "/img/products/baby-creator-black-flat-back.webp",
+    "topBodyW": 381,
+    "w": 720,
+    "h": 900,
+    "centerX": 360.0,
+    "topY": 150,
+    "hemY": 768,
+    "bboxTop": 131,
+    "bboxBottom": 768,
+    "bodyY": 586,
+    "bodyL": 174,
+    "bodyR": 546
+   }
+  }
+ },
+ "classic-t": {
+  "style": "ST2000",
+  "handle": "classic-t",
+  "views": {
+   "front": {
+    "image": "/img/products/classic-t-black-opal.webp",
+    "topBodyW": 543,
+    "w": 720,
+    "h": 900,
+    "centerX": 358.0,
+    "topY": 40,
+    "hemY": 852,
+    "bboxTop": 40,
+    "bboxBottom": 858,
+    "bodyY": 624,
+    "bodyL": 163,
+    "bodyR": 554
+   }
+  }
+ },
+ "classic-t-kinder": {
+  "style": "ST2200",
+  "handle": "classic-t-kinder",
+  "views": {
+   "front": {
+    "image": "/img/products/classic-t-kinder-blue-midnight.webp",
+    "topBodyW": 515,
+    "w": 720,
+    "h": 900,
+    "centerX": 363.0,
+    "topY": 91,
+    "hemY": 787,
+    "bboxTop": 90,
+    "bboxBottom": 808,
+    "bodyY": 602,
+    "bodyL": 182,
+    "bodyR": 540
+   }
+  }
+ },
+ "classic-t-damen": {
+  "style": "ST2600",
+  "handle": "classic-t-damen",
+  "views": {
+   "front": {
+    "image": "/img/products/classic-t-damen-black-opal.webp",
+    "topBodyW": 565,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 45,
+    "hemY": 861,
+    "bboxTop": 38,
+    "bboxBottom": 861,
+    "bodyY": 345,
+    "bodyL": 167,
+    "bodyR": 553
+   }
+  }
+ },
+ "comfort-t": {
+  "style": "ST2100",
+  "handle": "comfort-t",
+  "views": {
+   "front": {
+    "image": "/img/products/comfort-t-blue-midnight.webp",
+    "topBodyW": 512,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 53,
+    "hemY": 837,
+    "bboxTop": 53,
+    "bboxBottom": 845,
+    "bodyY": 618,
+    "bodyL": 166,
+    "bodyR": 552
+   }
+  }
+ },
+ "comfort-t-damen": {
+  "style": "ST2160",
+  "handle": "comfort-t-damen",
+  "views": {
+   "front": {
+    "image": "/img/products/comfort-t-damen-black-opal.webp",
+    "topBodyW": 565,
+    "w": 720,
+    "h": 900,
+    "centerX": 358.5,
+    "topY": 44,
+    "hemY": 859,
+    "bboxTop": 40,
+    "bboxBottom": 859,
+    "bodyY": 345,
+    "bodyL": 163,
+    "bodyR": 552
+   }
+  }
+ },
+ "crafter": {
+  "style": "STTU170",
+  "handle": "crafter",
+  "views": {
+   "front": {
+    "image": "/img/products/crafter-black-flat.webp",
+    "topBodyW": 502,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 133,
+    "hemY": 779,
+    "bboxTop": 120,
+    "bboxBottom": 779,
+    "bodyY": 590,
+    "bodyL": 180,
+    "bodyR": 539
+   },
+   "back": {
+    "image": "/img/products/crafter-black-flat-back.webp",
+    "topBodyW": 335,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 145,
+    "hemY": 771,
+    "bboxTop": 129,
+    "bboxBottom": 771,
+    "bodyY": 587,
+    "bodyL": 188,
+    "bodyR": 531
+   }
+  }
+ },
+ "creator-2-0": {
+  "style": "STTU169",
+  "handle": "creator-2-0",
+  "views": {
+   "front": {
+    "image": "/img/products/creator-2-0-black-flat.webp",
+    "topBodyW": 492,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 141,
+    "hemY": 771,
+    "bboxTop": 126,
+    "bboxBottom": 772,
+    "bodyY": 587,
+    "bodyL": 175,
+    "bodyR": 543
+   },
+   "back": {
+    "image": "/img/products/creator-2-0-black-flat-back.webp",
+    "topBodyW": 309,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.0,
+    "topY": 138,
+    "hemY": 774,
+    "bboxTop": 125,
+    "bboxBottom": 774,
+    "bodyY": 588,
+    "bodyL": 181,
+    "bodyR": 537
+   }
+  }
+ },
+ "freestyler": {
+  "style": "STTU788",
+  "handle": "freestyler",
+  "views": {
+   "front": {
+    "image": "/img/products/freestyler-black-flat.webp",
+    "topBodyW": 503,
+    "w": 720,
+    "h": 900,
+    "centerX": 360.5,
+    "topY": 132,
+    "hemY": 783,
+    "bboxTop": 116,
+    "bboxBottom": 783,
+    "bodyY": 592,
+    "bodyL": 181,
+    "bodyR": 540
+   },
+   "back": {
+    "image": "/img/products/freestyler-black-flat-back.webp",
+    "topBodyW": 378,
+    "w": 720,
+    "h": 900,
+    "centerX": 360.5,
+    "topY": 130,
+    "hemY": 786,
+    "bboxTop": 113,
+    "bboxBottom": 786,
+    "bodyY": 594,
+    "bodyL": 179,
+    "bodyR": 542
+   }
+  }
+ },
+ "lux-t": {
+  "style": "ST7000",
+  "handle": "lux-t",
+  "views": {
+   "front": {
+    "image": "/img/products/lux-t-blue-midnight.webp",
+    "topBodyW": 546,
+    "w": 720,
+    "h": 900,
+    "centerX": 361.0,
+    "topY": 34,
+    "hemY": 855,
+    "bboxTop": 34,
+    "bboxBottom": 865,
+    "bodyY": 628,
+    "bodyL": 178,
+    "bodyR": 550
+   }
+  }
+ },
+ "lux-t-damen": {
+  "style": "ST7600",
+  "handle": "lux-t-damen",
+  "views": {
+   "front": {
+    "image": "/img/products/lux-t-damen-blue-midnight.webp",
+    "topBodyW": 557,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 49,
+    "hemY": 850,
+    "bboxTop": 48,
+    "bboxBottom": 850,
+    "bodyY": 352,
+    "bodyL": 171,
+    "bodyR": 552
+   }
+  }
+ },
+ "mini-creator-2-0": {
+  "style": "STTK184",
+  "handle": "mini-creator-2-0",
+  "views": {
+   "front": {
+    "image": "/img/products/mini-creator-2-0-black-flat.webp",
+    "topBodyW": 545,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 144,
+    "hemY": 775,
+    "bboxTop": 122,
+    "bboxBottom": 776,
+    "bodyY": 589,
+    "bodyL": 161,
+    "bodyR": 558
+   },
+   "back": {
+    "image": "/img/products/mini-creator-2-0-black-flat-back.webp",
+    "topBodyW": 386,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 140,
+    "hemY": 785,
+    "bboxTop": 115,
+    "bboxBottom": 785,
+    "bodyY": 593,
+    "bodyL": 171,
+    "bodyR": 548
+   }
+  }
+ },
+ "seamless-sports-t": {
+  "style": "ST8860",
+  "handle": "seamless-sports-t",
+  "views": {
+   "front": {
+    "image": "/img/products/seamless-sports-t-blue-midnight.webp",
+    "topBodyW": 508,
+    "w": 720,
+    "h": 900,
+    "centerX": 361.5,
+    "topY": 41,
+    "hemY": 857,
+    "bboxTop": 41,
+    "bboxBottom": 857,
+    "bodyY": 588,
+    "bodyL": 181,
+    "bodyR": 546
+   }
+  }
+ },
+ "seamless-sports-t-damen": {
+  "style": "ST8960",
+  "handle": "seamless-sports-t-damen",
+  "views": {
+   "front": {
+    "image": "/img/products/seamless-sports-t-damen-blue-midnight.webp",
+    "topBodyW": 561,
+    "w": 720,
+    "h": 900,
+    "centerX": 360.5,
+    "topY": 37,
+    "hemY": 864,
+    "bboxTop": 34,
+    "bboxBottom": 865,
+    "bodyY": 335,
+    "bodyL": 176,
+    "bodyR": 542
+   }
+  }
+ },
+ "stanley-stancer": {
+  "style": "STTM961",
+  "handle": "stanley-stancer",
+  "views": {
+   "front": {
+    "image": "/img/products/stanley-stancer-black-flat.webp",
+    "topBodyW": 360,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.0,
+    "topY": 85,
+    "hemY": 865,
+    "bboxTop": 35,
+    "bboxBottom": 865,
+    "bodyY": 628,
+    "bodyL": 129,
+    "bodyR": 590
+   },
+   "back": {
+    "image": "/img/products/stanley-stancer-black-flat-back.webp",
+    "topBodyW": 335,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.0,
+    "topY": 88,
+    "hemY": 863,
+    "bboxTop": 35,
+    "bboxBottom": 864,
+    "bodyY": 627,
+    "bodyL": 132,
+    "bodyR": 587
+   }
+  }
+ },
+ "stella-muser": {
+  "style": "STTW172",
+  "handle": "stella-muser",
+  "views": {
+   "front": {
+    "image": "/img/products/stella-muser-black-flat.webp",
+    "topBodyW": 543,
+    "w": 720,
+    "h": 900,
+    "centerX": 360.0,
+    "topY": 155,
+    "hemY": 767,
+    "bboxTop": 131,
+    "bboxBottom": 768,
+    "bodyY": 586,
+    "bodyL": 167,
+    "bodyR": 554
+   },
+   "back": {
+    "image": "/img/products/stella-muser-black-flat-back.webp",
+    "topBodyW": 384,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 160,
+    "hemY": 761,
+    "bboxTop": 138,
+    "bboxBottom": 761,
+    "bodyY": 583,
+    "bodyL": 164,
+    "bodyR": 555
+   }
+  }
+ },
+ "classic-tank-top": {
+  "style": "ST2800",
+  "handle": "classic-tank-top",
+  "views": {
+   "front": {
+    "image": "/img/products/classic-tank-top-black-opal.webp",
+    "topBodyW": 421,
+    "w": 720,
+    "h": 900,
+    "centerX": 357.0,
+    "topY": 50,
+    "hemY": 865,
+    "bboxTop": 34,
+    "bboxBottom": 865,
+    "bodyY": 628,
+    "bodyL": 159,
+    "bodyR": 556
+   }
+  }
+ },
+ "classic-tank-top-damen": {
+  "style": "ST2900",
+  "handle": "classic-tank-top-damen",
+  "views": {
+   "front": {
+    "image": "/img/products/classic-tank-top-damen-black-opal.webp",
+    "topBodyW": 405,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 45,
+    "hemY": 864,
+    "bboxTop": 34,
+    "bboxBottom": 865,
+    "bodyY": 330,
+    "bodyL": 166,
+    "bodyR": 554
+   }
+  }
+ },
+ "comfort-tank-top": {
+  "style": "ST2810",
+  "handle": "comfort-tank-top",
+  "views": {
+   "front": {
+    "image": "/img/products/comfort-tank-top-black-opal.webp",
+    "topBodyW": 363,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.5,
+    "topY": 61,
+    "hemY": 865,
+    "bboxTop": 34,
+    "bboxBottom": 865,
+    "bodyY": 628,
+    "bodyL": 160,
+    "bodyR": 559
+   }
+  }
+ }
+}
