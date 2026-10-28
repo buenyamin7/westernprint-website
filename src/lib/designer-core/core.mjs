@@ -39,6 +39,10 @@ export const TARIFFS = [
 ];
 /** Ärmel: max. 8 x 8 cm (wie SLEEVE im Shop und in der Kasse) */
 export const SLEEVE_MAX_U = [800, 800];
+/** Ärmel bei Kinder- und Babygrößen: schrumpft mit demselben Faktor wie die Formate, auf 0,5 cm gerundet, Preis gleich */
+export const sleeveMaxFor = (scale = 1) => (!(scale > 0) || scale >= 1 ? SLEEVE_MAX_U : SLEEVE_MAX_U.map((u) => Math.max(100, Math.round((u * scale) / 50) * 50)));
+/** Text für Ärmelgröße, z. B. „max. 4,5 x 4,5 cm“ */
+export const sleeveText = (scale = 1) => { const [a, b] = sleeveMaxFor(scale); return `max. ${fmtCm(a)} x ${fmtCm(b)} cm`; };
 
 /**
  * Formate für Kinder- und Babygrößen: gleiche Stufen und gleiche Preise wie bei Erwachsenen, aber die Maße schrumpfen

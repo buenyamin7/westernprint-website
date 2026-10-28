@@ -77,7 +77,7 @@ const { pod, sleeves, podSecond } = Astro.props;
     <fieldset class="print-side" data-sleeves>
       <legend>Ärmel, optional</legend>
       <div class="chips chips-size">
-        {[['left', 'Ärmel links'], ['right', 'Ärmel rechts']].map(([k, l]) => <label class="chip"><input type="checkbox" name={`sleeve_${k}`} value="1" /> <span>{l} <small>{SLEEVE.hint}, +{SLEEVE.surcharge.toFixed(2).replace('.', ',')} €</small></span></label>)}
+        {[['left', 'Ärmel links'], ['right', 'Ärmel rechts']].map(([k, l]) => <label class="chip"><input type="checkbox" name={`sleeve_${k}`} value="1" /> <span>{l} <small><span data-sleeve-hint>{SLEEVE.hint}</span>, +{SLEEVE.surcharge.toFixed(2).replace('.', ',')} €</small></span></label>)}
       </div>
       {[['left', 'links'], ['right', 'rechts']].map(([k, l]) => (
         <div class="sleeve-up" data-sleeve-up={k} hidden>
@@ -85,7 +85,7 @@ const { pod, sleeves, podSecond } = Astro.props;
             <input type="file" name={`file_sleeve_${k}`} accept=".png,image/png" data-sleeve-file={k} />
             <span class="upload-box">
               <span class="upload-thumb" data-sleeve-thumb={k}><Icon name="upload-simple" size={22} /></span>
-              <span class="upload-text"><strong data-sleeve-label={k}>Motiv Ärmel {l} hochladen</strong><small>PNG mit transparentem Hintergrund. Mittig auf dem Oberarm, {SLEEVE.hint}.</small></span>
+              <span class="upload-text"><strong data-sleeve-label={k}>Motiv Ärmel {l} hochladen</strong><small>PNG mit transparentem Hintergrund. Mittig auf dem Oberarm, <span data-sleeve-hint>{SLEEVE.hint}</span>.</small></span>
             </span>
           </label>
         </div>

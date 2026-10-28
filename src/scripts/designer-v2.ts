@@ -2,7 +2,7 @@
 // Geometrie und Preisstufen kommen aus dem gemeinsamen Kern (auch in der Kasse), damit beide dasselbe prüfen.
 import {
   toU, fmtCm, parseCm, classifyPrint, heightFor, widthForHeight, sourceDpi, qualityFor, checkPlacement,
-  constrainMove, maxWidthAt, fitSuggestion, cmToPx, tariffsFor, reachableTariffs, CORE_VERSION, TARIFF_VERSION,
+  constrainMove, maxWidthAt, fitSuggestion, cmToPx, tariffsFor, reachableTariffs, sleeveText, CORE_VERSION, TARIFF_VERSION,
 } from '../lib/designer-core/core.mjs';
 import { addItem, euro } from './cart';
 
@@ -259,7 +259,10 @@ function blockers(): string[] {
   return out;
 }
 
-function render() { renderStage(); renderPanel(); renderCalc(); const b = blockers(); el.add.setAttribute('aria-disabled', String(b.length > 0)); el.add.classList.toggle('is-blocked', b.length > 0); }
+// Ärmelgröße je Kleidergröße (Kinder/Baby kleiner, Preis gleich)
+const sleeveScale = () => dz.sizes[sizeKey()]?.areas?.front?.tariffScale || 1;
+function renderSleeves() { const t = sleeveScale() < 1 ? sleeveText(sleeveScale()) : 'max. ca. 8 x 8 cm'; form.querySelectorAll<HTMLElement>('[data-sleeve-hint]').forEach((e) => (e.textContent = t)); }
+function render() { renderSleeves(); renderStage(); renderPanel(); renderCalc(); const b = blockers(); el.add.setAttribute('aria-disabled', String(b.length > 0)); el.add.classList.toggle('is-blocked', b.length > 0); }
 
 // ── Upload und Motivprüfung ──────────────────────────────────────────────────
 async function inspect(file: File): Promise<Omit<Motif, 'url' | 'status' | 'token' | 'file' | 'name' | 'local'> & { local: string }> {
