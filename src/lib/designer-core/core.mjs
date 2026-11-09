@@ -9,7 +9,7 @@
 // (vorne: vordere Kragennaht, hinten: hintere Kragennaht). x positiv nach rechts im Bild, y positiv nach unten.
 // Links/rechts in Texten immer aus Sicht der tragenden Person.
 
-export const CORE_VERSION = '2.0.0';
+export const CORE_VERSION = '2.1.0';
 
 /** cm -> ganzzahlige Hundertstel-cm */
 export const toU = (cm) => Math.round(Number(cm) * 100);
@@ -188,6 +188,74 @@ export function fitSuggestion(zone, bw, bh, wantX, wantTop) {
 
 export const cmToPx = (cal, xU, yU) => [cal.originPx[0] + (xU / 100) * cal.pxPerCm, cal.originPx[1] + (yU / 100) * cal.pxPerCm];
 export const pxToU = (cal, px, py) => [Math.round(((px - cal.originPx[0]) / cal.pxPerCm) * 100), Math.round(((py - cal.originPx[1]) / cal.pxPerCm) * 100)];
+
+/**
+ * Kalibrierung für das Foto einer anderen Farbe. Die Kalibrierung in print-areas.json gilt für das Referenzfoto je Ansicht,
+ * die Fotos anderer Farben sind teils anders gerahmt (bis ca. 9 % Maßstab, 4,5 cm Kragennaht, Messung 09.11.2026).
+ * fix = [s, dx, dy] aus scripts/designer/register-colors.py: Pixel im Farbfoto * s + (dx, dy) = Pixel im Referenzfoto.
+ * Ohne fix (Referenzfoto oder gleich gerahmt) bleibt die Kalibrierung unverändert. Die cm (Zone, Motiv, Kasse) ändern sich nie.
+ */
+export function calForColor(cal, fix) {
+  if (!cal || !Array.isArray(fix) || !(fix[0] > 0)) return cal;
+  const [s, dx, dy] = fix;
+  return { ...cal, pxPerCm: cal.pxPerCm / s, originPx: [(cal.originPx[0] - dx) / s, (cal.originPx[1] - dy) / s] };
+}
+
+// ── Größenvorschläge „Klein / Mittel / Groß / Maximal“ ───────────────────────
+// Typische Motivbreiten für Erwachsene Größe M (halbe Brustweite 52 cm). Sie wachsen und schrumpfen mit der halben
+// Brustweite der gewählten Größe, damit „Mittel“ auf S und XXL ähnlich wirkt. Die cm bleiben danach frei editierbar.
+export const SUGGESTIONS = {
+  front: [
+    { key: 'klein', label: 'Klein', note: 'Brust links', widthCm: 10, preset: 'chest_left', fallbackWidthCm: 12 },
+    { key: 'mittel', label: 'Mittel', widthCm: 25, preset: 'center' },
+    { key: 'gross', label: 'Groß', widthCm: 28, preset: 'center' },
+    { key: 'max', label: 'Maximal', preset: 'center' },
+  ],
+  back: [
+    { key: 'klein', label: 'Klein', note: 'Nacken', widthCm: 10, preset: 'center', topCm: 3 },
+    { key: 'mittel', label: 'Mittel', widthCm: 28, preset: 'center' },
+    { key: 'gross', label: 'Groß', widthCm: 32, preset: 'center' },
+    { key: 'max', label: 'Maximal', preset: 'center' },
+  ],
+};
+
+/**
+ * Vorschläge für ein Motiv (sichtbare Pixel bw x bh) auf einer Druckfläche einer Kleidergröße.
+ * Jeder Vorschlag passt garantiert in die Zone (sonst entfällt er). Gleiche Breiten werden zusammengefasst.
+ * @returns {{key:string,label:string,note?:string,preset:string|null,centerXU:number,topYU:number,widthU:number,heightU:number}[]}
+ */
+export function sizeSuggestions({ zone, presets = {}, halfChestCm, side, bw, bh }) {
+  if (!zone || !(bw > 0 && bh > 0)) return [];
+  const f = halfChestCm > 0 ? halfChestCm / ADULT_REF_HALF_CHEST_CM : 1;
+  const out = [];
+  for (const s of SUGGESTIONS[side] || []) {
+    let preset = s.preset, pr = presets[preset], wCm = s.widthCm;
+    if (!pr && s.fallbackWidthCm) { preset = 'center'; pr = presets.center; wCm = s.fallbackWidthCm; }
+    if (!pr) { preset = null; pr = { centerXU: 0, topYU: zone.yMinU }; }
+    if (s.topCm != null) preset = null; // eigene Höhe (Nacken): keine Startposition
+    const top = s.topCm != null ? Math.max(zone.yMinU, Math.round(s.topCm * Math.min(1, f) * 100)) : pr.topYU;
+    const maxW = maxWidthAt(zone, bw, bh, pr.centerXU, top);
+    if (maxW < 100) continue;
+    // auf 0,5 cm runden, nie breiter als an dieser Stelle möglich
+    const want = wCm == null ? maxW : Math.round((wCm * f * 100) / 50) * 50;
+    const widthU = Math.min(want, maxW);
+    if (out.some((o) => o.widthU === widthU && o.centerXU === pr.centerXU && o.topYU === top)) continue;
+    out.push({ key: s.key, label: s.label, ...(s.note ? { note: s.note } : {}), preset, centerXU: pr.centerXU, topYU: top, widthU, heightU: heightFor(widthU, bw, bh).checkU });
+  }
+  return out;
+}
+
+/**
+ * Größenvergleich: Druckbereich und Motiv auf mehreren Kleidergrößen im selben Maßstab.
+ * Liefert je Größe, ob das Motiv (gleiche cm, gleiche Lage) dort passt, und welchen Anteil der halben Brustweite es einnimmt.
+ */
+export function compareSizes(areasBySize, side, pl) {
+  return Object.entries(areasBySize).map(([size, sz]) => {
+    const a = sz?.areas?.[side];
+    const fits = !!(a?.zone && pl && checkPlacement(a.zone, pl).ok);
+    return { size, halfChestCm: sz?.halfChestCm ?? null, fits, share: pl && sz?.halfChestCm ? pl.widthU / (sz.halfChestCm * 100) : null };
+  });
+}
 
 // ── Serverseitige Prüfung einer V2-Druckposition ─────────────────────────────
 

@@ -27,6 +27,11 @@ const { pod, sleeves, podSecond } = Astro.props;
     <p class="dz-status" role="status" aria-live="polite" data-dz-status></p>
 
     <div class="dz-edit" data-dz-edit hidden>
+      <div class="dz-sugg-wrap">
+        <span class="dz-sugg-l" id="dz-sugg-l">Motivgröße auf Größe <b data-dz-sugg-size></b></span>
+        <div class="dz-row" role="group" aria-labelledby="dz-sugg-l" data-dz-sugg></div>
+        <small class="dz-hint">Vorschlag, die Zentimeter kannst du danach frei ändern.</small>
+      </div>
       <div class="dz-row" role="radiogroup" aria-label="Position" data-dz-presets>
         <label class="chip" data-dz-preset-wrap="center"><input type="radio" name="dz_preset" value="center" /> <span>Mittig</span></label>
         <label class="chip" data-dz-preset-wrap="chest_left"><input type="radio" name="dz_preset" value="chest_left" /> <span>Brust links</span></label>
@@ -71,6 +76,14 @@ const { pod, sleeves, podSecond } = Astro.props;
       <legend>Motiv später schicken? Dann wähle die geplante Druckgröße:</legend>
       <div class="chips chips-size" data-dz-planned-chips></div>
     </fieldset>
+
+    <figure class="dz-compare" data-dz-compare hidden>
+      <figcaption><b data-dz-compare-title>Größenvergleich</b><small>Gleiche Zentimeter auf jeder Kleidergröße: Das Textil wächst, der Druck bleibt gleich groß.</small></figcaption>
+      <svg class="dz-compare-svg" data-dz-compare-svg role="img" aria-labelledby="dz-compare-desc" preserveAspectRatio="xMidYMax meet">
+        <desc id="dz-compare-desc" data-dz-compare-desc></desc>
+      </svg>
+      <div class="dz-compare-legend" data-dz-compare-legend></div>
+    </figure>
   </section>
 
   {sleeves && (
@@ -126,6 +139,44 @@ const { pod, sleeves, podSecond } = Astro.props;
   .dz-badge, .dz-measure { position: absolute; left: 12px; bottom: 12px; margin: 0; font-size: 12px; padding: 5px 10px; border-radius: 999px; background: rgba(0, 0, 0, 0.7); color: #fff; }
   .dz-measure { left: auto; right: 12px; font-variant-numeric: tabular-nums; font-weight: 600; }
   .dz-note { font-size: 12.5px; color: var(--text-3); margin-top: 8px; }
+  /* Leiste unter dem Foto: auf welcher Größe die Vorschau zeigt, Vergleichsumriss */
+  .dz-stage:has(+ .dz-bar) { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+  .dz-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 10px; padding: 8px 12px; background: var(--surface); border: 1px solid var(--line); border-top: 0; border-radius: 0 0 22px 22px; }
+  .dz-sizetag { margin: 0; font-size: 13px; color: var(--text-2); display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
+  .dz-sizetag b { color: var(--text); font-size: 14px; }
+  .dz-sizetag.is-warn { color: var(--text); }
+  .dz-sizetag.is-warn::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--dz-warn); flex: none; }
+  .dz-sizetag button { border: 1px solid var(--accent-line, var(--accent)); background: var(--accent-soft); color: var(--text); border-radius: 999px; font: inherit; font-size: 12.5px; font-weight: 600; padding: 4px 10px; min-height: 32px; cursor: pointer; }
+  .dz-refopt { display: flex; align-items: center; gap: 4px; }
+  .dz-bar .dz-short { display: none; }
+  .dz-refopt-l { font-size: 12px; color: var(--text-3); margin-right: 2px; }
+  .dz-refopt button { border: 1px solid var(--line-strong); background: transparent; color: var(--text-2); border-radius: 999px; font: inherit; font-size: 12.5px; padding: 4px 10px; min-height: 32px; cursor: pointer; }
+  .dz-refopt button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+  .dz-ref { fill: none; stroke: #fff; stroke-width: 2; stroke-dasharray: 9 5; vector-effect: non-scaling-stroke; pointer-events: none; }
+  .dz-ref-bg { fill: rgba(255, 255, 255, 0.08); stroke: rgba(0, 0, 0, 0.6); stroke-width: 4; vector-effect: non-scaling-stroke; pointer-events: none; }
+  .dz-ref-t { fill: #fff; font-weight: 700; paint-order: stroke; stroke: rgba(0, 0, 0, 0.65); stroke-width: 3px; pointer-events: none; font-family: var(--font-body); }
+  /* Größenvorschläge */
+  .dz-sugg-wrap { display: grid; gap: 6px; }
+  .dz-sugg-wrap .dz-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); gap: 6px; }
+  .dz-sugg-l { font-size: 13px; color: var(--text-2); }
+  .dz-sugg { border: 1px solid var(--line-strong); background: var(--bg-2); color: var(--text); border-radius: 10px; font: inherit; font-size: 13.5px; font-weight: 600; padding: 6px 12px; min-height: 44px; cursor: pointer; display: grid; text-align: left; line-height: 1.2; }
+  .dz-sugg small { font-weight: 400; font-size: 12px; color: var(--text-3); font-variant-numeric: tabular-nums; }
+  .dz-sugg[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+  .dz-sugg:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  /* Größenvergleich */
+  .dz-compare { margin: 0; display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 12px; }
+  .dz-compare[hidden] { display: none; }
+  .dz-compare figcaption { display: grid; gap: 2px; font-size: 13.5px; }
+  .dz-compare figcaption small { color: var(--text-3); font-size: 12.5px; }
+  .dz-compare-svg { width: 100%; height: auto; max-height: 300px; border-radius: 12px; background: radial-gradient(80% 70% at 50% 40%, #a9afab 0%, #858b87 55%, #6b716d 100%); }
+  .dz-compare-legend { display: flex; justify-content: space-around; gap: 8px; font-size: 12.5px; color: var(--text-2); text-align: center; }
+  .dz-compare-legend b { display: block; color: var(--text); font-size: 13.5px; }
+  .dz-compare-legend .is-cur b { color: var(--accent-strong, var(--accent)); }
+  .dz-compare-legend .is-bad { color: var(--danger); }
+  .dz-cmp-zone { fill: none; stroke: #fff; stroke-width: 1; stroke-dasharray: 4 3; vector-effect: non-scaling-stroke; opacity: 0.8; }
+  .dz-cmp-plan { fill: color-mix(in srgb, var(--accent) 35%, transparent); stroke: var(--accent); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+  .dz-cmp-bad { fill: none; stroke: var(--danger); stroke-width: 2; vector-effect: non-scaling-stroke; }
+  .dz-cmp-line { stroke: rgba(255, 255, 255, 0.55); stroke-width: 1; stroke-dasharray: 2 3; vector-effect: non-scaling-stroke; }
 
   .dz-panel .chip small.age, .chip small.age { display: block; font-size: 11px; color: var(--text-3); }
   .dz-side { display: grid; gap: 12px; border: 1px solid var(--line); border-radius: 12px; padding: 14px; background: var(--surface); }
@@ -170,6 +221,11 @@ const { pod, sleeves, podSecond } = Astro.props;
   .form-note.error { color: var(--danger); }
   @media (max-width: 900px) {
     .dz-stage { border-radius: 16px; }
+    .dz-bar { border-radius: 0 0 16px 16px; padding: 6px 10px; gap: 4px 6px; }
+    .dz-bar .dz-long, .dz-refopt-l { display: none; }
+    .dz-bar .dz-short { display: inline; }
+    .dz-sizetag { font-size: 12.5px; gap: 4px 6px; }
+    .dz-sizetag button, .dz-refopt button { padding: 3px 9px; font-size: 12px; }
     .dz-tabs button { padding: 6px 12px; }
     /* Handy: Vorschau bleibt beim Scrollen durch Farbe, Größe und Druck oben sichtbar (kompakt, max. 42 % der Höhe) */
     .pvisual:has(.dz-stage) { position: sticky; top: var(--nav-h); z-index: 5; background: var(--bg); padding-bottom: 6px; }

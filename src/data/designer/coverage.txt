@@ -6,9 +6,35 @@ fisherman-beanie: nicht im Designer V2 (kein Oberteil oder keine Daten), bleibt 
 pencil-case: nicht im Designer V2 (kein Oberteil oder keine Daten), bleibt beim bisherigen Designer
 duffle-bag: nicht im Designer V2 (kein Oberteil oder keine Daten), bleibt beim bisherigen Designer
 tote-bag: nicht im Designer V2 (kein Oberteil oder keine Daten), bleibt beim bisherigen Designer
+cruiser-2-0 front: Farbfoto /img/products/cruiser-2-0-eco-heather-flat.webp ist anders gerendert (Silhouette 84 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
+cruiser-2-0 back: Farbfoto /img/products/cruiser-2-0-white-flat-back.webp ist anders gerendert (Silhouette 83 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
+cruiser-2-0 back: Farbfoto /img/products/cruiser-2-0-off-white-flat-back.webp ist anders gerendert (Silhouette 83 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
+cruiser-2-0 back: Farbfoto /img/products/cruiser-2-0-eco-heather-flat-back.webp ist anders gerendert (Silhouette 79 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
+cruiser-2-0 back: Farbfoto /img/products/cruiser-2-0-mid-heather-grey-flat-back.webp ist anders gerendert (Silhouette 80 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
+cruiser-2-0 back: Farbfoto /img/products/cruiser-2-0-dark-heather-grey-flat-back.webp ist anders gerendert (Silhouette 80 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
 baby-tumbler: nicht im Designer V2 (kein Oberteil oder keine Daten), bleibt beim bisherigen Designer
 mini-bolter: nicht im Designer V2 (kein Oberteil oder keine Daten), bleibt beim bisherigen Designer
+mini-changer-2-0 front: Farbfoto /img/products/mini-changer-2-0-french-navy-flat.webp ist anders gerendert (Silhouette 78 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
+mini-changer-2-0 front: Farbfoto /img/products/mini-changer-2-0-heather-grey-flat.webp ist anders gerendert (Silhouette 74 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
+mini-changer-2-0 front: Farbfoto /img/products/mini-changer-2-0-natural-raw-flat.webp ist anders gerendert (Silhouette 71 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
+mini-changer-2-0 front: Farbfoto /img/products/mini-changer-2-0-stargazer-flat.webp ist anders gerendert (Silhouette 76 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
+mini-changer-2-0 front: Farbfoto /img/products/mini-changer-2-0-heritage-brown-flat.webp ist anders gerendert (Silhouette 76 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
+mini-changer-2-0 front: Farbfoto /img/products/mini-changer-2-0-eco-heather-flat.webp ist anders gerendert (Silhouette 80 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
 mover-2-0: nicht im Designer V2 (kein Oberteil oder keine Daten), bleibt beim bisherigen Designer
+changer-2-0 back: Farbfoto /img/products/changer-2-0-eco-heather-flat-back.webp ist anders gerendert (Silhouette 81 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
+roller front: Farbfoto /img/products/roller-verdant-green-flat.webp ist anders gerendert (Silhouette 78 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
+roller front: Farbfoto /img/products/roller-mocha-flat.webp ist anders gerendert (Silhouette 78 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
+roller back: Farbfoto /img/products/roller-verdant-green-flat-back.webp ist anders gerendert (Silhouette 80 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
+roller back: Farbfoto /img/products/roller-mocha-flat-back.webp ist anders gerendert (Silhouette 80 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
 sweatpants-select: nicht im Designer V2 (kein Oberteil oder keine Daten), bleibt beim bisherigen Designer
+baby-creator front: Farbfoto /img/products/baby-creator-eco-heather-flat.webp ist anders gerendert (Silhouette 81 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
+creator-2-0 back: Farbfoto /img/products/creator-2-0-dark-heather-blue-flat-back.webp ist anders gerendert (Silhouette 83 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
+freestyler front: Farbfoto /img/products/freestyler-misty-jade-flat.webp ist anders gerendert (Silhouette 79 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
+freestyler back: Farbfoto /img/products/freestyler-cool-heather-grey-flat-back.webp ist anders gerendert (Silhouette 84 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
+freestyler back: Farbfoto /img/products/freestyler-mindful-blue-flat-back.webp ist anders gerendert (Silhouette 84 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
+freestyler back: Farbfoto /img/products/freestyler-heritage-brown-flat-back.webp ist anders gerendert (Silhouette 84 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
+freestyler back: Farbfoto /img/products/freestyler-heather-haze-flat-back.webp ist anders gerendert (Silhouette 81 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
+freestyler back: Farbfoto /img/products/freestyler-misty-jade-flat-back.webp ist anders gerendert (Silhouette 81 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
+lux-t-damen front: Farbfoto /img/products/lux-t-damen-sunflower-yellow.jpg ist anders gerendert (Silhouette 84 % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen
 classic-tank-top-damen XS: Maßtabelle fehlt, Größe gesperrt
 classic-tank-top-damen XS: Maßtabelle fehlt, Größe gesperrt

@@ -20,6 +20,10 @@ const products = read('src/data/products.json');
 const charts = read('src/data/designer/size-charts.json').products;
 const shots = read('src/data/designer/packshots.json');
 const overrides = read('src/data/designer/packshot-overrides.json');
+// Ausgleich je Farbfoto (register-colors.py): [s, dx, dy, iou], Farbfoto * s + (dx, dy) = Referenzfoto
+const colorFix = fs.existsSync(path.join(ROOT, 'src/data/designer/color-fix.json')) ? read('src/data/designer/color-fix.json') : {};
+/** Unter dieser Silhouetten-Übereinstimmung ist das Farbfoto anders gerendert (Ärmel, Schultern): Hinweis im Abdeckungsbericht */
+const MIN_IOU = 0.85;
 const approvals = fs.existsSync(path.join(ROOT, 'src/data/designer/approvals.json')) ? read('src/data/designer/approvals.json') : { products: {} };
 
 export const RULES = {
@@ -148,7 +152,16 @@ for (const p of products) {
     const ovView = ov || (schematic ? (isHoodie(p) ? { originY: ovAll.front.originY, frame: 'hood-tip' } : { originY: shot.views.front.topY + Math.round((ovAll.front.originY - shot.views.front.topY) * 0.3) }) : null);
     if (!ovView) continue;
     const mm = ovView.bodyFrom ? { ...m, bodyL: shot.views[ovView.bodyFrom].bodyL, bodyR: shot.views[ovView.bodyFrom].bodyR } : m;
-    entry.views[view] = { image: m.image, schematic, imageSize: [m.w, m.h], centerX: m.centerX };
+    // Farbfotos: eigener Maßstab und eigene Kragennaht je Farbe. Schematische Rückseite zeigt das Frontfoto der Farbe,
+    // dort gilt der Ausgleich der Vorderseite (der Shop nimmt ihn von views.front).
+    const fixes = schematic ? null : colorFix[p.handle]?.[view] || {};
+    const fixOut = {};
+    for (const [src, [s, dx, dy, iou]] of Object.entries(fixes || {})) {
+      if (iou < MIN_IOU) report.push(`${p.handle} ${view}: Farbfoto ${src} ist anders gerendert (Silhouette ${Math.round(iou * 100)} % gleich), Kragen und Länge sind abgeglichen, bitte im Kontrollbogen ansehen`);
+      if (Math.abs(s - 1) < 0.001 && Math.abs(dx) < 0.5 && Math.abs(dy) < 0.5) continue; // gleich gerahmt wie das Referenzfoto
+      fixOut[src] = [s, dx, dy];
+    }
+    entry.views[view] = { image: m.image, schematic, imageSize: [m.w, m.h], centerX: m.centerX, ...(fixes ? { colorFix: fixOut } : {}) };
     for (const size of p.sizes) {
       const c = chart.sizes[size];
       if (!c?.halfChestCm) { report.push(`${p.handle} ${size}: Maßtabelle fehlt, Größe gesperrt`); continue; }
