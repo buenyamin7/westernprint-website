@@ -30,7 +30,15 @@ Anlass: Kundinnen (z. B. Familiensets) konnten nicht einschätzen, wie groß der
 - **Vorschläge „Klein / Mittel / Groß / Maximal“** über den Feldern: typische Breiten für Erwachsene M (vorne: Klein 10 cm Brust links, Mittel 25, Groß 28; hinten: Klein 10 cm im Nacken 3 cm unter der Kragennaht, Mittel 28, Groß 32; Maximal = größte Breite an dieser Stelle). Sie wachsen und schrumpfen mit der halben Brustweite der gewählten Größe (Faktor halbe Brustweite / 52 cm, auf 0,5 cm gerundet), passen immer in den Druckbereich und zeigen Maße und Preisstufe. Danach bleiben die cm frei editierbar. Werte in `SUGGESTIONS` im Kern.
 - **Größenvergleich:** Unter dem Druckschritt zeigt eine kleine Grafik die kleinste, die gewählte und die größte Größe (nur Größen, die es in der Farbe gibt) im selben Maßstab, Kragennaht auf einer Linie. Das Textil wächst, Motiv bzw. geplante Druckgröße bleibt gleich groß. Darunter je Größe, welchen Anteil der Brustbreite das Motiv einnimmt, oder „passt so nicht“.
 
-Nicht gebaut (braucht erst eine Entscheidung): „Druck mitwachsen lassen“ für Familiensets (Stufe 3) und Korrekturabzug aus Shop-Bestellungen (Stufe 4).
+Nicht gebaut (braucht erst eine Entscheidung): „Druck mitwachsen lassen“ für Familiensets (Stufe 3).
+
+### Korrekturabzug nach jeder Bestellung (Stufe 4, 10.11.2026)
+
+Jede bezahlte Webshop-Bestellung mit Motivdatei bekommt automatisch einen Korrekturabzug per Mail (echtes Foto, bestellte Größe, Maßlinien). Gedruckt wird erst nach der Freigabe des Kunden. Ist ein Artikel beim Hersteller nicht lieferbar, steht der nächste Wareneingang in derselben Mail. Der Ablauf liegt nicht in diesem Repo:
+
+- Kasse `westernprint-checkout` (README, Abschnitt „Korrekturabzug und Freigabe“): Start nach der Zahlung, Mails, Freigabe-Seite, Erinnerungen.
+- Privates Repo `westernprint-abzug`: GitHub Action, die den Abzug aus den Druckdaten (`Druckdaten V2`) erzeugt. Sie liest Fotos, `products.json` und `print-areas.json` (inkl. `colorFix`) bei jedem Lauf aus diesem Repo, Branch main.
+- Die Danke-Seite (`src/pages/bestellung-erfolgreich.astro`) zeigt den Stand der Freigabe, sobald die Kasse `proof` und `approval` meldet.
 
 ## Preise
 
