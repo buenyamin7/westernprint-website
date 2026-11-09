@@ -138,3 +138,101 @@ test('Kinder- und Babygrößen: gleiche Stufen und Preise, Maße schrumpfen mit 
   assert.ok('error' in classifyPrint({ widthU: 2000, heightU: 2800, side: 'front', allowBrust: true, surcharges: SUR, scale: s }), 'größer als Baby-A3+');
   assert.deepEqual(reachableTariffs({ xMinU: -800, xMaxU: 800, yMinU: 150, yMaxU: 950 }, 'back', true, 1).map((t) => t.key), ['A6', 'A5'], 'kleiner Bereich: nur erreichbare Stufen');
 });
+
+// ── Stufe 1 (09.11.2026): Farbfotos auf das Referenzfoto registriert ─────────
+test('Farbausgleich: derselbe cm-Punkt liegt im Farbfoto genau dort, wo er im Referenzfoto liegt', async () => {
+  const { calForColor } = await import('../src/lib/designer-core/core.mjs');
+  const cal = { originPx: [359.5, 135], pxPerCm: 7.4, frame: 'collar' };
+  assert.equal(calForColor(cal, null), cal, 'ohne Ausgleich unverändert');
+  assert.equal(calForColor(cal, undefined), cal);
+  const fix = [0.9226, 31.79, 30.63]; // Farbfoto * s + d = Referenzfoto (Drummer 2.0 Natural Raw)
+  const c = calForColor(cal, fix);
+  assert.equal(c.frame, 'collar', 'übrige Felder bleiben');
+  for (const [x, y] of [[0, 0], [-1250, 400], [900, 2800]]) {
+    const [rx, ry] = cmToPx(cal, x, y), [cx, cy] = cmToPx(c, x, y);
+    assert.ok(Math.abs(cx * fix[0] + fix[1] - rx) < 1e-9 && Math.abs(cy * fix[0] + fix[2] - ry) < 1e-9, `${x}/${y}`);
+    assert.deepEqual(pxToU(c, cx, cy), [x, y], 'Rückweg ohne Drift');
+  }
+  assert.ok(c.pxPerCm > cal.pxPerCm, 'größer gerahmtes Foto: mehr Pixel je cm');
+});
+
+test('Farbausgleich in print-areas.json: plausibel, Fotos vorhanden', async () => {
+  const fs = await import('node:fs');
+  const pa = JSON.parse(fs.readFileSync(new URL('../src/data/designer/print-areas.json', import.meta.url), 'utf8'));
+  let n = 0;
+  for (const [h, e] of Object.entries(pa.products)) {
+    for (const [view, v] of Object.entries(e.views)) {
+      if (v.schematic) { assert.equal(v.colorFix, undefined, `${h} ${view}: schematisch nimmt den Ausgleich von vorne`); continue; }
+      for (const [src, f] of Object.entries(v.colorFix || {})) {
+        n++;
+        assert.equal(f.length, 3, `${h} ${src}`);
+        assert.ok(f[0] > 0.75 && f[0] < 1.25, `${h} ${src}: Faktor ${f[0]}`);
+        assert.ok(Math.abs(f[1]) < 150 && Math.abs(f[2]) < 150, `${h} ${src}: Versatz`);
+        assert.notEqual(src, v.image, 'Referenzfoto braucht keinen Ausgleich');
+        assert.ok(fs.existsSync(new URL(`../public${src}`, import.meta.url)), `${src} fehlt`);
+      }
+    }
+  }
+  assert.ok(n > 500, `nur ${n} Farbfotos mit Ausgleich`);
+  // Beispiel aus der Messung vom 09.11.: Drummer 2.0 hat anders gerahmte Farbfotos
+  assert.ok(Object.keys(pa.products['drummer-2-0'].views.front.colorFix).length > 5);
+});
+
+// ── Stufe 2: Größe sichtbar machen ──────────────────────────────────────────
+const tee = { xMinU: -1830, xMaxU: 1830, yMinU: 150, yMaxU: 4200, exclude: [] }; // T-Shirt M, ca. 52 cm halbe Brustweite
+const teePresets = { center: { centerXU: 0, topYU: 700, widthU: 2500 }, chest_left: { centerXU: 1144, topYU: 500, widthU: 1000 } };
+
+test('Vorschläge Klein/Mittel/Groß/Maximal: typische Breiten, passen immer, wachsen mit der Größe', async () => {
+  const { sizeSuggestions } = await import('../src/lib/designer-core/core.mjs');
+  const s = sizeSuggestions({ zone: tee, presets: teePresets, halfChestCm: 52, side: 'front', bw: 1000, bh: 1000 });
+  assert.deepEqual(s.map((x) => x.key), ['klein', 'mittel', 'gross', 'max']);
+  const by = Object.fromEntries(s.map((x) => [x.key, x]));
+  assert.equal(by.klein.widthU, 1000); assert.equal(by.klein.preset, 'chest_left'); assert.equal(by.klein.centerXU, 1144);
+  assert.equal(by.mittel.widthU, 2500); assert.equal(by.gross.widthU, 2800);
+  assert.equal(by.max.widthU, maxWidthAt(tee, 1000, 1000, 0, 700));
+  for (const x of s) assert.ok(checkPlacement(tee, x).ok, x.key);
+  // XXL (halbe Brustweite 62 cm): anteilig größer, auf 0,5 cm gerundet
+  const xxl = sizeSuggestions({ zone: { ...tee, xMinU: -2200, xMaxU: 2200 }, presets: teePresets, halfChestCm: 62, side: 'front', bw: 1000, bh: 1000 });
+  assert.equal(xxl.find((x) => x.key === 'mittel').widthU, 3000);
+  // Hohes Motiv: Breite durch die Höhe begrenzt, Vorschläge fallen zusammen statt doppelt zu erscheinen
+  const tall = sizeSuggestions({ zone: tee, presets: teePresets, halfChestCm: 52, side: 'front', bw: 500, bh: 2000 });
+  for (const x of tall) assert.ok(checkPlacement(tee, x).ok, `hoch ${x.key}`);
+  assert.equal(new Set(tall.map((x) => x.widthU)).size, tall.length, 'keine doppelten Breiten');
+  // Rücken: Klein im Nacken (3 cm unter der Kragennaht), ohne Brust links
+  const back = sizeSuggestions({ zone: tee, presets: { center: teePresets.center }, halfChestCm: 52, side: 'back', bw: 1000, bh: 1000 });
+  assert.equal(back[0].key, 'klein'); assert.equal(back[0].topYU, 300); assert.equal(back[0].preset, null);
+  // Tanktop ohne Brust links: Klein mittig, 12 cm
+  const tank = sizeSuggestions({ zone: tee, presets: { center: teePresets.center }, halfChestCm: 52, side: 'front', bw: 1000, bh: 1000 });
+  assert.equal(tank[0].widthU, 1200); assert.equal(tank[0].preset, 'center');
+  assert.deepEqual(sizeSuggestions({ zone: null, presets: {}, halfChestCm: 52, side: 'front', bw: 1, bh: 1 }), []);
+});
+
+test('Vorschläge passen für jedes Produkt, jede Größe und jede Seite in den Druckbereich', async () => {
+  const fs = await import('node:fs');
+  const { sizeSuggestions } = await import('../src/lib/designer-core/core.mjs');
+  const pa = JSON.parse(fs.readFileSync(new URL('../src/data/designer/print-areas.json', import.meta.url), 'utf8'));
+  let n = 0;
+  for (const [h, e] of Object.entries(pa.products)) for (const [size, sz] of Object.entries(e.sizes)) for (const [side, a] of Object.entries(sz.areas)) {
+    if (!a.zone) continue;
+    for (const [bw, bh] of [[1000, 1000], [3000, 1000], [800, 2400]]) {
+      const s = sizeSuggestions({ zone: a.zone, presets: a.presets, halfChestCm: sz.halfChestCm, side, bw, bh });
+      assert.ok(s.length >= 1, `${h} ${size} ${side}`);
+      for (const x of s) { n++; assert.ok(checkPlacement(a.zone, x).ok, `${h} ${size} ${side} ${x.key}`); assert.ok(x.widthU >= 100); }
+    }
+  }
+  assert.ok(n > 1000);
+});
+
+test('Größenvergleich: gleiche cm, Anteil an der Brustbreite sinkt mit der Größe, „passt nicht“ wird erkannt', async () => {
+  const { compareSizes } = await import('../src/lib/designer-core/core.mjs');
+  const small = { halfChestCm: 46, areas: { front: { zone: { ...tee, xMinU: -1500, xMaxU: 1500 } } } };
+  const big = { halfChestCm: 62, areas: { front: { zone: { ...tee, xMinU: -2200, xMaxU: 2200 } } } };
+  const pl = { centerXU: 0, topYU: 700, widthU: 2800, heightU: 2800 };
+  const [s, b] = compareSizes({ S: small, XXL: big }, 'front', pl);
+  assert.equal(s.fits, true); assert.equal(b.fits, true);
+  assert.ok(s.share > b.share, 'auf XXL wirkt dasselbe Motiv kleiner');
+  assert.ok(Math.abs(b.share - 28 / 62) < 1e-9);
+  const [s2] = compareSizes({ S: small }, 'front', { ...pl, widthU: 3100 });
+  assert.equal(s2.fits, false, 'breiter als der Druckbereich von S');
+  assert.equal(compareSizes({ S: small }, 'front', null)[0].share, null);
+});

@@ -1,6 +1,6 @@
 # Designer V2: Motiv in echten Zentimetern
 
-Stand 28.10.2026. Hinter einem Schalter, standardmäßig aus. Grundlage: Codex-Bauprompt vom 28.10. und die Entscheidungen des Inhabers (siehe unten).
+Stand 09.11.2026 (live seit 28.10.2026, Schalter `PUBLIC_DESIGNER_V2=1`). Grundlage: Codex-Bauprompt vom 28.10. und die Entscheidungen des Inhabers (siehe unten).
 
 ## Was der Kunde bekommt
 
@@ -20,6 +20,17 @@ Stand 28.10.2026. Hinter einem Schalter, standardmäßig aus. Grundlage: Codex-B
 - **Ohne Motiv:** wie bisher „Motiv nachreichen“. Der Kunde wählt dann eine Preisstufe, die in den Druckbereich passt.
 - **Rückseite ohne Rückenfoto (Stedman):** schematische Silhouette, klar beschriftet.
 - **Handy:** Die Vorschau bleibt beim Scrollen oben sichtbar, Felder mit 16 px, Griffe und Buttons ab 44 px.
+
+### Größe sichtbar machen (Stufe 2, 09.11.2026)
+
+Anlass: Kundinnen (z. B. Familiensets) konnten nicht einschätzen, wie groß der Druck in echt wirkt. Siehe `~/Desktop/Claude/Output/designer-echte-groesse/BRIEFING.md`.
+
+- **Größe unter der Bühne:** Die Leiste unter dem Foto sagt immer, auf welcher Kleidergröße die Vorschau zeigt („Vorschau auf Größe M“). Ohne gewählte Größe: „Noch keine Größe gewählt. Vorschau auf XL“ (mittlere Größe) mit Knopf „Größe wählen“.
+- **Vergleichsumriss:** In derselben Leiste lässt sich ein DIN-A4-Blatt (21 × 29,7 cm) oder ein Handy (ca. 7 × 15 cm) im selben Maßstab auf das Textil legen, ausgerichtet an Motiv bzw. Druckfläche.
+- **Vorschläge „Klein / Mittel / Groß / Maximal“** über den Feldern: typische Breiten für Erwachsene M (vorne: Klein 10 cm Brust links, Mittel 25, Groß 28; hinten: Klein 10 cm im Nacken 3 cm unter der Kragennaht, Mittel 28, Groß 32; Maximal = größte Breite an dieser Stelle). Sie wachsen und schrumpfen mit der halben Brustweite der gewählten Größe (Faktor halbe Brustweite / 52 cm, auf 0,5 cm gerundet), passen immer in den Druckbereich und zeigen Maße und Preisstufe. Danach bleiben die cm frei editierbar. Werte in `SUGGESTIONS` im Kern.
+- **Größenvergleich:** Unter dem Druckschritt zeigt eine kleine Grafik die kleinste, die gewählte und die größte Größe (nur Größen, die es in der Farbe gibt) im selben Maßstab, Kragennaht auf einer Linie. Das Textil wächst, Motiv bzw. geplante Druckgröße bleibt gleich groß. Darunter je Größe, welchen Anteil der Brustbreite das Motiv einnimmt, oder „passt so nicht“.
+
+Nicht gebaut (braucht erst eine Entscheidung): „Druck mitwachsen lassen“ für Familiensets (Stufe 3) und Korrekturabzug aus Shop-Bestellungen (Stufe 4).
 
 ## Preise
 
@@ -47,11 +58,12 @@ Toleranz 0,5 mm, damit eine echte A4-Datei (2480 × 3508 px, bei 21 cm Breite 29
 | `src/data/designer/size-charts.json` | Hersteller-Maßtabellen (Stanley/Stella Produktdatenblatt, Stedman Garment Sizes), Abruf 28.10. |
 | `src/data/designer/packshots.json` | Automatisch vermessene Produktfotos (`measure-packshots.py`) |
 | `src/data/designer/packshot-overrides.json` | Von Hand gesetzte Kragennaht, Taschen, Knopfleisten, Reißverschlüsse |
+| `src/data/designer/color-fix.json` | Ausgleich je Farbfoto auf das Referenzfoto (`register-colors.py`), wird in print-areas.json übernommen |
 | `src/data/designer/approvals.json` | Freigegebene Produkte (nur diese sind bestellbar) |
 | `src/data/designer/print-areas.json` | Ergebnis: Druckbereiche je Produkt/Größe/Seite (`build-print-areas.mjs`) |
 | `src/data/designer/coverage.txt` | Abdeckungsbericht: was fehlt, was gesperrt ist |
 
-Daten neu bauen: `python3 scripts/designer/measure-packshots.py && node scripts/designer/build-print-areas.mjs`, danach `node scripts/designer/sync-to-checkout.mjs` (kopiert Kern + Druckbereiche in den Kassen-Worker; `--check` vergleicht nur).
+Daten neu bauen: `python3 scripts/designer/measure-packshots.py && python3 scripts/designer/register-colors.py && node scripts/designer/build-print-areas.mjs`, danach `node scripts/designer/sync-to-checkout.mjs <Pfad zu westernprint-checkout>` (kopiert Kern + Druckbereiche in den Kassen-Worker; `--check` vergleicht nur). Kontrollbogen je Farbe: `python3 scripts/designer/color-check.py ZIELORDNER` (Rückgabe 1, wenn ein Farbfoto über dem Ziel liegt). Neue Farbfotos brauchen immer `register-colors.py`, sonst gilt für sie kein Ausgleich.
 
 ## Regeln für den Druckbereich (vom Inhaber freizugeben)
 
@@ -60,6 +72,10 @@ Daten neu bauen: `python3 scripts/designer/measure-packshots.py && node scripts/
 - **Unten:** Rückenlänge minus Abstand Schulter bis Kragennaht minus Saum (T-Shirts 2,5 cm; Bündchen: Erwachsene 6, Kinder 4,5, Baby 3,5 cm) minus 1,5 cm. Bei Hoodies zusätzlich 1,5 cm über der Kängurutasche. Höchstens 50 cm.
 - **Knopfleiste und Reißverschluss:** gesperrt, plus 1,5 cm Abstand.
 - **Startplatzierung:** mittig, Oberkante 7 cm unter der Kragennaht (Hoodie 4 cm), 25 cm breit (vorne) bzw. 28 cm (hinten). Brust links 10 cm breit, 5 cm unter der Kragennaht. Kinder und Baby anteilig kleiner.
+
+**Farbfotos (Stufe 1, 09.11.2026):** Die Kalibrierung (`pxPerCm`, `originPx`) ist am Referenzfoto je Ansicht gemessen (`views.*.image`). Die Fotos der anderen Farben sind teils anders gerahmt: Ohne Ausgleich zeigte die Vorschau bei 373 von 1.218 Farbfotos mehr als 2 % falschen Maßstab oder mehr als 1 cm falsche Kragennaht, im schlimmsten Fall 18 % und 6,8 cm (Roller Verdant Green). `register-colors.py` gleicht deshalb jedes Farbfoto auf das Referenzfoto ab, über die Mittellinie: Kragen bzw. Kapuze oben und Saum unten an der Mitte liegen danach genau übereinander, die Mitte am Kragen ebenso. Der Maßstab kommt damit aus der Länge wie die Kalibrierung selbst. Ergebnis je Foto `[s, dx, dy]` (Farbfoto × s + Versatz = Referenzfoto) in `views[ansicht].colorFix[foto]`; die schematische Rückseite nutzt den Ausgleich von vorne. Shop: `calForColor()` im Kern, für Bühne, Ziehen, Lupe, Größenvergleich und das Mockup im Warenkorb. Die cm (Druckbereich, Motiv, Preisstufe) ändern sich dadurch nicht, deshalb prüft die Kasse unverändert (`verifyPlacement` arbeitet nur in cm).
+
+Bewusst nicht wie `register()` im Korrekturabzug (Abgleich der ganzen Silhouette): Rund 240 Farbfotos sind anders gerendert (Schultern, Kapuze, Ärmel anders gelegt, z. B. Drummer 2.0 Blue Ice). Dort zog der Silhouetten-Abgleich den Maßstab um bis zu 8 % weg und richtete am Ärmelbündchen statt am Saum aus. Der Kontrollbogen nennt diese Fotos als Hinweis („anders gerendert“); Kragennaht und Länge sitzen auch dort.
 
 **Maßstab der Vorschau:** Die Produktfotos zeigen das Textil wie getragen (räumlich). Zur Seite hin wird der Stoff deshalb verkürzt abgebildet: Breite zu Länge im Foto ca. 0,6 statt 0,73 laut Maßtabelle. Der Maßstab kommt daher aus der Länge (Breitenmaßstab × k, k je Produkt aus Rundhals-Ansichten, sonst Median der Marke) und gilt einheitlich für Foto, Druckbereich und Motiv. In der Mitte, wo gedruckt wird, stimmen die cm. Für den Druck gelten ohnehin die cm aus der Bestellung, nicht das Foto.
 

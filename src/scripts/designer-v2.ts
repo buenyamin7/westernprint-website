@@ -2,14 +2,15 @@
 // Geometrie und Preisstufen kommen aus dem gemeinsamen Kern (auch in der Kasse), damit beide dasselbe prüfen.
 import {
   toU, fmtCm, parseCm, classifyPrint, heightFor, widthForHeight, sourceDpi, qualityFor, checkPlacement,
-  constrainMove, maxWidthAt, fitSuggestion, cmToPx, tariffsFor, reachableTariffs, sleeveText, CORE_VERSION, TARIFF_VERSION,
+  constrainMove, maxWidthAt, fitSuggestion, cmToPx, tariffsFor, reachableTariffs, sleeveText, calForColor, sizeSuggestions, compareSizes,
+  CORE_VERSION, TARIFF_VERSION,
 } from '../lib/designer-core/core.mjs';
 import { addItem, euro } from './cart';
 
 type Side = 'front' | 'back';
 type Zone = { xMinU: number; xMaxU: number; yMinU: number; yMaxU: number; exclude: { x0U: number; x1U: number; y0U: number; y1U: number; label: string }[] };
 type Preset = { centerXU: number; topYU: number; widthU: number };
-type Area = { status: string; frame: string; pxPerCm: number; originPx: [number, number]; zone: Zone | null; presets: Record<string, Preset> };
+type Area = { status: string; frame: string; pxPerCm: number; originPx: [number, number]; zone: Zone | null; presets: Record<string, Preset>; tariffScale?: number };
 type Motif = { file: File; name: string; local: string; url: string | null; W: number; H: number; bx: number; by: number; bw: number; bh: number; opaque: boolean; status: 'uploading' | 'ready' | 'error'; token: number };
 type Place = { centerXU: number; topYU: number; widthU: number; preset: string | null };
 
@@ -45,6 +46,7 @@ const state = {
   ack: { front: '', back: '' } as Record<Side, string>, // Schlüssel der bestätigten Auflösungswarnung (Datei + Breite)
   planned: { front: 'A4', back: 'A4' } as Record<Side, string>,
   zoomed: false,
+  refObj: '' as '' | 'a4' | 'phone', // Vergleichsumriss auf der Bühne
   sleeveUploads: { left: null, right: null } as Record<'left' | 'right', { url: string; name: string } | null>,
 };
 const history: { past: string[]; future: string[] } = { past: [], future: [] };
@@ -53,10 +55,22 @@ let uploadSeq = 0;
 const val = (name: string) => form.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`)?.value ?? '';
 const colorEl = () => form.querySelector<HTMLInputElement>('input[name="color"]:checked')!;
 const sizeKey = () => val('size') || dz.refSize;
+// Größen mit Druckbereich, in der Reihenfolge des Produkts (für den Größenvergleich)
+const SIZE_ORDER: string[] = product.sizes.filter((s: string) => dz.sizes[s]);
 const activeSides = () => { const s = val('side'); return { front: s !== 'Rückseite', back: s !== 'Vorderseite' }; };
 const variant = () => product.variants.find((v: any) => v.color === val('color') && v.size === val('size'));
 const qty = () => Math.max(1, Math.min(99, Number(q<HTMLInputElement>('#qty').value) || 1));
-const area = (side: Side = state.view): Area | null => dz.sizes[sizeKey()]?.areas?.[side] ?? null;
+/**
+ * Druckbereich einer Seite für die gewählte (oder angegebene) Kleidergröße, mit der Kalibrierung des Fotos der gewählten Farbe.
+ * Die Kalibrierung in print-areas.json gilt für das Referenzfoto. Andere Farbfotos sind teils anders gerahmt, ihr Ausgleich
+ * steht in views[side].colorFix (register-colors.py). Die schematische Rückseite zeigt das Frontfoto: dort gilt der Ausgleich von vorne.
+ */
+function area(side: Side = state.view, size: string = sizeKey()): Area | null {
+  const raw = dz.sizes[size]?.areas?.[side]; if (!raw) return null;
+  const v = dz.views || {};
+  const fixes = side === 'back' && (!v.back || v.back.schematic) ? v.front?.colorFix : v[side]?.colorFix;
+  return calForColor(raw, fixes?.[photoFor(side).src] || null);
+}
 const visH = (m: Motif, wU: number) => heightFor(wU, m.bw, m.bh);
 
 function snapshot() { return JSON.stringify({ place: state.place, planned: state.planned }); }
@@ -106,7 +120,8 @@ function photoFor(side: Side) {
   return { src: front, flat: side === 'back' };
 }
 
-function renderStage() {
+function renderStage() { drawStage(); renderRef(); }
+function drawStage() {
   const side = state.view, a = area(side);
   const ph = photoFor(side);
   if (el.photo.getAttribute('href') !== ph.src) el.photo.setAttribute('href', ph.src);
@@ -118,7 +133,7 @@ function renderStage() {
     b.setAttribute('aria-selected', String(on)); b.classList.toggle('is-on', on); b.hidden = !activeSides()[s];
     (b.querySelector('[data-dz-dot]') as HTMLElement).hidden = !state.motif[s];
   });
-  if (!a?.zone) { [el.zone, el.zoneBg, el.hole].forEach((r) => r.setAttribute('width', '0')); el.motifG.setAttribute('visibility', 'hidden'); el.excl.innerHTML = ''; setViewBox(); return; }
+  if (!a?.zone) { planBox = null; planG.setAttribute('visibility', 'hidden'); [el.zone, el.zoneBg, el.hole].forEach((r) => r.setAttribute('width', '0')); el.motifG.setAttribute('visibility', 'hidden'); el.excl.innerHTML = ''; setViewBox(); return; }
   const z = a.zone;
   const [x0, y0] = cmToPx(a, z.xMinU, z.yMinU), [x1, y1] = cmToPx(a, z.xMaxU, z.yMaxU);
   for (const r of [el.zone, el.zoneBg, el.hole]) { r.setAttribute('x', String(x0)); r.setAttribute('y', String(y0)); r.setAttribute('width', String(x1 - x0)); r.setAttribute('height', String(y1 - y0)); }
@@ -148,9 +163,11 @@ function renderStage() {
 
 // Ohne Motiv: die gewählte Druckgröße als Fläche zeigen (hochkant, wenn sie passt, sonst quer; nie größer als der Druckbereich)
 const planG = q<SVGGElement>('[data-dz-plan-g]'), planR = q<SVGRectElement>('[data-dz-plan]'), planT = q<SVGTextElement>('[data-dz-plan-t]');
+let planBox: { centerXU: number; topYU: number; widthU: number; heightU: number } | null = null; // gezeigte Fläche ohne Motiv (für Vergleiche)
 function renderPlan(side: Side, a: Area) {
   const key = state.planned[side];
   const t = !state.motif[side] && key && a.zone ? tariffsFor(a.tariffScale || 1).find((x) => x.key === key) : null;
+  planBox = null;
   if (!t || !a.zone) { planG.setAttribute('visibility', 'hidden'); return; }
   const z = a.zone, zw = z.xMaxU - z.xMinU;
   const pr = key === 'Brust' && a.presets.chest_left ? a.presets.chest_left : a.presets.center || { centerXU: 0, topYU: z.yMinU, widthU: 0 };
@@ -159,12 +176,98 @@ function renderPlan(side: Side, a: Area) {
   if (h > zh && w <= zh && h <= zw) [w, h] = [h, w];
   w = Math.min(w, zw); h = Math.min(h, zh);
   const cx = Math.min(Math.max(pr.centerXU, z.xMinU + w / 2), z.xMaxU - w / 2);
+  planBox = { centerXU: cx, topYU: pr.topYU, widthU: w, heightU: h };
   const [x0, y0] = cmToPx(a, cx - w / 2, pr.topYU), [x1, y1] = cmToPx(a, cx + w / 2, pr.topYU + h);
   planR.setAttribute('x', String(x0)); planR.setAttribute('y', String(y0)); planR.setAttribute('width', String(x1 - x0)); planR.setAttribute('height', String(y1 - y0));
   const fs = Math.max(11, Math.min(26, (x1 - x0) / 5)), cxp = (x0 + x1) / 2, cyp = (y0 + y1) / 2;
   planT.setAttribute('x', String(cxp)); planT.setAttribute('y', String(cyp)); planT.setAttribute('font-size', String(fs));
   planT.innerHTML = `<tspan x="${cxp}" dy="-0.5em">${key}</tspan><tspan x="${cxp}" dy="1.2em" font-size="${fs * 0.6}">${fmtCm(w)} × ${fmtCm(h)} cm</tspan>`;
   planG.setAttribute('visibility', 'visible');
+}
+
+// ── Größe sichtbar machen ────────────────────────────────────────────────────
+// Leiste unter dem Foto: auf welcher Kleidergröße die Vorschau zeigt. Ohne gewählte Größe ein deutlicher Hinweis.
+const sizeTag = q<HTMLElement>('[data-dz-sizetag]');
+function renderSizeTag() {
+  const chosen = val('size');
+  sizeTag.classList.toggle('is-warn', !chosen);
+  sizeTag.innerHTML = chosen
+    ? `<span class="dz-long">Vorschau auf Größe</span><span class="dz-short">Größe</span> <b>${sizeText(chosen)}</b>`
+    : `<span><span class="dz-long">Noch keine Größe gewählt. Vorschau auf</span><span class="dz-short">Vorschau:</span> <b>${sizeText(sizeKey())}</b></span> <button type="button" data-dz-pick-size>Größe wählen</button>`;
+}
+
+// Vergleichsumriss im selben Maßstab: DIN-A4-Blatt (21 × 29,7 cm) oder Handy (ca. 7 × 15 cm), am Motiv bzw. an der Druckfläche ausgerichtet
+const REF_OBJ = { a4: { w: 2100, h: 2970, r: 0, label: 'DIN A4', sub: '21 × 29,7 cm' }, phone: { w: 715, h: 1475, r: 90, label: 'Handy', sub: 'ca. 7 × 15 cm' } } as const;
+const refG = q<SVGGElement>('[data-dz-ref]'), refR = q<SVGRectElement>('[data-dz-ref-r]'), refBg = q<SVGRectElement>('[data-dz-ref-bg]'), refT = q<SVGTextElement>('[data-dz-ref-t]');
+function renderRef() {
+  document.querySelectorAll<HTMLButtonElement>('[data-dz-refobj]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.dzRefobj === state.refObj)));
+  const a = area(), o = state.refObj ? REF_OBJ[state.refObj] : null;
+  if (!o || !a?.zone) { refG.setAttribute('visibility', 'hidden'); return; }
+  const at = placementFor(state.view) || planBox || { centerXU: 0, topYU: a.presets.center?.topYU ?? a.zone.yMinU };
+  const [x0, y0] = cmToPx(a, at.centerXU - o.w / 2, at.topYU), [x1, y1] = cmToPx(a, at.centerXU + o.w / 2, at.topYU + o.h);
+  const r = (o.r / 100) * a.pxPerCm;
+  for (const e of [refR, refBg]) { e.setAttribute('x', String(x0)); e.setAttribute('y', String(y0)); e.setAttribute('width', String(x1 - x0)); e.setAttribute('height', String(y1 - y0)); e.setAttribute('rx', String(r)); }
+  // Beschriftung unter dem Umriss (oben liegt meist das Motiv), auf jedem Bildschirm mindestens ca. 12 px groß
+  const fs = 13 * pxScale;
+  refT.setAttribute('x', String(x0)); refT.setAttribute('y', String(y1 + fs * 1.15)); refT.setAttribute('font-size', String(fs));
+  refT.innerHTML = `${o.label} <tspan font-weight="500">${o.sub}</tspan>`;
+  refG.setAttribute('visibility', 'visible');
+}
+
+// Vorschläge „Klein / Mittel / Groß / Maximal“ für das Motiv auf der gewählten Größe (aus dem Kern, je Produkt und Größe)
+const suggEl = q<HTMLElement>('[data-dz-sugg]');
+let suggList: ReturnType<typeof sizeSuggestions> = [];
+function renderSugg(side: Side, a: Area, m: Motif, p: Place) {
+  suggList = sizeSuggestions({ zone: a.zone, presets: a.presets, halfChestCm: dz.sizes[sizeKey()]?.halfChestCm, side, bw: m.bw, bh: m.bh });
+  q('[data-dz-sugg-size]').textContent = sizeText(sizeKey());
+  suggEl.innerHTML = suggList.map((s) => {
+    const on = s.widthU === p.widthU && s.centerXU === p.centerXU && s.topYU === p.topYU;
+    const t = classifyPrint({ widthU: s.widthU, heightU: s.heightU, side, allowBrust: ALLOW_BRUST, surcharges: SUR, scale: a.tariffScale || 1 });
+    return `<button type="button" class="dz-sugg" data-sugg="${s.key}" aria-pressed="${on}">${s.label}<small>${fmtCm(s.widthU)} × ${fmtCm(s.heightU)} cm${s.note ? `, ${s.note}` : ''}${'key' in t && t.key ? ` · ${t.key}` : ''}</small></button>`;
+  }).join('');
+}
+
+// Größenvergleich: kleinste, gewählte und größte Größe im selben Maßstab (Kragennaht auf einer Linie). Gleiche cm, das Textil wächst.
+const cmp = { box: q<HTMLElement>('[data-dz-compare]'), svg: q<SVGSVGElement>('[data-dz-compare-svg]'), legend: q<HTMLElement>('[data-dz-compare-legend]'), title: q<HTMLElement>('[data-dz-compare-title]') };
+function renderCompare() {
+  const side = state.view;
+  // Nur Größen, die es in der gewählten Farbe gibt (sonst alle mit Druckbereich)
+  const withZone = SIZE_ORDER.filter((s) => dz.sizes[s]?.areas?.[side]?.zone);
+  const inColor = withZone.filter((s) => product.variants.some((v: any) => v.color === val('color') && v.size === s && v.available));
+  const list = inColor.length >= 2 ? inColor : withZone;
+  const cur = sizeKey();
+  if (list.length < 2) { cmp.box.hidden = true; return; }
+  const sizes = [list[0], ...(list.includes(cur) && cur !== list[0] && cur !== list[list.length - 1] ? [cur] : []), list[list.length - 1]];
+  const m = state.motif[side], pl = placementFor(side) || planBox;
+  const ph = photoFor(side);
+  const res = compareSizes(Object.fromEntries(sizes.map((s) => [s, dz.sizes[s]])), side, pl);
+  // Abbildung je Größe: Foto in cm, Kragennaht im Ursprung der jeweiligen Spalte
+  const frames = sizes.map((s) => { const a = area(side, s)!; const k = a.pxPerCm, [ox, oy] = a.originPx; return { s, a, k, ox, oy, L: -ox / k, R: (720 - ox) / k, T: -oy / k, B: (900 - oy) / k }; });
+  const CROP = 0.82; // transparente Ränder der Fotos teilweise überlappen lassen
+  let x = 0; const cx: number[] = [];
+  const EDGE = 0.9; // außen nicht in die Ärmel schneiden
+  frames.forEach((f, i) => { x = i ? x + CROP * (frames[i - 1].R - f.L) : -EDGE * f.L; cx.push(x); });
+  const vx0 = 0, vx1 = cx[cx.length - 1] + EDGE * frames[frames.length - 1].R;
+  const vy0 = Math.min(...frames.map((f) => f.T)) * 0.92, vy1 = Math.max(...frames.map((f) => f.B)) * 0.93;
+  cmp.svg.setAttribute('viewBox', `${vx0} ${vy0} ${vx1 - vx0} ${vy1 - vy0}`);
+  const flat = ph.flat ? ' filter="url(#dz-flat)"' : '';
+  let out = `<desc id="dz-compare-desc" data-dz-compare-desc></desc><line class="dz-cmp-line" x1="${vx0}" x2="${vx1}" y1="0" y2="0" />`;
+  frames.forEach((f, i) => {
+    const z = f.a.zone!, X = cx[i];
+    out += `<image href="${ph.src}" width="720" height="900" transform="translate(${X} 0) scale(${1 / f.k}) translate(${-f.ox} ${-f.oy})" preserveAspectRatio="xMidYMid meet"${flat} />`;
+    out += `<rect class="dz-cmp-zone" x="${X + z.xMinU / 100}" y="${z.yMinU / 100}" width="${(z.xMaxU - z.xMinU) / 100}" height="${(z.yMaxU - z.yMinU) / 100}" />`;
+    if (!pl) return;
+    const vx = X + (pl.centerXU - pl.widthU / 2) / 100, vy = pl.topYU / 100, vw = pl.widthU / 100, vh = (m ? visH(m, pl.widthU).exact : pl.heightU) / 100;
+    if (m) { const sx = vw / m.bw, sy = vh / m.bh; out += `<image href="${m.local}" x="${vx - m.bx * sx}" y="${vy - m.by * sy}" width="${m.W * sx}" height="${m.H * sy}" preserveAspectRatio="none" />`; }
+    else out += `<rect class="dz-cmp-plan" x="${vx}" y="${vy}" width="${vw}" height="${vh}" />`;
+    if (!res[i].fits) out += `<rect class="dz-cmp-bad" x="${vx}" y="${vy}" width="${vw}" height="${vh}" />`;
+  });
+  cmp.svg.innerHTML = out;
+  const names = sizes.map(sizeText);
+  cmp.title.textContent = `So wirkt ${m ? 'dein Motiv' : 'die Druckgröße'} auf ${names.slice(0, -1).join(', ')} und ${names[names.length - 1]}`;
+  cmp.legend.innerHTML = res.map((r) => `<div class="${r.size === cur && val('size') ? 'is-cur' : ''}${r.fits || !pl ? '' : ' is-bad'}"><b>${sizeText(r.size)}</b>${!pl ? '' : r.fits ? `${Math.round((r.share || 0) * 100)} % der Brustbreite` : 'passt so nicht'}</div>`).join('');
+  q<SVGDescElement>('[data-dz-compare-desc]').textContent = pl ? `${fmtCm(pl.widthU)} cm breit. ${res.map((r) => `${sizeText(r.size)}: ${r.fits ? `${Math.round((r.share || 0) * 100)} Prozent der Brustbreite` : 'passt nicht'}`).join(', ')}.` : 'Druckbereich je Größe';
+  cmp.box.hidden = false;
 }
 
 function setViewBox() {
@@ -198,6 +301,7 @@ function renderPanel() {
   if (!m || !p || !a?.zone) { renderMessages(); return; }
   const h = visH(m, p.widthU);
   const maxW = maxWidthAt(a.zone, m.bw, m.bh, p.centerXU, p.topYU);
+  renderSugg(side, a, m, p);
   if (document.activeElement !== el.w) el.w.value = fieldVal(p.widthU);
   if (document.activeElement !== el.h) el.h.value = fieldVal(Math.round(h.exact));
   if (document.activeElement !== el.top) el.top.value = fieldVal(p.topYU);
@@ -284,7 +388,7 @@ function blockers(): string[] {
 // Ärmelgröße je Kleidergröße (Kinder/Baby kleiner, Preis gleich)
 const sleeveScale = () => dz.sizes[sizeKey()]?.areas?.front?.tariffScale || 1;
 function renderSleeves() { const t = sleeveScale() < 1 ? sleeveText(sleeveScale()) : 'max. ca. 8 x 8 cm'; form.querySelectorAll<HTMLElement>('[data-sleeve-hint]').forEach((e) => (e.textContent = t)); }
-function render() { renderSleeves(); renderStage(); renderPanel(); renderCalc(); const b = blockers(); el.add.setAttribute('aria-disabled', String(b.length > 0)); el.add.classList.toggle('is-blocked', b.length > 0); }
+function render() { renderSleeves(); renderSizeTag(); renderStage(); renderPanel(); renderCompare(); renderCalc(); const b = blockers(); el.add.setAttribute('aria-disabled', String(b.length > 0)); el.add.classList.toggle('is-blocked', b.length > 0); }
 
 // ── Upload und Motivprüfung ──────────────────────────────────────────────────
 async function inspect(file: File): Promise<Omit<Motif, 'url' | 'status' | 'token' | 'file' | 'name' | 'local'> & { local: string }> {
@@ -460,6 +564,17 @@ document.querySelectorAll<HTMLButtonElement>('[data-dz-nudge]').forEach((b) => b
 el.undo.addEventListener('click', () => { const s = history.past.pop(); if (s == null) return; history.future.push(lastCommitted); restore(s); });
 el.redo.addEventListener('click', () => { const s = history.future.pop(); if (s == null) return; history.past.push(lastCommitted); restore(s); });
 document.querySelectorAll<HTMLButtonElement>('[data-dz-tab]').forEach((b) => b.addEventListener('click', () => { state.view = b.dataset.dzTab as Side; render(); }));
+suggEl.addEventListener('click', (e) => {
+  const b = (e.target as Element).closest<HTMLButtonElement>('[data-sugg]'); const s = suggList.find((x) => x.key === b?.dataset.sugg); const p = state.place[state.view];
+  if (!s || !p) return;
+  state.place[state.view] = { centerXU: s.centerXU, topYU: s.topYU, widthU: s.widthU, preset: s.preset }; commit(); render(); announce();
+});
+document.querySelectorAll<HTMLButtonElement>('[data-dz-refobj]').forEach((b) => b.addEventListener('click', () => { const k = b.dataset.dzRefobj as 'a4' | 'phone'; state.refObj = state.refObj === k ? '' : k; renderRef(); }));
+sizeTag.addEventListener('click', (e) => {
+  if (!(e.target as Element).closest('[data-dz-pick-size]')) return;
+  const box = q<HTMLElement>('[data-sizes]'); box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  box.querySelector<HTMLInputElement>('input[name="size"]:not(:disabled)')?.focus({ preventScroll: true });
+});
 q('[data-dz-zoom="in"]').addEventListener('click', () => { state.zoomed = true; render(); });
 q('[data-dz-zoom="out"]').addEventListener('click', () => { state.zoomed = false; render(); });
 addEventListener('resize', () => renderStage());

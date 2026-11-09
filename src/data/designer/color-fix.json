@@ -1,0 +1,7138 @@
+{
+ "baby-body": {
+  "front": {
+   "/img/products/baby-body-white-flat.webp": [
+    0.9875,
+    7.99,
+    7.83,
+    0.9562
+   ],
+   "/img/products/baby-body-cotton-pink-flat.webp": [
+    0.9887,
+    7.55,
+    6.76,
+    0.9575
+   ],
+   "/img/products/baby-body-natural-raw-flat.webp": [
+    0.9875,
+    15.4,
+    9.8,
+    0.9149
+   ],
+   "/img/products/baby-body-butter-flat.webp": [
+    0.9875,
+    7.99,
+    7.83,
+    0.9568
+   ],
+   "/img/products/baby-body-fraiche-peche-flat.webp": [
+    0.99,
+    7.1,
+    7.66,
+    0.9567
+   ],
+   "/img/products/baby-body-eco-heather-flat.webp": [
+    1.022,
+    -4.66,
+    -6.72,
+    0.8868
+   ],
+   "/img/products/baby-body-blue-soul-flat.webp": [
+    0.9975,
+    3.91,
+    3.18,
+    0.9232
+   ],
+   "/img/products/baby-body-caribbean-blue-flat.webp": [
+    0.9887,
+    7.55,
+    6.76,
+    0.9573
+   ],
+   "/img/products/baby-body-french-navy-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ]
+  },
+  "back": {
+   "/img/products/baby-body-white-flat-back.webp": [
+    0.9825,
+    -2.61,
+    7.18,
+    0.9457
+   ],
+   "/img/products/baby-body-cotton-pink-flat-back.webp": [
+    0.9825,
+    -2.61,
+    7.18,
+    0.9452
+   ],
+   "/img/products/baby-body-natural-raw-flat-back.webp": [
+    0.9825,
+    1.32,
+    7.18,
+    0.8958
+   ],
+   "/img/products/baby-body-butter-flat-back.webp": [
+    0.9837,
+    -2.07,
+    6.11,
+    0.946
+   ],
+   "/img/products/baby-body-fraiche-peche-flat-back.webp": [
+    0.9837,
+    -3.05,
+    6.11,
+    0.9453
+   ],
+   "/img/products/baby-body-eco-heather-flat-back.webp": [
+    0.9887,
+    1.56,
+    5.77,
+    0.9328
+   ],
+   "/img/products/baby-body-blue-soul-flat-back.webp": [
+    0.9887,
+    0.08,
+    2.81,
+    0.9237
+   ],
+   "/img/products/baby-body-caribbean-blue-flat-back.webp": [
+    0.9837,
+    -2.07,
+    6.11,
+    0.9459
+   ],
+   "/img/products/baby-body-french-navy-flat-back.webp": [
+    0.9987,
+    -0.05,
+    1.09,
+    0.9986
+   ]
+  }
+ },
+ "baby-cruiser": {
+  "front": {
+   "/img/products/baby-cruiser-natural-raw-flat.webp": [
+    1.0052,
+    -1.38,
+    -2.85,
+    0.9803
+   ],
+   "/img/products/baby-cruiser-butter-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9966
+   ],
+   "/img/products/baby-cruiser-heather-grey-flat.webp": [
+    1.0017,
+    -0.63,
+    -0.28,
+    0.992
+   ]
+  },
+  "back": {
+   "/img/products/baby-cruiser-natural-raw-flat-back.webp": [
+    0.9965,
+    1.25,
+    2.56,
+    0.9932
+   ],
+   "/img/products/baby-cruiser-butter-flat-back.webp": [
+    0.9948,
+    2.37,
+    3.84,
+    0.9919
+   ],
+   "/img/products/baby-cruiser-heather-grey-flat-back.webp": [
+    0.9983,
+    0.63,
+    2.28,
+    0.9943
+   ]
+  }
+ },
+ "classic-hoodie": {
+  "front": {
+   "/img/products/classic-hoodie-black-opal.webp": [
+    1.0,
+    -1.0,
+    0.0,
+    0.9992
+   ],
+   "/img/products/classic-hoodie-bordeaux.webp": [
+    1.0075,
+    -2.21,
+    -2.3,
+    0.9393
+   ],
+   "/img/products/classic-hoodie-bottle-green.webp": [
+    1.0063,
+    -2.26,
+    -1.24,
+    0.9441
+   ],
+   "/img/products/classic-hoodie-bright-royal.webp": [
+    1.0,
+    1.0,
+    0.0,
+    0.9923
+   ],
+   "/img/products/classic-hoodie-grey-heather.webp": [
+    0.9975,
+    -0.1,
+    -0.9,
+    0.9971
+   ],
+   "/img/products/classic-hoodie-natural.webp": [
+    1.0038,
+    -0.85,
+    0.86,
+    0.9515
+   ],
+   "/img/products/classic-hoodie-navy-blue.webp": [
+    1.0,
+    -1.0,
+    0.0,
+    0.9987
+   ],
+   "/img/products/classic-hoodie-slate-grey.webp": [
+    0.9988,
+    -0.05,
+    0.05,
+    0.9987
+   ],
+   "/img/products/classic-hoodie-scarlet-red.webp": [
+    1.0,
+    -1.0,
+    0.0,
+    0.9984
+   ],
+   "/img/products/classic-hoodie-white.webp": [
+    0.9963,
+    -0.65,
+    3.13,
+    0.9781
+   ]
+  }
+ },
+ "classic-hoodie-kinder": {
+  "front": {
+   "/img/products/classic-hoodie-kinder-bright-royal.webp": [
+    0.9961,
+    1.17,
+    2.27,
+    0.9909
+   ],
+   "/img/products/classic-hoodie-kinder-grey-heather.webp": [
+    0.9961,
+    1.17,
+    1.27,
+    0.991
+   ],
+   "/img/products/classic-hoodie-kinder-navy-blue.webp": [
+    0.9961,
+    1.17,
+    1.27,
+    0.9905
+   ],
+   "/img/products/classic-hoodie-kinder-scarlet-red.webp": [
+    0.9948,
+    1.64,
+    3.35,
+    0.9895
+   ],
+   "/img/products/classic-hoodie-kinder-white.webp": [
+    0.9948,
+    1.64,
+    2.36,
+    0.9897
+   ]
+  }
+ },
+ "cruiser-2-0": {
+  "front": {
+   "/img/products/cruiser-2-0-white-flat.webp": [
+    0.9856,
+    6.68,
+    7.69,
+    0.9738
+   ],
+   "/img/products/cruiser-2-0-red-flat.webp": [
+    0.9882,
+    5.25,
+    -0.34,
+    0.9795
+   ],
+   "/img/products/cruiser-2-0-cotton-pink-flat.webp": [
+    1.0,
+    0.5,
+    0.0,
+    0.9938
+   ],
+   "/img/products/cruiser-2-0-off-white-flat.webp": [
+    0.9843,
+    7.14,
+    8.74,
+    0.9725
+   ],
+   "/img/products/cruiser-2-0-desert-dust-flat.webp": [
+    0.9987,
+    -0.02,
+    0.07,
+    0.9984
+   ],
+   "/img/products/cruiser-2-0-glazed-green-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/cruiser-2-0-ochre-flat.webp": [
+    0.9882,
+    5.25,
+    -0.34,
+    0.9795
+   ],
+   "/img/products/cruiser-2-0-bright-blue-flat.webp": [
+    0.9882,
+    5.25,
+    -0.34,
+    0.9791
+   ],
+   "/img/products/cruiser-2-0-natural-raw-flat.webp": [
+    0.9843,
+    3.69,
+    -2.09,
+    0.9689
+   ],
+   "/img/products/cruiser-2-0-lavender-flat.webp": [
+    1.0,
+    0.5,
+    0.0,
+    0.9939
+   ],
+   "/img/products/cruiser-2-0-worker-blue-flat.webp": [
+    0.9882,
+    5.25,
+    -0.34,
+    0.9793
+   ],
+   "/img/products/cruiser-2-0-aloe-flat.webp": [
+    0.9987,
+    0.48,
+    0.07,
+    0.9965
+   ],
+   "/img/products/cruiser-2-0-fraiche-peche-flat.webp": [
+    0.9987,
+    0.48,
+    0.07,
+    0.9965
+   ],
+   "/img/products/cruiser-2-0-latte-flat.webp": [
+    0.9882,
+    5.25,
+    -0.34,
+    0.9791
+   ],
+   "/img/products/cruiser-2-0-purple-love-flat.webp": [
+    1.0,
+    0.5,
+    0.0,
+    0.9941
+   ],
+   "/img/products/cruiser-2-0-red-brown-flat.webp": [
+    0.9987,
+    -0.02,
+    0.07,
+    0.9993
+   ],
+   "/img/products/cruiser-2-0-bubble-pink-flat.webp": [
+    0.9629,
+    14.35,
+    10.71,
+    0.9701
+   ],
+   "/img/products/cruiser-2-0-nispero-flat.webp": [
+    0.9728,
+    9.06,
+    14.14,
+    0.9675
+   ],
+   "/img/products/cruiser-2-0-fiesta-flat.webp": [
+    0.9987,
+    0.48,
+    0.07,
+    0.9969
+   ],
+   "/img/products/cruiser-2-0-green-bay-flat.webp": [
+    1.0,
+    0.5,
+    0.0,
+    0.9942
+   ],
+   "/img/products/cruiser-2-0-aqua-blue-flat.webp": [
+    0.9882,
+    5.75,
+    -0.34,
+    0.9788
+   ],
+   "/img/products/cruiser-2-0-cool-heather-grey-flat.webp": [
+    1.0053,
+    -0.92,
+    -5.32,
+    0.9569
+   ],
+   "/img/products/cruiser-2-0-eco-heather-flat.webp": [
+    1.0532,
+    -17.61,
+    -14.51,
+    0.8438
+   ],
+   "/img/products/cruiser-2-0-blue-soul-flat.webp": [
+    0.9987,
+    0.48,
+    0.07,
+    0.9965
+   ],
+   "/img/products/cruiser-2-0-khaki-flat.webp": [
+    0.9882,
+    5.25,
+    -0.34,
+    0.9793
+   ],
+   "/img/products/cruiser-2-0-burgundy-flat.webp": [
+    0.9882,
+    5.25,
+    -0.34,
+    0.9794
+   ],
+   "/img/products/cruiser-2-0-heather-grey-flat.webp": [
+    0.9641,
+    13.91,
+    11.62,
+    0.9716
+   ],
+   "/img/products/cruiser-2-0-anthracite-flat.webp": [
+    0.9882,
+    5.75,
+    -0.34,
+    0.9785
+   ],
+   "/img/products/cruiser-2-0-lilac-dream-flat.webp": [
+    0.906,
+    35.24,
+    24.2,
+    0.8623
+   ],
+   "/img/products/cruiser-2-0-viva-yellow-flat.webp": [
+    0.9295,
+    26.33,
+    23.4,
+    0.9192
+   ],
+   "/img/products/cruiser-2-0-pool-blue-flat.webp": [
+    0.9295,
+    26.33,
+    23.4,
+    0.9194
+   ],
+   "/img/products/cruiser-2-0-stone-flat.webp": [
+    0.9295,
+    26.33,
+    23.4,
+    0.9193
+   ],
+   "/img/products/cruiser-2-0-mid-heather-grey-flat.webp": [
+    0.9973,
+    2.45,
+    -3.84,
+    0.9746
+   ],
+   "/img/products/cruiser-2-0-dark-heather-grey-flat.webp": [
+    0.9973,
+    2.45,
+    -3.84,
+    0.9744
+   ],
+   "/img/products/cruiser-2-0-stargazer-flat.webp": [
+    0.9882,
+    5.25,
+    -0.34,
+    0.9793
+   ],
+   "/img/products/cruiser-2-0-india-ink-grey-flat.webp": [
+    0.9882,
+    5.25,
+    -0.34,
+    0.9793
+   ],
+   "/img/products/cruiser-2-0-french-navy-flat.webp": [
+    0.9882,
+    5.25,
+    -0.34,
+    0.9793
+   ],
+   "/img/products/cruiser-2-0-blue-ice-flat.webp": [
+    0.9495,
+    19.16,
+    21.77,
+    0.9406
+   ],
+   "/img/products/cruiser-2-0-mindful-blue-flat.webp": [
+    0.9531,
+    18.34,
+    19.74,
+    0.9472
+   ],
+   "/img/products/cruiser-2-0-heritage-brown-flat.webp": [
+    0.9531,
+    18.34,
+    19.74,
+    0.9471
+   ],
+   "/img/products/cruiser-2-0-heather-haze-flat.webp": [
+    0.9459,
+    20.44,
+    21.89,
+    0.9297
+   ],
+   "/img/products/cruiser-2-0-misty-jade-flat.webp": [
+    0.9519,
+    18.77,
+    19.78,
+    0.9467
+   ],
+   "/img/products/cruiser-2-0-deep-plum-flat.webp": [
+    0.9238,
+    28.38,
+    22.67,
+    0.9072
+   ],
+   "/img/products/cruiser-2-0-earthy-red-flat.webp": [
+    0.9238,
+    28.38,
+    22.67,
+    0.9072
+   ],
+   "/img/products/cruiser-2-0-pebble-blue-flat.webp": [
+    0.9519,
+    18.77,
+    19.78,
+    0.9465
+   ],
+   "/img/products/cruiser-2-0-blue-grey-flat.webp": [
+    0.9238,
+    29.31,
+    22.67,
+    0.9075
+   ],
+   "/img/products/cruiser-2-0-deep-teal-flat.webp": [
+    0.9882,
+    5.25,
+    -0.34,
+    0.9793
+   ],
+   "/img/products/cruiser-2-0-mosstone-flat.webp": [
+    0.9531,
+    18.34,
+    19.74,
+    0.9473
+   ],
+   "/img/products/cruiser-2-0-faded-olive-flat.webp": [
+    0.9238,
+    29.31,
+    22.67,
+    0.9074
+   ],
+   "/img/products/cruiser-2-0-honey-paper-flat.webp": [
+    0.94,
+    21.63,
+    21.16,
+    0.9277
+   ]
+  },
+  "back": {
+   "/img/products/cruiser-2-0-white-flat-back.webp": [
+    1.0538,
+    -17.31,
+    -36.87,
+    0.8342
+   ],
+   "/img/products/cruiser-2-0-red-flat-back.webp": [
+    1.0437,
+    -19.43,
+    -24.67,
+    0.8568
+   ],
+   "/img/products/cruiser-2-0-cotton-pink-flat-back.webp": [
+    1.0013,
+    -0.47,
+    -0.05,
+    0.996
+   ],
+   "/img/products/cruiser-2-0-off-white-flat-back.webp": [
+    1.0552,
+    -17.83,
+    -36.98,
+    0.832
+   ],
+   "/img/products/cruiser-2-0-desert-dust-flat-back.webp": [
+    1.0,
+    0.5,
+    1.0,
+    0.9962
+   ],
+   "/img/products/cruiser-2-0-glazed-green-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/cruiser-2-0-ochre-flat-back.webp": [
+    1.0437,
+    -19.43,
+    -23.62,
+    0.8569
+   ],
+   "/img/products/cruiser-2-0-bright-blue-flat-back.webp": [
+    1.0409,
+    -16.84,
+    -23.45,
+    0.862
+   ],
+   "/img/products/cruiser-2-0-natural-raw-flat-back.webp": [
+    0.977,
+    10.26,
+    0.9,
+    0.9541
+   ],
+   "/img/products/cruiser-2-0-lavender-flat-back.webp": [
+    1.0013,
+    -0.47,
+    -0.05,
+    0.996
+   ],
+   "/img/products/cruiser-2-0-worker-blue-flat-back.webp": [
+    1.0437,
+    -19.43,
+    -24.67,
+    0.8567
+   ],
+   "/img/products/cruiser-2-0-aloe-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9993
+   ],
+   "/img/products/cruiser-2-0-fraiche-peche-flat-back.webp": [
+    1.0,
+    0.5,
+    1.0,
+    0.9963
+   ],
+   "/img/products/cruiser-2-0-latte-flat-back.webp": [
+    1.0423,
+    -17.87,
+    -23.54,
+    0.8589
+   ],
+   "/img/products/cruiser-2-0-purple-love-flat-back.webp": [
+    1.0,
+    0.5,
+    1.0,
+    0.996
+   ],
+   "/img/products/cruiser-2-0-red-brown-flat-back.webp": [
+    1.0013,
+    -0.22,
+    -0.05,
+    0.9932
+   ],
+   "/img/products/cruiser-2-0-bubble-pink-flat-back.webp": [
+    0.9961,
+    0.91,
+    -11.8,
+    0.963
+   ],
+   "/img/products/cruiser-2-0-nispero-flat-back.webp": [
+    0.9987,
+    0.97,
+    -6.94,
+    0.9418
+   ],
+   "/img/products/cruiser-2-0-fiesta-flat-back.webp": [
+    1.0013,
+    -0.47,
+    -0.05,
+    0.9963
+   ],
+   "/img/products/cruiser-2-0-green-bay-flat-back.webp": [
+    1.0013,
+    -0.47,
+    -0.05,
+    0.996
+   ],
+   "/img/products/cruiser-2-0-aqua-blue-flat-back.webp": [
+    1.0437,
+    -19.43,
+    -23.62,
+    0.8569
+   ],
+   "/img/products/cruiser-2-0-cool-heather-grey-flat-back.webp": [
+    0.9745,
+    9.21,
+    0.99,
+    0.9357
+   ],
+   "/img/products/cruiser-2-0-eco-heather-flat-back.webp": [
+    1.0745,
+    -26.37,
+    -25.47,
+    0.7855
+   ],
+   "/img/products/cruiser-2-0-blue-soul-flat-back.webp": [
+    1.0013,
+    -0.47,
+    -0.05,
+    0.9959
+   ],
+   "/img/products/cruiser-2-0-khaki-flat-back.webp": [
+    1.0437,
+    -19.43,
+    -23.62,
+    0.8567
+   ],
+   "/img/products/cruiser-2-0-burgundy-flat-back.webp": [
+    1.0437,
+    -19.43,
+    -24.67,
+    0.8567
+   ],
+   "/img/products/cruiser-2-0-heather-grey-flat-back.webp": [
+    1.0066,
+    1.14,
+    -9.32,
+    0.9555
+   ],
+   "/img/products/cruiser-2-0-anthracite-flat-back.webp": [
+    1.0437,
+    -19.43,
+    -24.67,
+    0.8567
+   ],
+   "/img/products/cruiser-2-0-lilac-dream-flat-back.webp": [
+    0.9294,
+    27.33,
+    6.47,
+    0.8946
+   ],
+   "/img/products/cruiser-2-0-viva-yellow-flat-back.webp": [
+    0.955,
+    18.16,
+    5.58,
+    0.9254
+   ],
+   "/img/products/cruiser-2-0-pool-blue-flat-back.webp": [
+    0.955,
+    17.68,
+    5.58,
+    0.9249
+   ],
+   "/img/products/cruiser-2-0-stone-flat-back.webp": [
+    0.955,
+    18.16,
+    5.58,
+    0.9254
+   ],
+   "/img/products/cruiser-2-0-mid-heather-grey-flat-back.webp": [
+    1.0745,
+    -24.76,
+    -36.22,
+    0.8019
+   ],
+   "/img/products/cruiser-2-0-dark-heather-grey-flat-back.webp": [
+    1.0745,
+    -24.76,
+    -36.22,
+    0.8018
+   ],
+   "/img/products/cruiser-2-0-stargazer-flat-back.webp": [
+    1.0437,
+    -19.43,
+    -24.67,
+    0.8567
+   ],
+   "/img/products/cruiser-2-0-india-ink-grey-flat-back.webp": [
+    1.0437,
+    -19.43,
+    -23.62,
+    0.8567
+   ],
+   "/img/products/cruiser-2-0-french-navy-flat-back.webp": [
+    1.0437,
+    -19.43,
+    -23.62,
+    0.8567
+   ],
+   "/img/products/cruiser-2-0-blue-ice-flat-back.webp": [
+    0.9732,
+    11.12,
+    -2.85,
+    0.9598
+   ],
+   "/img/products/cruiser-2-0-mindful-blue-flat-back.webp": [
+    0.9671,
+    13.82,
+    6.12,
+    0.9497
+   ],
+   "/img/products/cruiser-2-0-heritage-brown-flat-back.webp": [
+    0.9671,
+    13.82,
+    6.12,
+    0.9497
+   ],
+   "/img/products/cruiser-2-0-heather-haze-flat-back.webp": [
+    0.9598,
+    15.95,
+    4.45,
+    0.9548
+   ],
+   "/img/products/cruiser-2-0-misty-jade-flat-back.webp": [
+    0.9671,
+    13.82,
+    6.12,
+    0.95
+   ],
+   "/img/products/cruiser-2-0-deep-plum-flat-back.webp": [
+    0.9409,
+    22.75,
+    4.19,
+    0.9479
+   ],
+   "/img/products/cruiser-2-0-earthy-red-flat-back.webp": [
+    0.9409,
+    22.75,
+    4.19,
+    0.9479
+   ],
+   "/img/products/cruiser-2-0-pebble-blue-flat-back.webp": [
+    0.9671,
+    13.82,
+    6.12,
+    0.9497
+   ],
+   "/img/products/cruiser-2-0-blue-grey-flat-back.webp": [
+    0.9409,
+    22.75,
+    4.19,
+    0.9478
+   ],
+   "/img/products/cruiser-2-0-deep-teal-flat-back.webp": [
+    1.0437,
+    -19.43,
+    -23.62,
+    0.8567
+   ],
+   "/img/products/cruiser-2-0-mosstone-flat-back.webp": [
+    0.9671,
+    13.82,
+    6.12,
+    0.9498
+   ],
+   "/img/products/cruiser-2-0-faded-olive-flat-back.webp": [
+    0.9386,
+    23.11,
+    4.27,
+    0.9463
+   ],
+   "/img/products/cruiser-2-0-honey-paper-flat-back.webp": [
+    0.9502,
+    18.44,
+    5.74,
+    0.9534
+   ]
+  }
+ },
+ "drummer-2-0": {
+  "front": {
+   "/img/products/drummer-2-0-white-flat.webp": [
+    0.9827,
+    9.17,
+    5.99,
+    0.9742
+   ],
+   "/img/products/drummer-2-0-red-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9994
+   ],
+   "/img/products/drummer-2-0-cotton-pink-flat.webp": [
+    0.988,
+    5.81,
+    3.71,
+    0.9636
+   ],
+   "/img/products/drummer-2-0-bright-orange-flat.webp": [
+    1.0,
+    -0.5,
+    0.0,
+    0.9993
+   ],
+   "/img/products/drummer-2-0-desert-dust-flat.webp": [
+    1.0,
+    -0.5,
+    0.0,
+    0.9991
+   ],
+   "/img/products/drummer-2-0-canyon-pink-flat.webp": [
+    1.0014,
+    -0.49,
+    1.92,
+    0.9515
+   ],
+   "/img/products/drummer-2-0-natural-raw-flat.webp": [
+    0.9226,
+    28.79,
+    30.63,
+    0.9309
+   ],
+   "/img/products/drummer-2-0-spectra-yellow-flat.webp": [
+    1.0054,
+    -0.95,
+    1.67,
+    0.9476
+   ],
+   "/img/products/drummer-2-0-khaki-flat.webp": [
+    1.0,
+    -0.5,
+    0.0,
+    0.9996
+   ],
+   "/img/products/drummer-2-0-bottle-green-flat.webp": [
+    1.0,
+    -0.5,
+    0.0,
+    0.9997
+   ],
+   "/img/products/drummer-2-0-royal-blue-flat.webp": [
+    1.0,
+    -0.5,
+    0.0,
+    0.9995
+   ],
+   "/img/products/drummer-2-0-sky-blue-flat.webp": [
+    0.988,
+    5.81,
+    3.71,
+    0.9634
+   ],
+   "/img/products/drummer-2-0-burgundy-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/drummer-2-0-heather-grey-flat.webp": [
+    1.0109,
+    -5.46,
+    -7.76,
+    0.9494
+   ],
+   "/img/products/drummer-2-0-anthracite-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/drummer-2-0-dusk-flat.webp": [
+    0.9249,
+    27.5,
+    30.55,
+    0.8905
+   ],
+   "/img/products/drummer-2-0-vintage-white-flat.webp": [
+    0.9775,
+    9.07,
+    15.08,
+    0.9725
+   ],
+   "/img/products/drummer-2-0-dark-heather-grey-flat.webp": [
+    0.9893,
+    5.34,
+    5.61,
+    0.9838
+   ],
+   "/img/products/drummer-2-0-india-ink-grey-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/drummer-2-0-caribbean-blue-flat.webp": [
+    0.988,
+    5.81,
+    3.71,
+    0.9634
+   ],
+   "/img/products/drummer-2-0-french-navy-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/drummer-2-0-blue-ice-flat.webp": [
+    0.9736,
+    9.97,
+    12.34,
+    0.9093
+   ],
+   "/img/products/drummer-2-0-heritage-brown-flat.webp": [
+    0.9023,
+    36.07,
+    31.32,
+    0.8904
+   ],
+   "/img/products/drummer-2-0-deep-plum-flat.webp": [
+    0.9343,
+    25.53,
+    28.37,
+    0.9349
+   ],
+   "/img/products/drummer-2-0-blue-grey-flat.webp": [
+    0.9366,
+    24.22,
+    28.28,
+    0.9365
+   ],
+   "/img/products/drummer-2-0-verdant-green-flat.webp": [
+    0.9523,
+    16.93,
+    22.95,
+    0.9468
+   ],
+   "/img/products/drummer-2-0-mocha-flat.webp": [
+    0.9511,
+    17.61,
+    23.96,
+    0.9473
+   ]
+  },
+  "back": {
+   "/img/products/drummer-2-0-white-flat-back.webp": [
+    0.9972,
+    1.0,
+    -1.81,
+    0.9813
+   ],
+   "/img/products/drummer-2-0-red-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/drummer-2-0-cotton-pink-flat-back.webp": [
+    0.9639,
+    11.07,
+    9.13,
+    0.9507
+   ],
+   "/img/products/drummer-2-0-bright-orange-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9995
+   ],
+   "/img/products/drummer-2-0-desert-dust-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9991
+   ],
+   "/img/products/drummer-2-0-canyon-pink-flat-back.webp": [
+    0.9877,
+    3.94,
+    -5.11,
+    0.9735
+   ],
+   "/img/products/drummer-2-0-natural-raw-flat-back.webp": [
+    0.9562,
+    15.28,
+    11.5,
+    0.9424
+   ],
+   "/img/products/drummer-2-0-spectra-yellow-flat-back.webp": [
+    0.973,
+    11.18,
+    21.24,
+    0.9579
+   ],
+   "/img/products/drummer-2-0-khaki-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/drummer-2-0-bottle-green-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/drummer-2-0-royal-blue-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/drummer-2-0-sky-blue-flat-back.webp": [
+    0.9639,
+    11.55,
+    9.13,
+    0.9513
+   ],
+   "/img/products/drummer-2-0-burgundy-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/drummer-2-0-heather-grey-flat-back.webp": [
+    1.0286,
+    -9.76,
+    -9.09,
+    0.9149
+   ],
+   "/img/products/drummer-2-0-anthracite-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/drummer-2-0-dusk-flat-back.webp": [
+    0.9102,
+    32.27,
+    31.41,
+    0.9224
+   ],
+   "/img/products/drummer-2-0-vintage-white-flat-back.webp": [
+    0.9717,
+    9.22,
+    18.39,
+    0.9345
+   ],
+   "/img/products/drummer-2-0-dark-heather-grey-flat-back.webp": [
+    0.9231,
+    25.81,
+    27.23,
+    0.89
+   ],
+   "/img/products/drummer-2-0-india-ink-grey-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/drummer-2-0-caribbean-blue-flat-back.webp": [
+    0.9639,
+    11.07,
+    9.13,
+    0.9507
+   ],
+   "/img/products/drummer-2-0-french-navy-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/drummer-2-0-blue-ice-flat-back.webp": [
+    0.9011,
+    35.09,
+    34.46,
+    0.9157
+   ],
+   "/img/products/drummer-2-0-heritage-brown-flat-back.webp": [
+    0.8944,
+    37.96,
+    35.59,
+    0.8748
+   ],
+   "/img/products/drummer-2-0-deep-plum-flat-back.webp": [
+    0.9057,
+    30.75,
+    26.15,
+    0.8999
+   ],
+   "/img/products/drummer-2-0-blue-grey-flat-back.webp": [
+    0.9057,
+    30.75,
+    26.15,
+    0.8997
+   ],
+   "/img/products/drummer-2-0-verdant-green-flat-back.webp": [
+    0.9278,
+    26.41,
+    33.53,
+    0.9058
+   ],
+   "/img/products/drummer-2-0-mocha-flat-back.webp": [
+    0.929,
+    25.98,
+    33.48,
+    0.9054
+   ]
+  }
+ },
+ "mini-cruiser-2-0": {
+  "front": {
+   "/img/products/mini-cruiser-2-0-white-flat.webp": [
+    0.9686,
+    15.78,
+    13.6,
+    0.9475
+   ],
+   "/img/products/mini-cruiser-2-0-red-flat.webp": [
+    1.0,
+    0.25,
+    0.0,
+    0.9996
+   ],
+   "/img/products/mini-cruiser-2-0-cotton-pink-flat.webp": [
+    1.0014,
+    -0.0,
+    -0.13,
+    0.9919
+   ],
+   "/img/products/mini-cruiser-2-0-glazed-green-flat.webp": [
+    1.0,
+    -0.25,
+    1.0,
+    0.9998
+   ],
+   "/img/products/mini-cruiser-2-0-ochre-flat.webp": [
+    0.9958,
+    1.0,
+    2.39,
+    0.9956
+   ],
+   "/img/products/mini-cruiser-2-0-bright-blue-flat.webp": [
+    1.0014,
+    -0.5,
+    -0.13,
+    0.9959
+   ],
+   "/img/products/mini-cruiser-2-0-natural-raw-flat.webp": [
+    0.978,
+    2.23,
+    9.9,
+    0.957
+   ],
+   "/img/products/mini-cruiser-2-0-teal-monstera-flat.webp": [
+    0.9986,
+    0.0,
+    1.13,
+    0.9991
+   ],
+   "/img/products/mini-cruiser-2-0-lavender-flat.webp": [
+    0.9986,
+    -0.25,
+    1.13,
+    0.9987
+   ],
+   "/img/products/mini-cruiser-2-0-butter-flat.webp": [
+    0.9986,
+    -0.5,
+    1.13,
+    0.997
+   ],
+   "/img/products/mini-cruiser-2-0-aloe-flat.webp": [
+    0.9986,
+    0.5,
+    1.13,
+    0.9966
+   ],
+   "/img/products/mini-cruiser-2-0-go-green-flat.webp": [
+    0.9986,
+    0.25,
+    1.13,
+    0.999
+   ],
+   "/img/products/mini-cruiser-2-0-fraiche-p-che-flat.webp": [
+    1.0,
+    -0.5,
+    1.0,
+    0.9955
+   ],
+   "/img/products/mini-cruiser-2-0-fiesta-flat.webp": [
+    0.9647,
+    9.93,
+    15.86,
+    0.9439
+   ],
+   "/img/products/mini-cruiser-2-0-aqua-blue-flat.webp": [
+    0.9673,
+    5.6,
+    14.68,
+    0.9458
+   ],
+   "/img/products/mini-cruiser-2-0-eco-heather-flat.webp": [
+    0.9972,
+    1.25,
+    1.26,
+    0.9662
+   ],
+   "/img/products/mini-cruiser-2-0-blue-soul-flat.webp": [
+    0.9986,
+    -0.5,
+    1.13,
+    0.9971
+   ],
+   "/img/products/mini-cruiser-2-0-khaki-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/mini-cruiser-2-0-royal-blue-flat.webp": [
+    1.0,
+    -0.25,
+    1.0,
+    0.9996
+   ],
+   "/img/products/mini-cruiser-2-0-burgundy-flat.webp": [
+    1.0014,
+    -0.5,
+    -0.13,
+    0.9962
+   ],
+   "/img/products/mini-cruiser-2-0-heather-grey-flat.webp": [
+    0.9608,
+    9.9,
+    18.1,
+    0.9556
+   ],
+   "/img/products/mini-cruiser-2-0-anthracite-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/mini-cruiser-2-0-viva-yellow-flat.webp": [
+    0.9986,
+    0.25,
+    1.13,
+    0.9988
+   ],
+   "/img/products/mini-cruiser-2-0-pool-blue-flat.webp": [
+    0.9986,
+    1.25,
+    1.13,
+    0.9954
+   ],
+   "/img/products/mini-cruiser-2-0-pink-joy-flat.webp": [
+    1.0,
+    -0.5,
+    1.0,
+    0.9955
+   ],
+   "/img/products/mini-cruiser-2-0-stargazer-flat.webp": [
+    0.8976,
+    33.56,
+    45.53,
+    0.8888
+   ],
+   "/img/products/mini-cruiser-2-0-caribbean-blue-flat.webp": [
+    0.9986,
+    0.5,
+    1.13,
+    0.9966
+   ],
+   "/img/products/mini-cruiser-2-0-french-navy-flat.webp": [
+    0.9608,
+    15.18,
+    17.14,
+    0.9529
+   ],
+   "/img/products/mini-cruiser-2-0-heritage-brown-flat.webp": [
+    0.8976,
+    33.56,
+    45.53,
+    0.8886
+   ]
+  },
+  "back": {
+   "/img/products/mini-cruiser-2-0-white-flat-back.webp": [
+    0.9748,
+    7.58,
+    11.32,
+    0.9442
+   ],
+   "/img/products/mini-cruiser-2-0-red-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9992
+   ],
+   "/img/products/mini-cruiser-2-0-cotton-pink-flat-back.webp": [
+    1.0014,
+    -0.52,
+    -0.15,
+    0.9954
+   ],
+   "/img/products/mini-cruiser-2-0-glazed-green-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/mini-cruiser-2-0-ochre-flat-back.webp": [
+    0.9971,
+    1.53,
+    1.29,
+    0.999
+   ],
+   "/img/products/mini-cruiser-2-0-bright-blue-flat-back.webp": [
+    1.0014,
+    -0.52,
+    -0.15,
+    0.9955
+   ],
+   "/img/products/mini-cruiser-2-0-natural-raw-flat-back.webp": [
+    0.9789,
+    6.09,
+    9.96,
+    0.9493
+   ],
+   "/img/products/mini-cruiser-2-0-teal-monstera-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9994
+   ],
+   "/img/products/mini-cruiser-2-0-lavender-flat-back.webp": [
+    1.0014,
+    -0.52,
+    -0.15,
+    0.9955
+   ],
+   "/img/products/mini-cruiser-2-0-butter-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.997
+   ],
+   "/img/products/mini-cruiser-2-0-aloe-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9992
+   ],
+   "/img/products/mini-cruiser-2-0-go-green-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9993
+   ],
+   "/img/products/mini-cruiser-2-0-fraiche-p-che-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9987
+   ],
+   "/img/products/mini-cruiser-2-0-fiesta-flat-back.webp": [
+    0.9547,
+    14.8,
+    20.8,
+    0.9327
+   ],
+   "/img/products/mini-cruiser-2-0-aqua-blue-flat-back.webp": [
+    0.9748,
+    7.58,
+    11.32,
+    0.955
+   ],
+   "/img/products/mini-cruiser-2-0-eco-heather-flat-back.webp": [
+    1.0072,
+    -2.59,
+    -1.74,
+    0.9528
+   ],
+   "/img/products/mini-cruiser-2-0-blue-soul-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9991
+   ],
+   "/img/products/mini-cruiser-2-0-khaki-flat-back.webp": [
+    0.9971,
+    1.53,
+    1.29,
+    0.9992
+   ],
+   "/img/products/mini-cruiser-2-0-royal-blue-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9995
+   ],
+   "/img/products/mini-cruiser-2-0-burgundy-flat-back.webp": [
+    0.9971,
+    1.53,
+    1.29,
+    0.9993
+   ],
+   "/img/products/mini-cruiser-2-0-heather-grey-flat-back.webp": [
+    0.9482,
+    20.46,
+    23.25,
+    0.9309
+   ],
+   "/img/products/mini-cruiser-2-0-anthracite-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/mini-cruiser-2-0-viva-yellow-flat-back.webp": [
+    0.9971,
+    1.03,
+    1.29,
+    0.9931
+   ],
+   "/img/products/mini-cruiser-2-0-pool-blue-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9991
+   ],
+   "/img/products/mini-cruiser-2-0-pink-joy-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.999
+   ],
+   "/img/products/mini-cruiser-2-0-stargazer-flat-back.webp": [
+    0.8711,
+    44.91,
+    58.32,
+    0.8593
+   ],
+   "/img/products/mini-cruiser-2-0-caribbean-blue-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9992
+   ],
+   "/img/products/mini-cruiser-2-0-french-navy-flat-back.webp": [
+    0.9469,
+    18.08,
+    23.35,
+    0.9271
+   ],
+   "/img/products/mini-cruiser-2-0-heritage-brown-flat-back.webp": [
+    0.8711,
+    44.69,
+    58.32,
+    0.8589
+   ]
+  }
+ },
+ "side-pocket-hoodie-select": {
+  "front": {
+   "/img/products/side-pocket-hoodie-select-black-opal.webp": [
+    0.9987,
+    -0.54,
+    0.04,
+    0.9971
+   ],
+   "/img/products/side-pocket-hoodie-select-grey-heather.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9959
+   ]
+  }
+ },
+ "mini-changer-2-0": {
+  "front": {
+   "/img/products/mini-changer-2-0-french-navy-flat.webp": [
+    1.0805,
+    -28.94,
+    -40.27,
+    0.7837
+   ],
+   "/img/products/mini-changer-2-0-heather-grey-flat.webp": [
+    1.1009,
+    -36.29,
+    -53.04,
+    0.74
+   ],
+   "/img/products/mini-changer-2-0-natural-raw-flat.webp": [
+    1.1097,
+    -39.44,
+    -54.34,
+    0.7114
+   ],
+   "/img/products/mini-changer-2-0-fraiche-peche-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9994
+   ],
+   "/img/products/mini-changer-2-0-cotton-pink-flat.webp": [
+    1.0014,
+    -0.52,
+    -0.16,
+    0.9961
+   ],
+   "/img/products/mini-changer-2-0-pink-joy-flat.webp": [
+    1.0,
+    0.0,
+    -1.0,
+    0.9966
+   ],
+   "/img/products/mini-changer-2-0-lavender-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/mini-changer-2-0-royal-blue-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/mini-changer-2-0-blue-soul-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9994
+   ],
+   "/img/products/mini-changer-2-0-bright-blue-flat.webp": [
+    1.0,
+    0.5,
+    0.0,
+    0.9942
+   ],
+   "/img/products/mini-changer-2-0-stargazer-flat.webp": [
+    1.0689,
+    -24.77,
+    -33.3,
+    0.7617
+   ],
+   "/img/products/mini-changer-2-0-pool-blue-flat.webp": [
+    1.0,
+    0.0,
+    -1.0,
+    0.9968
+   ],
+   "/img/products/mini-changer-2-0-glazed-green-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9999
+   ],
+   "/img/products/mini-changer-2-0-teal-monstera-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9995
+   ],
+   "/img/products/mini-changer-2-0-khaki-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/mini-changer-2-0-viva-yellow-flat.webp": [
+    1.0,
+    -0.25,
+    -1.0,
+    0.9966
+   ],
+   "/img/products/mini-changer-2-0-heritage-brown-flat.webp": [
+    1.0689,
+    -25.31,
+    -33.3,
+    0.7633
+   ],
+   "/img/products/mini-changer-2-0-eco-heather-flat.webp": [
+    1.0673,
+    -24.19,
+    -35.22,
+    0.8047
+   ]
+  },
+  "back": {
+   "/img/products/mini-changer-2-0-french-navy-flat-back.webp": [
+    1.0431,
+    -15.51,
+    -22.38,
+    0.8805
+   ],
+   "/img/products/mini-changer-2-0-heather-grey-flat-back.webp": [
+    1.0187,
+    -6.73,
+    -12.66,
+    0.9081
+   ],
+   "/img/products/mini-changer-2-0-natural-raw-flat-back.webp": [
+    1.0349,
+    -14.09,
+    -20.13,
+    0.8829
+   ],
+   "/img/products/mini-changer-2-0-fraiche-peche-flat-back.webp": [
+    1.0015,
+    -0.55,
+    -0.2,
+    0.9943
+   ],
+   "/img/products/mini-changer-2-0-cotton-pink-flat-back.webp": [
+    1.0015,
+    -0.55,
+    -0.2,
+    0.9944
+   ],
+   "/img/products/mini-changer-2-0-pink-joy-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9991
+   ],
+   "/img/products/mini-changer-2-0-lavender-flat-back.webp": [
+    1.0015,
+    -0.55,
+    -0.2,
+    0.9942
+   ],
+   "/img/products/mini-changer-2-0-royal-blue-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9995
+   ],
+   "/img/products/mini-changer-2-0-blue-soul-flat-back.webp": [
+    1.0015,
+    -0.55,
+    -0.2,
+    0.9943
+   ],
+   "/img/products/mini-changer-2-0-bright-blue-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9992
+   ],
+   "/img/products/mini-changer-2-0-stargazer-flat-back.webp": [
+    1.0,
+    -1.5,
+    -5.0,
+    0.9176
+   ],
+   "/img/products/mini-changer-2-0-pool-blue-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9995
+   ],
+   "/img/products/mini-changer-2-0-glazed-green-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/mini-changer-2-0-teal-monstera-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9995
+   ],
+   "/img/products/mini-changer-2-0-khaki-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/mini-changer-2-0-viva-yellow-flat-back.webp": [
+    1.0015,
+    -0.55,
+    -0.2,
+    0.9942
+   ],
+   "/img/products/mini-changer-2-0-heritage-brown-flat-back.webp": [
+    0.9985,
+    -1.95,
+    -4.79,
+    0.9181
+   ],
+   "/img/products/mini-changer-2-0-eco-heather-flat-back.webp": [
+    0.9894,
+    5.79,
+    2.39,
+    0.9792
+   ]
+  }
+ },
+ "classic-fleece-jacket": {
+  "front": {
+   "/img/products/classic-fleece-jacket-black-opal.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9991
+   ],
+   "/img/products/classic-fleece-jacket-grey-steel.webp": [
+    1.0012,
+    0.06,
+    -0.04,
+    0.991
+   ]
+  }
+ },
+ "classic-fleece-jacket-damen": {
+  "front": {
+   "/img/products/classic-fleece-jacket-damen-black-opal.webp": [
+    1.0052,
+    -2.86,
+    -1.18,
+    0.9743
+   ],
+   "/img/products/classic-fleece-jacket-damen-scarlet-red.webp": [
+    1.0013,
+    0.04,
+    -0.04,
+    0.9892
+   ]
+  }
+ },
+ "classic-polo": {
+  "front": {
+   "/img/products/classic-polo-black-opal.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/classic-polo-bottle-green.webp": [
+    1.0,
+    0.5,
+    0.0,
+    0.9944
+   ],
+   "/img/products/classic-polo-bright-royal.webp": [
+    1.0,
+    -1.0,
+    0.0,
+    0.999
+   ],
+   "/img/products/classic-polo-deep-berry.webp": [
+    0.9988,
+    -0.06,
+    0.04,
+    0.9976
+   ],
+   "/img/products/classic-polo-grey-heather.webp": [
+    0.9988,
+    -0.06,
+    0.04,
+    0.9974
+   ],
+   "/img/products/classic-polo-kiwi-green.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9993
+   ],
+   "/img/products/classic-polo-light-blue.webp": [
+    0.9988,
+    -0.06,
+    0.04,
+    0.9975
+   ],
+   "/img/products/classic-polo-navy-blue.webp": [
+    1.0,
+    0.5,
+    0.0,
+    0.9945
+   ],
+   "/img/products/classic-polo-ocean-blue.webp": [
+    1.0,
+    -1.0,
+    0.0,
+    0.9989
+   ],
+   "/img/products/classic-polo-orange.webp": [
+    0.9988,
+    -0.06,
+    0.04,
+    0.9975
+   ],
+   "/img/products/classic-polo-scarlet-red.webp": [
+    0.9988,
+    -0.06,
+    0.04,
+    0.9975
+   ],
+   "/img/products/classic-polo-white.webp": [
+    0.9988,
+    -0.06,
+    0.04,
+    0.9973
+   ],
+   "/img/products/classic-polo-yellow.webp": [
+    0.9988,
+    -0.06,
+    0.04,
+    0.9973
+   ]
+  }
+ },
+ "classic-polo-damen": {
+  "front": {
+   "/img/products/classic-polo-damen-black-opal.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/classic-polo-damen-brilliant-orange.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9993
+   ],
+   "/img/products/classic-polo-damen-bright-royal.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/classic-polo-damen-grey-heather.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/classic-polo-damen-kiwi-green.webp": [
+    1.0,
+    -0.5,
+    0.0,
+    0.9956
+   ],
+   "/img/products/classic-polo-damen-light-blue.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/classic-polo-damen-navy-blue.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9999
+   ],
+   "/img/products/classic-polo-damen-ocean-blue.webp": [
+    1.0,
+    -0.5,
+    0.0,
+    0.9957
+   ],
+   "/img/products/classic-polo-damen-sweet-pink.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9995
+   ],
+   "/img/products/classic-polo-damen-scarlet-red.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9993
+   ],
+   "/img/products/classic-polo-damen-white.webp": [
+    0.9988,
+    -0.57,
+    1.04,
+    0.9959
+   ],
+   "/img/products/classic-polo-damen-yellow.webp": [
+    0.9988,
+    -0.07,
+    1.04,
+    0.995
+   ]
+  }
+ },
+ "classic-polo-kinder": {
+  "front": {
+   "/img/products/classic-polo-kinder-bright-royal.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/classic-polo-kinder-grey-heather.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/classic-polo-kinder-navy-blue.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9999
+   ],
+   "/img/products/classic-polo-kinder-scarlet-red.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9995
+   ],
+   "/img/products/classic-polo-kinder-white.webp": [
+    1.0026,
+    -1.95,
+    -1.17,
+    0.9921
+   ]
+  }
+ },
+ "coaster-vintage": {
+  "front": {
+   "/img/products/coaster-vintage-g-dyed-blue-stone-flat.webp": [
+    0.9682,
+    11.44,
+    14.93,
+    0.9488
+   ],
+   "/img/products/coaster-vintage-g-dyed-black-rock-flat.webp": [
+    0.9358,
+    23.07,
+    29.13,
+    0.9261
+   ]
+  },
+  "back": {
+   "/img/products/coaster-vintage-g-dyed-blue-stone-flat-back.webp": [
+    1.0043,
+    -2.05,
+    -0.46,
+    0.9331
+   ],
+   "/img/products/coaster-vintage-g-dyed-black-rock-flat-back.webp": [
+    0.9642,
+    12.12,
+    18.29,
+    0.9042
+   ]
+  }
+ },
+ "prepster-2-0": {
+  "front": {
+   "/img/products/prepster-2-0-white-flat.webp": [
+    1.0185,
+    -6.64,
+    -6.33,
+    0.9357
+   ],
+   "/img/products/prepster-2-0-red-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9993
+   ],
+   "/img/products/prepster-2-0-glazed-green-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/prepster-2-0-natural-raw-flat.webp": [
+    1.0015,
+    -0.54,
+    -0.18,
+    0.9818
+   ],
+   "/img/products/prepster-2-0-worker-blue-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9989
+   ],
+   "/img/products/prepster-2-0-aloe-flat.webp": [
+    1.0015,
+    -0.54,
+    -0.18,
+    0.9964
+   ],
+   "/img/products/prepster-2-0-latte-flat.webp": [
+    0.9985,
+    0.54,
+    1.18,
+    0.9786
+   ],
+   "/img/products/prepster-2-0-red-brown-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9992
+   ],
+   "/img/products/prepster-2-0-bubble-pink-flat.webp": [
+    1.0015,
+    -0.54,
+    -0.18,
+    0.9959
+   ],
+   "/img/products/prepster-2-0-nispero-flat.webp": [
+    1.0015,
+    -0.54,
+    -0.18,
+    0.9963
+   ],
+   "/img/products/prepster-2-0-cool-heather-grey-flat.webp": [
+    0.9707,
+    10.54,
+    13.28,
+    0.9648
+   ],
+   "/img/products/prepster-2-0-eco-heather-flat.webp": [
+    0.997,
+    1.08,
+    1.36,
+    0.9764
+   ],
+   "/img/products/prepster-2-0-blue-soul-flat.webp": [
+    1.0015,
+    -0.54,
+    -0.18,
+    0.9963
+   ],
+   "/img/products/prepster-2-0-khaki-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9994
+   ],
+   "/img/products/prepster-2-0-burgundy-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/prepster-2-0-heather-grey-flat.webp": [
+    0.9678,
+    11.56,
+    15.54,
+    0.9705
+   ],
+   "/img/products/prepster-2-0-anthracite-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9995
+   ],
+   "/img/products/prepster-2-0-dark-heather-grey-flat.webp": [
+    0.9678,
+    11.56,
+    15.54,
+    0.9707
+   ],
+   "/img/products/prepster-2-0-dark-heather-blue-flat.webp": [
+    0.9678,
+    11.56,
+    15.54,
+    0.9705
+   ],
+   "/img/products/prepster-2-0-stargazer-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/prepster-2-0-french-navy-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/prepster-2-0-deep-plum-flat.webp": [
+    0.9608,
+    14.09,
+    19.19,
+    0.9565
+   ],
+   "/img/products/prepster-2-0-passionate-red-flat.webp": [
+    0.8886,
+    40.05,
+    53.58,
+    0.9016
+   ],
+   "/img/products/prepster-2-0-pebble-blue-flat.webp": [
+    0.8874,
+    40.04,
+    53.67,
+    0.9008
+   ],
+   "/img/products/prepster-2-0-blue-grey-flat.webp": [
+    0.9608,
+    14.09,
+    19.19,
+    0.9564
+   ],
+   "/img/products/prepster-2-0-deep-teal-flat.webp": [
+    0.885,
+    41.33,
+    52.08,
+    0.9197
+   ],
+   "/img/products/prepster-2-0-mocha-flat.webp": [
+    0.8862,
+    40.91,
+    51.99,
+    0.9193
+   ]
+  },
+  "back": {
+   "/img/products/prepster-2-0-white-flat-back.webp": [
+    1.015,
+    -5.38,
+    -3.75,
+    0.9223
+   ],
+   "/img/products/prepster-2-0-red-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9991
+   ],
+   "/img/products/prepster-2-0-glazed-green-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/prepster-2-0-natural-raw-flat-back.webp": [
+    1.0273,
+    -9.29,
+    -12.38,
+    0.917
+   ],
+   "/img/products/prepster-2-0-worker-blue-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9982
+   ],
+   "/img/products/prepster-2-0-aloe-flat-back.webp": [
+    1.0015,
+    -0.53,
+    -0.17,
+    0.9965
+   ],
+   "/img/products/prepster-2-0-latte-flat-back.webp": [
+    1.0119,
+    -4.29,
+    -5.42,
+    0.9382
+   ],
+   "/img/products/prepster-2-0-red-brown-flat-back.webp": [
+    1.0015,
+    -0.53,
+    -0.17,
+    0.9958
+   ],
+   "/img/products/prepster-2-0-bubble-pink-flat-back.webp": [
+    1.0015,
+    -0.53,
+    -0.17,
+    0.9963
+   ],
+   "/img/products/prepster-2-0-nispero-flat-back.webp": [
+    1.0015,
+    -0.53,
+    -1.17,
+    0.9964
+   ],
+   "/img/products/prepster-2-0-cool-heather-grey-flat-back.webp": [
+    1.0059,
+    -2.13,
+    -1.69,
+    0.9698
+   ],
+   "/img/products/prepster-2-0-eco-heather-flat-back.webp": [
+    1.0273,
+    -9.8,
+    -12.38,
+    0.9089
+   ],
+   "/img/products/prepster-2-0-blue-soul-flat-back.webp": [
+    1.0015,
+    -0.53,
+    -0.17,
+    0.9965
+   ],
+   "/img/products/prepster-2-0-khaki-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9986
+   ],
+   "/img/products/prepster-2-0-burgundy-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.999
+   ],
+   "/img/products/prepster-2-0-heather-grey-flat-back.webp": [
+    1.018,
+    -6.48,
+    -7.16,
+    0.9329
+   ],
+   "/img/products/prepster-2-0-anthracite-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9986
+   ],
+   "/img/products/prepster-2-0-dark-heather-grey-flat-back.webp": [
+    1.018,
+    -6.48,
+    -7.16,
+    0.9326
+   ],
+   "/img/products/prepster-2-0-dark-heather-blue-flat-back.webp": [
+    1.018,
+    -6.48,
+    -7.16,
+    0.933
+   ],
+   "/img/products/prepster-2-0-stargazer-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9988
+   ],
+   "/img/products/prepster-2-0-french-navy-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9987
+   ],
+   "/img/products/prepster-2-0-deep-plum-flat-back.webp": [
+    0.9941,
+    2.11,
+    2.66,
+    0.9745
+   ],
+   "/img/products/prepster-2-0-passionate-red-flat-back.webp": [
+    0.8968,
+    37.54,
+    47.74,
+    0.9192
+   ],
+   "/img/products/prepster-2-0-pebble-blue-flat-back.webp": [
+    0.8992,
+    36.69,
+    47.56,
+    0.9182
+   ],
+   "/img/products/prepster-2-0-blue-grey-flat-back.webp": [
+    0.9941,
+    2.11,
+    2.66,
+    0.9746
+   ],
+   "/img/products/prepster-2-0-deep-teal-flat-back.webp": [
+    0.9028,
+    34.49,
+    43.68,
+    0.9407
+   ],
+   "/img/products/prepster-2-0-mocha-flat-back.webp": [
+    0.9028,
+    34.49,
+    43.68,
+    0.9406
+   ]
+  }
+ },
+ "stanley-coaster": {
+  "front": {
+   "/img/products/stanley-coaster-white-flat.webp": [
+    0.9808,
+    5.41,
+    10.69,
+    0.9767
+   ],
+   "/img/products/stanley-coaster-red-flat.webp": [
+    0.9876,
+    4.46,
+    6.14,
+    0.9757
+   ],
+   "/img/products/stanley-coaster-cotton-pink-flat.webp": [
+    1.0228,
+    -7.69,
+    -10.4,
+    0.9411
+   ],
+   "/img/products/stanley-coaster-natural-raw-flat.webp": [
+    0.9835,
+    4.93,
+    9.47,
+    0.9776
+   ],
+   "/img/products/stanley-coaster-khaki-flat.webp": [
+    1.0228,
+    -8.21,
+    -10.4,
+    0.9421
+   ],
+   "/img/products/stanley-coaster-bottle-green-flat.webp": [
+    1.0228,
+    -8.21,
+    -10.4,
+    0.9398
+   ],
+   "/img/products/stanley-coaster-royal-blue-flat.webp": [
+    1.0228,
+    -8.21,
+    -10.4,
+    0.9397
+   ],
+   "/img/products/stanley-coaster-sky-blue-flat.webp": [
+    1.0228,
+    -8.21,
+    -9.37,
+    0.9392
+   ],
+   "/img/products/stanley-coaster-burgundy-flat.webp": [
+    1.0228,
+    -8.21,
+    -10.4,
+    0.9397
+   ],
+   "/img/products/stanley-coaster-heather-grey-flat.webp": [
+    1.0099,
+    -4.55,
+    -1.97,
+    0.9435
+   ],
+   "/img/products/stanley-coaster-anthracite-flat.webp": [
+    1.0228,
+    -8.21,
+    -10.4,
+    0.9397
+   ],
+   "/img/products/stanley-coaster-ocean-depth-flat.webp": [
+    1.0113,
+    -4.06,
+    -2.11,
+    0.9535
+   ],
+   "/img/products/stanley-coaster-caribbean-blue-flat.webp": [
+    1.0228,
+    -8.21,
+    -9.37,
+    0.9395
+   ],
+   "/img/products/stanley-coaster-french-navy-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9985
+   ],
+   "/img/products/stanley-coaster-deep-plum-flat.webp": [
+    1.007,
+    -2.78,
+    0.33,
+    0.9625
+   ],
+   "/img/products/stanley-coaster-verdant-green-flat.webp": [
+    0.9397,
+    21.2,
+    26.52,
+    0.9561
+   ],
+   "/img/products/stanley-coaster-india-ink-grey-flat.webp": [
+    0.9385,
+    22.12,
+    26.61,
+    0.9577
+   ]
+  },
+  "back": {
+   "/img/products/stanley-coaster-white-flat-back.webp": [
+    0.9652,
+    10.1,
+    16.34,
+    0.9608
+   ],
+   "/img/products/stanley-coaster-red-flat-back.webp": [
+    0.9844,
+    5.62,
+    6.62,
+    0.9744
+   ],
+   "/img/products/stanley-coaster-cotton-pink-flat-back.webp": [
+    0.9802,
+    7.12,
+    10.0,
+    0.9586
+   ],
+   "/img/products/stanley-coaster-natural-raw-flat-back.webp": [
+    0.9692,
+    12.03,
+    14.98,
+    0.9781
+   ],
+   "/img/products/stanley-coaster-khaki-flat-back.webp": [
+    0.9788,
+    1.25,
+    7.2,
+    0.9512
+   ],
+   "/img/products/stanley-coaster-bottle-green-flat-back.webp": [
+    0.9585,
+    14.92,
+    17.94,
+    0.963
+   ],
+   "/img/products/stanley-coaster-royal-blue-flat-back.webp": [
+    0.9585,
+    14.92,
+    17.94,
+    0.9609
+   ],
+   "/img/products/stanley-coaster-sky-blue-flat-back.webp": [
+    0.9585,
+    14.92,
+    17.94,
+    0.9601
+   ],
+   "/img/products/stanley-coaster-burgundy-flat-back.webp": [
+    0.9585,
+    14.92,
+    17.94,
+    0.9614
+   ],
+   "/img/products/stanley-coaster-heather-grey-flat-back.webp": [
+    0.9612,
+    13.48,
+    18.65,
+    0.9545
+   ],
+   "/img/products/stanley-coaster-anthracite-flat-back.webp": [
+    0.9585,
+    14.92,
+    17.94,
+    0.9626
+   ],
+   "/img/products/stanley-coaster-ocean-depth-flat-back.webp": [
+    0.9559,
+    16.82,
+    21.06,
+    0.9509
+   ],
+   "/img/products/stanley-coaster-caribbean-blue-flat-back.webp": [
+    0.9585,
+    14.92,
+    17.94,
+    0.9601
+   ],
+   "/img/products/stanley-coaster-french-navy-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/stanley-coaster-deep-plum-flat-back.webp": [
+    0.9957,
+    1.55,
+    1.47,
+    0.9634
+   ],
+   "/img/products/stanley-coaster-verdant-green-flat-back.webp": [
+    0.9167,
+    30.42,
+    36.58,
+    0.9509
+   ],
+   "/img/products/stanley-coaster-india-ink-grey-flat-back.webp": [
+    0.9167,
+    30.42,
+    36.58,
+    0.9511
+   ]
+  }
+ },
+ "stanley-guider": {
+  "front": {
+   "/img/products/stanley-guider-french-navy-flat.webp": [
+    0.9986,
+    -0.0,
+    0.11,
+    0.9992
+   ],
+   "/img/products/stanley-guider-burgundy-flat.webp": [
+    0.9986,
+    -0.0,
+    0.11,
+    0.9992
+   ],
+   "/img/products/stanley-guider-mindful-blue-flat.webp": [
+    1.0,
+    -0.5,
+    0.0,
+    0.9963
+   ],
+   "/img/products/stanley-guider-stargazer-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/stanley-guider-khaki-flat.webp": [
+    1.0,
+    -0.5,
+    0.0,
+    0.9963
+   ],
+   "/img/products/stanley-guider-desert-dust-flat.webp": [
+    1.0284,
+    -15.87,
+    -10.47,
+    0.9191
+   ],
+   "/img/products/stanley-guider-anthracite-flat.webp": [
+    0.9986,
+    -0.0,
+    0.11,
+    0.9991
+   ]
+  },
+  "back": {
+   "/img/products/stanley-guider-french-navy-flat-back.webp": [
+    1.0,
+    0.0,
+    -1.0,
+    0.9996
+   ],
+   "/img/products/stanley-guider-burgundy-flat-back.webp": [
+    1.0,
+    0.0,
+    -1.0,
+    0.9996
+   ],
+   "/img/products/stanley-guider-mindful-blue-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9991
+   ],
+   "/img/products/stanley-guider-stargazer-flat-back.webp": [
+    1.0,
+    -0.5,
+    0.0,
+    0.9997
+   ],
+   "/img/products/stanley-guider-khaki-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9994
+   ],
+   "/img/products/stanley-guider-desert-dust-flat-back.webp": [
+    0.9972,
+    0.51,
+    6.25,
+    0.9735
+   ],
+   "/img/products/stanley-guider-anthracite-flat-back.webp": [
+    1.0,
+    0.0,
+    -1.0,
+    0.9996
+   ]
+  }
+ },
+ "baby-changer": {
+  "front": {
+   "/img/products/baby-changer-white-flat.webp": [
+    1.004,
+    -1.43,
+    -0.83,
+    0.9797
+   ],
+   "/img/products/baby-changer-cotton-pink-flat.webp": [
+    1.002,
+    -0.72,
+    -0.41,
+    0.986
+   ],
+   "/img/products/baby-changer-natural-raw-flat.webp": [
+    1.0,
+    -0.5,
+    1.0,
+    0.9925
+   ],
+   "/img/products/baby-changer-butter-flat.webp": [
+    1.004,
+    -1.94,
+    -0.83,
+    0.9812
+   ],
+   "/img/products/baby-changer-fraiche-p-che-flat.webp": [
+    1.002,
+    -0.72,
+    -0.41,
+    0.986
+   ],
+   "/img/products/baby-changer-eco-heather-flat.webp": [
+    0.8934,
+    36.03,
+    51.54,
+    0.8993
+   ],
+   "/img/products/baby-changer-blue-soul-flat.webp": [
+    0.895,
+    36.35,
+    49.48,
+    0.8589
+   ],
+   "/img/products/baby-changer-heather-grey-flat.webp": [
+    1.002,
+    -0.72,
+    -1.41,
+    0.9895
+   ]
+  },
+  "back": {
+   "/img/products/baby-changer-white-flat-back.webp": [
+    1.002,
+    -0.72,
+    0.59,
+    0.9865
+   ],
+   "/img/products/baby-changer-cotton-pink-flat-back.webp": [
+    1.002,
+    -0.72,
+    0.59,
+    0.9848
+   ],
+   "/img/products/baby-changer-natural-raw-flat-back.webp": [
+    0.998,
+    0.72,
+    2.41,
+    0.9925
+   ],
+   "/img/products/baby-changer-butter-flat-back.webp": [
+    1.002,
+    -0.72,
+    0.59,
+    0.9867
+   ],
+   "/img/products/baby-changer-fraiche-p-che-flat-back.webp": [
+    1.002,
+    -0.72,
+    0.59,
+    0.9848
+   ],
+   "/img/products/baby-changer-eco-heather-flat-back.webp": [
+    0.8899,
+    40.92,
+    52.27,
+    0.8778
+   ],
+   "/img/products/baby-changer-blue-soul-flat-back.webp": [
+    0.9312,
+    22.86,
+    32.93,
+    0.8902
+   ],
+   "/img/products/baby-changer-heather-grey-flat-back.webp": [
+    0.996,
+    0.93,
+    1.82,
+    0.9945
+   ]
+  }
+ },
+ "bomber-2-0": {
+  "front": {
+   "/img/products/bomber-2-0-khaki-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9994
+   ],
+   "/img/products/bomber-2-0-french-navy-flat.webp": [
+    1.0,
+    -0.5,
+    0.0,
+    0.9997
+   ]
+  },
+  "back": {
+   "/img/products/bomber-2-0-khaki-flat-back.webp": [
+    1.0,
+    0.5,
+    0.0,
+    0.9959
+   ],
+   "/img/products/bomber-2-0-french-navy-flat-back.webp": [
+    1.0,
+    0.25,
+    0.0,
+    0.9998
+   ]
+  }
+ },
+ "brooker": {
+  "front": {
+   "/img/products/brooker-desert-dust-flat.webp": [
+    1.0016,
+    -0.58,
+    -0.2,
+    0.9931
+   ],
+   "/img/products/brooker-red-brown-flat.webp": [
+    1.0032,
+    -1.17,
+    -1.4,
+    0.9902
+   ],
+   "/img/products/brooker-khaki-flat.webp": [
+    1.0032,
+    -1.17,
+    -1.4,
+    0.9899
+   ],
+   "/img/products/brooker-french-navy-flat.webp": [
+    1.0016,
+    -0.58,
+    -0.2,
+    0.9932
+   ]
+  },
+  "back": {
+   "/img/products/brooker-desert-dust-flat-back.webp": [
+    0.9985,
+    0.54,
+    0.18,
+    0.9975
+   ],
+   "/img/products/brooker-red-brown-flat-back.webp": [
+    1.0,
+    -0.5,
+    0.0,
+    0.997
+   ],
+   "/img/products/brooker-khaki-flat-back.webp": [
+    1.003,
+    -1.09,
+    -1.37,
+    0.9893
+   ],
+   "/img/products/brooker-french-navy-flat-back.webp": [
+    1.0015,
+    -0.55,
+    -0.18,
+    0.9951
+   ]
+  }
+ },
+ "changer-2-0": {
+  "front": {
+   "/img/products/changer-2-0-white-flat.webp": [
+    0.981,
+    9.3,
+    15.76,
+    0.9345
+   ],
+   "/img/products/changer-2-0-off-white-flat.webp": [
+    0.981,
+    8.81,
+    15.76,
+    0.9349
+   ],
+   "/img/products/changer-2-0-natural-raw-flat.webp": [
+    0.9854,
+    7.26,
+    6.49,
+    0.955
+   ],
+   "/img/products/changer-2-0-desert-dust-flat.webp": [
+    1.0015,
+    -0.04,
+    -0.16,
+    0.9928
+   ],
+   "/img/products/changer-2-0-heather-grey-flat.webp": [
+    0.981,
+    9.3,
+    3.01,
+    0.9627
+   ],
+   "/img/products/changer-2-0-anthracite-flat.webp": [
+    1.0,
+    0.5,
+    0.0,
+    0.9947
+   ],
+   "/img/products/changer-2-0-french-navy-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/changer-2-0-burgundy-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/changer-2-0-blue-ice-flat.webp": [
+    0.967,
+    14.12,
+    16.11,
+    0.9551
+   ],
+   "/img/products/changer-2-0-eco-heather-flat.webp": [
+    1.0182,
+    -5.04,
+    -5.0,
+    0.9465
+   ],
+   "/img/products/changer-2-0-dark-heather-grey-flat.webp": [
+    0.981,
+    7.34,
+    11.84,
+    0.9373
+   ],
+   "/img/products/changer-2-0-fiesta-flat.webp": [
+    0.9697,
+    11.42,
+    12.94,
+    0.9501
+   ],
+   "/img/products/changer-2-0-nispero-flat.webp": [
+    0.9941,
+    4.62,
+    12.56,
+    0.953
+   ],
+   "/img/products/changer-2-0-fraiche-peche-flat.webp": [
+    1.0015,
+    -0.04,
+    -0.16,
+    0.9929
+   ],
+   "/img/products/changer-2-0-cotton-pink-flat.webp": [
+    1.0015,
+    -0.04,
+    -0.16,
+    0.9927
+   ],
+   "/img/products/changer-2-0-bubble-pink-flat.webp": [
+    1.0015,
+    -0.04,
+    -0.16,
+    0.993
+   ],
+   "/img/products/changer-2-0-red-brown-flat.webp": [
+    1.0,
+    0.25,
+    0.0,
+    0.9996
+   ],
+   "/img/products/changer-2-0-deep-plum-flat.webp": [
+    0.9573,
+    17.34,
+    10.31,
+    0.9542
+   ],
+   "/img/products/changer-2-0-earthy-red-flat.webp": [
+    0.9573,
+    17.34,
+    10.31,
+    0.9541
+   ],
+   "/img/products/changer-2-0-red-flat.webp": [
+    1.0,
+    0.25,
+    0.0,
+    0.9995
+   ],
+   "/img/products/changer-2-0-lilac-dream-flat.webp": [
+    0.9725,
+    12.36,
+    16.55,
+    0.9459
+   ],
+   "/img/products/changer-2-0-lavender-flat.webp": [
+    1.0015,
+    -0.04,
+    -0.16,
+    0.9926
+   ],
+   "/img/products/changer-2-0-worker-blue-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9995
+   ],
+   "/img/products/changer-2-0-pebble-blue-flat.webp": [
+    0.9546,
+    17.84,
+    14.4,
+    0.946
+   ],
+   "/img/products/changer-2-0-blue-soul-flat.webp": [
+    0.9985,
+    2.53,
+    4.15,
+    0.9597
+   ],
+   "/img/products/changer-2-0-aqua-blue-flat.webp": [
+    1.0,
+    0.5,
+    0.0,
+    0.9948
+   ],
+   "/img/products/changer-2-0-bright-blue-flat.webp": [
+    1.0,
+    0.5,
+    0.0,
+    0.9943
+   ],
+   "/img/products/changer-2-0-mindful-blue-flat.webp": [
+    0.9245,
+    29.16,
+    28.42,
+    0.9262
+   ],
+   "/img/products/changer-2-0-blue-grey-flat.webp": [
+    0.9573,
+    17.34,
+    10.31,
+    0.9541
+   ],
+   "/img/products/changer-2-0-aloe-flat.webp": [
+    1.0015,
+    -0.04,
+    -0.16,
+    0.9924
+   ],
+   "/img/products/changer-2-0-stargazer-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/changer-2-0-deep-teal-flat.webp": [
+    0.9452,
+    21.69,
+    36.11,
+    0.9142
+   ],
+   "/img/products/changer-2-0-pool-blue-flat.webp": [
+    0.9725,
+    11.87,
+    16.55,
+    0.9451
+   ],
+   "/img/products/changer-2-0-glazed-green-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/changer-2-0-green-bay-flat.webp": [
+    0.974,
+    10.88,
+    15.45,
+    0.9614
+   ],
+   "/img/products/changer-2-0-misty-jade-flat.webp": [
+    0.9245,
+    29.16,
+    28.42,
+    0.9261
+   ],
+   "/img/products/changer-2-0-khaki-flat.webp": [
+    1.0,
+    0.5,
+    0.0,
+    0.9947
+   ],
+   "/img/products/changer-2-0-mosstone-flat.webp": [
+    0.9546,
+    17.84,
+    14.4,
+    0.9461
+   ],
+   "/img/products/changer-2-0-honey-paper-flat.webp": [
+    0.9492,
+    20.25,
+    11.13,
+    0.9429
+   ],
+   "/img/products/changer-2-0-ochre-flat.webp": [
+    1.0,
+    0.25,
+    0.0,
+    0.9992
+   ],
+   "/img/products/changer-2-0-heritage-brown-flat.webp": [
+    0.9245,
+    29.16,
+    28.42,
+    0.9263
+   ],
+   "/img/products/changer-2-0-latte-flat.webp": [
+    1.0015,
+    -0.04,
+    -0.16,
+    0.9928
+   ],
+   "/img/products/changer-2-0-stone-flat.webp": [
+    0.9725,
+    12.36,
+    16.55,
+    0.9459
+   ],
+   "/img/products/changer-2-0-cool-heather-grey-flat.webp": [
+    0.981,
+    9.3,
+    3.01,
+    0.9624
+   ],
+   "/img/products/changer-2-0-heather-haze-flat.webp": [
+    0.9754,
+    11.34,
+    -0.29,
+    0.9509
+   ],
+   "/img/products/changer-2-0-india-ink-grey-flat.webp": [
+    1.0,
+    0.25,
+    0.0,
+    0.9997
+   ]
+  },
+  "back": {
+   "/img/products/changer-2-0-white-flat-back.webp": [
+    0.9971,
+    1.55,
+    -2.7,
+    0.9717
+   ],
+   "/img/products/changer-2-0-off-white-flat-back.webp": [
+    0.9956,
+    2.07,
+    -1.55,
+    0.9689
+   ],
+   "/img/products/changer-2-0-natural-raw-flat-back.webp": [
+    1.0134,
+    -4.81,
+    -8.43,
+    0.9423
+   ],
+   "/img/products/changer-2-0-desert-dust-flat-back.webp": [
+    0.9985,
+    0.53,
+    0.15,
+    0.995
+   ],
+   "/img/products/changer-2-0-heather-grey-flat-back.webp": [
+    1.0318,
+    -11.42,
+    -17.63,
+    0.9046
+   ],
+   "/img/products/changer-2-0-anthracite-flat-back.webp": [
+    0.9971,
+    1.05,
+    1.29,
+    0.9989
+   ],
+   "/img/products/changer-2-0-french-navy-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/changer-2-0-burgundy-flat-back.webp": [
+    0.9971,
+    1.05,
+    1.29,
+    0.999
+   ],
+   "/img/products/changer-2-0-blue-ice-flat-back.webp": [
+    0.9813,
+    6.23,
+    8.74,
+    0.958
+   ],
+   "/img/products/changer-2-0-eco-heather-flat-back.webp": [
+    1.0624,
+    -21.87,
+    -27.49,
+    0.8134
+   ],
+   "/img/products/changer-2-0-dark-heather-grey-flat-back.webp": [
+    0.9687,
+    11.23,
+    18.63,
+    0.933
+   ],
+   "/img/products/changer-2-0-fiesta-flat-back.webp": [
+    1.0074,
+    -3.16,
+    -0.74,
+    0.9645
+   ],
+   "/img/products/changer-2-0-nispero-flat-back.webp": [
+    1.0381,
+    -13.68,
+    -10.04,
+    0.8926
+   ],
+   "/img/products/changer-2-0-fraiche-peche-flat-back.webp": [
+    0.9971,
+    0.55,
+    1.29,
+    0.9957
+   ],
+   "/img/products/changer-2-0-cotton-pink-flat-back.webp": [
+    0.9985,
+    0.03,
+    1.15,
+    0.9988
+   ],
+   "/img/products/changer-2-0-bubble-pink-flat-back.webp": [
+    0.9971,
+    1.05,
+    1.29,
+    0.9983
+   ],
+   "/img/products/changer-2-0-red-brown-flat-back.webp": [
+    0.9971,
+    1.05,
+    1.29,
+    0.999
+   ],
+   "/img/products/changer-2-0-deep-plum-flat-back.webp": [
+    0.9471,
+    19.45,
+    10.02,
+    0.9422
+   ],
+   "/img/products/changer-2-0-earthy-red-flat-back.webp": [
+    0.9471,
+    19.45,
+    10.02,
+    0.9422
+   ],
+   "/img/products/changer-2-0-red-flat-back.webp": [
+    0.9971,
+    1.05,
+    1.29,
+    0.9989
+   ],
+   "/img/products/changer-2-0-lilac-dream-flat-back.webp": [
+    0.9855,
+    6.67,
+    12.29,
+    0.9697
+   ],
+   "/img/products/changer-2-0-lavender-flat-back.webp": [
+    0.9971,
+    1.05,
+    1.29,
+    0.9984
+   ],
+   "/img/products/changer-2-0-worker-blue-flat-back.webp": [
+    0.9971,
+    1.05,
+    1.29,
+    0.999
+   ],
+   "/img/products/changer-2-0-pebble-blue-flat-back.webp": [
+    0.9419,
+    20.85,
+    24.65,
+    0.9409
+   ],
+   "/img/products/changer-2-0-blue-soul-flat-back.webp": [
+    1.0195,
+    -7.5,
+    -12.14,
+    0.9401
+   ],
+   "/img/products/changer-2-0-aqua-blue-flat-back.webp": [
+    1.0015,
+    -1.03,
+    0.85,
+    0.9954
+   ],
+   "/img/products/changer-2-0-bright-blue-flat-back.webp": [
+    0.9971,
+    1.05,
+    1.29,
+    0.9986
+   ],
+   "/img/products/changer-2-0-mindful-blue-flat-back.webp": [
+    0.9942,
+    1.6,
+    -7.37,
+    0.9361
+   ],
+   "/img/products/changer-2-0-blue-grey-flat-back.webp": [
+    0.9471,
+    19.45,
+    10.02,
+    0.9422
+   ],
+   "/img/products/changer-2-0-aloe-flat-back.webp": [
+    0.9971,
+    1.05,
+    1.29,
+    0.9986
+   ],
+   "/img/products/changer-2-0-stargazer-flat-back.webp": [
+    0.9971,
+    1.05,
+    1.29,
+    0.9991
+   ],
+   "/img/products/changer-2-0-deep-teal-flat-back.webp": [
+    0.9445,
+    19.92,
+    27.27,
+    0.938
+   ],
+   "/img/products/changer-2-0-pool-blue-flat-back.webp": [
+    0.987,
+    5.67,
+    12.16,
+    0.9702
+   ],
+   "/img/products/changer-2-0-glazed-green-flat-back.webp": [
+    0.9971,
+    1.05,
+    1.29,
+    0.9992
+   ],
+   "/img/products/changer-2-0-green-bay-flat-back.webp": [
+    0.9956,
+    1.08,
+    -0.56,
+    0.9575
+   ],
+   "/img/products/changer-2-0-misty-jade-flat-back.webp": [
+    0.9942,
+    1.6,
+    -7.37,
+    0.9361
+   ],
+   "/img/products/changer-2-0-khaki-flat-back.webp": [
+    0.9971,
+    1.05,
+    1.29,
+    0.999
+   ],
+   "/img/products/changer-2-0-mosstone-flat-back.webp": [
+    0.9432,
+    20.39,
+    23.6,
+    0.9422
+   ],
+   "/img/products/changer-2-0-honey-paper-flat-back.webp": [
+    0.9646,
+    10.3,
+    -0.32,
+    0.9401
+   ],
+   "/img/products/changer-2-0-ochre-flat-back.webp": [
+    0.9985,
+    0.53,
+    0.15,
+    0.995
+   ],
+   "/img/products/changer-2-0-heritage-brown-flat-back.webp": [
+    0.9942,
+    1.6,
+    -7.37,
+    0.9361
+   ],
+   "/img/products/changer-2-0-latte-flat-back.webp": [
+    0.9985,
+    0.53,
+    0.15,
+    0.9951
+   ],
+   "/img/products/changer-2-0-stone-flat-back.webp": [
+    0.9855,
+    6.67,
+    12.29,
+    0.9698
+   ],
+   "/img/products/changer-2-0-cool-heather-grey-flat-back.webp": [
+    1.0318,
+    -11.42,
+    -17.63,
+    0.9046
+   ],
+   "/img/products/changer-2-0-heather-haze-flat-back.webp": [
+    0.9855,
+    5.2,
+    -6.44,
+    0.949
+   ],
+   "/img/products/changer-2-0-india-ink-grey-flat-back.webp": [
+    0.9971,
+    1.05,
+    1.29,
+    0.999
+   ]
+  }
+ },
+ "roller": {
+  "front": {
+   "/img/products/roller-white-flat.webp": [
+    0.9984,
+    -2.68,
+    5.2,
+    0.9625
+   ],
+   "/img/products/roller-vintage-white-flat.webp": [
+    0.9631,
+    9.1,
+    8.65,
+    0.9283
+   ],
+   "/img/products/roller-natural-raw-flat.webp": [
+    0.9139,
+    28.71,
+    36.79,
+    0.8865
+   ],
+   "/img/products/roller-desert-dust-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9993
+   ],
+   "/img/products/roller-heather-grey-flat.webp": [
+    0.9937,
+    -1.95,
+    -1.16,
+    0.9624
+   ],
+   "/img/products/roller-anthracite-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/roller-french-navy-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/roller-burgundy-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/roller-blue-ice-flat.webp": [
+    0.9631,
+    9.1,
+    8.65,
+    0.9281
+   ],
+   "/img/products/roller-sky-blue-flat.webp": [
+    0.9675,
+    7.0,
+    7.12,
+    0.9317
+   ],
+   "/img/products/roller-dark-heather-grey-flat.webp": [
+    0.9905,
+    -0.82,
+    0.24,
+    0.9601
+   ],
+   "/img/products/roller-bright-orange-flat.webp": [
+    1.0,
+    -0.25,
+    0.0,
+    0.9993
+   ],
+   "/img/products/roller-cotton-pink-flat.webp": [
+    1.0,
+    -1.0,
+    0.0,
+    0.9952
+   ],
+   "/img/products/roller-canyon-pink-flat.webp": [
+    0.9812,
+    6.23,
+    4.41,
+    0.954
+   ],
+   "/img/products/roller-deep-plum-flat.webp": [
+    0.9007,
+    33.89,
+    39.93,
+    0.8691
+   ],
+   "/img/products/roller-red-flat.webp": [
+    0.9827,
+    -2.43,
+    8.14,
+    0.9488
+   ],
+   "/img/products/roller-dusk-flat.webp": [
+    0.9206,
+    26.3,
+    44.39,
+    0.8558
+   ],
+   "/img/products/roller-royal-blue-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9992
+   ],
+   "/img/products/roller-blue-grey-flat.webp": [
+    0.9007,
+    33.89,
+    39.93,
+    0.8698
+   ],
+   "/img/products/roller-serene-blue-flat.webp": [
+    1.0,
+    -0.25,
+    0.0,
+    0.9988
+   ],
+   "/img/products/roller-caribbean-blue-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9981
+   ],
+   "/img/products/roller-verdant-green-flat.webp": [
+    0.8482,
+    52.31,
+    69.78,
+    0.7806
+   ],
+   "/img/products/roller-bottle-green-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/roller-stem-green-flat.webp": [
+    0.9984,
+    -0.18,
+    0.21,
+    0.9952
+   ],
+   "/img/products/roller-khaki-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9993
+   ],
+   "/img/products/roller-spectra-yellow-flat.webp": [
+    1.0,
+    -0.5,
+    0.0,
+    0.9992
+   ],
+   "/img/products/roller-heritage-brown-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9994
+   ],
+   "/img/products/roller-mocha-flat.webp": [
+    0.8471,
+    52.72,
+    69.01,
+    0.7783
+   ],
+   "/img/products/roller-india-ink-grey-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ]
+  },
+  "back": {
+   "/img/products/roller-white-flat-back.webp": [
+    0.9968,
+    1.41,
+    4.42,
+    0.9805
+   ],
+   "/img/products/roller-vintage-white-flat-back.webp": [
+    0.9511,
+    15.79,
+    13.31,
+    0.9289
+   ],
+   "/img/products/roller-natural-raw-flat-back.webp": [
+    0.8988,
+    38.37,
+    51.51,
+    0.8703
+   ],
+   "/img/products/roller-desert-dust-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9994
+   ],
+   "/img/products/roller-heather-grey-flat-back.webp": [
+    0.9826,
+    5.3,
+    3.35,
+    0.9697
+   ],
+   "/img/products/roller-anthracite-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/roller-french-navy-flat-back.webp": [
+    1.0,
+    0.25,
+    0.0,
+    0.9997
+   ],
+   "/img/products/roller-burgundy-flat-back.webp": [
+    1.0,
+    0.25,
+    0.0,
+    0.9998
+   ],
+   "/img/products/roller-blue-ice-flat-back.webp": [
+    0.9511,
+    15.79,
+    13.31,
+    0.9285
+   ],
+   "/img/products/roller-sky-blue-flat-back.webp": [
+    0.9511,
+    15.79,
+    13.31,
+    0.9282
+   ],
+   "/img/products/roller-dark-heather-grey-flat-back.webp": [
+    0.9811,
+    5.37,
+    5.52,
+    0.9688
+   ],
+   "/img/products/roller-bright-orange-flat-back.webp": [
+    1.0,
+    0.0,
+    -1.0,
+    0.9993
+   ],
+   "/img/products/roller-cotton-pink-flat-back.webp": [
+    1.0016,
+    -1.08,
+    -1.22,
+    0.9924
+   ],
+   "/img/products/roller-canyon-pink-flat-back.webp": [
+    0.9704,
+    5.38,
+    7.91,
+    0.9505
+   ],
+   "/img/products/roller-deep-plum-flat-back.webp": [
+    0.8988,
+    37.24,
+    46.12,
+    0.8705
+   ],
+   "/img/products/roller-red-flat-back.webp": [
+    0.978,
+    5.02,
+    8.86,
+    0.97
+   ],
+   "/img/products/roller-dusk-flat-back.webp": [
+    0.8975,
+    39.73,
+    37.27,
+    0.8662
+   ],
+   "/img/products/roller-royal-blue-flat-back.webp": [
+    1.0,
+    0.25,
+    0.0,
+    0.9995
+   ],
+   "/img/products/roller-blue-grey-flat-back.webp": [
+    0.9001,
+    36.55,
+    46.89,
+    0.8715
+   ],
+   "/img/products/roller-serene-blue-flat-back.webp": [
+    1.0016,
+    -0.83,
+    -1.22,
+    0.9932
+   ],
+   "/img/products/roller-caribbean-blue-flat-back.webp": [
+    1.0016,
+    -1.08,
+    -1.22,
+    0.9927
+   ],
+   "/img/products/roller-verdant-green-flat-back.webp": [
+    0.8463,
+    57.27,
+    69.99,
+    0.7985
+   ],
+   "/img/products/roller-bottle-green-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/roller-stem-green-flat-back.webp": [
+    1.0016,
+    -0.08,
+    -0.22,
+    0.9911
+   ],
+   "/img/products/roller-khaki-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9994
+   ],
+   "/img/products/roller-spectra-yellow-flat-back.webp": [
+    1.0016,
+    -1.08,
+    -1.22,
+    0.9935
+   ],
+   "/img/products/roller-heritage-brown-flat-back.webp": [
+    1.0,
+    0.5,
+    0.0,
+    0.9931
+   ],
+   "/img/products/roller-mocha-flat-back.webp": [
+    0.8451,
+    57.68,
+    69.24,
+    0.7983
+   ],
+   "/img/products/roller-india-ink-grey-flat-back.webp": [
+    1.0,
+    0.25,
+    0.0,
+    0.9998
+   ]
+  }
+ },
+ "baby-creator": {
+  "front": {
+   "/img/products/baby-creator-white-flat.webp": [
+    1.0097,
+    -2.98,
+    -9.45,
+    0.9673
+   ],
+   "/img/products/baby-creator-red-flat.webp": [
+    0.9968,
+    1.15,
+    0.45,
+    0.9931
+   ],
+   "/img/products/baby-creator-cotton-pink-flat.webp": [
+    0.9984,
+    0.57,
+    0.23,
+    0.9976
+   ],
+   "/img/products/baby-creator-natural-raw-flat.webp": [
+    0.9968,
+    1.15,
+    1.45,
+    0.9929
+   ],
+   "/img/products/baby-creator-butter-flat.webp": [
+    0.9984,
+    0.57,
+    0.23,
+    0.998
+   ],
+   "/img/products/baby-creator-fraiche-peche-flat.webp": [
+    0.9984,
+    0.57,
+    0.23,
+    0.9976
+   ],
+   "/img/products/baby-creator-eco-heather-flat.webp": [
+    1.0776,
+    -26.81,
+    -41.19,
+    0.8108
+   ],
+   "/img/products/baby-creator-blue-soul-flat.webp": [
+    1.0504,
+    -18.13,
+    -28.17,
+    0.8717
+   ],
+   "/img/products/baby-creator-heather-grey-flat.webp": [
+    1.0,
+    -1.0,
+    -1.0,
+    0.9941
+   ],
+   "/img/products/baby-creator-mid-heather-blue-flat.webp": [
+    1.0146,
+    -5.76,
+    -10.19,
+    0.9587
+   ],
+   "/img/products/baby-creator-cream-heather-pink-flat.webp": [
+    1.0097,
+    -3.48,
+    -8.44,
+    0.9659
+   ],
+   "/img/products/baby-creator-caribbean-blue-flat.webp": [
+    0.9968,
+    1.15,
+    0.45,
+    0.9919
+   ],
+   "/img/products/baby-creator-french-navy-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  "back": {
+   "/img/products/baby-creator-white-flat-back.webp": [
+    0.9984,
+    1.58,
+    2.24,
+    0.996
+   ],
+   "/img/products/baby-creator-red-flat-back.webp": [
+    0.9984,
+    1.58,
+    1.24,
+    0.9969
+   ],
+   "/img/products/baby-creator-cotton-pink-flat-back.webp": [
+    1.0,
+    1.0,
+    2.0,
+    0.9971
+   ],
+   "/img/products/baby-creator-natural-raw-flat-back.webp": [
+    0.9984,
+    1.08,
+    1.24,
+    0.9951
+   ],
+   "/img/products/baby-creator-butter-flat-back.webp": [
+    1.0,
+    1.0,
+    2.0,
+    0.9969
+   ],
+   "/img/products/baby-creator-fraiche-peche-flat-back.webp": [
+    1.0,
+    1.0,
+    2.0,
+    0.9972
+   ],
+   "/img/products/baby-creator-eco-heather-flat-back.webp": [
+    1.0546,
+    -18.63,
+    -25.06,
+    0.8557
+   ],
+   "/img/products/baby-creator-blue-soul-flat-back.webp": [
+    1.0387,
+    -12.9,
+    -21.38,
+    0.8888
+   ],
+   "/img/products/baby-creator-heather-grey-flat-back.webp": [
+    1.0,
+    0.0,
+    1.0,
+    0.9962
+   ],
+   "/img/products/baby-creator-mid-heather-blue-flat-back.webp": [
+    1.0016,
+    -0.08,
+    -0.24,
+    0.9927
+   ],
+   "/img/products/baby-creator-cream-heather-pink-flat-back.webp": [
+    1.0,
+    1.0,
+    1.0,
+    0.9965
+   ],
+   "/img/products/baby-creator-caribbean-blue-flat-back.webp": [
+    1.0,
+    1.0,
+    2.0,
+    0.997
+   ],
+   "/img/products/baby-creator-french-navy-flat-back.webp": [
+    1.0,
+    0.5,
+    0.0,
+    0.9953
+   ]
+  }
+ },
+ "classic-t": {
+  "front": {
+   "/img/products/classic-t-ash.webp": [
+    0.9975,
+    2.38,
+    0.1,
+    0.994
+   ],
+   "/img/products/classic-t-burgundy-red.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/classic-t-bright-lime.webp": [
+    0.9975,
+    0.88,
+    0.1,
+    0.9946
+   ],
+   "/img/products/classic-t-blue-midnight.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/classic-t-bordeaux.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9995
+   ],
+   "/img/products/classic-t-bottle-green.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/classic-t-brilliant-orange.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.999
+   ],
+   "/img/products/classic-t-bright-royal.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/classic-t-deep-berry.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/classic-t-dark-chocolate.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/classic-t-denim-blue.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/classic-t-gold.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9991
+   ],
+   "/img/products/classic-t-grey-heather.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/classic-t-hunters-green.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9995
+   ],
+   "/img/products/classic-t-kelly-green.webp": [
+    0.9975,
+    0.88,
+    0.1,
+    0.9952
+   ],
+   "/img/products/classic-t-kiwi-green.webp": [
+    0.9975,
+    0.88,
+    0.1,
+    0.9951
+   ],
+   "/img/products/classic-t-light-blue.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/classic-t-marina-blue.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/classic-t-military-green.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/classic-t-natural.webp": [
+    1.0,
+    0.5,
+    0.0,
+    0.9954
+   ],
+   "/img/products/classic-t-navy-blue.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/classic-t-ocean-blue.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.999
+   ],
+   "/img/products/classic-t-orange.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.999
+   ],
+   "/img/products/classic-t-real-grey.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/classic-t-sand.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9995
+   ],
+   "/img/products/classic-t-soft-grey.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9994
+   ],
+   "/img/products/classic-t-slate-grey.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/classic-t-sweet-pink.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9993
+   ],
+   "/img/products/classic-t-scarlet-red.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9991
+   ],
+   "/img/products/classic-t-sunflower-yellow.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9987
+   ],
+   "/img/products/classic-t-teal.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9994
+   ],
+   "/img/products/classic-t-white.webp": [
+    0.9951,
+    6.49,
+    1.19,
+    0.9754
+   ],
+   "/img/products/classic-t-yellow.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9989
+   ]
+  }
+ },
+ "classic-t-kinder": {
+  "front": {
+   "/img/products/classic-t-kinder-black-opal.webp": [
+    0.9986,
+    1.52,
+    0.13,
+    0.9958
+   ],
+   "/img/products/classic-t-kinder-bordeaux.webp": [
+    0.9986,
+    1.02,
+    0.13,
+    0.9945
+   ],
+   "/img/products/classic-t-kinder-bottle-green.webp": [
+    0.9986,
+    0.77,
+    0.13,
+    0.9947
+   ],
+   "/img/products/classic-t-kinder-bright-royal.webp": [
+    0.9986,
+    1.52,
+    0.13,
+    0.9957
+   ],
+   "/img/products/classic-t-kinder-deep-berry.webp": [
+    0.9986,
+    1.27,
+    0.13,
+    0.9943
+   ],
+   "/img/products/classic-t-kinder-gold.webp": [
+    0.9986,
+    1.77,
+    0.13,
+    0.9941
+   ],
+   "/img/products/classic-t-kinder-grey-heather.webp": [
+    0.9957,
+    0.56,
+    1.39,
+    0.9934
+   ],
+   "/img/products/classic-t-kinder-kelly-green.webp": [
+    1.0,
+    -0.25,
+    1.0,
+    0.9963
+   ],
+   "/img/products/classic-t-kinder-kiwi-green.webp": [
+    1.0,
+    -0.75,
+    1.0,
+    0.9917
+   ],
+   "/img/products/classic-t-kinder-light-blue.webp": [
+    1.0,
+    0.5,
+    -1.0,
+    0.9962
+   ],
+   "/img/products/classic-t-kinder-natural.webp": [
+    1.0014,
+    -0.52,
+    -1.13,
+    0.9936
+   ],
+   "/img/products/classic-t-kinder-navy-blue.webp": [
+    0.9986,
+    0.52,
+    0.13,
+    0.9956
+   ],
+   "/img/products/classic-t-kinder-ocean-blue.webp": [
+    0.9986,
+    1.52,
+    1.13,
+    0.9961
+   ],
+   "/img/products/classic-t-kinder-orange.webp": [
+    1.0,
+    0.75,
+    -1.0,
+    0.9959
+   ],
+   "/img/products/classic-t-kinder-sand.webp": [
+    1.0,
+    -0.5,
+    -1.0,
+    0.9959
+   ],
+   "/img/products/classic-t-kinder-slate-grey.webp": [
+    1.0,
+    1.75,
+    -1.0,
+    0.9916
+   ],
+   "/img/products/classic-t-kinder-sweet-pink.webp": [
+    1.0,
+    2.0,
+    -1.0,
+    0.9915
+   ],
+   "/img/products/classic-t-kinder-scarlet-red.webp": [
+    0.9986,
+    0.02,
+    0.13,
+    0.9933
+   ],
+   "/img/products/classic-t-kinder-sunflower-yellow.webp": [
+    1.0014,
+    0.48,
+    -1.13,
+    0.9922
+   ],
+   "/img/products/classic-t-kinder-teal.webp": [
+    1.0,
+    0.0,
+    1.0,
+    0.9963
+   ],
+   "/img/products/classic-t-kinder-white.webp": [
+    1.0014,
+    -0.52,
+    -1.13,
+    0.9944
+   ],
+   "/img/products/classic-t-kinder-yellow.webp": [
+    1.0014,
+    -0.02,
+    -1.13,
+    0.992
+   ]
+  }
+ },
+ "classic-t-damen": {
+  "front": {
+   "/img/products/classic-t-damen-ash.webp": [
+    0.9988,
+    3.44,
+    1.05,
+    0.988
+   ],
+   "/img/products/classic-t-damen-burgundy-red.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/classic-t-damen-bright-lime.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9984
+   ],
+   "/img/products/classic-t-damen-blue-midnight.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9999
+   ],
+   "/img/products/classic-t-damen-bordeaux.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9995
+   ],
+   "/img/products/classic-t-damen-bottle-green.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/classic-t-damen-brilliant-orange.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9992
+   ],
+   "/img/products/classic-t-damen-bright-royal.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9995
+   ],
+   "/img/products/classic-t-damen-deep-berry.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/classic-t-damen-dark-chocolate.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9999
+   ],
+   "/img/products/classic-t-damen-denim-blue.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/classic-t-damen-gold.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9991
+   ],
+   "/img/products/classic-t-damen-grey-heather.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9995
+   ],
+   "/img/products/classic-t-damen-hunters-green.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/classic-t-damen-kelly-green.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9993
+   ],
+   "/img/products/classic-t-damen-kiwi-green.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9989
+   ],
+   "/img/products/classic-t-damen-light-blue.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/classic-t-damen-marina-blue.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9999
+   ],
+   "/img/products/classic-t-damen-military-green.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/classic-t-damen-natural.webp": [
+    1.0,
+    2.0,
+    0.0,
+    0.9907
+   ],
+   "/img/products/classic-t-damen-navy-blue.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9999
+   ],
+   "/img/products/classic-t-damen-ocean-blue.webp": [
+    0.9988,
+    0.44,
+    1.05,
+    0.9975
+   ],
+   "/img/products/classic-t-damen-orange.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.999
+   ],
+   "/img/products/classic-t-damen-real-grey.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/classic-t-damen-sand.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/classic-t-damen-soft-grey.webp": [
+    1.0,
+    0.5,
+    0.0,
+    0.995
+   ],
+   "/img/products/classic-t-damen-slate-grey.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/classic-t-damen-sweet-pink.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9993
+   ],
+   "/img/products/classic-t-damen-scarlet-red.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9993
+   ],
+   "/img/products/classic-t-damen-sunflower-yellow.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9989
+   ],
+   "/img/products/classic-t-damen-teal.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/classic-t-damen-white.webp": [
+    0.9988,
+    1.94,
+    1.05,
+    0.9905
+   ],
+   "/img/products/classic-t-damen-yellow.webp": [
+    1.0,
+    0.5,
+    0.0,
+    0.9955
+   ]
+  }
+ },
+ "comfort-t": {
+  "front": {
+   "/img/products/comfort-t-black-opal.webp": [
+    1.0026,
+    -0.92,
+    -1.14,
+    0.9937
+   ],
+   "/img/products/comfort-t-bordeaux.webp": [
+    1.0,
+    0.5,
+    0.0,
+    0.9965
+   ],
+   "/img/products/comfort-t-bottle-green.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9982
+   ],
+   "/img/products/comfort-t-bright-royal.webp": [
+    1.0013,
+    0.04,
+    -1.07,
+    0.9928
+   ],
+   "/img/products/comfort-t-grey-heather.webp": [
+    1.0013,
+    0.04,
+    -1.07,
+    0.993
+   ],
+   "/img/products/comfort-t-kelly-green.webp": [
+    1.0,
+    0.5,
+    0.0,
+    0.9965
+   ],
+   "/img/products/comfort-t-kiwi-green.webp": [
+    0.9987,
+    0.46,
+    0.07,
+    0.9972
+   ],
+   "/img/products/comfort-t-marina-blue.webp": [
+    1.0,
+    0.5,
+    0.0,
+    0.9966
+   ],
+   "/img/products/comfort-t-military-green.webp": [
+    1.0013,
+    0.04,
+    -0.07,
+    0.9927
+   ],
+   "/img/products/comfort-t-natural.webp": [
+    1.0013,
+    0.04,
+    -1.07,
+    0.9923
+   ],
+   "/img/products/comfort-t-navy-blue.webp": [
+    1.0,
+    0.5,
+    0.0,
+    0.9966
+   ],
+   "/img/products/comfort-t-orange.webp": [
+    1.0,
+    0.5,
+    0.0,
+    0.9964
+   ],
+   "/img/products/comfort-t-real-grey.webp": [
+    1.0013,
+    -0.46,
+    -1.07,
+    0.9959
+   ],
+   "/img/products/comfort-t-soft-grey.webp": [
+    1.0013,
+    0.04,
+    -1.07,
+    0.9927
+   ],
+   "/img/products/comfort-t-slate-grey.webp": [
+    1.0013,
+    -0.46,
+    -1.07,
+    0.9959
+   ],
+   "/img/products/comfort-t-scarlet-red.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9982
+   ],
+   "/img/products/comfort-t-sunflower-yellow.webp": [
+    1.0,
+    0.5,
+    0.0,
+    0.9967
+   ],
+   "/img/products/comfort-t-white.webp": [
+    0.9987,
+    1.96,
+    0.07,
+    0.9936
+   ]
+  }
+ },
+ "comfort-t-damen": {
+  "front": {
+   "/img/products/comfort-t-damen-bright-royal.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9994
+   ],
+   "/img/products/comfort-t-damen-grey-heather.webp": [
+    1.0025,
+    -1.64,
+    -2.11,
+    0.9835
+   ],
+   "/img/products/comfort-t-damen-navy-blue.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9995
+   ],
+   "/img/products/comfort-t-damen-scarlet-red.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9993
+   ],
+   "/img/products/comfort-t-damen-white.webp": [
+    1.0012,
+    -0.44,
+    -0.05,
+    0.9935
+   ]
+  }
+ },
+ "crafter": {
+  "front": {
+   "/img/products/crafter-white-flat.webp": [
+    0.957,
+    13.03,
+    18.16,
+    0.9461
+   ],
+   "/img/products/crafter-red-flat.webp": [
+    0.9908,
+    3.3,
+    3.21,
+    0.961
+   ],
+   "/img/products/crafter-cotton-pink-flat.webp": [
+    0.9908,
+    3.3,
+    3.21,
+    0.9597
+   ],
+   "/img/products/crafter-bright-orange-flat.webp": [
+    0.9908,
+    3.3,
+    3.21,
+    0.9602
+   ],
+   "/img/products/crafter-desert-dust-flat.webp": [
+    0.9642,
+    12.38,
+    13.44,
+    0.9532
+   ],
+   "/img/products/crafter-canyon-pink-flat.webp": [
+    0.9908,
+    3.3,
+    3.21,
+    0.9601
+   ],
+   "/img/products/crafter-sage-flat.webp": [
+    0.9893,
+    3.35,
+    3.4,
+    0.964
+   ],
+   "/img/products/crafter-bright-blue-flat.webp": [
+    0.9938,
+    1.71,
+    1.81,
+    0.9637
+   ],
+   "/img/products/crafter-natural-raw-flat.webp": [
+    0.9833,
+    5.52,
+    7.14,
+    0.957
+   ],
+   "/img/products/crafter-stem-green-flat.webp": [
+    1.0031,
+    -1.62,
+    -4.43,
+    0.9601
+   ],
+   "/img/products/crafter-teal-monstera-flat.webp": [
+    0.9908,
+    3.3,
+    3.21,
+    0.9605
+   ],
+   "/img/products/crafter-lavender-flat.webp": [
+    0.9908,
+    3.3,
+    3.21,
+    0.9602
+   ],
+   "/img/products/crafter-butter-flat.webp": [
+    0.9923,
+    -0.22,
+    -0.96,
+    0.964
+   ],
+   "/img/products/crafter-go-green-flat.webp": [
+    0.9908,
+    3.3,
+    3.21,
+    0.9605
+   ],
+   "/img/products/crafter-fiesta-flat.webp": [
+    0.9908,
+    3.3,
+    3.21,
+    0.9602
+   ],
+   "/img/products/crafter-eco-heather-flat.webp": [
+    1.0125,
+    -6.53,
+    -7.74,
+    0.9352
+   ],
+   "/img/products/crafter-spectra-yellow-flat.webp": [
+    0.9848,
+    3.5,
+    5.97,
+    0.9581
+   ],
+   "/img/products/crafter-khaki-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/crafter-bottle-green-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9999
+   ],
+   "/img/products/crafter-royal-blue-flat.webp": [
+    0.9938,
+    1.71,
+    1.81,
+    0.9637
+   ],
+   "/img/products/crafter-sky-blue-flat.webp": [
+    0.9893,
+    3.35,
+    3.4,
+    0.9638
+   ],
+   "/img/products/crafter-burgundy-flat.webp": [
+    0.9893,
+    3.85,
+    3.4,
+    0.9593
+   ],
+   "/img/products/crafter-heather-grey-flat.webp": [
+    0.9908,
+    2.31,
+    4.2,
+    0.9455
+   ],
+   "/img/products/crafter-anthracite-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/crafter-dusk-flat.webp": [
+    0.9403,
+    20.95,
+    22.98,
+    0.9594
+   ],
+   "/img/products/crafter-pink-joy-flat.webp": [
+    0.9349,
+    22.44,
+    27.36,
+    0.9216
+   ],
+   "/img/products/crafter-vintage-white-flat.webp": [
+    0.9908,
+    0.33,
+    -0.76,
+    0.9624
+   ],
+   "/img/products/crafter-dark-heather-grey-flat.webp": [
+    0.9788,
+    7.13,
+    6.74,
+    0.9536
+   ],
+   "/img/products/crafter-ocean-depth-flat.webp": [
+    0.9923,
+    2.26,
+    2.01,
+    0.9635
+   ],
+   "/img/products/crafter-india-ink-grey-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9999
+   ],
+   "/img/products/crafter-caribbean-blue-flat.webp": [
+    0.9908,
+    3.3,
+    3.21,
+    0.9603
+   ],
+   "/img/products/crafter-french-navy-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9999
+   ],
+   "/img/products/crafter-blue-ice-flat.webp": [
+    0.9642,
+    12.38,
+    16.33,
+    0.97
+   ],
+   "/img/products/crafter-heritage-brown-flat.webp": [
+    0.9642,
+    12.38,
+    13.44,
+    0.9534
+   ],
+   "/img/products/crafter-deep-plum-flat.webp": [
+    0.9431,
+    19.97,
+    20.78,
+    0.9413
+   ],
+   "/img/products/crafter-violet-flat.webp": [
+    0.939,
+    20.98,
+    24.08,
+    0.9388
+   ],
+   "/img/products/crafter-blue-grey-flat.webp": [
+    0.9458,
+    18.98,
+    19.5,
+    0.9436
+   ],
+   "/img/products/crafter-verdant-green-flat.webp": [
+    0.9376,
+    21.47,
+    24.24,
+    0.9389
+   ],
+   "/img/products/crafter-lemon-sorbet-flat.webp": [
+    0.9202,
+    27.26,
+    32.7,
+    0.9231
+   ],
+   "/img/products/crafter-mocha-flat.webp": [
+    0.939,
+    20.98,
+    24.08,
+    0.9386
+   ]
+  },
+  "back": {
+   "/img/products/crafter-white-flat-back.webp": [
+    0.9428,
+    20.57,
+    26.21,
+    0.9608
+   ],
+   "/img/products/crafter-red-flat-back.webp": [
+    0.966,
+    12.21,
+    15.55,
+    0.9785
+   ],
+   "/img/products/crafter-cotton-pink-flat-back.webp": [
+    0.9675,
+    11.67,
+    15.35,
+    0.9787
+   ],
+   "/img/products/crafter-bright-orange-flat-back.webp": [
+    0.966,
+    12.21,
+    15.55,
+    0.9782
+   ],
+   "/img/products/crafter-desert-dust-flat-back.webp": [
+    0.9414,
+    21.08,
+    29.21,
+    0.9599
+   ],
+   "/img/products/crafter-canyon-pink-flat-back.webp": [
+    0.9675,
+    11.67,
+    15.35,
+    0.9777
+   ],
+   "/img/products/crafter-sage-flat-back.webp": [
+    0.966,
+    12.21,
+    15.55,
+    0.9785
+   ],
+   "/img/products/crafter-bright-blue-flat-back.webp": [
+    0.966,
+    12.21,
+    15.55,
+    0.9778
+   ],
+   "/img/products/crafter-natural-raw-flat-back.webp": [
+    0.9315,
+    24.61,
+    31.35,
+    0.9515
+   ],
+   "/img/products/crafter-stem-green-flat-back.webp": [
+    0.972,
+    10.05,
+    8.91,
+    0.9462
+   ],
+   "/img/products/crafter-teal-monstera-flat-back.webp": [
+    0.966,
+    12.21,
+    15.55,
+    0.9778
+   ],
+   "/img/products/crafter-lavender-flat-back.webp": [
+    0.966,
+    12.21,
+    15.55,
+    0.9783
+   ],
+   "/img/products/crafter-butter-flat-back.webp": [
+    0.9905,
+    1.93,
+    1.38,
+    0.9397
+   ],
+   "/img/products/crafter-go-green-flat-back.webp": [
+    0.966,
+    12.21,
+    15.55,
+    0.9781
+   ],
+   "/img/products/crafter-fiesta-flat-back.webp": [
+    0.966,
+    12.21,
+    15.55,
+    0.9783
+   ],
+   "/img/products/crafter-eco-heather-flat-back.webp": [
+    1.0016,
+    -0.58,
+    -1.23,
+    0.9243
+   ],
+   "/img/products/crafter-spectra-yellow-flat-back.webp": [
+    0.9572,
+    15.39,
+    18.65,
+    0.9522
+   ],
+   "/img/products/crafter-khaki-flat-back.webp": [
+    1.0016,
+    -0.58,
+    -0.23,
+    0.9961
+   ],
+   "/img/products/crafter-bottle-green-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/crafter-royal-blue-flat-back.webp": [
+    0.966,
+    12.21,
+    15.55,
+    0.9778
+   ],
+   "/img/products/crafter-sky-blue-flat-back.webp": [
+    0.966,
+    12.21,
+    15.55,
+    0.9779
+   ],
+   "/img/products/crafter-burgundy-flat-back.webp": [
+    0.966,
+    12.21,
+    15.55,
+    0.9782
+   ],
+   "/img/products/crafter-heather-grey-flat-back.webp": [
+    0.9288,
+    25.14,
+    33.55,
+    0.9415
+   ],
+   "/img/products/crafter-anthracite-flat-back.webp": [
+    1.0016,
+    -0.58,
+    -0.23,
+    0.9962
+   ],
+   "/img/products/crafter-dusk-flat-back.webp": [
+    0.8854,
+    41.19,
+    50.26,
+    0.9263
+   ],
+   "/img/products/crafter-pink-joy-flat-back.webp": [
+    0.9099,
+    32.4,
+    36.72,
+    0.9503
+   ],
+   "/img/products/crafter-vintage-white-flat-back.webp": [
+    0.9905,
+    1.93,
+    1.38,
+    0.9396
+   ],
+   "/img/products/crafter-dark-heather-grey-flat-back.webp": [
+    0.9456,
+    19.55,
+    26.8,
+    0.9517
+   ],
+   "/img/products/crafter-ocean-depth-flat-back.webp": [
+    0.966,
+    12.21,
+    15.55,
+    0.9784
+   ],
+   "/img/products/crafter-india-ink-grey-flat-back.webp": [
+    1.0016,
+    -0.58,
+    -0.23,
+    0.9961
+   ],
+   "/img/products/crafter-caribbean-blue-flat-back.webp": [
+    0.966,
+    12.21,
+    15.55,
+    0.9784
+   ],
+   "/img/products/crafter-french-navy-flat-back.webp": [
+    1.0016,
+    -0.58,
+    -0.23,
+    0.9962
+   ],
+   "/img/products/crafter-blue-ice-flat-back.webp": [
+    0.9428,
+    20.57,
+    27.15,
+    0.9658
+   ],
+   "/img/products/crafter-heritage-brown-flat-back.webp": [
+    0.9385,
+    22.57,
+    30.5,
+    0.9608
+   ],
+   "/img/products/crafter-deep-plum-flat-back.webp": [
+    0.9086,
+    31.96,
+    39.61,
+    0.9398
+   ],
+   "/img/products/crafter-violet-flat-back.webp": [
+    0.9086,
+    32.42,
+    38.7,
+    0.938
+   ],
+   "/img/products/crafter-blue-grey-flat-back.webp": [
+    0.9086,
+    31.96,
+    39.61,
+    0.9397
+   ],
+   "/img/products/crafter-verdant-green-flat-back.webp": [
+    0.9086,
+    32.87,
+    38.7,
+    0.9394
+   ],
+   "/img/products/crafter-lemon-sorbet-flat-back.webp": [
+    0.8981,
+    36.62,
+    47.1,
+    0.9323
+   ],
+   "/img/products/crafter-mocha-flat-back.webp": [
+    0.9086,
+    32.42,
+    38.7,
+    0.9382
+   ]
+  }
+ },
+ "creator-2-0": {
+  "front": {
+   "/img/products/creator-2-0-white-flat.webp": [
+    1.0016,
+    -0.07,
+    -4.23,
+    0.9752
+   ],
+   "/img/products/creator-2-0-red-flat.webp": [
+    1.0016,
+    -0.07,
+    -1.23,
+    0.9841
+   ],
+   "/img/products/creator-2-0-cotton-pink-flat.webp": [
+    1.0016,
+    -0.07,
+    -1.23,
+    0.9842
+   ],
+   "/img/products/creator-2-0-off-white-flat.webp": [
+    1.0016,
+    -0.07,
+    -1.23,
+    0.9835
+   ],
+   "/img/products/creator-2-0-desert-dust-flat.webp": [
+    1.0016,
+    -0.07,
+    -1.23,
+    0.9842
+   ],
+   "/img/products/creator-2-0-glazed-green-flat.webp": [
+    0.9984,
+    0.57,
+    0.22,
+    0.9981
+   ],
+   "/img/products/creator-2-0-ochre-flat.webp": [
+    1.0016,
+    -0.07,
+    -1.23,
+    0.9841
+   ],
+   "/img/products/creator-2-0-bright-blue-flat.webp": [
+    1.0032,
+    -1.15,
+    -2.46,
+    0.9797
+   ],
+   "/img/products/creator-2-0-natural-raw-flat.webp": [
+    1.0161,
+    -5.3,
+    -11.42,
+    0.9387
+   ],
+   "/img/products/creator-2-0-lavender-flat.webp": [
+    1.0016,
+    -0.07,
+    -1.23,
+    0.9843
+   ],
+   "/img/products/creator-2-0-worker-blue-flat.webp": [
+    1.0032,
+    -1.15,
+    -2.46,
+    0.9797
+   ],
+   "/img/products/creator-2-0-aloe-flat.webp": [
+    1.0016,
+    -0.07,
+    -1.23,
+    0.9835
+   ],
+   "/img/products/creator-2-0-fraiche-peche-flat.webp": [
+    1.0016,
+    -0.07,
+    -1.23,
+    0.9832
+   ],
+   "/img/products/creator-2-0-latte-flat.webp": [
+    1.0016,
+    -0.07,
+    -1.23,
+    0.9832
+   ],
+   "/img/products/creator-2-0-purple-love-flat.webp": [
+    1.0145,
+    -4.71,
+    -8.13,
+    0.9446
+   ],
+   "/img/products/creator-2-0-red-brown-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9994
+   ],
+   "/img/products/creator-2-0-bubble-pink-flat.webp": [
+    1.0032,
+    -0.64,
+    -0.45,
+    0.9705
+   ],
+   "/img/products/creator-2-0-nispero-flat.webp": [
+    1.008,
+    -1.87,
+    -3.14,
+    0.9675
+   ],
+   "/img/products/creator-2-0-fiesta-flat.webp": [
+    0.989,
+    3.96,
+    3.53,
+    0.9767
+   ],
+   "/img/products/creator-2-0-green-bay-flat.webp": [
+    0.9859,
+    5.07,
+    6.92,
+    0.9799
+   ],
+   "/img/products/creator-2-0-aqua-blue-flat.webp": [
+    1.0032,
+    -1.15,
+    -2.46,
+    0.9798
+   ],
+   "/img/products/creator-2-0-cool-heather-grey-flat.webp": [
+    1.0161,
+    -7.84,
+    -8.37,
+    0.9361
+   ],
+   "/img/products/creator-2-0-eco-heather-flat.webp": [
+    0.9752,
+    8.92,
+    14.22,
+    0.9376
+   ],
+   "/img/products/creator-2-0-blue-soul-flat.webp": [
+    1.0016,
+    -0.07,
+    -0.22,
+    0.9599
+   ],
+   "/img/products/creator-2-0-spectra-yellow-flat.webp": [
+    1.0112,
+    -3.54,
+    -4.62,
+    0.9556
+   ],
+   "/img/products/creator-2-0-khaki-flat.webp": [
+    1.0032,
+    -0.64,
+    -3.46,
+    0.9806
+   ],
+   "/img/products/creator-2-0-burgundy-flat.webp": [
+    1.0032,
+    -0.64,
+    -3.46,
+    0.9806
+   ],
+   "/img/products/creator-2-0-heather-grey-flat.webp": [
+    0.9953,
+    2.2,
+    2.66,
+    0.9497
+   ],
+   "/img/products/creator-2-0-anthracite-flat.webp": [
+    1.0032,
+    -0.64,
+    -3.46,
+    0.9806
+   ],
+   "/img/products/creator-2-0-lilac-dream-flat.webp": [
+    0.9306,
+    26.39,
+    27.47,
+    0.9415
+   ],
+   "/img/products/creator-2-0-viva-yellow-flat.webp": [
+    0.9347,
+    23.97,
+    27.9,
+    0.9122
+   ],
+   "/img/products/creator-2-0-pool-blue-flat.webp": [
+    0.9292,
+    26.88,
+    28.57,
+    0.9413
+   ],
+   "/img/products/creator-2-0-stone-flat.webp": [
+    0.9306,
+    26.39,
+    28.4,
+    0.9416
+   ],
+   "/img/products/creator-2-0-vintage-white-flat.webp": [
+    1.0048,
+    -1.22,
+    -5.7,
+    0.9717
+   ],
+   "/img/products/creator-2-0-mid-heather-grey-flat.webp": [
+    0.9783,
+    8.32,
+    12.85,
+    0.9758
+   ],
+   "/img/products/creator-2-0-dark-heather-grey-flat.webp": [
+    0.9798,
+    7.28,
+    11.67,
+    0.9796
+   ],
+   "/img/products/creator-2-0-dark-heather-blue-flat.webp": [
+    1.0518,
+    -19.95,
+    -26.23,
+    0.8599
+   ],
+   "/img/products/creator-2-0-stargazer-flat.webp": [
+    1.0032,
+    -0.64,
+    -3.46,
+    0.9806
+   ],
+   "/img/products/creator-2-0-india-ink-grey-flat.webp": [
+    1.0016,
+    -0.07,
+    -3.23,
+    0.9788
+   ],
+   "/img/products/creator-2-0-french-navy-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9995
+   ],
+   "/img/products/creator-2-0-blue-ice-flat.webp": [
+    1.0032,
+    -0.64,
+    -4.46,
+    0.9744
+   ],
+   "/img/products/creator-2-0-mindful-blue-flat.webp": [
+    0.989,
+    4.45,
+    4.52,
+    0.9548
+   ],
+   "/img/products/creator-2-0-heritage-brown-flat.webp": [
+    0.989,
+    4.45,
+    4.52,
+    0.9541
+   ],
+   "/img/products/creator-2-0-heather-haze-flat.webp": [
+    0.9875,
+    5.01,
+    5.72,
+    0.9693
+   ],
+   "/img/products/creator-2-0-misty-jade-flat.webp": [
+    0.989,
+    4.45,
+    4.52,
+    0.9548
+   ],
+   "/img/products/creator-2-0-deep-plum-flat.webp": [
+    0.9574,
+    15.56,
+    17.49,
+    0.9491
+   ],
+   "/img/products/creator-2-0-earthy-red-flat.webp": [
+    0.9574,
+    15.8,
+    17.49,
+    0.9503
+   ],
+   "/img/products/creator-2-0-passionate-red-flat.webp": [
+    0.9618,
+    13.74,
+    15.96,
+    0.9541
+   ],
+   "/img/products/creator-2-0-pebble-blue-flat.webp": [
+    0.9618,
+    13.74,
+    15.96,
+    0.9537
+   ],
+   "/img/products/creator-2-0-blue-grey-flat.webp": [
+    0.9574,
+    15.56,
+    17.49,
+    0.9466
+   ],
+   "/img/products/creator-2-0-deep-teal-flat.webp": [
+    0.9052,
+    34.59,
+    39.62,
+    0.9105
+   ],
+   "/img/products/creator-2-0-verdant-green-flat.webp": [
+    0.9589,
+    15.27,
+    18.26,
+    0.951
+   ],
+   "/img/products/creator-2-0-mosstone-flat.webp": [
+    0.9618,
+    13.74,
+    15.96,
+    0.9536
+   ],
+   "/img/products/creator-2-0-faded-olive-flat.webp": [
+    0.9589,
+    14.79,
+    18.26,
+    0.9489
+   ],
+   "/img/products/creator-2-0-honey-paper-flat.webp": [
+    1.0,
+    -2.5,
+    -6.0,
+    0.9824
+   ],
+   "/img/products/creator-2-0-mocha-flat.webp": [
+    0.9052,
+    34.59,
+    39.62,
+    0.9102
+   ],
+   "/img/products/creator-2-0-misty-grey-flat.webp": [
+    0.9052,
+    34.59,
+    39.62,
+    0.9099
+   ]
+  },
+  "back": {
+   "/img/products/creator-2-0-white-flat-back.webp": [
+    0.9938,
+    1.75,
+    -0.13,
+    0.9763
+   ],
+   "/img/products/creator-2-0-red-flat-back.webp": [
+    0.9969,
+    0.63,
+    0.43,
+    0.9799
+   ],
+   "/img/products/creator-2-0-cotton-pink-flat-back.webp": [
+    0.9984,
+    -0.43,
+    0.22,
+    0.9776
+   ],
+   "/img/products/creator-2-0-off-white-flat-back.webp": [
+    0.9969,
+    0.13,
+    1.43,
+    0.9795
+   ],
+   "/img/products/creator-2-0-desert-dust-flat-back.webp": [
+    0.9984,
+    0.06,
+    0.22,
+    0.9791
+   ],
+   "/img/products/creator-2-0-glazed-green-flat-back.webp": [
+    1.0016,
+    -0.57,
+    -0.22,
+    0.996
+   ],
+   "/img/products/creator-2-0-ochre-flat-back.webp": [
+    0.9953,
+    1.69,
+    1.64,
+    0.9796
+   ],
+   "/img/products/creator-2-0-bright-blue-flat-back.webp": [
+    0.9984,
+    0.06,
+    0.22,
+    0.9789
+   ],
+   "/img/products/creator-2-0-natural-raw-flat-back.webp": [
+    1.0176,
+    -6.83,
+    -11.59,
+    0.9224
+   ],
+   "/img/products/creator-2-0-lavender-flat-back.webp": [
+    0.9984,
+    0.06,
+    0.22,
+    0.9794
+   ],
+   "/img/products/creator-2-0-worker-blue-flat-back.webp": [
+    0.9969,
+    0.63,
+    0.43,
+    0.9803
+   ],
+   "/img/products/creator-2-0-aloe-flat-back.webp": [
+    0.9984,
+    0.06,
+    0.22,
+    0.9785
+   ],
+   "/img/products/creator-2-0-fraiche-peche-flat-back.webp": [
+    0.9984,
+    0.06,
+    0.22,
+    0.9795
+   ],
+   "/img/products/creator-2-0-latte-flat-back.webp": [
+    0.9969,
+    1.13,
+    1.43,
+    0.9792
+   ],
+   "/img/products/creator-2-0-purple-love-flat-back.webp": [
+    1.0079,
+    -3.35,
+    -7.14,
+    0.946
+   ],
+   "/img/products/creator-2-0-red-brown-flat-back.webp": [
+    1.0016,
+    -0.57,
+    -0.22,
+    0.9962
+   ],
+   "/img/products/creator-2-0-bubble-pink-flat-back.webp": [
+    1.0375,
+    -13.99,
+    -17.63,
+    0.8838
+   ],
+   "/img/products/creator-2-0-nispero-flat-back.webp": [
+    1.0176,
+    -6.83,
+    -11.59,
+    0.9384
+   ],
+   "/img/products/creator-2-0-fiesta-flat-back.webp": [
+    1.0032,
+    -1.63,
+    -6.45,
+    0.9484
+   ],
+   "/img/products/creator-2-0-green-bay-flat-back.webp": [
+    0.9984,
+    0.56,
+    -0.78,
+    0.9731
+   ],
+   "/img/products/creator-2-0-aqua-blue-flat-back.webp": [
+    0.9969,
+    0.63,
+    0.43,
+    0.9804
+   ],
+   "/img/products/creator-2-0-cool-heather-grey-flat-back.webp": [
+    1.0291,
+    -11.49,
+    -15.34,
+    0.9269
+   ],
+   "/img/products/creator-2-0-eco-heather-flat-back.webp": [
+    1.0016,
+    -1.57,
+    -1.22,
+    0.985
+   ],
+   "/img/products/creator-2-0-blue-soul-flat-back.webp": [
+    1.0308,
+    -11.57,
+    -16.62,
+    0.907
+   ],
+   "/img/products/creator-2-0-spectra-yellow-flat-back.webp": [
+    1.016,
+    -6.24,
+    -10.33,
+    0.9451
+   ],
+   "/img/products/creator-2-0-khaki-flat-back.webp": [
+    0.9969,
+    0.63,
+    0.43,
+    0.9798
+   ],
+   "/img/products/creator-2-0-burgundy-flat-back.webp": [
+    0.9969,
+    0.63,
+    0.43,
+    0.9802
+   ],
+   "/img/products/creator-2-0-heather-grey-flat-back.webp": [
+    1.0225,
+    -8.59,
+    -13.33,
+    0.9306
+   ],
+   "/img/products/creator-2-0-anthracite-flat-back.webp": [
+    0.9969,
+    0.63,
+    0.43,
+    0.9803
+   ],
+   "/img/products/creator-2-0-lilac-dream-flat-back.webp": [
+    0.9177,
+    28.61,
+    34.29,
+    0.9295
+   ],
+   "/img/products/creator-2-0-viva-yellow-flat-back.webp": [
+    0.9353,
+    23.23,
+    26.7,
+    0.9313
+   ],
+   "/img/products/creator-2-0-pool-blue-flat-back.webp": [
+    0.9164,
+    29.09,
+    35.36,
+    0.9304
+   ],
+   "/img/products/creator-2-0-stone-flat-back.webp": [
+    0.9177,
+    28.61,
+    34.29,
+    0.9301
+   ],
+   "/img/products/creator-2-0-vintage-white-flat-back.webp": [
+    0.9938,
+    1.75,
+    -0.13,
+    0.9774
+   ],
+   "/img/products/creator-2-0-mid-heather-grey-flat-back.webp": [
+    1.0144,
+    -5.66,
+    -9.08,
+    0.9528
+   ],
+   "/img/products/creator-2-0-dark-heather-grey-flat-back.webp": [
+    1.0144,
+    -5.66,
+    -9.08,
+    0.9525
+   ],
+   "/img/products/creator-2-0-dark-heather-blue-flat-back.webp": [
+    1.0618,
+    -23.24,
+    -34.01,
+    0.8258
+   ],
+   "/img/products/creator-2-0-stargazer-flat-back.webp": [
+    0.9969,
+    0.63,
+    0.43,
+    0.9799
+   ],
+   "/img/products/creator-2-0-india-ink-grey-flat-back.webp": [
+    1.0325,
+    -11.66,
+    -21.0,
+    0.8853
+   ],
+   "/img/products/creator-2-0-french-navy-flat-back.webp": [
+    1.0016,
+    -0.57,
+    -0.22,
+    0.9961
+   ],
+   "/img/products/creator-2-0-blue-ice-flat-back.webp": [
+    0.9953,
+    1.19,
+    0.65,
+    0.9688
+   ],
+   "/img/products/creator-2-0-mindful-blue-flat-back.webp": [
+    1.016,
+    -6.75,
+    -9.32,
+    0.9299
+   ],
+   "/img/products/creator-2-0-heritage-brown-flat-back.webp": [
+    1.016,
+    -6.24,
+    -9.32,
+    0.9348
+   ],
+   "/img/products/creator-2-0-heather-haze-flat-back.webp": [
+    1.0047,
+    -2.2,
+    -1.66,
+    0.9524
+   ],
+   "/img/products/creator-2-0-misty-jade-flat-back.webp": [
+    1.016,
+    -6.24,
+    -9.32,
+    0.9351
+   ],
+   "/img/products/creator-2-0-deep-plum-flat-back.webp": [
+    0.9695,
+    10.46,
+    11.96,
+    0.9804
+   ],
+   "/img/products/creator-2-0-earthy-red-flat-back.webp": [
+    0.9695,
+    10.46,
+    11.96,
+    0.9803
+   ],
+   "/img/products/creator-2-0-passionate-red-flat-back.webp": [
+    0.971,
+    9.93,
+    10.8,
+    0.9803
+   ],
+   "/img/products/creator-2-0-pebble-blue-flat-back.webp": [
+    0.971,
+    9.93,
+    10.8,
+    0.9805
+   ],
+   "/img/products/creator-2-0-blue-grey-flat-back.webp": [
+    0.9695,
+    10.46,
+    11.96,
+    0.9801
+   ],
+   "/img/products/creator-2-0-deep-teal-flat-back.webp": [
+    0.9394,
+    21.27,
+    25.27,
+    0.959
+   ],
+   "/img/products/creator-2-0-verdant-green-flat-back.webp": [
+    0.9725,
+    9.39,
+    10.61,
+    0.9808
+   ],
+   "/img/products/creator-2-0-mosstone-flat-back.webp": [
+    0.971,
+    9.93,
+    10.8,
+    0.9805
+   ],
+   "/img/products/creator-2-0-faded-olive-flat-back.webp": [
+    0.9695,
+    10.46,
+    11.96,
+    0.9801
+   ],
+   "/img/products/creator-2-0-honey-paper-flat-back.webp": [
+    0.986,
+    6.0,
+    -0.05,
+    0.9685
+   ],
+   "/img/products/creator-2-0-mocha-flat-back.webp": [
+    0.9381,
+    22.24,
+    26.37,
+    0.958
+   ],
+   "/img/products/creator-2-0-misty-grey-flat-back.webp": [
+    0.9381,
+    21.3,
+    26.37,
+    0.9575
+   ]
+  }
+ },
+ "freestyler": {
+  "front": {
+   "/img/products/freestyler-white-flat.webp": [
+    1.0109,
+    0.08,
+    -4.47,
+    0.9492
+   ],
+   "/img/products/freestyler-desert-dust-flat.jpg": [
+    0.9462,
+    24.58,
+    23.18,
+    0.9514
+   ],
+   "/img/products/freestyler-glazed-green-flat.webp": [
+    1.0,
+    -0.25,
+    0.0,
+    0.9991
+   ],
+   "/img/products/freestyler-natural-raw-flat.webp": [
+    1.022,
+    -10.83,
+    -9.03,
+    0.9365
+   ],
+   "/img/products/freestyler-ka-a-co-ee-flat.webp": [
+    0.9909,
+    9.03,
+    3.19,
+    0.9567
+   ],
+   "/img/products/freestyler-worker-blue-flat.webp": [
+    0.9909,
+    8.53,
+    3.19,
+    0.9555
+   ],
+   "/img/products/freestyler-aloe-flat.webp": [
+    0.9909,
+    9.03,
+    3.19,
+    0.9568
+   ],
+   "/img/products/freestyler-fraiche-p-che-flat.jpg": [
+    0.9448,
+    25.08,
+    23.34,
+    0.9517
+   ],
+   "/img/products/freestyler-mocha-flat.webp": [
+    0.9804,
+    10.33,
+    8.47,
+    0.9206
+   ],
+   "/img/products/freestyler-cool-heather-grey-flat.webp": [
+    1.0416,
+    -9.71,
+    -22.16,
+    0.8851
+   ],
+   "/img/products/freestyler-khaki-flat.webp": [
+    0.9804,
+    10.33,
+    8.47,
+    0.9203
+   ],
+   "/img/products/freestyler-burgundy-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9995
+   ],
+   "/img/products/freestyler-heather-grey-flat.webp": [
+    1.035,
+    -6.29,
+    -14.97,
+    0.896
+   ],
+   "/img/products/freestyler-cream-flat.webp": [
+    0.9518,
+    18.55,
+    17.79,
+    0.9619
+   ],
+   "/img/products/freestyler-dark-heather-grey-flat.webp": [
+    1.035,
+    -5.77,
+    -14.97,
+    0.8952
+   ],
+   "/img/products/freestyler-stargazer-flat.webp": [
+    0.9864,
+    10.15,
+    6.73,
+    0.9743
+   ],
+   "/img/products/freestyler-french-navy-flat.webp": [
+    1.0,
+    0.25,
+    0.0,
+    0.9998
+   ],
+   "/img/products/freestyler-mindful-blue-flat.webp": [
+    1.0483,
+    -11.59,
+    -24.2,
+    0.8743
+   ],
+   "/img/products/freestyler-heritage-brown-flat.webp": [
+    1.0483,
+    -12.12,
+    -24.2,
+    0.8772
+   ],
+   "/img/products/freestyler-heather-haze-flat.webp": [
+    1.0416,
+    -9.71,
+    -21.12,
+    0.8908
+   ],
+   "/img/products/freestyler-misty-jade-flat.webp": [
+    1.0886,
+    -26.61,
+    -42.18,
+    0.7902
+   ]
+  },
+  "back": {
+   "/img/products/freestyler-white-flat-back.webp": [
+    1.0234,
+    -1.98,
+    -10.21,
+    0.9214
+   ],
+   "/img/products/freestyler-desert-dust-flat-back.webp": [
+    0.9985,
+    10.05,
+    0.2,
+    0.9569
+   ],
+   "/img/products/freestyler-glazed-green-flat-back.webp": [
+    1.0031,
+    -0.63,
+    -1.4,
+    0.9908
+   ],
+   "/img/products/freestyler-natural-raw-flat-back.webp": [
+    1.0298,
+    -9.98,
+    -13.15,
+    0.9206
+   ],
+   "/img/products/freestyler-ka-a-co-ee-flat-back.webp": [
+    0.997,
+    11.09,
+    0.4,
+    0.9526
+   ],
+   "/img/products/freestyler-worker-blue-flat-back.webp": [
+    0.997,
+    11.09,
+    0.4,
+    0.9534
+   ],
+   "/img/products/freestyler-aloe-flat-back.webp": [
+    0.9985,
+    10.55,
+    0.2,
+    0.9512
+   ],
+   "/img/products/freestyler-fraiche-p-che-flat-back.webp": [
+    0.9985,
+    10.05,
+    0.2,
+    0.957
+   ],
+   "/img/products/freestyler-mocha-flat-back.webp": [
+    0.9719,
+    19.62,
+    12.41,
+    0.938
+   ],
+   "/img/products/freestyler-cool-heather-grey-flat-back.webp": [
+    1.0564,
+    -10.76,
+    -26.34,
+    0.8449
+   ],
+   "/img/products/freestyler-khaki-flat-back.webp": [
+    0.9719,
+    19.62,
+    12.41,
+    0.9374
+   ],
+   "/img/products/freestyler-burgundy-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9999
+   ],
+   "/img/products/freestyler-heather-grey-flat-back.webp": [
+    1.053,
+    -9.02,
+    -22.68,
+    0.8588
+   ],
+   "/img/products/freestyler-cream-flat-back.webp": [
+    0.9676,
+    21.65,
+    14.86,
+    0.9436
+   ],
+   "/img/products/freestyler-dark-heather-grey-flat-back.webp": [
+    1.053,
+    -9.02,
+    -22.68,
+    0.8587
+   ],
+   "/img/products/freestyler-stargazer-flat-back.webp": [
+    0.9954,
+    11.14,
+    0.59,
+    0.9583
+   ],
+   "/img/products/freestyler-french-navy-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/freestyler-mindful-blue-flat-back.webp": [
+    1.0615,
+    -12.61,
+    -28.16,
+    0.8421
+   ],
+   "/img/products/freestyler-heritage-brown-flat-back.webp": [
+    1.0615,
+    -12.61,
+    -28.16,
+    0.8419
+   ],
+   "/img/products/freestyler-heather-haze-flat-back.webp": [
+    1.0807,
+    -19.52,
+    -38.59,
+    0.8069
+   ],
+   "/img/products/freestyler-misty-jade-flat-back.webp": [
+    1.0789,
+    -18.88,
+    -36.16,
+    0.81
+   ]
+  }
+ },
+ "lux-t": {
+  "front": {
+   "/img/products/lux-t-black-opal.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/lux-t-bottle-green.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/lux-t-bright-royal.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9995
+   ],
+   "/img/products/lux-t-dark-denim-heather.webp": [
+    0.9988,
+    1.44,
+    0.04,
+    0.9958
+   ],
+   "/img/products/lux-t-dark-grey-heather.webp": [
+    0.9988,
+    1.44,
+    0.04,
+    0.9959
+   ],
+   "/img/products/lux-t-grey-heather.webp": [
+    0.9988,
+    1.44,
+    0.04,
+    0.9958
+   ],
+   "/img/products/lux-t-kelly-green.webp": [
+    0.9988,
+    -0.06,
+    0.04,
+    0.9942
+   ],
+   "/img/products/lux-t-navy-blue.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/lux-t-orange.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9994
+   ],
+   "/img/products/lux-t-slate-grey.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/lux-t-scarlet-red.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9995
+   ],
+   "/img/products/lux-t-sunflower-yellow.webp": [
+    1.0,
+    -0.5,
+    0.0,
+    0.9991
+   ],
+   "/img/products/lux-t-white.webp": [
+    1.0,
+    -1.0,
+    0.0,
+    0.9948
+   ]
+  }
+ },
+ "lux-t-damen": {
+  "front": {
+   "/img/products/lux-t-damen-black-opal.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9997
+   ],
+   "/img/products/lux-t-damen-bottle-green.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/lux-t-damen-bright-royal.webp": [
+    1.0012,
+    -0.2,
+    -0.06,
+    0.9943
+   ],
+   "/img/products/lux-t-damen-dark-denim-heather.webp": [
+    1.0012,
+    -0.45,
+    -1.06,
+    0.9954
+   ],
+   "/img/products/lux-t-damen-dark-grey-heather.webp": [
+    1.0012,
+    -0.45,
+    -1.06,
+    0.9952
+   ],
+   "/img/products/lux-t-damen-grey-heather.webp": [
+    1.0025,
+    -0.65,
+    -1.13,
+    0.9872
+   ],
+   "/img/products/lux-t-damen-kelly-green.webp": [
+    1.0,
+    0.25,
+    0.0,
+    0.9992
+   ],
+   "/img/products/lux-t-damen-navy-blue.webp": [
+    1.0012,
+    -0.45,
+    -0.06,
+    0.9963
+   ],
+   "/img/products/lux-t-damen-orange.webp": [
+    1.0012,
+    0.05,
+    -1.06,
+    0.9917
+   ],
+   "/img/products/lux-t-damen-slate-grey.webp": [
+    1.0012,
+    -0.2,
+    -0.06,
+    0.9943
+   ],
+   "/img/products/lux-t-damen-scarlet-red.webp": [
+    1.0012,
+    -0.45,
+    -1.06,
+    0.9961
+   ],
+   "/img/products/lux-t-damen-sunflower-yellow.jpg": [
+    1.0824,
+    -29.13,
+    -37.59,
+    0.8435
+   ],
+   "/img/products/lux-t-damen-white.webp": [
+    1.0038,
+    -2.11,
+    -2.19,
+    0.9892
+   ]
+  }
+ },
+ "mini-creator-2-0": {
+  "front": {
+   "/img/products/mini-creator-2-0-white-flat.webp": [
+    0.9968,
+    1.14,
+    0.45,
+    0.9342
+   ],
+   "/img/products/mini-creator-2-0-red-flat.webp": [
+    0.9984,
+    1.07,
+    0.23,
+    0.9232
+   ],
+   "/img/products/mini-creator-2-0-cotton-pink-flat.webp": [
+    0.9984,
+    0.57,
+    1.23,
+    0.9227
+   ],
+   "/img/products/mini-creator-2-0-glazed-green-flat.webp": [
+    0.9968,
+    1.14,
+    1.45,
+    0.9201
+   ],
+   "/img/products/mini-creator-2-0-ochre-flat.webp": [
+    0.9968,
+    1.14,
+    1.45,
+    0.92
+   ],
+   "/img/products/mini-creator-2-0-bright-blue-flat.webp": [
+    0.9968,
+    1.14,
+    1.45,
+    0.9197
+   ],
+   "/img/products/mini-creator-2-0-natural-raw-flat.webp": [
+    0.9829,
+    5.69,
+    10.33,
+    0.9112
+   ],
+   "/img/products/mini-creator-2-0-teal-monstera-flat.webp": [
+    0.9968,
+    1.14,
+    1.45,
+    0.9198
+   ],
+   "/img/products/mini-creator-2-0-lavender-flat.webp": [
+    0.9984,
+    0.57,
+    1.23,
+    0.9228
+   ],
+   "/img/products/mini-creator-2-0-butter-flat.webp": [
+    0.9984,
+    0.57,
+    1.23,
+    0.9229
+   ],
+   "/img/products/mini-creator-2-0-aloe-flat.webp": [
+    0.9984,
+    0.57,
+    1.23,
+    0.9228
+   ],
+   "/img/products/mini-creator-2-0-go-green-flat.webp": [
+    0.9984,
+    1.07,
+    0.23,
+    0.9227
+   ],
+   "/img/products/mini-creator-2-0-fraiche-peche-flat.webp": [
+    0.9984,
+    0.57,
+    1.23,
+    0.9226
+   ],
+   "/img/products/mini-creator-2-0-fiesta-flat.webp": [
+    0.9906,
+    4.39,
+    3.34,
+    0.9272
+   ],
+   "/img/products/mini-creator-2-0-aqua-blue-flat.webp": [
+    0.9798,
+    9.97,
+    7.81,
+    0.8903
+   ],
+   "/img/products/mini-creator-2-0-eco-heather-flat.webp": [
+    0.9532,
+    19.74,
+    20.09,
+    0.8984
+   ],
+   "/img/products/mini-creator-2-0-blue-soul-flat.webp": [
+    0.9984,
+    0.57,
+    1.23,
+    0.9224
+   ],
+   "/img/products/mini-creator-2-0-khaki-flat.webp": [
+    0.9968,
+    1.14,
+    1.45,
+    0.9201
+   ],
+   "/img/products/mini-creator-2-0-royal-blue-flat.webp": [
+    0.9968,
+    1.14,
+    1.45,
+    0.9199
+   ],
+   "/img/products/mini-creator-2-0-burgundy-flat.webp": [
+    0.9968,
+    1.14,
+    1.45,
+    0.92
+   ],
+   "/img/products/mini-creator-2-0-heather-grey-flat.webp": [
+    0.9768,
+    9.35,
+    8.23,
+    0.9151
+   ],
+   "/img/products/mini-creator-2-0-anthracite-flat.webp": [
+    0.9968,
+    1.14,
+    1.45,
+    0.9201
+   ],
+   "/img/products/mini-creator-2-0-viva-yellow-flat.webp": [
+    0.9984,
+    0.57,
+    1.23,
+    0.9225
+   ],
+   "/img/products/mini-creator-2-0-pool-blue-flat.webp": [
+    0.9968,
+    1.14,
+    1.45,
+    0.9199
+   ],
+   "/img/products/mini-creator-2-0-pink-joy-flat.webp": [
+    0.9984,
+    1.07,
+    0.23,
+    0.9233
+   ],
+   "/img/products/mini-creator-2-0-caribbean-blue-flat.webp": [
+    0.9984,
+    0.57,
+    1.23,
+    0.9228
+   ],
+   "/img/products/mini-creator-2-0-french-navy-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/mini-creator-2-0-stargazer-flat.webp": [
+    0.9984,
+    1.07,
+    0.23,
+    0.9243
+   ],
+   "/img/products/mini-creator-2-0-verdant-green-flat.webp": [
+    0.9968,
+    1.64,
+    0.45,
+    0.9242
+   ],
+   "/img/products/mini-creator-2-0-heritage-brown-flat.webp": [
+    0.9984,
+    1.07,
+    0.23,
+    0.9241
+   ]
+  },
+  "back": {
+   "/img/products/mini-creator-2-0-white-flat-back.webp": [
+    1.0157,
+    -5.91,
+    -4.24,
+    0.9512
+   ],
+   "/img/products/mini-creator-2-0-red-flat-back.webp": [
+    1.0287,
+    -10.06,
+    -13.28,
+    0.9263
+   ],
+   "/img/products/mini-creator-2-0-cotton-pink-flat-back.webp": [
+    1.0304,
+    -11.16,
+    -13.52,
+    0.9221
+   ],
+   "/img/products/mini-creator-2-0-glazed-green-flat-back.webp": [
+    1.0287,
+    -10.06,
+    -13.28,
+    0.9264
+   ],
+   "/img/products/mini-creator-2-0-ochre-flat-back.webp": [
+    1.0287,
+    -10.06,
+    -13.28,
+    0.9272
+   ],
+   "/img/products/mini-creator-2-0-bright-blue-flat-back.webp": [
+    1.0287,
+    -10.57,
+    -13.28,
+    0.9258
+   ],
+   "/img/products/mini-creator-2-0-natural-raw-flat-back.webp": [
+    1.0062,
+    -2.49,
+    3.15,
+    0.9654
+   ],
+   "/img/products/mini-creator-2-0-teal-monstera-flat-back.webp": [
+    1.0287,
+    -10.06,
+    -13.28,
+    0.9273
+   ],
+   "/img/products/mini-creator-2-0-lavender-flat-back.webp": [
+    1.0304,
+    -10.65,
+    -13.52,
+    0.9236
+   ],
+   "/img/products/mini-creator-2-0-butter-flat-back.webp": [
+    1.0287,
+    -11.08,
+    -13.28,
+    0.9244
+   ],
+   "/img/products/mini-creator-2-0-aloe-flat-back.webp": [
+    1.0287,
+    -10.57,
+    -13.28,
+    0.9258
+   ],
+   "/img/products/mini-creator-2-0-go-green-flat-back.webp": [
+    1.0271,
+    -9.98,
+    -13.03,
+    0.9282
+   ],
+   "/img/products/mini-creator-2-0-fraiche-peche-flat-back.webp": [
+    1.0304,
+    -10.65,
+    -13.52,
+    0.9237
+   ],
+   "/img/products/mini-creator-2-0-fiesta-flat-back.webp": [
+    1.0142,
+    -5.34,
+    -6.04,
+    0.9449
+   ],
+   "/img/products/mini-creator-2-0-aqua-blue-flat-back.webp": [
+    1.011,
+    -4.19,
+    -1.54,
+    0.9254
+   ],
+   "/img/products/mini-creator-2-0-eco-heather-flat-back.webp": [
+    1.0,
+    -0.75,
+    -1.0,
+    0.9683
+   ],
+   "/img/products/mini-creator-2-0-blue-soul-flat-back.webp": [
+    1.0304,
+    -10.65,
+    -13.52,
+    0.9234
+   ],
+   "/img/products/mini-creator-2-0-khaki-flat-back.webp": [
+    1.0287,
+    -10.06,
+    -13.28,
+    0.9267
+   ],
+   "/img/products/mini-creator-2-0-royal-blue-flat-back.webp": [
+    1.0287,
+    -10.57,
+    -13.28,
+    0.9258
+   ],
+   "/img/products/mini-creator-2-0-burgundy-flat-back.webp": [
+    1.0287,
+    -10.06,
+    -13.28,
+    0.9268
+   ],
+   "/img/products/mini-creator-2-0-heather-grey-flat-back.webp": [
+    1.0287,
+    -10.57,
+    -11.22,
+    0.9291
+   ],
+   "/img/products/mini-creator-2-0-anthracite-flat-back.webp": [
+    1.0287,
+    -10.06,
+    -13.28,
+    0.9272
+   ],
+   "/img/products/mini-creator-2-0-viva-yellow-flat-back.webp": [
+    1.0304,
+    -11.16,
+    -13.52,
+    0.922
+   ],
+   "/img/products/mini-creator-2-0-pool-blue-flat-back.webp": [
+    1.0287,
+    -10.57,
+    -13.28,
+    0.9256
+   ],
+   "/img/products/mini-creator-2-0-pink-joy-flat-back.webp": [
+    1.0287,
+    -10.57,
+    -13.28,
+    0.9255
+   ],
+   "/img/products/mini-creator-2-0-caribbean-blue-flat-back.webp": [
+    1.0304,
+    -11.16,
+    -13.52,
+    0.9219
+   ],
+   "/img/products/mini-creator-2-0-french-navy-flat-back.webp": [
+    1.0,
+    -0.25,
+    0.0,
+    0.9998
+   ],
+   "/img/products/mini-creator-2-0-stargazer-flat-back.webp": [
+    1.0287,
+    -10.57,
+    -13.28,
+    0.9247
+   ],
+   "/img/products/mini-creator-2-0-verdant-green-flat-back.webp": [
+    1.0271,
+    -9.98,
+    -13.03,
+    0.9281
+   ],
+   "/img/products/mini-creator-2-0-heritage-brown-flat-back.webp": [
+    1.0287,
+    -10.57,
+    -13.28,
+    0.9254
+   ]
+  }
+ },
+ "seamless-sports-t": {
+  "front": {
+   "/img/products/seamless-sports-t-black-opal.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/seamless-sports-t-blue-midnight-dip.webp": [
+    1.0012,
+    -0.44,
+    -1.05,
+    0.9969
+   ]
+  }
+ },
+ "seamless-sports-t-damen": {
+  "front": {
+   "/img/products/seamless-sports-t-damen-black-opal.webp": [
+    1.0,
+    -0.5,
+    0.0,
+    0.9999
+   ],
+   "/img/products/seamless-sports-t-damen-blue-midnight-dip.webp": [
+    0.9988,
+    0.93,
+    0.04,
+    0.998
+   ]
+  }
+ },
+ "stanley-stancer": {
+  "front": {
+   "/img/products/stanley-stancer-white-flat.webp": [
+    1.0026,
+    0.58,
+    -0.22,
+    0.9408
+   ],
+   "/img/products/stanley-stancer-natural-raw-flat.webp": [
+    1.0,
+    0.0,
+    1.0,
+    0.9991
+   ],
+   "/img/products/stanley-stancer-heather-grey-flat.webp": [
+    1.0052,
+    -0.85,
+    -2.45,
+    0.9392
+   ],
+   "/img/products/stanley-stancer-french-navy-flat.webp": [
+    0.9987,
+    2.46,
+    1.11,
+    0.9801
+   ]
+  },
+  "back": {
+   "/img/products/stanley-stancer-white-flat-back.webp": [
+    0.9923,
+    6.25,
+    5.64,
+    0.9767
+   ],
+   "/img/products/stanley-stancer-natural-raw-flat-back.webp": [
+    0.9987,
+    0.47,
+    1.11,
+    0.9986
+   ],
+   "/img/products/stanley-stancer-heather-grey-flat-back.webp": [
+    0.9898,
+    5.18,
+    6.84,
+    0.9842
+   ],
+   "/img/products/stanley-stancer-french-navy-flat-back.webp": [
+    0.9898,
+    4.19,
+    6.84,
+    0.9635
+   ]
+  }
+ },
+ "stella-muser": {
+  "front": {
+   "/img/products/stella-muser-white-flat.webp": [
+    1.0049,
+    -1.27,
+    1.25,
+    0.9818
+   ],
+   "/img/products/stella-muser-red-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.998
+   ],
+   "/img/products/stella-muser-cotton-pink-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9975
+   ],
+   "/img/products/stella-muser-off-white-flat.webp": [
+    0.9984,
+    0.59,
+    1.25,
+    0.9965
+   ],
+   "/img/products/stella-muser-natural-raw-flat.webp": [
+    1.02,
+    -6.69,
+    -10.24,
+    0.9421
+   ],
+   "/img/products/stella-muser-lavender-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9974
+   ],
+   "/img/products/stella-muser-worker-blue-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9985
+   ],
+   "/img/products/stella-muser-fraiche-peche-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9976
+   ],
+   "/img/products/stella-muser-purple-love-flat.webp": [
+    1.0116,
+    -3.66,
+    -4.83,
+    0.951
+   ],
+   "/img/products/stella-muser-bubble-pink-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9976
+   ],
+   "/img/products/stella-muser-nispero-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9974
+   ],
+   "/img/products/stella-muser-fiesta-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9978
+   ],
+   "/img/products/stella-muser-green-bay-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9988
+   ],
+   "/img/products/stella-muser-aqua-blue-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9977
+   ],
+   "/img/products/stella-muser-cool-heather-grey-flat.webp": [
+    1.039,
+    -14.06,
+    -19.56,
+    0.9022
+   ],
+   "/img/products/stella-muser-eco-heather-flat.webp": [
+    1.0303,
+    -9.88,
+    -11.91,
+    0.9087
+   ],
+   "/img/products/stella-muser-blue-soul-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9981
+   ],
+   "/img/products/stella-muser-khaki-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9991
+   ],
+   "/img/products/stella-muser-burgundy-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9986
+   ],
+   "/img/products/stella-muser-heather-grey-flat.webp": [
+    1.0373,
+    -12.91,
+    -17.19,
+    0.902
+   ],
+   "/img/products/stella-muser-anthracite-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.999
+   ],
+   "/img/products/stella-muser-lilac-dream-flat.webp": [
+    0.973,
+    10.22,
+    11.97,
+    0.9633
+   ],
+   "/img/products/stella-muser-viva-yellow-flat.webp": [
+    0.9592,
+    15.15,
+    15.91,
+    0.9639
+   ],
+   "/img/products/stella-muser-stargazer-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9991
+   ],
+   "/img/products/stella-muser-french-navy-flat.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9993
+   ],
+   "/img/products/stella-muser-blue-ice-flat.webp": [
+    1.0049,
+    -1.27,
+    -4.78,
+    0.9714
+   ],
+   "/img/products/stella-muser-heritage-brown-flat.webp": [
+    1.0033,
+    -0.68,
+    -0.51,
+    0.9629
+   ],
+   "/img/products/stella-muser-heather-haze-flat.webp": [
+    0.9714,
+    10.77,
+    14.14,
+    0.9592
+   ],
+   "/img/products/stella-muser-misty-jade-flat.webp": [
+    1.0033,
+    -0.68,
+    -0.51,
+    0.9627
+   ],
+   "/img/products/stella-muser-passionate-red-flat.webp": [
+    1.0033,
+    -0.18,
+    -0.51,
+    0.9598
+   ],
+   "/img/products/stella-muser-pebble-blue-flat.webp": [
+    1.0016,
+    -0.09,
+    -0.25,
+    0.9652
+   ],
+   "/img/products/stella-muser-blue-grey-flat.webp": [
+    0.9745,
+    10.63,
+    8.82,
+    0.9679
+   ],
+   "/img/products/stella-muser-deep-teal-flat.webp": [
+    0.9638,
+    13.52,
+    13.32,
+    0.9467
+   ],
+   "/img/products/stella-muser-verdant-green-flat.webp": [
+    0.9776,
+    8.54,
+    7.38,
+    0.9711
+   ],
+   "/img/products/stella-muser-honey-paper-flat.webp": [
+    1.0082,
+    -4.48,
+    -6.32,
+    0.9632
+   ],
+   "/img/products/stella-muser-mocha-flat.webp": [
+    0.9638,
+    13.52,
+    13.32,
+    0.9466
+   ]
+  },
+  "back": {
+   "/img/products/stella-muser-white-flat-back.webp": [
+    0.9869,
+    4.23,
+    2.1,
+    0.9843
+   ],
+   "/img/products/stella-muser-red-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/stella-muser-cotton-pink-flat-back.webp": [
+    1.0017,
+    -0.6,
+    -0.27,
+    0.9952
+   ],
+   "/img/products/stella-muser-off-white-flat-back.webp": [
+    1.0,
+    0.0,
+    1.0,
+    0.9977
+   ],
+   "/img/products/stella-muser-natural-raw-flat-back.webp": [
+    0.9901,
+    3.55,
+    1.58,
+    0.9645
+   ],
+   "/img/products/stella-muser-lavender-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9985
+   ],
+   "/img/products/stella-muser-worker-blue-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/stella-muser-fraiche-peche-flat-back.webp": [
+    1.0017,
+    -0.6,
+    -0.27,
+    0.995
+   ],
+   "/img/products/stella-muser-purple-love-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.976
+   ],
+   "/img/products/stella-muser-bubble-pink-flat-back.webp": [
+    1.0017,
+    -0.6,
+    -0.27,
+    0.9947
+   ],
+   "/img/products/stella-muser-nispero-flat-back.webp": [
+    1.0017,
+    -0.35,
+    -0.27,
+    0.9925
+   ],
+   "/img/products/stella-muser-fiesta-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9992
+   ],
+   "/img/products/stella-muser-green-bay-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9996
+   ],
+   "/img/products/stella-muser-aqua-blue-flat-back.webp": [
+    0.9967,
+    1.19,
+    1.53,
+    0.9939
+   ],
+   "/img/products/stella-muser-cool-heather-grey-flat-back.webp": [
+    1.0239,
+    -9.09,
+    -15.08,
+    0.9219
+   ],
+   "/img/products/stella-muser-eco-heather-flat-back.webp": [
+    0.9917,
+    2.97,
+    5.29,
+    0.965
+   ],
+   "/img/products/stella-muser-blue-soul-flat-back.webp": [
+    0.9967,
+    0.69,
+    1.53,
+    0.9943
+   ],
+   "/img/products/stella-muser-khaki-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/stella-muser-burgundy-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/stella-muser-heather-grey-flat-back.webp": [
+    1.0239,
+    -8.57,
+    -12.01,
+    0.9243
+   ],
+   "/img/products/stella-muser-anthracite-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9998
+   ],
+   "/img/products/stella-muser-lilac-dream-flat-back.webp": [
+    0.9631,
+    13.25,
+    14.57,
+    0.9719
+   ],
+   "/img/products/stella-muser-viva-yellow-flat-back.webp": [
+    0.9232,
+    28.07,
+    33.52,
+    0.9442
+   ],
+   "/img/products/stella-muser-stargazer-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9999
+   ],
+   "/img/products/stella-muser-french-navy-flat-back.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9999
+   ],
+   "/img/products/stella-muser-blue-ice-flat-back.webp": [
+    0.9852,
+    5.3,
+    6.3,
+    0.9655
+   ],
+   "/img/products/stella-muser-heritage-brown-flat-back.webp": [
+    0.9901,
+    3.55,
+    1.58,
+    0.9807
+   ],
+   "/img/products/stella-muser-heather-haze-flat-back.webp": [
+    0.9647,
+    12.21,
+    14.33,
+    0.9685
+   ],
+   "/img/products/stella-muser-misty-jade-flat-back.webp": [
+    0.9917,
+    2.97,
+    1.32,
+    0.9794
+   ],
+   "/img/products/stella-muser-passionate-red-flat-back.webp": [
+    0.9901,
+    4.54,
+    1.58,
+    0.9798
+   ],
+   "/img/products/stella-muser-pebble-blue-flat-back.webp": [
+    0.995,
+    1.79,
+    -0.2,
+    0.9808
+   ],
+   "/img/products/stella-muser-blue-grey-flat-back.webp": [
+    0.9869,
+    4.72,
+    1.11,
+    0.9767
+   ],
+   "/img/products/stella-muser-deep-teal-flat-back.webp": [
+    0.9616,
+    13.32,
+    14.8,
+    0.9614
+   ],
+   "/img/products/stella-muser-verdant-green-flat-back.webp": [
+    0.9901,
+    3.55,
+    -0.4,
+    0.98
+   ],
+   "/img/products/stella-muser-honey-paper-flat-back.webp": [
+    0.9901,
+    3.06,
+    1.58,
+    0.9807
+   ],
+   "/img/products/stella-muser-mocha-flat-back.webp": [
+    0.9616,
+    13.32,
+    14.8,
+    0.9617
+   ]
+  }
+ },
+ "classic-tank-top": {
+  "front": {
+   "/img/products/classic-tank-top-white.webp": [
+    0.9988,
+    0.44,
+    1.06,
+    0.9889
+   ]
+  }
+ },
+ "classic-tank-top-damen": {
+  "front": {
+   "/img/products/classic-tank-top-damen-white.webp": [
+    0.9976,
+    3.37,
+    2.1,
+    0.9939
+   ]
+  }
+ },
+ "comfort-tank-top": {
+  "front": {
+   "/img/products/comfort-tank-top-grey-heather.webp": [
+    1.0,
+    -0.5,
+    0.0,
+    0.9971
+   ],
+   "/img/products/comfort-tank-top-white.webp": [
+    1.0,
+    0.0,
+    0.0,
+    0.9974
+   ]
+  }
+ }
+}

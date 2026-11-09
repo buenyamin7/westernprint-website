@@ -36,6 +36,11 @@ const { image, title } = Astro.props;
         <circle class="dz-handle" data-dz-handle="nw" /><circle class="dz-handle" data-dz-handle="ne" />
         <circle class="dz-handle" data-dz-handle="sw" /><circle class="dz-handle" data-dz-handle="se" />
       </g>
+      <!-- Vergleichsumriss (DIN A4 oder Handy) im selben Maßstab wie Druckbereich und Motiv -->
+      <g data-dz-ref visibility="hidden" aria-hidden="true">
+        <rect class="dz-ref-bg" data-dz-ref-bg /><rect class="dz-ref" data-dz-ref-r />
+        <text class="dz-ref-t" data-dz-ref-t></text>
+      </g>
     </g>
   </svg>
   <div class="dz-tabs" role="tablist" aria-label="Ansicht" data-dz-tabs>
@@ -49,4 +54,13 @@ const { image, title } = Astro.props;
   <p class="dz-badge" data-dz-badge hidden></p>
   <p class="dz-measure" data-dz-measure aria-hidden="true" hidden></p>
 </div>
+  <div class="dz-bar">
+    <p class="dz-sizetag" data-dz-sizetag aria-live="polite"></p>
+    <div class="dz-refopt" role="group" aria-label="Vergleichsgröße einblenden">
+      <span class="dz-refopt-l">Vergleich</span>
+      <button type="button" data-dz-refobj="a4" aria-pressed="false"><span class="dz-long">DIN </span>A4</button>
+      <button type="button" data-dz-refobj="phone" aria-pressed="false" aria-label="Handy, ca. 7 × 15 cm">Handy</button>
+    </div>
+  </div>
+
 <p class="dz-note" data-dz-note>Die Vorschau dient zur Orientierung. Maßgeblich sind die Zentimeter rechts. Stoff, Bildschirm und Druck können Farben verändern.</p>
