@@ -211,14 +211,14 @@ export const nischen: PodNische[] = [
     produkteIntro: 'Heavy Oversize von Build Your Brand für den Streetwear-Look, Stedman für günstigen Konzert-Merch, Stanley/Stella für Bio-Baumwolle. Nackenprint kostet 3,00 € netto zusätzlich.',
     besonderheiten: [
       { icon: 'arrows-out', t: 'Großer Rückendruck', d: 'Rückenmotive bis 38 cm Breite beim T-Shirt. Die exakte Zone je Textil zeigt der Designer, die Breite stellst du in Zentimetern ein.' },
-      { icon: 'clock', t: 'Auch wenn der Drop knallt', d: 'Produktion in 1 bis 3 Werktagen, Kapazität für 50 Bestellungen am Tag. Planst du einen großen Drop, sag uns vorher Bescheid.' },
+      { icon: 'clock', t: 'Auch wenn der Drop knallt', d: 'Produktion in 1 bis 3 Werktagen, Kapazität für rund 1.000 Bestellungen am Tag, auch im Weihnachtsgeschäft. Planst du einen großen Drop, sag uns vorher Bescheid.' },
       { icon: 'package', t: 'Dein Verpackungsmaterial', d: 'Gebrandete Versandtaschen, Sticker, Danke-Karten lieferst du an, wir verpacken damit. Neutral ohne westernprint-Logo ist Standard.' },
     ],
     faqs: [
       { q: 'Was ist Merch on Demand?', a: 'Merch on Demand ist Print-on-Demand für Fanartikel: Ein Shirt oder Hoodie wird erst gedruckt, wenn ein Fan es im Shop gekauft hat. Du brauchst kein Lager, keine Vorkasse und hast keine Restposten. Wir drucken in Oberhausen und versenden per DHL direkt an den Fan.' },
       { q: 'Was kostet Band-Merch in der Produktion?', a: 'Produktionspreis netto mit einem Druck: Heavy Oversize Tee BY102 12,95 €, Stedman Classic-T 9,10 €, Classic Hoodie 17,25 €, Heavy Hoody BY011 20,95 €, Tote Bag 9,94 €. Zweite Druckseite 5,00 €, Nackenprint 3,00 €. Versand innerhalb Deutschlands 5,00 € netto pro Bestellung.' },
       { q: 'Kann ich vor dem Drop ein Muster bestellen?', a: 'Ja. Muster bestellst du im Portal der App zum Produktionspreis, ohne Umweg über deinen Shop. So siehst du Stoff, Farbe und Druck, bevor der Drop online geht.' },
-      { q: 'Was passiert, wenn an einem Tag sehr viele Bestellungen kommen?', a: 'Wir schaffen rund 50 Bestellungen am Tag in 1 bis 3 Werktagen. Planst du einen großen Drop, sag uns Termin und erwartete Menge vorher, dann legen wir Rohware bereit.' },
+      { q: 'Was passiert, wenn an einem Tag sehr viele Bestellungen kommen?', a: 'Wir schaffen rund 1.000 Bestellungen am Tag, auch im Dezember-Peak, Produktion in 1 bis 3 Werktagen. Planst du einen großen Drop, sag uns Termin und erwartete Menge vorher, dann legen wir Rohware bereit.' },
     ],
   },
   {
