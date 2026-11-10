@@ -114,7 +114,20 @@ import { site } from '../data/site';
   function render(o: any) {
     const entry = STATUS[o.status];
     if (!entry) return otherStatus();
-    const [state, title, text] = entry;
+    const [state, title] = entry;
+    // Korrekturabzug (Kasse meldet proof/approval, seit 10.11.2026): Bei bezahlten Bestellungen mit Motiv wird erst nach
+    // der Freigabe des Kunden gedruckt. Ohne diese Felder (ältere Kasse) bleibt der bisherige Text.
+    const PROOF: Record<string, string> = {
+      '': 'In ein paar Minuten bekommst du eine E-Mail mit deinem Korrekturabzug. Bitte gib ihn frei: Wir drucken erst nach deiner Freigabe.',
+      'Intern prüfen': 'Wir prüfen gerade deine Druckdaten. Danach bekommst du eine E-Mail mit deinem Korrekturabzug. Wir drucken erst nach deiner Freigabe.',
+      'Abzug fehlt': 'Wir prüfen gerade deine Druckdaten. Danach bekommst du eine E-Mail mit deinem Korrekturabzug. Wir drucken erst nach deiner Freigabe.',
+      'Abzug gesendet': 'Dein Korrekturabzug ist per E-Mail unterwegs. Bitte gib ihn über den Link in der Mail frei: Wir drucken erst nach deiner Freigabe.',
+      'Erinnert': 'Dein Korrekturabzug wartet auf deine Freigabe. Den Link findest du in unserer E-Mail. Ohne Freigabe drucken wir nicht.',
+      'Keine Antwort': 'Dein Korrekturabzug wartet auf deine Freigabe. Den Link findest du in unserer E-Mail. Ohne Freigabe drucken wir nicht.',
+      'Änderung gewünscht': 'Dein Änderungswunsch ist bei uns. Du bekommst einen neuen Korrekturabzug per E-Mail.',
+      'Freigegeben': 'Danke, deine Freigabe ist da. Wir drucken genau so wie im Korrekturabzug.',
+    };
+    const text = o.status === 'Neu' && o.proof && PROOF[o.approval || ''] ? PROOF[o.approval || ''] : entry[2];
     show(state, title, text);
     if (state === 'ok' || state === 'pending') {
       $('[data-no]').textContent = o.orderNo;
