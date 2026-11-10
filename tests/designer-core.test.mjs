@@ -193,7 +193,7 @@ test('Vorschläge Klein/Mittel/Groß/Maximal: typische Breiten, passen immer, wa
   assert.equal(by.max.widthU, 3300, 'Maximal endet bei der größten Druckgröße A3+ (33 cm)');
   for (const x of s) assert.ok(checkPlacement(tee, x).ok, x.key);
   // XXL (halbe Brustweite 62 cm): anteilig größer, auf 0,5 cm gerundet
-  const xxl = sizeSuggestions({ zone: { ...tee, xMinU: -2200, xMaxU: 2200 }, presets: teePresets, halfChestCm: 62, side: 'front', bw: 1000, bh: 1000 });
+  const xxl = sizeSuggestions({ zone: { ...tee, xMinU: -2200, xMaxU: 2200 }, presets: teePresets, halfChestCm: 62, side: 'front', bw: 3000, bh: 1000 });
   assert.equal(xxl.find((x) => x.key === 'mittel').widthU, 3000);
   // Hohes Motiv: Breite durch die Höhe begrenzt, Vorschläge fallen zusammen statt doppelt zu erscheinen
   const tall = sizeSuggestions({ zone: tee, presets: teePresets, halfChestCm: 52, side: 'front', bw: 500, bh: 2000 });
@@ -257,4 +257,27 @@ test('Vorschläge sind nie größer als die größte Druckgröße (A3+), auch be
   const big = tariffsFor(0.65).at(-1).maxU;
   const kid = sizeSuggestions({ zone: wide, presets: pr, halfChestCm: 34, side: 'front', bw: 1000, bh: 1000, scale: 0.65 });
   assert.ok(kid.every((x) => x.widthU <= Math.min(...big) + 5), JSON.stringify(kid.map((x) => x.widthU)));
+});
+
+test('Vorschläge: „Klein“ bleibt ein kleines Logo, Größen sind gestaffelt statt fast gleich', async () => {
+  const { sizeSuggestions } = await import('../src/lib/designer-core/core.mjs');
+  // Hochformat 1:3 auf einem Hoodie (10.11.2026: „Klein 8,3 × 24,8 cm, Brust links“ neben „Mittel 8,6 × 25,8 cm“)
+  const hood = { xMinU: -1700, xMaxU: 1700, yMinU: 150, yMaxU: 2980, exclude: [] };
+  const pr = { center: { centerXU: 0, topYU: 400, widthU: 2500 }, chest_left: { centerXU: 1100, topYU: 500, widthU: 1000 } };
+  const s = sizeSuggestions({ zone: hood, presets: pr, halfChestCm: 52, side: 'front', bw: 1200, bh: 3600 });
+  assert.equal(s[0].key, 'klein'); assert.equal(s[0].widthU, 400); assert.ok(s[0].heightU <= 1200, 'Klein höchstens 12 cm hoch');
+  assert.equal(s.at(-1).key, 'max'); assert.equal(s.at(-1).heightU, 2580, 'Maximal füllt die Höhe des Druckbereichs');
+  assert.ok(s.length >= 3, 'zwischen Klein und Maximal gibt es eine Mitte: ' + JSON.stringify(s.map((x) => x.widthU)));
+  for (let i = 1; i < s.length; i++) assert.ok(s[i].widthU >= s[i - 1].widthU * 1.08, 'mindestens 8 % Abstand: ' + JSON.stringify(s.map((x) => x.widthU)));
+  // Quadrat auf dem Hoodie (Höhe begrenzt auf 28,3 cm): nicht nur Klein und Maximal, sondern gestaffelt
+  const sq = sizeSuggestions({ zone: hood, presets: pr, halfChestCm: 59, side: 'front', bw: 1000, bh: 1000 });
+  assert.deepEqual(sq.map((x) => x.key), ['klein', 'mittel', 'gross', 'max']);
+  assert.ok(sq[1].widthU <= 0.76 * sq[3].widthU && sq[2].widthU <= 0.85 * sq[3].widthU, JSON.stringify(sq.map((x) => x.widthU)));
+  // Querformat: alle vier bleiben, Klein 10 cm breit
+  const w = sizeSuggestions({ zone: hood, presets: pr, halfChestCm: 52, side: 'front', bw: 3600, bh: 1200 });
+  assert.deepEqual(w.map((x) => [x.key, x.widthU]), [['klein', 1000], ['mittel', 2500], ['gross', 2800], ['max', 3400]]);
+  // Größter Vorschlag heißt immer „Maximal“, nie „Groß“
+  const q = sizeSuggestions({ zone: hood, presets: pr, halfChestCm: 62, side: 'front', bw: 1000, bh: 1000 });
+  assert.equal(q.at(-1).key, 'max');
+  for (let i = 1; i < q.length; i++) assert.ok(q[i].widthU >= q[i - 1].widthU * 1.08, JSON.stringify(q.map((x) => x.widthU)));
 });
