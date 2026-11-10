@@ -221,12 +221,17 @@ export const SUGGESTIONS = {
 
 /**
  * Vorschläge für ein Motiv (sichtbare Pixel bw x bh) auf einer Druckfläche einer Kleidergröße.
- * Jeder Vorschlag passt garantiert in die Zone (sonst entfällt er). Gleiche Breiten werden zusammengefasst.
+ * Jeder Vorschlag passt garantiert in die Zone (sonst entfällt er) und ist nie größer als die größte Druckgröße
+ * (A3+, bei Kinder- und Babygrößen mit scale kleiner): Ein Vorschlag muss immer bestellbar sein. Gleiche Breiten werden zusammengefasst.
  * @returns {{key:string,label:string,note?:string,preset:string|null,centerXU:number,topYU:number,widthU:number,heightU:number}[]}
  */
-export function sizeSuggestions({ zone, presets = {}, halfChestCm, side, bw, bh }) {
+export function sizeSuggestions({ zone, presets = {}, halfChestCm, side, bw, bh, scale = 1 }) {
   if (!zone || !(bw > 0 && bh > 0)) return [];
   const f = halfChestCm > 0 ? halfChestCm / ADULT_REF_HALF_CHEST_CM : 1;
+  // Größte bestellbare Breite: Motiv muss hoch oder quer in die größte Preisstufe passen
+  const list = tariffsFor(scale), big = list[list.length - 1].maxU;
+  let capW = Math.floor(Math.max(Math.min(big[0], (big[1] * bw) / bh), Math.min(big[1], (big[0] * bw) / bh)));
+  while (capW > 0 && !fitsBox(capW, heightFor(capW, bw, bh).checkU, big)) capW--;
   const out = [];
   for (const s of SUGGESTIONS[side] || []) {
     let preset = s.preset, pr = presets[preset], wCm = s.widthCm;
@@ -238,7 +243,8 @@ export function sizeSuggestions({ zone, presets = {}, halfChestCm, side, bw, bh 
     if (maxW < 100) continue;
     // auf 0,5 cm runden, nie breiter als an dieser Stelle möglich
     const want = wCm == null ? maxW : Math.round((wCm * f * 100) / 50) * 50;
-    const widthU = Math.min(want, maxW);
+    const widthU = Math.min(want, maxW, capW);
+    if (widthU < 100) continue;
     if (out.some((o) => o.widthU === widthU && o.centerXU === pr.centerXU && o.topYU === top)) continue;
     out.push({ key: s.key, label: s.label, ...(s.note ? { note: s.note } : {}), preset, centerXU: pr.centerXU, topYU: top, widthU, heightU: heightFor(widthU, bw, bh).checkU });
   }

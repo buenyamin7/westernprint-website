@@ -218,7 +218,7 @@ function renderRef() {
 const suggEl = q<HTMLElement>('[data-dz-sugg]');
 let suggList: ReturnType<typeof sizeSuggestions> = [];
 function renderSugg(side: Side, a: Area, m: Motif, p: Place) {
-  suggList = sizeSuggestions({ zone: a.zone, presets: a.presets, halfChestCm: dz.sizes[sizeKey()]?.halfChestCm, side, bw: m.bw, bh: m.bh });
+  suggList = sizeSuggestions({ zone: a.zone, presets: a.presets, halfChestCm: dz.sizes[sizeKey()]?.halfChestCm, side, bw: m.bw, bh: m.bh, scale: a.tariffScale || 1 });
   q('[data-dz-sugg-size]').textContent = sizeText(sizeKey());
   suggEl.innerHTML = suggList.map((s) => {
     const on = s.widthU === p.widthU && s.centerXU === p.centerXU && s.topYU === p.topYU;
