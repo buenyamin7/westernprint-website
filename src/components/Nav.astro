@@ -55,6 +55,7 @@ const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith
       </button>
       {/* Nur sichtbar, wenn der Warenkorb Artikel enthält. Siehe Skript unten. */}
       <a href="/warenkorb" class="icon-btn cart-btn" data-cart-link hidden><Icon name="shopping-bag" size={18} /><span class="sr-only">Warenkorb, Artikel:</span><span class="cart-count" data-cart-count hidden>0</span></a>
+      <a href={site.kontoUrl} class="icon-btn konto-btn" aria-label="Mein Konto" title="Mein Konto"><Icon name="user" size={18} /></a>
       <a href="/kontakt" class="btn btn-primary btn-sm nav-cta">Angebot in 24h</a>
       <button class="icon-btn menu-btn" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
         <span class="when-closed"><Icon name="list" size={22} /></span>
@@ -82,6 +83,7 @@ const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith
         <a href={n.href} class="m-link">{n.label}</a>
       ))}
       <a href="/kontakt" class="m-link">Kontakt</a>
+      <a href={site.kontoUrl} class="m-link">Mein Konto</a>
       <div class="m-actions">
         <a href={site.phoneHref} class="btn btn-secondary"><Icon name="phone" size={16} /> Anrufen</a>
         <a href="/kontakt" class="btn btn-primary">Angebot in 24h</a>
