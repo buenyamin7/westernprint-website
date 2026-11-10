@@ -189,7 +189,8 @@ test('Vorschläge Klein/Mittel/Groß/Maximal: typische Breiten, passen immer, wa
   const by = Object.fromEntries(s.map((x) => [x.key, x]));
   assert.equal(by.klein.widthU, 1000); assert.equal(by.klein.preset, 'chest_left'); assert.equal(by.klein.centerXU, 1144);
   assert.equal(by.mittel.widthU, 2500); assert.equal(by.gross.widthU, 2800);
-  assert.equal(by.max.widthU, maxWidthAt(tee, 1000, 1000, 0, 700));
+  assert.equal(maxWidthAt(tee, 1000, 1000, 0, 700), 3500, 'in den Druckbereich würden 35 cm passen');
+  assert.equal(by.max.widthU, 3300, 'Maximal endet bei der größten Druckgröße A3+ (33 cm)');
   for (const x of s) assert.ok(checkPlacement(tee, x).ok, x.key);
   // XXL (halbe Brustweite 62 cm): anteilig größer, auf 0,5 cm gerundet
   const xxl = sizeSuggestions({ zone: { ...tee, xMinU: -2200, xMaxU: 2200 }, presets: teePresets, halfChestCm: 62, side: 'front', bw: 1000, bh: 1000 });
@@ -215,9 +216,14 @@ test('Vorschläge passen für jedes Produkt, jede Größe und jede Seite in den 
   for (const [h, e] of Object.entries(pa.products)) for (const [size, sz] of Object.entries(e.sizes)) for (const [side, a] of Object.entries(sz.areas)) {
     if (!a.zone) continue;
     for (const [bw, bh] of [[1000, 1000], [3000, 1000], [800, 2400]]) {
-      const s = sizeSuggestions({ zone: a.zone, presets: a.presets, halfChestCm: sz.halfChestCm, side, bw, bh });
+      const s = sizeSuggestions({ zone: a.zone, presets: a.presets, halfChestCm: sz.halfChestCm, side, bw, bh, scale: a.tariffScale || 1 });
       assert.ok(s.length >= 1, `${h} ${size} ${side}`);
-      for (const x of s) { n++; assert.ok(checkPlacement(a.zone, x).ok, `${h} ${size} ${side} ${x.key}`); assert.ok(x.widthU >= 100); }
+      for (const x of s) {
+        n++; assert.ok(checkPlacement(a.zone, x).ok, `${h} ${size} ${side} ${x.key}`); assert.ok(x.widthU >= 100);
+        // Jeder Vorschlag ist bestellbar: Er hat eine Preisstufe (10.11.2026: quadratisches Motiv bekam „Maximal 40 x 40 cm“, größer als A3+)
+        const t = classifyPrint({ widthU: x.widthU, heightU: x.heightU, side, allowBrust: true, surcharges: SUR, scale: a.tariffScale || 1 });
+        assert.ok(!('error' in t), `${h} ${size} ${side} ${x.key} ${bw}x${bh}: ${x.widthU} x ${x.heightU} ohne Preisstufe`);
+      }
     }
   }
   assert.ok(n > 1000);
@@ -235,4 +241,20 @@ test('Größenvergleich: gleiche cm, Anteil an der Brustbreite sinkt mit der Gr�
   const [s2] = compareSizes({ S: small }, 'front', { ...pl, widthU: 3100 });
   assert.equal(s2.fits, false, 'breiter als der Druckbereich von S');
   assert.equal(compareSizes({ S: small }, 'front', null)[0].share, null);
+});
+
+test('Vorschläge sind nie größer als die größte Druckgröße (A3+), auch bei Kindergrößen', async () => {
+  const { sizeSuggestions, tariffsFor } = await import('../src/lib/designer-core/core.mjs');
+  const wide = { xMinU: -2000, xMaxU: 2000, yMinU: 150, yMaxU: 5000, exclude: [] };
+  const pr = { center: { centerXU: 0, topYU: 700, widthU: 2800 } };
+  // Quadrat: höchstens 33 x 33 cm (A3+ ist 33 x 48), nicht 40 x 40
+  const sq = sizeSuggestions({ zone: wide, presets: pr, halfChestCm: 62, side: 'back', bw: 1000, bh: 1000 });
+  assert.equal(Math.max(...sq.map((x) => x.widthU)), 3300);
+  // Quer 3:1: 40 cm Breite bleiben möglich (40 x 13,3 passt quer in 48 x 33)
+  const wd = sizeSuggestions({ zone: wide, presets: pr, halfChestCm: 62, side: 'back', bw: 3000, bh: 1000 });
+  assert.equal(wd.find((x) => x.key === 'max').widthU, 4000);
+  // Kind, Faktor 0,65: A3+ = 21,5 x 31 cm
+  const big = tariffsFor(0.65).at(-1).maxU;
+  const kid = sizeSuggestions({ zone: wide, presets: pr, halfChestCm: 34, side: 'front', bw: 1000, bh: 1000, scale: 0.65 });
+  assert.ok(kid.every((x) => x.widthU <= Math.min(...big) + 5), JSON.stringify(kid.map((x) => x.widthU)));
 });
