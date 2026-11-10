@@ -204,15 +204,20 @@ export function calForColor(cal, fix) {
 // ── Größenvorschläge „Klein / Mittel / Groß / Maximal“ ───────────────────────
 // Typische Motivbreiten für Erwachsene Größe M (halbe Brustweite 52 cm). Sie wachsen und schrumpfen mit der halben
 // Brustweite der gewählten Größe, damit „Mittel“ auf S und XXL ähnlich wirkt. Die cm bleiben danach frei editierbar.
+// „Klein“ ist ein Brust- bzw. Nackenlogo: höchstens maxHeightCm hoch, auch bei hohen Motiven (sonst wäre „Klein“ bei
+// einem Hochformat 25 cm lang). „Mittel“ und „Groß“ sind höchstens 76 % bzw. 85 % von „Maximal“ (bei quadratischen und
+// hohen Motiven begrenzt die Höhe des Druckbereichs: ohne diese Grenze lägen 28,5 und 30,7 cm nebeneinander oder es fehlte
+// die Mitte). Jeder Vorschlag ist mindestens 8 % größer als der vorige, der größte heißt immer „Maximal“.
+export const SUGGESTION_SHARE = { mittel: 0.76, gross: 0.85 };
 export const SUGGESTIONS = {
   front: [
-    { key: 'klein', label: 'Klein', note: 'Brust links', widthCm: 10, preset: 'chest_left', fallbackWidthCm: 12 },
+    { key: 'klein', label: 'Klein', note: 'Brust links', widthCm: 10, maxHeightCm: 12, preset: 'chest_left', fallbackWidthCm: 12 },
     { key: 'mittel', label: 'Mittel', widthCm: 25, preset: 'center' },
     { key: 'gross', label: 'Groß', widthCm: 28, preset: 'center' },
     { key: 'max', label: 'Maximal', preset: 'center' },
   ],
   back: [
-    { key: 'klein', label: 'Klein', note: 'Nacken', widthCm: 10, preset: 'center', topCm: 3 },
+    { key: 'klein', label: 'Klein', note: 'Nacken', widthCm: 10, maxHeightCm: 12, preset: 'center', topCm: 3 },
     { key: 'mittel', label: 'Mittel', widthCm: 28, preset: 'center' },
     { key: 'gross', label: 'Groß', widthCm: 32, preset: 'center' },
     { key: 'max', label: 'Maximal', preset: 'center' },
@@ -233,6 +238,7 @@ export function sizeSuggestions({ zone, presets = {}, halfChestCm, side, bw, bh,
   let capW = Math.floor(Math.max(Math.min(big[0], (big[1] * bw) / bh), Math.min(big[1], (big[0] * bw) / bh)));
   while (capW > 0 && !fitsBox(capW, heightFor(capW, bw, bh).checkU, big)) capW--;
   const out = [];
+  let maxAtCenter = null;
   for (const s of SUGGESTIONS[side] || []) {
     let preset = s.preset, pr = presets[preset], wCm = s.widthCm;
     if (!pr && s.fallbackWidthCm) { preset = 'center'; pr = presets.center; wCm = s.fallbackWidthCm; }
@@ -242,13 +248,25 @@ export function sizeSuggestions({ zone, presets = {}, halfChestCm, side, bw, bh,
     const maxW = maxWidthAt(zone, bw, bh, pr.centerXU, top);
     if (maxW < 100) continue;
     // auf 0,5 cm runden, nie breiter als an dieser Stelle möglich
-    const want = wCm == null ? maxW : Math.round((wCm * f * 100) / 50) * 50;
+    let want = wCm == null ? maxW : Math.round((wCm * f * 100) / 50) * 50;
+    if (s.maxHeightCm) want = Math.min(want, Math.floor((s.maxHeightCm * f * 100 * bw) / bh / 10) * 10);
+    if (SUGGESTION_SHARE[s.key]) {
+      // Anteil an der größten Breite an derselben Stelle, auf 0,5 cm abgerundet
+      maxAtCenter ??= Math.min(maxW, capW);
+      want = Math.min(want, Math.floor((SUGGESTION_SHARE[s.key] * maxAtCenter) / 50) * 50);
+    }
     const widthU = Math.min(want, maxW, capW);
     if (widthU < 100) continue;
-    if (out.some((o) => o.widthU === widthU && o.centerXU === pr.centerXU && o.topYU === top)) continue;
     out.push({ key: s.key, label: s.label, ...(s.note ? { note: s.note } : {}), preset, centerXU: pr.centerXU, topYU: top, widthU, heightU: heightFor(widthU, bw, bh).checkU });
   }
-  return out;
+  // Aufsteigend mit mindestens 8 % Abstand. Ist „Maximal“ kaum größer als der vorige Vorschlag, ersetzt es ihn.
+  const kept = [];
+  for (const o of out) {
+    const last = kept[kept.length - 1];
+    if (last && o.widthU < last.widthU * 1.08) { if (o.key === 'max') kept[kept.length - 1] = o; continue; }
+    kept.push(o);
+  }
+  return kept;
 }
 
 /**
