@@ -443,6 +443,282 @@
  },
  {
   "supplier": "STANLEY_STELLA",
+  "style": "STAU773",
+  "name": "Light Tote Bag",
+  "category": "Bag",
+  "gender": "Unisex",
+  "colors": [
+   {
+    "id": "C002",
+    "name": "Black",
+    "hex": "#2A2B2D"
+   },
+   {
+    "id": "C001",
+    "name": "White",
+    "hex": "#F4F9FF"
+   },
+   {
+    "id": "C727",
+    "name": "French Navy",
+    "hex": "#282D3C"
+   },
+   {
+    "id": "C054",
+    "name": "Natural Raw",
+    "hex": "#E0D5C7"
+   },
+   {
+    "id": "C005",
+    "name": "Cotton Pink",
+    "hex": "#F2C1D1"
+   },
+   {
+    "id": "C244",
+    "name": "Burgundy",
+    "hex": "#64242E"
+   },
+   {
+    "id": "C004",
+    "name": "Red",
+    "hex": "#BD162C"
+   },
+   {
+    "id": "C359",
+    "name": "Dusk",
+    "hex": "#3F487A"
+   },
+   {
+    "id": "C230",
+    "name": "Royal Blue",
+    "hex": "#005A92"
+   },
+   {
+    "id": "C145",
+    "name": "Aqua Blue",
+    "hex": "#79BDE4"
+   },
+   {
+    "id": "C232",
+    "name": "Sky blue",
+    "hex": "#9BB7D4"
+   },
+   {
+    "id": "C724",
+    "name": "Caribbean Blue",
+    "hex": "#BCE3DF"
+   },
+   {
+    "id": "C224",
+    "name": "Bottle Green",
+    "hex": "#344D41"
+   },
+   {
+    "id": "C060",
+    "name": "Teal Monstera",
+    "hex": "#649B9E"
+   },
+   {
+    "id": "C059",
+    "name": "Stem Green",
+    "hex": "#CAD3C1"
+   },
+   {
+    "id": "C223",
+    "name": "Khaki",
+    "hex": "#545244"
+   },
+   {
+    "id": "C204",
+    "name": "Spectra Yellow",
+    "hex": "#F7B718"
+   },
+   {
+    "id": "C253",
+    "name": "Anthracite",
+    "hex": "#4A4B4D"
+   }
+  ],
+  "sizes": [
+   "OS"
+  ],
+  "ekMin": 1.46,
+  "ekMax": 1.62,
+  "unitPriceFrom": 8.46,
+  "unitPriceTo": 8.62,
+  "imageUrl": null,
+  "description": "Obere Kante doppelt gefaltet für Festigkeit und einen sauberen Abschluss\r\nLange Henkel aus Oberstoff, verstärkt mit Kreuzstich",
+  "modelImage": "https://res.cloudinary.com/www-stanleystella-com/t_pim/TechnicalNames/SFM0_STAU773_C359.jpg",
+  "grammage": null,
+  "fit": null,
+  "composition": null,
+  "variants": [
+   {
+    "color": "C001",
+    "colorName": "White",
+    "hex": "#F4F9FF",
+    "size": "OS",
+    "image": null,
+    "ek": 1.62,
+    "stock": 4179
+   },
+   {
+    "color": "C002",
+    "colorName": "Black",
+    "hex": "#2A2B2D",
+    "size": "OS",
+    "image": null,
+    "ek": 1.62,
+    "stock": 66502
+   },
+   {
+    "color": "C004",
+    "colorName": "Red",
+    "hex": "#BD162C",
+    "size": "OS",
+    "image": null,
+    "ek": 1.62,
+    "stock": 4954
+   },
+   {
+    "color": "C005",
+    "colorName": "Cotton Pink",
+    "hex": "#F2C1D1",
+    "size": "OS",
+    "image": null,
+    "ek": 1.62,
+    "stock": 3199
+   },
+   {
+    "color": "C054",
+    "colorName": "Natural Raw",
+    "hex": "#E0D5C7",
+    "size": "OS",
+    "image": null,
+    "ek": 1.46,
+    "stock": 28056
+   },
+   {
+    "color": "C060",
+    "colorName": "Teal Monstera",
+    "hex": "#649B9E",
+    "size": "OS",
+    "image": null,
+    "ek": 1.62,
+    "stock": 5342
+   },
+   {
+    "color": "C204",
+    "colorName": "Spectra Yellow",
+    "hex": "#F7B718",
+    "size": "OS",
+    "image": null,
+    "ek": 1.62,
+    "stock": 4023
+   },
+   {
+    "color": "C223",
+    "colorName": "Khaki",
+    "hex": "#545244",
+    "size": "OS",
+    "image": null,
+    "ek": 1.62,
+    "stock": 4250
+   },
+   {
+    "color": "C224",
+    "colorName": "Bottle Green",
+    "hex": "#344D41",
+    "size": "OS",
+    "image": null,
+    "ek": 1.62,
+    "stock": 732
+   },
+   {
+    "color": "C244",
+    "colorName": "Burgundy",
+    "hex": "#64242E",
+    "size": "OS",
+    "image": null,
+    "ek": 1.62,
+    "stock": 139
+   },
+   {
+    "color": "C253",
+    "colorName": "Anthracite",
+    "hex": "#4A4B4D",
+    "size": "OS",
+    "image": null,
+    "ek": 1.62,
+    "stock": 4911
+   },
+   {
+    "color": "C724",
+    "colorName": "Caribbean Blue",
+    "hex": "#BCE3DF",
+    "size": "OS",
+    "image": null,
+    "ek": 1.62,
+    "stock": 2545
+   },
+   {
+    "color": "C727",
+    "colorName": "French Navy",
+    "hex": "#282D3C",
+    "size": "OS",
+    "image": null,
+    "ek": 1.62,
+    "stock": 7248
+   },
+   {
+    "color": "C359",
+    "colorName": "Dusk",
+    "hex": "#3F487A",
+    "size": "OS",
+    "image": null,
+    "ek": 1.62,
+    "stock": 2455
+   },
+   {
+    "color": "C230",
+    "colorName": "Royal Blue",
+    "hex": "#005A92",
+    "size": "OS",
+    "image": null,
+    "ek": 1.62,
+    "stock": 0
+   },
+   {
+    "color": "C145",
+    "colorName": "Aqua Blue",
+    "hex": "#79BDE4",
+    "size": "OS",
+    "image": null,
+    "ek": 1.62,
+    "stock": 9756
+   },
+   {
+    "color": "C232",
+    "colorName": "Sky blue",
+    "hex": "#9BB7D4",
+    "size": "OS",
+    "image": null,
+    "ek": 1.62,
+    "stock": 0
+   },
+   {
+    "color": "C059",
+    "colorName": "Stem Green",
+    "hex": "#CAD3C1",
+    "size": "OS",
+    "image": null,
+    "ek": 1.62,
+    "stock": 0
+   }
+  ]
+ },
+ {
+  "supplier": "STANLEY_STELLA",
   "style": "STUB103",
   "name": "Baby Body",
   "category": "Body",
