@@ -21,9 +21,9 @@
       },
       "notes": "One-size accessory: garment fields not applicable; dimensions in other."
     },
-    "STAU771": {
+    "STAU296": {
       "handle": "fisherman-beanie",
-      "source": "https://api.stanleystella.com/ProductSheet/en_US/STAU771.pdf (page \"Size Guide\"); cross-checked identical numbers in the sheet linked from stanleystella.com: https://res.cloudinary.com/www-stanleystella-com/image/upload/Product%20Content/Product%20Sheets/en_GB/STAU771.pdf",
+      "source": "https://api.stanleystella.com/ProductSheet/en_US/STAU296.pdf (page \"Size Guide\", abgerufen 23.11.2026)",
       "definition": "Labels as published: 'A - Height' (diagram: flat, from crown to bottom edge of the folded-up cuff, i.e. worn height with cuff folded), 'C - Width' (diagram: flat width measured across the cuff). Cuff height itself is NOT published.",
       "sizes": {
         "OS": {
@@ -32,13 +32,13 @@
           "sleeveLengthCm": null,
           "ageLabel": null,
           "other": {
-            "heightCm": 27,
-            "widthCm": 20.5,
+            "heightCm": 17,
+            "widthCm": 26,
             "manufacturerSizeLabel": "OS"
           }
         }
       },
-      "notes": "One-size accessory: garment fields not applicable; dimensions in other."
+      "notes": "Fisherman Beanie 2.0, Nachfolger des STAU771 (dort 27 x 20,5 cm). One-size accessory: garment fields not applicable; dimensions in other."
     },
     "STAU764": {
       "handle": "pencil-case",
