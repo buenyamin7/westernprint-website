@@ -34,7 +34,7 @@
   }
  },
  "fisherman-beanie": {
-  "style": "STAU771",
+  "style": "STAU296",
   "handle": "fisherman-beanie",
   "views": {
    "front": {
@@ -43,13 +43,27 @@
     "w": 720,
     "h": 900,
     "centerX": 359.0,
-    "topY": 144,
-    "hemY": 756,
-    "bboxTop": 143,
-    "bboxBottom": 756,
-    "bodyY": 524,
-    "bodyL": 55,
-    "bodyR": 665
+    "topY": 207,
+    "hemY": 690,
+    "bboxTop": 207,
+    "bboxBottom": 692,
+    "bodyY": 553,
+    "bodyL": 29,
+    "bodyR": 690
+   },
+   "back": {
+    "image": "/img/products/fisherman-beanie-black-flat-back.webp",
+    "topBodyW": null,
+    "w": 720,
+    "h": 900,
+    "centerX": 359.0,
+    "topY": 228,
+    "hemY": 671,
+    "bboxTop": 227,
+    "bboxBottom": 672,
+    "bodyY": 544,
+    "bodyL": 29,
+    "bodyR": 690
    }
   }
  },

@@ -53,7 +53,7 @@
  },
  {
   "supplier": "STANLEY_STELLA",
-  "style": "STAU771",
+  "style": "STAU296",
   "name": "Fisherman Beanie",
   "category": "Accessoire",
   "gender": "unisex",
@@ -69,24 +69,24 @@
     "hex": "#E8D8B8"
    },
    {
-    "id": "C086",
-    "name": "Red Earth",
-    "hex": "#9B4722"
-   },
-   {
-    "id": "C089",
-    "name": "Aloe",
-    "hex": "#8FBC8F"
-   },
-   {
-    "id": "C115",
-    "name": "Purple Love",
-    "hex": "#7B5EA7"
-   },
-   {
     "id": "C135",
     "name": "Mocha",
     "hex": "#4A3228"
+   },
+   {
+    "id": "C136",
+    "name": "Deep Teal",
+    "hex": "#325068"
+   },
+   {
+    "id": "C150",
+    "name": "Earthy Red",
+    "hex": "#8A3F39"
+   },
+   {
+    "id": "C153",
+    "name": "Faded Olive",
+    "hex": "#A49667"
    },
    {
     "id": "C223",
@@ -94,36 +94,21 @@
     "hex": "#8B7355"
    },
    {
-    "id": "C650",
-    "name": "Mid Heather Grey",
-    "hex": "#A0A0A0"
-   },
-   {
-    "id": "C702",
-    "name": "Stargazer",
-    "hex": "#3D3580"
-   },
-   {
     "id": "C727",
     "name": "French Navy",
     "hex": "#0D1F4C"
-   },
-   {
-    "id": "C730",
-    "name": "Heritage Brown",
-    "hex": "#6B4226"
    }
   ],
   "sizes": [
    "OS"
   ],
   "ekMin": 5.3,
-  "ekMax": 5.51,
+  "ekMax": 5.3,
   "unitPriceFrom": 12.8,
-  "unitPriceTo": 13.01,
+  "unitPriceTo": 12.8,
   "imageUrl": null,
-  "description": "Einlagige Beanie\r\nVier Formnähte am Oberkopf\r\nUmschlagbarer Rand",
-  "modelImage": "https://res.cloudinary.com/www-stanleystella-com/t_pim/TechnicalNames/SFM5_STAU771_C089.jpg",
+  "description": "Einlagiger 2x2-Rippstrick, gewaschen\r\nFormgestrickt (fully fashioned)\r\nDoppelt umgeschlagener Rand mit Faltlinien",
+  "modelImage": "https://res.cloudinary.com/www-stanleystella-com/t_pim/TechnicalNames/SFM5_STAU296_C002.jpg",
   "grammage": null,
   "fit": null,
   "composition": null,
@@ -131,101 +116,74 @@
    {
     "color": "C002",
     "colorName": "Black",
-    "hex": "#2A2B2D",
+    "hex": "#1C1C1B",
     "size": "OS",
     "image": null,
     "ek": 5.3,
-    "stock": 328
-   },
-   {
-    "color": "C727",
-    "colorName": "French Navy",
-    "hex": "#282D3C",
-    "size": "OS",
-    "image": null,
-    "ek": 5.3,
-    "stock": 0
-   },
-   {
-    "color": "C086",
-    "colorName": "Red Earth",
-    "hex": "#7E3439",
-    "size": "OS",
-    "image": null,
-    "ek": 5.3,
-    "stock": 1205
-   },
-   {
-    "color": "C115",
-    "colorName": "Purple Love",
-    "hex": "#6C5A9E",
-    "size": "OS",
-    "image": null,
-    "ek": 5.3,
-    "stock": 0
-   },
-   {
-    "color": "C089",
-    "colorName": "Aloe",
-    "hex": "#ADBEB3",
-    "size": "OS",
-    "image": null,
-    "ek": 4.95,
-    "stock": 497
-   },
-   {
-    "color": "C702",
-    "colorName": "Stargazer",
-    "hex": "#39505C",
-    "size": "OS",
-    "image": null,
-    "ek": 5.3,
-    "stock": 0
-   },
-   {
-    "color": "C223",
-    "colorName": "Khaki",
-    "hex": "#545244",
-    "size": "OS",
-    "image": null,
-    "ek": 5.3,
-    "stock": 0
-   },
-   {
-    "color": "C730",
-    "colorName": "Heritage Brown",
-    "hex": "#995444",
-    "size": "OS",
-    "image": null,
-    "ek": 3.54,
-    "stock": 3686
-   },
-   {
-    "color": "C135",
-    "colorName": "Mocha",
-    "hex": "#6E6058",
-    "size": "OS",
-    "image": null,
-    "ek": 4.95,
-    "stock": 3841
+    "stock": null
    },
    {
     "color": "C007",
     "colorName": "Natural",
-    "hex": "#E0D5C8",
+    "hex": "#E8D8B8",
     "size": "OS",
     "image": null,
     "ek": 5.3,
-    "stock": 423
+    "stock": null
    },
    {
-    "color": "C650",
-    "colorName": "Mid Heather Grey",
-    "hex": "#807D7F",
+    "color": "C135",
+    "colorName": "Mocha",
+    "hex": "#4A3228",
     "size": "OS",
     "image": null,
-    "ek": 5.51,
-    "stock": 2078
+    "ek": 5.3,
+    "stock": null
+   },
+   {
+    "color": "C136",
+    "colorName": "Deep Teal",
+    "hex": "#325068",
+    "size": "OS",
+    "image": null,
+    "ek": 5.3,
+    "stock": null
+   },
+   {
+    "color": "C150",
+    "colorName": "Earthy Red",
+    "hex": "#8A3F39",
+    "size": "OS",
+    "image": null,
+    "ek": 5.3,
+    "stock": null
+   },
+   {
+    "color": "C153",
+    "colorName": "Faded Olive",
+    "hex": "#A49667",
+    "size": "OS",
+    "image": null,
+    "ek": 5.3,
+    "stock": null
+   },
+   {
+    "color": "C223",
+    "colorName": "Khaki",
+    "hex": "#8B7355",
+    "size": "OS",
+    "image": null,
+    "ek": 5.3,
+    "stock": null
+   },
+   {
+    "color": "C727",
+    "colorName": "French Navy",
+    "hex": "#0D1F4C",
+    "size": "OS",
+    "image": null,
+    "ek": 5.3,
+    "stock": null
    }
   ]
  },
