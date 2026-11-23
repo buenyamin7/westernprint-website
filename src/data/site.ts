@@ -13,6 +13,8 @@ export const site = {
   tiktok: 'https://www.tiktok.com/@westernprint.de',
   // Shop bleibt bei Shopify. Nach dem Domain-Umzug hier auf https://shop.westernprint.de umstellen.
   shopUrl: '/shop',
+  // Kundenkonto (Bestellungen, Sendungsverfolgung, Rechnungen). Läuft in der POD-App unter eigener Subdomain, nicht Teil dieser Website.
+  kontoUrl: 'https://konto.westernprint.de',
   // Kassen-Worker (Cloudflare). Nach dem Deploy hier die Worker-URL eintragen.
   checkoutApi: 'https://westernprint-checkout.westernprint-checkout.workers.dev',
   // Formular-Endpoint (z. B. Formspree "https://formspree.io/f/xxxx"). Leer = Anfrage geht per WhatsApp raus.
